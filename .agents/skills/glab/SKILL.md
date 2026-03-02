@@ -44,13 +44,17 @@ All commands support `-h`/`--help` and `-R`/`--repo OWNER/REPO` (to target a dif
 | Releases | `references/releases.md` | Creating releases, uploading assets, managing changelogs |
 | Repo, auth & config | `references/repo-and-config.md` | Cloning, forking, creating repos; authenticating; configuring glab |
 | API, variables & advanced | `references/api-and-advanced.md` | Making raw API calls; managing variables, snippets, schedules, stacks, labels, milestones, aliases |
-| Writing issues & MRs | `references/writing-issues-and-mrs.md` | Writing titles and descriptions for issues or merge requests; following conventional commits; structuring MR descriptions |
+| Writing issues & MRs | `references/writing-issues-and-mrs.md` | **REQUIRED** before creating or updating any issue or MR title/description |
 
 ## Core Workflows
 
 ### Create a Merge Request
 
-Use conventional commit prefixes in titles. See `references/writing-issues-and-mrs.md` for full guidelines.
+**REQUIRED**: Read `references/writing-issues-and-mrs.md` for full guidelines before writing titles/descriptions.
+
+**Title format**: `<type>[scope]: <imperative description> (closes #N)`
+Types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `ci`
+Max 72 chars. Imperative mood ("Add", not "Added").
 
 ```bash
 # Interactive — prompts for title, description, target branch
@@ -59,8 +63,8 @@ glab mr create
 # Non-interactive with conventional title, reviewers, and labels
 glab mr create -t "feat(auth): add OAuth2 login (closes #123)" --yes -a assignee --reviewer reviewer1 --label "ready for review" -b main
 
-# Draft MR from commit info
-glab mr create -f --draft --label WIP
+# Draft MR for early feedback
+glab mr create -f --draft
 ```
 
 ### Review and Merge
@@ -74,7 +78,11 @@ glab mr merge 42                      # Merge (prompts for method)
 
 ### Create an Issue
 
-Use descriptive titles with type prefixes. See `references/writing-issues-and-mrs.md` for full guidelines.
+**REQUIRED**: Read `references/writing-issues-and-mrs.md` for full guidelines before writing titles/descriptions.
+
+**Title format**: `[Type]: <specific problem/action> <context>`
+Types: `[Bug]`, `[Feature]`, `[Docs]`, `[Task]`
+50-70 chars. Sentence case. Include location + symptom.
 
 ```bash
 glab issue create -t "[Bug]: Login fails on iOS Safari 17 after timeout" -l bug,P1 -m v2.0

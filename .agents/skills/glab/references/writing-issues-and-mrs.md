@@ -233,6 +233,37 @@ glab mr create \
   --label RFC
 ```
 
+## Commit Message Conventions
+
+Individual commit messages follow similar rules to MR titles but apply at the commit level.
+
+### Subject Line
+
+- **Max 72 characters** — truncated in `git log --oneline` and GitLab UI otherwise.
+- **Capital letter**: Start with uppercase ("Add", not "add").
+- **Imperative mood**: Write as a command ("Fix bug", not "Fixed bug" or "Fixes bug").
+- **No trailing period**: The subject is a title, not a sentence.
+- **Conventional prefix**: Match the MR type — `feat:`, `fix:`, `docs:`, etc.
+
+### Body (Optional)
+
+- **Blank line** between subject and body.
+- **Max 72 characters per line** — wrap manually for readability in terminals.
+- **Explain "what" and "why"**, not "how" — the diff shows how.
+
+### Good vs Bad Commits
+
+| Bad | Good |
+|-----|------|
+| `fixed stuff` | `fix(auth): handle expired token on refresh` |
+| `wip` | `feat(search): add autocomplete suggestions` |
+| `changes` | `refactor(api): extract validation middleware` |
+| `Updated the tests and also fixed a bug in login and refactored the auth module` | Split into 3 separate commits |
+
+### Tip
+
+If a commit message needs "and" to describe what it does, consider splitting it into multiple commits.
+
 ## Merge Request Descriptions
 
 Structure with these sections:
@@ -253,7 +284,7 @@ Link to related issues: `Closes #123`
 3. Navigate to /login
 4. Verify button responds within 200ms
 
-### Screenshots / GIFs (if UI changes)
+### Screenshots / GIFs (REQUIRED for UI changes)
 | Before | After |
 |--------|-------|
 | ![before](url) | ![after](url) |
@@ -281,11 +312,90 @@ glab mr create \
   -d "Closes #42. Adds 30s timeout with retry logic for the auth endpoint."
 ```
 
+## Draft Merge Requests
+
+Use draft MRs to signal work-in-progress and prevent accidental merging during review.
+
+### How to Create
+
+```bash
+# Flag on creation
+glab mr create -t "feat(api): v2 endpoint migration" --draft
+
+# Or prefix the title manually
+glab mr create -t "Draft: feat(api): v2 endpoint migration"
+```
+
+- **`--draft` flag** or **`Draft:` prefix**: Both mark the MR as draft in GitLab.
+- **`WIP:` prefix is deprecated**: GitLab still recognizes it, but `Draft:` is the current convention.
+- **Prevents merging**: Draft MRs cannot be merged until marked as ready.
+- **Mark ready**: Use `glab mr update <id> --ready` or remove the `Draft:` prefix.
+
+### When to Use
+
+- Early feedback before implementation is complete
+- CI validation on partial work
+- Reserving an MR number for linking from issues
+- Collaborative development where others may push to the branch
+
+## Description Templates
+
+GitLab supports description templates that auto-populate when creating issues or MRs.
+
+### Template Locations
+
+```
+.gitlab/
+├── issue_templates/
+│   ├── Default.md          # Auto-populates for all new issues
+│   ├── Bug.md
+│   └── Feature.md
+└── merge_request_templates/
+    ├── Default.md          # Auto-populates for all new MRs
+    └── Hotfix.md
+```
+
+- **`Default.md`**: Automatically populates the description field for new issues/MRs.
+- **Named templates**: Users select from a dropdown in the GitLab UI.
+
+### Quick Actions in Templates
+
+Templates can include [quick actions](https://docs.gitlab.com/ee/user/project/quick_actions.html) that execute when the issue/MR is created:
+
+```markdown
+/label ~bug ~P1
+/assign @me
+/milestone %v2.0
+```
+
+### Template Variables
+
+MR templates support these variables that GitLab auto-expands:
+
+| Variable | Expands to |
+|----------|-----------|
+| `%{source_branch}` | Source branch name |
+| `%{target_branch}` | Target branch name |
+| `%{first_commit}` | First commit message in the MR |
+| `%{title}` | MR title |
+
+### Using Templates with glab
+
+When templates exist, `glab mr create` and `glab issue create` auto-populate from `Default.md`. To use a named template:
+
+```bash
+# glab doesn't have a --template flag, but you can pipe template content:
+cat .gitlab/merge_request_templates/Hotfix.md | glab mr create -t "fix(auth): patch token leak" -d -
+```
+
 ## Keep MRs Small and Focused
 
 - **Single purpose**: One MR = one feature or fix.
 - **Self-review first**: Run `glab mr diff` before requesting review.
 - **Use stacked diffs** (`glab stack`) for large features that need multiple sequential MRs.
+- **Commit count**: Aim for fewer than 10 commits per MR. If you have more, consider squashing related commits.
+- **Line count**: If an MR exceeds ~500 changed lines, add a note in the description explaining the scope and why it can't be split.
+- **Squash-and-merge**: For MRs with messy commit history, use squash merge to produce a clean single commit on the target branch. GitLab supports this as a merge option.
 
 ## Linking Issues and MRs
 
