@@ -29,6 +29,7 @@ npx skills add beeltec/skills -g
 |-------|-------------|
 | **glab** | GitLab CLI — create and manage merge requests, issues, CI/CD pipelines, releases, repositories, and more using `glab` |
 | **elementor-content** | Elementor page builder — create, read, update, and delete Elementor content by editing exported JSON templates or WordPress database records via WP-CLI |
+| **bump-version** | Versioning workflow — detect patch/minor/major bumps, update version files and changelog, then create a release commit |
 
 ## Manual Installation
 
