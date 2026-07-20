@@ -12,3 +12,5 @@ Each task document should have comprehensive instructions and a markdown checkli
 Create one master task document that contains a summary of all of the work that needs to be done and add links to all tasks including their status.
 
 Each task document should also have a link to the master document, the previous task document and the next task document.
+
+Make sure to refrence the necessary internal OKF wiki entries in the task documents
