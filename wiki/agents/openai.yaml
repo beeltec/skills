@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wiki"
+  short_description: "Manage the project's Open Knowledge Format wiki"
+  default_prompt: "Use $wiki to create or update the project wiki with this information."

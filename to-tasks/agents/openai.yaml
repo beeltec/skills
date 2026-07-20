@@ -1,0 +1,4 @@
+interface:
+  display_name: "To Tasks"
+  short_description: "Turn conversations and specs into task plans"
+  default_prompt: "Use $to-tasks to turn this conversation or specification into linked task documents."

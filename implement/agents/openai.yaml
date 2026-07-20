@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implement"
+  short_description: "Implement task plans from start to finish"
+  default_prompt: "Use $implement to implement the tasks in this work plan from start to finish."

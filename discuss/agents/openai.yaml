@@ -1,0 +1,4 @@
+interface:
+  display_name: "Discuss"
+  short_description: "Stress-test plans through guided discussion"
+  default_prompt: "Use $discuss to stress-test this plan with me one decision at a time."
