@@ -45,28 +45,38 @@ If you prefer not to use the CLI, clone the repository and copy or symlink the d
 
 ```bash
 git clone https://github.com/beeltec/skills.git
-cp -R skills/.agents/skills/glab ~/.codex/skills/glab
+cp -RL skills/.agents/skills/glab ~/.codex/skills/glab
 ```
 
 ## Maintaining the Repository
 
-Keep every skill in the cross-client `.agents/skills/` directory:
+Keep canonical skill directories categorized under `skills/`. Expose each skill through a relative symlink in the cross-client `.agents/skills/` directory:
 
 ```text
-.agents/skills/<skill-name>/
+skills/
+├── planning/
+├── tools/
+├── utilities/
+└── workflows/
+
+skills/<category>/<skill-name>/
 ├── SKILL.md            # Required metadata and core instructions
 ├── agents/             # Optional client-specific UI metadata
 ├── scripts/            # Optional executable helpers
 ├── references/         # Optional documentation loaded on demand
 └── assets/             # Optional templates and static resources
+
+.agents/skills/<skill-name> -> ../../skills/<category>/<skill-name>
 ```
 
 For each change:
 
-1. Keep the directory name and frontmatter `name` identical and lowercase with hyphens.
-2. Make `description` explain both capability and activation context.
-3. Keep `SKILL.md` focused and under 500 lines; move conditional detail into directly linked resource files.
-4. Test bundled scripts and validate every skill:
+1. Choose the narrowest existing category; add a category only when several related skills need it.
+2. Keep the canonical directory name, symlink name, and frontmatter `name` identical and lowercase with hyphens.
+3. Create symlinks relative to `.agents/skills/` so they remain valid in every clone.
+4. Make `description` explain both capability and activation context.
+5. Keep `SKILL.md` focused and under 500 lines; move conditional detail into directly linked resource files.
+6. Test bundled scripts and validate every public symlink:
 
    ```bash
    for skill in .agents/skills/*; do
@@ -74,7 +84,7 @@ For each change:
    done
    ```
 
-5. Confirm skills.sh discovery before publishing:
+7. Confirm skills.sh discovery before publishing:
 
    ```bash
    npx skills add . --list
