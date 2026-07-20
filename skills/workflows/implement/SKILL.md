@@ -15,6 +15,8 @@ If the wiki has no data on the used technologies, use context7 and web search be
 
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
+Do not overengineer. Also always ask yourself if you can implement something more ellegantly with less code.
+
 When a task is done (and only a task, not a subtask) use /code-review to review the work.
 
 When all tasks are done and green, merge the branch with a merge commit, checkout the primary branch and delete the work branch locally
