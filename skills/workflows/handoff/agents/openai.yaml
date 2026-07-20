@@ -1,0 +1,4 @@
+interface:
+  display_name: "Handoff"
+  short_description: "Create a resumable agent handoff document"
+  default_prompt: "Use $handoff to save the current work so another agent can continue it."

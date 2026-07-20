@@ -19,4 +19,6 @@ Do not overengineer. Also always ask yourself if you can implement something mor
 
 When a task is done (and only a task, not a subtask) use /code-review to review the work.
 
+If available, check the context length of the current session with claude-context-length-mcp after each task is done. If the sessions is greater than 150000 tokens, use /handoff
+
 When all tasks are done and green, merge the branch with a merge commit, checkout the primary branch and delete the work branch locally
