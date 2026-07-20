@@ -1,7 +1,6 @@
 ---
 name: to-tasks
-description: Create tasks with subtasks based off the current conversation or a spec document
-disable-model-invocation: true
+description: Turn a conversation or specification into linked task documents with bounded subtasks and progress checklists. Use when the user asks to plan work, break a spec into tasks, or create an implementation backlog.
 ---
 
 If the folder docs/tasks does not exist yet, create it and add it to the .gitignore file

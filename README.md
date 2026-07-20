@@ -1,8 +1,8 @@
-# Skills
+# Beeltec Skills
 
-A collection of reusable AI agent skills for [Claude Code](https://code.claude.com/) and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+[![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-Browse all available skills at [skills.sh](https://skills.sh).
+A collection of reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -10,52 +10,77 @@ Browse all available skills at [skills.sh](https://skills.sh).
 npx skills add beeltec/skills
 ```
 
-This installs all skills from this repository into your agent's skills directory. To install a specific skill:
+Choose skills interactively, or install a specific skill:
 
 ```bash
-npx skills add beeltec/skills -s glab
-npx skills add beeltec/skills -s elementor-content
+npx skills add beeltec/skills --skill glab
+npx skills add beeltec/skills --skill elementor-content
 ```
 
-Install globally (available across all projects) with the `-g` flag:
+Install globally with `--global`, or inspect the catalog without installing:
 
 ```bash
-npx skills add beeltec/skills -g
+npx skills add beeltec/skills --global
+npx skills add beeltec/skills --list
 ```
 
 ## Available Skills
 
 | Skill | Description |
 |-------|-------------|
-| **glab** | GitLab CLI — create and manage merge requests, issues, CI/CD pipelines, releases, repositories, and more using `glab` |
-| **elementor-content** | Elementor page builder — create, read, update, and delete Elementor content by editing exported JSON templates or WordPress database records via WP-CLI |
 | **bump-version** | Versioning workflow — detect patch/minor/major bumps, update version files and changelog, then create a release commit |
+| **check-context-window** | Inspect the current session's context and token usage |
+| **code-review** | Review a diff independently against repository standards and its originating specification |
+| **discuss** | Stress-test a plan or decision through a guided, one-question-at-a-time discussion |
+| **elementor-content** | Create and edit Elementor JSON or WordPress database content via WP-CLI |
+| **glab** | Manage GitLab merge requests, issues, pipelines, releases, and repositories with `glab` |
+| **implement** | Execute an existing task plan with branching, commits, tests, and review |
+| **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
+| **to-tasks** | Convert a conversation or specification into linked implementation tasks |
+| **wiki** | Maintain a project llmwiki using the Open Knowledge Format |
 
 ## Manual Installation
 
-If you prefer not to use the CLI, clone the repo and copy the skill directories:
+If you prefer not to use the CLI, clone the repository and copy or symlink the desired directory:
 
 ```bash
-# Project-scoped (this project only)
-cp -r .agents/skills/glab .claude/skills/glab
-
-# User-scoped (all projects)
-cp -r .agents/skills/glab ~/.claude/skills/glab
+git clone https://github.com/beeltec/skills.git
+cp -R skills/.agents/skills/glab ~/.codex/skills/glab
 ```
 
-## Skill Structure
+## Maintaining the Repository
 
-Each skill follows the Agent Skills standard:
+Keep every skill in the cross-client `.agents/skills/` directory:
 
-```
+```text
 .agents/skills/<skill-name>/
-  SKILL.md              # Main instructions (required)
-  references/           # Detailed reference guides (optional)
-    topic-a.md
-    topic-b.md
+├── SKILL.md            # Required metadata and core instructions
+├── agents/             # Optional client-specific UI metadata
+├── scripts/            # Optional executable helpers
+├── references/         # Optional documentation loaded on demand
+└── assets/             # Optional templates and static resources
 ```
 
-`SKILL.md` contains YAML frontmatter (`name`, `description`) and markdown instructions. Reference files hold detailed documentation that Claude loads on demand to keep the main skill focused.
+For each change:
+
+1. Keep the directory name and frontmatter `name` identical and lowercase with hyphens.
+2. Make `description` explain both capability and activation context.
+3. Keep `SKILL.md` focused and under 500 lines; move conditional detail into directly linked resource files.
+4. Test bundled scripts and validate every skill:
+
+   ```bash
+   for skill in .agents/skills/*; do
+     uvx --from skills-ref agentskills validate "$skill"
+   done
+   ```
+
+5. Confirm skills.sh discovery before publishing:
+
+   ```bash
+   npx skills add . --list
+   ```
+
+See the [Agent Skills specification](https://agentskills.io/specification), [creator best practices](https://agentskills.io/skill-creation/best-practices), and [skills CLI documentation](https://github.com/vercel-labs/skills#readme).
 
 ## License
 
