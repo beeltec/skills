@@ -9,7 +9,7 @@ Ask the questions one at a time, waiting for feedback on each question before co
 
 Always use the ask_user_question tool so the user can select an answer from a list of multiple choices. Make sure the first answer is always the one recommended by you and has "(recommended)" as the end of the answer.
 
-If available, always use the context7 mcp to research documentation about tools, frameworks, etc. in question. Also use the web search to find best practices and recommendations on them.
+If available, always use the context7 mcp to research documentation about tools, frameworks, etc. in question. Also use the web search to find best practices and recommendations on them before asking me.
 
 If a *fact* can be found by exploring the environment (filesystem, tools, etc.), look it up rather than asking me. The *decisions*, though, are mine — put each one to me and wait for my answer.
 
