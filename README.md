@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-A collection of 13 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+A collection of 14 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -37,6 +37,7 @@ npx skills add beeltec/skills --list
 | **glab** | Manage GitLab merge requests, issues, pipelines, releases, and repositories with `glab` |
 | **handoff** | Save unfinished work context so another agent can resume it |
 | **implement** | Execute an existing task plan with branching, commits, tests, and review |
+| **implement-with-subagents** | Execute a `$to-tasks` plan through one sequential subagent per task |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
 | **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with validation and agent instructions |
 | **to-tasks** | Convert a conversation or specification into linked implementation tasks |
