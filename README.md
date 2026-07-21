@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-A collection of 11 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+A collection of 12 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -39,6 +39,7 @@ npx skills add beeltec/skills --list
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
 | **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with validation and agent instructions |
 | **to-tasks** | Convert a conversation or specification into linked implementation tasks |
+| **to-wiki** | Turn confirmed conclusions into durable, canonical project wiki knowledge |
 
 ## Development Workflow
 
@@ -46,7 +47,7 @@ The development skills form a workflow that carries project knowledge from disco
 
 1. **setup-wiki** — create and configure the project wiki before using the rest of the workflow.
 2. **discuss** — explore an idea or decision until its requirements and tradeoffs are understood.
-3. **to-wiki** *(planned; not yet available)* — turn the conclusions from a discussion into durable project knowledge.
+3. **to-wiki** — turn the conclusions from a discussion into durable project knowledge.
 4. **to-tasks** — break the agreed specification into bounded, linked implementation tasks.
 5. **implement** — execute the task plan with branching, incremental commits, tests, and review.
 6. **code-review** — independently check the resulting changes against both repository standards and the originating specification.
