@@ -40,6 +40,20 @@ npx skills add beeltec/skills --list
 | **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with validation and agent instructions |
 | **to-tasks** | Convert a conversation or specification into linked implementation tasks |
 
+## Development Workflow
+
+The development skills form a workflow that carries project knowledge from discovery through implementation and review. Run **setup-wiki first** in every project. It creates the shared knowledge structure and agent instructions that the other development skills rely on to find durable context and work efficiently.
+
+1. **setup-wiki** — create and configure the project wiki before using the rest of the workflow.
+2. **discuss** — explore an idea or decision until its requirements and tradeoffs are understood.
+3. **to-wiki** *(planned; not yet available)* — turn the conclusions from a discussion into durable project knowledge.
+4. **to-tasks** — break the agreed specification into bounded, linked implementation tasks.
+5. **implement** — execute the task plan with branching, incremental commits, tests, and review.
+6. **code-review** — independently check the resulting changes against both repository standards and the originating specification.
+7. **handoff** — preserve the relevant conversation and workspace state when unfinished work must continue in another agent or session.
+
+`handoff` can be used at any point in the workflow. The other skills are most effective in the order shown because each stage produces context for the next one.
+
 ## Manual Installation
 
 If you prefer not to use the CLI, clone the repository and copy or symlink the desired directory:
