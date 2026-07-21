@@ -1,0 +1,7 @@
+interface:
+  display_name: "Setup Wiki"
+  short_description: "Scaffold and validate an OKF project wiki"
+  default_prompt: "Use $setup-wiki to scaffold an OKF wiki and add its validation and agent instructions to this project."
+
+policy:
+  allow_implicit_invocation: false

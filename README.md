@@ -37,6 +37,7 @@ npx skills add beeltec/skills --list
 | **handoff** | Save unfinished work context so another agent can resume it |
 | **implement** | Execute an existing task plan with branching, commits, tests, and review |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
+| **setup-wiki** | Scaffold an OKF project wiki with validation and agent instructions |
 | **to-tasks** | Convert a conversation or specification into linked implementation tasks |
 | **wiki** | Maintain a project llmwiki using the Open Knowledge Format |
 
