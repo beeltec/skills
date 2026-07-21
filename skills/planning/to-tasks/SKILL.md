@@ -82,24 +82,51 @@ user approves it. Do not publish an unapproved breakdown.
 2. Create `docs/tasks/<feature-slug>/` if needed. If `docs/tasks` is newly
    created, add `/docs/tasks/` to the project `.gitignore` unless project-local
    instructions require task documents to be tracked.
-3. Write one Markdown file per approved task. Never combine the tasks into a
-   master document.
-4. Number files from `001` in dependency order, with blockers before blocked
+3. Create `000-overview.md` as the master document. Summarize the agreed work
+   and list every task with its number, title, status, blockers, and relative
+   link. Identify the initial actionable frontier. Keep this file as an index;
+   do not duplicate the detailed task instructions or checklists in it.
+4. Write one Markdown file per approved task and link each task back to
+   `000-overview.md`.
+5. Number task files from `001` in dependency order, with blockers before blocked
    tasks: `docs/tasks/<feature-slug>/<NNN>-<task-slug>.md`.
-5. Record blocking edges using task numbers, titles, and relative links. A task
+6. Record blocking edges using task numbers, titles, and relative links. A task
    may only reference a lower-numbered blocker.
-6. Set every newly published task to `ready-for-agent`. The actionable frontier
+7. Set every newly published task to `ready-for-agent`. The actionable frontier
    is the set of tasks whose blockers are complete.
-7. Review the files and dependency graph for incomplete subtask checklists,
-   missing acceptance criteria, cycles, stale references, and accidental
-   horizontal slices.
+8. Review the master document, task files, and dependency graph for incomplete
+   subtask checklists, missing acceptance criteria, inconsistent statuses or
+   links, cycles, stale references, and accidental horizontal slices.
 
 Do not close or modify a source or parent issue.
+
+## Master Document Template
+
+```markdown
+# 000 — <Feature title>
+
+## Summary
+
+<Concise summary of the agreed end-to-end work and intended outcome.>
+
+## Tasks
+
+| Task | Status | Blocked by |
+| --- | --- | --- |
+| [001 — <Task title>](001-<task-slug>.md) | ready-for-agent | None |
+| [002 — <Task title>](002-<task-slug>.md) | ready-for-agent | [001](001-<task-slug>.md) |
+
+## Initial actionable frontier
+
+- [001 — <Task title>](001-<task-slug>.md)
+```
 
 ## Task Template
 
 ```markdown
 # <NNN> — <Task title>
+
+**Plan:** [000 — <Feature title>](000-overview.md)
 
 **What to build:** <The end-to-end behavior this task makes work from the
 user's perspective.>
