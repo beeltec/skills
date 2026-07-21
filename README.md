@@ -39,7 +39,7 @@ npx skills add beeltec/skills --list
 | **implement** | Execute an existing task plan with branching, commits, tests, and review |
 | **implement-with-subagents** | Execute a `$to-tasks` plan through one sequential subagent per task |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
-| **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with validation and agent instructions |
+| **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with agreed domain terminology, validation, and agent instructions |
 | **to-tasks** | Convert a conversation or specification into linked implementation tasks |
 | **to-wiki** | Turn confirmed conclusions into durable, canonical project wiki knowledge |
 

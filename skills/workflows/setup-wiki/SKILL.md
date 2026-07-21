@@ -1,6 +1,6 @@
 ---
 name: setup-wiki
-description: Scaffold and configure a project-owned llmwiki using Open Knowledge Format 0.1. Use when Codex needs to create a new docs/wiki knowledge bundle, add progressive-disclosure indexes and maintenance rules, install structural/link/length validation, or add wiki usage instructions to AGENTS.md and CLAUDE.md.
+description: Scaffold and configure a project-owned llmwiki using Open Knowledge Format 0.1. Use when Codex needs to create a new docs/wiki knowledge bundle, establish an owner-approved ubiquitous language, add progressive-disclosure indexes and maintenance rules, install structural/link/length validation, or add wiki usage instructions to AGENTS.md and CLAUDE.md.
 disable-model-invocation: true
 ---
 
@@ -10,9 +10,20 @@ Create a durable, project-owned OKF wiki without overwriting existing knowledge.
 
 ## Workflow
 
-1. Inspect the project root, `AGENTS.md`, `CLAUDE.md`, `package.json`, and any
-   existing `docs/wiki` content. Read applicable repository instructions first.
-2. Run the installer from this skill directory:
+1. Inspect the project root, `AGENTS.md`, `CLAUDE.md`, `package.json`, existing
+   product documentation and code, and any `docs/wiki` content. Read applicable
+   repository instructions first.
+2. Derive a concise set of candidate product and domain terms from that
+   evidence. For each term, propose a canonical name, precise definition,
+   applicable context, and preferred or forbidden synonyms when ambiguity
+   exists. Exclude generic technical vocabulary; keep project-specific
+   technical knowledge in architecture or engineering concepts.
+3. Review the complete candidate set with the user as project owner. Apply
+   their corrections, then ask for explicit agreement on the complete revised
+   set. Keep unapproved candidates in the conversation only. Do not write them
+   to the wiki. If the evidence yields no terms, say so and leave the scaffolded
+   terminology document empty.
+4. Run the installer from this skill directory:
 
    ```sh
    python3 scripts/setup_wiki.py --root /absolute/path/to/project
@@ -21,12 +32,20 @@ Create a durable, project-owned OKF wiki without overwriting existing knowledge.
    Use `--instructions agents`, `claude`, or `both` only when the default
    `auto` selection is unsuitable. Use `--no-package-script` when package.json
    must not be changed.
-3. Review every `kept` or `skipped` result. The installer never overwrites an
+5. Review every `kept` or `skipped` result. The installer never overwrites an
    existing wiki page or validation script. Merge missing conventions manually
    when a project already has equivalent files.
-4. Replace generic orientation text and empty directory indexes with concise,
-   project-specific descriptions. Preserve existing durable knowledge.
-5. Run validation:
+6. Add only the explicitly agreed terms to
+   `docs/wiki/domains/ubiquitous-language.md`. Preserve existing agreed terms
+   unless the project owner explicitly agrees to revise them. Format each entry
+   with its canonical term, definition, and context. Add preferred or forbidden
+   synonyms only when relevant; examples, counterexamples, rationale, and code
+   references are optional.
+7. Replace generic orientation text and empty directory indexes with concise,
+   project-specific descriptions. Preserve existing durable knowledge and
+   record the populated language and other project-specific wiki changes in
+   `docs/wiki/log.md`.
+8. Run validation:
 
    ```sh
    node scripts/validate-wiki.mjs
@@ -34,7 +53,7 @@ Create a durable, project-owned OKF wiki without overwriting existing knowledge.
 
    Run `pnpm wiki:check`, `npm run wiki:check`, or the repository-equivalent
    when the installer added the package script.
-6. Review the resulting diff, local links, agent-instruction block, and wiki
+9. Review the resulting diff, local links, agent-instruction block, and wiki
    log before handing off.
 
 ## Structure rules
@@ -50,6 +69,10 @@ Create a durable, project-owned OKF wiki without overwriting existing knowledge.
 - Organize concepts by durable responsibility or domain, not by the agent,
   task, or session that created them.
 - Keep one canonical owner for each rule or fact; other pages link to it.
+- Treat `docs/wiki/domains/ubiquitous-language.md` as the canonical agreement
+  between the project owner and developers about product and domain language.
+  Do not add lifecycle states or agent signatures. Agents acknowledge the
+  agreement by reading, challenging inconsistencies, and using its terms.
 - Keep transient task state outside the durable wiki.
 
 ## Length and splitting rules
