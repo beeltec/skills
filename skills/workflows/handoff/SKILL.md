@@ -6,11 +6,12 @@ Create one self-contained handoff that lets another agent continue without askin
 
 1. Stop task work and resolve the project root with `git rev-parse --show-toplevel`, falling back to the current directory outside Git.
 2. Inspect the conversation, applicable agent instructions, branch, `git status`, relevant diffs, changed files, and validation results.
-3. Create `<project-root>/docs/handoffs/` and a unique `handoff-YYYYMMDD-HHMMSS.md`; never overwrite another handoff.
-4. Record the timestamp, project root, branch, objective, original requirements, completed and partial work, exact stopping point, workspace state, decisions and rationale, validation, blockers, failed approaches, ordered next steps, first concrete action, and key files. Mark empty sections `None`.
-5. Exclude secrets, environment dumps, and unrelated conversation. Do not commit this temporary file unless asked.
-6. Read the file back and verify that it is non-empty, accurate, and names the next action.
+3. In a Git repository, ensure the root `.gitignore` ignores `/docs/handoffs/`. Add that rule only when the directory is not already covered, and preserve all existing rules.
+4. Create `<project-root>/docs/handoffs/` and a unique `handoff-YYYYMMDD-HHMMSS.md`; never overwrite another handoff.
+5. Record the timestamp, project root, branch, objective, original requirements, completed and partial work, exact stopping point, workspace state, decisions and rationale, validation, blockers, failed approaches, ordered next steps, first concrete action, and key files. Mark empty sections `None`.
+6. Exclude secrets, environment dumps, and unrelated conversation. Do not commit this temporary file unless asked.
+7. Read the file back and verify that it is non-empty, accurate, and names the next action.
 
 After success, present the repository-relative path followed by this exact prompt with the path substituted:
-`Continue the work from <repository-relative handoff path>`
+`Continue the work from <repository-relative handoff path>. Delete the handoff document when all work is finished and all checks are green.`
 Do not continue the underlying task after presenting the prompt.
