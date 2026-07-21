@@ -97,7 +97,7 @@ For each change:
 3. Create symlinks relative to `.agents/skills/` so they remain valid in every clone.
 4. Make `description` explain both capability and activation context.
 5. Keep `SKILL.md` focused and under 500 lines; move conditional detail into directly linked resource files.
-6. Test bundled scripts and validate every public symlink:
+6. Validate every public symlink:
 
    ```bash
    for skill in .agents/skills/*; do
