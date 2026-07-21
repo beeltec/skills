@@ -13,7 +13,7 @@ If available, always use web search to research documentation about tools, frame
 
 If a *fact* can be found by exploring the environment (filesystem, tools, etc.), look it up rather than asking me. The *decisions*, though, are mine — put each one to me and wait for my answer.
 
-Use /wiki to Update the wiki whenever you and the user decide on something or relevant information for the scope of the project come to light. 
+Update the wiki whenever you and the user decide on something or relevant information for the scope of the project come to light. 
 
 Do not act on it until I confirm we have reached a shared understanding.
 
