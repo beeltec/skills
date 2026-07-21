@@ -9,7 +9,7 @@ Delegate the requested work to a non-interactive Codex CLI process and relay its
 
 ## Workflow
 
-1. Confirm that the requested action is within the user's authorized scope. The nested agent can write within the selected workspace and use the network, but cannot request broader filesystem permissions.
+1. Confirm that the requested action is within the user's authorized scope. By default, the nested agent can write within the selected workspace and use the network but cannot cross that filesystem boundary. Only the orchestrator may select the explicit `danger-full-access` override described below, and only when the user has authorized a Git-writing workflow in a trusted repository.
 2. Build a self-contained prompt from the user's instruction. Preserve all requirements and include:
    - the concrete objective and expected deliverables;
    - relevant repository paths or context already known;
@@ -29,7 +29,7 @@ Delegate the requested work to a non-interactive Codex CLI process and relay its
 
    Use the execution tool's longest practical yield interval. If the tool yields a still-running process, keep polling that same process until it exits; a yielded process is not permission to start other work that the user required to run sequentially.
 5. Read the entire command output. The script deliberately preserves `codex exec` output: progress is streamed on stderr and the nested agent's final message is printed on stdout, so both remain visible to the orchestrator.
-6. After the process exits, inspect relevant workspace changes and run any cheap checks needed to verify the nested agent's claims. If it fails, use its diagnostics and the workspace state to decide whether to retry with a corrected, self-contained prompt. Always retry through the runner; do not reconstruct a raw `codex exec` command, because its global options must precede the `exec` subcommand.
+6. After the process exits, inspect relevant workspace changes and run any cheap checks needed to verify the nested agent's claims. If it fails, verify and enumerate completed or dirty work in the corrected, self-contained retry prompt so the next run preserves it and does not redo it. Read the composed retry prompt once before launch to catch truncation or quoting damage. Always retry through the runner; do not reconstruct a raw `codex exec` command, because its global options must precede the `exec` subcommand.
 7. Report the nested agent's outcome, the material files changed, and verification results. Clearly report a nonzero exit status or partial completion.
 
 ## Permissions
