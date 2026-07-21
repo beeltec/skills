@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $implement to implement the tasks in this work plan from start to finish."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true
