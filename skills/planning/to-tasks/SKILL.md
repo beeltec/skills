@@ -12,8 +12,8 @@ complete vertical slice and record the tasks that block it.
 
 ### 1. Gather context
 
-1. Work from the conversation and any supplied plan or specification.
-2. If the user supplies a file, issue, or URL, read its complete body and relevant
+1. Work from the conversation and any supplied plan or wiki article.
+2. If the user supplies a file, issue, URL or wiki article, read its complete body and relevant
    comments before drafting tasks.
 3. Read applicable agent instructions and project planning conventions.
 
