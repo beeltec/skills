@@ -1,4 +1,0 @@
-interface:
-  display_name: "Check Context Window"
-  short_description: "Check the current session context length"
-  default_prompt: "Use $check-context-window to check the length of this session's context window."

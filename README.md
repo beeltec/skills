@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-A collection of 14 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+A collection of 13 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -24,12 +24,15 @@ npx skills add beeltec/skills --global
 npx skills add beeltec/skills --list
 ```
 
+### Recommended MCP Server
+
+We recommend installing the [Context Usage MCP](https://github.com/beeltec/context-usage-mcp). Some skills may use it to access context-window usage information when that data is not available directly from the agent runtime.
+
 ## Available Skills
 
 | Skill | Description |
 |-------|-------------|
 | **bump-version** | Versioning workflow — detect patch/minor/major bumps, update version files and changelog, then create a release commit |
-| **check-context-window** | Inspect the current session's context and token usage |
 | **code-review** | Review changes in parallel against repository standards and their originating specification |
 | **codex-subagent** | Delegate implementation tasks to a workspace-scoped Codex CLI agent with configurable model and reasoning effort |
 | **create-conventional-branch** | Create and switch to a purpose-driven branch that follows the Conventional Branch specification |
