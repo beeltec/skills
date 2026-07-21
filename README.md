@@ -97,15 +97,7 @@ For each change:
 3. Create symlinks relative to `.agents/skills/` so they remain valid in every clone.
 4. Make `description` explain both capability and activation context.
 5. Keep `SKILL.md` focused and under 500 lines; move conditional detail into directly linked resource files.
-6. Validate every public symlink:
-
-   ```bash
-   for skill in .agents/skills/*; do
-     uvx --from skills-ref agentskills validate "$skill"
-   done
-   ```
-
-7. Confirm skills.sh discovery before publishing:
+6. Confirm skills.sh discovery before publishing:
 
    ```bash
    npx skills add . --list
