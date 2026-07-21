@@ -9,6 +9,7 @@ fi
 
 model="gpt-5.6-sol"
 reasoning_effort="medium"
+sandbox_mode="workspace-write"
 working_directory="$PWD"
 working_directory_set=false
 
@@ -30,8 +31,16 @@ while (( $# > 0 )); do
       reasoning_effort="$2"
       shift 2
       ;;
+    --sandbox)
+      if (( $# < 2 )); then
+        echo "error: --sandbox requires a value" >&2
+        exit 64
+      fi
+      sandbox_mode="$2"
+      shift 2
+      ;;
     --help|-h)
-      echo "usage: $0 [--model MODEL] [--effort LEVEL] [working-directory] < prompt.txt"
+      echo "usage: $0 [--model MODEL] [--effort LEVEL] [--sandbox MODE] [working-directory] < prompt.txt"
       exit 0
       ;;
     --*)
@@ -63,6 +72,14 @@ case "$reasoning_effort" in
     ;;
 esac
 
+case "$sandbox_mode" in
+  workspace-write|danger-full-access) ;;
+  *)
+    echo "error: unsupported sandbox mode: $sandbox_mode" >&2
+    exit 64
+    ;;
+esac
+
 if [[ -t 0 ]]; then
   echo "error: provide the Codex task prompt on stdin" >&2
   exit 64
@@ -75,7 +92,7 @@ fi
 
 codex_options=(
   --model "$model"
-  --sandbox workspace-write
+  --sandbox "$sandbox_mode"
   --ask-for-approval never
   --config 'sandbox_workspace_write.network_access=true'
   --cd "$working_directory"
