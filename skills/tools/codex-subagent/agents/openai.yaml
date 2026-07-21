@@ -1,0 +1,7 @@
+interface:
+  display_name: "Codex Subagent"
+  short_description: "Delegate implementation tasks to Codex CLI"
+  default_prompt: "Use $codex-subagent to implement this task with a Codex CLI subagent."
+
+policy:
+  allow_implicit_invocation: true
