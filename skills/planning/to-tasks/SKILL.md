@@ -39,6 +39,10 @@ Split the work according to these rules:
 - Size each task to fit comfortably in one fresh context window.
 - Give every task explicit blocking edges. A task with no blockers can start
   immediately.
+- Give every task a comprehensive Markdown checklist of all subtasks required
+  to complete it. Make each checklist item concrete and independently
+  checkable so an implementing agent can track progress without reconstructing
+  the plan.
 - Add prefactoring tasks only when they reduce implementation risk or unblock a
   vertical slice.
 - Avoid implementation snippets and volatile file paths. Include a compact
@@ -86,8 +90,9 @@ user approves it. Do not publish an unapproved breakdown.
    may only reference a lower-numbered blocker.
 6. Set every newly published task to `ready-for-agent`. The actionable frontier
    is the set of tasks whose blockers are complete.
-7. Review the files and dependency graph for missing acceptance criteria,
-   cycles, stale references, and accidental horizontal slices.
+7. Review the files and dependency graph for incomplete subtask checklists,
+   missing acceptance criteria, cycles, stale references, and accidental
+   horizontal slices.
 
 Do not close or modify a source or parent issue.
 
@@ -104,6 +109,11 @@ start immediately".>
 
 **Status:** ready-for-agent
 
+## Subtasks
+
+- [ ] <Concrete implementation subtask>
+- [ ] <Concrete implementation subtask>
+
 ## Acceptance criteria
 
 - [ ] <Observable or verifiable criterion>
@@ -115,5 +125,7 @@ start immediately".>
   apply.>
 ```
 
-Keep acceptance criteria outcome-focused and sufficient to prove the slice is
-complete. Do not turn them into a layer-by-layer implementation checklist.
+Make the subtask checklist comprehensive enough to guide and track the full
+implementation. Keep acceptance criteria outcome-focused and sufficient to
+prove the slice is complete; do not use them as a substitute for the subtask
+checklist.
