@@ -93,6 +93,10 @@ For each change:
 
 See the [Agent Skills specification](https://agentskills.io/specification), [creator best practices](https://agentskills.io/skill-creation/best-practices), and [skills CLI documentation](https://github.com/vercel-labs/skills#readme).
 
+## Acknowledgments
+
+The **discuss**, **code-review**, **implement**, and **handoff** skills are customized adaptations of skills created by [Matt Pocock](https://github.com/mattpocock) in [mattpocock/skills](https://github.com/mattpocock/skills), which is licensed under the MIT License. Thanks to Matt for creating and sharing the originals.
+
 ## License
 
 [MIT](LICENSE)
