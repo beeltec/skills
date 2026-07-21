@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 Implement the work described by the user.
 
-If we are not yet on a work branch create it using [Conventional Branch Specification](https://conventionalbranch.org/#specification) but never use AI Agent Source Prefixes.
+If we are not yet on a work branch create it with /create-conventional-branch
 
 After each subtask is done, mark it as done in the task document and do a conventional git commit with optional scope.
 
