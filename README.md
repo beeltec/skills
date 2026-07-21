@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-A collection of reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+A collection of 11 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -30,16 +30,15 @@ npx skills add beeltec/skills --list
 |-------|-------------|
 | **bump-version** | Versioning workflow — detect patch/minor/major bumps, update version files and changelog, then create a release commit |
 | **check-context-window** | Inspect the current session's context and token usage |
-| **code-review** | Review a diff independently against repository standards and its originating specification |
+| **code-review** | Review changes in parallel against repository standards and their originating specification |
 | **discuss** | Stress-test a plan or decision through a guided, one-question-at-a-time discussion |
 | **elementor-content** | Create and edit Elementor JSON or WordPress database content via WP-CLI |
 | **glab** | Manage GitLab merge requests, issues, pipelines, releases, and repositories with `glab` |
 | **handoff** | Save unfinished work context so another agent can resume it |
 | **implement** | Execute an existing task plan with branching, commits, tests, and review |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
-| **setup-wiki** | Scaffold an OKF project wiki with validation and agent instructions |
+| **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with validation and agent instructions |
 | **to-tasks** | Convert a conversation or specification into linked implementation tasks |
-| **wiki** | Maintain a project llmwiki using the Open Knowledge Format |
 
 ## Manual Installation
 
