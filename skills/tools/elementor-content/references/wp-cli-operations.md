@@ -50,21 +50,16 @@ Returns `"builder"` if the page uses Elementor.
 
 ## Writing Elementor Content
 
-### Update Page Content (File-Based — Recommended)
+### Update Page Content from a File
 
-Always use a file to avoid shell escaping issues with complex JSON:
-
-```bash
-# 1. Edit the JSON file
-# 2. Write it back
-wp post meta update <post_id> _elementor_data "$(cat page-content.json)"
-```
-
-Or using `wp eval` for safer handling:
+Avoid interpolating untrusted JSON directly into a shell command. Prefer a file plus WordPress APIs:
 
 ```bash
 wp eval "
   \$data = file_get_contents('/tmp/elementor-content.json');
+  if ( json_decode( \$data, true ) === null && json_last_error() !== JSON_ERROR_NONE ) {
+    throw new RuntimeException( json_last_error_msg() );
+  }
   update_post_meta(<post_id>, '_elementor_data', wp_slash(\$data));
 "
 ```
@@ -79,7 +74,7 @@ wp post meta update <post_id> _elementor_page_settings '{"background_background"
 
 ## Safety Practices
 
-### Always Backup Before Writing
+### Always Back Up Before Writing
 
 ```bash
 # Backup current content
@@ -92,10 +87,10 @@ wp post meta get <post_id> _elementor_data > backup-<post_id>-$(date +%Y%m%d%H%M
 
 ```bash
 # Check syntax
-cat page-content.json | jq . > /dev/null 2>&1 && echo "Valid JSON" || echo "INVALID JSON"
+jq empty page-content.json
 
 # Check it's an array (database format)
-cat page-content.json | jq 'type == "array"'
+jq -e 'type == "array"' page-content.json
 ```
 
 ## Cache Clearing
@@ -108,12 +103,12 @@ wp elementor flush-css
 
 Without this, the page may display stale styles or appear broken.
 
-### Full Cache Clear (if styles still stale)
+### Other Caches (only if configured and still stale)
 
 ```bash
 wp elementor flush-css
 wp cache flush
-wp rewrite flush
+# Purge the site's actual page/CDN/object cache using its documented command.
 ```
 
 ## Template Operations
@@ -156,18 +151,22 @@ POST_ID=$(wp post create --post_type=page --post_title="New Page" --post_status=
 
 # 2. Enable Elementor on the page
 wp post meta update $POST_ID _elementor_edit_mode "builder"
-wp post meta update $POST_ID _elementor_version "3.25.0"
+# If version meta is required, derive it from the installed plugin; never copy a sample version.
 
 # 3. Set the content (from a JSON file)
 wp eval "
   \$data = file_get_contents('/tmp/new-page-content.json');
+  if ( json_decode( \$data, true ) === null && json_last_error() !== JSON_ERROR_NONE ) {
+    throw new RuntimeException( json_last_error_msg() );
+  }
   update_post_meta($POST_ID, '_elementor_data', wp_slash(\$data));
 "
 
 # 4. Set page template to Elementor full width (optional)
 wp post meta update $POST_ID _wp_page_template "elementor_header_footer"
 
-# 5. Flush CSS cache
+# 5. Read back, validate, then flush CSS cache
+wp post meta get $POST_ID _elementor_data | jq -e 'type == "array"' > /dev/null
 wp elementor flush-css
 
 echo "Created Elementor page: $POST_ID"
@@ -251,28 +250,19 @@ done
 wp elementor flush-css
 ```
 
-If that doesn't work:
-```bash
-# Nuclear option: clear all Elementor CSS files
-wp eval "
-  \$upload_dir = wp_upload_dir();
-  \$css_dir = \$upload_dir['basedir'] . '/elementor/css/';
-  array_map('unlink', glob(\$css_dir . '*.css'));
-"
-wp elementor flush-css
-```
+If that does not work, inspect the page/CDN/object cache actually configured for the site. Do not delete generated files directly.
 
 ### Content Appears But Layout is Broken
 
-**Cause:** Usually a nesting violation — widgets outside containers, or missing `isInner` flags.
+**Cause:** Often an invalid tree or a control value whose shape does not match the installed widget.
 
 **Fix:** Validate the structure:
 ```bash
 # Check all elements have valid elType
 wp post meta get <post_id> _elementor_data | jq '[.. | objects | select(.elType) | .elType] | unique'
 
-# Check widgets have empty elements arrays
-wp post meta get <post_id> _elementor_data | jq '[.. | objects | select(.widgetType) | select(.elements | length > 0)]'
+# Review widgets with children; these are valid only for nested-capable widget types
+wp post meta get <post_id> _elementor_data | jq '[.. | objects | select(.widgetType and ((.elements // []) | length > 0)) | {id, widgetType}]'
 ```
 
 ### `wp_slash()` Issue — Backslashes Doubled
@@ -285,7 +275,7 @@ wp post meta get <post_id> _elementor_data | jq '[.. | objects | select(.widgetT
 
 **Cause:** Copy-pasting elements without regenerating IDs.
 
-**Fix:** Generate new 8-char hex IDs for all duplicated elements:
+**Fix:** Generate collision-free IDs for duplicated elements while preserving the site's observed ID format:
 ```bash
 wp post meta get <post_id> _elementor_data | jq '[.. | objects | .id // empty] | length as $total | [.. | objects | .id // empty] | unique | length as $unique | {total: $total, unique: $unique, has_duplicates: ($total != $unique)}'
 ```

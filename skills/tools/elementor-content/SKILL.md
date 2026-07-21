@@ -1,96 +1,65 @@
 ---
 name: elementor-content
-description: Use when creating, reading, updating, or deleting Elementor page builder content — editing exported JSON template files or WordPress database records via WP-CLI. Covers pages, templates, containers, sections, and all built-in widget types.
+description: Create, inspect, update, migrate, import, or delete Elementor content in exported JSON templates or WordPress post metadata via WP-CLI. Use for Elementor pages, library templates, containers, legacy sections/columns, nested widgets, responsive settings, global-style references, and Elementor Pro Theme Builder templates or display conditions.
 ---
 
 # Elementor Content
 
-Directly read, create, modify, and restructure Elementor page builder content by working with the underlying JSON data — either in exported `.json` template files or in the WordPress database via WP-CLI.
+Manipulate Elementor's JSON data conservatively. Prefer an exported template or a staging copy. Treat direct `_elementor_data` writes as a low-level fallback because widget schemas and internal metadata can vary by Elementor, Elementor Pro, addon, and feature version.
 
-## When to Use
+## Workflow
 
-- Creating or editing Elementor page/template content
-- Modifying widget settings (text, images, styles, links)
-- Restructuring page layouts (moving sections, adding containers)
-- Bulk-updating content across multiple Elementor pages
-- Importing/exporting Elementor templates
-- Building new Elementor pages from scratch
-- Creating Theme Builder templates (header, footer, single, archive) programmatically
+1. Identify whether the target is a JSON template or a WordPress installation.
+2. For WordPress, confirm the site, post ID, post type, installed Elementor/Core Pro versions, and available CLI commands. Never copy version metadata from examples.
+3. Read the complete document and make a timestamped backup before mutation.
+4. Inspect a same-site element of the desired type when adding or changing unfamiliar controls. Preserve unknown keys and existing value shapes.
+5. Make the smallest tree/settings change that satisfies the request. Preserve IDs for unchanged elements; generate collision-free IDs only for new elements.
+6. Validate JSON, structure, responsive/global references, content quality, and security before writing.
+7. Write once, read back, parse again, and compare the intended result.
+8. Run Elementor's supported cache-regeneration command, clear other caches only when relevant, and visually verify editor plus frontend at relevant breakpoints.
+9. Restore the backup if validation or rendering fails.
 
-## Operational Modes
+Do not mutate a live production page when a staging or draft workflow is available. Do not publish, delete, or bulk-update content unless the user's request authorizes it.
 
-### Mode 1: JSON Template Files
+## Choose the Right Reference
 
-Work directly with `.json` files exported from Elementor (Library → Export Template). Read, edit, and write the file. Import back via Elementor UI or WP-CLI.
+| Need | Read |
+|---|---|
+| JSON wrapper, tree, IDs, settings, responsive values, globals | `references/element-structure.md` |
+| Common built-in widget examples | `references/widget-catalog.md` |
+| Live database reads/writes, backup, verification, CLI | `references/wp-cli-operations.md` |
+| Elementor Pro Theme Builder templates and conditions | `references/theme-builder-templates.md` |
+| Accessibility, responsive design, performance, security, QA | `references/best-practices.md` |
 
-### Mode 2: WP-CLI Database Operations
+Treat the widget catalog as examples, not a stable schema. Inspect same-site JSON or registered widget controls when exact keys matter, especially for nested, Pro, addon, or Editor V4 elements.
 
-Read/write the `_elementor_data` post meta key in WordPress. Requires WP-CLI access and a running WordPress installation. See `references/wp-cli-operations.md`.
+## Data Rules
 
-## Core Workflow
+- Use the template wrapper (`title`, `type`, `version`, `page_settings`, `content`) for exported files; `_elementor_data` stores the content array only.
+- Preserve `settings` as either an empty array or an object, matching source data. Do not normalize empty arrays to objects without a reason.
+- Require each element to have a document-unique `id`, `elType`, `settings`, and `elements` array. Require `widgetType` for widgets.
+- Preserve source `isInner` values. Do not infer container depth from `isInner` or rewrite it solely because an element moved.
+- Allow child elements on containers and on widgets that are explicitly nested-capable. Ordinary widgets generally have an empty `elements` array.
+- Preserve legacy section/column trees unless migration is requested. Prefer containers for new layouts supported by the target site.
+- Preserve `__globals__` references and verify referenced kit styles exist on the destination. Do not replace global styles with hard-coded values unless requested.
+- Support custom breakpoint suffixes in addition to `_tablet` and `_mobile`; inspect the target site's breakpoint configuration.
+- Treat rich text, URLs, custom attributes, custom CSS, shortcodes, and dynamic tags as untrusted input. Preserve only trusted markup and avoid inventing executable content.
 
-1. **Identify mode** — JSON file on disk, or live WordPress database?
-2. **Read** the content — parse the JSON file or fetch via `wp post meta get`
-3. **Understand the tree** — Elementor content is a nested array of elements (see `references/element-structure.md`)
-4. **Locate target** — find the element to modify by walking the tree; match on `widgetType`, `settings` content, or `id`
-5. **Modify** — change settings, add/remove/reorder elements
-6. **Validate** — run the validation checklist below before writing
-7. **Write** — save the JSON file or update via `wp post meta update`
-8. **Flush cache** — if using WP-CLI, run `wp elementor flush-css` to regenerate stylesheets
+## Validation
 
-## Reference Guides
+Before writing:
 
-| Topic | File | Load when... |
-|-------|------|-------------|
-| JSON structure & hierarchy | `references/element-structure.md` | You need to understand the data format, nesting rules, or settings patterns |
-| Widget types & settings | `references/widget-catalog.md` | You need to create a widget or modify widget-specific settings |
-| WP-CLI operations | `references/wp-cli-operations.md` | You're working with a live WordPress database (not a JSON file) |
-| Theme Builder templates | `references/theme-builder-templates.md` | You're creating header, footer, single, or archive templates programmatically |
+- Parse the exact payload to be written and confirm the expected root type.
+- Recursively check required fields and duplicate element/repeater IDs without assuming IDs are hexadecimal.
+- Confirm each widget type exists on the target site and preserve nested-widget children where supported.
+- Check media IDs/URLs, internal links, dynamic tags, and global-style references in the destination context.
+- Review heading order, landmarks, alt text, descriptive links, keyboard behavior, visible focus, contrast, and motion controls.
+- Review desktop and every enabled breakpoint without duplicating whole layouts merely to hide them per device.
+- Prefer global styles, responsive inheritance, shallow container trees, and appropriately sized media.
 
-## Quick Reference: Common Operations
+After writing:
 
-**Change a heading:**
-Find the element with `"widgetType": "heading"`, update `settings.title`.
-
-**Add a button to a container:**
-Create a new element with `"elType": "widget"`, `"widgetType": "button"`, generate a unique `id`, set `settings.text` and `settings.link`, and append to the parent container's `elements` array.
-
-**Restructure layout:**
-Move elements between parent containers by cutting from one `elements` array and pasting into another. Ensure no element appears in two places.
-
-**Create a new page:**
-Build the full JSON tree: outer container(s) → inner containers/widgets. Wrap in template format if exporting, or write directly to `_elementor_data` via WP-CLI.
-
-**Create a Theme Builder template:**
-Requires post meta (`_elementor_template_type`, `_elementor_conditions`), taxonomy term (`elementor_library_type`), AND registration in the `elementor_pro_theme_builder_conditions` option. See `references/theme-builder-templates.md` for the full checklist — missing any step will silently fail.
-
-**Change styling:**
-Modify the relevant settings key on the element. Responsive variants use `_tablet` and `_mobile` suffixes. Dimensions use `{top, right, bottom, left, unit, isLinked}` objects.
-
-## Element ID Generation
-
-Every element requires a unique `id` — an **8-character lowercase hexadecimal string** (e.g., `"3f2a1b7c"`). Generate randomly; ensure no duplicates within the document.
-
-## Constraints
-
-- **MUST** preserve valid JSON at all times
-- **MUST** keep every element's `id` unique within the document
-- **MUST** maintain correct nesting: containers hold containers or widgets; widgets have `"elements": []` (empty)
-- **MUST** include `elType` on every element
-- **MUST** include `widgetType` on every widget element
-- **MUST NOT** place widgets directly inside the root array — they must be inside a container (or legacy section → column)
-- **MUST NOT** leave orphaned references (e.g., removing a container but leaving its children elsewhere)
-- **MUST** flush CSS cache after database writes (`wp elementor flush-css`)
-
-## Validation Checklist
-
-Before writing the modified content:
-
-- [ ] Valid JSON (parseable without errors)
-- [ ] All `id` values are unique 8-char hex strings
-- [ ] Every element has `elType` set (`"container"`, `"widget"`, `"section"`, or `"column"`)
-- [ ] Every widget has `widgetType` set to a valid type
-- [ ] Widgets have `"elements": []` (empty array, never omitted)
-- [ ] No widgets at root level — all wrapped in containers
-- [ ] Settings values use correct format (dimensions, URLs, media objects)
-- [ ] Template wrapper (if applicable) has `type`, `version`, `title`, `content`
+- Read back and parse the stored value.
+- Confirm the intended diff and that unrelated settings/content remain unchanged.
+- Run `wp elementor flush-css` when available. For Theme Builder condition changes, run `wp elementor-pro theme-builder clear-conditions` when available.
+- Verify the Elementor editor loads, then verify frontend rendering and interactions at relevant breakpoints.

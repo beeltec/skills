@@ -9,7 +9,7 @@ Exported `.json` template files have this top-level structure:
   "title": "My Page Template",
   "type": "page",
   "version": "0.4",
-  "page_settings": {},
+  "page_settings": [],
   "content": [ /* array of top-level elements */ ]
 }
 ```
@@ -73,7 +73,7 @@ Every element in Elementor follows this schema:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Unique 8-character lowercase hex identifier |
+| `id` | string | Unique identifier within the document; preserve existing format |
 | `elType` | string | Element type: `"container"`, `"widget"`, `"section"`, or `"column"` |
 | `settings` | object | Configuration key-value pairs |
 | `elements` | array | Child elements (empty `[]` for widgets) |
@@ -87,24 +87,25 @@ Every element in Elementor follows this schema:
 
 ## Element Hierarchy
 
-### Modern Layout (Containers) — Elementor 3.6+
+### Modern Layout (Containers)
 
 Containers use flexbox/grid and support unlimited nesting:
 
 ```
 root array
   └── container (elType: "container", isInner: false)
-        ├── container (elType: "container", isInner: true)
+        ├── container (elType: "container", isInner: false)
         │     ├── widget (elType: "widget", widgetType: "heading")
         │     └── widget (elType: "widget", widgetType: "text-editor")
-        └── container (elType: "container", isInner: true)
+        └── container (elType: "container", isInner: false)
               └── widget (elType: "widget", widgetType: "image")
 ```
 
-- Top-level containers have `isInner: false`
-- Nested containers have `isInner: true`
+- Preserve `isInner` from source data. Current official examples use `false` for both top-level and nested containers, so it is not a reliable depth marker.
 - Containers can hold other containers or widgets
-- No depth limit
+- Keep nesting as shallow as practical
+
+Some modern nested widgets (for example nested tabs, accordions, carousels, and menus) can also hold child elements. Do not force every widget's `elements` array to be empty; inspect the widget type and same-site data.
 
 ### Legacy Layout (Sections/Columns)
 
@@ -240,7 +241,7 @@ Used for lists of items (icon lists, social icons, tabs, accordion items, etc.):
 }
 ```
 
-Each repeater item has a unique `_id` (8-char hex, same format as element `id`).
+Each repeater item has a unique `_id`. Preserve the source format and check for collisions; do not assume all current or addon-generated IDs are hexadecimal.
 
 ### Background Settings
 

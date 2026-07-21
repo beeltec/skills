@@ -1,6 +1,6 @@
 # Theme Builder Templates (Elementor Pro)
 
-Elementor Pro's Theme Builder lets you create templates for headers, footers, single posts, archives, etc. Creating these programmatically (via migration or WP-CLI) requires several meta keys, taxonomy terms, and a **conditions cache** that are not obvious from the Elementor UI.
+Elementor Pro's Theme Builder lets you create templates for headers, footers, single posts, archives, etc. Programmatic creation is version-sensitive and requires document metadata, taxonomy terms, display conditions, and cache regeneration. Prefer the Theme Builder UI or supported APIs, and verify behavior against the installed Elementor Pro version.
 
 ## Template Types
 
@@ -46,9 +46,7 @@ update_post_meta( $template_id, '_elementor_conditions', array( 'include/singula
 // Page template — use 'default' for theme builder templates
 update_post_meta( $template_id, '_wp_page_template', 'default' );
 
-// Version meta — Elementor expects these
-update_post_meta( $template_id, '_elementor_version', '3.33.2' );
-update_post_meta( $template_id, '_elementor_pro_version', '3.34.0' );
+// If version meta is required, derive installed versions; never copy sample versions.
 ```
 
 ### 3. Taxonomy Term
@@ -59,25 +57,15 @@ wp_set_object_terms( $template_id, 'single-post', 'elementor_library_type' );
 
 Without this, Elementor's template library won't categorise the template correctly and the Theme Builder UI won't show it in the right section.
 
-### 4. Conditions Cache (Critical)
+### 4. Regenerate the Conditions Cache
 
-Elementor Pro stores an **options-level cache** of all template conditions. Setting `_elementor_conditions` post meta alone is NOT enough — you must also register the template in this option:
+Do not edit Elementor Pro's internal conditions option directly. After changing conditions through an approved workflow, use the supported CLI command to clear and regenerate the cache:
 
-```php
-$conditions = get_option( 'elementor_pro_theme_builder_conditions', array() );
-
-// Key = location ('header', 'footer', 'single', 'archive')
-if ( ! isset( $conditions['single'] ) ) {
-    $conditions['single'] = array();
-}
-
-// Sub-key = template post ID, value = array of condition strings
-$conditions['single'][ $template_id ] = array( 'include/singular/my_cpt' );
-
-update_option( 'elementor_pro_theme_builder_conditions', $conditions );
+```bash
+wp elementor-pro theme-builder clear-conditions
 ```
 
-**If you skip this step, the template will exist in the database but Elementor will never apply it to any page.**
+Confirm availability with `wp help elementor-pro theme-builder clear-conditions`, then verify the template in Theme Builder and on a matching frontend URL.
 
 ### 5. Page Settings
 
@@ -206,19 +194,13 @@ update_post_meta( $template_id, '_elementor_edit_mode', 'builder' );
 update_post_meta( $template_id, '_elementor_template_type', 'single-post' );
 update_post_meta( $template_id, '_elementor_conditions', array( 'include/singular/rwtuev_news' ) );
 update_post_meta( $template_id, '_wp_page_template', 'default' );
-update_post_meta( $template_id, '_elementor_version', '3.33.2' );
-update_post_meta( $template_id, '_elementor_pro_version', '3.34.0' );
+// Preserve or derive installed version metadata if the target version requires it.
 
 // 3. Set taxonomy
 wp_set_object_terms( $template_id, 'single-post', 'elementor_library_type' );
 
-// 4. Register in conditions cache
-$conditions = get_option( 'elementor_pro_theme_builder_conditions', array() );
-if ( ! isset( $conditions['single'] ) ) {
-    $conditions['single'] = array();
-}
-$conditions['single'][ $template_id ] = array( 'include/singular/rwtuev_news' );
-update_option( 'elementor_pro_theme_builder_conditions', $conditions );
+// 4. After creation, regenerate conditions with:
+//    wp elementor-pro theme-builder clear-conditions
 
 // 5. Set page settings
 update_post_meta( $template_id, '_elementor_page_settings', array(
@@ -281,8 +263,8 @@ wp post list --post_type=elementor_library --fields=ID,post_title,post_status --
 wp post meta get <template_id> _elementor_template_type
 wp post meta get <template_id> _elementor_conditions
 
-# Check the conditions cache
-wp eval 'print_r( get_option("elementor_pro_theme_builder_conditions") );'
+# Regenerate the conditions cache after approved condition changes
+wp elementor-pro theme-builder clear-conditions
 
 # Check taxonomy assignment
 wp eval 'print_r( array_map( function($t) { return $t->slug; }, wp_get_object_terms(<template_id>, "elementor_library_type") ) );'
@@ -295,7 +277,7 @@ wp eval 'print_r( array_map( function($t) { return $t->slug; }, wp_get_object_te
 **Symptoms:** Template exists in database, conditions set on post meta, but the page renders without the template shell.
 
 **Checklist:**
-1. Is the template in `elementor_pro_theme_builder_conditions`? (Most common cause)
+1. Did `wp elementor-pro theme-builder clear-conditions` complete successfully?
 2. Is `_elementor_template_type` set to `single-post` (not just `single`)?
 3. Is the `elementor_library_type` taxonomy term set correctly?
 4. Does the post have `_wp_page_template = 'default'`? (`elementor_header_footer` bypasses Theme Builder)

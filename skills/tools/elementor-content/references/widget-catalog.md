@@ -637,6 +637,6 @@ Many widgets use repeater arrays. Each item follows this pattern:
 }
 ```
 
-- `_id` is required — unique 8-char hex string
+- `_id` is required and unique within its repeater; preserve the site's observed ID format
 - Field names are widget-specific
 - Items are rendered in array order
