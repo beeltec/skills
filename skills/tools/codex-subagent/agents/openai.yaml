@@ -1,7 +1,7 @@
 interface:
   display_name: "Codex Subagent"
-  short_description: "Delegate implementation tasks to Codex CLI"
-  default_prompt: "Use $codex-subagent to implement this task with a Codex CLI subagent."
+  short_description: "For non-Codex harnesses delegating to Codex CLI"
+  default_prompt: "From a non-Codex harness such as Claude Code or OpenCode, use $codex-subagent to implement this task with a Codex CLI subagent. Never invoke this skill from Codex itself."
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

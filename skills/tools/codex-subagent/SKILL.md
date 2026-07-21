@@ -1,9 +1,12 @@
 ---
 name: codex-subagent
-description: Delegate a coding or implementation task to a nested Codex CLI agent through unattended, workspace-scoped `codex exec`. Use when the user explicitly asks to use, invoke, run, or delegate to a Codex subagent, or asks the current model to implement or change something using Codex. Also use when the model decides that a bounded implementation task should be handed to Codex CLI. Do not use merely because a task involves code; the trigger must specifically involve Codex delegation or implementation using Codex.
+description: For non-Codex agent harnesses such as Claude Code or OpenCode only. Never invoke this skill from Codex itself. Delegate a coding or implementation task from another harness to a nested Codex CLI agent through unattended, workspace-scoped `codex exec`. Use when the user explicitly asks a non-Codex harness to use, invoke, run, or delegate to a Codex subagent, or asks it to implement or change something using Codex. Do not use merely because a task involves code; the trigger must specifically involve Codex delegation or implementation using Codex.
 ---
 
 # Codex Subagent
+
+> [!IMPORTANT]
+> Do not invoke this skill from Codex. It is exclusively for external agent harnesses, such as Claude Code or OpenCode, that delegate work to Codex CLI.
 
 Delegate the requested work to a non-interactive Codex CLI process and relay its result to the orchestrating agent.
 

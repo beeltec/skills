@@ -34,7 +34,7 @@ We recommend installing the [Context Usage MCP](https://github.com/beeltec/conte
 |-------|-------------|
 | **bump-version** | Versioning workflow — detect patch/minor/major bumps, update version files and changelog, then create a release commit |
 | **code-review** | Review changes in parallel against repository standards and their originating specification |
-| **codex-subagent** | Delegate implementation tasks to a workspace-scoped Codex CLI agent with configurable model and reasoning effort |
+| **codex-subagent** | From non-Codex harnesses such as Claude Code or OpenCode only, delegate implementation tasks to a workspace-scoped Codex CLI agent with configurable model and reasoning effort; never invoke from Codex itself |
 | **create-conventional-branch** | Create and switch to a purpose-driven branch that follows the Conventional Branch specification |
 | **discuss** | Stress-test a plan or decision through a guided, one-question-at-a-time discussion |
 | **elementor-content** | Create and edit Elementor JSON or WordPress database content via WP-CLI |
