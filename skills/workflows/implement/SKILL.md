@@ -11,7 +11,7 @@ After each subtask is done, mark it as done in the task document and do a conven
 
 Check the wiki regularly for guidance and documentation on used technologies.
 
-If the wiki has no data on the used technologies, use context7 and web search before using a technology to retrieve the latest documenation, best practices and recommendations on it. Update the wiki with this info.
+If the wiki has no data on the used technologies, web search before using a technology to retrieve the latest documenation, best practices and recommendations on it. Update the wiki with this info.
 
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
