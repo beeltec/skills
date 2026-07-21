@@ -24,10 +24,6 @@ npx skills add beeltec/skills --global
 npx skills add beeltec/skills --list
 ```
 
-### Recommended MCP Server
-
-We recommend installing the [Context Usage MCP](https://github.com/beeltec/context-usage-mcp). Some skills may use it to access context-window usage information when that data is not available directly from the agent runtime.
-
 ## Available Skills
 
 | Skill | Description |
