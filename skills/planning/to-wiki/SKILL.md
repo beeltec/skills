@@ -11,7 +11,6 @@ meaning of the source while integrating it with the wiki's existing concepts.
 Read [the bundled OKF 0.1 specification](references/okf-spec.md) completely
 before editing a wiki. Treat it as the format authority and apply stricter
 project-local maintenance rules when they do not conflict with the specification.
-The bundled copy comes from the [GoogleCloudPlatform knowledge-catalog source](https://raw.githubusercontent.com/GoogleCloudPlatform/knowledge-catalog/refs/heads/main/okf/SPEC.md).
 
 ## Workflow
 
