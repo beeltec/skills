@@ -13,4 +13,4 @@ Create one master task document that contains a summary of all of the work that 
 
 Each task document should also have a link to the master document, the previous task document and the next task document.
 
-Make sure to refrence the necessary internal OKF wiki entries in the task documents
+Add references to the internal OKF wiki entries in the task documents
