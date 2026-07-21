@@ -7,6 +7,8 @@ Interview me relentlessly about every aspect of this until we reach a shared und
 
 Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
 
+When posing each question, state roughly how many questions are expected to remain after it (for example, "About 4 questions remain after this one"). Re-estimate as the discussion uncovers or resolves branches; present the count as an approximation, not a commitment.
+
 Always use the ask_user_question tool so the user can select an answer from a list of multiple choices. Make sure the first answer is always the one recommended by you and has "(recommended)" as the end of the answer.
 
 If available, always use web search to research documentation about tools, frameworks, etc. in question as well as find best practices and recommendations on them before asking me.
