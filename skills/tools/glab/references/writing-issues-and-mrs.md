@@ -2,6 +2,23 @@
 
 Guidelines for writing clear, scannable, and actionable issues and merge requests in GitLab.
 
+## Project Conventions Come First
+
+Before composing or updating content:
+
+1. Read `CONTRIBUTING.md`, repository guidance, and the available files in
+   `.gitlab/issue_templates/` or `.gitlab/merge_request_templates/`.
+2. Inspect a few recently accepted issues or merged MRs for established title,
+   label, and description conventions.
+3. Search for duplicates and related work.
+4. Preserve existing useful content when updating a description; make the
+   smallest requested edit.
+
+Use the project's template and title policy when they exist. The formats below
+are fallbacks, not universal GitLab requirements. Do not require Conventional
+Commits, bracketed issue types, fixed title lengths, or a standard checklist
+unless the project has adopted them.
+
 ## Issue Titles
 
 ### Be Descriptive and Specific
@@ -23,7 +40,7 @@ Make the title convey **at a glance** what the issue is about. Include key detai
 | Question | `[Question]: <Specific question>` | `[Question]: Best way to handle rate limiting?` |
 | Task | Imperative statement | `Refactor auth middleware to use JWT v3` |
 
-### Keep It Concise (50-70 Characters Ideal)
+### Keep It Concise
 
 - Use sentence case (capitalize first word, not every word).
 - Avoid fluff: no "Issue:", "Problem with:", or vague terms like "not working."
@@ -171,9 +188,11 @@ glab issue create \
 
 ## Merge Request Titles
 
-### Use Imperative Mood with Conventional Commits Prefix
+### Use the Project's MR Title Convention
 
-Start with `<type>[optional scope]: <description>` for automation and scannable changelogs.
+If the project uses Conventional Commits for MR titles, start with
+`<type>[optional scope]: <description>`. Otherwise, use a concise imperative
+summary that matches the repository's established style.
 
 **Common types:**
 
@@ -192,11 +211,12 @@ Start with `<type>[optional scope]: <description>` for automation and scannable 
 
 **Scope**: Noun describing affected area — `(ui)`, `(api)`, `(auth)`, `(db)`.
 
-### Title Rules
+### Fallback Title Rules
 
 - **Length**: 50-72 characters max — scannable in lists and notifications.
 - **Imperative mood**: "Add", "Fix", "Update" — not "Added", "Fixes", "Updated".
-- **Include issue references**: `(closes #123)` or `(#123)`.
+- Put closing issue references in the MR description so reviewers can see and
+  verify their effect. Add one to the title only when project policy requires it.
 - **Breaking changes**: Use `!` after type — `feat!: drop Node 18 support`.
 
 ### Good vs Bad Titles
@@ -384,8 +404,11 @@ MR templates support these variables that GitLab auto-expands:
 When templates exist, `glab mr create` and `glab issue create` auto-populate from `Default.md`. To use a named template:
 
 ```bash
-# glab doesn't have a --template flag, but you can pipe template content:
-cat .gitlab/merge_request_templates/Hotfix.md | glab mr create -t "fix(auth): patch token leak" -d -
+# Current glab versions support local MR templates by name:
+glab mr create -t "fix(auth): patch token leak" --template Hotfix
+
+# For an older installed glab version, check --help and use stdin if needed:
+glab mr create -t "fix(auth): patch token leak" -d - < .gitlab/merge_request_templates/Hotfix.md
 ```
 
 ## Keep MRs Small and Focused
@@ -393,8 +416,9 @@ cat .gitlab/merge_request_templates/Hotfix.md | glab mr create -t "fix(auth): pa
 - **Single purpose**: One MR = one feature or fix.
 - **Self-review first**: Run `glab mr diff` before requesting review.
 - **Use stacked diffs** (`glab stack`) for large features that need multiple sequential MRs.
-- **Commit count**: Aim for fewer than 10 commits per MR. If you have more, consider squashing related commits.
-- **Line count**: If an MR exceeds ~500 changed lines, add a note in the description explaining the scope and why it can't be split.
+- **Size**: Keep the MR small enough to review confidently. Avoid universal
+  commit-count or line-count thresholds; generated code, migrations, and
+  repository policy can change what is practical.
 - **Squash-and-merge**: For MRs with messy commit history, use squash merge to produce a clean single commit on the target branch. GitLab supports this as a merge option.
 
 ## Linking Issues and MRs
@@ -421,7 +445,7 @@ glab mr create -t "fix(auth): handle timeout" -d "Fixes #42"
 
 ## Labels Instead of Title Prefixes
 
-While `[Bug]:` prefixes are useful when templates aren't available, prefer applying labels separately for better filtering:
+Prefer applying labels separately for better filtering unless the project requires title prefixes:
 
 ```bash
 # Labels are filterable; title prefixes are not

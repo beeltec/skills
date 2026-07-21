@@ -135,21 +135,31 @@ glab repo transfer owner/repo --target-namespace new-group
 
 Interactive and non-interactive authentication.
 
-**Minimum required token scopes:** `api`, `write_repository`
+Use the least-privileged authentication method and scopes that support the
+operation. Interactive OAuth is preferred for a user session. In CI, prefer a
+CI job token when its endpoint permissions are sufficient, then a scoped
+project or group token; avoid personal access tokens where possible. Read-only
+operations may need only `read_api` or `read_repository`, while API mutations
+generally require `api`. `write_repository` grants Git-over-HTTP write access
+and is not a universal requirement for `glab` login.
 
 ```bash
 # Interactive login (prompts for host, token, protocol)
 glab auth login
 
 # Non-interactive with token
-glab auth login --hostname gitlab.example.com --token glpat-XXXXXXXXXXXXXXXXXXXX
+glab auth login --hostname gitlab.example.com --stdin
 
 # Specify protocols
 glab auth login --hostname gitlab.example.com --git-protocol ssh --api-protocol https
 
 # Login via stdin (for CI)
-echo "glpat-XXXXXXXXXXXXXXXXXXXX" | glab auth login --hostname gitlab.example.com --stdin
+printf '%s' "$GITLAB_TOKEN" | glab auth login --hostname gitlab.example.com --stdin
 ```
+
+Never place a real token directly in a command argument, URL, shell history,
+repository file, issue, MR, or log. Use an expiring token, store it in an
+approved secret manager, and rotate or revoke it when no longer needed.
 
 ### glab auth status
 
