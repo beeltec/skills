@@ -51,11 +51,31 @@ The development skills form a workflow that carries project knowledge from disco
 2. **discuss** — explore an idea or decision until its requirements and tradeoffs are understood.
 3. **to-wiki** — turn the conclusions from a discussion into durable project knowledge.
 4. **to-tasks** — break the agreed specification into bounded, linked implementation tasks.
-5. **implement** — execute the task plan with branching, incremental commits, tests, and review.
+5. **implement** or **implement-with-subagents** — execute the approved task plan.
 6. **code-review** — independently check the resulting changes against both repository standards and the originating specification.
 7. **handoff** — preserve the relevant conversation and workspace state when unfinished work must continue in another agent or session.
 
 `handoff` can be used at any point in the workflow. The other skills are most effective in the order shown because each stage produces context for the next one.
+
+### Implementing with subagents
+
+Use **implement-with-subagents** after completing **discuss**, **to-wiki**, and
+**to-tasks** consecutively in one session. Once **to-tasks** has created the
+task documents:
+
+1. Note the path to the generated master document, usually
+   `docs/tasks/<feature-slug>/000-overview.md`.
+2. Clear the current session and start a fresh one so implementation does not
+   compete with the planning conversation for context.
+3. Select a small model for the orchestrator, such as GPT 5.4 Mini or Sonnet 5.
+4. Invoke **implement-with-subagents** and point it at the master document:
+
+   ```text
+   Use $implement-with-subagents with docs/tasks/<feature-slug>/000-overview.md
+   ```
+
+The orchestrator reads the master plan and delegates each task to a separate
+subagent, running only one subagent at a time in dependency order.
 
 ## Manual Installation
 
