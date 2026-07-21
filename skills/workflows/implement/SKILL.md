@@ -1,6 +1,7 @@
 ---
 name: implement
 description: Implement a task plan from start to finish, including branching, incremental commits, tests, documentation lookup, review, and local integration. Use when the user asks to execute an existing task breakdown or work plan.
+disable-model-invocation: true
 ---
 
 Implement the work described by the user.

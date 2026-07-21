@@ -1,6 +1,7 @@
 ---
 name: setup-wiki
 description: Scaffold and configure a project-owned llmwiki using Open Knowledge Format 0.1. Use when Codex needs to create a new docs/wiki knowledge bundle, add progressive-disclosure indexes and maintenance rules, install structural/link/length validation, or add wiki usage instructions to AGENTS.md and CLAUDE.md.
+disable-model-invocation: true
 ---
 
 # Setup Wiki
