@@ -20,6 +20,8 @@ Do not overengineer. Also always ask yourself if you can implement something mor
 
 When a task is done (and only a task, not a subtask) use /code-review to review the work.
 
+If the task necessitates it run end-to-end tests using available skills and mcps (like Playwright MCP or Mobile MCP).
+
 If available, check the context length of the current session with @beeltec/context-usage-mcp after each subtask is done. If the session's context usage exceeds 150000 tokens, use /handoff.
 
 When all tasks are done and green, merge the branch with a merge commit, checkout the primary branch and delete the work branch locally
