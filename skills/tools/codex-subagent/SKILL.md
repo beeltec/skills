@@ -20,7 +20,7 @@ Delegate the requested work to a non-interactive Codex CLI process and relay its
    - required validation or acceptance criteria;
    - an instruction to inspect the repository, implement the task completely, run proportionate checks, and summarize changes and checks in the final response.
 3. Do not invent product requirements or paste secrets into the prompt. Ask the user only when a missing decision would materially change the result.
-4. Pipe the prompt on stdin to `scripts/run-codex-subagent.sh`. Run it in the foreground: do not append `&`, use a background shell tool mode, or launch another subagent task until it exits. Optionally pass `--model MODEL`, `--effort LEVEL`, `--sandbox MODE`, and a repository directory:
+4. Pipe the prompt on stdin to `scripts/run-codex-subagent.sh`. **Run the command as a background task using the executing harness's managed background-task mode.** A foreground task will be cut off when the execution tool reaches its fixed timeout, which can terminate the nested Codex run before it finishes. Do not append `&` or otherwise create an unmanaged shell process; use the execution tool's background mode so it returns a task or process handle. Optionally pass `--model MODEL`, `--effort LEVEL`, `--sandbox MODE`, and a repository directory:
 
    ```bash
    printf '%s\n' "$prompt" | /absolute/path/to/codex-subagent/scripts/run-codex-subagent.sh --model gpt-5.6-sol --effort high /path/to/repository
@@ -30,7 +30,7 @@ Delegate the requested work to a non-interactive Codex CLI process and relay its
 
    `workspace-write` deliberately makes `.git` read-only. If the delegated workflow must create branches, stage files, or commit, and the user has authorized that Git operation in a trusted repository, invoke the runner with `--sandbox danger-full-access`. This removes filesystem sandboxing for the nested process, so do not enable it merely to recover from an unrelated failure.
 
-   Use the execution tool's longest practical yield interval. If the tool yields a still-running process, keep polling that same process until it exits; a yielded process is not permission to start other work that the user required to run sequentially.
+   Keep polling the same background task or process handle until it exits. Do not treat a still-running status as completion or start other work that the user required to run sequentially.
 5. Read the entire command output. The script deliberately preserves `codex exec` output: progress is streamed on stderr and the nested agent's final message is printed on stdout, so both remain visible to the orchestrator.
 6. After the process exits, inspect relevant workspace changes and run any cheap checks needed to verify the nested agent's claims. If it fails, verify and enumerate completed or dirty work in the corrected, self-contained retry prompt so the next run preserves it and does not redo it. Read the composed retry prompt once before launch to catch truncation or quoting damage. Always retry through the runner; do not reconstruct a raw `codex exec` command, because its global options must precede the `exec` subcommand.
 7. Report the nested agent's outcome, the material files changed, and verification results. Clearly report a nonzero exit status or partial completion.
