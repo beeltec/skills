@@ -8,6 +8,10 @@ disable-model-invocation: true
 
 Create a durable, project-owned OKF wiki without overwriting existing knowledge.
 
+Stay on the user's current Git branch. Never create or switch branches while
+scaffolding, configuring, or populating the wiki, including when the current
+branch is not the primary branch.
+
 ## Workflow
 
 1. Inspect the project root, `AGENTS.md`, `CLAUDE.md`, `package.json`, existing

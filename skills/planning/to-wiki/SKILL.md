@@ -11,6 +11,9 @@ Read [the bundled OKF 0.1 specification](references/okf-spec.md) completely
 before editing a wiki. Treat it as the format authority and apply stricter
 project-local maintenance rules when they do not conflict with the specification.
 
+Stay on the user's current Git branch. Never create or switch branches for wiki
+updates, including when the current branch is not the primary branch.
+
 ## Workflow
 
 1. Resolve the project root and read applicable agent instructions.

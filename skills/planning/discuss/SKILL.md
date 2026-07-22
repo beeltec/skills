@@ -5,6 +5,9 @@ description: Discuss with the user relentlessly about a plan, decision, or idea.
 
 Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 
+Stay on the user's current Git branch. Never create or switch branches as part
+of discussion, even when inspecting the repository informs the decisions.
+
 Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
 
 When posing each question, state roughly how many questions are expected to remain after it (for example, "About 4 questions remain after this one"). Re-estimate as the discussion uncovers or resolves branches; present the count as an approximation, not a commitment.

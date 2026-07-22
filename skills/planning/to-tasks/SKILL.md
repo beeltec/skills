@@ -8,6 +8,10 @@ description: Break a plan, specification, issue, or the current conversation int
 Break agreed work into independently actionable tasks. Make each task a narrow,
 complete vertical slice and record the tasks that block it.
 
+Stay on the user's current Git branch. Never create or switch branches while
+planning or publishing task documents. Derive task paths from the current
+branch or agreed work without changing branches.
+
 ## Workflow
 
 ### 1. Gather context
