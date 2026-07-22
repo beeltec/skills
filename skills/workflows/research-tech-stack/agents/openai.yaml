@@ -1,7 +1,7 @@
 interface:
   display_name: "Research Tech Stack"
   short_description: "Research current tech guidance into the wiki"
-  default_prompt: "Use $research-tech-stack to research current, version-matched guidance for the affected technology stack and update the project wiki before implementation."
+  default_prompt: "Use $research-tech-stack to research current, version-matched guidance for the affected technology stack and update the project wiki before creating implementation tasks."
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

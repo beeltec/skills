@@ -51,9 +51,9 @@ The development skills form a workflow that carries project knowledge from disco
 1. **setup-wiki** — create and configure the project wiki before using the rest of the workflow.
 2. **discuss** — explore an idea or decision until its requirements and tradeoffs are understood.
 3. **to-wiki** — turn the conclusions from a discussion into durable project knowledge.
-4. **to-tasks** — break the agreed specification into bounded, linked implementation tasks.
-5. **research-tech-stack** — refresh current, version-matched engineering guidance for the technologies affected by the planned work.
-6. **implement** or **implement-with-subagents** — execute the approved task plan after the research gate passes.
+4. **research-tech-stack** *(optional)* — refresh current, version-matched engineering guidance for the technologies affected by the planned work.
+5. **to-tasks** — break the agreed specification and current engineering guidance into bounded, linked implementation tasks.
+6. **implement** or **implement-with-subagents** — execute the approved task plan.
 7. **code-review** — independently check the resulting changes against both repository standards and the originating specification.
 8. **handoff** — preserve the relevant conversation and workspace state when unfinished work must continue in another agent or session.
 

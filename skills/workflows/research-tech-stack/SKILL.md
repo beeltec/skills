@@ -1,11 +1,12 @@
 ---
 name: research-tech-stack
-description: Research current, version-matched documentation, recommendations, and best practices for technologies affected by planned implementation work, then persist curated project-relevant guidance under docs/wiki/engineering/technologies. Use before implementation or when technology guidance is missing, stale, version-mismatched, security-sensitive, or materially uncertain.
+description: Research current, version-matched documentation, recommendations, and best practices for technologies affected by planned work, then persist curated project-relevant guidance under docs/wiki/engineering/technologies. Use as an optional planning step before creating tasks, or when technology guidance is missing, stale, version-mismatched, security-sensitive, or materially uncertain.
 ---
 
 # Research Tech Stack
 
-Create a current engineering knowledge gate before code changes. Research only
+Create current engineering knowledge before implementation tasks are derived.
+This is an optional planning step immediately before `$to-tasks`. Research only
 technologies affected by the intended work, and turn web evidence into concise,
 project-relevant wiki guidance rather than copying documentation or retaining
 search transcripts.
@@ -83,8 +84,9 @@ Store all web-fetched technology guidance in `engineering/technologies/`, not
 in `research/`. Other architecture, engineering, or operational pages may link
 to these canonical pages for their external technical basis.
 
-## Completion Gate
+## Completion
 
-Do not begin code changes until every affected technology is either covered by
-current, version-applicable guidance or has been researched and its page has
-passed wiki validation. Report which pages were reused and which were updated.
+When this optional step is invoked, finish it before running `$to-tasks`: every
+affected technology must either have current, version-applicable guidance or be
+researched, persisted, and wiki-validated. Report which pages were reused and
+which were updated.

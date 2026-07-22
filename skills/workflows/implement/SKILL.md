@@ -7,17 +7,11 @@ Implement the work described by the user.
 
 If we are not yet on a work branch create it with /create-conventional-branch
 
-Before changing code, invoke `/research-tech-stack` as a mandatory knowledge
-gate. Inventory only the technologies affected by the planned work, reuse
-current and version-applicable guidance, and research and update the wiki for
-anything missing, stale, version-mismatched, security-sensitive, or materially
-uncertain. Do not start code changes until the affected technology pages and
-wiki validation are current.
-
 After each subtask is done, always check the task document's checklist, mark the completed subtask as done there, and do a conventional git commit with optional scope.
 
-Check the wiki regularly for the current technology guidance and other project
-knowledge while implementing.
+Check the wiki regularly for guidance and documentation on used technologies.
+
+If the wiki has no data on the used technologies, web search before using a technology to retrieve the latest documenation, best practices and recommendations on it. Update the wiki with this info.
 
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
