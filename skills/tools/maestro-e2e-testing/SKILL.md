@@ -107,8 +107,7 @@ onFlowComplete:
 | `runFlow` | Execute subflow | `- runFlow: subflows/login.yaml` |
 | `runScript` | Run JavaScript | `- runScript: script.js` |
 
-**Full command reference:** See [commands.md](commands.md)
-**Full selector reference:** See [selectors.md](selectors.md)
+**Full command reference:** See [commands.md](commands.md) **Full selector reference:** See [selectors.md](selectors.md)
 
 ### Running Tests
 

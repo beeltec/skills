@@ -12,6 +12,4 @@ Create one self-contained handoff that lets another agent continue without askin
 6. Exclude secrets, environment dumps, and unrelated conversation. Do not commit this temporary file unless asked.
 7. Read the file back and verify that it is non-empty, accurate, and names the next action.
 
-After success, present the repository-relative path followed by this exact prompt with the path substituted:
-`Continue the work from <repository-relative handoff path>. Delete the handoff document when all work is finished and all checks are green.`
-Do not continue the underlying task after presenting the prompt.
+After success, present the repository-relative path followed by this exact prompt with the path substituted: `Continue the work from <repository-relative handoff path>. Delete the handoff document when all work is finished and all checks are green.` Do not continue the underlying task after presenting the prompt.

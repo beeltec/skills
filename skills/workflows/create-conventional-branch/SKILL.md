@@ -11,20 +11,14 @@ Create and switch to a branch whose name communicates the work's purpose.
 
 Create or switch branches only when:
 
-- `$implement` or `$implement-with-subagents` is executing implementation work;
-  or
-- the user explicitly requests creating a branch or running a pull/merge-request
-  publishing workflow.
+- `$implement` or `$implement-with-subagents` is executing implementation work; or
+- the user explicitly requests creating a branch or running a pull/merge-request publishing workflow.
 
-Do not create or switch branches for `$discuss`, `$setup-wiki`, `$to-wiki`,
-`$research-tech-stack`, or `$to-tasks`. Those workflows stay on the branch the
-user selected, including when it is not the primary branch. Documentation or
-repository writes alone do not make a new branch necessary.
+Do not create or switch branches for `$discuss`, `$setup-wiki`, `$to-wiki`, `$research-tech-stack`, or `$to-tasks`. Those workflows stay on the branch the user selected, including when it is not the primary branch. Documentation or repository writes alone do not make a new branch necessary.
 
 ## Workflow
 
-1. Confirm that the invocation meets the authorization rules above. Otherwise,
-   do not change branches and return control to the calling workflow.
+1. Confirm that the invocation meets the authorization rules above. Otherwise, do not change branches and return control to the calling workflow.
 2. Read repository instructions and inspect the current branch and worktree with `git status --short --branch`.
 3. Derive the branch purpose from the task. Preserve an issue or ticket identifier when one is available.
 4. Choose the narrowest applicable prefix:

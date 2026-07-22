@@ -6,18 +6,12 @@ Guidelines for writing clear, scannable, and actionable issues and merge request
 
 Before composing or updating content:
 
-1. Read `CONTRIBUTING.md`, repository guidance, and the available files in
-   `.gitlab/issue_templates/` or `.gitlab/merge_request_templates/`.
-2. Inspect a few recently accepted issues or merged MRs for established title,
-   label, and description conventions.
+1. Read `CONTRIBUTING.md`, repository guidance, and the available files in `.gitlab/issue_templates/` or `.gitlab/merge_request_templates/`.
+2. Inspect a few recently accepted issues or merged MRs for established title, label, and description conventions.
 3. Search for duplicates and related work.
-4. Preserve existing useful content when updating a description; make the
-   smallest requested edit.
+4. Preserve existing useful content when updating a description; make the smallest requested edit.
 
-Use the project's template and title policy when they exist. The formats below
-are fallbacks, not universal GitLab requirements. Do not require Conventional
-Commits, bracketed issue types, fixed title lengths, or a standard checklist
-unless the project has adopted them.
+Use the project's template and title policy when they exist. The formats below are fallbacks, not universal GitLab requirements. Do not require Conventional Commits, bracketed issue types, fixed title lengths, or a standard checklist unless the project has adopted them.
 
 ## Issue Titles
 
@@ -190,9 +184,7 @@ glab issue create \
 
 ### Use the Project's MR Title Convention
 
-If the project uses Conventional Commits for MR titles, start with
-`<type>[optional scope]: <description>`. Otherwise, use a concise imperative
-summary that matches the repository's established style.
+If the project uses Conventional Commits for MR titles, start with `<type>[optional scope]: <description>`. Otherwise, use a concise imperative summary that matches the repository's established style.
 
 **Common types:**
 
@@ -215,8 +207,7 @@ summary that matches the repository's established style.
 
 - **Length**: 50-72 characters max — scannable in lists and notifications.
 - **Imperative mood**: "Add", "Fix", "Update" — not "Added", "Fixes", "Updated".
-- Put closing issue references in the MR description so reviewers can see and
-  verify their effect. Add one to the title only when project policy requires it.
+- Put closing issue references in the MR description so reviewers can see and verify their effect. Add one to the title only when project policy requires it.
 - **Breaking changes**: Use `!` after type — `feat!: drop Node 18 support`.
 
 ### Good vs Bad Titles
@@ -416,9 +407,7 @@ glab mr create -t "fix(auth): patch token leak" -d - < .gitlab/merge_request_tem
 - **Single purpose**: One MR = one feature or fix.
 - **Self-review first**: Run `glab mr diff` before requesting review.
 - **Use stacked diffs** (`glab stack`) for large features that need multiple sequential MRs.
-- **Size**: Keep the MR small enough to review confidently. Avoid universal
-  commit-count or line-count thresholds; generated code, migrations, and
-  repository policy can change what is practical.
+- **Size**: Keep the MR small enough to review confidently. Avoid universal commit-count or line-count thresholds; generated code, migrations, and repository policy can change what is practical.
 - **Squash-and-merge**: For MRs with messy commit history, use squash merge to produce a clean single commit on the target branch. GitLab supports this as a merge option.
 
 ## Linking Issues and MRs

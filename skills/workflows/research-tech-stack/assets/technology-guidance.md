@@ -14,28 +14,23 @@ freshness_tier: <fast-moving | stable | security-sensitive>
 
 ## Project usage
 
-Describe where the technology is used, how the project constrains its version,
-and which parts of the repository this guidance governs.
+Describe where the technology is used, how the project constrains its version, and which parts of the repository this guidance governs.
 
 ## Current guidance
 
-Record concise, actionable, project-relevant recommendations. Distinguish
-requirements from recommendations and optional conventions.
+Record concise, actionable, project-relevant recommendations. Distinguish requirements from recommendations and optional conventions.
 
 ## File and folder structure
 
-Describe the recommended structure when relevant. Omit this section when the
-technology does not establish meaningful structure guidance.
+Describe the recommended structure when relevant. Omit this section when the technology does not establish meaningful structure guidance.
 
 ## Project deviations
 
-Record deliberate differences from current external guidance and their known
-rationale. State `None known` when the project follows the guidance.
+Record deliberate differences from current external guidance and their known rationale. State `None known` when the project follows the guidance.
 
 ## Uncertainty
 
-Record unresolved conflicts, version ambiguity, or reliance on lower-authority
-sources. State `None known` only after checking.
+Record unresolved conflicts, version ambiguity, or reliance on lower-authority sources. State `None known` only after checking.
 
 ## Sources
 
