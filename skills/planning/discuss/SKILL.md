@@ -5,9 +5,9 @@ description: Discuss with the user relentlessly about a plan, decision, or idea.
 
 Before interviewing read indexes and concepts in `docs/wiki` because you have to know the current project state before discussing.
 
-Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
-
 Stay on the user's current Git branch. Never create or switch branches as part of discussion, even when inspecting the repository informs the decisions.
+
+Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 
 Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
 
