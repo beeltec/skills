@@ -7,7 +7,7 @@ Implement the work described by the user.
 
 If we are not yet on a work branch create it with /create-conventional-branch
 
-After each subtask is done, always check the task document's checklist, mark the completed subtask as done there, and do a conventional git commit with optional scope.
+After each subtask is done (**subtask**, not the entire task!), check the task document's checklist, mark the completed subtask as done there, and do a conventional git commit with optional scope.
 
 Check the wiki regularly for guidance and documentation on used technologies.
 
