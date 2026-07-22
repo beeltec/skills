@@ -17,11 +17,8 @@ Question X / (~Y):
 Question
 ```
 
-Replace `X` with the current question number, starting at 1 and incrementing by
-one. Replace `Y` with the estimated total number of questions in the discussion,
-including the current question. Re-estimate `Y` as the discussion uncovers or
-resolves branches; it is an approximation and may change. Replace `Question`
-with the question itself. Do not express the question count in any other format.
+Start `X` at 1 and increment it. Use `Y` for the estimated total, including the
+current question; revise it as the discussion evolves. Use no other count format.
 
 Always use the ask_user_question tool so the user can select an answer from a list of multiple choices. Make sure the first answer is always the one recommended by you and has "(recommended)" as the end of the answer.
 
