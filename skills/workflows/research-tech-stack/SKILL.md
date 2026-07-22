@@ -11,6 +11,10 @@ technologies affected by the intended work, and turn web evidence into concise,
 project-relevant wiki guidance rather than copying documentation or retaining
 search transcripts.
 
+Stay on the user's current Git branch. Never create or switch branches while
+researching or updating technology guidance, including when the current branch
+is not the primary branch.
+
 ## Preconditions
 
 1. Resolve the project root and read applicable repository instructions.
