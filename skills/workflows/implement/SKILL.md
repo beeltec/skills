@@ -11,8 +11,6 @@ After each subtask is done, always check the task document's checklist, mark the
 
 Check the wiki regularly for guidance and documentation on used technologies.
 
-If the wiki has no data on the used technologies, web search before using a technology to retrieve the latest documenation, best practices and recommendations on it. Update the wiki with this info.
-
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
 Do not overengineer. Also always ask yourself if you can implement something more ellegantly with less code.

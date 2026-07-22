@@ -1,6 +1,6 @@
 ---
 name: research-tech-stack
-description: Research current, version-matched documentation, recommendations, and best practices for technologies affected by planned work, then persist curated project-relevant guidance under docs/wiki/engineering/technologies. Use as an optional planning step before creating tasks, or when technology guidance is missing, stale, version-mismatched, security-sensitive, or materially uncertain.
+description: Research current, version-matched documentation, recommendations, and best practices for technologies affected by planned work, then persist curated project-relevant guidance under docs/wiki/engineering/technologies. Use only when the user explicitly requests this optional planning step before creating tasks.
 ---
 
 # Research Tech Stack
