@@ -3,10 +3,11 @@ name: discuss
 description: Discuss with the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'discuss' trigger phrases.
 ---
 
+Before interviewing read indexes and concepts in `docs/wiki` because you have to know the current project state before discussing.
+
 Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 
-Stay on the user's current Git branch. Never create or switch branches as part
-of discussion, even when inspecting the repository informs the decisions.
+Stay on the user's current Git branch. Never create or switch branches as part of discussion, even when inspecting the repository informs the decisions.
 
 Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
 
@@ -17,8 +18,7 @@ Question X / (~Y):
 Question
 ```
 
-Start `X` at 1 and increment it. Use `Y` for the estimated total, including the
-current question; revise it as the discussion evolves. Use no other count format.
+Start `X` at 1 and increment it. Use `Y` for the estimated total, including the current question; revise it as the discussion evolves. Use no other count format.
 
 Always use the ask_user_question tool so the user can select an answer from a list of multiple choices. Make sure the first answer is always the one recommended by you and has "(recommended)" as the end of the answer.
 
