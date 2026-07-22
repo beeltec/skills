@@ -51,8 +51,12 @@ updates, including when the current branch is not the primary branch.
 10. Add a concise, newest-first entry to `docs/wiki/log.md` under today's
     `YYYY-MM-DD` heading. Describe the knowledge changed, not the editing session.
 11. Run `node scripts/validate-wiki.mjs` or the repository's documented wiki
-    check. Fix all errors, review warnings, inspect the final diff, and report
-    the pages created or updated plus the validation result.
+    check. Fix all errors, review warnings, and inspect the final diff.
+12. After validation succeeds, stage only the wiki changes produced by this
+    workflow and create a Conventional Commit with the `docs` type and `wiki`
+    scope, for example `docs(wiki): document deployment constraints`. Adapt the
+    subject to the knowledge changed. Report the commit hash, pages created or
+    updated, and validation result.
 
 ## Writing Rules
 
@@ -64,5 +68,5 @@ updates, including when the current branch is not the primary branch.
   links inside the wiki.
 - Follow the wiki's local maintenance and length rules. Split concepts before
   they mix different owners, audiences, lifecycles, or reusable subjects.
-- Do not create tasks, commits, or implementation artifacts. Wiki output is the
-  durable specification that `$to-tasks` can reference next.
+- Do not create tasks or implementation artifacts. Wiki output is the durable
+  specification that `$to-tasks` can reference next.
