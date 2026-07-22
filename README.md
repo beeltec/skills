@@ -46,24 +46,46 @@ npx skills add beeltec/skills --list
 
 ## Development Workflow
 
-The development skills form a workflow that carries project knowledge from discovery through implementation and review. Run **setup-wiki first** in every project. It creates the shared knowledge structure and agent instructions that the other development skills rely on to find durable context and work efficiently.
+The development skills form a connected path from an early idea to reviewed code. Each phase produces durable context for the next one, so agents do not have to reconstruct decisions, requirements, or technical constraints later.
 
-1. **setup-wiki** — create and configure the project wiki before using the rest of the workflow.
-2. **discuss** — explore an idea or decision until its requirements and tradeoffs are understood.
-3. **to-wiki** — turn the conclusions from a discussion into durable project knowledge.
-4. **research-tech-stack** *(optional)* — refresh current, version-matched engineering guidance for the technologies affected by the planned work.
-5. **to-tasks** — break the agreed specification and current engineering guidance into bounded, linked implementation tasks.
-6. **implement** or **implement-with-subagents** — execute the approved task plan.
-7. **code-review** — independently check the resulting changes against both repository standards and the originating specification.
-8. **handoff** — preserve the relevant conversation and workspace state when unfinished work must continue in another agent or session.
+![Development workflow from project foundation through planning, implementation, and review](docs/assets/development-workflow.png)
 
-`handoff` can be used at any point in the workflow. The other skills are most effective in the order shown because each stage produces context for the next one.
+### 1. Establish the project foundation
+
+Start each project with **setup-wiki**. It creates the shared wiki structure, validation tooling, and agent instructions used throughout the rest of the workflow. This is a one-time project setup, not a step that must be repeated for every feature.
+
+### 2. Turn an idea into an implementation plan
+
+Use the planning skills in sequence:
+
+1. **discuss** explores the idea, challenges assumptions, and clarifies requirements and tradeoffs.
+2. **to-wiki** records the confirmed conclusions as durable project knowledge.
+3. **research-tech-stack** is optional. Use it when implementation depends on current, version-specific guidance that is not already documented in the project wiki.
+4. **to-tasks** converts the agreed specification and relevant technical guidance into bounded, linked tasks with an explicit execution order.
+
+By the end of this phase, the project wiki explains what was decided and why, while the task documents explain what needs to be built.
+
+### 3. Choose an implementation path
+
+Execute the task plan with one of two skills:
+
+- **implement** handles the plan in the current agent session, including branching, incremental commits, tests, documentation lookup, and review.
+- **implement-with-subagents** delegates each task to a fresh subagent in dependency order. Use it for a plan created by **to-tasks** when isolating task context is valuable.
+
+These are alternative execution paths, not consecutive steps.
+
+### 4. Verify the result
+
+Run **code-review** after implementation. It checks the changes independently along two axes: compliance with the repository's documented standards and fidelity to the originating specification. If the review finds problems, return to the implementation phase, address them, and review again.
+
+### Pause and resume anywhere
+
+Use **handoff** whenever unfinished work must continue in another agent or session. It records the relevant conversation and workspace state, so it can wrap any phase of the workflow rather than acting as a mandatory final step.
 
 ### Implementing with subagents
 
-Use **implement-with-subagents** after completing **discuss**, **to-wiki**, and
-**to-tasks** consecutively in one session. Once **to-tasks** has created the
-task documents:
+Use **implement-with-subagents** after the planning phase has produced a complete
+task set. Once **to-tasks** has created the task documents:
 
 1. Note the path to the generated master document, usually
    `docs/tasks/<feature-slug>/000-overview.md`.
