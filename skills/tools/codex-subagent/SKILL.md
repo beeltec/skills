@@ -30,7 +30,7 @@ Delegate the requested work to a non-interactive Codex CLI process and relay its
 
    `workspace-write` deliberately makes `.git` read-only. If the delegated workflow must create branches, stage files, or commit, and the user has authorized that Git operation in a trusted repository, invoke the runner with `--sandbox danger-full-access`. This removes filesystem sandboxing for the nested process, so do not enable it merely to recover from an unrelated failure.
 
-   Keep polling the same background task or process handle until it exits. Do not treat a still-running status as completion or start other work that the user required to run sequentially.
+   Do not poll the Codex subagent. Run it as a managed background task and wait for the harness to report completion. Do not start work that must run afterward until it finishes.
 5. Read the entire command output. The script deliberately preserves `codex exec` output: progress is streamed on stderr and the nested agent's final message is printed on stdout, so both remain visible to the orchestrator.
 6. After the process exits, inspect relevant workspace changes and run any cheap checks needed to verify the nested agent's claims. If it fails, verify and enumerate completed or dirty work in the corrected, self-contained retry prompt so the next run preserves it and does not redo it. Read the composed retry prompt once before launch to catch truncation or quoting damage. Always retry through the runner; do not reconstruct a raw `codex exec` command, because its global options must precede the `exec` subcommand.
 7. Report the nested agent's outcome, the material files changed, and verification results. Clearly report a nonzero exit status or partial completion.
