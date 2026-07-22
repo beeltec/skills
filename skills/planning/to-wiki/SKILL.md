@@ -52,11 +52,9 @@ updates, including when the current branch is not the primary branch.
     `YYYY-MM-DD` heading. Describe the knowledge changed, not the editing session.
 11. Run `node scripts/validate-wiki.mjs` or the repository's documented wiki
     check. Fix all errors, review warnings, and inspect the final diff.
-12. After validation succeeds, stage only the wiki changes produced by this
-    workflow and create a Conventional Commit with the `docs` type and `wiki`
-    scope, for example `docs(wiki): document deployment constraints`. Adapt the
-    subject to the knowledge changed. Report the commit hash, pages created or
-    updated, and validation result.
+12. After validation, stage only this workflow's wiki changes and create a
+    Conventional Commit: `docs(wiki): <concise summary>`. Report its hash, the
+    changed pages, and the validation result.
 
 ## Writing Rules
 
