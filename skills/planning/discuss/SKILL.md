@@ -10,7 +10,18 @@ of discussion, even when inspecting the repository informs the decisions.
 
 Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
 
-When posing each question, state roughly how many questions are expected to remain after it (for example, "About 4 questions remain after this one"). Re-estimate as the discussion uncovers or resolves branches; present the count as an approximation, not a commitment.
+Format every question exactly as:
+
+```text
+Question X / (~Y):
+Question
+```
+
+Replace `X` with the current question number, starting at 1 and incrementing by
+one. Replace `Y` with the estimated total number of questions in the discussion,
+including the current question. Re-estimate `Y` as the discussion uncovers or
+resolves branches; it is an approximation and may change. Replace `Question`
+with the question itself. Do not express the question count in any other format.
 
 Always use the ask_user_question tool so the user can select an answer from a list of multiple choices. Make sure the first answer is always the one recommended by you and has "(recommended)" as the end of the answer.
 
