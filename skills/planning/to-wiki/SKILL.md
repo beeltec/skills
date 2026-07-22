@@ -1,7 +1,6 @@
 ---
 name: to-wiki
 description: Turn confirmed conclusions from a conversation or specification into durable, canonical project knowledge in an existing Open Knowledge Format wiki. Use when the user explicitly invokes $to-wiki or asks to preserve an agreed understanding, decision, constraint, policy, or researched conclusion in docs/wiki.
-disable-model-invocation: true
 ---
 
 # To Wiki
