@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-A collection of 14 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+A collection of 15 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -39,6 +39,7 @@ npx skills add beeltec/skills --list
 | **implement** | Execute an existing task plan with branching, commits, tests, and review |
 | **implement-with-subagents** | Execute a `$to-tasks` plan through one sequential subagent per task |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
+| **research-tech-stack** | Research current, version-matched technology guidance and persist it in the engineering wiki before implementation |
 | **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with agreed domain terminology, validation, and agent instructions |
 | **to-tasks** | Convert a conversation or specification into linked implementation tasks |
 | **to-wiki** | Turn confirmed conclusions into durable, canonical project wiki knowledge |
@@ -51,9 +52,10 @@ The development skills form a workflow that carries project knowledge from disco
 2. **discuss** — explore an idea or decision until its requirements and tradeoffs are understood.
 3. **to-wiki** — turn the conclusions from a discussion into durable project knowledge.
 4. **to-tasks** — break the agreed specification into bounded, linked implementation tasks.
-5. **implement** or **implement-with-subagents** — execute the approved task plan.
-6. **code-review** — independently check the resulting changes against both repository standards and the originating specification.
-7. **handoff** — preserve the relevant conversation and workspace state when unfinished work must continue in another agent or session.
+5. **research-tech-stack** — refresh current, version-matched engineering guidance for the technologies affected by the planned work.
+6. **implement** or **implement-with-subagents** — execute the approved task plan after the research gate passes.
+7. **code-review** — independently check the resulting changes against both repository standards and the originating specification.
+8. **handoff** — preserve the relevant conversation and workspace state when unfinished work must continue in another agent or session.
 
 `handoff` can be used at any point in the workflow. The other skills are most effective in the order shown because each stage produces context for the next one.
 

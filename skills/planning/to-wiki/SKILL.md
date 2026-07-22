@@ -25,10 +25,13 @@ project-local maintenance rules when they do not conflict with the specification
    - `architecture/` for system-wide design, security, delivery, technology,
      and compatibility decisions.
    - `engineering/` for application-specific coding, testing, and review rules.
+     Store curated web-fetched language, framework, runtime, library, and tool
+     guidance by technology under `engineering/technologies/`.
    - `domains/` for product behavior, policies, contracts, and domain rules.
    - `operations/` for repeatable operational and verification runbooks.
-   - `research/` for compiled external evidence; place the durable conclusion
-     in its owning concept and link back to the evidence.
+   - `research/` for compiled external evidence other than technology guidance;
+     place the durable conclusion in its owning concept and link back to the
+     evidence.
 6. Update an existing concept when it already owns the subject. Otherwise,
    create a focused concept under the narrowest durable responsibility. Never
    organize pages by conversation, task, branch, feature request, or agent.
