@@ -19,7 +19,7 @@ new contract.
 | [004 — Route discussion and research by knowledge state](004-route-planning-knowledge.md) | completed | [001](001-initialize-project-governance.md), [003](003-manage-backlog-lifecycle.md) |
 | [005 — Review changes against wiki and backlog authority](005-review-wiki-backlog-authority.md) | completed | [001](001-initialize-project-governance.md), [003](003-manage-backlog-lifecycle.md) |
 | [006 — Execute work items and Epics through completion](006-execute-backlog-work.md) | completed | [002](002-upgrade-existing-projects.md), [003](003-manage-backlog-lifecycle.md), [005](005-review-wiki-backlog-authority.md) |
-| [007 — Orchestrate backlog execution with subagents](007-orchestrate-backlog-subagents.md) | ready-for-agent | [006](006-execute-backlog-work.md) |
+| [007 — Orchestrate backlog execution with subagents](007-orchestrate-backlog-subagents.md) | completed | [006](006-execute-backlog-work.md) |
 | [008 — Publish and verify the redesigned workflow](008-publish-redesigned-workflow.md) | ready-for-agent | [002](002-upgrade-existing-projects.md), [003](003-manage-backlog-lifecycle.md), [004](004-route-planning-knowledge.md), [005](005-review-wiki-backlog-authority.md), [006](006-execute-backlog-work.md), [007](007-orchestrate-backlog-subagents.md) |
 
 ## Initial actionable frontier
