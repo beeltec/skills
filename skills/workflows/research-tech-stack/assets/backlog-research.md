@@ -16,7 +16,7 @@ Summarize project-relevant conclusions. Distinguish requirements, recommendation
 
 ### Best practices and coding guidelines
 
-Record applicable version-matched best practices and recommended coding guidelines — official style guides, idiomatic usage and configuration patterns, security recommendations. State `Not applicable` only when inspected evidence shows the delta touches nothing these guidelines would govern.
+Record applicable version-matched best practices and recommended coding guidelines — official style guides, idiomatic usage and configuration patterns, security recommendations. State each rule or pattern concretely enough to implement from without reopening sources. State `Not applicable` only when inspected evidence shows the delta touches nothing these guidelines would govern.
 
 ### Uncertainty and readiness
 
