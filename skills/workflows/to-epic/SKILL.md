@@ -1,9 +1,9 @@
 ---
-name: plan-epic
+name: to-epic
 description: Plan one Epic end-to-end in a setup-project backlog without per-step approval pauses — Epic intake, one explicit owner decision on research-tech-stack, child work-item intake, and refinement until the Epic and every child are ready. Use when the user asks to plan an outcome into a ready Epic.
 ---
 
-# Plan Epic
+# To Epic
 
 Invoking this skill is the project owner's standing approval for the full planning transaction set of one Epic: Epic intake, child work-item intake, refinement, rank placement, and every `proposed -> ready` transition. This supersedes `$backlog`'s per-transaction approval pauses for exactly these transactions; follow `$backlog` for everything else — preflight, templates, relationships, Definition of Ready, validation, staging, commits. It never authorizes cancellation, wiki mutation, execution claims, or touching records outside this Epic and its children.
 

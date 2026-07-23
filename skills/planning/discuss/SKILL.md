@@ -29,6 +29,7 @@ Track terminology. When the user uses a domain term absent from the ubiquitous l
 Do not act until the user confirms shared understanding. After confirmation, classify it before proposing a handoff:
 
 - Unimplemented desired state (new capability, behavior change, fix, migration) belongs in `docs/backlog`: offer `$backlog` to create or refine the proposed Epic or work item under its approval boundary. Never recommend publishing its target specification to the wiki.
+- When that desired state is a coordinated outcome that should form an Epic — multiple coherent, independently valuable work items serving one goal — explicitly ask whether to run `$to-epic` instead, which plans it end-to-end (Epic intake, research decision, child intake, refinement to ready) without further approval pauses.
 - A correction, clarification, or durable conclusion already describing accepted current primary-branch state may be offered to `$wiki` — never merely because a proposal is well specified or agreed as desirable.
 - Confirmed new or corrected terminology: offer `$wiki` to update the ubiquitous language, even when the term arose from an unimplemented proposal — its meaning is durable project language regardless of whether the proposal ships.
 - A conversation may contain both: route the desired delta to `$backlog` and only independently current, durable facts to `$wiki`, without duplicating the proposal.
