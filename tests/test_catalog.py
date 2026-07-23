@@ -55,18 +55,20 @@ class CatalogContractTests(unittest.TestCase):
             encoding="utf-8"
         )
         active_publication = README + diagram
+        active_contracts = active_publication + "".join(
+            path.read_text(encoding="utf-8")
+            for pattern in ("*/*/SKILL.md", "*/*/agents/openai.yaml")
+            for path in sorted((ROOT / "skills").glob(pattern))
+        )
         for name in REMOVED_PUBLIC_NAMES:
             self.assertNotIn(name, self.skill_names)
-            self.assertFalse((ROOT / ".agents" / "skills" / name).exists())
-            self.assertNotIn(name, active_publication)
+            self.assertFalse(os.path.lexists(ROOT / ".agents" / "skills" / name))
+            self.assertNotIn(name, active_contracts)
 
-        obsolete_terms = (
-            "docs/tasks",
-            "000-overview.md",
-            "validate-wiki.mjs",
-            "wiki:check",
-        )
-        for obsolete in obsolete_terms:
+        for obsolete in ("validate-wiki.mjs", "wiki:check"):
+            self.assertNotIn(obsolete, active_contracts)
+
+        for obsolete in ("docs/tasks", "000-overview.md"):
             self.assertNotIn(obsolete, active_publication)
 
 
