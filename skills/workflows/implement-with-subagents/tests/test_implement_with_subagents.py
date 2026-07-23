@@ -45,6 +45,7 @@ class ImplementWithSubagentsContractTests(unittest.TestCase):
             "claim owner/session/branch/expiry",
         ):
             self.assertIn(required, preflight)
+        self.assertIn("missing or malformed records", preflight)
         self.assertIn("deadlocked frontier", preflight)
         self.assertIn("blocker outside the authorized set", preflight)
 
@@ -61,8 +62,8 @@ class ImplementWithSubagentsContractTests(unittest.TestCase):
     def test_one_fresh_subagent_per_item_and_same_agent_recovery(self) -> None:
         self.assertIn("Spawn exactly one fresh subagent", SKILL)
         self.assertIn("never assign this subagent another work item", SKILL)
-        self.assertIn("no concurrent or paused implementation subagents", SKILL)
-        self.assertIn("invoke and follow `$implement`", SKILL)
+        self.assertIn("never have more than one implementation subagent running or paused", SKILL)
+        self.assertIn("invoke and follow `/implement`", SKILL)
         self.assertIn("same assigned subagent", SKILL)
         self.assertIn("No replacement subagent", SKILL)
 

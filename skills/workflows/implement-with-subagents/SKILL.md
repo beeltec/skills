@@ -5,7 +5,7 @@ description: Orchestrate an explicit ready Epic or selected backlog work-item se
 
 # Implement with Subagents
 
-Act as the execution orchestrator for approved work in a `setup-project` backlog. Keep ownership of authority discovery, selection, sequencing, verification, recovery, and Epic closure. Delegate each executable work item to exactly one fresh subagent, with no concurrent or paused implementation subagents.
+Act as the execution orchestrator for approved work in a `setup-project` backlog. Keep ownership of authority discovery, selection, sequencing, verification, recovery, and Epic closure. Delegate each executable work item to exactly one fresh subagent, and never have more than one implementation subagent running or paused.
 
 Never create, inspect, migrate, or depend on `docs/tasks` or a master task document. Do not implement work-item scope in the orchestrator.
 
@@ -26,7 +26,7 @@ Complete preflight before spawning a subagent or changing backlog state:
 
 1. Resolve the repository root. Read all applicable `AGENTS.md`, `CLAUDE.md`, nested instructions, contributing guidance, and coding standards.
 2. Require `.setup-project.json`, wiki maintenance and root index, ubiquitous language, backlog maintenance and root index, all four backlog templates, and `scripts/validate-project.mjs`. Stop and direct the user to `$setup-project` when the scaffold is incomplete.
-3. Run `node scripts/validate-project.mjs`. Stop on malformed links, records, relationships, rank, archives, statuses, or claims; do not delegate against an invalid baseline.
+3. Run `node scripts/validate-project.mjs`. Stop on malformed links, missing or malformed records, relationships, rank, archives, statuses, or claims; do not delegate against an invalid baseline.
 4. Resolve the authorized scope. For an Epic, read its complete record and every child. For a set, read every selected work item. Read the complete global rank, active and archive indexes, related parent Epics, all records connected by relationships, and every record needed to calculate inward blockers.
 5. Read backlog maintenance, applicable type templates, all selected and Epic `wiki_refs`, nearest wiki indexes, wiki maintenance and log, relevant engineering and architecture guidance, proposal research and local evidence, and repository code and tests affected by the authorized work.
 6. Inspect the current and primary branches, remotes, staged and unstaged changes, and recent history. Preserve unrelated and shared-workspace changes between delegations.
@@ -43,7 +43,7 @@ Repeat this loop for authorized incomplete work:
 1. Reload the records and run `node scripts/validate-project.mjs` before every selection. First resume an active item with this run's live claim and assigned subagent. Otherwise scan `## Global executable-work rank` from top to bottom and select the first authorized item whose status is `ready`, whose claim fields are empty, and which has no unresolved inward blocker. Rank chooses among currently actionable authorized items; links determine actionability.
 2. Spawn exactly one fresh subagent dedicated to the selected `WORK-NNN`. Record the item-to-agent/session mapping for this run. Do not keep another implementation subagent running or paused, and never assign this subagent another work item.
 3. Give it a self-contained prompt containing:
-   - an explicit instruction to invoke and follow `$implement` with the selected work-item ID or path, scoped only to that item;
+   - an explicit instruction to invoke and follow `/implement` with the selected work-item ID or path, scoped only to that item;
    - the repository root, complete work-item path, parent Epic path and authorized-scope description;
    - all relevant blocker outcomes, relationship paths, wiki references, fixed constraints, and user instructions;
    - an instruction to inspect current repository and Git state before editing, preserve unrelated work, and never broaden scope or change rank;
