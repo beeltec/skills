@@ -16,7 +16,7 @@ installation, setup, planning, review, and execution handoffs end to end.
 - [x] Rewrite the development workflow around `setup-project`, state-aware discussion handoffs, proposal research, `backlog`, direct or subagent implementation, and two-axis review.
 - [x] Replace all `docs/tasks` and `000-overview.md` invocation examples with Epic or work-item identifiers and paths.
 - [x] Regenerate or replace the development workflow diagram so it matches the documented skills and contains no removed handoff or task-plan stages.
-- [ ] Verify every canonical skill directory, frontmatter name, UI metadata name, and `.agents/skills` relative symlink agrees.
+- [x] Verify every canonical skill directory, frontmatter name, UI metadata name, and `.agents/skills` relative symlink agrees.
 - [x] Remove `setup-wiki` and `to-tasks` catalog entries and symlinks without modifying unrelated dangling or user-owned artifacts.
 - [ ] Search all active documentation, metadata, and skills for stale `$setup-wiki`, `$to-tasks`, `validate-wiki.mjs`, `wiki:check`, and current-workflow `docs/tasks` references.
 - [ ] Permit old names only in explicit setup-upgrade compatibility code and fixtures, clearly labeled as legacy behavior.
