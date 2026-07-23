@@ -24,10 +24,13 @@ If available, use the ask_user_question tool with multiple-choice answers; the f
 
 Look up any *fact* discoverable from the environment (filesystem, tools) instead of asking. *Decisions* belong to the user — put each one to them and wait.
 
+Track terminology. When the user uses a domain term absent from the ubiquitous language, an existing term with a different meaning, or several words for one concept, raise a numbered question: confirm the meaning, propose a definition, and ask whether to add or correct it in the ubiquitous language. Collect confirmed terms for the handoff; without a wiki, note them for `$setup-project`.
+
 Do not act until the user confirms shared understanding. After confirmation, classify it before proposing a handoff:
 
 - Unimplemented desired state (new capability, behavior change, fix, migration) belongs in `docs/backlog`: offer `$backlog` to create or refine the proposed Epic or work item under its approval boundary. Never recommend publishing its target specification to the wiki.
 - A correction, clarification, or durable conclusion already describing accepted current primary-branch state may be offered to `$wiki` — never merely because a proposal is well specified or agreed as desirable.
+- Confirmed new or corrected terminology: offer `$wiki` to update the ubiquitous language, even when the term arose from an unimplemented proposal — its meaning is durable project language regardless of whether the proposal ships.
 - A conversation may contain both: route the desired delta to `$backlog` and only independently current, durable facts to `$wiki`, without duplicating the proposal.
 - Unresolved decisions stay in the conversation or the proposed backlog record — never presented as accepted wiki knowledge or as ready work.
 
