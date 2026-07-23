@@ -12,7 +12,7 @@ Stay on the user's current Git branch. Never create or switch branches while res
 ## Preconditions
 
 1. Resolve the project root and read applicable repository instructions.
-2. Require `docs/wiki/index.md` and `docs/wiki/maintenance.md`. If either is missing, stop and direct the user to run `$setup-project` first.
+2. Require `docs/wiki/index.md` and `docs/wiki/maintenance.md`. If either is missing, stop and direct the user to run `$setup-wiki` first.
 3. Read the wiki root, maintenance rules, `engineering/index.md`, `engineering/technologies/index.md` when present, and relevant technology pages before researching.
 
 ## Workflow
@@ -35,7 +35,7 @@ Stay on the user's current Git branch. Never create or switch branches while res
 8. Write one canonical page per technology under `docs/wiki/engineering/technologies/<technology>.md`, using [the technology page template](assets/technology-guidance.md). Update an existing page instead of creating overlapping guidance.
 9. If current external guidance conflicts with established repository conventions, preserve the project structure. Record the recommendation, project deviation, and known rationale. Do not expand the implementation into a migration without an explicit decision.
 10. Update `docs/wiki/engineering/technologies/index.md`, every other affected nearest index, and `docs/wiki/log.md`. Keep one canonical statement of each rule and link to it elsewhere.
-11. Run `node scripts/validate-project.mjs` or the repository's documented project check. Fix errors, review warnings, and inspect the final diff before declaring the gate complete.
+11. Run `node scripts/validate-wiki.mjs` or the repository's documented wiki check. Fix errors, review warnings, and inspect the final diff before declaring the gate complete.
 
 ## Page Contract
 

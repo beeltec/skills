@@ -12,7 +12,7 @@ Stay on the user's current Git branch. Never create or switch branches for wiki 
 ## Workflow
 
 1. Resolve the project root and read applicable agent instructions.
-2. Require `docs/wiki/index.md` and `docs/wiki/maintenance.md`. If either is missing, stop and direct the user to run `$setup-project` first.
+2. Require `docs/wiki/index.md` and `docs/wiki/maintenance.md`. If either is missing, stop and direct the user to run `$setup-wiki` first.
 3. Read the source material, the wiki root index, maintenance rules, log, the nearest relevant indexes, and related concept pages before editing.
 4. Extract only conclusions that are confirmed, durable, and useful beyond the current task. Exclude discussion history, rejected alternatives, temporary observations, active checklists, implementation steps, and session state.
 5. Choose the canonical owner for each conclusion:
@@ -26,7 +26,7 @@ Stay on the user's current Git branch. Never create or switch branches for wiki 
 8. Give new concept pages valid frontmatter with non-empty `type`, `title`, `description`, ISO 8601 `timestamp`, and `status`. Add `tags`, `confidence`, `last_reviewed`, and bundle-relative `sources` only when they add value.
 9. Update every affected nearest `index.md` with links and one-sentence descriptions. Repair inbound links and add useful `Connections` links on concept pages.
 10. Add a concise, newest-first entry to `docs/wiki/log.md` under today's `YYYY-MM-DD` heading. Describe the knowledge changed, not the editing session.
-11. Run `node scripts/validate-project.mjs` or the repository's documented project check. Fix all errors, review warnings, and inspect the final diff.
+11. Run `node scripts/validate-wiki.mjs` or the repository's documented wiki check. Fix all errors, review warnings, and inspect the final diff.
 12. After validation, stage only this workflow's wiki changes and create a Conventional Commit: `docs(wiki): <concise summary>`. Report its hash, the changed pages, and the validation result.
 
 ## Writing Rules
