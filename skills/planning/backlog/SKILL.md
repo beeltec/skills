@@ -7,6 +7,8 @@ description: Manage approved desired work in a setup-project backlog from lightw
 
 Manage `docs/backlog` as the tracked system of record for desired project deltas and execution state. Treat `docs/wiki` as accepted current state on the primary branch. Never put a proposal in the wiki or treat completed backlog work as accepted state until the relevant wiki concepts are updated.
 
+Use `$wiki` for accepted-knowledge operations. Do not mutate wiki concepts inside a backlog transaction.
+
 Stay on the user's current Git branch. Never create, switch, merge, or delete branches as part of backlog management. Do not create, inspect, migrate, or depend on `docs/tasks`.
 
 ## Authority

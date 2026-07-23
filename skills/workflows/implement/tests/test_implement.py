@@ -57,12 +57,18 @@ class ImplementContractTests(unittest.TestCase):
         self.assertIn("Repeat until both Standards and Spec pass", SKILL)
         self.assertIn("obtain project-owner approval", SKILL)
         self.assertIn("`wiki reconciliation: no update required`", SKILL)
+        self.assertIn("Do not edit `docs/wiki` on the work branch", SKILL)
+        self.assertIn("invoke `$wiki` on the primary branch", SKILL)
         self.assertIn("run `node scripts/validate-project.mjs` plus the full applicable repository suite", SKILL)
 
     def test_done_follows_primary_acceptance_and_applies_archive_rules(self) -> None:
         merge = SKILL.index("Merge the one work branch into the primary branch")
+        acceptance = SKILL.index("post-merge checks establish primary-branch acceptance")
+        wiki = SKILL.index("invoke `$wiki` on the primary branch")
         done = SKILL.index("set the item to `done`")
         self.assertLess(merge, done)
+        self.assertLess(acceptance, wiki)
+        self.assertLess(wiki, done)
         self.assertIn("post-merge checks establish primary-branch acceptance", SKILL)
         self.assertIn("Move a standalone item to `archive/standalone/`", SKILL)
         self.assertIn("move its whole directory to `archive/epics/`", SKILL)
@@ -90,6 +96,7 @@ class ImplementContractTests(unittest.TestCase):
         self.assertIn("without overwriting", by_name["conflicting claim"]["expected"])
         self.assertIn("repeat both review axes", by_name["review failure"]["expected"])
         self.assertIn("exact owner approval", by_name["wiki reconciliation required"]["expected"])
+        self.assertIn("after primary acceptance", by_name["wiki reconciliation required"]["expected"])
         self.assertIn("primary acceptance before done", by_name["completion and archival"]["expected"])
 
 

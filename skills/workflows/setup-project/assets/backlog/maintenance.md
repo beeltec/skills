@@ -1,6 +1,6 @@
 # Backlog maintenance
 
-`docs/backlog` is the tracked system of record for desired project deltas and their execution state. `docs/wiki` is the canonical record of accepted current state on the primary branch. A completed backlog item does not redefine current state by itself: update the owning wiki concepts when the outcome is accepted, then archive the backlog records.
+`docs/backlog` is the tracked system of record for desired project deltas and their execution state. `docs/wiki` is the canonical record of accepted current state on the primary branch. A completed backlog item does not redefine current state by itself: after primary-branch acceptance, use `$wiki` to update the owning concepts before completing and archiving the backlog records.
 
 Run `node scripts/validate-project.mjs` after every wiki or backlog change.
 
@@ -48,7 +48,7 @@ Before executable work becomes `ready`, all of the following are required:
 - Checklist subtasks under `## Subtasks` are small enough to complete and verify coherently. Use `No subtasks.` when decomposition adds no value.
 - The item is present exactly once in the root global rank.
 
-Proposal-specific research remains with the backlog record. During implementation reconciliation, promote only guidance that became durable accepted current state to its canonical wiki concept; summarize it there instead of copying the proposal evidence.
+Proposal-specific research remains with the backlog record. During post-acceptance implementation reconciliation, promote only guidance that became durable accepted current state to its canonical wiki concept; summarize it there instead of copying the proposal evidence.
 
 ## Relationships
 
@@ -77,3 +77,4 @@ Relationships may target Epics or executable work, must resolve to an existing I
 - Move done/cancelled standalone work to `archive/standalone/` and remove it from global rank.
 - Archive an Epic atomically by moving its whole directory to `archive/epics/`. The Epic and every child must already be `done` or `cancelled`; no child may remain active or outside that directory.
 - Active records may not link or relate to archived records. Archived records may retain links among archived records and wiki references for history.
+- Active `wiki_refs` must resolve. Archived records may retain a missing historical wiki path after an approved concept deletion; validation reports it as a warning so archive history is not rewritten.

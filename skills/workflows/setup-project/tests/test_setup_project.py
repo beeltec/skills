@@ -337,7 +337,7 @@ class SetupProjectTests(unittest.TestCase):
             instructions = (self.project / name).read_text(encoding="utf-8")
             self.assertIn("`docs/wiki` owns accepted primary-branch state", instructions)
             self.assertIn("Use `$backlog` for backlog mutations", instructions)
-            self.assertIn("`$to-wiki` for accepted wiki updates", instructions)
+            self.assertIn("`$wiki` for all accepted-knowledge reads", instructions)
             self.assertIn("node scripts/validate-project.mjs", instructions)
 
         before = {

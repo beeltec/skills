@@ -31,13 +31,15 @@ class KnowledgeRoutingContractTests(unittest.TestCase):
         self.assertIn("already describes accepted current primary-branch state", skill)
         self.assertIn("Do not recommend publishing its target specification", skill)
 
-    def test_to_wiki_accepts_current_state_and_rejects_proposals(self) -> None:
-        skill = read("skills/planning/to-wiki/SKILL.md")
+    def test_wiki_manages_current_state_and_rejects_proposals(self) -> None:
+        skill = read("skills/planning/wiki/SKILL.md")
 
-        self.assertIn("Require the complete relevant `$setup-project` scaffold", skill)
+        self.assertIn("Require the complete `$setup-project` scaffold", skill)
         self.assertIn("Reject proposed features", skill)
-        self.assertIn("Prefer a completed or cancelled archived record", skill)
-        self.assertIn("do not copy its desired delta", skill)
+        self.assertIn("archived completed or cancelled record", skill)
+        self.assertIn("never copy its desired delta", skill)
+        self.assertIn("Delete replaced concepts", skill)
+        self.assertIn("active backlog record references", skill)
         self.assertIn("node scripts/validate-project.mjs", skill)
 
     def test_research_output_belongs_to_proposed_backlog_work(self) -> None:
@@ -53,7 +55,7 @@ class KnowledgeRoutingContractTests(unittest.TestCase):
         self.assertIn("with `status: proposed`", skill)
         self.assertIn("Do not create or update a wiki technology page during planning", skill)
         self.assertIn("Treat `pending` research as a hard readiness failure", skill)
-        self.assertIn("During implementation reconciliation", skill)
+        self.assertIn("During post-acceptance implementation reconciliation", skill)
         for heading in (
             "Repository and version evidence",
             "Findings and recommendations",
@@ -73,7 +75,7 @@ class KnowledgeRoutingContractTests(unittest.TestCase):
             "$setup-project",
             "$backlog",
             "$discuss",
-            "$to-wiki",
+            "$wiki",
             "$research-tech-stack",
         ):
             self.assertIn(workflow, authorization)
@@ -84,13 +86,13 @@ class KnowledgeRoutingContractTests(unittest.TestCase):
             read(path)
             for path in (
                 "skills/planning/discuss/SKILL.md",
-                "skills/planning/to-wiki/SKILL.md",
+                "skills/planning/wiki/SKILL.md",
                 "skills/workflows/research-tech-stack/SKILL.md",
                 "skills/workflows/create-conventional-branch/SKILL.md",
             )
         )
 
-        for obsolete in ("$setup-wiki", "validate-wiki.mjs", "$to-tasks"):
+        for obsolete in ("$setup-wiki", "validate-wiki.mjs", "$to-tasks", "$to-wiki"):
             self.assertNotIn(obsolete, affected)
         self.assertIn("$setup-project", affected)
         self.assertIn("node scripts/validate-project.mjs", affected)

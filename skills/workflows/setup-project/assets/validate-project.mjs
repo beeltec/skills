@@ -380,6 +380,7 @@ const validateBacklog = async () => {
     if (workTypes.has(record.type)) {
       const claim = scalar(record.frontmatter, 'claim');
       const claimExpires = scalar(record.frontmatter, 'claim_expires');
+      const wikiRefs = inlineList(record.frontmatter, 'wiki_refs');
       if (record.status === 'in-progress') {
         if (!claim || claim === 'none') errors.push(`${label}: in-progress work requires a temporary claim`);
         const expiry = Date.parse(claimExpires ?? '');
@@ -390,26 +391,28 @@ const validateBacklog = async () => {
         errors.push(`${label}: work outside in-progress must use claim: none and claim_expires: none`);
       }
 
+      if (wikiRefs?.includes('none') && wikiRefs.length !== 1) {
+        errors.push(`${label}: wiki_refs may use none only by itself`);
+      } else if (wikiRefs && !wikiRefs.includes('none')) {
+        for (const reference of wikiRefs) {
+          const target = reference.startsWith('/')
+            ? path.resolve(wikiRoot, reference.slice(1))
+            : path.resolve(projectRoot, reference);
+          if (!isWithin(wikiRoot, target)) errors.push(`${label}: wiki_refs must stay within docs/wiki: ${reference}`);
+          else if (!(await exists(target)) && record.archived) {
+            warnings.push(`${label}: archived wiki_refs retains missing historical ${reference}`);
+          } else if (!(await exists(target))) errors.push(`${label}: wiki_refs references missing ${reference}`);
+        }
+      }
+
       if (['ready', 'in-progress', 'done'].includes(record.status)) {
         const acceptance = checkboxes(section(record.body, 'Acceptance criteria'));
-        const wikiRefs = inlineList(record.frontmatter, 'wiki_refs');
         const research = scalar(record.frontmatter, 'research');
         const researchBody = section(record.body, 'Research');
         const execution = section(record.body, 'Execution');
         const subtasks = section(record.body, 'Subtasks');
         if (acceptance.length === 0) errors.push(`${label}: ready work requires checkable acceptance criteria`);
         if (!wikiRefs || wikiRefs.length === 0) errors.push(`${label}: ready work requires wiki_refs or [none]`);
-        else if (wikiRefs.includes('none') && wikiRefs.length !== 1) {
-          errors.push(`${label}: wiki_refs may use none only by itself`);
-        } else if (!wikiRefs.includes('none')) {
-          for (const reference of wikiRefs) {
-            const target = reference.startsWith('/')
-              ? path.resolve(wikiRoot, reference.slice(1))
-              : path.resolve(projectRoot, reference);
-            if (!isWithin(wikiRoot, target)) errors.push(`${label}: wiki_refs must stay within docs/wiki: ${reference}`);
-            else if (!(await exists(target))) errors.push(`${label}: wiki_refs references missing ${reference}`);
-          }
-        }
         if (!['complete', 'not-needed'].includes(research ?? '')) {
           errors.push(`${label}: ready work research must be complete or not-needed`);
         }

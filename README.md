@@ -41,7 +41,7 @@ npx skills add beeltec/skills --list
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
 | **research-tech-stack** | Resolve version-specific uncertainty for proposed backlog work and attach the evidence before readiness |
 | **setup-project** | Initialize or safely upgrade a project with accepted-state wiki, desired-change backlog, validation, and agent instructions |
-| **to-wiki** | Preserve durable conclusions that already describe accepted current project state |
+| **wiki** | Manage the complete lifecycle of accepted project knowledge, from discovery and evidence through correction, organization, deprecation, and deletion |
 
 ## Development Workflow
 
@@ -65,10 +65,10 @@ The generated `node scripts/validate-project.mjs` command validates both systems
 Use **discuss** to examine an idea against accepted project knowledge and resolve decisions one question at a time. Its handoff depends on what the conclusion represents:
 
 - Send a new capability, behavior change, fix, or migration to **backlog** as proposed desired work.
-- Send a correction or durable conclusion that already describes accepted current state to **to-wiki**.
+- Send a correction or durable conclusion that already describes accepted current state to **wiki**.
 - Split mixed conclusions between the two without copying an unimplemented target into the wiki.
 
-These are state-aware routes, not a mandatory sequence. **to-wiki** validates and commits accepted knowledge; **backlog** obtains explicit owner approval for durable intent and priority transactions.
+These are state-aware routes, not a mandatory sequence. **wiki** owns all accepted-knowledge reads and lifecycle operations, verifies evidence, obtains exact semantic approval, validates, and commits coherent wiki transactions. **backlog** obtains explicit owner approval for durable intent and priority transactions.
 
 ### 3. Prepare desired work
 

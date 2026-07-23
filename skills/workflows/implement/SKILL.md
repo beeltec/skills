@@ -82,31 +82,32 @@ After the item implementation and full applicable suite are green, invoke `$code
 
 ## Wiki Reconciliation And Validation
 
-Before primary-branch integration, compare the accepted implementation with every linked wiki concept and proposal-research conclusion.
+Before primary-branch integration, compare the reviewed implementation with every linked wiki concept and proposal-research conclusion.
 
 - If no durable current-state knowledge changed, record `wiki reconciliation: no update required` with the reason in `## Execution`.
-- If knowledge changed, propose the exact canonical wiki edits and obtain project-owner approval unless already granted for those exact edits. Summarize only durable accepted guidance in the owning concepts; keep temporary execution detail, rejected alternatives, and proposal-specific source history in the backlog.
-- Update the nearest wiki indexes and `docs/wiki/log.md` as required. Validate and commit the approved wiki transaction separately with only intended wiki paths staged. Do not describe the implementation as accepted primary-branch state until integration; the branch edits are the prepared reconciliation that becomes authoritative on merge.
-- Re-run review after any implementation or wiki change made after the last passing review.
+- If knowledge will change after acceptance, invoke `$wiki` in proposal-only mode to inspect evidence, draft the exact canonical transaction, and obtain project-owner approval unless already granted for those exact edits. Summarize only durable guidance in the owning concepts; keep temporary execution detail, rejected alternatives, and proposal-specific source history in the backlog.
+- Do not edit `docs/wiki` on the work branch to describe the implementation. Record the exact approved transaction in `## Execution` so it can be verified and applied after primary-branch acceptance.
+- Re-run review after any implementation change made after the last passing review.
 
-When review and reconciliation pass, verify every acceptance criterion with concrete evidence, check only supported criteria and subtasks, and run `node scripts/validate-project.mjs` plus the full applicable repository suite. Commit the prepared completion evidence while leaving `status: in-progress` and the live claim intact. No item may be `done` on the work branch.
+When review and the reconciliation decision pass, verify every acceptance criterion with concrete evidence, check only supported criteria and subtasks, and run `node scripts/validate-project.mjs` plus the full applicable repository suite. Commit the prepared completion evidence while leaving `status: in-progress` and the live claim intact. No item may be `done` on the work branch.
 
 ## Primary-Branch Acceptance And Completion
 
 Primary-branch integration is a per-work-item gate, including during an Epic invocation:
 
-1. Confirm the item still has a live claim, all criteria and subtasks are checked, both review axes pass, reconciliation is complete, the consolidated validator passes, the full suite passes, and the worktree contains no unintended staged changes.
+1. Confirm the item still has a live claim, all criteria and subtasks are checked, both review axes pass, reconciliation is either unnecessary or exactly approved, the consolidated validator passes, the full suite passes, and the worktree contains no unintended staged changes.
 2. Merge the one work branch into the primary branch with a merge commit. Do not squash or fast-forward. Resolve no unexpected conflict by changing scope; stop safely instead.
 3. On the primary branch, rerun `node scripts/validate-project.mjs` and the full applicable suite. The successful merge commit and post-merge checks establish primary-branch acceptance.
-4. Apply one validated backlog completion transaction: clear `claim` and `claim_expires`, set the item to `done`, remove it from global rank, and preserve all verified checklist evidence. Move a standalone item to `archive/standalone/` and update active/archive indexes immediately. Leave a done Epic child in its active Epic directory until the Epic closes.
-5. Inspect and stage only the completion transaction's backlog paths, validate the staged diff, and create a concise Conventional Commit on primary. Never mark an item done before steps 1-3 succeed.
-6. For unfinished Epic scope, switch back to the same work branch and merge the primary branch into it so the child's completion, rank, and dependency state are present. Validate again, then select the next child. Do not create another work branch.
+4. If durable knowledge changed, invoke `$wiki` on the primary branch. Re-verify that the approved wording describes the now-accepted repository state, apply that exact semantic transaction with required indexes, links, metadata, and log changes, validate, and commit only its wiki paths. If the evidence requires different meaning, stop for revised owner approval.
+5. Apply one validated backlog completion transaction: clear `claim` and `claim_expires`, set the item to `done`, remove it from global rank, and preserve all verified checklist and reconciliation evidence. Move a standalone item to `archive/standalone/` and update active/archive indexes immediately. Leave a done Epic child in its active Epic directory until the Epic closes.
+6. Inspect and stage only the completion transaction's backlog paths, validate the staged diff, and create a concise Conventional Commit on primary. Never mark an item done before steps 1-4 succeed.
+7. For unfinished Epic scope, switch back to the same work branch and merge the primary branch into it so the child's completion, rank, dependency, and accepted wiki state are present. Validate again, then select the next child. Do not create another work branch.
 
 If integration is not authorized, primary is unavailable, merge or post-merge checks fail, or acceptance is declined, stop before `done`. Report the blocker and preserve or safely release the claim. Never claim primary-branch acceptance from a review, pull request, unmerged branch, or passing branch-local tests alone.
 
 ## Epic Completion And Cleanup
 
-After every required child is `done` or explicitly owner-cancelled, verify the Epic outcome and each Epic acceptance criterion with concrete primary-branch evidence. Reconcile any remaining Epic-level durable knowledge and run the consolidated validator and full applicable suite.
+After every required child is `done` or explicitly owner-cancelled, verify the Epic outcome and each Epic acceptance criterion with concrete primary-branch evidence. Reconcile any remaining Epic-level durable knowledge through `$wiki` before Epic completion, then run the consolidated validator and full applicable suite.
 
 In one final primary-branch backlog transaction, check supported Epic criteria, set the Epic to `done`, move its whole directory to `archive/epics/`, and update active and archive indexes. The final child's completion may share this transaction only when all child and Epic gates already pass. Validate and commit the atomic archive; never split it across commits.
 

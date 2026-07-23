@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 README = (ROOT / "README.md").read_text(encoding="utf-8")
-REMOVED_PUBLIC_NAMES = ("setup-wiki", "to-tasks")
+REMOVED_PUBLIC_NAMES = ("setup-wiki", "to-tasks", "to-wiki")
 
 
 class CatalogContractTests(unittest.TestCase):

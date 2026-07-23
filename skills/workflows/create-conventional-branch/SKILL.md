@@ -14,7 +14,7 @@ Create or switch branches only when:
 - `$implement` or `$implement-with-subagents` is executing implementation work; or
 - the user explicitly requests creating a branch or running a pull/merge-request publishing workflow.
 
-Do not create, switch, merge, or delete branches for `$setup-project`, `$backlog`, `$discuss`, `$to-wiki`, or `$research-tech-stack`. Those planning and project-state workflows stay on the branch the user selected, including when it is not the primary branch. Documentation or repository writes alone do not make a new branch necessary. Only the implementation workflows named above receive automatic branch authorization.
+Do not create, switch, merge, or delete branches for `$setup-project`, `$backlog`, `$discuss`, `$wiki`, or `$research-tech-stack`. Those planning and project-state workflows stay on the branch the user selected, including when it is not the primary branch. Documentation or repository writes alone do not make a new branch necessary. Only the implementation workflows named above receive automatic branch authorization.
 
 ## Workflow
 

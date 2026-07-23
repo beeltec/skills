@@ -79,6 +79,7 @@ class ImplementWithSubagentsContractTests(unittest.TestCase):
             "archive location",
         ):
             self.assertIn(evidence, verification)
+        self.assertIn("applied on the primary branch after acceptance", verification)
         self.assertIn("recalculate actionability", verification)
 
     def test_epic_closure_is_authorized_atomic_and_fully_gated(self) -> None:

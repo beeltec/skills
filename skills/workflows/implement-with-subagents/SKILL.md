@@ -61,8 +61,8 @@ Do not continue until all direct `$implement` gates for that item are evidenced:
 
 - implementation and acceptance criteria are complete without scope creep;
 - focused checks and the full applicable suite passed;
-- both backlog-aware code-review axes passed against the item's fixed point after the last implementation or wiki change;
-- durable knowledge was reconciled with exact owner approval, or the execution record explains why no wiki update was required;
+- both backlog-aware code-review axes passed against the item's fixed point after the last implementation change;
+- any exact owner-approved wiki transaction was applied on the primary branch after acceptance, or the execution record explains why no wiki update was required;
 - a merge commit and post-merge checks establish primary-branch acceptance before `done`;
 - the claim is cleared, the item is absent from global rank, and status, indexes, and archive location follow backlog maintenance; and
 - the item branch was cleaned up only when the direct workflow's cleanup gates passed.

@@ -31,8 +31,8 @@ Do not act on it until I confirm we have reached a shared understanding.
 After confirmation, classify the shared understanding before proposing a handoff:
 
 - A new capability, behavior change, fix, migration, or other unimplemented desired state belongs in `docs/backlog`. Offer `$backlog` to create or refine the proposed Epic or work item, subject to that skill's explicit approval boundary. Do not recommend publishing its target specification to the wiki.
-- A correction, clarification, or durable conclusion that already describes accepted current primary-branch state may be offered to `$to-wiki`. Do not use `$to-wiki` merely because a proposal is well specified or agreed as desirable.
-- A conversation may contain both. Route the desired delta to `$backlog`; route only independently current, durable facts to `$to-wiki`, without duplicating the proposal.
+- A correction, clarification, or durable conclusion that already describes accepted current primary-branch state may be offered to `$wiki`. Do not use `$wiki` merely because a proposal is well specified or agreed as desirable.
+- A conversation may contain both. Route the desired delta to `$backlog`; route only independently current, durable facts to `$wiki`, without duplicating the proposal.
 - Unresolved decisions remain in the conversation or the proposed backlog record. Do not present them as accepted wiki knowledge or claim that the work is ready.
 
 Ask one final handoff question in the same numbered, one-question-at-a-time format. Invoke only the route the user explicitly accepts.

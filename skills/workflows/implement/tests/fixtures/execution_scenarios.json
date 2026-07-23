@@ -33,7 +33,7 @@
     "name": "wiki reconciliation required",
     "selection": "WORK-005",
     "state": "accepted implementation changes durable technology guidance",
-    "expected": "obtain exact owner approval, update canonical wiki and log, validate, and repeat review before integration"
+    "expected": "obtain exact owner approval before integration, then update the canonical wiki and log after primary acceptance and before done"
   },
   {
     "name": "completion and archival",

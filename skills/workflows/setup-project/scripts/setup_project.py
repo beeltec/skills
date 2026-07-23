@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-INSTALLER_VERSION = 2
+INSTALLER_VERSION = 3
 MANIFEST_NAME = ".setup-project.json"
 CANONICAL_COMMAND = "node scripts/validate-project.mjs"
 LEGACY_COMMAND = "node scripts/validate-wiki.mjs"

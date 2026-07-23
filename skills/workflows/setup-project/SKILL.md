@@ -50,7 +50,7 @@ Stay on the user's current Git branch. Never create or switch branches while sca
 
 - Read `docs/backlog/maintenance.md` before creating or changing backlog records. It is canonical for hierarchy, statuses, readiness, relationships, ranking, claims, cancellation, and archival.
 - Keep desired deltas in the backlog until completed outcomes are accepted into the wiki.
-- Require explicit project-owner approval before moving executable work to `ready`, changing global rank, cancelling work, or changing accepted wiki state.
+- Require explicit project-owner approval before moving executable work to `ready`, changing global rank, cancelling work, or changing accepted wiki meaning. Use `$wiki` for accepted-knowledge operations.
 - Use immutable global `EPIC-NNN` IDs for Epics and `WORK-NNN` IDs for peer Story, Task, and Bug records.
 - Keep every active executable item exactly once in the root global rank. Use checklist subtasks for local execution steps and temporary claims for in-progress coordination.
 - Archive standalone terminal work promptly. Archive an Epic and all children together only when every record is terminal.

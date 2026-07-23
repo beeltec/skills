@@ -62,9 +62,9 @@
   <text x="505" y="300" text-anchor="middle" class="small">resolve one decision at a time</text>
 
   <rect x="380" y="370" width="250" height="125" rx="18" class="card" stroke="#25758a"/>
-  <text x="505" y="414" text-anchor="middle" class="name">to-wiki</text>
-  <text x="505" y="445" text-anchor="middle" class="small">accepted facts only</text>
-  <text x="505" y="472" text-anchor="middle" class="small">validate and publish</text>
+  <text x="505" y="414" text-anchor="middle" class="name">wiki</text>
+  <text x="505" y="445" text-anchor="middle" class="small">accepted knowledge lifecycle</text>
+  <text x="505" y="472" text-anchor="middle" class="small">discover, validate, maintain</text>
 
   <rect x="380" y="550" width="250" height="125" rx="18" class="card" stroke="#c95f42"/>
   <text x="505" y="594" text-anchor="middle" class="name">backlog</text>

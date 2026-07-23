@@ -1,0 +1,7 @@
+interface:
+  display_name: "Wiki"
+  short_description: "Manage accepted project knowledge lifecycle"
+  default_prompt: "Use $wiki to inspect or manage the governed docs/wiki lifecycle while preserving only accepted current project state."
+
+policy:
+  allow_implicit_invocation: true
