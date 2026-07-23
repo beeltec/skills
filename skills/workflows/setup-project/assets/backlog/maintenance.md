@@ -10,7 +10,7 @@ Run `node scripts/validate-project.mjs` after every wiki or backlog change.
 - A **Story**, **Task**, or **Bug** is executable work identified by `WORK-NNN`. These three types are peers; none may parent another.
 - Epic work sets `parent` to the containing Epic ID. Standalone work sets `parent: none` and lives under `standalone/`.
 - IDs are immutable, globally unique, and never reused, including after cancellation or archival. Allocate the next unused numeric value independently for `EPIC-NNN` and `WORK-NNN`; zero-pad to at least three digits.
-- `templates/` contains non-record examples. Never place active records under `archive/` or completed/cancelled records in active areas.
+- `templates/` contains non-record examples. Never place active records under `archive/`. A done/cancelled Epic child remains with its active Epic until the entire directory can be archived atomically; other completed/cancelled records belong under `archive/`.
 
 ## Lifecycle
 
