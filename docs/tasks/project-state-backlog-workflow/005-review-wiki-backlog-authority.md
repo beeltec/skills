@@ -22,7 +22,7 @@ desired delta and acceptance criteria, with relevant Epic context.
 - [x] Update the Standards subagent prompt to cite wiki or repository rules and retain the documented smell baseline as heuristic guidance.
 - [x] Update the Spec subagent prompt to cite work-item requirements and report missing behavior, incorrect behavior, and scope creep.
 - [x] Preserve separate reporting and finding counts for Standards and Spec.
-- [ ] Add representative smoke tests or fixtures for explicit item selection, claim-based discovery, Epic context, absent specs, ambiguity, and conflicting wiki/backlog evidence.
+- [x] Add representative smoke tests or fixtures for explicit item selection, claim-based discovery, Epic context, absent specs, ambiguity, and conflicting wiki/backlog evidence.
 
 ## Acceptance criteria
 
