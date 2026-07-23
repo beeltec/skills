@@ -1,18 +1,18 @@
 ---
 name: setup-project
-description: Initialize a fresh project with an accepted-state OKF wiki and a tracked desired-change backlog. Use when creating project governance, templates, validation, and managed agent instructions before feature work begins.
+description: Initialize or safely upgrade a project with an accepted-state OKF wiki and a tracked desired-change backlog. Use when creating or migrating project governance, templates, validation, managed CI, and agent instructions.
 disable-model-invocation: true
 ---
 
 # Setup Project
 
-Initialize a fresh project with two governed, tracked systems without overwriting existing files: an OKF wiki for accepted primary-branch state and a backlog for desired deltas and execution state.
+Initialize or upgrade a project with two governed, tracked systems without overwriting project-owned files: an OKF wiki for accepted primary-branch state and a backlog for desired deltas and execution state.
 
 Stay on the user's current Git branch. Never create or switch branches while scaffolding, configuring, or populating the wiki, including when the current branch is not the primary branch.
 
 ## Workflow
 
-1. Inspect the project root, `AGENTS.md`, `CLAUDE.md`, `package.json`, existing product documentation and code, and any `docs/wiki` or `docs/backlog` content. Read applicable repository instructions first. Do not create or inspect `docs/tasks`.
+1. Inspect the project root, `AGENTS.md`, `CLAUDE.md`, `package.json`, existing product documentation and code, and any `docs/wiki` or `docs/backlog` content. Read applicable repository instructions first. Do not create, inspect, validate, move, or modify `docs/tasks`.
 2. Derive a concise set of candidate product and domain terms from that evidence. For each term, propose a canonical name, precise definition, applicable context, and preferred or forbidden synonyms when ambiguity exists. Exclude generic technical vocabulary; keep project-specific technical knowledge in architecture or engineering concepts.
 3. Review the complete candidate set with the user as project owner. Apply their corrections, then ask for explicit agreement on the complete revised set. Keep unapproved candidates in the conversation only. Do not write them to the wiki. If the evidence yields no terms, say so and leave the scaffolded terminology document empty.
 4. Run the installer from this skill directory:
@@ -22,7 +22,7 @@ Stay on the user's current Git branch. Never create or switch branches while sca
    ```
 
    Use `--instructions agents`, `claude`, or `both` only when the default `auto` selection is unsuitable. Use `--no-package-script` when package.json must not be changed.
-5. Review every `kept` or `skipped` result. The installer never overwrites an existing wiki page, backlog page, or validation script. This skill initializes fresh projects; use the project upgrade workflow rather than manually merging an established setup.
+5. Review every `kept`, `skipped`, and manual-action result. Existing wiki and backlog pages are never overwritten. The installer upgrades only recognized managed instruction blocks, an installer-owned validator or package script, and compatible managed CI integrations; custom collisions are preserved for manual reconciliation.
 6. Add only the explicitly agreed terms to `docs/wiki/domains/ubiquitous-language.md`. Preserve existing agreed terms unless the project owner explicitly agrees to revise them. Format each entry with its canonical term, definition, and context. Add preferred or forbidden synonyms only when relevant; examples, counterexamples, rationale, and code references are optional.
 7. Replace generic orientation text and empty wiki indexes with concise, project-specific descriptions. Preserve durable accepted knowledge and record project-specific wiki changes in `docs/wiki/log.md`. Leave the empty backlog scaffold unchanged until the project owner approves proposed work.
 8. Run validation:
@@ -66,6 +66,8 @@ Stay on the user's current Git branch. Never create or switch branches while sca
 ## Installed resources
 
 - `scripts/setup_project.py` creates missing assets, updates managed agent instructions, and optionally adds a non-conflicting package script without touching lockfiles.
+- `.setup-project.json` records the installer version and hashes or locations of managed validators, instructions, package scripts, and CI assets for safe future upgrades.
+- Compatible GitHub Actions projects receive a standalone managed workflow. GitLab projects receive a standalone job only when `.gitlab-ci.yml` has no include or one simple block-list include; unsupported CI is reported without changing its configuration.
 - `assets/wiki/` contains the generic accepted-state OKF bundle templates.
 - `assets/backlog/` contains desired-change governance, indexes, archives, and type-specific templates.
 - `assets/validate-project.mjs` reports wiki and backlog validation separately and enforces their structural and lifecycle contracts.
