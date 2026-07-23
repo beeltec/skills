@@ -9,7 +9,7 @@ readiness.
 
 **Blocked by:** [001 — Initialize fresh projects with wiki and backlog governance](001-initialize-project-governance.md), [003 — Manage the complete backlog lifecycle](003-manage-backlog-lifecycle.md).
 
-**Status:** ready-for-agent
+**Status:** completed
 
 ## Subtasks
 
@@ -28,7 +28,7 @@ readiness.
 
 ## Acceptance criteria
 
-- [ ] A discussion about desired behavior ends with a backlog handoff, while a correction to accepted current knowledge can end with `to-wiki`.
-- [ ] Proposal-specific technical research is attached to its backlog work and can block readiness until uncertainty is resolved.
-- [ ] The wiki is not used as a second copy of an unimplemented target specification.
-- [ ] All affected skills use `setup-project` and `validate-project.mjs` terminology and remain on the current branch during planning.
+- [x] A discussion about desired behavior ends with a backlog handoff, while a correction to accepted current knowledge can end with `to-wiki`.
+- [x] Proposal-specific technical research is attached to its backlog work and can block readiness until uncertainty is resolved.
+- [x] The wiki is not used as a second copy of an unimplemented target specification.
+- [x] All affected skills use `setup-project` and `validate-project.mjs` terminology and remain on the current branch during planning.
