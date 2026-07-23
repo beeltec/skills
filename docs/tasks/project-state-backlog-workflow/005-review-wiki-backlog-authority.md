@@ -8,7 +8,7 @@ desired delta and acceptance criteria, with relevant Epic context.
 
 **Blocked by:** [001 — Initialize fresh projects with wiki and backlog governance](001-initialize-project-governance.md), [003 — Manage the complete backlog lifecycle](003-manage-backlog-lifecycle.md).
 
-**Status:** ready-for-agent
+**Status:** completed
 
 ## Subtasks
 
@@ -26,7 +26,7 @@ desired delta and acceptance criteria, with relevant Epic context.
 
 ## Acceptance criteria
 
-- [ ] Reviewing a backlog-backed change requires no feature-name wiki page and uses the correct work item as its specification.
-- [ ] Standards findings cite accepted wiki or repository guidance; Spec findings cite the work item and relevant Epic constraints.
-- [ ] Ambiguous or missing work-item context is surfaced to the user rather than guessed.
-- [ ] Parallel review axes and their independent severity reporting remain intact.
+- [x] Reviewing a backlog-backed change requires no feature-name wiki page and uses the correct work item as its specification.
+- [x] Standards findings cite accepted wiki or repository guidance; Spec findings cite the work item and relevant Epic constraints.
+- [x] Ambiguous or missing work-item context is surfaced to the user rather than guessed.
+- [x] Parallel review axes and their independent severity reporting remain intact.
