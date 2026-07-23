@@ -1,6 +1,7 @@
 ---
 name: discuss
 description: Stress-test a plan, decision, or idea one question at a time, using accepted project knowledge when available and routing confirmed desired changes to the backlog. Use when the user wants to discuss or challenge their thinking.
+disable-model-invocation: true
 ---
 
 # Discuss
@@ -29,10 +30,11 @@ Track terminology. When the user uses a domain term absent from the ubiquitous l
 Do not act until the user confirms shared understanding. After confirmation, classify it before proposing a handoff:
 
 - Unimplemented desired state (new capability, behavior change, fix, migration) belongs in `docs/backlog`: offer `$backlog` to create or refine the proposed Epic or work item under its approval boundary. Never recommend publishing its target specification to the wiki.
-- When that desired state is a coordinated outcome that should form an Epic — multiple coherent, independently valuable work items serving one goal — explicitly ask whether to run `$to-epic` instead, which plans it end-to-end (Epic intake, research decision, child intake, refinement to ready) without further approval pauses.
+- When that desired state is a coordinated outcome that should form an Epic — multiple coherent, independently valuable work items serving one goal — explicitly ask whether the user wants `$to-epic` instead, which plans it end-to-end (Epic intake, research decision, child intake, refinement to ready) without further approval pauses.
 - A correction, clarification, or durable conclusion already describing accepted current primary-branch state may be offered to `$wiki` — never merely because a proposal is well specified or agreed as desirable.
+- When several confirmed durable conclusions or terms should be published together, explicitly ask whether the user wants `$to-wiki` instead, which publishes the conversation's confirmed knowledge end-to-end under one standing approval, pausing only on deprecations or deletions.
 - Confirmed new or corrected terminology: offer `$wiki` to update the ubiquitous language, even when the term arose from an unimplemented proposal — its meaning is durable project language regardless of whether the proposal ships.
 - A conversation may contain both: route the desired delta to `$backlog` and only independently current, durable facts to `$wiki`, without duplicating the proposal.
 - Unresolved decisions stay in the conversation or the proposed backlog record — never presented as accepted wiki knowledge or as ready work.
 
-Ask one final handoff question in the same numbered format and invoke only the route the user explicitly accepts.
+Ask one final handoff question in the same numbered format. Invoke `$backlog` or `$wiki` only when the user explicitly accepts that route. `$to-epic` and `$to-wiki` are user-invoked only — never invoke them; when accepted, end the turn by telling the user the exact `/to-epic` or `/to-wiki` command to run.
