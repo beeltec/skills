@@ -12,6 +12,8 @@ status: active
 
 This directory is an Open Knowledge Format 0.1 bundle. Read the root [index](/index.md) first, then use the nearest directory index for progressive disclosure.
 
+The wiki owns accepted current state on the primary branch: durable product behavior, architecture, engineering guidance, operations, and supporting evidence. The tracked [`docs/backlog`](../backlog/index.md) owns desired deltas and execution state. Do not describe an unaccepted backlog proposal as current state here; update the wiki when completed work is accepted.
+
 ## Organization
 
 - `architecture/` owns system-wide design, security, delivery, and compatibility decisions.
@@ -39,7 +41,7 @@ Reserved `index.md` and `log.md` files follow OKF rules and are not concepts.
 
 ## Provenance and durability
 
-Technology research and its curated conclusions belong together under `engineering/technologies/`. Other compiled external evidence belongs in `research/` and links claims to their sources; durable conclusions belong in their owning architecture, engineering, domain, or operations page. Keep search transcripts, session state, temporary probes, active checklists, and planned commits outside the wiki.
+Technology research and its curated conclusions belong together under `engineering/technologies/`. Other compiled external evidence belongs in `research/` and links claims to their sources; durable conclusions belong in their owning architecture, engineering, domain, or operations page. Keep desired changes, search transcripts, session state, temporary probes, active checklists, and planned commits outside the wiki.
 
 ## Links and indexes
 
