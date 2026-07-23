@@ -26,7 +26,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--no-package-script",
         action="store_true",
-        help="Do not add the project validation command to package.json",
+        help="Do not add a project validation command to package.json",
     )
     return parser.parse_args()
 
@@ -124,17 +124,24 @@ def add_package_script(root: Path) -> tuple[str, str]:
         return "skipped", "package.json scripts is not an object"
 
     command = "node scripts/validate-project.mjs"
-    existing = scripts.get("wiki:check")
-    if existing == command:
-        return "unchanged", "wiki:check already configured"
-    if existing is not None:
-        return "kept", f"existing wiki:check was not overwritten: {existing}"
+    for name, existing in scripts.items():
+        if existing == command:
+            return "unchanged", f"{name} already configured"
 
-    scripts["wiki:check"] = command
+    candidates = ["project:check", "project:validate", "validate:project"]
+    name = next((candidate for candidate in candidates if candidate not in scripts), None)
+    suffix = 2
+    while name is None:
+        candidate = f"project:check:{suffix}"
+        if candidate not in scripts:
+            name = candidate
+        suffix += 1
+
+    scripts[name] = command
     package_json.write_text(
         json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    return "updated", "added wiki:check"
+    return "updated", f"added {name}"
 
 
 def main() -> int:
@@ -163,6 +170,18 @@ def main() -> int:
                 write_missing(target, content, generated_values=True),
                 target,
                 "wiki asset",
+            )
+        )
+
+    backlog_assets = assets / "backlog"
+    for source in sorted(backlog_assets.rglob("*.md")):
+        relative = source.relative_to(backlog_assets)
+        target = root / "docs" / "backlog" / relative
+        results.append(
+            (
+                write_missing(target, source.read_text(encoding="utf-8")),
+                target,
+                "backlog asset",
             )
         )
 
@@ -197,7 +216,7 @@ def main() -> int:
 
     kept = [target for status, target, _ in results if status == "kept"]
     if kept:
-        print("\nExisting files were preserved; review them for missing wiki conventions:")
+        print("\nExisting files were preserved; review them for missing project conventions:")
         for target in kept:
             print(f"- {target.relative_to(root)}")
 

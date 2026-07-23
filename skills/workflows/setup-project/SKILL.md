@@ -6,13 +6,13 @@ disable-model-invocation: true
 
 # Setup Project
 
-Create a durable, project-owned OKF wiki without overwriting existing knowledge.
+Initialize a fresh project with two governed, tracked systems without overwriting existing files: an OKF wiki for accepted primary-branch state and a backlog for desired deltas and execution state.
 
 Stay on the user's current Git branch. Never create or switch branches while scaffolding, configuring, or populating the wiki, including when the current branch is not the primary branch.
 
 ## Workflow
 
-1. Inspect the project root, `AGENTS.md`, `CLAUDE.md`, `package.json`, existing product documentation and code, and any `docs/wiki` content. Read applicable repository instructions first.
+1. Inspect the project root, `AGENTS.md`, `CLAUDE.md`, `package.json`, existing product documentation and code, and any `docs/wiki` or `docs/backlog` content. Read applicable repository instructions first. Do not create or inspect `docs/tasks`.
 2. Derive a concise set of candidate product and domain terms from that evidence. For each term, propose a canonical name, precise definition, applicable context, and preferred or forbidden synonyms when ambiguity exists. Exclude generic technical vocabulary; keep project-specific technical knowledge in architecture or engineering concepts.
 3. Review the complete candidate set with the user as project owner. Apply their corrections, then ask for explicit agreement on the complete revised set. Keep unapproved candidates in the conversation only. Do not write them to the wiki. If the evidence yields no terms, say so and leave the scaffolded terminology document empty.
 4. Run the installer from this skill directory:
@@ -22,17 +22,17 @@ Stay on the user's current Git branch. Never create or switch branches while sca
    ```
 
    Use `--instructions agents`, `claude`, or `both` only when the default `auto` selection is unsuitable. Use `--no-package-script` when package.json must not be changed.
-5. Review every `kept` or `skipped` result. The installer never overwrites an existing wiki page or validation script. Merge missing conventions manually when a project already has equivalent files.
+5. Review every `kept` or `skipped` result. The installer never overwrites an existing wiki page, backlog page, or validation script. This skill initializes fresh projects; use the project upgrade workflow rather than manually merging an established setup.
 6. Add only the explicitly agreed terms to `docs/wiki/domains/ubiquitous-language.md`. Preserve existing agreed terms unless the project owner explicitly agrees to revise them. Format each entry with its canonical term, definition, and context. Add preferred or forbidden synonyms only when relevant; examples, counterexamples, rationale, and code references are optional.
-7. Replace generic orientation text and empty directory indexes with concise, project-specific descriptions. Preserve existing durable knowledge and record the populated language and other project-specific wiki changes in `docs/wiki/log.md`.
+7. Replace generic orientation text and empty wiki indexes with concise, project-specific descriptions. Preserve durable accepted knowledge and record project-specific wiki changes in `docs/wiki/log.md`. Leave the empty backlog scaffold unchanged until the project owner approves proposed work.
 8. Run validation:
 
    ```sh
    node scripts/validate-project.mjs
    ```
 
-   Run `pnpm wiki:check`, `npm run wiki:check`, or the repository-equivalent when the installer added the package script.
-9. Review the resulting diff, local links, agent-instruction block, and wiki log before handing off.
+   Run the package-script equivalent when the installer reports that it added one.
+9. Review the resulting diff, local links, backlog scaffold, agent-instruction block, and wiki log before handing off. Run setup a second time and confirm it changes no bytes.
 
 ## Structure rules
 
@@ -46,6 +46,15 @@ Stay on the user's current Git branch. Never create or switch branches while sca
 - Treat `docs/wiki/domains/ubiquitous-language.md` as the canonical agreement between the project owner and developers about product and domain language. Do not add lifecycle states or agent signatures. Agents acknowledge the agreement by reading, challenging inconsistencies, and using its terms.
 - Keep transient task state outside the durable wiki.
 
+## Backlog rules
+
+- Read `docs/backlog/maintenance.md` before creating or changing backlog records. It is canonical for hierarchy, statuses, readiness, relationships, ranking, claims, cancellation, and archival.
+- Keep desired deltas in the backlog until completed outcomes are accepted into the wiki.
+- Require explicit project-owner approval before moving executable work to `ready`, changing global rank, cancelling work, or changing accepted wiki state.
+- Use immutable global `EPIC-NNN` IDs for Epics and `WORK-NNN` IDs for peer Story, Task, and Bug records.
+- Keep every active executable item exactly once in the root global rank. Use checklist subtasks for local execution steps and temporary claims for in-progress coordination.
+- Archive standalone terminal work promptly. Archive an Epic and all children together only when every record is terminal.
+
 ## Length and splitting rules
 
 - Target at most 350 lines per concept page. At this threshold, review whether the page still represents one cohesive concept.
@@ -56,7 +65,8 @@ Stay on the user's current Git branch. Never create or switch branches while sca
 
 ## Installed resources
 
-- `scripts/setup_project.py` creates missing assets, updates managed agent instructions, and optionally adds the package script.
-- `assets/wiki/` contains the generic OKF bundle templates.
-- `assets/validate-project.mjs` validates metadata, reserved files, links, index coverage, duplicate titles, status values, and length limits.
+- `scripts/setup_project.py` creates missing assets, updates managed agent instructions, and optionally adds a non-conflicting package script without touching lockfiles.
+- `assets/wiki/` contains the generic accepted-state OKF bundle templates.
+- `assets/backlog/` contains desired-change governance, indexes, archives, and type-specific templates.
+- `assets/validate-project.mjs` reports wiki and backlog validation separately and enforces their structural and lifecycle contracts.
 - `assets/agent-instructions.md` is the managed instruction block installed in `AGENTS.md` and/or `CLAUDE.md`.
