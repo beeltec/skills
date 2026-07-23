@@ -50,7 +50,7 @@ Use standard Markdown links. Prefer bundle-relative links beginning with `/` ins
 Run after every wiki change:
 
 ```sh
-node scripts/validate-wiki.mjs
+node scripts/validate-project.mjs
 ```
 
 The check validates metadata, reserved files, statuses, duplicate titles, links, indexes, index coverage, and the 500-line hard limit. Pages over the 350-line target produce warnings.

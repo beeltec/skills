@@ -8,13 +8,13 @@ from pathlib import Path
 
 
 MANAGED_BLOCK = re.compile(
-    r"<!-- setup-wiki:start -->.*?<!-- setup-wiki:end -->", re.DOTALL
+    r"<!-- setup-project:start -->.*?<!-- setup-project:end -->", re.DOTALL
 )
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Create a non-destructive OKF wiki scaffold in a project."
+        description="Initialize project knowledge and backlog governance."
     )
     parser.add_argument("--root", type=Path, default=Path.cwd(), help="Project root")
     parser.add_argument(
@@ -26,7 +26,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--no-package-script",
         action="store_true",
-        help="Do not add wiki:check to package.json",
+        help="Do not add the project validation command to package.json",
     )
     return parser.parse_args()
 
@@ -123,7 +123,7 @@ def add_package_script(root: Path) -> tuple[str, str]:
     if not isinstance(scripts, dict):
         return "skipped", "package.json scripts is not an object"
 
-    command = "node scripts/validate-wiki.mjs"
+    command = "node scripts/validate-project.mjs"
     existing = scripts.get("wiki:check")
     if existing == command:
         return "unchanged", "wiki:check already configured"
@@ -166,8 +166,8 @@ def main() -> int:
             )
         )
 
-    validator_source = assets / "validate-wiki.mjs"
-    validator_target = root / "scripts" / "validate-wiki.mjs"
+    validator_source = assets / "validate-project.mjs"
+    validator_target = root / "scripts" / "validate-project.mjs"
     results.append(
         (
             write_missing(
@@ -201,7 +201,7 @@ def main() -> int:
         for target in kept:
             print(f"- {target.relative_to(root)}")
 
-    print("\nRun: node scripts/validate-wiki.mjs")
+    print("\nRun: node scripts/validate-project.mjs")
     return 0
 
 

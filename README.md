@@ -39,7 +39,7 @@ npx skills add beeltec/skills --list
 | **implement-with-subagents** | Execute a `$to-tasks` plan through one sequential subagent per task |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
 | **research-tech-stack** | Research current, version-matched technology guidance and persist it in the engineering wiki before implementation |
-| **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with agreed domain terminology, validation, and agent instructions |
+| **setup-project** | Initialize a fresh project with an accepted-state wiki, desired-change backlog, validation, and agent instructions |
 | **to-tasks** | Convert a conversation or specification into linked implementation tasks |
 | **to-wiki** | Turn confirmed conclusions into durable, canonical project wiki knowledge |
 
@@ -51,7 +51,7 @@ The development skills form a connected path from an early idea to reviewed code
 
 ### 1. Establish the project foundation
 
-Start each project with **setup-wiki**. It creates the shared wiki structure, validation tooling, and agent instructions used throughout the rest of the workflow. This is a one-time project setup, not a step that must be repeated for every feature.
+Start each project with **setup-project**. It creates the shared wiki and backlog structure, validation tooling, and agent instructions used throughout the rest of the workflow. This is a one-time project setup, not a step that must be repeated for every feature.
 
 ### 2. Turn an idea into an implementation plan
 

@@ -1,10 +1,10 @@
 ---
-name: setup-wiki
-description: Scaffold and configure a project-owned llmwiki using Open Knowledge Format 0.1. Use when Codex needs to create a new docs/wiki knowledge bundle, establish an owner-approved ubiquitous language, add progressive-disclosure indexes and maintenance rules, install structural/link/length validation, or add wiki usage instructions to AGENTS.md and CLAUDE.md.
+name: setup-project
+description: Initialize a fresh project with an accepted-state OKF wiki and a tracked desired-change backlog. Use when creating project governance, templates, validation, and managed agent instructions before feature work begins.
 disable-model-invocation: true
 ---
 
-# Setup Wiki
+# Setup Project
 
 Create a durable, project-owned OKF wiki without overwriting existing knowledge.
 
@@ -18,7 +18,7 @@ Stay on the user's current Git branch. Never create or switch branches while sca
 4. Run the installer from this skill directory:
 
    ```sh
-   python3 scripts/setup_wiki.py --root /absolute/path/to/project
+   python3 scripts/setup_project.py --root /absolute/path/to/project
    ```
 
    Use `--instructions agents`, `claude`, or `both` only when the default `auto` selection is unsuitable. Use `--no-package-script` when package.json must not be changed.
@@ -28,7 +28,7 @@ Stay on the user's current Git branch. Never create or switch branches while sca
 8. Run validation:
 
    ```sh
-   node scripts/validate-wiki.mjs
+   node scripts/validate-project.mjs
    ```
 
    Run `pnpm wiki:check`, `npm run wiki:check`, or the repository-equivalent when the installer added the package script.
@@ -56,7 +56,7 @@ Stay on the user's current Git branch. Never create or switch branches while sca
 
 ## Installed resources
 
-- `scripts/setup_wiki.py` creates missing assets, updates managed agent instructions, and optionally adds the package script.
+- `scripts/setup_project.py` creates missing assets, updates managed agent instructions, and optionally adds the package script.
 - `assets/wiki/` contains the generic OKF bundle templates.
-- `assets/validate-wiki.mjs` validates metadata, reserved files, links, index coverage, duplicate titles, status values, and length limits.
+- `assets/validate-project.mjs` validates metadata, reserved files, links, index coverage, duplicate titles, status values, and length limits.
 - `assets/agent-instructions.md` is the managed instruction block installed in `AGENTS.md` and/or `CLAUDE.md`.

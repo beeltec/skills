@@ -1,0 +1,7 @@
+interface:
+  display_name: "Setup Project"
+  short_description: "Initialize governed project knowledge and backlog"
+  default_prompt: "Use $setup-project to initialize this fresh project with its accepted-state wiki, desired-change backlog, validation, and agent instructions."
+
+policy:
+  allow_implicit_invocation: false

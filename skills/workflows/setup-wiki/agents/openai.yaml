@@ -1,7 +1,0 @@
-interface:
-  display_name: "Setup Wiki"
-  short_description: "Scaffold an OKF wiki and shared domain language"
-  default_prompt: "Use $setup-wiki to agree on project terminology, scaffold an OKF wiki, and add its validation and agent instructions to this project."
-
-policy:
-  allow_implicit_invocation: false
