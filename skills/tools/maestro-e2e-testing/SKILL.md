@@ -1,286 +1,141 @@
 ---
 name: maestro-e2e-testing
-description: Use when writing, running, or debugging Maestro E2E tests for mobile apps. Triggers on tasks involving end-to-end testing, UI automation, test flows, smoke tests, regression tests, or when user mentions Maestro, E2E, or automated mobile testing. Also use when setting up Maestro in a project or integrating with Expo EAS Workflows.
+description: Write, run, and debug Maestro E2E tests for mobile apps. Use for end-to-end testing, UI automation, test flows, smoke or regression tests, Maestro project setup, or Expo EAS Workflow integration.
 ---
 
 # Maestro E2E Testing
 
-Maestro is a YAML-based UI testing framework for mobile (iOS/Android) and web with built-in tolerance for flakiness and delays. Tests are declarative flow files that describe user journeys.
+Maestro is a YAML-based UI testing framework for mobile (iOS/Android) and web with built-in tolerance for flakiness. Tests are declarative flow files describing user journeys.
 
-## When to Use
-
-- Writing or modifying E2E test flows (`.maestro/` directory)
-- Setting up Maestro in a new or existing project
-- Debugging flaky or failing E2E tests
-- Integrating E2E tests into CI/CD (EAS Workflows, GitHub Actions)
-- Converting manual QA scripts into automated flows
-
-## Project Setup
-
-### Installation
+## Setup
 
 ```bash
-# macOS/Linux
 curl -fsSL "https://get.maestro.mobile.dev" | bash
-
-# Verify
 maestro --version
 ```
 
-**Prerequisites:** Java 11+, iOS Simulator (Xcode) or Android Emulator (Android SDK).
+Prerequisites: Java 11+, iOS Simulator (Xcode) or Android Emulator (Android SDK).
 
-### Directory Structure
-
-```
-project-root/
-├── .maestro/
-│   ├── config.yaml          # Workspace config (optional)
-│   ├── subflows/            # Reusable subflows
-│   │   ├── login.yaml
-│   │   └── setup.yaml
-│   ├── home.yaml            # Feature flows
-│   ├── login.yaml
-│   └── settings.yaml
-└── eas.json                 # EAS build profiles (Expo)
-```
-
-### Workspace Config
+Layout: feature flows in `.maestro/*.yaml`, reusable subflows in `.maestro/subflows/`, optional workspace config in `.maestro/config.yaml`:
 
 ```yaml
-# .maestro/config.yaml
 flows:
   - "*.yaml"
-  - "!subflows/**"           # Exclude subflows from direct execution
+  - "!subflows/**"        # exclude subflows from direct execution
 executionOrder:
   continueOnFailure: false
-  flowsOrder:
-    - login.yaml
-    - home.yaml
-    - settings.yaml
+  flowsOrder: [login.yaml, home.yaml]
 ```
 
-## Quick Reference
+## Flow Anatomy
 
-### Flow File Anatomy
+Header above `---`, commands below:
 
 ```yaml
-# --- Header (above ---) ---
-appId: com.markveys.idplus     # Required: bundle ID / package name
-name: Login Flow               # Optional: display name
-tags:
-  - smoke                      # Optional: for selective runs
-  - auth
+appId: com.example.app          # required: bundle ID / package name
+name: Login Flow
+tags: [smoke, auth]
 env:
-  USERNAME: ${USERNAME || "test@example.com"}
+  EMAIL: ${EMAIL || "test@example.com"}
 onFlowStart:
   - runFlow: subflows/setup.yaml
 onFlowComplete:
   - takeScreenshot: final-state
 ---
-# --- Commands (below ---) ---
 - launchApp:
-    clearState: true
-
-- assertVisible: "Welcome"
+    clearState: true            # test isolation
 - tapOn: "Sign In"
-- inputText: "user@example.com"
-- tapOn: "Login"
+- inputText: ${EMAIL}
 - assertVisible: "Dashboard"
 ```
 
-### Essential Commands
+Core commands: `launchApp`, `tapOn` (text or `id:`), `inputText`, `eraseText`, `hideKeyboard`, `assertVisible`/`assertNotVisible`, `scrollUntilVisible`, `swipe`, `back`, `waitForAnimationToEnd`, `takeScreenshot`, `runFlow`, `runScript`, `repeat`. Full reference: [commands.md](commands.md) and [selectors.md](selectors.md).
 
-| Command | Usage | Example |
-|---------|-------|---------|
-| `launchApp` | Start app | `- launchApp:` with `clearState: true` |
-| `tapOn` | Tap element | `- tapOn: "Button"` or `- tapOn:` with `id: "btn_id"` |
-| `inputText` | Type text | `- inputText: "hello"` |
-| `assertVisible` | Assert shown | `- assertVisible: "Welcome"` |
-| `assertNotVisible` | Assert hidden | `- assertNotVisible: "Error"` |
-| `scrollUntilVisible` | Scroll to find | See commands reference |
-| `swipe` | Swipe gesture | `- swipe:` with direction |
-| `back` | Navigate back | `- back` |
-| `hideKeyboard` | Dismiss keyboard | `- hideKeyboard` |
-| `eraseText` | Clear text field | `- eraseText` |
-| `waitForAnimationToEnd` | Wait for settle | `- waitForAnimationToEnd` |
-| `takeScreenshot` | Capture screen | `- takeScreenshot: "name"` |
-| `runFlow` | Execute subflow | `- runFlow: subflows/login.yaml` |
-| `runScript` | Run JavaScript | `- runScript: script.js` |
-
-**Full command reference:** See [commands.md](commands.md) **Full selector reference:** See [selectors.md](selectors.md)
-
-### Running Tests
+## Running
 
 ```bash
-# Run single flow
-maestro test .maestro/login.yaml
-
-# Run all flows in directory
-maestro test .maestro/
-
-# Run flows by tag
-maestro test --include-tags=smoke .maestro/
-
-# Launch Maestro Studio (visual test builder)
-maestro studio
+maestro test .maestro/login.yaml            # one flow
+maestro test .maestro/                      # all flows
+maestro test --include-tags=smoke .maestro/ # by tag
+maestro studio                              # visual builder
 ```
 
-## Core Patterns
+## Patterns
 
-### 1. Subflows for Reuse
-
-Extract common sequences (login, navigation) into `subflows/`:
+**Subflows** — extract shared sequences and pass env:
 
 ```yaml
-# .maestro/subflows/login.yaml
-appId: com.markveys.idplus
----
-- tapOn: "Sign In"
-- tapOn:
-    id: "email_field"
-- inputText: ${EMAIL}
-- tapOn:
-    id: "password_field"
-- inputText: ${PASSWORD}
-- tapOn: "Login"
-- assertVisible: "Dashboard"
-```
-
-```yaml
-# .maestro/home.yaml - uses the subflow
-appId: com.markveys.idplus
-env:
-  EMAIL: "test@example.com"
-  PASSWORD: "test123"
----
-- launchApp:
-    clearState: true
 - runFlow:
     file: subflows/login.yaml
     env:
       EMAIL: ${EMAIL}
       PASSWORD: ${PASSWORD}
-- assertVisible: "Home"
 ```
 
-### 2. Conditional Platform Logic
+**Platform-specific steps:**
 
 ```yaml
 - runFlow:
     when:
       true: ${maestro.platform == 'ios'}
     file: ios-specific.yaml
-
-- runFlow:
-    when:
-      true: ${maestro.platform == 'android'}
-    file: android-specific.yaml
 ```
 
-### 3. Environment Variables
+**Env vars** — pass at runtime (`EMAIL=a@b.com maestro test ...`) or default in the header with `${EMAIL || "default"}`.
 
-```bash
-# Pass at runtime
-EMAIL=admin@test.com maestro test .maestro/login.yaml
-
-# Or define defaults in flow header
-env:
-  EMAIL: ${EMAIL || "default@test.com"}
-```
-
-### 4. Handling Animations and Timing
-
-```yaml
-# Wait for animations to complete before asserting
-- waitForAnimationToEnd
-
-# Custom timeout on assertions
-- assertVisible:
-    text: "Loaded"
-    enabled: true
-
-# Retry tap if screen doesn't change
-- tapOn:
-    id: "submit_button"
-    retryTapIfNoChange: true
-```
-
-### 5. Repeat Actions
-
-```yaml
-- repeat:
-    times: 3
-    commands:
-      - tapOn: "Next"
-      - assertVisible: "Step .*"
-```
+**Timing** — use `waitForAnimationToEnd` before asserting after navigation, and `retryTapIfNoChange: true` on flaky taps. Never hardcode sleeps.
 
 ## Expo EAS Integration
 
-### Build Profile
-
-Add to `eas.json`:
+`eas.json` build profile:
 
 ```json
-{
-  "build": {
-    "e2e-test": {
-      "withoutCredentials": true,
-      "ios": { "simulator": true },
-      "android": { "buildType": "apk" }
-    }
-  }
-}
+{ "build": { "e2e-test": {
+  "withoutCredentials": true,
+  "ios": { "simulator": true },
+  "android": { "buildType": "apk" } } } }
 ```
 
-### EAS Workflow
+`.eas/workflows/e2e-test.yml`:
 
 ```yaml
-# .eas/workflows/e2e-test.yml
 name: e2e-tests
 on:
   pull_request:
     branches: ['*']
-
 jobs:
   build_for_e2e:
     type: build
-    params:
-      platform: android
-      profile: e2e-test
-
+    params: { platform: android, profile: e2e-test }
   maestro_test:
     needs: [build_for_e2e]
     type: maestro
     params:
       build_id: ${{ needs.build_for_e2e.outputs.build_id }}
-      flow_path:
-        - '.maestro/login.yaml'
-        - '.maestro/home.yaml'
+      flow_path: ['.maestro/login.yaml', '.maestro/home.yaml']
 ```
 
 ## Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|
-| Hardcoded waits (`sleep: 5000`) | Use `waitForAnimationToEnd` or `assertVisible` with timeout |
-| No `clearState` on launch | Add `clearState: true` to `launchApp` for test isolation |
-| Brittle text selectors | Prefer `id` selectors; use regex for dynamic text (`"Welcome.*"`) |
-| Giant monolithic flows | Split into focused flows + subflows |
-| Missing `hideKeyboard` | Always dismiss keyboard before tapping elements below it |
-| iOS `eraseText` flakiness | Use `longPressOn` + `tapOn: 'Select All'` + `eraseText` workaround |
-| Subflows in `config.yaml` flows list | Exclude with `!subflows/**` glob pattern |
-| No tags | Tag flows (`smoke`, `regression`, `feature`) for selective CI runs |
+| Hardcoded waits | `waitForAnimationToEnd` or assertion timeouts |
+| No `clearState` on launch | Add it for test isolation |
+| Brittle text selectors | Prefer `id`; regex for dynamic text (`"Welcome.*"`) |
+| Monolithic flows | Split into focused flows + subflows |
+| Missing `hideKeyboard` | Dismiss keyboard before tapping elements below it |
+| iOS `eraseText` flakiness | `longPressOn` + `tapOn: 'Select All'` + `eraseText` |
+| Subflows run directly | Exclude with `!subflows/**` in config |
+| No tags | Tag flows (`smoke`, `regression`) for selective CI runs |
 
-## Flow Writing Checklist
+## Flow Checklist
 
-- [ ] Set `appId` matching your app's bundle identifier
-- [ ] Add descriptive `name` and relevant `tags`
-- [ ] Start with `launchApp:` (with `clearState: true` for isolation)
-- [ ] Use `id` selectors where possible, regex text selectors as fallback
-- [ ] Extract repeated sequences into subflows
-- [ ] Use `waitForAnimationToEnd` before assertions after navigation
-- [ ] Add `hideKeyboard` after text input before tapping other elements
-- [ ] Handle platform differences with conditional `runFlow`
-- [ ] Use env vars for test data, with sensible defaults
-- [ ] Add `takeScreenshot` at key checkpoints for debugging
+- [ ] `appId` matches the bundle identifier; descriptive `name` and `tags`
+- [ ] Starts with `launchApp:` + `clearState: true`
+- [ ] `id` selectors preferred; regex text as fallback
+- [ ] Repeated sequences extracted into subflows
+- [ ] `waitForAnimationToEnd` before post-navigation assertions
+- [ ] `hideKeyboard` after text input
+- [ ] Platform differences via conditional `runFlow`
+- [ ] Test data via env vars with defaults
+- [ ] `takeScreenshot` at key checkpoints
