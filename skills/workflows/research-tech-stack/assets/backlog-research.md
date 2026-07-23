@@ -14,6 +14,10 @@ Record exact versions or constraints and the repository paths that establish the
 
 Summarize project-relevant conclusions. Distinguish requirements, recommendations, and optional conventions.
 
+### Best practices and coding guidelines
+
+Record applicable version-matched best practices and recommended coding guidelines — official style guides, idiomatic usage and configuration patterns, security recommendations. State `Not applicable` only when inspected evidence shows the delta touches nothing these guidelines would govern.
+
 ### Uncertainty and readiness
 
 State `complete`, `not-needed`, or `pending` and explain why. List every unresolved version-specific, source-authority, compatibility, or security-sensitive question; do not use `complete` while any applicable question remains unresolved.
