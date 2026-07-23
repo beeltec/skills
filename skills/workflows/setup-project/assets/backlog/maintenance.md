@@ -43,10 +43,12 @@ Before executable work becomes `ready`, all of the following are required:
 - Acceptance criteria contain at least one objectively checkable item.
 - The parent and all relationships are valid; blockers are explicit.
 - `wiki_refs` names every relevant accepted-state page as a `docs/wiki/...` project-relative path, or contains only `none` after confirming no page applies.
-- `research` is `complete` or `not-needed`; required conclusions and sources are recorded under `## Research` or linked from the wiki.
+- `research` is `pending`, `complete`, or `not-needed` while work is proposed. Ready work requires `complete` or `not-needed`. Keep proposal-specific sources, version findings, recommendations, uncertainty, and project deviations under `## Research`; unresolved version-specific or security-sensitive questions require `pending` and prevent readiness.
 - `## Execution` states an actionable approach, verification commands, and explicit project-owner approval.
 - Checklist subtasks under `## Subtasks` are small enough to complete and verify coherently. Use `No subtasks.` when decomposition adds no value.
 - The item is present exactly once in the root global rank.
+
+Proposal-specific research remains with the backlog record. During implementation reconciliation, promote only guidance that became durable accepted current state to its canonical wiki concept; summarize it there instead of copying the proposal evidence.
 
 ## Relationships
 

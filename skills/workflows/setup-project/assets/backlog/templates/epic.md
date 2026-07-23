@@ -36,7 +36,7 @@ Link accepted current-state concepts affected by this outcome.
 
 ## Research
 
-Summarize required research or state why none is needed.
+Record proposal-specific affected technologies, repository and version evidence, findings, recommendations, uncertainty, project deviations, and labeled sources. Identify affected children whose research remains pending.
 
 ## Execution
 

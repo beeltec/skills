@@ -6,7 +6,7 @@ status: proposed
 parent: EPIC-NNN
 outcome: Replace with the accepted behavior to restore
 wiki_refs: [none]
-research: not-needed
+research: pending
 blocks: []
 clones: []
 duplicates: []
@@ -38,7 +38,7 @@ Link the accepted behavior or contract being restored, or explain `none`.
 
 ## Research
 
-Record investigation evidence and sources, or explain `not-needed`.
+Record proposal-specific repository and version evidence, findings, recommendations, uncertainty, project deviations, and labeled sources. Keep `research: pending` while any version-specific or security-sensitive question is unresolved; use `not-needed` only with a concrete explanation.
 
 ## Execution
 

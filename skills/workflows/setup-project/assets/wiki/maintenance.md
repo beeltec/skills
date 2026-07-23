@@ -18,7 +18,7 @@ The wiki owns accepted current state on the primary branch: durable product beha
 
 - `architecture/` owns system-wide design, security, delivery, and compatibility decisions.
 - `engineering/` owns application-specific coding and review guidance.
-- `engineering/technologies/` owns curated, web-fetched guidance for languages, frameworks, runtimes, libraries, and major tools. Keep one canonical page per technology with applicable versions, review metadata, labeled sources, and project deviations.
+- `engineering/technologies/` owns accepted, durable guidance for languages, frameworks, runtimes, libraries, and major tools. Keep one canonical page per technology with applicable versions, review metadata, labeled sources, and project deviations. Proposal-specific technical research remains with its backlog record until implementation reconciliation establishes accepted guidance.
 - `domains/` owns product behavior, policies, contracts, and controls.
 - `operations/` owns executable runbooks.
 - `research/` owns compiled evidence supporting durable knowledge.
@@ -41,7 +41,7 @@ Reserved `index.md` and `log.md` files follow OKF rules and are not concepts.
 
 ## Provenance and durability
 
-Technology research and its curated conclusions belong together under `engineering/technologies/`. Other compiled external evidence belongs in `research/` and links claims to their sources; durable conclusions belong in their owning architecture, engineering, domain, or operations page. Keep desired changes, search transcripts, session state, temporary probes, active checklists, and planned commits outside the wiki.
+Accepted technology guidance and its durable external basis belong together under `engineering/technologies/`. Other compiled external evidence supporting accepted knowledge belongs in `research/` and links claims to its sources; durable conclusions belong in their owning architecture, engineering, domain, or operations page. Keep proposal-specific research with its desired change in the backlog. Keep desired changes, search transcripts, session state, temporary probes, active checklists, and planned commits outside the wiki.
 
 ## Links and indexes
 

@@ -85,12 +85,14 @@ Before proposing `proposed -> ready`, verify every maintenance requirement and r
 - at least one acceptance criterion is objectively checkable;
 - parentage and all relationships resolve, blockers are explicit, and no blocking cycle exists;
 - `wiki_refs` contains every relevant `docs/wiki/...` path, or only `none` after confirming none applies;
-- research is `complete` or `not-needed`, with resolved conclusions and sources or a concrete explanation;
+- research is `complete` or `not-needed`, with resolved conclusions and sources or a concrete explanation; `pending` research and any unresolved version-specific or security-sensitive question prevent readiness;
 - `## Execution` records an actionable approach, verification commands, and the explicit project-owner approval;
 - subtasks are coherent checklist steps, or the section says exactly `No subtasks.`;
 - the work item occurs exactly once at its approved position in global rank.
 
 A ready Epic additionally requires an approved outcome, objective acceptance criteria, coordination approach, and at least one approved child. Show the owner the complete candidate record, rank position, and validation-relevant relationships before requesting transition approval. Approval to refine is not approval to become ready.
+
+Keep proposal-specific sources, version findings, recommendations, uncertainty, and project deviations in the relevant backlog record. Promote only durable guidance that becomes accepted current state during implementation reconciliation to the owning wiki concept; do not copy an unimplemented target specification into the wiki.
 
 ## Relationships And Actionability
 

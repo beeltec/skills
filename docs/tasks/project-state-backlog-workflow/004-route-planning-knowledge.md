@@ -18,11 +18,11 @@ readiness.
 - [x] Prevent `discuss` from recommending unimplemented specifications for wiki publication.
 - [x] Update `to-wiki` to require `setup-project`, reject proposed or unimplemented desired-state content, and keep active backlog state out of OKF concepts.
 - [x] Update `to-wiki` to use the consolidated project validator and to link accepted current knowledge to relevant backlog history only when that improves traceability without duplicating it.
-- [ ] Adapt `research-tech-stack` to require a proposed Epic or work item and inspect its desired delta, repository evidence, and current wiki context.
-- [ ] Store proposal-specific sources, version findings, recommendations, uncertainty, and project deviations with the backlog record rather than under wiki technology guidance.
-- [ ] Make unresolved version-specific or security-sensitive research prevent the work item from satisfying the Definition of Ready.
-- [ ] Promote research conclusions to the wiki only when they become durable accepted guidance during implementation reconciliation.
-- [ ] Update research templates and UI metadata to describe the new pre-readiness output and remove task-plan sequencing language.
+- [x] Adapt `research-tech-stack` to require a proposed Epic or work item and inspect its desired delta, repository evidence, and current wiki context.
+- [x] Store proposal-specific sources, version findings, recommendations, uncertainty, and project deviations with the backlog record rather than under wiki technology guidance.
+- [x] Make unresolved version-specific or security-sensitive research prevent the work item from satisfying the Definition of Ready.
+- [x] Promote research conclusions to the wiki only when they become durable accepted guidance during implementation reconciliation.
+- [x] Update research templates and UI metadata to describe the new pre-readiness output and remove task-plan sequencing language.
 - [ ] Update conventional-branch authorization so `setup-project`, `backlog`, `discuss`, `to-wiki`, and research stay on the user-selected branch while implementation workflows may create work branches.
 - [ ] Run static searches and representative planning smoke tests to verify each handoff chooses the correct knowledge owner.
 
