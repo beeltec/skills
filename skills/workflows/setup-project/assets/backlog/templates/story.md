@@ -45,4 +45,4 @@ Record the approach, verification commands, and explicit project-owner approval.
 
 ## Subtasks
 
-- [ ] Add coherent execution steps, or replace this checklist with `No subtasks.`
+- [ ] Add one bounded step naming its scope and its verification, or replace this checklist with `No subtasks.`

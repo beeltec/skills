@@ -51,7 +51,7 @@ Refine against the matching installed template and accepted wiki state:
 - **Task:** a bounded engineering or operational result — a concrete project-state delta with verification evidence, not a layer-only activity.
 - **Bug:** an observed failure against accepted behavior — impact, reproduction conditions, the behavior to restore, a failing-before/passing-after check, and regression evidence.
 
-Slice executable work into the smallest coherent outcome that can be implemented, verified, and accepted independently. Prefer vertical behavior or bounded operational results over horizontal layers, investigation-only fragments, or agent-sized busywork. Use checklist subtasks for local steps with no independently valuable outcome; never create child work below a Story, Task, or Bug.
+Slice executable work into the smallest coherent outcome that can be implemented, verified, and accepted independently. Prefer vertical behavior or bounded operational results over horizontal layers, investigation-only fragments, or agent-sized busywork. Decompose execution into structured checklist subtasks: each subtask is one bounded step — roughly one coherent commit — that names its scope (files, components, or records touched) and its verification (command, test, or observable result). Split any step that cannot state a single verification. Subtasks are local steps with no independently valuable outcome; never create child work below a Story, Task, or Bug.
 
 For Epics, refine a measurable coordinated outcome, objective acceptance criteria, explicit exclusions, and a useful multi-item child scope. Parentless work stays standalone when no genuine shared outcome requires an Epic.
 
@@ -67,7 +67,7 @@ Reject `proposed -> ready` unless all hold:
 - `wiki_refs` lists every relevant `docs/wiki/...` path, or only `none` after confirming none applies;
 - research is `complete` or `not-needed` with resolved conclusions and sources or a concrete explanation — `pending` research or any unresolved version-specific or security-sensitive question blocks readiness;
 - `## Execution` records an actionable approach, verification commands, and the explicit project-owner approval;
-- subtasks are coherent checklist steps, or the section says exactly `No subtasks.`;
+- every subtask is one bounded step naming its scope and its verification, or the section says exactly `No subtasks.`;
 - the item occurs exactly once at its approved position in global rank.
 
 A ready Epic additionally requires an approved outcome, objective acceptance criteria, a coordination approach, and at least one approved child. Show the owner the complete candidate record, rank position, and validation-relevant relationships before requesting the transition; approval to refine is not approval to become ready.

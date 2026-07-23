@@ -46,4 +46,4 @@ Record the fix approach, regression commands, and explicit project-owner approva
 
 ## Subtasks
 
-- [ ] Add investigation and correction steps, or replace this checklist with `No subtasks.`
+- [ ] Add bounded investigation and correction steps, each naming its scope and its verification, or replace this checklist with `No subtasks.`

@@ -45,7 +45,7 @@ Before executable work becomes `ready`, all of the following are required:
 - `wiki_refs` names every relevant accepted-state page as a `docs/wiki/...` project-relative path, or contains only `none` after confirming no page applies.
 - `research` is `pending`, `complete`, or `not-needed` while work is proposed. Ready work requires `complete` or `not-needed`. Keep proposal-specific sources, version findings, recommendations, uncertainty, and project deviations under `## Research`; unresolved version-specific or security-sensitive questions require `pending` and prevent readiness.
 - `## Execution` states an actionable approach, verification commands, and explicit project-owner approval.
-- Checklist subtasks under `## Subtasks` are small enough to complete and verify coherently. Use `No subtasks.` when decomposition adds no value.
+- Every checklist subtask under `## Subtasks` is one bounded step — roughly one coherent commit — naming its scope (files, components, or records touched) and its verification (command, test, or observable result). Split any step that cannot state a single verification. Use `No subtasks.` when decomposition adds no value.
 - The item is present exactly once in the root global rank.
 
 Proposal-specific research remains with the backlog record. During post-acceptance implementation reconciliation, promote only guidance that became durable accepted current state to its canonical wiki concept; summarize it there instead of copying the proposal evidence.
@@ -68,7 +68,7 @@ Relationships may target Epics or executable work, must resolve to an existing I
 ## Ranking, subtasks, and claims
 
 - The ordered list under `## Global executable-work rank` in the root index is the sole global rank. It contains every active `WORK-NNN` exactly once, across Epic and standalone work. Epics are not ranked. Reorder only with project-owner approval.
-- Checklist subtasks are local execution steps, not separate backlog records. Keep them in `## Subtasks`; all must be checked before `done`.
+- Checklist subtasks are local execution steps, not separate backlog records. Keep them in `## Subtasks`. Check each one with evidence as soon as the increment completing it lands — never batched at the end — and all must be checked before `done`.
 - An in-progress work item has a non-empty `claim` naming the agent/session and an ISO 8601 `claim_expires` in the future. Claims are coordination leases, not ownership. Release or renew before expiry. Every other status uses `claim: none` and `claim_expires: none`.
 
 ## Cancellation and archival

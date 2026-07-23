@@ -33,6 +33,7 @@ Reject before branch creation:
 - an explicit item that is `proposed`, `done`, or `cancelled`;
 - an item that is not `ready`, unless `in-progress` with a live claim belonging to this exact executor/session and branch and the invocation is resuming it;
 - a ready item missing any Definition of Ready field, objective criterion, approved execution approach, verification command, rank entry, resolved parent/relationship, or completed/not-needed research;
+- a ready item whose `## Subtasks` are too coarse to execute as checkable increments — any subtask missing its scope or its verification — unless the section is exactly `No subtasks.`;
 - a ready item with an unresolved inward `blocks` relationship;
 - a malformed record, invalid project, expired claim, or claim/status mismatch;
 - any live claim owned by another executor — never overwrite it;
@@ -62,7 +63,7 @@ Renew the claim in a separately validated transaction before expiry; never conti
 ## Per-Item Execution
 
 1. Capture the primary branch's current commit as this item's fixed point. Re-read the authority packet and repository evidence after any preceding Epic child integration.
-2. Follow the approved approach and `## Subtasks`. Commit implementation and tests as coherent, independently green increments. After each increment, update all checklist entries it supports in one separate validated backlog transaction staging only its backlog paths — keep bookkeeping out of code commits.
+2. Follow the approved approach and `## Subtasks`. Commit implementation and tests as coherent, independently green increments. Immediately after each green increment, check every subtask it completes, with evidence, in one separate validated backlog transaction staging only its backlog paths — keep bookkeeping out of code commits. Do not start the next subtask while an earlier completed subtask is unchecked; check-off is a per-increment gate, never a batch at the end of the item.
 3. Never broaden scope to fix an adjacent problem; record the observation and ask for an approved backlog transaction when it blocks the outcome.
 4. Run focused tests, typechecks, linters, and other listed verification throughout. Add or update tests that objectively exercise the desired delta. Run the full applicable suite at the end of the item.
 5. Check a subtask or criterion only with concrete evidence (command and result, test, artifact, or direct inspection); record concise evidence in `## Execution` when not self-evident from committed tests. Validate and verify the narrow staged diff after each such backlog mutation.
