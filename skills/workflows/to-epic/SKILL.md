@@ -14,7 +14,7 @@ Stay on the current branch. Never create or use `docs/tasks`.
 
 ## Workflow
 
-1. **Epic intake** — Establish the coordinated outcome from the conversation or named sources, then create the `proposed` Epic via `$backlog` intake with provenance. If the outcome doesn't need multiple work items, stop and offer standalone intake instead. If the user names an existing `proposed` Epic, resume at its first incomplete step; reject `ready`, `in-progress`, or terminal Epics.
+1. **Epic intake** — Establish the coordinated outcome from the conversation or named sources, then create the `proposed` Epic via `$backlog` intake with provenance. If the outcome doesn't need multiple work items, stop and recommend `/to-backlog` instead. If the user names an existing `proposed` Epic, resume at its first incomplete step; reject `ready`, `in-progress`, or terminal Epics.
 2. **Research decision** — Before proposing any child, ask the owner explicitly: run `$research-tech-stack` on the Epic first? Never skip or answer this yourself.
    - Yes → run it; use the findings to inform child slicing.
    - No → record the decision on the Epic. Children still need individually justified research states; if a version-specific or security-sensitive question surfaces later, ask again for that record — never relabel uncertainty.
