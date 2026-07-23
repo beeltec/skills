@@ -330,6 +330,29 @@ class SetupProjectTests(unittest.TestCase):
         self.assertIn("<!-- setup-project:start -->", claude.read_text(encoding="utf-8"))
         self.assertNotIn("setup-wiki:", claude.read_text(encoding="utf-8"))
 
+    def test_both_instruction_files_receive_project_routing_rules(self) -> None:
+        self.run_installer("--instructions", "both")
+
+        for name in ("AGENTS.md", "CLAUDE.md"):
+            instructions = (self.project / name).read_text(encoding="utf-8")
+            self.assertIn("`docs/wiki` owns accepted primary-branch state", instructions)
+            self.assertIn("Use `$backlog` for backlog mutations", instructions)
+            self.assertIn("`$to-wiki` for accepted wiki updates", instructions)
+            self.assertIn("node scripts/validate-project.mjs", instructions)
+
+        before = {
+            name: (self.project / name).read_bytes()
+            for name in ("AGENTS.md", "CLAUDE.md")
+        }
+        self.run_installer("--instructions", "both")
+        self.assertEqual(
+            {
+                name: (self.project / name).read_bytes()
+                for name in ("AGENTS.md", "CLAUDE.md")
+            },
+            before,
+        )
+
     def test_github_actions_adds_standalone_workflow_without_rewriting_existing_jobs(self) -> None:
         workflows = self.project / ".github" / "workflows"
         workflows.mkdir(parents=True)
