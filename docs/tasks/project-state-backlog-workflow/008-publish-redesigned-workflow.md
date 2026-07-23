@@ -8,7 +8,7 @@ installation, setup, planning, review, and execution handoffs end to end.
 
 **Blocked by:** [002 — Upgrade existing project setups safely](002-upgrade-existing-projects.md), [003 — Manage the complete backlog lifecycle](003-manage-backlog-lifecycle.md), [004 — Route discussion and research by knowledge state](004-route-planning-knowledge.md), [005 — Review changes against wiki and backlog authority](005-review-wiki-backlog-authority.md), [006 — Execute work items and Epics through completion](006-execute-backlog-work.md), [007 — Orchestrate backlog execution with subagents](007-orchestrate-backlog-subagents.md).
 
-**Status:** ready-for-agent
+**Status:** completed
 
 ## Subtasks
 
@@ -23,12 +23,12 @@ installation, setup, planning, review, and execution handoffs end to end.
 - [x] Run installer and validator fixture suites, existing repository tests, and representative backlog, research, review, implement, and subagent smoke scenarios.
 - [x] Run `npx skills add . --list` and verify the expected public names and descriptions are discoverable.
 - [x] Check tracked skill symlink integrity and report the unrelated pre-existing dangling symlink separately rather than silently fixing it in this work.
-- [ ] Perform a final diff review for accidental compatibility layers, duplicated authorities, stale status vocabulary, and disagreement between README and skill contracts.
+- [x] Perform a final diff review for accidental compatibility layers, duplicated authorities, stale status vocabulary, and disagreement between README and skill contracts.
 
 ## Acceptance criteria
 
-- [ ] Public documentation presents one coherent path from project setup through current-state knowledge, desired backlog work, research, implementation, review, reconciliation, and archive.
-- [ ] `setup-project` and `backlog` are discoverable; `setup-wiki` and `to-tasks` are not.
-- [ ] No active workflow documentation treats the wiki as the owner of unimplemented desired state or `docs/tasks` as a supported plan format.
-- [ ] Automated setup, upgrade, validator, backlog, review, implementation, and orchestration checks pass.
-- [ ] Remaining legacy-name occurrences are restricted to intentional migration tests or detection code, and unrelated repository defects are reported without scope creep.
+- [x] Public documentation presents one coherent path from project setup through current-state knowledge, desired backlog work, research, implementation, review, reconciliation, and archive.
+- [x] `setup-project` and `backlog` are discoverable; `setup-wiki` and `to-tasks` are not.
+- [x] No active workflow documentation treats the wiki as the owner of unimplemented desired state or `docs/tasks` as a supported plan format.
+- [x] Automated setup, upgrade, validator, backlog, review, implementation, and orchestration checks pass.
+- [x] Remaining legacy-name occurrences are restricted to intentional migration tests or detection code, and unrelated repository defects are reported without scope creep.
