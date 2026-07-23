@@ -5,6 +5,8 @@ title: Attempt execution without readiness
 status: ready
 parent: none
 outcome: Produce a bounded result without readiness evidence
+wiki_refs: [docs/wiki/missing.md]
+research: complete
 blocks: []
 clones: []
 duplicates: []

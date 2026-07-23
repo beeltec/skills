@@ -399,6 +399,17 @@ const validateBacklog = async () => {
         const subtasks = section(record.body, 'Subtasks');
         if (acceptance.length === 0) errors.push(`${label}: ready work requires checkable acceptance criteria`);
         if (!wikiRefs || wikiRefs.length === 0) errors.push(`${label}: ready work requires wiki_refs or [none]`);
+        else if (wikiRefs.includes('none') && wikiRefs.length !== 1) {
+          errors.push(`${label}: wiki_refs may use none only by itself`);
+        } else if (!wikiRefs.includes('none')) {
+          for (const reference of wikiRefs) {
+            const target = reference.startsWith('/')
+              ? path.resolve(wikiRoot, reference.slice(1))
+              : path.resolve(projectRoot, reference);
+            if (!isWithin(wikiRoot, target)) errors.push(`${label}: wiki_refs must stay within docs/wiki: ${reference}`);
+            else if (!(await exists(target))) errors.push(`${label}: wiki_refs references missing ${reference}`);
+          }
+        }
         if (!['complete', 'not-needed'].includes(research ?? '')) {
           errors.push(`${label}: ready work research must be complete or not-needed`);
         }
@@ -479,7 +490,14 @@ const validateBacklog = async () => {
       const linked = /^\s*\d+\.\s+\[[^\]]*\]\([^)]+\)/.test(line);
       const id = /\bWORK-\d{3,}\b/.exec(line)?.[0];
       if (!linked || !id) errors.push(`index.md: invalid global rank entry: ${line.trim()}`);
-      else ranked.push(id);
+      else {
+        ranked.push(id);
+        const targetText = /\[[^\]]*\]\(([^)]+)\)/.exec(line)?.[1];
+        const target = targetText ? resolveLocalTarget(rootIndex, targetText, backlogRoot) : null;
+        if (recordsById.get(id)?.file !== target) {
+          errors.push(`index.md: global rank ${id} must link to its matching record`);
+        }
+      }
     }
     const activeWork = records
       .filter((record) => workTypes.has(record.type) && !['done', 'cancelled'].includes(record.status))

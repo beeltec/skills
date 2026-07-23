@@ -130,7 +130,7 @@ class SetupProjectTests(unittest.TestCase):
         validation = self.validate()
         self.assertNotEqual(validation.returncode, 0)
         self.assertIn("ready work requires checkable acceptance criteria", validation.stderr)
-        self.assertIn("ready work requires wiki_refs or [none]", validation.stderr)
+        self.assertIn("wiki_refs references missing docs/wiki/missing.md", validation.stderr)
         self.assertIn("Execution must record approach, verification, and explicit approval", validation.stderr)
 
     def test_blocking_cycle_and_broken_wiki_link_fail_actionably(self) -> None:
