@@ -18,8 +18,8 @@ installation, setup, planning, review, and execution handoffs end to end.
 - [x] Regenerate or replace the development workflow diagram so it matches the documented skills and contains no removed handoff or task-plan stages.
 - [x] Verify every canonical skill directory, frontmatter name, UI metadata name, and `.agents/skills` relative symlink agrees.
 - [x] Remove `setup-wiki` and `to-tasks` catalog entries and symlinks without modifying unrelated dangling or user-owned artifacts.
-- [ ] Search all active documentation, metadata, and skills for stale `$setup-wiki`, `$to-tasks`, `validate-wiki.mjs`, `wiki:check`, and current-workflow `docs/tasks` references.
-- [ ] Permit old names only in explicit setup-upgrade compatibility code and fixtures, clearly labeled as legacy behavior.
+- [x] Search all active documentation, metadata, and skills for stale `$setup-wiki`, `$to-tasks`, `validate-wiki.mjs`, `wiki:check`, and current-workflow `docs/tasks` references.
+- [x] Permit old names only in explicit setup-upgrade compatibility code and fixtures, clearly labeled as legacy behavior.
 - [ ] Run installer and validator fixture suites, existing repository tests, and representative backlog, research, review, implement, and subagent smoke scenarios.
 - [ ] Run `npx skills add . --list` and verify the expected public names and descriptions are discoverable.
 - [ ] Check tracked skill symlink integrity and report the unrelated pre-existing dangling symlink separately rather than silently fixing it in this work.
