@@ -249,6 +249,17 @@ Approved lifecycle smoke-test fixture.
         )
         self.assert_valid()
 
+        self.write_work(
+            story_path,
+            "WORK-001",
+            work_type="story",
+            parent="WORK-002",
+            relates_to=("WORK-002",),
+        )
+        invalid_hierarchy = self.validate()
+        self.assertNotEqual(invalid_hierarchy.returncode, 0)
+        self.assertIn("parent WORK-002 is not an Epic", invalid_hierarchy.stderr)
+
         self.write_epic(epic_path, "EPIC-001", status="ready")
         self.write_work(
             story_path,
