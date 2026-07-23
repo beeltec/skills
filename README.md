@@ -35,7 +35,6 @@ npx skills add beeltec/skills --list
 | **discuss** | Stress-test a plan or decision through a guided, one-question-at-a-time discussion |
 | **elementor-content** | Create and edit Elementor JSON or WordPress database content via WP-CLI |
 | **glab** | Manage GitLab merge requests, issues, pipelines, releases, and repositories with `glab` |
-| **handoff** | Save unfinished work context so another agent can resume it |
 | **implement** | Execute an existing task plan with branching, commits, tests, and review |
 | **implement-with-subagents** | Execute a `$to-tasks` plan through one sequential subagent per task |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
@@ -77,10 +76,6 @@ These are alternative execution paths, not consecutive steps.
 ### 4. Verify the result
 
 Run **code-review** after implementation. It checks the changes independently along two axes: compliance with the repository's documented standards and fidelity to the originating specification. If the review finds problems, return to the implementation phase, address them, and review again.
-
-### Pause and resume anywhere
-
-Use **handoff** whenever unfinished work must continue in another agent or session. It records the relevant conversation and workspace state, so it can wrap any phase of the workflow rather than acting as a mandatory final step.
 
 ### Implementing with subagents
 
@@ -148,7 +143,7 @@ See the [Agent Skills specification](https://agentskills.io/specification), [cre
 
 ## Acknowledgments
 
-The **discuss**, **code-review**, **implement**, and **handoff** skills are customized adaptations of skills created by [Matt Pocock](https://github.com/mattpocock) in [mattpocock/skills](https://github.com/mattpocock/skills), which is licensed under the MIT License. Thanks to Matt for creating and sharing the originals.
+The **discuss**, **code-review**, and **implement** skills are customized adaptations of skills created by [Matt Pocock](https://github.com/mattpocock) in [mattpocock/skills](https://github.com/mattpocock/skills), which is licensed under the MIT License. Thanks to Matt for creating and sharing the originals.
 
 ## License
 
