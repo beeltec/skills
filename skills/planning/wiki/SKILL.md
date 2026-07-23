@@ -90,6 +90,6 @@ For each approved semantic mutation or authorized non-semantic repair:
 3. Run `node scripts/validate-project.mjs`; fix all errors and review every warning. If validation cannot pass, do not commit.
 4. Inspect `git diff`, `git diff --cached`, and `git status`. Stage only the intended `docs/wiki` paths; verify no unrelated changes, secrets, notes, or backlog content.
 5. One concise Conventional Commit: `docs(wiki): <transaction outcome>`.
-6. Report the commit hash, authority/approval, changed and deleted concepts, structural effects, evidence and sources, warnings, and validation result.
+6. Report the commit hash, authority/approval, changed and deleted concepts, structural effects, evidence and sources, warnings, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. rejected desired-change content → `/to-backlog` naming it); recommend only, omit when none follows.
 
 If approval is denied or revised, update the proposal in conversation without mutating files. If unrelated changes overlap an affected wiki file and a safe narrow transaction is not possible, stop and ask.

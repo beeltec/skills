@@ -20,3 +20,5 @@ Stay on the current branch. Never create or use `docs/tasks`.
 4. **Report** — Published concepts and terminology with their transactions and commit hashes; rejected candidates with their `$backlog` routing; any destructive decisions and their outcomes; the final `node scripts/validate-project.mjs` result.
 
 A failed validator, evidence contradicting a confirmed conclusion, or unestablished current acceptance is a blocker: publish nothing for that candidate, keep committed transactions intact, and report — never force acceptance.
+
+End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists. Recommend only — never invoke it; omit the line when no follow-up exists.

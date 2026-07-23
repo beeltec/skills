@@ -39,3 +39,5 @@ Stay on the user's current Git branch — never create, switch, merge, or delete
 - During post-acceptance reconciliation, promote only conclusions that became durable accepted guidance to the owning wiki concept via `$wiki` under its approval rules, summarizing rather than copying; retain the backlog research as history.
 
 After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, sources, research state, unresolved readiness blockers, commit hash, and validation result.
+
+End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes the record's planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it.

@@ -1,6 +1,6 @@
 ---
 name: setup-project
-description: Initialize or safely upgrade a project with an accepted-state OKF wiki and a tracked desired-change backlog. Use when creating or migrating project governance, templates, validation, managed CI, and agent instructions.
+description: Initialize or safely upgrade a project with an accepted-state OKF wiki and a tracked desired-change backlog; on brownfield repositories, automatically back-fill a foundation wiki from code-verified facts. Use when creating or migrating project governance, templates, validation, managed CI, and agent instructions.
 disable-model-invocation: true
 ---
 
@@ -26,7 +26,10 @@ Stay on the user's current Git branch — never create or switch branches while 
 6. Add only the explicitly agreed terms to `docs/wiki/domains/ubiquitous-language.md` (canonical term, definition, context; synonyms only when relevant; examples, counterexamples, rationale, and code references optional). Preserve existing agreed terms unless the owner explicitly agrees to revise them.
 7. Replace generic orientation text and empty wiki indexes with concise, project-specific descriptions. Preserve durable accepted knowledge; record project-specific wiki changes in `docs/wiki/log.md`. Leave the empty backlog scaffold unchanged until the owner approves proposed work.
 8. Run `node scripts/validate-project.mjs` (and the package-script equivalent when the installer added one).
-9. Review the diff, local links, backlog scaffold, agent-instruction block, and wiki log. Run setup a second time and confirm it changes no bytes.
+9. **Brownfield back-fill** — When the repository already contains application code (source directories, manifests, build configuration) and the wiki has no accepted concepts beyond the scaffold, this invocation is the owner's standing approval to explore the codebase and publish a foundation overview as validated `$wiki` transactions: tech stack with exact versions, architecture and module map, build/test/run commands, observable conventions, and code-derived terminology. Publish only facts verified against repository evidence; collect owner-judgment candidates (intent, rationale, product language) in the report for a later `/discuss` and `/to-wiki`. Rerun the validator. Skip on greenfield repositories and already-populated wikis.
+10. Review the diff, local links, backlog scaffold, agent-instruction block, and wiki log. Run setup a second time and confirm it changes no bytes.
+
+End the report with `Next step:` — one copy-pasteable command: greenfield → `/discuss` naming the first outcome to shape; brownfield → `/discuss` naming the highest-value judgment candidate or first desired change. Recommend only — never invoke a user-invoked skill.
 
 ## Structure rules
 

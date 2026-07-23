@@ -83,6 +83,8 @@ If the user explicitly confirmed no specification exists, skip the Spec sub-agen
 
 Present the two reports under `## Standards` and `## Spec`, verbatim or lightly cleaned. Keep severity labels and counts independent; never merge or rerank findings across axes. End with a one-line summary of each axis's total, severity breakdown, and worst issue. Do not pick a single winner.
 
+Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance. Recommend only — never invoke it.
+
 ## Why two axes
 
 Code can follow every standard yet implement the wrong delta (Standards pass, Spec fail), or implement the item exactly while breaking a convention (Spec pass, Standards fail). Separate reporting stops one axis from masking the other.

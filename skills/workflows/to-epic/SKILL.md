@@ -23,3 +23,5 @@ Stay on the current branch. Never create or use `docs/tasks`.
 5. **Report** — Epic and child IDs with type, status, rank position, and research state; the research decision; commit hashes; final `node scripts/validate-project.mjs` result. Any record left `proposed` gets its named blocker and resumption point.
 
 A failed validator, unresolved research the owner declined, or a missing readiness requirement is a blocker: leave the record `proposed`, keep committed transactions intact, and report — never force `ready`.
+
+End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `/implement EPIC-NNN` (or `/implement-with-subagents EPIC-NNN` for isolated per-child sessions); a record left `proposed` → the exact command that resumes it after its named blocker. Recommend only — never invoke it.

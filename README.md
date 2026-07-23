@@ -74,18 +74,20 @@ flowchart TD
 4. **implement** (single session) or **implement-with-subagents** (one fresh subagent per item) executes ready work: claim, conventional branch, incremental commits, and a **code-review** loop on two independent axes — Standards (wiki and repository rules) and Spec (the work item's desired delta) — until both pass.
 5. After merge to the primary branch, durable knowledge changes are reconciled into the **wiki** with owner approval, and the terminal backlog record is archived with its history.
 
+Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments, chosen from the run's outcome — so each step hands off to the next.
+
 **setup-project**, **discuss**, **to-epic**, **to-backlog**, and **to-wiki** are user-invoked only (`disable-model-invocation: true`): invoking them is itself an owner decision — for the to-\* skills it grants the standing approval — so an agent may recommend the command but never run it on its own.
 
 ### Greenfield and Brownfield
 
 - **Greenfield** (new application): run **setup-project** on the empty repository, then shape the product through `/discuss` — desired outcomes flow through `/to-epic` or `/to-backlog` to ready work, and the implement → code-review → acceptance loop grows wiki knowledge as features land.
-- **Brownfield** (existing application): run **setup-project** on the existing repository (it upgrades safely and never overwrites project-owned files), then capture accepted current state first — explore the codebase through `/discuss` and publish the confirmed facts, architecture, and terminology with `/to-wiki`. Once the wiki reflects reality, desired changes follow the same delivery loop as greenfield.
+- **Brownfield** (existing application): run **setup-project** on the existing repository (it upgrades safely and never overwrites project-owned files). When it detects existing application code with an empty wiki, it automatically explores the codebase and back-fills a foundation overview of code-verified facts — stack, architecture, commands, conventions, terminology. Owner-judgment knowledge (intent, rationale, product language) is reported as candidates for `/discuss` and `/to-wiki`. Once the wiki reflects reality, desired changes follow the same delivery loop as greenfield.
 
 Both paths converge on the same cycle; they differ only in whether the wiki starts empty or must first be back-filled from the existing system.
 
 | Skill | Description |
 |-------|-------------|
-| **setup-project** | Initialize or safely upgrade a project with wiki, backlog, validation, and agent instructions |
+| **setup-project** | Initialize or safely upgrade a project with wiki, backlog, validation, and agent instructions; back-fill a foundation wiki on brownfield repositories |
 | **discuss** | Stress-test an idea one question at a time, then route conclusions to wiki or backlog |
 | **wiki** | Manage the lifecycle of accepted project knowledge |
 | **to-wiki** | Publish the conversation's confirmed durable knowledge to the wiki under one standing approval |
