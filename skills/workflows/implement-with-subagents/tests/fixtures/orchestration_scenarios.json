@@ -1,0 +1,44 @@
+[
+  {
+    "name": "parallel-ready ranking",
+    "selection": ["WORK-003", "WORK-005"],
+    "state": "both selected items are ready, unblocked, and unclaimed; WORK-005 is globally ranked first",
+    "expected": "delegate WORK-005 first, verify every direct implementation gate, reload global rank, then delegate WORK-003"
+  },
+  {
+    "name": "dependency chain",
+    "selection": "EPIC-001",
+    "state": "WORK-001 blocks higher-ranked WORK-002 and both are ready children",
+    "expected": "delegate actionable WORK-001 first; after primary acceptance and validation, recalculate actionability and delegate WORK-002"
+  },
+  {
+    "name": "same-agent failure recovery",
+    "selection": ["WORK-010", "WORK-011"],
+    "state": "WORK-010 returns with a failing Spec review and a live claim owned by its assigned subagent",
+    "expected": "resume the same WORK-010 subagent with review evidence; do not spawn a replacement or delegate WORK-011"
+  },
+  {
+    "name": "conflicting claim",
+    "selection": ["WORK-020"],
+    "state": "WORK-020 has another executor's live unexpired claim",
+    "expected": "stop before delegation, report the claim owner, session, branch, and expiry, and never overwrite or release it"
+  },
+  {
+    "name": "claim cleanup gate",
+    "selection": ["WORK-021", "WORK-022"],
+    "state": "WORK-021 is reported done but its claim remains populated and it remains in global rank",
+    "expected": "resume the same WORK-021 subagent to repair and validate direct completion evidence; do not delegate WORK-022"
+  },
+  {
+    "name": "cancellation decision",
+    "selection": "EPIC-030",
+    "state": "implementation reveals that unfinished WORK-030 should be cancelled as out of scope",
+    "expected": "stop for explicit project-owner approval and child disposition; do not cancel, rerank, or continue to another child"
+  },
+  {
+    "name": "final Epic closure",
+    "selection": "EPIC-040",
+    "state": "every child has primary-branch acceptance, terminal disposition, cleared claims, review evidence, and reconciled wiki state",
+    "expected": "verify Epic success measures and full gates, then atomically mark done and archive the complete Epic directory in one validated commit"
+  }
+]
