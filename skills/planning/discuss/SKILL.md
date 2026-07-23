@@ -5,7 +5,7 @@ description: Stress-test a plan, decision, or idea one question at a time, using
 
 # Discuss
 
-Before interviewing, resolve the project root and read applicable repository instructions. When `docs/wiki` exists, read its root index, maintenance rules, ubiquitous language, nearest relevant indexes, and related concepts so accepted current state informs the discussion. Without a wiki, continue without inventing project facts and recommend `$setup-project` if the user wants to persist project state.
+Before interviewing, resolve the project root and read applicable repository instructions. When `docs/wiki` exists, read its root index, maintenance rules, ubiquitous language, nearest relevant indexes, and related concepts so accepted current state informs the discussion. When `docs/backlog` exists, also read its root index and any records related to the topic — read-only — so existing proposed work, relationships, and rank inform the questioning and the handoff can refine an existing record instead of proposing a duplicate. Without a wiki, continue without inventing project facts and recommend `$setup-project` if the user wants to persist project state.
 
 Stay on the user's current Git branch — never create, switch, merge, or delete branches, even when inspecting the repository.
 
@@ -14,7 +14,7 @@ Interview the user relentlessly about every aspect until shared understanding is
 Ask exactly one question at a time and wait for the answer. Format every question exactly as:
 
 ```text
-Question X / (~Y):
+Question X / ~Y:
 Question
 ```
 
