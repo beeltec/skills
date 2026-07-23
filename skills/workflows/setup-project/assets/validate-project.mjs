@@ -88,7 +88,7 @@ const checkboxes = (content) =>
     text: match[2].trim(),
   }));
 
-const hasPlaceholder = (value) => !value || /\b(?:replace|tbd|todo|unknown)\b/i.test(value);
+const hasPlaceholder = (value) => !value || /\b(?:replace (?:with|this)\b|tbd|todo)\b/i.test(value);
 
 const checkLinks = async (files, bundleRoot, errors, activeRecords = new Map()) => {
   for (const file of files) {
