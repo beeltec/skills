@@ -1,6 +1,6 @@
 ---
 name: create-conventional-branch
-description: Create and switch to a purpose-driven Git branch that follows the Conventional Branch specification. Use automatically only when $implement or $implement-with-subagents needs a work branch, or when the user explicitly requests a branch or pull/merge-request publishing workflow. Never use for discussion, research, wiki maintenance, wiki setup, or task planning alone.
+description: Create and switch to a purpose-driven Git branch that follows the Conventional Branch specification. Use automatically only for $implement or $implement-with-subagents, or when the user explicitly requests a branch or pull/merge-request workflow. Never use automatically for setup-project, backlog, discussion, wiki maintenance, or research.
 ---
 
 # Create Conventional Branch
@@ -14,7 +14,7 @@ Create or switch branches only when:
 - `$implement` or `$implement-with-subagents` is executing implementation work; or
 - the user explicitly requests creating a branch or running a pull/merge-request publishing workflow.
 
-Do not create or switch branches for `$discuss`, `$setup-wiki`, `$to-wiki`, `$research-tech-stack`, or `$to-tasks`. Those workflows stay on the branch the user selected, including when it is not the primary branch. Documentation or repository writes alone do not make a new branch necessary.
+Do not create, switch, merge, or delete branches for `$setup-project`, `$backlog`, `$discuss`, `$to-wiki`, or `$research-tech-stack`. Those planning and project-state workflows stay on the branch the user selected, including when it is not the primary branch. Documentation or repository writes alone do not make a new branch necessary. Only the implementation workflows named above receive automatic branch authorization.
 
 ## Workflow
 
