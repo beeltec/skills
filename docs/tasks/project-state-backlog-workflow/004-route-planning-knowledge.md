@@ -24,7 +24,7 @@ readiness.
 - [x] Promote research conclusions to the wiki only when they become durable accepted guidance during implementation reconciliation.
 - [x] Update research templates and UI metadata to describe the new pre-readiness output and remove task-plan sequencing language.
 - [x] Update conventional-branch authorization so `setup-project`, `backlog`, `discuss`, `to-wiki`, and research stay on the user-selected branch while implementation workflows may create work branches.
-- [ ] Run static searches and representative planning smoke tests to verify each handoff chooses the correct knowledge owner.
+- [x] Run static searches and representative planning smoke tests to verify each handoff chooses the correct knowledge owner.
 
 ## Acceptance criteria
 
