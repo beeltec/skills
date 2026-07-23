@@ -20,7 +20,7 @@ The invocation is a gate-backed execution workflow: it authorizes temporary clai
 Complete before creating or switching a branch or mutating a claim:
 
 1. Resolve the repository root. Read all applicable `AGENTS.md`, `CLAUDE.md`, nested instructions, and contributing or coding standards.
-2. Require `.setup-project.json`, `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If incomplete, stop and direct the user to `$setup-project`.
+2. Require `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If incomplete, stop and direct the user to `$setup-project`.
 3. Run `node scripts/validate-project.mjs`. Stop on an invalid baseline unless the user explicitly changes the assignment to repairing it.
 4. Inspect the current branch, primary branch, remotes, staged/unstaged changes, and recent history. Preserve unrelated changes; never stage them.
 5. Resolve the selection: explicit ID or path wins; otherwise only a single unambiguous conversational selection. List candidates and ask when absent or ambiguous.

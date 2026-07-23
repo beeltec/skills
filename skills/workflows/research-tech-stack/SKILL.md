@@ -12,7 +12,7 @@ Stay on the user's current Git branch — never create, switch, merge, or delete
 ## Preconditions
 
 1. Resolve the project root and read applicable repository instructions.
-2. Require `.setup-project.json`, `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, the installed backlog templates, and `scripts/validate-project.mjs`; otherwise stop and direct the user to `$setup-project`.
+2. Require `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, the installed backlog templates, and `scripts/validate-project.mjs`; otherwise stop and direct the user to `$setup-project`.
 3. Run `node scripts/validate-project.mjs`. On an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Require one named `EPIC-NNN` or `WORK-NNN` with `status: proposed`. Without one, offer `$backlog` intake first. Reject research as a pre-readiness mutation when the record is already `ready`, `in-progress`, or terminal; never silently reopen it.
 5. Read backlog maintenance, the matching type template, the complete named record (delta, parent and child scope, relationships) and directly related records; the wiki root, maintenance rules, ubiquitous language, nearest indexes, and accepted technology or architecture concepts.

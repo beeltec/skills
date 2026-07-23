@@ -8,8 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-INSTALLER_VERSION = 3
-MANIFEST_NAME = ".setup-project.json"
+LEGACY_MANIFEST_NAME = ".setup-project.json"
 CANONICAL_COMMAND = "node scripts/validate-project.mjs"
 LEGACY_COMMAND = "node scripts/validate-wiki.mjs"
 LEGACY_VALIDATOR_SHA256 = (
@@ -95,67 +94,39 @@ def relative_path(root: Path, target: Path) -> str:
     return target.relative_to(root).as_posix()
 
 
-def load_manifest(root: Path, notes: list[str]) -> tuple[dict, bool]:
-    target = root / MANIFEST_NAME
+def remove_legacy_manifest(root: Path, notes: list[str]) -> tuple[str, Path] | None:
+    target = root / LEGACY_MANIFEST_NAME
     if not target.exists():
-        return {}, True
+        return None
     try:
         manifest = json.loads(target.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError) as error:
-        notes.append(
-            f"Manual action: preserved {MANIFEST_NAME}; it could not be parsed: {error}"
-        )
-        return {}, False
-    if not isinstance(manifest, dict) or manifest.get("installer") != "setup-project":
-        notes.append(
-            f"Manual action: preserved {MANIFEST_NAME}; it is not owned by setup-project."
-        )
-        return {}, False
-    return manifest, True
-
-
-def write_manifest(root: Path, manifest: dict, writable: bool) -> str:
-    if not writable:
-        return "kept"
-    target = root / MANIFEST_NAME
-    content = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
-    existed = target.exists()
-    if existed and target.read_text(encoding="utf-8") == content:
-        return "unchanged"
-    target.write_text(content, encoding="utf-8")
-    return "updated" if existed else "created"
-
-
-def managed_asset_hash(manifest: dict, relative: str) -> str | None:
-    assets = manifest.get("managed_assets", {})
-    if not isinstance(assets, dict):
-        return None
-    value = assets.get(relative)
-    return value if isinstance(value, str) else None
+    except (json.JSONDecodeError, OSError):
+        manifest = None
+    if isinstance(manifest, dict) and manifest.get("installer") == "setup-project":
+        target.unlink()
+        return "removed", target
+    notes.append(
+        f"Manual action: preserved {LEGACY_MANIFEST_NAME}; it is not owned by "
+        "setup-project."
+    )
+    return "kept", target
 
 
 def install_managed_asset(
     root: Path,
     target: Path,
     content: bytes,
-    manifest: dict,
     notes: list[str],
     kind: str,
 ) -> tuple[str, bool]:
     relative = relative_path(root, target)
-    expected_hash = sha256(content)
     if not target.exists():
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(content)
         return "created", True
 
-    existing = target.read_bytes()
-    existing_hash = sha256(existing)
-    if existing_hash == expected_hash:
+    if sha256(target.read_bytes()) == sha256(content):
         return "unchanged", True
-    if managed_asset_hash(manifest, relative) == existing_hash:
-        target.write_bytes(content)
-        return "updated", True
 
     notes.append(
         f"Manual action: preserved customized {kind} at {relative}; "
@@ -213,14 +184,13 @@ def update_instructions(target: Path, block: str, notes: list[str]) -> str:
 
 
 def install_validator(
-    root: Path, source: Path, manifest: dict, notes: list[str]
+    root: Path, source: Path, notes: list[str]
 ) -> tuple[list[tuple[str, Path, str]], bool]:
     target = root / "scripts" / "validate-project.mjs"
     status, canonical_ready = install_managed_asset(
         root,
         target,
         source.read_bytes(),
-        manifest,
         notes,
         "project validator",
     )
@@ -402,21 +372,16 @@ def gitlab_include_update(content: str) -> tuple[str | None, str]:
     return prefix + separator + insertion + content[block_end:], "extended compatible include list"
 
 
-def install_ci(
-    root: Path, manifest: dict, notes: list[str]
-) -> tuple[list[tuple[str, Path, str]], list[str]]:
+def install_ci(root: Path, notes: list[str]) -> list[tuple[str, Path, str]]:
     results = []
-    managed_paths = []
 
     github_directory = root / ".github" / "workflows"
     if github_directory.is_dir():
         target = github_directory / "project-validation.yml"
-        status, managed = install_managed_asset(
-            root, target, github_workflow(), manifest, notes, "GitHub Actions workflow"
+        status, _ = install_managed_asset(
+            root, target, github_workflow(), notes, "GitHub Actions workflow"
         )
         results.append((status, target, "GitHub Actions"))
-        if managed:
-            managed_paths.append(relative_path(root, target))
 
     gitlab_config = root / ".gitlab-ci.yml"
     if gitlab_config.is_file():
@@ -431,7 +396,7 @@ def install_ci(
         else:
             target = root / ".gitlab" / "ci" / "project-validation.yml"
             status, managed = install_managed_asset(
-                root, target, gitlab_job(), manifest, notes, "GitLab CI job"
+                root, target, gitlab_job(), notes, "GitLab CI job"
             )
             if not managed:
                 notes.append(
@@ -446,9 +411,8 @@ def install_ci(
                 else:
                     results.append(("unchanged", gitlab_config, "GitLab CI"))
                 results.append((status, target, "GitLab CI job"))
-                managed_paths.append(relative_path(root, target))
 
-    return results, managed_paths
+    return results
 
 
 def main() -> int:
@@ -467,7 +431,6 @@ def main() -> int:
         "TIMESTAMP": now.isoformat(),
     }
     notes: list[str] = []
-    manifest, manifest_writable = load_manifest(root, notes)
 
     results: list[tuple[str, Path, str]] = []
     for source in sorted(wiki_assets.rglob("*.md")):
@@ -495,55 +458,42 @@ def main() -> int:
         )
 
     validator_source = assets / "validate-project.mjs"
-    validator_target = root / "scripts" / "validate-project.mjs"
-    validator_results, canonical_ready = install_validator(
-        root, validator_source, manifest, notes
-    )
+    validator_results, canonical_ready = install_validator(root, validator_source, notes)
     results.extend(validator_results)
 
     instruction_block = (assets / "agent-instructions.md").read_text(
         encoding="utf-8"
     )
+    created_instruction_targets = []
     for target in instruction_targets(root, args.instructions):
         existed = target.exists()
         status = update_instructions(target, instruction_block, notes)
         if not existed and status == "updated":
             status = "created"
+        if status == "created":
+            created_instruction_targets.append(target)
         results.append((status, target, "agent instructions"))
 
-    package_script = None
+    agents_file = root / "AGENTS.md"
+    claude_file = root / "CLAUDE.md"
+    if (
+        agents_file in created_instruction_targets
+        and not claude_file.exists()
+        and not claude_file.is_symlink()
+    ):
+        claude_file.symlink_to("AGENTS.md")
+        results.append(("created", claude_file, "claude symlink"))
+
     if not args.no_package_script:
-        status, detail, package_script = add_package_script(
-            root, canonical_ready, notes
-        )
+        status, detail, _ = add_package_script(root, canonical_ready, notes)
         print(f"{status:9} {'package script':18} {detail}")
 
-    ci_results, managed_ci = install_ci(root, manifest, notes)
-    results.extend(ci_results)
+    results.extend(install_ci(root, notes))
 
-    managed_assets = {}
-    if canonical_ready:
-        managed_assets[relative_path(root, validator_target)] = sha256(
-            validator_target.read_bytes()
-        )
-    for relative in managed_ci:
-        managed_assets[relative] = sha256((root / relative).read_bytes())
-    selected_instruction_targets = instruction_targets(root, args.instructions)
-    next_manifest = {
-        "installer": "setup-project",
-        "installer_version": INSTALLER_VERSION,
-        "managed_assets": managed_assets,
-        "instruction_files": [
-            relative_path(root, target)
-            for target in selected_instruction_targets
-            if target.exists()
-            and MANAGED_BLOCK.search(target.read_text(encoding="utf-8"))
-        ],
-        "package_scripts": [package_script] if package_script else [],
-        "schema_version": 1,
-    }
-    manifest_status = write_manifest(root, next_manifest, manifest_writable)
-    results.append((manifest_status, root / MANIFEST_NAME, "ownership manifest"))
+    legacy_manifest_result = remove_legacy_manifest(root, notes)
+    if legacy_manifest_result is not None:
+        status, target = legacy_manifest_result
+        results.append((status, target, "legacy manifest"))
 
     for status, target, kind in results:
         print(f"{status:9} {kind:18} {target.relative_to(root)}")

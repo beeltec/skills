@@ -22,7 +22,7 @@ Strictly non-semantic maintenance the user requested (formatting, metadata norma
 Before a mutation:
 
 1. Resolve the project root; read all applicable `AGENTS.md`, `CLAUDE.md`, nested instructions, contributing guidance, and documentation standards.
-2. Require the complete `$setup-project` scaffold: `.setup-project.json`, `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/log.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`; never improvise a wiki-only setup.
+2. Require the complete `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/log.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`; never improvise a wiki-only setup.
 3. Run `node scripts/validate-project.mjs`. On an invalid baseline, report and stop unless the user explicitly changes the request to repairing that state.
 4. Read the root index, maintenance rules, log, ubiquitous language, nearest relevant indexes, related concepts, and every page needed to detect duplicate ownership and inbound links.
 5. Read relevant active and archived backlog records when they establish proposal state, acceptance, implementation history, research provenance, or references affected by a move or deletion.

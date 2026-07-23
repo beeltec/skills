@@ -18,7 +18,7 @@ Accept optional `model` and `reasoning effort` settings for work-item subagents;
 Complete before spawning a subagent or changing backlog state:
 
 1. Resolve the repository root. Read all applicable `AGENTS.md`, `CLAUDE.md`, nested instructions, contributing guidance, and coding standards.
-2. Require `.setup-project.json`, wiki maintenance and root index, ubiquitous language, backlog maintenance and root index, all four backlog templates, and `scripts/validate-project.mjs`; otherwise stop and direct the user to `$setup-project`.
+2. Require wiki maintenance and root index, ubiquitous language, backlog maintenance and root index, all four backlog templates, and `scripts/validate-project.mjs`; otherwise stop and direct the user to `$setup-project`.
 3. Run `node scripts/validate-project.mjs`. Stop on any malformed links, records, relationships, rank, archives, statuses, or claims — never delegate against an invalid baseline.
 4. Resolve the authorized scope: for an Epic, read its complete record and every child; for a set, every selected item. Read the complete global rank, active and archive indexes, related parent Epics, all relationship-connected records, and everything needed to calculate inward blockers.
 5. Read backlog maintenance, applicable type templates, all selected and Epic `wiki_refs`, nearest wiki indexes, wiki maintenance and log, relevant engineering and architecture guidance, proposal research and local evidence, and the affected repository code and tests.

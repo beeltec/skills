@@ -22,7 +22,7 @@ An invoked gate-backed execution workflow that explicitly authorizes an agent/se
 Before proposing or applying a mutation:
 
 1. Resolve the repository root; read all applicable `AGENTS.md`, `CLAUDE.md`, and nested instructions.
-2. Require the setup-project scaffold: `.setup-project.json`, `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, the four type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`; do not improvise a partial scaffold.
+2. Require the setup-project scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, the four type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`; do not improvise a partial scaffold.
 3. Run `node scripts/validate-project.mjs`. On an invalid baseline, report the errors and mutate only if the user explicitly asks to repair that existing state.
 4. Read the wiki root index, maintenance rules, ubiquitous language, nearest relevant indexes, and every relevant accepted-state concept.
 5. Read the backlog root index, maintenance rules, relevant type templates, active and archive indexes, all records related by parent or relationship, and every record needed to determine inward links and blocking state.

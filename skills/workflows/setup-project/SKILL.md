@@ -21,8 +21,8 @@ Stay on the user's current Git branch — never create or switch branches while 
    python3 scripts/setup_project.py --root /absolute/path/to/project
    ```
 
-   Use `--instructions agents|claude|both` only when the default `auto` is unsuitable; `--no-package-script` when package.json must not change.
-5. Review every `kept`, `skipped`, and manual-action result. Existing wiki and backlog pages are never overwritten; the installer upgrades only recognized managed instruction blocks, the installer-owned validator or package script, and compatible managed CI integrations. Custom collisions are preserved for manual reconciliation.
+   Use `--instructions agents|claude|both` only when the default `auto` is unsuitable; `--no-package-script` when package.json must not change. When the installer creates a new `AGENTS.md` and no `CLAUDE.md` exists, it also creates `CLAUDE.md` as a symlink to `AGENTS.md`.
+5. Review every `kept`, `skipped`, and manual-action result. Existing wiki and backlog pages are never overwritten; the installer upgrades only recognized managed instruction blocks and the installer-owned package script, and adds compatible managed CI integrations. Any file that differs from its installed asset is preserved for manual reconciliation.
 6. Add only the explicitly agreed terms to `docs/wiki/domains/ubiquitous-language.md` (canonical term, definition, context; synonyms only when relevant; examples, counterexamples, rationale, and code references optional). Preserve existing agreed terms unless the owner explicitly agrees to revise them.
 7. Replace generic orientation text and empty wiki indexes with concise, project-specific descriptions. Preserve durable accepted knowledge; record project-specific wiki changes in `docs/wiki/log.md`. Leave the empty backlog scaffold unchanged until the owner approves proposed work.
 8. Run `node scripts/validate-project.mjs` (and the package-script equivalent when the installer added one).
@@ -55,8 +55,7 @@ Stay on the user's current Git branch — never create or switch branches while 
 
 ## Installed resources
 
-- `scripts/setup_project.py` — creates missing assets, updates managed agent instructions, and optionally adds a non-conflicting package script without touching lockfiles.
-- `.setup-project.json` — records installer version and hashes/locations of managed validators, instructions, package scripts, and CI assets for safe upgrades.
+- `scripts/setup_project.py` — creates missing assets, updates managed agent instructions, and optionally adds a non-conflicting package script without touching lockfiles. It removes a leftover `.setup-project.json` manifest from earlier installer versions.
 - CI: compatible GitHub Actions projects get a standalone managed workflow; GitLab projects get a standalone job only when `.gitlab-ci.yml` has no include or one simple block-list include. Unsupported CI is reported, not changed.
 - `assets/wiki/` — generic accepted-state OKF bundle templates. `assets/backlog/` — desired-change governance, indexes, archives, and type templates.
 - `assets/validate-project.mjs` — reports wiki and backlog validation separately and enforces their structural and lifecycle contracts.
