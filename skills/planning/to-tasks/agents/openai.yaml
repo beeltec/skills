@@ -1,7 +1,0 @@
-interface:
-  display_name: "To Tasks"
-  short_description: "Create dependency-linked tracer-bullet tasks"
-  default_prompt: "Use $to-tasks to turn this conversation or specification into approved tracer-bullet task documents."
-
-policy:
-  allow_implicit_invocation: false
