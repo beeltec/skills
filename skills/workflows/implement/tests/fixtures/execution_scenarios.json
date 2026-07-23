@@ -1,0 +1,44 @@
+[
+  {
+    "name": "ready standalone item",
+    "selection": "WORK-001",
+    "state": "ready, ranked, unblocked, unclaimed",
+    "expected": "claim, implement, review, reconcile, merge to primary, mark done, remove rank, archive standalone"
+  },
+  {
+    "name": "dependency-linked Epic",
+    "selection": "EPIC-001",
+    "state": "WORK-001 blocks WORK-002 and both are ranked ready children",
+    "expected": "integrate and complete WORK-001 before WORK-002 becomes actionable; reuse one branch; archive Epic after both close"
+  },
+  {
+    "name": "blocked standalone item",
+    "selection": "WORK-002",
+    "state": "ready but blocked by nonterminal WORK-001",
+    "expected": "stop before branch creation and report WORK-001"
+  },
+  {
+    "name": "conflicting claim",
+    "selection": "WORK-003",
+    "state": "in-progress with another executor's live claim",
+    "expected": "stop before branch creation without overwriting the claim"
+  },
+  {
+    "name": "review failure",
+    "selection": "WORK-004",
+    "state": "Standards passes and Spec fails",
+    "expected": "fix, test, and repeat both review axes; do not integrate or complete while either axis fails"
+  },
+  {
+    "name": "wiki reconciliation required",
+    "selection": "WORK-005",
+    "state": "accepted implementation changes durable technology guidance",
+    "expected": "obtain exact owner approval, update canonical wiki and log, validate, and repeat review before integration"
+  },
+  {
+    "name": "completion and archival",
+    "selection": "WORK-006",
+    "state": "all branch-local gates pass",
+    "expected": "merge commit and post-merge checks establish primary acceptance before done, claim clearing, rank removal, and archival"
+  }
+]
