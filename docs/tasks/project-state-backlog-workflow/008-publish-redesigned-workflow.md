@@ -20,9 +20,9 @@ installation, setup, planning, review, and execution handoffs end to end.
 - [x] Remove `setup-wiki` and `to-tasks` catalog entries and symlinks without modifying unrelated dangling or user-owned artifacts.
 - [x] Search all active documentation, metadata, and skills for stale `$setup-wiki`, `$to-tasks`, `validate-wiki.mjs`, `wiki:check`, and current-workflow `docs/tasks` references.
 - [x] Permit old names only in explicit setup-upgrade compatibility code and fixtures, clearly labeled as legacy behavior.
-- [ ] Run installer and validator fixture suites, existing repository tests, and representative backlog, research, review, implement, and subagent smoke scenarios.
-- [ ] Run `npx skills add . --list` and verify the expected public names and descriptions are discoverable.
-- [ ] Check tracked skill symlink integrity and report the unrelated pre-existing dangling symlink separately rather than silently fixing it in this work.
+- [x] Run installer and validator fixture suites, existing repository tests, and representative backlog, research, review, implement, and subagent smoke scenarios.
+- [x] Run `npx skills add . --list` and verify the expected public names and descriptions are discoverable.
+- [x] Check tracked skill symlink integrity and report the unrelated pre-existing dangling symlink separately rather than silently fixing it in this work.
 - [ ] Perform a final diff review for accidental compatibility layers, duplicated authorities, stale status vocabulary, and disagreement between README and skill contracts.
 
 ## Acceptance criteria
