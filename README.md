@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-A collection of 15 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+17 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -14,136 +14,120 @@ Choose skills interactively, or install a specific skill:
 
 ```bash
 npx skills add beeltec/skills --skill glab
-npx skills add beeltec/skills --skill elementor-content
 ```
 
-Install globally with `--global`, or inspect the catalog without installing:
+Add `--global` to install globally, or `--list` to inspect the catalog without installing.
 
-```bash
-npx skills add beeltec/skills --global
-npx skills add beeltec/skills --list
+## Development Workflow Skills
+
+These skills form one connected delivery workflow built on two strictly separated project records: `docs/wiki` owns accepted current state on the primary branch, `docs/backlog` owns approved desired changes and their execution state. A proposal never enters the wiki, and completed work becomes accepted knowledge only after primary-branch acceptance and reconciliation.
+
+```mermaid
+flowchart TD
+    SP["setup-project<br/>scaffold wiki, backlog, validator,<br/>agent instructions"] --> D
+    D["discuss<br/>stress-test an idea<br/>one question at a time"]
+
+    D -->|epic-shaped outcome| TE
+    D -->|standalone desired change| TB
+    D -->|confirmed durable knowledge| TW
+
+    subgraph BACKLOG["docs/backlog — desired changes"]
+        BL["backlog<br/>intake, refine, rank<br/>(owner approval per transaction)"]
+        TE["to-epic<br/>plan one Epic to ready<br/>(one standing approval)"]
+        TB["to-backlog<br/>standalone items to ready<br/>(one standing approval)"]
+        RT["research-tech-stack<br/>version-matched evidence"]
+        BL <--> RT
+        TE <--> RT
+        TB <--> RT
+        RDY(["ready"])
+        BL -->|Definition of Ready<br/>+ owner approval| RDY
+        TE --> RDY
+        TB --> RDY
+    end
+
+    RDY --> IMP
+
+    subgraph EXEC["execution"]
+        IMP["implement /<br/>implement-with-subagents<br/>claim, branch, build, test"]
+        CR["code-review<br/>Standards axis + Spec axis"]
+        IMP --> CR
+        CR -->|findings| IMP
+    end
+
+    CR -->|both axes pass| ACC["primary-branch acceptance<br/>(merge commit + full suite)"]
+    ACC -->|durable knowledge changed| WK
+    ACC --> DONE(["done, archived"])
+
+    subgraph WIKI["docs/wiki — accepted current state"]
+        WK["wiki<br/>knowledge lifecycle"]
+        TW["to-wiki<br/>publish confirmed knowledge<br/>(one standing approval)"]
+        TW --> WK
+    end
+
+    WK -.->|baseline knowledge| D
+    WK -.->|standards authority| CR
 ```
 
-## Available Skills
+1. **setup-project** scaffolds both records, their templates and indexes, `scripts/validate-project.mjs`, and managed agent instructions.
+2. **discuss** resolves an idea against accepted knowledge, fully advisory — it never mutates records itself. It ends by recommending the matching command: `/to-epic` for a coordinated multi-item outcome, `/to-backlog` for standalone desired changes, `/to-wiki` for confirmed already-current knowledge and terminology. Execution always passes through backlog readiness — there is no direct-implementation route.
+3. **backlog** owns the record mechanics for Epics (`EPIC-NNN`) and work items (`WORK-NNN`) under per-transaction owner approval; **to-epic** plans one Epic and **to-backlog** plans confirmed standalone items end-to-end to ready under a single standing approval each; **research-tech-stack** attaches version-matched evidence where readiness needs it. Only approved, ready work is executable.
+4. **implement** (single session) or **implement-with-subagents** (one fresh subagent per item) executes ready work: claim, conventional branch, incremental commits, and a **code-review** loop on two independent axes — Standards (wiki and repository rules) and Spec (the work item's desired delta) — until both pass.
+5. After merge to the primary branch, durable knowledge changes are reconciled into the **wiki** with owner approval, and the terminal backlog record is archived with its history.
+
+Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments, chosen from the run's outcome — so each step hands off to the next.
+
+**setup-project**, **discuss**, **to-epic**, **to-backlog**, and **to-wiki** are user-invoked only (`disable-model-invocation: true`): invoking them is itself an owner decision — for the to-\* skills it grants the standing approval — so an agent may recommend the command but never run it on its own.
+
+### Greenfield and Brownfield
+
+- **Greenfield** (new application): run **setup-project** on the empty repository, then shape the product through `/discuss` — desired outcomes flow through `/to-epic` or `/to-backlog` to ready work, and the implement → code-review → acceptance loop grows wiki knowledge as features land.
+- **Brownfield** (existing application): run **setup-project** on the existing repository (it upgrades safely and never overwrites project-owned files). When it detects existing application code with an empty wiki, it automatically explores the codebase and back-fills a foundation overview of code-verified facts — stack, architecture, commands, conventions, terminology. Owner-judgment knowledge (intent, rationale, product language) is reported as candidates for `/discuss` and `/to-wiki`. Once the wiki reflects reality, desired changes follow the same delivery loop as greenfield.
+
+Both paths converge on the same cycle; they differ only in whether the wiki starts empty or must first be back-filled from the existing system.
 
 | Skill | Description |
 |-------|-------------|
-| **bump-version** | Versioning workflow — detect patch/minor/major bumps, update version files and changelog, then create a release commit |
-| **code-review** | Review changes in parallel against repository standards and their originating specification |
-| **codex-subagent** | From non-Codex harnesses such as Claude Code or OpenCode only, delegate implementation tasks to a workspace-scoped Codex CLI agent with configurable model and reasoning effort; never invoke from Codex itself |
-| **create-conventional-branch** | Create and switch to a purpose-driven branch that follows the Conventional Branch specification |
-| **discuss** | Stress-test a plan or decision through a guided, one-question-at-a-time discussion |
+| **setup-project** | Initialize or safely upgrade a project with wiki, backlog, validation, and agent instructions; back-fill a foundation wiki on brownfield repositories |
+| **discuss** | Stress-test an idea one question at a time, then route conclusions to wiki or backlog |
+| **wiki** | Manage the lifecycle of accepted project knowledge |
+| **to-wiki** | Publish the conversation's confirmed durable knowledge to the wiki under one standing approval |
+| **backlog** | Manage approved desired work from intake through refinement, ranking, execution, and archival |
+| **to-epic** | Plan one Epic end-to-end to ready under one standing approval |
+| **to-backlog** | Take the conversation's confirmed standalone work items to ready under one standing approval |
+| **research-tech-stack** | Attach current, version-matched evidence to a proposed backlog item before readiness |
+| **implement** | Execute a ready work item or Epic through claim, implementation, review, and completion |
+| **implement-with-subagents** | Orchestrate an Epic or work-item set with one fresh subagent per item |
+| **code-review** | Review changes against accepted standards and the work item's scope |
+
+## Standalone Skills
+
+Independent skills that work in any project:
+
+| Skill | Description |
+|-------|-------------|
+| **bump-version** | Detect patch/minor/major bumps, update version files and changelog, create a release commit |
+| **codex-subagent** | Delegate implementation tasks to a workspace-scoped Codex CLI agent |
+| **create-conventional-branch** | Create and switch to a branch following the Conventional Branch specification |
 | **elementor-content** | Create and edit Elementor JSON or WordPress database content via WP-CLI |
 | **glab** | Manage GitLab merge requests, issues, pipelines, releases, and repositories with `glab` |
-| **implement** | Execute an existing task plan with branching, commits, tests, and review |
-| **implement-with-subagents** | Execute a `$to-tasks` plan through one sequential subagent per task |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
-| **research-tech-stack** | Research current, version-matched technology guidance and persist it in the engineering wiki before implementation |
-| **setup-wiki** | Scaffold an Open Knowledge Format 0.1 project wiki with agreed domain terminology, validation, and agent instructions |
-| **to-tasks** | Convert a conversation or specification into linked implementation tasks |
-| **to-wiki** | Turn confirmed conclusions into durable, canonical project wiki knowledge |
-
-## Development Workflow
-
-The development skills form a connected path from an early idea to reviewed code. Each phase produces durable context for the next one, so agents do not have to reconstruct decisions, requirements, or technical constraints later.
-
-![Development workflow from project foundation through planning, implementation, and review](docs/assets/development-workflow.png)
-
-### 1. Establish the project foundation
-
-Start each project with **setup-wiki**. It creates the shared wiki structure, validation tooling, and agent instructions used throughout the rest of the workflow. This is a one-time project setup, not a step that must be repeated for every feature.
-
-### 2. Turn an idea into an implementation plan
-
-Use the planning skills in sequence:
-
-1. **discuss** explores the idea, challenges assumptions, and clarifies requirements and tradeoffs.
-2. **to-wiki** records the confirmed conclusions as durable project knowledge.
-3. **research-tech-stack** is optional. Use it when implementation depends on current, version-specific guidance that is not already documented in the project wiki.
-4. **to-tasks** converts the agreed specification and relevant technical guidance into bounded, linked tasks with an explicit execution order.
-
-By the end of this phase, the project wiki explains what was decided and why, while the task documents explain what needs to be built.
-
-### 3. Choose an implementation path
-
-Execute the task plan with one of two skills:
-
-- **implement** handles the plan in the current agent session, including branching, incremental commits, tests, documentation lookup, and review.
-- **implement-with-subagents** delegates each task to a fresh subagent in dependency order. Use it for a plan created by **to-tasks** when isolating task context is valuable.
-
-These are alternative execution paths, not consecutive steps.
-
-### 4. Verify the result
-
-Run **code-review** after implementation. It checks the changes independently along two axes: compliance with the repository's documented standards and fidelity to the originating specification. If the review finds problems, return to the implementation phase, address them, and review again.
-
-### Implementing with subagents
-
-Use **implement-with-subagents** after the planning phase has produced a complete
-task set. Once **to-tasks** has created the task documents:
-
-1. Note the path to the generated master document, usually
-   `docs/tasks/<feature-slug>/000-overview.md`.
-2. Clear the current session and start a fresh one so implementation does not
-   compete with the planning conversation for context.
-3. Select a small model for the orchestrator, such as GPT 5.4 Mini or Sonnet 5.
-4. Invoke **implement-with-subagents** and point it at the master document:
-
-   ```text
-   Use $implement-with-subagents with docs/tasks/<feature-slug>/000-overview.md
-   ```
-
-The orchestrator reads the master plan and delegates each task to a separate
-subagent, running only one subagent at a time in dependency order.
 
 ## Manual Installation
 
-If you prefer not to use the CLI, clone the repository and copy or symlink the desired directory:
+Clone the repository and copy or symlink the desired skill directory:
 
 ```bash
 git clone https://github.com/beeltec/skills.git
 cp -RL skills/.agents/skills/glab ~/.codex/skills/glab
 ```
 
-## Maintaining the Repository
+## Contributing
 
-Keep canonical skill directories categorized under `skills/`. Expose each skill through a relative symlink in the cross-client `.agents/skills/` directory:
-
-```text
-skills/
-├── planning/
-├── tools/
-├── utilities/
-└── workflows/
-
-skills/<category>/<skill-name>/
-├── SKILL.md            # Required metadata and core instructions
-├── agents/             # Optional client-specific UI metadata
-├── scripts/            # Optional executable helpers
-├── references/         # Optional documentation loaded on demand
-└── assets/             # Optional templates and static resources
-
-.agents/skills/<skill-name> -> ../../skills/<category>/<skill-name>
-```
-
-For each change:
-
-1. Choose the narrowest existing category; add a category only when several related skills need it.
-2. Keep the canonical directory name, symlink name, and frontmatter `name` identical and lowercase with hyphens.
-3. Create symlinks relative to `.agents/skills/` so they remain valid in every clone.
-4. Make `description` explain both capability and activation context.
-5. Keep `SKILL.md` focused and under 500 lines; move conditional detail into directly linked resource files.
-6. Confirm skills.sh discovery before publishing:
-
-   ```bash
-   npx skills add . --list
-   ```
-
-See the [Agent Skills specification](https://agentskills.io/specification), [creator best practices](https://agentskills.io/skill-creation/best-practices), and [skills CLI documentation](https://github.com/vercel-labs/skills#readme).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for repository layout and skill authoring guidelines.
 
 ## Acknowledgments
 
-The **discuss**, **code-review**, and **implement** skills are customized adaptations of skills created by [Matt Pocock](https://github.com/mattpocock) in [mattpocock/skills](https://github.com/mattpocock/skills), which is licensed under the MIT License. Thanks to Matt for creating and sharing the originals.
+The **discuss**, **code-review**, and **implement** skills are customized adaptations of skills created by [Matt Pocock](https://github.com/mattpocock) in [mattpocock/skills](https://github.com/mattpocock/skills) (MIT License).
 
 ## License
 

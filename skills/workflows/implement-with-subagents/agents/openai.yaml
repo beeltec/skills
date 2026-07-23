@@ -1,7 +1,7 @@
 interface:
   display_name: "Implement with Subagents"
-  short_description: "Run task plans through sequential subagents"
-  default_prompt: "Use $implement-with-subagents to execute the tasks in this master task document sequentially."
+  short_description: "Run backlog work through sequential subagents"
+  default_prompt: "Use $implement-with-subagents to execute this EPIC-NNN or explicit WORK-NNN set through one fresh, sequential subagent per work item."
 
 policy:
   allow_implicit_invocation: false

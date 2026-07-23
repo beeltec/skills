@@ -1,0 +1,7 @@
+interface:
+  display_name: "Backlog"
+  short_description: "Manage governed backlog lifecycle transactions"
+  default_prompt: "Use $backlog to propose and manage approved Epic, Story, Task, or Bug lifecycle changes in docs/backlog."
+
+policy:
+  allow_implicit_invocation: true

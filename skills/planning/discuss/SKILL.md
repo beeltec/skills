@@ -1,31 +1,39 @@
 ---
 name: discuss
-description: Discuss with the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'discuss' trigger phrases.
+description: Stress-test a plan, decision, or idea one question at a time, using accepted project knowledge when available and routing confirmed desired changes to the backlog. Use when the user wants to discuss or challenge their thinking.
+disable-model-invocation: true
 ---
 
-Before interviewing read indexes and concepts in `docs/wiki` because you have to know the current project state before discussing.
+# Discuss
 
-Stay on the user's current Git branch. Never create or switch branches as part of discussion, even when inspecting the repository informs the decisions.
+Before interviewing, resolve the project root and read applicable repository instructions. When `docs/wiki` exists, read its root index, maintenance rules, ubiquitous language, nearest relevant indexes, and related concepts so accepted current state informs the discussion. When `docs/backlog` exists, also read its root index and any records related to the topic — read-only — so existing proposed work, relationships, and rank inform the questioning and the handoff can refine an existing record instead of proposing a duplicate. Without a wiki, continue without inventing project facts and recommend `$setup-project` if the user wants to persist project state.
 
-Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+Stay on the user's current Git branch — never create, switch, merge, or delete branches, even when inspecting the repository.
 
-Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
+Interview the user relentlessly about every aspect until shared understanding is reached, walking each branch of the decision tree and resolving dependencies between decisions one by one. Provide a recommended answer for each question.
 
-Format every question exactly as:
+Ask exactly one question at a time and wait for the answer. Format every question exactly as:
 
 ```text
-Question X / (~Y):
+Question X / ~Y:
 Question
 ```
 
-Start `X` at 1 and increment it. Use `Y` for the estimated total, including the current question; revise it as the discussion evolves. Use no other count format.
+Start `X` at 1 and increment; `Y` is the estimated total including the current question, revised as the discussion evolves. Use no other count format.
 
-If available use the ask_user_question tool so the user can select an answer from a list of multiple choices. Make sure the first answer is always the one recommended by you and has "(recommended)" as the end of the answer.
+If available, use the ask_user_question tool with multiple-choice answers; the first option is always your recommendation, ending with "(recommended)". If available, use web search to research the tools and frameworks in question and their best practices before asking.
 
-If available use web search to research documentation about tools, frameworks, etc. in question as well as find best practices and recommendations on them before asking me.
+Look up any *fact* discoverable from the environment (filesystem, tools) instead of asking. *Decisions* belong to the user — put each one to them and wait.
 
-If a *fact* can be found by exploring the environment (filesystem, tools, etc.), look it up rather than asking me. The *decisions*, though, are mine — put each one to me and wait for my answer.
+Track terminology. When the user uses a domain term absent from the ubiquitous language, an existing term with a different meaning, or several words for one concept, raise a numbered question: confirm the meaning, propose a definition, and ask whether to add or correct it in the ubiquitous language. Collect confirmed terms for the handoff; without a wiki, note them for `$setup-project`.
 
-Do not act on it until I confirm we have reached a shared understanding.
+Discuss is fully advisory: it reads and asks but never invokes a mutating skill or edits project records. After the user confirms shared understanding, classify each conclusion and recommend the matching user-invoked standing-approval command:
 
-Ask the user if the shared understanding should be documented using /to-wiki (this is the logical next step). Do so if the user accepts.
+- A coordinated outcome that should form an Epic — multiple coherent, independently valuable work items serving one goal — routes to `/to-epic`, which plans it end-to-end (Epic intake, research decision, child intake, refinement to ready) without further approval pauses.
+- Other unimplemented desired state (new capability, behavior change, fix, migration) routes to `/to-backlog`, which intakes the confirmed standalone items and refines each to ready — including refining an existing `proposed` record found during preflight instead of proposing a duplicate. Never recommend publishing a target specification to the wiki.
+- A correction, clarification, or durable conclusion already describing accepted current primary-branch state routes to `/to-wiki` — never merely because a proposal is well specified or agreed as desirable.
+- Confirmed new or corrected terminology also routes to `/to-wiki`, even when the term arose from an unimplemented proposal — its meaning is durable project language regardless of whether the proposal ships.
+- A conversation may contain several: route the desired delta to `/to-epic` or `/to-backlog` and only independently current, durable facts to `/to-wiki`, without duplicating the proposal.
+- Unresolved decisions stay in the conversation or the proposed backlog record — never presented as accepted wiki knowledge or as ready work.
+
+Ask one final handoff question in the same numbered format, then end the turn with each accepted command as one complete copy-pasteable prompt — `/to-epic`, `/to-backlog`, or `/to-wiki` followed by the confirmed conclusions it should process — never invoke them or fall back to invoking `$backlog` or `$wiki` yourself.

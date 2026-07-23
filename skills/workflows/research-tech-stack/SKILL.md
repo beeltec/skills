@@ -1,57 +1,43 @@
 ---
 name: research-tech-stack
-description: Research current, version-matched documentation, recommendations, and best practices for technologies affected by planned work, then persist curated project-relevant guidance under docs/wiki/engineering/technologies. Use only when the user explicitly requests this optional planning step before creating tasks.
+description: Research version-matched technical guidance, best practices, and recommended coding guidelines for a proposed Epic or work item and attach proposal-specific evidence, recommendations, deviations, and uncertainty to its setup-project backlog record before readiness. Use only when the user explicitly requests research for identified proposed backlog work.
 ---
 
 # Research Tech Stack
 
-Create current engineering knowledge before implementation tasks are derived. This is an optional planning step immediately before `$to-tasks`. Research only technologies affected by the intended work, and turn web evidence into concise, project-relevant wiki guidance rather than copying documentation or retaining search transcripts.
+Resolve technical uncertainty for one identified proposed backlog record before readiness. Proposal-specific research lives with the desired change in `docs/backlog`; `docs/wiki` remains the authority for accepted current guidance.
 
-Stay on the user's current Git branch. Never create or switch branches while researching or updating technology guidance, including when the current branch is not the primary branch.
+Stay on the user's current Git branch — never create, switch, merge, or delete branches, even off the primary branch.
 
 ## Preconditions
 
 1. Resolve the project root and read applicable repository instructions.
-2. Require `docs/wiki/index.md` and `docs/wiki/maintenance.md`. If either is missing, stop and direct the user to run `$setup-wiki` first.
-3. Read the wiki root, maintenance rules, `engineering/index.md`, `engineering/technologies/index.md` when present, and relevant technology pages before researching.
+2. Require `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, the installed backlog templates, and `scripts/validate-project.mjs`; otherwise stop and direct the user to `$setup-project`.
+3. Run `node scripts/validate-project.mjs`. On an invalid baseline, report and stop unless the user explicitly asks to repair that state.
+4. Require one named `EPIC-NNN` or `WORK-NNN` with `status: proposed`. Without one, offer `$backlog` intake first. Reject research as a pre-readiness mutation when the record is already `ready`, `in-progress`, or terminal; never silently reopen it.
+5. Read backlog maintenance, the matching type template, the complete named record (delta, parent and child scope, relationships) and directly related records; the wiki root, maintenance rules, ubiquitous language, nearest indexes, and accepted technology or architecture concepts.
 
-## Workflow
+## Research Workflow
 
-1. Inspect the planned work and repository evidence such as manifests, lockfiles, runtime files, build configuration, source imports, and existing wiki pages. Inventory only the languages, frameworks, runtimes, libraries, and major tools whose use or structure the implementation could affect.
-2. Resolve installed or constrained versions from the repository. Do not infer a version from general familiarity when project evidence can establish it.
-3. For each affected technology, decide whether its canonical page is current:
-   - Research immediately when guidance is absent, materially uncertain, or does not cover the project's version.
-   - Treat fast-moving frameworks and tools as stale after 30 days.
-   - Treat stable technologies as stale after 90 days.
-   - Re-check security-sensitive guidance for every applicable implementation.
-   - Re-check immediately when a known release or source change may invalidate the existing guidance.
-4. Search the web for every technology that requires research. Prefer sources in this order:
-   1. version-matched official documentation, specifications, and repositories;
-   2. guidance from the technology's maintainers;
-   3. reputable secondary sources for practical gaps or comparisons.
-5. Open and verify the sources used. Confirm version applicability, publication or update context when available, and whether a statement is normative, recommended, or merely one viable convention. Search results alone are not evidence.
-6. When authoritative sources are unavailable or contradictory, use the best reputable secondary guidance available. Label it as lower-authority and preserve the uncertainty; never present it as an official recommendation.
-7. Synthesize only guidance relevant to this project and planned work. Include file and folder structure when applicable. Do not copy long source passages, store search queries, or preserve a research transcript.
-8. Write one canonical page per technology under `docs/wiki/engineering/technologies/<technology>.md`, using [the technology page template](assets/technology-guidance.md). Update an existing page instead of creating overlapping guidance.
-9. If current external guidance conflicts with established repository conventions, preserve the project structure. Record the recommendation, project deviation, and known rationale. Do not expand the implementation into a migration without an explicit decision.
-10. Update `docs/wiki/engineering/technologies/index.md`, every other affected nearest index, and `docs/wiki/log.md`. Keep one canonical statement of each rule and link to it elsewhere.
-11. Run `node scripts/validate-wiki.mjs` or the repository's documented wiki check. Fix errors, review warnings, and inspect the final diff before declaring the gate complete.
+1. Inspect repository evidence bearing on the proposed delta: manifests, lockfiles, runtime files, build and deployment configuration, source imports, tests. Record exact installed or constrained versions and file paths — never infer versions from familiarity.
+2. Inventory only technologies whose use or structure the proposed change could affect.
+3. For each, decide whether external research is needed: research when accepted guidance is absent, materially uncertain, or not version-applicable. Treat fast-moving evidence as stale after 30 days, stable after 90. Re-check security-sensitive guidance for every applicable proposal regardless of prior review, and re-check immediately when a known release, source change, or repository deviation may invalidate prior evidence.
+4. Verify sources in order: version-matched official documentation, specifications, and repositories; maintainer guidance; then reputable secondary sources for remaining gaps. Open every source used — snippets are not evidence.
+5. Where applicable, also research current best practices and recommended coding guidelines for each affected technology — official style guides, idiomatic usage and configuration patterns, security recommendations, and maintainer-recommended project conventions — using the same source order and version-matching rules. Skip only when inspected evidence shows the proposed delta touches no code or configuration the guidelines would govern. Record conclusions self-contained enough to implement from without reopening sources; links are provenance, not content.
+6. Distinguish normative requirements, recommendations, and optional conventions. When sources are missing or contradictory, use the best available evidence, label its authority, and preserve the uncertainty.
+7. Compare external guidance with accepted wiki knowledge and actual repository conventions. Do not silently replace current practice or expand the proposal into a migration; record each relevant project deviation and known rationale with the record.
+8. Draft the record's `## Research` section using [the proposal research template](assets/backlog-research.md): affected delta, repository and version evidence, concise findings and recommendations including applicable best practices and coding guidelines, unresolved uncertainty, project deviations, labeled source links. Do not create or update a wiki technology page during planning.
+9. Set executable work's frontmatter research state: `complete` only when all applicable version-specific and security-sensitive questions are resolved with sufficient conclusions and sources; `not-needed` only when inspected evidence establishes no external research applies, with that reasoning in the section; `pending` whenever a source is unavailable, version applicability is ambiguous, sources conflict, a security-sensitive question is open, or more investigation is required.
+10. For Epic research, keep the full result in the Epic's `## Research`. Mark every affected proposed child `research: pending` and identify the inherited question in its Research section. Epic evidence may be linked rather than copied, but each child must resolve and record its applicable conclusions before `ready`.
+11. Present findings, proposed edits, resulting research state, and readiness effect to the project owner. Apply only the exact transaction they explicitly approve.
 
-## Page Contract
+## Readiness And Persistence
 
-Every technology page must record:
+- Never change a record from `proposed` to `ready` here — `$backlog` owns that separately approved transition.
+- `pending` research is a hard readiness failure. Never relabel uncertainty as `complete`; the validator requires `complete` or `not-needed` before `ready`.
+- Proposal-specific sources, findings, recommendations, uncertainty, and deviations stay in the backlog record — evidence for a desired delta, not accepted guidance.
+- During post-acceptance reconciliation, promote only conclusions that became durable accepted guidance to the owning wiki concept via `$wiki` under its approval rules, summarizing rather than copying; retain the backlog research as history.
 
-- the technology and applicable version range;
-- where and how the project uses it;
-- current project-relevant recommendations;
-- recommended file and folder structure when relevant;
-- deliberate project deviations and their rationale;
-- source links labeled `official`, `maintainer`, or `secondary`;
-- `last_reviewed` and a `fast-moving`, `stable`, or `security-sensitive` freshness tier;
-- unresolved uncertainty, including lower-authority fallbacks.
+After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, sources, research state, unresolved readiness blockers, commit hash, and validation result.
 
-Store all web-fetched technology guidance in `engineering/technologies/`, not in `research/`. Other architecture, engineering, or operational pages may link to these canonical pages for their external technical basis.
-
-## Completion
-
-When this optional step is invoked, finish it before running `$to-tasks`: every affected technology must either have current, version-applicable guidance or be researched, persisted, and wiki-validated. Report which pages were reused and which were updated.
+End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes the record's planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it.

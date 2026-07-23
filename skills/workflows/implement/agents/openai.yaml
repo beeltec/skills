@@ -1,7 +1,7 @@
 interface:
   display_name: "Implement"
-  short_description: "Implement task plans from start to finish"
-  default_prompt: "Use $implement to implement the tasks in this work plan from start to finish."
+  short_description: "Execute ready backlog work through acceptance"
+  default_prompt: "Use $implement to execute this ready WORK-NNN or EPIC-NNN through claim, review, primary-branch acceptance, completion, and archival."
 
 policy:
   allow_implicit_invocation: true

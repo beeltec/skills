@@ -1,86 +1,90 @@
 ---
 name: code-review
-description: Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating task asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to "review since X".
+description: Review changes since a fixed point on two independent axes — Standards (accepted wiki and repository rules) and Spec (the selected backlog work item's desired delta and acceptance criteria) — via parallel sub-agents reported separately. Use for backlog-backed branch, PR, or work-in-progress reviews.
 ---
 
-Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
+# Code Review
 
-- **Standards** — does the code conform to this repo's documented coding standards?
-- **Spec** — does the code faithfully implement the originating task / wiki entry?
+Review the diff between `HEAD` and a user-supplied fixed point against two authorities, run as **parallel sub-agents** so they do not pollute each other's context, and report them separately:
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
+- **Standards** — conformance to accepted wiki engineering/architecture guidance and repository standards.
+- **Spec** — implementation of the selected backlog work item's desired delta and acceptance criteria within its Epic context.
+
+The wiki is accepted current state; the backlog is desired change and execution state. Neither authority replaces the other.
 
 ## Process
 
 ### 1. Pin the fixed point
 
-Whatever the user said is the fixed point — a commit SHA, branch name, tag, `main`, `HEAD~5`, etc. If they didn't specify one, ask for it.
+Use whatever the user gave (SHA, branch, tag, `main`, `HEAD~5`); ask if unspecified. Resolve before authority discovery with `git rev-parse --verify <fixed-point>^{commit}` and `git merge-base <fixed-point> HEAD`; stop with an actionable error if either fails. Capture once:
 
-Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
+- diff: `git diff <fixed-point>...HEAD` (three-dot, against the merge-base);
+- commits: `git log <fixed-point>..HEAD --oneline`;
+- changed paths: `git diff --name-only <fixed-point>...HEAD`.
 
-Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here — not inside two parallel sub-agents.
+If the diff is empty, report that and stop. Bad refs and empty diffs are handled here, never inside parallel reviews.
 
-### 2. Identify the spec source
+### 2. Read project governance
 
-Look for the originating spec, in this order:
+Resolve the repository root and read all applicable `AGENTS.md`, `CLAUDE.md`, and nested instructions. When the setup-project scaffold exists, also read `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, and the nearest relevant wiki and backlog indexes. Use project-local maintenance rules when stricter. Do not mutate the wiki, backlog, claims, or statuses during review.
 
-1. A path the user passed as an argument.
-2. A wiki entry matching the branch name or feature.
-3. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
+### 3. Select the backlog work item
 
-### 3. Identify the standards sources
+Select one executable `WORK-NNN` record as the Spec authority. Never infer desired behavior from a feature-named wiki page.
 
-Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md` or a wiki entry.
+1. A user-supplied `WORK-NNN`, backlog path, or complete work-item contents wins over every discovered candidate. If an explicit Epic has several executable children, ask which one.
+2. Otherwise inspect active records under `docs/backlog/epics/` and `docs/backlog/standalone/` (excluding templates, archived, and terminal records). Candidates need a live unexpired execution claim or an explicit branch link — the branch name or reviewed commit messages name the work ID, or the item's Execution/Provenance section names the exact current branch.
+3. Use a discovered item only when the evidence identifies exactly one candidate; ignore expired claims. With several, list each with its evidence and ask. With none, ask for the ID or path — never guess from similar titles, changed paths, or wiki pages.
 
-On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below — a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
+If no backlog item exists for the change, ask the user to confirm no specification is available; only after that explicit confirmation skip the Spec sub-agent and report `no spec available`. Missing or ambiguous work-item context is a visible review outcome, not a reason to pick a likely candidate.
 
-- **The repo overrides.** A documented repo standard always wins; where it endorses something the baseline would flag, suppress the smell.
-- **Always a judgement call.** Each smell is a labelled heuristic ("possible Feature Envy"), never a hard violation — and, like any standard here, skip anything tooling already enforces.
+### 4. Build the authority packet
 
-Each smell reads *what it is* → *how to fix*; match it against the diff:
+Read every authority completely before starting either sub-agent:
 
-- **Mysterious Name** — a function, variable, or type whose name doesn't reveal what it does or holds. → rename it; if no honest name comes, the design's murky.
-- **Duplicated Code** — the same logic shape appears in more than one hunk or file in the change. → extract the shared shape, call it from both.
-- **Feature Envy** — a method that reaches into another object's data more than its own. → move the method onto the data it envies.
-- **Data Clumps** — the same few fields or params keep travelling together (a type wanting to be born). → bundle them into one type, pass that.
-- **Primitive Obsession** — a primitive or string standing in for a domain concept that deserves its own type. → give the concept its own small type.
-- **Repeated Switches** — the same `switch`/`if`-cascade on the same type recurs across the change. → replace with polymorphism, or one map both sites share.
-- **Shotgun Surgery** — one logical change forces scattered edits across many files in the diff. → gather what changes together into one module.
-- **Divergent Change** — one file or module is edited for several unrelated reasons. → split so each module changes for one reason.
-- **Speculative Generality** — abstraction, parameters, or hooks added for needs the spec doesn't have. → delete it; inline back until a real need shows.
-- **Message Chains** — long `a.b().c().d()` navigation the caller shouldn't depend on. → hide the walk behind one method on the first object.
-- **Middle Man** — a class or function that mostly just delegates onward. → cut it, call the real target direct.
-- **Refused Bequest** — a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
+- the selected work item: outcome/delta, acceptance criteria, relationships, wiki references, Research, Execution, subtasks;
+- its complete parent Epic when `parent` is not `none`: outcome, criteria, scope, exclusions, constraints, wiki references, research, execution context;
+- every linked current-state wiki concept relevant to the change (via `wiki_refs` or the Epic) plus the nearest indexes needed for ownership;
+- proposal-specific research in the item or Epic and directly linked local evidence;
+- accepted guidance under `docs/wiki/engineering/` and `docs/wiki/architecture/`, and repository standard sources (instructions, `CONTRIBUTING.md`, `CODING_STANDARDS.md`).
 
-### 4. Spawn both sub-agents in parallel
+Record each source path and role. Current-state wiki facts describe the baseline and constraints; they cannot satisfy or erase a missing desired delta. The child item's delta, criteria, and exclusions are primary Spec authority; Epic context never expands or replaces child scope. Backlog scope never waives a repository or accepted wiki standard.
 
-Send a single message with two `Agent` tool calls. Use the `general-purpose` subagent for both.
+### 5. Prepare the Standards authority
 
-**Standards sub-agent prompt** — include:
+Use all applicable accepted engineering/architecture wiki guidance and repository standards from step 4. Product current-state concepts and backlog requirements are context, not Standards rules.
 
-- The full diff command and commit list.
-- The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full — the sub-agent has no other access to it.
-- The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls — documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+On top of documented rules, Standards always carries this **smell baseline** — a fixed set of Fowler code smells (_Refactoring_, ch.3) applying even when the repo documents nothing. Two binding rules: **a documented repo standard always overrides** (suppress a smell it endorses), and **every smell is a labelled judgement-call heuristic** ("possible Feature Envy"), never a hard violation; skip anything tooling already enforces.
 
-**Spec sub-agent prompt** — include:
+- **Mysterious Name** — name doesn't reveal purpose → rename; if no honest name comes, the design's murky.
+- **Duplicated Code** — same logic shape in multiple hunks/files → extract and share.
+- **Feature Envy** — method uses another object's data more than its own → move it to that data.
+- **Data Clumps** — the same fields/params travel together → bundle into one type.
+- **Primitive Obsession** — primitive standing in for a domain concept → give it a small type.
+- **Repeated Switches** — same `switch`/`if`-cascade on the same type recurs → polymorphism or one shared map.
+- **Shotgun Surgery** — one logical change scattered across many files → gather into one module.
+- **Divergent Change** — one module edited for unrelated reasons → split per reason.
+- **Speculative Generality** — abstraction for needs the spec doesn't have → delete/inline until a real need shows.
+- **Message Chains** — long `a.b().c().d()` navigation → hide behind one method on the first object.
+- **Middle Man** — mostly delegates onward → cut it, call the target directly.
+- **Refused Bequest** — implementer ignores most of what it inherits → composition over inheritance.
 
-- The diff command and commit list.
-- The path or fetched contents of the spec.
-- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
+### 6. Spawn both sub-agents in parallel
 
-If the spec is missing, skip the Spec sub-agent and note this in the final report.
+Send one message with two `Agent` calls, both `general-purpose`.
 
-### 5. Aggregate
+**Standards sub-agent prompt:** the diff command and commit list; the Standards sources with paths and roles; the full smell baseline pasted in (the sub-agent has no other access to it); and the brief: "Review only the diff. Report every documented-standard violation by severity and file/hunk, citing the source path and exact rule. Separately report possible baseline smells by name, quoting the hunk. Documented rules are hard authority; smells are judgement-call heuristics that an explicit documented rule overrides. Do not use backlog scope to waive a standard. Skip checks tooling already enforces. Under 400 words."
 
-Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings — the two axes are deliberately separate (see _Why two axes_).
+**Spec sub-agent prompt:** the diff command and commit list; the complete work item as primary authority, complete parent Epic as context, linked wiki concepts, and relevant proposal research, each labelled by role; and the brief: "Review only the diff. Report by severity: (a) missing or partial desired behavior or acceptance requirements; (b) incorrect implemented behavior; (c) scope creep. Cite the work-item path and exact requirement for every finding. Cite Epic constraints when relevant, but never expand or replace child scope with Epic scope. Use linked wiki facts only as baseline and constraints; never let existing behavior mask a missing delta. Do not treat a backlog request as permission to violate repository standards; leave that conflict visible for the Standards axis. Under 400 words."
 
-End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes — that's the reranking the separation exists to prevent.
+If the user explicitly confirmed no specification exists, skip the Spec sub-agent and note it in the report. Otherwise missing or ambiguous context stops the review for user input before any sub-agent starts.
+
+### 7. Aggregate
+
+Present the two reports under `## Standards` and `## Spec`, verbatim or lightly cleaned. Keep severity labels and counts independent; never merge or rerank findings across axes. End with a one-line summary of each axis's total, severity breakdown, and worst issue. Do not pick a single winner.
+
+Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance. Recommend only — never invoke it.
 
 ## Why two axes
 
-A change can pass one axis and fail the other:
-
-- Code that follows every standard but implements the wrong thing → **Standards pass, Spec fail.**
-- Code that does exactly what the issue asked but breaks the project's conventions → **Spec pass, Standards fail.**
-
-Reporting them separately stops one axis from masking the other.
+Code can follow every standard yet implement the wrong delta (Standards pass, Spec fail), or implement the item exactly while breaking a convention (Spec pass, Standards fail). Separate reporting stops one axis from masking the other.
