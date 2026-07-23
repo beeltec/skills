@@ -1,7 +1,7 @@
 interface:
   display_name: "To Wiki"
-  short_description: "Turn agreed conclusions into durable wiki knowledge"
-  default_prompt: "Use $to-wiki to document the agreed conclusions from this conversation in the project wiki."
+  short_description: "Document accepted current project knowledge"
+  default_prompt: "Use $to-wiki to preserve only conclusions that already describe accepted current project state, rejecting proposed desired changes."
 
 policy:
   allow_implicit_invocation: true

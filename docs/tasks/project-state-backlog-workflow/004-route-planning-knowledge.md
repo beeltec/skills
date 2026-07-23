@@ -16,8 +16,8 @@ readiness.
 - [x] Update `discuss` to read the project wiki when present and preserve its one-question-at-a-time decision process.
 - [x] Route a confirmed desired change to the `backlog` skill and route only already-current durable conclusions to `to-wiki`.
 - [x] Prevent `discuss` from recommending unimplemented specifications for wiki publication.
-- [ ] Update `to-wiki` to require `setup-project`, reject proposed or unimplemented desired-state content, and keep active backlog state out of OKF concepts.
-- [ ] Update `to-wiki` to use the consolidated project validator and to link accepted current knowledge to relevant backlog history only when that improves traceability without duplicating it.
+- [x] Update `to-wiki` to require `setup-project`, reject proposed or unimplemented desired-state content, and keep active backlog state out of OKF concepts.
+- [x] Update `to-wiki` to use the consolidated project validator and to link accepted current knowledge to relevant backlog history only when that improves traceability without duplicating it.
 - [ ] Adapt `research-tech-stack` to require a proposed Epic or work item and inspect its desired delta, repository evidence, and current wiki context.
 - [ ] Store proposal-specific sources, version findings, recommendations, uncertainty, and project deviations with the backlog record rather than under wiki technology guidance.
 - [ ] Make unresolved version-specific or security-sensitive research prevent the work item from satisfying the Definition of Ready.
