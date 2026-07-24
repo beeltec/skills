@@ -41,17 +41,14 @@ The planners run the same record mechanics as **backlog**, but under one standin
 
 ```mermaid
 flowchart TD
-    TE["to-epic<br/>plan one Epic to ready<br/>(one standing approval)"]
-    TB["to-backlog<br/>standalone items to ready<br/>(one standing approval)"]
-    BL["backlog<br/>intake, refine, rank<br/>(owner approval per transaction)"]
-    RT["research-tech-stack<br/>version-matched evidence"]
-    RDY(["ready"])
-    TE <-->|owner research decision| RT
-    TB <-->|owner research decision| RT
-    BL <--> RT
-    TE --> RDY
-    TB --> RDY
-    BL -->|Definition of Ready<br/>+ owner approval| RDY
+    TE["to-epic<br/>plan one Epic<br/>(one standing approval)"] --> DEC
+    TB["to-backlog<br/>plan standalone items<br/>(one standing approval)"] --> DEC
+    BL["backlog<br/>intake, refine, rank<br/>(owner approval per transaction)"] --> DEC
+    DEC{"owner decision:<br/>research needed?"}
+    DEC -->|yes| RT["research-tech-stack<br/>attach version-matched evidence"]
+    DEC -->|no| RDY
+    RT --> RDY
+    RDY(["ready<br/>Definition of Ready met<br/>+ owner approval"])
     RDY --> IMP["/implement"]
 ```
 
