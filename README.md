@@ -22,52 +22,66 @@ Add `--global` to install globally, or `--list` to inspect the catalog without i
 
 These skills form one connected delivery workflow built on two strictly separated project records: `docs/wiki` owns accepted current state on the primary branch, `docs/backlog` owns approved desired changes and their execution state. A proposal never enters the wiki, and completed work becomes accepted knowledge only after primary-branch acceptance and reconciliation.
 
+### Shape an idea and route it
+
+**discuss** stress-tests an idea against accepted knowledge, then recommends exactly one command per confirmed conclusion:
+
 ```mermaid
 flowchart TD
-    SP["setup-project<br/>scaffold wiki, backlog, validator,<br/>agent instructions"]
+    SP["setup-project<br/>scaffold wiki, backlog, validator,<br/>agent instructions"] --> D
     D["discuss<br/>advisory — stress-test an idea<br/>one question at a time"]
+    D -->|coordinated multi-item outcome| TE["/to-epic"]
+    D -->|standalone desired change| TB["/to-backlog"]
+    D -->|current-state knowledge<br/>+ confirmed terminology| TW["/to-wiki"]
+```
 
-    subgraph BACKLOG["docs/backlog — desired changes"]
-        TE["to-epic<br/>plan one Epic to ready<br/>(one standing approval)"]
-        TB["to-backlog<br/>standalone items to ready<br/>(one standing approval)"]
-        BL["backlog<br/>intake, refine, rank<br/>(owner approval per transaction)"]
-        RT["research-tech-stack<br/>version-matched evidence"]
-        RDY(["ready"])
-        TE <-->|owner research decision| RT
-        TB <-->|owner research decision| RT
-        BL <--> RT
-        TE --> RDY
-        TB --> RDY
-        BL -->|Definition of Ready<br/>+ owner approval| RDY
-    end
+### Plan desired changes to ready — `docs/backlog`
 
-    subgraph EXEC["execution"]
-        IMP["implement /<br/>implement-with-subagents<br/>claim, branch, build, test"]
-        CR["code-review<br/>Standards axis + Spec axis"]
-        IMP --> CR
-        CR -->|findings| IMP
-    end
+The planners run the same record mechanics as **backlog**, but under one standing approval each, pausing only for the owner's research decision:
 
-    subgraph WIKI["docs/wiki — accepted current state"]
-        TW["to-wiki<br/>publish confirmed knowledge<br/>(one standing approval)"]
-        WK["wiki<br/>knowledge lifecycle"]
-        TW -->|verified transactions| WK
-    end
+```mermaid
+flowchart TD
+    TE["to-epic<br/>plan one Epic to ready<br/>(one standing approval)"]
+    TB["to-backlog<br/>standalone items to ready<br/>(one standing approval)"]
+    BL["backlog<br/>intake, refine, rank<br/>(owner approval per transaction)"]
+    RT["research-tech-stack<br/>version-matched evidence"]
+    RDY(["ready"])
+    TE <-->|owner research decision| RT
+    TB <-->|owner research decision| RT
+    BL <--> RT
+    TE --> RDY
+    TB --> RDY
+    BL -->|Definition of Ready<br/>+ owner approval| RDY
+    RDY --> IMP["/implement"]
+```
 
-    SP --> D
-    SP -.->|brownfield back-fill| WK
-    D -->|coordinated multi-item outcome| TE
-    D -->|standalone desired change| TB
-    D -->|current-state knowledge<br/>+ confirmed terminology| TW
-    TW -.->|rejected desired-change<br/>candidates| TB
+### Execute and accept
 
-    RDY --> IMP
+Ready work is executed on a conventional branch and reviewed until both axes pass; acceptance happens only on the primary branch:
+
+```mermaid
+flowchart TD
+    RDY(["ready work item"]) --> IMP
+    IMP["implement /<br/>implement-with-subagents<br/>claim, branch, build, test"] --> CR
+    CR["code-review<br/>Standards axis + Spec axis"] -->|findings| IMP
     CR -->|both axes pass| ACC["primary-branch acceptance<br/>(merge commit + full suite)"]
     ACC --> DONE(["done, archived"])
-    ACC -->|durable knowledge changed| WK
+    ACC -->|durable knowledge changed| WK["wiki<br/>apply approved reconciliation"]
+```
 
-    WK -.->|baseline knowledge| D
-    WK -.->|standards authority| CR
+### Grow accepted knowledge — `docs/wiki`
+
+The wiki is fed from three directions and feeds back into discussion and review:
+
+```mermaid
+flowchart TD
+    TW["to-wiki<br/>publish confirmed knowledge<br/>(one standing approval)"] -->|verified transactions| WK
+    SP["setup-project"] -.->|brownfield back-fill| WK
+    ACC["primary-branch acceptance"] -->|durable knowledge changed| WK
+    WK["wiki<br/>knowledge lifecycle"]
+    TW -.->|rejected desired-change candidates| TB["/to-backlog"]
+    WK -.->|baseline knowledge| D["discuss"]
+    WK -.->|standards authority| CR["code-review"]
 ```
 
 1. **setup-project** scaffolds both records, their templates and indexes, `scripts/validate-project.mjs`, managed agent instructions, and compatible CI integration. On a brownfield repository it back-fills a foundation wiki from code-verified facts (see below).
