@@ -9,7 +9,14 @@ const wikiRoot = path.join(projectRoot, 'docs/wiki');
 const backlogRoot = path.join(projectRoot, 'docs/backlog');
 const wikiStatuses = new Set(['draft', 'active', 'deprecated', 'superseded']);
 const adrIdPattern = /^ADR-\d{3,}$/;
-const adrSections = ['Context', 'Decision', 'Alternatives considered', 'Consequences', 'Affected concepts', 'Provenance'];
+const adrSections = [
+  'Context',
+  'Decision',
+  'Alternatives considered',
+  'Consequences',
+  'Affected concepts',
+  'Provenance',
+];
 const backlogStatuses = new Set(['proposed', 'ready', 'in-progress', 'done', 'cancelled']);
 const workTypes = new Set(['story', 'task', 'bug']);
 const relationshipFields = ['blocks', 'clones', 'duplicates', 'relates_to', 'causes'];
@@ -54,13 +61,14 @@ const inlineList = (frontmatter, key) => {
   if (value === null || !/^\[.*\]$/.test(value)) return null;
   const inner = value.slice(1, -1).trim();
   if (!inner) return [];
-  return inner.split(',').map((item) => unquote(item)).filter(Boolean);
+  return inner
+    .split(',')
+    .map((item) => unquote(item))
+    .filter(Boolean);
 };
 
 const markdownTargets = (content) =>
-  [...content.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)]
-    .map((match) => match[1]?.trim())
-    .filter(Boolean);
+  [...content.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)].map((match) => match[1]?.trim()).filter(Boolean);
 
 const resolveLocalTarget = (sourceFile, rawTarget, bundleRoot) => {
   const withoutTitle = rawTarget.replace(/\s+["'][^"']*["']$/, '');
@@ -136,7 +144,8 @@ const validateWiki = async () => {
     return { errors: ['docs/wiki does not exist'], warnings, count: 0, adrIds: new Set() };
   }
   for (const relative of required) {
-    if (!(await exists(path.join(wikiRoot, relative)))) errors.push(`docs/wiki/${relative}: required wiki root is missing`);
+    if (!(await exists(path.join(wikiRoot, relative))))
+      errors.push(`docs/wiki/${relative}: required wiki root is missing`);
   }
 
   const files = (await walkMarkdown(wikiRoot)).sort();
@@ -152,7 +161,8 @@ const validateWiki = async () => {
 
     if (reservedNames.has(basename)) {
       const rootIndex = file === path.join(wikiRoot, 'index.md');
-      if (parsed && !rootIndex) errors.push(`${relativeFile}: reserved files outside the root index cannot have frontmatter`);
+      if (parsed && !rootIndex)
+        errors.push(`${relativeFile}: reserved files outside the root index cannot have frontmatter`);
       if (rootIndex && parsed) {
         const keys = [...parsed.raw.matchAll(/^([a-zA-Z_][\w-]*):/gm)].map((match) => match[1]);
         if (keys.length !== 1 || keys[0] !== 'okf_version') {
@@ -302,7 +312,12 @@ const validateRecordPath = (record, recordsById, errors) => {
     const expectedArchive = record.archived ? ['archive', 'epics'] : ['epics'];
     const prefixMatches = expectedArchive.every((part, index) => parts[index] === part);
     const directory = parts[expectedArchive.length];
-    if (!prefixMatches || parts.length !== expectedArchive.length + 2 || stem !== record.id || !directory?.startsWith(`${record.id}-`)) {
+    if (
+      !prefixMatches ||
+      parts.length !== expectedArchive.length + 2 ||
+      stem !== record.id ||
+      !directory?.startsWith(`${record.id}-`)
+    ) {
       errors.push(`${record.relative}: Epic must be <area>/${record.id}-short-title/${record.id}.md`);
     }
     return;
@@ -371,7 +386,8 @@ const validateBacklog = async (adrIds) => {
     return { errors: ['docs/backlog does not exist'], warnings, count: 0 };
   }
   for (const relative of required) {
-    if (!(await exists(path.join(backlogRoot, relative)))) errors.push(`docs/backlog/${relative}: required backlog scaffold is missing`);
+    if (!(await exists(path.join(backlogRoot, relative))))
+      errors.push(`docs/backlog/${relative}: required backlog scaffold is missing`);
   }
 
   const files = (await walkMarkdown(backlogRoot)).sort();
@@ -379,11 +395,17 @@ const validateBacklog = async (adrIds) => {
   const recordsById = new Map();
   for (const file of files) {
     const relative = path.relative(backlogRoot, file);
-    if (relative.startsWith(`templates${path.sep}`) || path.basename(file) === 'index.md' || relative === 'maintenance.md') continue;
+    if (
+      relative.startsWith(`templates${path.sep}`) ||
+      path.basename(file) === 'index.md' ||
+      relative === 'maintenance.md'
+    )
+      continue;
     const content = await readFile(file, 'utf8');
     const parsed = parseFrontmatter(content);
     if (!parsed) {
-      if (/^(?:EPIC|WORK)-\d+/.test(path.basename(file))) errors.push(`${relative}: backlog record is missing YAML frontmatter`);
+      if (/^(?:EPIC|WORK)-\d+/.test(path.basename(file)))
+        errors.push(`${relative}: backlog record is missing YAML frontmatter`);
       continue;
     }
     const id = scalar(parsed.raw, 'id');
@@ -407,7 +429,8 @@ const validateBacklog = async (adrIds) => {
     };
     records.push(record);
     if (!id) errors.push(`${relative}: record is missing id`);
-    else if (recordsById.has(id)) errors.push(`${relative}: duplicate immutable ID also used by ${recordsById.get(id).relative}`);
+    else if (recordsById.has(id))
+      errors.push(`${relative}: duplicate immutable ID also used by ${recordsById.get(id).relative}`);
     else recordsById.set(id, record);
   }
 
@@ -427,7 +450,8 @@ const validateBacklog = async (adrIds) => {
     if (!backlogStatuses.has(record.status)) errors.push(`${label}: invalid status ${record.status ?? '(missing)'}`);
     if (hasPlaceholder(record.outcome)) errors.push(`${label}: outcome must be non-empty and contain no placeholder`);
     for (const field of relationshipFields) {
-      if (record.relationships[field] === null) errors.push(`${label}: ${field} must be declared as a YAML inline array`);
+      if (record.relationships[field] === null)
+        errors.push(`${label}: ${field} must be declared as a YAML inline array`);
     }
     if (record.id) validateRecordPath(record, recordsById, errors);
 
@@ -511,8 +535,14 @@ const validateBacklog = async (adrIds) => {
         if (!['complete', 'not-needed'].includes(research ?? '')) {
           errors.push(`${label}: ready work research must be complete or not-needed`);
         }
-        if (!researchBody || hasPlaceholder(researchBody)) errors.push(`${label}: ready work requires a resolved Research section`);
-        if (!execution || hasPlaceholder(execution) || !/approv/i.test(execution) || !/(?:verif|test|check|command)/i.test(execution)) {
+        if (!researchBody || hasPlaceholder(researchBody))
+          errors.push(`${label}: ready work requires a resolved Research section`);
+        if (
+          !execution ||
+          hasPlaceholder(execution) ||
+          !/approv/i.test(execution) ||
+          !/(?:verif|test|check|command)/i.test(execution)
+        ) {
           errors.push(`${label}: ready work Execution must record approach, verification, and explicit approval`);
         }
         if (checkboxes(subtasks).length === 0 && !/^No subtasks\.$/im.test(subtasks)) {
@@ -544,9 +574,11 @@ const validateBacklog = async (adrIds) => {
     }
     for (const field of relationshipFields) {
       const targets = record.relationships[field] ?? [];
-      if (new Set(targets).size !== targets.length) errors.push(`${record.relative}: ${field} contains duplicate references`);
+      if (new Set(targets).size !== targets.length)
+        errors.push(`${record.relative}: ${field} contains duplicate references`);
       for (const target of targets) {
-        if (!/^(?:EPIC|WORK)-\d{3,}$/.test(target)) errors.push(`${record.relative}: ${field} has invalid ID ${target}`);
+        if (!/^(?:EPIC|WORK)-\d{3,}$/.test(target))
+          errors.push(`${record.relative}: ${field} has invalid ID ${target}`);
         else if (target === record.id) errors.push(`${record.relative}: ${field} cannot reference itself`);
         else if (!recordsById.has(target)) errors.push(`${record.relative}: ${field} references missing ${target}`);
         else if (!record.archived && recordsById.get(target).archived) {
@@ -556,7 +588,8 @@ const validateBacklog = async (adrIds) => {
       if (field === 'relates_to') {
         for (const target of targets) {
           const reverse = recordsById.get(target)?.relationships.relates_to ?? [];
-          if (!reverse.includes(record.id)) errors.push(`${record.relative}: relates_to ${target} must be declared symmetrically`);
+          if (!reverse.includes(record.id))
+            errors.push(`${record.relative}: relates_to ${target} must be declared symmetrically`);
         }
       }
     }
@@ -569,7 +602,11 @@ const validateBacklog = async (adrIds) => {
     }
     if (epic.archived) {
       for (const child of children) {
-        if (!child.archived || path.dirname(child.file) !== path.dirname(epic.file) || !['done', 'cancelled'].includes(child.status)) {
+        if (
+          !child.archived ||
+          path.dirname(child.file) !== path.dirname(epic.file) ||
+          !['done', 'cancelled'].includes(child.status)
+        ) {
           errors.push(`${epic.relative}: archived Epic must contain every terminal child in the same directory`);
         }
       }
@@ -635,17 +672,23 @@ const validateBacklog = async (adrIds) => {
   }
 
   findBlockingCycles(recordsById, errors);
-  const activeRecordFiles = new Map(records.filter((record) => !record.archived).map((record) => [record.file, record]));
+  const activeRecordFiles = new Map(
+    records.filter((record) => !record.archived).map((record) => [record.file, record]),
+  );
   await checkLinks(files, backlogRoot, errors, activeRecordFiles);
   return { errors, warnings, count: records.length };
 };
 
 const report = (name, result, noun) => {
   if (result.warnings.length > 0) {
-    process.stderr.write(`${name} validation warnings:\n${result.warnings.map((warning) => `- ${warning}`).join('\n')}\n`);
+    process.stderr.write(
+      `${name} validation warnings:\n${result.warnings.map((warning) => `- ${warning}`).join('\n')}\n`,
+    );
   }
   if (result.errors.length > 0) {
-    process.stderr.write(`${name} validation failed with ${result.errors.length} error(s):\n${result.errors.map((error) => `- ${error}`).join('\n')}\n`);
+    process.stderr.write(
+      `${name} validation failed with ${result.errors.length} error(s):\n${result.errors.map((error) => `- ${error}`).join('\n')}\n`,
+    );
   } else {
     process.stdout.write(`${name} validation passed: ${result.count} ${noun} checked.\n`);
   }
