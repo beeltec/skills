@@ -7,7 +7,7 @@ description: Manage approved desired work in a setup-project backlog from lightw
 
 `docs/backlog` is the tracked system of record for desired project deltas and execution state; `docs/wiki` is accepted current state on the primary branch. Never put a proposal in the wiki or treat completed backlog work as accepted until the relevant wiki concepts are updated. Use `$wiki` for accepted-knowledge operations; never mutate wiki concepts inside a backlog transaction.
 
-Stay on the user's current Git branch — never create, switch, merge, or delete branches. Never create, inspect, migrate, or depend on `docs/tasks`.
+Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
 
 ## Authority
 
@@ -22,8 +22,8 @@ An invoked gate-backed execution workflow that explicitly authorizes an agent/se
 Before proposing or applying a mutation:
 
 1. Resolve the repository root; read all applicable `AGENTS.md`, `CLAUDE.md`, and nested instructions.
-2. Require the setup-project scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, the four type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`; do not improvise a partial scaffold.
-3. Run `node scripts/validate-project.mjs`. On an invalid baseline, report the errors and mutate only if the user explicitly asks to repair that existing state.
+2. Require the `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`; do not improvise a partial scaffold.
+3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Read the wiki root index, maintenance rules, ubiquitous language, nearest relevant indexes, and every relevant accepted-state concept.
 5. Read the backlog root index, maintenance rules, relevant type templates, active and archive indexes, all records related by parent or relationship, and every record needed to determine inward links and blocking state.
 6. Inspect active and archived IDs before allocation, the complete global rank, the current branch, and staged/unstaged changes. Preserve unrelated work; never stage it.
@@ -53,7 +53,7 @@ Refine against the matching installed template and accepted wiki state:
 - **Task:** a bounded engineering or operational result — a concrete project-state delta with verification evidence, not a layer-only activity.
 - **Bug:** an observed failure against accepted behavior — impact, reproduction conditions, the behavior to restore, a failing-before/passing-after check, and regression evidence.
 
-Slice executable work into the smallest coherent outcome that can be implemented, verified, and accepted independently. Prefer vertical behavior or bounded operational results over horizontal layers, investigation-only fragments, or agent-sized busywork. Decompose execution into structured checklist subtasks: each subtask is one bounded step — roughly one coherent commit — that names its scope (files, components, or records touched) and its verification (command, test, or observable result). Split any step that cannot state a single verification. Subtasks are local steps with no independently valuable outcome; never create child work below a Story, Task, or Bug.
+Slice executable work into the smallest coherent outcome that can be implemented, verified, and accepted independently. Prefer vertical behavior or bounded operational results over horizontal layers, investigation-only fragments, or agent-sized busywork. Decompose execution into checklist subtasks: one bounded step each — roughly one coherent commit — naming its scope (files, components, or records touched) and its verification (command, test, or observable result); split any step that cannot state a single verification. Subtasks are local steps with no independently valuable outcome; never create child work below a Story, Task, or Bug.
 
 For Epics, refine a measurable coordinated outcome, objective acceptance criteria, explicit exclusions, and a useful multi-item child scope. Parentless work stays standalone when no genuine shared outcome requires an Epic.
 
@@ -131,6 +131,6 @@ For each approved mutation:
 4. Inspect `git diff`, `git diff --cached`, and `git status`. Stage only the transaction's intended `docs/backlog` paths; handle a separately approved wiki update as its own validated workflow and commit. Never use broad staging commands.
 5. Verify the staged path list and diff contain no unrelated files, secrets, working notes, or `docs/tasks` content.
 6. Create one concise Conventional Commit, normally `docs(backlog): <transaction outcome>`. Keep temporary claims in their own transaction when practical.
-7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); recommend only, omit when none follows. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); omit when none follows. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
 
 If approval is denied or changed, revise the proposal in conversation without mutating files. If unrelated worktree changes overlap an affected file, preserve them and ask before proceeding when a safe narrow transaction is not possible.

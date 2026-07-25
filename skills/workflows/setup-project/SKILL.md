@@ -1,6 +1,6 @@
 ---
 name: setup-project
-description: Initialize or safely upgrade a project with an accepted-state OKF wiki and a tracked desired-change backlog; on brownfield repositories, automatically back-fill a foundation wiki from code-verified facts. Use when creating or migrating project governance, templates, validation, managed CI, and agent instructions.
+description: Initialize or safely upgrade a project with an accepted-state OKF wiki and a desired-change backlog; on brownfield repositories, back-fill a foundation wiki from code-verified facts. Use when creating or migrating project governance, templates, validation, managed CI, or agent instructions.
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Initialize or upgrade two governed, tracked systems without overwriting project-owned files: an OKF wiki for accepted primary-branch state and a backlog for desired deltas and execution state.
 
-Stay on the user's current Git branch — never create or switch branches while scaffolding, configuring, or populating the wiki, even off the primary branch.
+Stay on the current branch — never create, switch, merge, or delete branches.
 
 ## Workflow
 
@@ -29,7 +29,7 @@ Stay on the user's current Git branch — never create or switch branches while 
 9. **Brownfield back-fill** — When the repository already contains application code (source directories, manifests, build configuration) and the wiki has no accepted concepts beyond the scaffold, this invocation is the owner's standing approval to explore the codebase and publish a foundation overview as validated `$wiki` transactions: tech stack with exact versions, architecture and module map, build/test/run commands, observable conventions, and code-derived terminology. Publish only facts verified against repository evidence; collect owner-judgment candidates (intent, rationale, product language) in the report for a later `/discuss` and `/to-wiki`. Never back-fill an ADR: a decision's rejected alternatives and rationale are owner judgement, not code-verifiable, so report observed significant decisions as ADR candidates instead. Rerun the validator. Skip on greenfield repositories and already-populated wikis.
 10. Review the diff, local links, backlog scaffold, agent-instruction block, and wiki log. Run setup a second time and confirm it changes no bytes.
 
-End the report with `Next step:` — one copy-pasteable command: greenfield → `/discuss` naming the first outcome to shape; brownfield → `/discuss` naming the highest-value judgment candidate or first desired change. Recommend only — never invoke a user-invoked skill. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command: greenfield → `/discuss` naming the first outcome to shape; brownfield → `/discuss` naming the highest-value judgment candidate or first desired change. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
 
 ## Structure rules
 

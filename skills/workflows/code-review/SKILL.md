@@ -85,7 +85,7 @@ If the user explicitly confirmed no specification exists, skip the Spec sub-agen
 
 Present the two reports under `## Standards` and `## Spec`, verbatim or lightly cleaned. Keep severity labels and counts independent; never merge or rerank findings across axes. End with a one-line summary of each axis's total, severity breakdown, and worst issue. Do not pick a single winner.
 
-Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance. Recommend only — never invoke it. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
 
 ## Why two axes
 

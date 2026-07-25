@@ -7,7 +7,7 @@ description: Manage the complete lifecycle of accepted project knowledge in a se
 
 `docs/wiki` is the canonical record of durable accepted current state on the primary branch; `docs/backlog` is the system of record for desired deltas, proposal evidence, and execution history. Agreement, work-branch implementation, or approval of a target specification does not make that target current.
 
-Stay on the user's current Git branch — never create, switch, merge, or delete branches, even off the primary branch. Read [the bundled OKF 0.1 specification](references/okf-spec.md) completely before mutating a wiki. Apply stricter project-local maintenance rules when they do not conflict with it.
+Stay on the current branch — never create, switch, merge, or delete branches. Read [the bundled OKF 0.1 specification](references/okf-spec.md) completely before mutating a wiki. Apply stricter project-local maintenance rules when they do not conflict with it.
 
 ## Authority
 
@@ -22,8 +22,8 @@ Strictly non-semantic maintenance the user requested (formatting, metadata norma
 Before a mutation:
 
 1. Resolve the project root; read all applicable `AGENTS.md`, `CLAUDE.md`, nested instructions, contributing guidance, and documentation standards.
-2. Require the complete `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/log.md`, `docs/wiki/architecture/decisions/index.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`; never improvise a wiki-only setup.
-3. Run `node scripts/validate-project.mjs`. On an invalid baseline, report and stop unless the user explicitly changes the request to repairing that state.
+2. Require the `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/log.md`, `docs/wiki/architecture/decisions/index.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`; never improvise a wiki-only setup.
+3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Read the root index, maintenance rules, log, ubiquitous language, nearest relevant indexes, related concepts, and every page needed to detect duplicate ownership and inbound links.
 5. Read relevant active and archived backlog records when they establish proposal state, acceptance, implementation history, research provenance, or references affected by a move or deletion.
 6. Inspect repository code, tests, manifests, configuration, version evidence, branches, and worktree state needed to verify the candidate claims. Preserve unrelated changes; never stage them.
@@ -102,6 +102,6 @@ For each approved semantic mutation or authorized non-semantic repair:
 3. Run `node scripts/validate-project.mjs`; fix all errors and review every warning. If validation cannot pass, do not commit.
 4. Inspect `git diff`, `git diff --cached`, and `git status`. Stage only the intended `docs/wiki` paths; verify no unrelated changes, secrets, notes, or backlog content.
 5. One concise Conventional Commit: `docs(wiki): <transaction outcome>`.
-6. Report the commit hash, authority/approval, changed and deleted concepts, structural effects, evidence and sources, warnings, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. rejected desired-change content → `/to-backlog` naming it); recommend only, omit when none follows. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+6. Report the commit hash, authority/approval, changed and deleted concepts, structural effects, evidence and sources, warnings, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. rejected desired-change content → `/to-backlog` naming it); omit when none follows. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
 
 If approval is denied or revised, update the proposal in conversation without mutating files. If unrelated changes overlap an affected wiki file and a safe narrow transaction is not possible, stop and ask.

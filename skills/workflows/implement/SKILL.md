@@ -20,8 +20,8 @@ The invocation is a gate-backed execution workflow: it authorizes temporary clai
 Complete before creating or switching a branch or mutating a claim:
 
 1. Resolve the repository root. Read all applicable `AGENTS.md`, `CLAUDE.md`, nested instructions, and contributing or coding standards.
-2. Require `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If incomplete, stop and direct the user to `$setup-project`.
-3. Run `node scripts/validate-project.mjs`. Stop on an invalid baseline unless the user explicitly changes the assignment to repairing it.
+2. Require the `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`.
+3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Inspect the current branch, primary branch, remotes, staged/unstaged changes, and recent history. Preserve unrelated changes; never stage them.
 5. Resolve the selection: explicit ID or path wins; otherwise only a single unambiguous conversational selection. List candidates and ask when absent or ambiguous.
 6. Read completely the selected records, the parent Epic and every child in Epic scope, the global rank, active and archive indexes, all related records, and all records needed to calculate inward blockers.
@@ -115,4 +115,4 @@ In one final primary-branch backlog transaction: check supported Epic criteria, 
 
 Remain on primary and delete the local work branch only after every item is integrated, its completion committed, the Epic archive committed when applicable, all checks green, and no authorized scope remains; otherwise retain the branch and report the exact blocker. Report selected scope, claims, changed paths, commits and merge commits, review results, acceptance evidence, reconciliation including every published `ADR-NNN` and each ADR superseded, validation, archive destinations, and remaining concerns.
 
-End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement` with the next highest-ranked actionable `WORK-NNN`, or `/discuss` naming the next open outcome when no ready work remains. Recommend only — never invoke a user-invoked skill. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement` with the next highest-ranked actionable `WORK-NNN`, or `/discuss` naming the next open outcome when no ready work remains. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.

@@ -6,11 +6,11 @@ disable-model-invocation: true
 
 # To Epic
 
-Invoking this skill is the project owner's standing approval for the full planning transaction set of one Epic: Epic intake, child work-item intake, refinement, rank placement, and every `proposed -> ready` transition. This supersedes `$backlog`'s per-transaction approval pauses for exactly these transactions; follow `$backlog` for everything else — preflight, templates, relationships, Definition of Ready, validation, staging, commits. It never authorizes cancellation, wiki mutation, execution claims, or touching records outside this Epic and its children.
+Invoking this skill is the owner's standing approval for the full planning transaction set of one Epic: Epic intake, child work-item intake, refinement, rank placement, and every `proposed -> ready` transition. This supersedes `$backlog`'s per-transaction approval pauses for exactly these transactions; follow `$backlog` for everything else — preflight, templates, relationships, Definition of Ready, validation, staging, commits. It never authorizes cancellation, wiki mutation, execution claims, or touching records outside this Epic and its children.
 
 Pause for user input only at the research decision (step 2) and on hard blockers; otherwise run to completion and report.
 
-Stay on the current branch. Never create or use `docs/tasks`.
+Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
 
 ## Workflow
 
@@ -24,4 +24,4 @@ Stay on the current branch. Never create or use `docs/tasks`.
 
 A failed validator, unresolved research the owner declined, or a missing readiness requirement is a blocker: leave the record `proposed`, keep committed transactions intact, and report — never force `ready`.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `/implement EPIC-NNN` (or `/implement-with-subagents EPIC-NNN` for isolated per-child sessions); a record left `proposed` → the exact command that resumes it after its named blocker. Recommend only — never invoke it. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `/implement EPIC-NNN` (or `/implement-with-subagents EPIC-NNN` for isolated per-child sessions); a record left `proposed` → the exact command that resumes it after its named blocker. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.

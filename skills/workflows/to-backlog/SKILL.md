@@ -1,16 +1,16 @@
 ---
 name: to-backlog
-description: Intake the standalone work items confirmed in the current conversation into a setup-project backlog and refine each to ready without per-step approval pauses — item intake, one explicit owner decision on research, and refinement until every item is ready. Use when the user asks to turn confirmed standalone (non-Epic) outcomes into ready work items.
+description: Intake the conversation's confirmed standalone work items into a setup-project backlog and refine each to ready without per-step approval pauses, pausing only for the owner's research decision. Use when the user asks to turn confirmed standalone (non-Epic) outcomes into ready work items.
 disable-model-invocation: true
 ---
 
 # To Backlog
 
-Invoking this skill is the project owner's standing approval for the full planning transaction set of the standalone work items confirmed in the current conversation: intake, refinement, rank placement, and every `proposed -> ready` transition. This supersedes `$backlog`'s per-transaction approval pauses for exactly these transactions; follow `$backlog` for everything else — preflight, templates, relationships, Definition of Ready, validation, staging, commits. It never authorizes Epic creation, cancellation, wiki mutation, execution claims, or touching records outside these items.
+Invoking this skill is the owner's standing approval for the full planning transaction set of the standalone work items confirmed in the current conversation: intake, refinement, rank placement, and every `proposed -> ready` transition. This supersedes `$backlog`'s per-transaction approval pauses for exactly these transactions; follow `$backlog` for everything else — preflight, templates, relationships, Definition of Ready, validation, staging, commits. It never authorizes Epic creation, cancellation, wiki mutation, execution claims, or touching records outside these items.
 
 Pause for user input only at the research decision (step 2) and on hard blockers; otherwise run to completion and report.
 
-Stay on the current branch. Never create or use `docs/tasks`.
+Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
 
 ## Workflow
 
@@ -23,4 +23,4 @@ Stay on the current branch. Never create or use `docs/tasks`.
 
 A failed validator, unresolved research the owner declined, or a missing readiness requirement is a blocker: leave the record `proposed`, keep committed transactions intact, and report — never force `ready`.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `/implement` with the highest-ranked new `WORK-NNN`; a record left `proposed` → the exact command that resumes it after its named blocker. Recommend only — never invoke it. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `/implement` with the highest-ranked new `WORK-NNN`; a record left `proposed` → the exact command that resumes it after its named blocker. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.

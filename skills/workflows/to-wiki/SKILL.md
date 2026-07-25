@@ -1,16 +1,16 @@
 ---
 name: to-wiki
-description: Publish the durable knowledge confirmed in the current conversation — from discussion or codebase inspection — to a setup-project wiki as one end-to-end transaction set without per-edit approval pauses, including ADRs for decisions already in force. Use when the user asks to publish confirmed current-state conclusions or architecture decision records to the wiki.
+description: Publish the conversation's confirmed durable knowledge — from discussion or codebase inspection — to a setup-project wiki without per-edit approval pauses, including ADRs for decisions already in force. Use when the user asks to publish confirmed current-state conclusions or ADRs to the wiki.
 disable-model-invocation: true
 ---
 
 # To Wiki
 
-Invoking this skill is the project owner's standing approval for publishing the durable knowledge explicitly confirmed in the current conversation — whether it emerged from discussion or from inspecting the existing codebase: concept creation, correction or extension of existing concepts, ADR publication for decisions already in force, ubiquitous-language additions and corrections, and the derived index, link, metadata, and log changes. This supersedes `$wiki`'s per-transaction approval pauses for exactly these additive and corrective transactions; follow `$wiki` for everything else — preflight, knowledge eligibility, ownership, evidence, sources, validation, staging, commits.
+Invoking this skill is the owner's standing approval for publishing the durable knowledge explicitly confirmed in the current conversation — whether it emerged from discussion or from inspecting the existing codebase: concept creation, correction or extension of existing concepts, ADR publication for decisions already in force, ubiquitous-language additions and corrections, and the derived index, link, metadata, and log changes. This supersedes `$wiki`'s per-transaction approval pauses for exactly these additive and corrective transactions; follow `$wiki` for everything else — preflight, knowledge eligibility, ownership, evidence, sources, validation, staging, commits.
 
 It never authorizes deprecating or deleting an existing concept, superseding an existing ADR, mutating `docs/backlog`, publishing proposal-shaped content, or touching knowledge the conversation did not confirm. Pause for user input only on the per-item candidates in step 3 and hard blockers; otherwise run to completion and report.
 
-Stay on the current branch. Never create or use `docs/tasks`.
+Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
 
 ## Workflow
 
@@ -21,4 +21,4 @@ Stay on the current branch. Never create or use `docs/tasks`.
 
 A failed validator, evidence contradicting a confirmed conclusion, or unestablished current acceptance is a blocker: publish nothing for that candidate, keep committed transactions intact, and report — never force acceptance.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists. Recommend only — never invoke it; omit the line when no follow-up exists. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists; omit when none follows. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.

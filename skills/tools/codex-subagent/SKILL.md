@@ -1,6 +1,6 @@
 ---
 name: codex-subagent
-description: For non-Codex agent harnesses such as Claude Code or OpenCode only — never invoke from Codex itself. Delegates a coding or implementation task to a nested Codex CLI agent through unattended, workspace-scoped `codex exec`. Use when the user explicitly asks to use, invoke, run, or delegate to a Codex subagent, or to implement something using Codex — not merely because a task involves code.
+description: Delegate a coding or implementation task to a nested Codex CLI agent through unattended, workspace-scoped `codex exec`. For non-Codex harnesses (Claude Code, OpenCode) only — never invoke from Codex itself. Use only when the user explicitly asks to use or delegate to a Codex subagent — not merely because a task involves code.
 ---
 
 # Codex Subagent

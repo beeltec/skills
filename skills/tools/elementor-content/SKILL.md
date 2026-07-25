@@ -1,6 +1,6 @@
 ---
 name: elementor-content
-description: Create, inspect, update, migrate, import, or delete Elementor content in exported JSON templates or WordPress post metadata via WP-CLI. Use for Elementor pages, library templates, containers, legacy sections/columns, nested widgets, responsive settings, global-style references, and Elementor Pro Theme Builder templates or display conditions.
+description: Create, inspect, update, migrate, import, or delete Elementor content in exported JSON templates or WordPress post metadata via WP-CLI. Use for Elementor pages, library and Pro Theme Builder templates, containers, legacy sections/columns, widgets, responsive settings, global styles, and display conditions.
 ---
 
 # Elementor Content

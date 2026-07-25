@@ -1,19 +1,19 @@
 ---
 name: research
-description: Research a proposed Epic or work item before readiness — current versions of its technologies plus the concepts, standards, and guidelines its delta implicates (for example OWASP for authentication) — fanned out across parallel sub-agents, and attach the evidence, recommendations, deviations, and uncertainty to its setup-project backlog record. Use only when the user explicitly requests research for identified proposed backlog work. Never for general questions, for ready or in-progress records, or to publish accepted wiki guidance.
+description: Research a proposed backlog Epic or work item before readiness — current technology versions plus the concepts and standards its delta implicates — via parallel sub-agents, attaching the evidence to its record. Use only when the user explicitly requests research for identified proposed backlog work; never for general questions, ready or in-progress records, or wiki guidance.
 ---
 
 # Research
 
 Resolve technical uncertainty for one identified proposed backlog record before readiness. Research covers both the technologies the delta touches and the concepts, standards, and guidelines it implicates. Findings live with the desired change in `docs/backlog`; `docs/wiki` remains the authority for accepted current guidance.
 
-Stay on the user's current Git branch — never create, switch, merge, or delete branches.
+Stay on the current branch — never create, switch, merge, or delete branches.
 
 ## Preconditions
 
 1. Resolve the project root and read applicable repository instructions.
-2. Require `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, the installed backlog templates, and `scripts/validate-project.mjs`; otherwise stop and direct the user to `$setup-project`.
-3. Run `node scripts/validate-project.mjs`. On an invalid baseline, report and stop unless the user explicitly asks to repair that state.
+2. Require the `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`.
+3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Require one named `EPIC-NNN` or `WORK-NNN` with `status: proposed`. Without one, offer `$backlog` intake first. Reject research on a `ready`, `in-progress`, or terminal record; never silently reopen it.
 5. Read backlog maintenance, the matching type template, the complete named record (delta, parent and child scope, relationships) and directly related records; the wiki root, maintenance rules, ubiquitous language, nearest indexes, and accepted technology or architecture concepts.
 
@@ -91,4 +91,4 @@ Present findings, proposed edits, resulting research state, and readiness effect
 
 After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, subjects researched, resolved versions, research state, unresolved readiness blockers, commit hash, and validation result.
 
-End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.

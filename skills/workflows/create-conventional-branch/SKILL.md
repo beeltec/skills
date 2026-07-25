@@ -1,6 +1,6 @@
 ---
 name: create-conventional-branch
-description: Create and switch to a purpose-driven Git branch following the Conventional Branch specification. Use automatically only for $implement or $implement-with-subagents, or when the user explicitly requests a branch or pull/merge-request workflow. Never use automatically for setup-project, backlog, discussion, wiki maintenance, or research.
+description: Create and switch to a Git branch following the Conventional Branch specification. Use automatically only for $implement or $implement-with-subagents, or on an explicit branch or pull/merge-request request — never automatically for setup-project, backlog, discussion, wiki maintenance, or research.
 ---
 
 # Create Conventional Branch
