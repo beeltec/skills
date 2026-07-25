@@ -47,7 +47,7 @@ flowchart TD
     TB["to-backlog<br/>plan standalone items<br/>(one standing approval)"] --> DEC
     BL["backlog<br/>intake, refine, rank<br/>(owner approval per transaction)"] --> DEC
     DEC{"owner decision:<br/>research needed?"}
-    DEC -->|yes| RT["research-tech-stack<br/>attach version-matched evidence"]
+    DEC -->|yes| RT["research<br/>attach current, version-matched evidence"]
     DEC -->|no| RDY
     RT --> RDY
     RDY(["ready<br/>Definition of Ready met<br/>decisions resolved<br/>+ owner approval"])
@@ -85,7 +85,7 @@ flowchart TD
 
 1. **setup-project** scaffolds both records, their templates and indexes, `scripts/validate-project.mjs`, managed agent instructions, and compatible CI integration. On a brownfield repository it back-fills a foundation wiki from code-verified facts (see below).
 2. **discuss** resolves an idea against accepted knowledge, fully advisory — it never mutates records itself. It ends by recommending the matching command: `/to-epic` for a coordinated multi-item outcome, `/to-backlog` for standalone desired changes, `/to-wiki` for conclusions that already describe accepted current state — including confirmed terminology and architectural decisions already in force, even when the term arose from an unshipped proposal. A decision that only takes effect once proposed work ships travels with that work instead. A single conversation can route to several; execution always passes through backlog readiness — there is no direct-implementation route.
-3. **backlog** owns the record mechanics for Epics (`EPIC-NNN`) and work items (`WORK-NNN`) under per-transaction owner approval; **to-epic** plans one Epic and **to-backlog** plans confirmed standalone items end-to-end to ready under a single standing approval each, pausing only for one explicit owner decision on research; **research-tech-stack** attaches version-matched evidence to a proposed record where readiness needs it. Readiness also requires `decisions` resolved: every architecturally significant design choice is drafted in ADR shape under `## Decisions`, or explicitly recorded as `none`. Only approved, ready work is executable.
+3. **backlog** owns the record mechanics for Epics (`EPIC-NNN`) and work items (`WORK-NNN`) under per-transaction owner approval; **to-epic** plans one Epic and **to-backlog** plans confirmed standalone items end-to-end to ready under a single standing approval each, pausing only for one explicit owner decision on research; **research** attaches evidence to a proposed record where readiness needs it — versions resolved live from each release source, plus the concepts and guidelines the delta implicates — fanned out across one sub-agent per subject. Readiness also requires `decisions` resolved: every architecturally significant design choice is drafted in ADR shape under `## Decisions`, or explicitly recorded as `none`. Only approved, ready work is executable.
 4. **to-wiki** is the knowledge counterpart of the to-\* planners: it publishes the conversation's confirmed durable knowledge — from discussion or codebase inspection — as validated **wiki** transactions under one standing approval, verifying every claim against repository evidence, including ADRs for decisions already in force. It pauses per item for anything destructive (deprecating or deleting a concept, superseding an ADR), and rejects proposal-shaped candidates back toward `/to-backlog` instead of publishing them.
 5. **implement** (single session) or **implement-with-subagents** (one fresh subagent per item) executes ready work: claim, conventional branch, incremental commits with per-subtask evidence, and a **code-review** loop on two independent axes — Standards (wiki and repository rules) and Spec (the work item's desired delta) — until both pass. Wiki changes are only drafted on the work branch, never applied there.
 6. Primary-branch acceptance is a merge commit plus the full suite. Only then are durable knowledge changes applied to the **wiki** as the exact owner-approved transaction — this is where each drafted decision becomes an ADR, its `ADR-NNN` is allocated, and any ADR it replaces is superseded in place — and the terminal backlog record is archived with its history. When no ready work remains, the loop closes by recommending `/discuss` on the next open outcome.
@@ -110,7 +110,7 @@ Both paths converge on the same cycle; they differ only in whether the wiki star
 | **backlog** | Manage approved desired work from intake through refinement, ranking, execution, and archival |
 | **to-epic** | Plan one Epic end-to-end to ready under one standing approval |
 | **to-backlog** | Take the conversation's confirmed standalone work items to ready under one standing approval |
-| **research-tech-stack** | Attach current, version-matched evidence to a proposed backlog item before readiness |
+| **research** | Attach current version and guideline evidence to a proposed backlog item before readiness, fanned out per subject |
 | **implement** | Execute a ready work item or Epic through claim, implementation, review, and completion |
 | **implement-with-subagents** | Orchestrate an Epic or work-item set with one fresh subagent per item |
 | **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's scope |

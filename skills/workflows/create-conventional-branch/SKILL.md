@@ -11,7 +11,7 @@ Create and switch to a branch whose name communicates the work's purpose.
 
 Create or switch branches only when `$implement` or `$implement-with-subagents` is executing implementation work, or the user explicitly requests a branch or a pull/merge-request publishing workflow.
 
-Never for `$setup-project`, `$backlog`, `$discuss`, `$wiki`, or `$research-tech-stack` — those stay on the user's selected branch, even off the primary branch. Documentation or repository writes alone never justify a new branch.
+Never for `$setup-project`, `$backlog`, `$discuss`, `$wiki`, or `$research` — those stay on the user's selected branch, even off the primary branch. Documentation or repository writes alone never justify a new branch.
 
 ## Workflow
 

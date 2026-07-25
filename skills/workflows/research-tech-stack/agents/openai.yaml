@@ -1,7 +1,0 @@
-interface:
-  display_name: "Research Tech Stack"
-  short_description: "Resolve proposed work's technical readiness"
-  default_prompt: "Use $research-tech-stack to research version-matched guidance for the named proposed Epic or work item, attach the evidence to its backlog record, and report unresolved readiness blockers."
-
-policy:
-  allow_implicit_invocation: false
