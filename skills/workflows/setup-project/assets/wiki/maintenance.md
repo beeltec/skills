@@ -26,12 +26,20 @@ The project owner approves the exact meaning of every addition, correction, depr
 
 Before moving or deleting a concept, repair all wiki references in the same transaction. An active backlog reference blocks the operation until `$backlog` applies a separately approved reference update. Archived backlog records may retain missing historical `wiki_refs`; validation reports those references as warnings.
 
+## Adopted guidance
+
+Engineering guidance under `engineering/technologies/` and `engineering/standards/` is accepted current state because the owner has **adopted** it as binding on new code — not because every existing file already complies. A page separates rules that bind (`Requirements`) from preferred approaches (`Recommendations`) and verified project choices (`Conventions`).
+
+Non-compliant existing code goes under the page's `## Known gaps` with the path that shows it, and its remediation is tracked in `docs/backlog` — never as prose that softens the rule. A rule the owner has not adopted is a proposal and stays out of the wiki. Reversing, weakening, or removing an already-adopted rule is a semantic change requiring its own explicit approval.
+
 ## Organization
 
 - `architecture/` owns system-wide design, security, delivery, and compatibility decisions.
 - `architecture/decisions/` owns ADRs. One ADR per architecturally significant decision, never merged into a broader concept page.
 - `engineering/` owns application-specific coding and review guidance.
 - `engineering/technologies/` owns accepted, durable guidance for languages, frameworks, runtimes, libraries, and major tools. Keep one canonical page per technology with applicable versions, review metadata, labeled sources, and project deviations. Proposal-specific technical research remains with its backlog record until post-acceptance implementation reconciliation establishes accepted guidance.
+- `engineering/standards/` owns accepted, durable guidance for cross-cutting standards the project applies — security, privacy, accessibility, protocol, and regulatory. Keep one canonical page per standard with its specification version, target conformance level, enforcing tooling, adopted rules, deviations, and labeled sources.
+- `engineering/guidance-template.md` is the shared non-record structure for both. Create and refresh those pages with `$to-guidance`; it is a non-record example and states no accepted guidance itself.
 - `domains/` owns product behavior, policies, contracts, and controls.
 - `operations/` owns executable runbooks.
 - `research/` owns compiled evidence supporting durable knowledge.

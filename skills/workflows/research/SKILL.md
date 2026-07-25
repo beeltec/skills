@@ -15,7 +15,7 @@ Stay on the current branch — never create, switch, merge, or delete branches.
 2. Require the `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`.
 3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Require one named `EPIC-NNN` or `WORK-NNN` with `status: proposed`. Without one, offer `$backlog` intake first. Reject research on a `ready`, `in-progress`, or terminal record; never silently reopen it.
-5. Read backlog maintenance, the matching type template, the complete named record (delta, parent and child scope, relationships) and directly related records; the wiki root, maintenance rules, ubiquitous language, nearest indexes, and accepted technology or architecture concepts.
+5. Read backlog maintenance, the matching type template, the complete named record (delta, parent and child scope, relationships) and directly related records; the wiki root, maintenance rules, ubiquitous language, nearest indexes, accepted architecture concepts, and the guidance pages under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` for every subject the delta touches.
 
 ## 1. Inspect the repository
 
@@ -39,7 +39,7 @@ Drop a subject only when inspected evidence shows the delta touches nothing it g
 
 ## 3. Decide what needs external research
 
-Research a subject when accepted wiki guidance is absent, materially uncertain, or not version-applicable. Treat fast-moving evidence as stale after 30 days, stable after 90. Re-check security-sensitive guidance every run regardless of prior review, and re-check immediately when a release, source change, or repository deviation may invalidate prior evidence.
+Check each subject against its guidance page under `docs/wiki/engineering/technologies/` or `docs/wiki/engineering/standards/` first. A page whose recorded installed version matches the repository and whose `last_reviewed` is within the thresholds below already answers the subject: cite it, record the conclusions it supplies, and research only what it leaves open — never re-derive rules it already carries. Research a subject when accepted wiki guidance is absent, materially uncertain, or not version-applicable. Treat fast-moving evidence as stale after 30 days, stable after 90. Re-check security-sensitive guidance every run regardless of prior review, and re-check immediately when a release, source change, or repository deviation may invalidate prior evidence.
 
 ## 4. Fan out one sub-agent per subject
 
@@ -87,7 +87,7 @@ Present findings, proposed edits, resulting research state, and readiness effect
 - Never change a record's status here — `$backlog` owns all transitions, including the `ready -> proposed` walk-back that makes a record eligible for research again.
 - `pending` research is a hard readiness failure. Never relabel uncertainty as `complete`; the validator requires `complete` or `not-needed` before `ready`.
 - Proposal-specific sources, findings, recommendations, uncertainty, and deviations stay in the backlog record.
-- During post-acceptance reconciliation, promote only conclusions that became durable accepted guidance to the owning wiki concept via `$wiki` under its approval rules, summarizing rather than copying; retain the backlog research as history.
+- During post-acceptance reconciliation, promote only conclusions that became durable accepted guidance to the owning wiki concept via `$wiki` under its approval rules, summarizing rather than copying; retain the backlog research as history. When the owning subject has no page under `docs/wiki/engineering/technologies/` or `docs/wiki/engineering/standards/`, route the promotion through `/to-guidance` for that subject so it lands on a canonical guidance page instead of being folded into a generic engineering concept.
 
 After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, subjects researched, resolved versions, research state, unresolved readiness blockers, commit hash, and validation result.
 

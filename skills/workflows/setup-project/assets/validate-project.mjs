@@ -131,7 +131,9 @@ const validateWiki = async () => {
     'domains/index.md',
     'domains/ubiquitous-language.md',
     'engineering/index.md',
+    'engineering/guidance-template.md',
     'engineering/technologies/index.md',
+    'engineering/standards/index.md',
     'operations/index.md',
     'research/index.md',
   ];

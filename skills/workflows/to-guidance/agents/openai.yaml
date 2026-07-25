@@ -1,0 +1,7 @@
+interface:
+  display_name: "To Guidance"
+  short_description: "Persist durable technology and standards guidance"
+  default_prompt: "Use $to-guidance to research the named technologies or standards and publish or refresh their canonical guidance pages under docs/wiki/engineering/, so implementation agents read adopted rules instead of re-researching them."
+
+policy:
+  allow_implicit_invocation: false
