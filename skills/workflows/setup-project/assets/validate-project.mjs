@@ -8,6 +8,8 @@ const projectRoot = path.resolve(scriptDirectory, '..');
 const wikiRoot = path.join(projectRoot, 'docs/wiki');
 const backlogRoot = path.join(projectRoot, 'docs/backlog');
 const wikiStatuses = new Set(['draft', 'active', 'deprecated', 'superseded']);
+const adrIdPattern = /^ADR-\d{3,}$/;
+const adrSections = ['Context', 'Decision', 'Alternatives considered', 'Consequences', 'Affected concepts', 'Provenance'];
 const backlogStatuses = new Set(['proposed', 'ready', 'in-progress', 'done', 'cancelled']);
 const workTypes = new Set(['story', 'task', 'bug']);
 const relationshipFields = ['blocks', 'clones', 'duplicates', 'relates_to', 'causes'];
@@ -117,6 +119,7 @@ const validateWiki = async () => {
     'start-here.md',
     'log.md',
     'architecture/index.md',
+    'architecture/decisions/index.md',
     'domains/index.md',
     'domains/ubiquitous-language.md',
     'engineering/index.md',
@@ -125,8 +128,12 @@ const validateWiki = async () => {
     'research/index.md',
   ];
 
+  const decisionsRoot = path.join(wikiRoot, 'architecture/decisions');
+  const adrTemplate = path.join(decisionsRoot, 'template.md');
+  const adrs = new Map();
+
   if (!(await exists(wikiRoot))) {
-    return { errors: ['docs/wiki does not exist'], warnings, count: 0 };
+    return { errors: ['docs/wiki does not exist'], warnings, count: 0, adrIds: new Set() };
   }
   for (const relative of required) {
     if (!(await exists(path.join(wikiRoot, relative)))) errors.push(`docs/wiki/${relative}: required wiki root is missing`);
@@ -163,10 +170,13 @@ const validateWiki = async () => {
       continue;
     }
 
+    if (file === adrTemplate) continue;
+
     if (!parsed) {
       errors.push(`${relativeFile}: concept document is missing YAML frontmatter`);
       continue;
     }
+    const isAdr = isWithin(decisionsRoot, file);
     const type = scalar(parsed.raw, 'type');
     const title = scalar(parsed.raw, 'title');
     const description = scalar(parsed.raw, 'description');
@@ -175,7 +185,9 @@ const validateWiki = async () => {
     const lineCount = content.replace(/\r?\n$/, '').split(/\r?\n/).length;
     if (!type) errors.push(`${relativeFile}: concept document is missing a non-empty type`);
     if (!title) errors.push(`${relativeFile}: concept document is missing a title`);
-    else if (titles.has(title)) errors.push(`${relativeFile}: duplicate title also used by ${titles.get(title)}`);
+    else if (isAdr && status === 'superseded') {
+      // A superseded ADR is retained history; its title may recur in the ADR that replaced it.
+    } else if (titles.has(title)) errors.push(`${relativeFile}: duplicate title also used by ${titles.get(title)}`);
     else titles.set(title, relativeFile);
     if (!description) errors.push(`${relativeFile}: concept document is missing a description`);
     if (!timestamp || !/^\d{4}-\d{2}-\d{2}T/.test(timestamp)) {
@@ -188,6 +200,64 @@ const validateWiki = async () => {
       errors.push(`${relativeFile}: ${lineCount} lines exceeds the ${maximumConceptLines}-line maximum`);
     } else if (lineCount > recommendedConceptLines) {
       warnings.push(`${relativeFile}: ${lineCount} lines exceeds the ${recommendedConceptLines}-line review threshold`);
+    }
+
+    if (!isAdr) {
+      if (type === 'Decision') {
+        errors.push(`${relativeFile}: type Decision is reserved for ADRs under architecture/decisions/`);
+      }
+      if (status === 'superseded') {
+        errors.push(`${relativeFile}: status superseded applies only to an ADR under architecture/decisions/`);
+      }
+      continue;
+    }
+
+    const id = scalar(parsed.raw, 'id');
+    const decided = scalar(parsed.raw, 'decided');
+    const supersedes = scalar(parsed.raw, 'supersedes');
+    const supersededBy = scalar(parsed.raw, 'superseded_by');
+    if (type !== 'Decision') errors.push(`${relativeFile}: ADR type must be Decision`);
+    if (!id || !adrIdPattern.test(id)) errors.push(`${relativeFile}: ADR id must match ADR-NNN`);
+    else if (adrs.has(id)) errors.push(`${relativeFile}: duplicate ADR id also used by ${adrs.get(id).relativeFile}`);
+    else {
+      adrs.set(id, { relativeFile, status, supersedes, supersededBy });
+      const expected = `adr-${id.slice(4).toLowerCase()}-`;
+      if (!basename.startsWith(expected)) errors.push(`${relativeFile}: ADR filename must begin with ${expected}`);
+    }
+    if (!decided || !/^\d{4}-\d{2}-\d{2}$/.test(decided)) {
+      errors.push(`${relativeFile}: ADR decided must be an ISO 8601 YYYY-MM-DD date`);
+    }
+    if (status === 'superseded') {
+      if (!supersededBy || !adrIdPattern.test(supersededBy)) {
+        errors.push(`${relativeFile}: superseded ADR requires superseded_by: ADR-NNN`);
+      }
+    } else if (supersededBy !== 'none') {
+      errors.push(`${relativeFile}: ADR outside superseded must use superseded_by: none`);
+    }
+    if (supersedes !== 'none' && !adrIdPattern.test(supersedes ?? '')) {
+      errors.push(`${relativeFile}: ADR supersedes must be ADR-NNN or none`);
+    }
+    for (const heading of adrSections) {
+      if (!section(parsed.body, heading)) warnings.push(`${relativeFile}: ADR is missing the ${heading} section`);
+    }
+  }
+
+  for (const [id, adr] of adrs) {
+    if (adr.status === 'superseded' && adrIdPattern.test(adr.supersededBy ?? '')) {
+      const replacement = adrs.get(adr.supersededBy);
+      if (adr.supersededBy === id) errors.push(`${adr.relativeFile}: ADR cannot supersede itself`);
+      else if (!replacement) errors.push(`${adr.relativeFile}: superseded_by references missing ${adr.supersededBy}`);
+      else if (replacement.supersedes !== id) {
+        errors.push(`${adr.relativeFile}: superseded_by ${adr.supersededBy} must declare supersedes: ${id}`);
+      }
+    }
+    if (adrIdPattern.test(adr.supersedes ?? '')) {
+      const replaced = adrs.get(adr.supersedes);
+      if (adr.supersedes === id) errors.push(`${adr.relativeFile}: ADR cannot supersede itself`);
+      else if (!replaced) errors.push(`${adr.relativeFile}: supersedes references missing ${adr.supersedes}`);
+      else if (replaced.status !== 'superseded' || replaced.supersededBy !== id) {
+        errors.push(`${adr.relativeFile}: supersedes ${adr.supersedes} must be superseded with superseded_by: ${id}`);
+      }
     }
   }
 
@@ -221,7 +291,7 @@ const validateWiki = async () => {
   }
 
   await checkLinks(files, wikiRoot, errors);
-  return { errors, warnings, count: files.length };
+  return { errors, warnings, count: files.length, adrIds: new Set(adrs.keys()) };
 };
 
 const validateRecordPath = (record, recordsById, errors) => {
@@ -279,7 +349,7 @@ const findBlockingCycles = (recordsById, errors) => {
   for (const id of recordsById.keys()) visit(id);
 };
 
-const validateBacklog = async () => {
+const validateBacklog = async (adrIds) => {
   const errors = [];
   const warnings = [];
   const required = [
@@ -296,6 +366,7 @@ const validateBacklog = async () => {
     'templates/task.md',
     'templates/bug.md',
   ];
+  const publishedAdrs = adrIds ?? new Set();
   if (!(await exists(backlogRoot))) {
     return { errors: ['docs/backlog does not exist'], warnings, count: 0 };
   }
@@ -368,6 +439,30 @@ const validateBacklog = async () => {
     }
     if (!record.archived && record.parent === 'none' && ['done', 'cancelled'].includes(record.status)) {
       errors.push(`${label}: terminal standalone work must be archived`);
+    }
+
+    const decisions = scalar(record.frontmatter, 'decisions');
+    const nonterminalOrDone = ['ready', 'in-progress', 'done'].includes(record.status);
+    if (decisions === null) {
+      const message = `${label}: record must declare decisions as pending, none, or an ADR-NNN inline array`;
+      if (nonterminalOrDone) errors.push(message);
+      else warnings.push(message);
+    } else if (decisions === 'pending') {
+      if (nonterminalOrDone) errors.push(`${label}: ready work requires decisions none or published ADR IDs`);
+    } else if (decisions !== 'none') {
+      const decisionIds = inlineList(record.frontmatter, 'decisions');
+      if (decisionIds === null) {
+        errors.push(`${label}: decisions must be pending, none, or a YAML inline array of ADR-NNN`);
+      } else if (decisionIds.length === 0) {
+        errors.push(`${label}: decisions inline array must not be empty; use none`);
+      } else {
+        for (const adrId of decisionIds) {
+          if (!adrIdPattern.test(adrId)) errors.push(`${label}: decisions has invalid ADR ID ${adrId}`);
+          else if (publishedAdrs.has(adrId)) continue;
+          else if (record.archived) warnings.push(`${label}: archived decisions retains missing historical ${adrId}`);
+          else errors.push(`${label}: decisions references missing ${adrId}`);
+        }
+      }
     }
 
     const cancelledReason = scalar(record.frontmatter, 'cancelled_reason');
@@ -557,7 +652,7 @@ const report = (name, result, noun) => {
 };
 
 const wikiResult = await validateWiki();
-const backlogResult = await validateBacklog();
+const backlogResult = await validateBacklog(wikiResult.adrIds);
 report('Wiki', wikiResult, 'Markdown files');
 report('Backlog', backlogResult, 'records');
 if (wikiResult.errors.length > 0 || backlogResult.errors.length > 0) process.exitCode = 1;

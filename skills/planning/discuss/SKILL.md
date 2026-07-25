@@ -25,6 +25,8 @@ If available, use the ask_user_question tool with multiple-choice answers; the f
 
 Look up any *fact* discoverable from the environment (filesystem, tools) instead of asking. *Decisions* belong to the user — put each one to them and wait.
 
+Track architecturally significant decisions. Apply the ADR significance test in the project's `docs/wiki/maintenance.md`: a decision qualifies when it changes system structure, affects a cross-cutting quality, adopts or drops a technology or dependency, or is costly to reverse, and a real alternative was rejected. For each qualifying decision reached, raise a numbered question confirming the decision, the alternatives rejected and why, and the consequences accepted, so the routed command can record it. Read existing ADRs under `docs/wiki/architecture/decisions/` during preflight; when a conclusion replaces one, say which ADR it supersedes.
+
 Track terminology. When the user uses a domain term absent from the ubiquitous language, an existing term with a different meaning, or several words for one concept, raise a numbered question: confirm the meaning, propose a definition, and ask whether to add or correct it in the ubiquitous language. Collect confirmed terms for the handoff; without a wiki, note them for `$setup-project`.
 
 Discuss is fully advisory: it reads and asks but never invokes a mutating skill or edits project records. After the user confirms shared understanding, classify each conclusion and recommend the matching user-invoked standing-approval command:
@@ -33,6 +35,7 @@ Discuss is fully advisory: it reads and asks but never invokes a mutating skill 
 - Other unimplemented desired state (new capability, behavior change, fix, migration) routes to `/to-backlog`, which intakes the confirmed standalone items and refines each to ready — including refining an existing `proposed` record found during preflight instead of proposing a duplicate. Never recommend publishing a target specification to the wiki.
 - A correction, clarification, or durable conclusion already describing accepted current primary-branch state routes to `/to-wiki` — never merely because a proposal is well specified or agreed as desirable.
 - Confirmed new or corrected terminology also routes to `/to-wiki`, even when the term arose from an unimplemented proposal — its meaning is durable project language regardless of whether the proposal ships.
+- An architecturally significant decision already in force routes to `/to-wiki`, which publishes it as an ADR. One that only takes effect once proposed work ships is not yet accepted state: route it with that work to `/to-epic` or `/to-backlog`, which drafts it on the record for publication at acceptance. Never recommend publishing a decision the project has not yet adopted.
 - A conversation may contain several: route the desired delta to `/to-epic` or `/to-backlog` and only independently current, durable facts to `/to-wiki`, without duplicating the proposal.
 - Unresolved decisions stay in the conversation or the proposed backlog record — never presented as accepted wiki knowledge or as ready work.
 

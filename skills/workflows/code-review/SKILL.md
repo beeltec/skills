@@ -42,7 +42,7 @@ If no backlog item exists for the change, ask the user to confirm no specificati
 
 Read every authority completely before starting either sub-agent:
 
-- the selected work item: outcome/delta, acceptance criteria, relationships, wiki references, Research, Execution, subtasks;
+- the selected work item: outcome/delta, acceptance criteria, relationships, wiki references, Research, Decisions, Execution, subtasks;
 - its complete parent Epic when `parent` is not `none`: outcome, criteria, scope, exclusions, constraints, wiki references, research, execution context;
 - every linked current-state wiki concept relevant to the change (via `wiki_refs` or the Epic) plus the nearest indexes needed for ownership;
 - proposal-specific research in the item or Epic and directly linked local evidence;
@@ -53,6 +53,8 @@ Record each source path and role. Current-state wiki facts describe the baseline
 ### 5. Prepare the Standards authority
 
 Use all applicable accepted engineering/architecture wiki guidance and repository standards from step 4. Product current-state concepts and backlog requirements are context, not Standards rules.
+
+Standards also carries the **ADR check** when the wiki defines the significance test. Read the in-force ADRs under `docs/wiki/architecture/decisions/`, the significance test in `docs/wiki/maintenance.md`, and the work item's `decisions` field and `## Decisions` section. Report a finding when the diff makes a decision meeting that test and the record carries neither a drafted ADR covering it nor a recorded `none` explaining why none qualifies, and when the diff contradicts an in-force ADR without drafting its supersession. The significance test is a judgement call — label it as one, and never treat a missing ADR as a code defect.
 
 On top of documented rules, Standards always carries this **smell baseline** — a fixed set of Fowler code smells (_Refactoring_, ch.3) applying even when the repo documents nothing. Two binding rules: **a documented repo standard always overrides** (suppress a smell it endorses), and **every smell is a labelled judgement-call heuristic** ("possible Feature Envy"), never a hard violation; skip anything tooling already enforces.
 
@@ -73,7 +75,7 @@ On top of documented rules, Standards always carries this **smell baseline** —
 
 Send one message with two `Agent` calls, both `general-purpose`.
 
-**Standards sub-agent prompt:** the diff command and commit list; the Standards sources with paths and roles; the full smell baseline pasted in (the sub-agent has no other access to it); and the brief: "Review only the diff. Report every documented-standard violation by severity and file/hunk, citing the source path and exact rule. Separately report possible baseline smells by name, quoting the hunk. Documented rules are hard authority; smells are judgement-call heuristics that an explicit documented rule overrides. Do not use backlog scope to waive a standard. Skip checks tooling already enforces. Under 400 words."
+**Standards sub-agent prompt:** the diff command and commit list; the Standards sources with paths and roles; the full smell baseline pasted in (the sub-agent has no other access to it); the ADR check inputs when present — the significance test text, the in-force ADRs, and the item's `decisions` field and `## Decisions` section, all pasted in; and the brief: "Review only the diff. Report every documented-standard violation by severity and file/hunk, citing the source path and exact rule. Separately report possible baseline smells by name, quoting the hunk. Separately report any unrecorded architecturally significant decision or contradicted in-force ADR, labelled as a judgement call and citing the significance test. Documented rules are hard authority; smells and the ADR check are judgement-call heuristics that an explicit documented rule overrides. Do not use backlog scope to waive a standard. Skip checks tooling already enforces. Under 400 words."
 
 **Spec sub-agent prompt:** the diff command and commit list; the complete work item as primary authority, complete parent Epic as context, linked wiki concepts, and relevant proposal research, each labelled by role; and the brief: "Review only the diff. Report by severity: (a) missing or partial desired behavior or acceptance requirements; (b) incorrect implemented behavior; (c) scope creep. Cite the work-item path and exact requirement for every finding. Cite Epic constraints when relevant, but never expand or replace child scope with Epic scope. Use linked wiki facts only as baseline and constraints; never let existing behavior mask a missing delta. Do not treat a backlog request as permission to violate repository standards; leave that conflict visible for the Standards axis. Under 400 words."
 

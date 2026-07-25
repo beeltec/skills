@@ -22,6 +22,8 @@ Add `--global` to install globally, or `--list` to inspect the catalog without i
 
 These skills form one connected delivery workflow built on two strictly separated project records: `docs/wiki` owns accepted current state on the primary branch, `docs/backlog` owns approved desired changes and their execution state. A proposal never enters the wiki, and completed work becomes accepted knowledge only after primary-branch acceptance and reconciliation.
 
+Architecturally significant decisions are recorded as ADRs under `docs/wiki/architecture/decisions/` — one `type: Decision` concept per decision, with the alternatives rejected and the consequences accepted. A proposed decision is drafted on its backlog record and published only at acceptance; a replaced ADR is superseded in place rather than deleted, because a decision stays true even after it stops governing.
+
 ### Shape an idea and route it
 
 **discuss** stress-tests an idea against accepted knowledge, then recommends exactly one command per confirmed conclusion:
@@ -32,7 +34,7 @@ flowchart TD
     D["discuss<br/>advisory — stress-test an idea<br/>one question at a time"]
     D -->|coordinated multi-item outcome| TE["/to-epic"]
     D -->|standalone desired change| TB["/to-backlog"]
-    D -->|current-state knowledge<br/>+ confirmed terminology| TW["/to-wiki"]
+    D -->|current-state knowledge<br/>+ confirmed terminology<br/>+ decisions already in force| TW["/to-wiki"]
 ```
 
 ### Plan desired changes to ready — `docs/backlog`
@@ -48,7 +50,7 @@ flowchart TD
     DEC -->|yes| RT["research-tech-stack<br/>attach version-matched evidence"]
     DEC -->|no| RDY
     RT --> RDY
-    RDY(["ready<br/>Definition of Ready met<br/>+ owner approval"])
+    RDY(["ready<br/>Definition of Ready met<br/>decisions resolved<br/>+ owner approval"])
     RDY --> IMP["/implement"]
 ```
 
@@ -63,7 +65,7 @@ flowchart TD
     CR["code-review<br/>Standards axis + Spec axis"] -->|findings| IMP
     CR -->|both axes pass| ACC["primary-branch acceptance<br/>(merge commit + full suite)"]
     ACC --> DONE(["done, archived"])
-    ACC -->|durable knowledge changed| WK["wiki<br/>apply approved reconciliation"]
+    ACC -->|durable knowledge changed<br/>drafted decisions become ADRs| WK["wiki<br/>apply approved reconciliation"]
 ```
 
 ### Grow accepted knowledge — `docs/wiki`
@@ -75,18 +77,18 @@ flowchart TD
     TW["to-wiki<br/>publish confirmed knowledge<br/>(one standing approval)"] -->|verified transactions| WK
     SP["setup-project"] -.->|brownfield back-fill| WK
     ACC["primary-branch acceptance"] -->|durable knowledge changed| WK
-    WK["wiki<br/>knowledge lifecycle"]
+    WK["wiki<br/>knowledge lifecycle<br/>+ ADRs superseded in place"]
     TW -.->|rejected desired-change candidates| TB["/to-backlog"]
     WK -.->|baseline knowledge| D["discuss"]
     WK -.->|standards authority| CR["code-review"]
 ```
 
 1. **setup-project** scaffolds both records, their templates and indexes, `scripts/validate-project.mjs`, managed agent instructions, and compatible CI integration. On a brownfield repository it back-fills a foundation wiki from code-verified facts (see below).
-2. **discuss** resolves an idea against accepted knowledge, fully advisory — it never mutates records itself. It ends by recommending the matching command: `/to-epic` for a coordinated multi-item outcome, `/to-backlog` for standalone desired changes, `/to-wiki` for conclusions that already describe accepted current state — including confirmed terminology, even when the term arose from an unshipped proposal. A single conversation can route to several; execution always passes through backlog readiness — there is no direct-implementation route.
-3. **backlog** owns the record mechanics for Epics (`EPIC-NNN`) and work items (`WORK-NNN`) under per-transaction owner approval; **to-epic** plans one Epic and **to-backlog** plans confirmed standalone items end-to-end to ready under a single standing approval each, pausing only for one explicit owner decision on research; **research-tech-stack** attaches version-matched evidence to a proposed record where readiness needs it. Only approved, ready work is executable.
-4. **to-wiki** is the knowledge counterpart of the to-\* planners: it publishes the conversation's confirmed durable knowledge — from discussion or codebase inspection — as validated **wiki** transactions under one standing approval, verifying every claim against repository evidence. It pauses per item for anything destructive (deprecating or deleting a concept), and rejects proposal-shaped candidates back toward `/to-backlog` instead of publishing them.
+2. **discuss** resolves an idea against accepted knowledge, fully advisory — it never mutates records itself. It ends by recommending the matching command: `/to-epic` for a coordinated multi-item outcome, `/to-backlog` for standalone desired changes, `/to-wiki` for conclusions that already describe accepted current state — including confirmed terminology and architectural decisions already in force, even when the term arose from an unshipped proposal. A decision that only takes effect once proposed work ships travels with that work instead. A single conversation can route to several; execution always passes through backlog readiness — there is no direct-implementation route.
+3. **backlog** owns the record mechanics for Epics (`EPIC-NNN`) and work items (`WORK-NNN`) under per-transaction owner approval; **to-epic** plans one Epic and **to-backlog** plans confirmed standalone items end-to-end to ready under a single standing approval each, pausing only for one explicit owner decision on research; **research-tech-stack** attaches version-matched evidence to a proposed record where readiness needs it. Readiness also requires `decisions` resolved: every architecturally significant design choice is drafted in ADR shape under `## Decisions`, or explicitly recorded as `none`. Only approved, ready work is executable.
+4. **to-wiki** is the knowledge counterpart of the to-\* planners: it publishes the conversation's confirmed durable knowledge — from discussion or codebase inspection — as validated **wiki** transactions under one standing approval, verifying every claim against repository evidence, including ADRs for decisions already in force. It pauses per item for anything destructive (deprecating or deleting a concept, superseding an ADR), and rejects proposal-shaped candidates back toward `/to-backlog` instead of publishing them.
 5. **implement** (single session) or **implement-with-subagents** (one fresh subagent per item) executes ready work: claim, conventional branch, incremental commits with per-subtask evidence, and a **code-review** loop on two independent axes — Standards (wiki and repository rules) and Spec (the work item's desired delta) — until both pass. Wiki changes are only drafted on the work branch, never applied there.
-6. Primary-branch acceptance is a merge commit plus the full suite. Only then are durable knowledge changes applied to the **wiki** as the exact owner-approved transaction, and the terminal backlog record is archived with its history. When no ready work remains, the loop closes by recommending `/discuss` on the next open outcome.
+6. Primary-branch acceptance is a merge commit plus the full suite. Only then are durable knowledge changes applied to the **wiki** as the exact owner-approved transaction — this is where each drafted decision becomes an ADR, its `ADR-NNN` is allocated, and any ADR it replaces is superseded in place — and the terminal backlog record is archived with its history. When no ready work remains, the loop closes by recommending `/discuss` on the next open outcome.
 
 Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments, chosen from the run's outcome, as the report's last line (a numbered list in run order when several must run) — so each step hands off to the next.
 
@@ -103,15 +105,15 @@ Both paths converge on the same cycle; they differ only in whether the wiki star
 |-------|-------------|
 | **setup-project** | Initialize or safely upgrade a project with wiki, backlog, validation, and agent instructions; back-fill a foundation wiki on brownfield repositories |
 | **discuss** | Stress-test an idea one question at a time, then recommend `/to-epic`, `/to-backlog`, or `/to-wiki` per conclusion |
-| **wiki** | Manage the lifecycle of accepted project knowledge |
-| **to-wiki** | Publish the conversation's confirmed durable knowledge to the wiki under one standing approval |
+| **wiki** | Manage the lifecycle of accepted project knowledge, including ADRs and their supersession |
+| **to-wiki** | Publish the conversation's confirmed durable knowledge, including ADRs for decisions in force, under one standing approval |
 | **backlog** | Manage approved desired work from intake through refinement, ranking, execution, and archival |
 | **to-epic** | Plan one Epic end-to-end to ready under one standing approval |
 | **to-backlog** | Take the conversation's confirmed standalone work items to ready under one standing approval |
 | **research-tech-stack** | Attach current, version-matched evidence to a proposed backlog item before readiness |
 | **implement** | Execute a ready work item or Epic through claim, implementation, review, and completion |
 | **implement-with-subagents** | Orchestrate an Epic or work-item set with one fresh subagent per item |
-| **code-review** | Review changes against accepted standards and the work item's scope |
+| **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's scope |
 
 ## Standalone Skills
 
