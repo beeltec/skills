@@ -1,6 +1,6 @@
 # Elementor Widget Catalog
 
-All built-in Elementor widgets with their `widgetType` identifiers and key settings.
+Built-in Elementor widgets with their `widgetType` identifiers and key settings. Settings shown are examples, not a stable schema — inspect same-site JSON when exact keys matter.
 
 ## Common Settings (All Widgets)
 
@@ -22,11 +22,27 @@ Every widget can have these settings in addition to its type-specific ones:
 
 Dimension format: `{ "top": "10", "right": "10", "bottom": "10", "left": "10", "unit": "px", "isLinked": true }`
 
-## Content Widgets
+## Icon Object Format
+
+Icons are used across many widgets:
+
+```json
+{ "value": "fas fa-home", "library": "fa-solid" }
+```
+
+Libraries: `fa-solid` (`fas fa-`), `fa-regular` (`far fa-`), `fa-brands` (`fab fa-`), `svg` (custom upload).
+
+## Repeater Item Format
+
+Many widgets use repeater arrays. Each item is `{ "_id": "a1b2c3d4", "field_name": "value", ... }`:
+
+- `_id` is required and unique within its repeater; preserve the site's observed ID format
+- Field names are widget-specific
+- Items are rendered in array order
+
+## Representative Examples
 
 ### `heading`
-
-Heading text element (H1–H6).
 
 ```json
 {
@@ -42,14 +58,11 @@ Heading text element (H1–H6).
 }
 ```
 
-| Setting | Values |
-|---------|--------|
-| `header_size` | `"h1"`, `"h2"`, `"h3"`, `"h4"`, `"h5"`, `"h6"` |
-| `align` | `"left"`, `"center"`, `"right"`, `"justify"` |
+`header_size`: `"h1"`–`"h6"`; `align`: `"left"`, `"center"`, `"right"`, `"justify"`.
 
 ### `text-editor`
 
-Rich text / WYSIWYG content block. Content is stored as HTML.
+Rich text block; content is stored as HTML.
 
 ```json
 {
@@ -62,8 +75,6 @@ Rich text / WYSIWYG content block. Content is stored as HTML.
 ```
 
 ### `image`
-
-Single image display.
 
 ```json
 {
@@ -84,41 +95,9 @@ Single image display.
 }
 ```
 
-| Setting | Values |
-|---------|--------|
-| `image_size` | `"full"`, `"large"`, `"medium"`, `"thumbnail"`, or custom `"NxN"` |
-| `link_to` | `"none"`, `"file"`, `"custom"` |
-| `hover_animation` | `""`, `"grow"`, `"shrink"`, `"pulse"`, `"push"`, `"bounce-in"`, `"float"` |
-
-### `video`
-
-Embedded video player.
-
-```json
-{
-  "video_type": "youtube",
-  "youtube_url": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-  "vimeo_url": "",
-  "dailymotion_url": "",
-  "hosted_url": { "url": "", "id": "" },
-  "autoplay": "yes",
-  "mute": "yes",
-  "loop": "yes",
-  "controls": "yes",
-  "aspect_ratio": "169",
-  "image_overlay": { "url": "", "id": "" },
-  "show_image_overlay": ""
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `video_type` | `"youtube"`, `"vimeo"`, `"dailymotion"`, `"hosted"` |
-| `aspect_ratio` | `"169"` (16:9), `"219"` (21:9), `"43"` (4:3), `"32"` (3:2), `"11"` (1:1), `"916"` (9:16) |
+`image_size`: `"full"`, `"large"`, `"medium"`, `"thumbnail"`, or custom `"NxN"`; `link_to`: `"none"`, `"file"`, `"custom"`; `hover_animation`: `""`, `"grow"`, `"shrink"`, `"pulse"`, `"push"`, `"bounce-in"`, `"float"`.
 
 ### `button`
-
-Call-to-action button.
 
 ```json
 {
@@ -141,186 +120,9 @@ Call-to-action button.
 }
 ```
 
-| Setting | Values |
-|---------|--------|
-| `size` | `"xs"`, `"sm"`, `"md"`, `"lg"`, `"xl"` |
-| `button_type` | `"default"`, `"info"`, `"success"`, `"warning"`, `"danger"` |
-| `icon_align` | `"left"`, `"right"` |
+`size`: `"xs"`–`"xl"`; `button_type`: `"default"`, `"info"`, `"success"`, `"warning"`, `"danger"`; `icon_align`: `"left"`, `"right"`.
 
-### `divider`
-
-Horizontal rule / separator.
-
-```json
-{
-  "style": "solid",
-  "weight": { "size": 2, "unit": "px" },
-  "width": { "size": 100, "unit": "%" },
-  "align": "center",
-  "gap": { "size": 15, "unit": "px" },
-  "color": "#DDDDDD",
-  "look": "line",
-  "text": "",
-  "icon": { "value": "", "library": "" }
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `style` | `"solid"`, `"double"`, `"dotted"`, `"dashed"` |
-| `look` | `"line"`, `"line_text"`, `"line_icon"` |
-
-### `spacer`
-
-Vertical whitespace.
-
-```json
-{
-  "space": { "size": 50, "unit": "px" }
-}
-```
-
-### `read-more`
-
-"Read More" link for post excerpts.
-
-```json
-{
-  "link_text": "Read More \u00bb"
-}
-```
-
-## Image & Gallery Widgets
-
-### `image-box`
-
-Image with heading and description below/beside it.
-
-```json
-{
-  "image": { "url": "https://example.com/icon.png", "id": "" },
-  "image_size": "thumbnail",
-  "title_text": "Feature Title",
-  "description_text": "Short description of the feature.",
-  "link": { "url": "", "is_external": "", "nofollow": "" },
-  "position": "top"
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `position` | `"top"`, `"left"`, `"right"` |
-
-### `image-carousel`
-
-Sliding image carousel.
-
-```json
-{
-  "carousel": [
-    { "_id": "a1b2c3d4", "url": "https://example.com/slide1.jpg", "id": "" },
-    { "_id": "e5f6a7b8", "url": "https://example.com/slide2.jpg", "id": "" }
-  ],
-  "image_size": "full",
-  "slides_to_show": "3",
-  "slides_to_scroll": "1",
-  "navigation": "both",
-  "autoplay": "yes",
-  "autoplay_speed": 5000,
-  "infinite": "yes",
-  "pause_on_hover": "yes",
-  "link_to": "none",
-  "caption_type": ""
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `navigation` | `"both"`, `"arrows"`, `"dots"`, `"none"` |
-| `link_to` | `"none"`, `"file"`, `"custom"` |
-
-### `image-gallery`
-
-Grid/masonry image gallery.
-
-```json
-{
-  "gallery": [
-    { "_id": "a1b2c3d4", "url": "https://example.com/img1.jpg", "id": "" },
-    { "_id": "e5f6a7b8", "url": "https://example.com/img2.jpg", "id": "" }
-  ],
-  "image_size": "medium",
-  "gallery_columns": 3,
-  "gallery_link": "file",
-  "gallery_rand": ""
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `gallery_link` | `"file"`, `"none"` |
-| `gallery_rand` | `""` (ordered), `"rand"` (randomized) |
-
-## Icon Widgets
-
-### Icon Object Format
-
-Icons are used across many widgets:
-
-```json
-{
-  "value": "fas fa-home",
-  "library": "fa-solid"
-}
-```
-
-| Library | Prefix | Example |
-|---------|--------|---------|
-| `fa-solid` | `fas fa-` | `"fas fa-check"` |
-| `fa-regular` | `far fa-` | `"far fa-heart"` |
-| `fa-brands` | `fab fa-` | `"fab fa-twitter"` |
-| `svg` | (custom) | SVG upload |
-
-### `icon`
-
-Standalone icon display.
-
-```json
-{
-  "selected_icon": { "value": "fas fa-star", "library": "fa-solid" },
-  "view": "default",
-  "shape": "circle",
-  "align": "center",
-  "link": { "url": "", "is_external": "", "nofollow": "" },
-  "primary_color": "#0073AA",
-  "size": { "size": 50, "unit": "px" }
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `view` | `"default"` (icon only), `"stacked"` (filled bg), `"framed"` (border) |
-| `shape` | `"circle"`, `"square"` |
-
-### `icon-box`
-
-Icon with heading and description.
-
-```json
-{
-  "selected_icon": { "value": "fas fa-cog", "library": "fa-solid" },
-  "title_text": "Feature Name",
-  "description_text": "Feature description here.",
-  "link": { "url": "", "is_external": "", "nofollow": "" },
-  "position": "top",
-  "title_size": "h3",
-  "view": "default"
-}
-```
-
-### `icon-list`
-
-Vertical list with icons per item.
+### `icon-list` (repeater example)
 
 ```json
 {
@@ -345,138 +147,7 @@ Vertical list with icons per item.
 }
 ```
 
-### `social-icons`
-
-Row of social media icon links.
-
-```json
-{
-  "social_icon_list": [
-    {
-      "_id": "a1b2c3d4",
-      "social_icon": { "value": "fab fa-facebook", "library": "fa-brands" },
-      "link": { "url": "https://facebook.com/example", "is_external": "on", "nofollow": "" }
-    },
-    {
-      "_id": "e5f6a7b8",
-      "social_icon": { "value": "fab fa-twitter", "library": "fa-brands" },
-      "link": { "url": "https://twitter.com/example", "is_external": "on", "nofollow": "" }
-    }
-  ],
-  "shape": "rounded",
-  "align": "center",
-  "columns": 0,
-  "icon_color": "custom",
-  "icon_primary_color": "#FFFFFF",
-  "icon_secondary_color": "#333333"
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `shape` | `"rounded"`, `"square"`, `"circle"` |
-
-### `star-rating`
-
-Star rating display.
-
-```json
-{
-  "rating_scale": 5,
-  "rating": 4.5,
-  "star_style": "star_fontawesome",
-  "title": "Excellent Service",
-  "align": "center",
-  "icon_size": { "size": 20, "unit": "px" },
-  "icon_color": "#FFC107",
-  "icon_unmarked_color": "#CCCCCC"
-}
-```
-
-## Interactive Widgets
-
-### `counter`
-
-Animated number counter.
-
-```json
-{
-  "starting_number": 0,
-  "ending_number": 250,
-  "prefix": "$",
-  "suffix": "K+",
-  "duration": 2000,
-  "thousand_separator": "yes",
-  "thousand_separator_char": ",",
-  "title": "Revenue Generated",
-  "align": "center",
-  "number_color": "#0073AA",
-  "title_color": "#333333"
-}
-```
-
-### `progress`
-
-Progress bar with percentage.
-
-```json
-{
-  "title": "Web Development",
-  "progress_type": "",
-  "percent": { "size": 85, "unit": "%" },
-  "display_percentage": "show",
-  "inner_text": "",
-  "bar_color": "#0073AA",
-  "bar_bg_color": "#EEEEEE",
-  "title_color": "#333333"
-}
-```
-
-### `testimonial`
-
-Customer testimonial quote.
-
-```json
-{
-  "testimonial_content": "This product completely transformed our workflow. Highly recommended!",
-  "testimonial_image": { "url": "https://example.com/avatar.jpg", "id": "" },
-  "testimonial_name": "Jane Smith",
-  "testimonial_job": "CEO, Example Corp",
-  "testimonial_image_position": "aside",
-  "alignment": "center",
-  "content_content_color": "#666666",
-  "name_text_color": "#333333"
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `testimonial_image_position` | `"aside"`, `"top"` |
-
-### `alert`
-
-Dismissible alert/notice box.
-
-```json
-{
-  "alert_type": "info",
-  "alert_title": "Notice",
-  "alert_description": "This is an informational message.",
-  "show_dismiss": "show",
-  "dismiss_icon": { "value": "fas fa-times", "library": "fa-solid" }
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `alert_type` | `"info"`, `"success"`, `"warning"`, `"danger"` |
-| `show_dismiss` | `"show"`, `"hide"` |
-
-## Tab & Accordion Widgets
-
-### `tabs`
-
-Horizontal tabbed content.
+### `tabs` (tabbed-content example)
 
 ```json
 {
@@ -492,151 +163,33 @@ Horizontal tabbed content.
 }
 ```
 
-| Setting | Values |
-|---------|--------|
-| `type` | `"horizontal"`, `"vertical"` |
+`type`: `"horizontal"`, `"vertical"`.
 
-### `accordion`
+## All Other Widgets
 
-Collapsible accordion (one open at a time).
-
-```json
-{
-  "tabs": [
-    { "_id": "a1b2c3d4", "tab_title": "Question 1?", "tab_content": "<p>Answer to question 1.</p>" },
-    { "_id": "e5f6a7b8", "tab_title": "Question 2?", "tab_content": "<p>Answer to question 2.</p>" }
-  ],
-  "selected_icon": { "value": "fas fa-plus", "library": "fa-solid" },
-  "selected_active_icon": { "value": "fas fa-minus", "library": "fa-solid" },
-  "title_color": "#333333",
-  "title_background": "#F5F5F5",
-  "title_active_color": "#0073AA",
-  "content_color": "#666666"
-}
-```
-
-### `toggle`
-
-Toggle panels (multiple can be open simultaneously). Same settings structure as `accordion`.
-
-```json
-{
-  "tabs": [
-    { "_id": "a1b2c3d4", "tab_title": "Toggle Section 1", "tab_content": "<p>Toggle content here.</p>" },
-    { "_id": "e5f6a7b8", "tab_title": "Toggle Section 2", "tab_content": "<p>More toggle content.</p>" }
-  ],
-  "selected_icon": { "value": "fas fa-caret-right", "library": "fa-solid" },
-  "selected_active_icon": { "value": "fas fa-caret-down", "library": "fa-solid" }
-}
-```
-
-## Embed & Code Widgets
-
-### `html`
-
-Custom HTML block.
-
-```json
-{
-  "html": "<div class=\"custom-widget\">\n  <p>Raw HTML content here</p>\n</div>"
-}
-```
-
-### `shortcode`
-
-WordPress shortcode execution.
-
-```json
-{
-  "shortcode": "[contact-form-7 id=\"123\" title=\"Contact Form\"]"
-}
-```
-
-### `google_maps`
-
-Embedded Google Map.
-
-```json
-{
-  "address": "1600 Amphitheatre Parkway, Mountain View, CA",
-  "zoom": { "size": 14, "unit": "px" },
-  "height": { "size": 400, "unit": "px" }
-}
-```
-
-Note: `widgetType` is `"google_maps"` (underscore, not hyphen).
-
-### `menu-anchor`
-
-Invisible anchor point for one-page navigation.
-
-```json
-{
-  "anchor": "services",
-  "anchor_description": ""
-}
-```
-
-Use with links like `#services` to scroll to this point.
-
-### `sidebar`
-
-Displays a WordPress widget area/sidebar.
-
-```json
-{
-  "sidebar": "sidebar-1"
-}
-```
-
-The value is the registered sidebar ID from the theme.
-
-### `audio`
-
-Audio player.
-
-```json
-{
-  "audio_type": "hosted",
-  "hosted_url": { "url": "https://example.com/audio.mp3", "id": "" },
-  "external_url": { "url": "" },
-  "autoplay": "",
-  "loop": ""
-}
-```
-
-| Setting | Values |
-|---------|--------|
-| `audio_type` | `"hosted"`, `"external"` |
-
-## Other Widgets
-
-### `rating`
-
-Interactive star rating display (distinct from `star-rating` — this is the newer Pro-like variant available in free Elementor).
-
-```json
-{
-  "rating_scale": 5,
-  "rating_value": 4,
-  "star_style": "star_fontawesome",
-  "title": "Rating Title",
-  "alignment": "center"
-}
-```
-
-## Repeater Item Format
-
-Many widgets use repeater arrays. Each item follows this pattern:
-
-```json
-{
-  "_id": "a1b2c3d4",
-  "field_name": "value",
-  "another_field": "value"
-}
-```
-
-- `_id` is required and unique within its repeater; preserve the site's observed ID format
-- Field names are widget-specific
-- Items are rendered in array order
+| `widgetType` | Key settings | Notes / value enums |
+|---|---|---|
+| `video` | `video_type`, `youtube_url`/`vimeo_url`/`dailymotion_url`/`hosted_url`, `autoplay`, `mute`, `loop`, `controls`, `aspect_ratio`, `image_overlay`, `show_image_overlay` | `video_type`: `"youtube"`, `"vimeo"`, `"dailymotion"`, `"hosted"`; `aspect_ratio`: `"169"`, `"219"`, `"43"`, `"32"`, `"11"`, `"916"` |
+| `divider` | `style`, `weight`, `width`, `align`, `gap`, `color`, `look`, `text`, `icon` | `style`: `"solid"`, `"double"`, `"dotted"`, `"dashed"`; `look`: `"line"`, `"line_text"`, `"line_icon"` |
+| `spacer` | `space` | size object, e.g. `{ "size": 50, "unit": "px" }` |
+| `read-more` | `link_text` | |
+| `image-box` | `image`, `image_size`, `title_text`, `description_text`, `link`, `position` | `position`: `"top"`, `"left"`, `"right"` |
+| `image-carousel` | `carousel` (repeater of images), `image_size`, `slides_to_show`, `slides_to_scroll`, `navigation`, `autoplay`, `autoplay_speed`, `infinite`, `pause_on_hover`, `link_to`, `caption_type` | `navigation`: `"both"`, `"arrows"`, `"dots"`, `"none"` |
+| `image-gallery` | `gallery` (repeater of images), `image_size`, `gallery_columns`, `gallery_link`, `gallery_rand` | `gallery_link`: `"file"`, `"none"`; `gallery_rand`: `""`, `"rand"` |
+| `icon` | `selected_icon`, `view`, `shape`, `align`, `link`, `primary_color`, `size` | `view`: `"default"`, `"stacked"`, `"framed"`; `shape`: `"circle"`, `"square"` |
+| `icon-box` | `selected_icon`, `title_text`, `description_text`, `link`, `position`, `title_size`, `view` | |
+| `social-icons` | `social_icon_list` (repeater: `social_icon`, `link`), `shape`, `align`, `columns`, `icon_color`, `icon_primary_color`, `icon_secondary_color` | `shape`: `"rounded"`, `"square"`, `"circle"` |
+| `star-rating` | `rating_scale`, `rating`, `star_style`, `title`, `align`, `icon_size`, `icon_color`, `icon_unmarked_color` | |
+| `rating` | `rating_scale`, `rating_value`, `star_style`, `title`, `alignment` | newer variant, distinct from `star-rating` |
+| `counter` | `starting_number`, `ending_number`, `prefix`, `suffix`, `duration`, `thousand_separator`, `thousand_separator_char`, `title`, `align`, `number_color`, `title_color` | |
+| `progress` | `title`, `progress_type`, `percent`, `display_percentage`, `inner_text`, `bar_color`, `bar_bg_color`, `title_color` | `display_percentage`: `"show"`, `"hide"` |
+| `testimonial` | `testimonial_content`, `testimonial_image`, `testimonial_name`, `testimonial_job`, `testimonial_image_position`, `alignment` | `testimonial_image_position`: `"aside"`, `"top"` |
+| `alert` | `alert_type`, `alert_title`, `alert_description`, `show_dismiss`, `dismiss_icon` | `alert_type`: `"info"`, `"success"`, `"warning"`, `"danger"`; `show_dismiss`: `"show"`, `"hide"` |
+| `accordion` | `tabs` (repeater: `tab_title`, `tab_content`), `selected_icon`, `selected_active_icon`, title/content colors | one panel open at a time |
+| `toggle` | same structure as `accordion` | multiple panels can be open |
+| `html` | `html` | raw HTML string |
+| `shortcode` | `shortcode` | e.g. `"[contact-form-7 id=\"123\"]"` |
+| `google_maps` | `address`, `zoom`, `height` | `widgetType` uses underscore, not hyphen |
+| `menu-anchor` | `anchor`, `anchor_description` | link with `#<anchor>` to scroll to it |
+| `sidebar` | `sidebar` | registered sidebar ID from the theme |
+| `audio` | `audio_type`, `hosted_url`, `external_url`, `autoplay`, `loop` | `audio_type`: `"hosted"`, `"external"` |
