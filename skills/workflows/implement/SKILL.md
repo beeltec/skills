@@ -31,6 +31,8 @@ An already-read authority is void and must be re-read when any of these holds:
 
 Always re-read global rank, claims, statuses, and indexes before every selection and terminal transition regardless of freshness. When freshness is uncertain, re-read: a stale authority is a correctness failure, a redundant read is only slow.
 
+**Suite freshness:** a passing full applicable suite is green for the exact tree that produced it. A later gate requiring the suite cites that result while the tree is unchanged, and re-runs it once any tracked file changed. A backlog-only bookkeeping commit cannot affect it.
+
 ## Preflight
 
 Complete before creating or switching a branch or mutating a claim:
@@ -91,7 +93,7 @@ Renew the claim in a separately validated transaction before expiry; never conti
 After implementation and the full applicable suite are green, invoke `$code-review` with the `WORK-NNN`, this item's captured fixed point, and the packet paths and roles resolved in preflight (backlog-aware Standards and Spec axes). Then loop:
 
 1. Address every actionable finding without changing approved scope.
-2. Rerun affected focused checks and the full applicable suite.
+2. Rerun affected focused checks and the full applicable suite under suite freshness.
 3. Invoke `$code-review` again against the same fixed point as a delta review: pass the previous pass's reviewed commit and its findings so it confirms each is resolved and reviews only the diff since that commit.
 4. Repeat until both axes pass.
 
@@ -116,7 +118,7 @@ Integration is a per-work-item gate, including during an Epic invocation:
 
 1. Confirm: live claim, all criteria and subtasks checked, both review axes pass, reconciliation unnecessary or exactly approved, validator and full suite pass, no unintended staged changes.
 2. Merge the work branch into the primary branch with a merge commit — never squash or fast-forward. Resolve no unexpected conflict by changing scope; stop safely instead.
-3. On the primary branch, rerun `node scripts/validate-project.mjs` and the full suite. The merge commit plus post-merge checks establish primary-branch acceptance.
+3. On the primary branch, rerun `node scripts/validate-project.mjs` and the full suite. When the merge commit's tree hash equals that of the last green tree, cite that result and record both hashes in `## Execution` as the post-merge evidence. The merge commit plus post-merge checks establish primary-branch acceptance.
 4. If durable knowledge changed, invoke `$wiki` on the primary branch: re-verify the approved wording describes the now-accepted state, apply that exact semantic transaction with required indexes, links, metadata, and log changes, validate, and commit only its wiki paths. Publish each approved drafted decision as an ADR here — `$wiki` allocates the next unused `ADR-NNN` at this point and supersedes any replaced ADR in place, in both directions. If the evidence requires different meaning, stop for revised owner approval.
 5. Apply one validated backlog completion transaction: clear `claim` and `claim_expires`, set `done`, replace `decisions: pending` with the ADR IDs just published (or `none` where the significance test recorded no qualifying decision), remove from global rank, preserve all verified evidence. Move a standalone item to `archive/standalone/` and update indexes immediately; leave a done Epic child in its active Epic directory until the Epic closes.
 6. Stage only the completion transaction's backlog paths, validate the staged diff, and create a concise Conventional Commit on primary. Never mark done before steps 1-4 succeed.

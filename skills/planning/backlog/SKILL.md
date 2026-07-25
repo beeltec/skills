@@ -138,7 +138,7 @@ For each approved mutation:
 1. Restate the exact approved transaction and affected records. For gate-backed bookkeeping, state the gate and named work item instead of seeking repeated approval.
 2. Edit all affected records, reciprocal links, indexes, and rank as one logical transaction, with no unrelated cleanup.
 3. Run `node scripts/validate-project.mjs`. Fix all errors and review warnings. If it cannot pass, do not commit; report the invalid transaction.
-4. Inspect `git diff`, `git diff --cached`, and `git status`. Stage only the transaction's intended `docs/backlog` paths; handle a separately approved wiki update as its own validated workflow and commit. Never use broad staging commands.
+4. Inspect `git diff`, `git diff --cached`, and `git status`; for a bookkeeping transaction, stage first and inspect once with `git status --short` and `git diff --cached`. Stage only the transaction's intended `docs/backlog` paths; handle a separately approved wiki update as its own validated workflow and commit. Never use broad staging commands.
 5. Verify the staged path list and diff contain no unrelated files, secrets, working notes, or `docs/tasks` content.
 6. Create one concise Conventional Commit, normally `docs(backlog): <transaction outcome>`. Keep temporary claims in their own transaction when practical.
 7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); omit when none follows. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
