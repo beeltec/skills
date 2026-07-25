@@ -1,11 +1,13 @@
 ---
 name: implement-with-subagents
-description: Orchestrate an explicit ready Epic or selected backlog work-item set through sequential, isolated implementation subagents. Use only when the user explicitly invokes $implement-with-subagents with an EPIC-NNN, WORK-NNN IDs, backlog record paths, or an unambiguous set established by the conversation.
+description: Orchestrate an explicit ready Epic or selected backlog work-item set through isolated implementation subagents with serialized integration. Use only when the user explicitly invokes $implement-with-subagents with an EPIC-NNN, WORK-NNN IDs, backlog record paths, or an unambiguous set established by the conversation.
 ---
 
 # Implement with Subagents
 
-Orchestrate approved `setup-project` backlog work: own authority discovery, selection, sequencing, verification, recovery, and Epic closure; delegate each item to exactly one fresh subagent running `$implement`. Never implement work-item scope in the orchestrator, run or pause more than one implementation subagent at a time, or create, inspect, or depend on `docs/tasks` or a master task document.
+Orchestrate approved `setup-project` backlog work: own authority discovery, selection, sequencing, verification, recovery, and Epic closure; delegate each item to exactly one fresh subagent running `$implement`. Never implement work-item scope in the orchestrator, or create, inspect, or depend on `docs/tasks` or a master task document.
+
+**Serialized integration:** run at most three items concurrently, and only where no `blocks` link joins them in either direction and their declared subtask scopes are disjoint; give each an isolated git worktree. Admit one item to primary at a time. An item whose turn follows another's merge merges primary into its branch, re-verifies, and re-reviews the delta before its own acceptance gate. Concurrency is safe because the constraints behind strict sequencing were the shared worktree and primary contention, not the work; the accepted cost is that a landed sibling can force an in-flight item to re-merge, re-verify, and re-review.
 
 ## Inputs
 
@@ -30,10 +32,10 @@ Reject: a proposed item, malformed Definition of Ready, missing rank entry for a
 
 Loop over authorized incomplete work:
 
-1. Rerun the validator before every selection, and reload global rank, claims, statuses, and indexes plus every path the completed item's merge commit touched; the rest of the packet stays read under `$implement`'s Authority Packet Freshness rule. First resume an active item with this run's live claim and assigned subagent; otherwise select the first authorized item in global rank that is `ready`, unclaimed, and free of unresolved inward blockers.
+1. Rerun the validator before every selection and every admission to primary, and reload global rank, claims, statuses, and indexes plus every path the completed item's merge commit touched; the rest of the packet stays read under `$implement`'s Authority Packet Freshness rule. First resume an active item with this run's live claim and assigned subagent; otherwise select the first authorized item in global rank that is `ready`, unclaimed, and free of unresolved inward blockers.
 2. Spawn one fresh subagent dedicated to that `WORK-NNN`; record the item-to-agent/session mapping. Never assign it another item.
 3. Give it a self-contained prompt: invoke and follow `$implement` with the selected ID/path, scoped only to that item; repository root, record and parent Epic paths, authorized-scope description; blocker outcomes, relationship paths, wiki references, fixed constraints, and user instructions; the exact paths of every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` for the technologies and standards that item's delta touches, named explicitly because a fresh subagent cannot inherit them from this context, with the instruction to read each one and treat its `Requirements` as binding, plus every touched subject that has no page so the subagent reports it; inspect repository and Git state before editing, preserve unrelated work, never broaden scope or change rank; complete every direct `$implement` gate (claim, branch, review, reconciliation, primary-branch acceptance, completion, archival); report changed paths, commits and merge commits, checks, review results, acceptance evidence, wiki reconciliation, final status, claim state, archive destination, and concerns.
-4. Pass supported model/effort settings; wait for the subagent to return before any later selection.
+4. Pass supported model/effort settings. Select again immediately while a concurrency slot is free; otherwise wait for a subagent to return.
 
 No umbrella branch: each subagent's `$implement` invocation uses exactly one fresh conventional branch; never reuse an earlier item's branch.
 
@@ -47,7 +49,7 @@ After every subagent response, independently inspect Git state and history, the 
 - a merge commit and post-merge checks establish primary-branch acceptance before `done`;
 - claim cleared, item removed from rank, status/indexes/archive per backlog maintenance; item branch cleaned up only after its cleanup gates passed.
 
-If evidence is missing or a check fails, send a focused follow-up with concrete evidence to the same assigned subagent and wait — no replacement subagent, no later item while that item is active. If it cannot continue, its claim conflicts, a required owner decision is unavailable, or safe recovery cannot be proved, stop and report the blocker. Never release or overwrite another executor's claim. After an item passes, finish its subagent, reload rank and claim data and the paths its merge commit touched, validate, and recalculate actionability.
+If evidence is missing or a check fails, send a focused follow-up with concrete evidence to the same assigned subagent and wait — no replacement subagent, and no admission of that item to primary while it is unresolved. If it cannot continue, its claim conflicts, a required owner decision is unavailable, or safe recovery cannot be proved, stop and report the blocker. Never release or overwrite another executor's claim. After an item passes, finish its subagent, reload rank and claim data and the paths its merge commit touched, validate, and recalculate actionability.
 
 ## Epic Closure
 
