@@ -46,7 +46,7 @@ End the report with `Next step:` — one copy-pasteable command: greenfield → 
 
 - Read `docs/backlog/maintenance.md` before creating or changing records — it is canonical for hierarchy, statuses, readiness, relationships, ranking, claims, cancellation, and archival.
 - Desired deltas stay in the backlog until completed outcomes are accepted into the wiki. Use `$wiki` for accepted-knowledge operations.
-- Explicit project-owner approval is required before moving work to `ready`, changing global rank, cancelling work, superseding an ADR, or changing accepted wiki meaning.
+- Explicit project-owner approval is required before moving work to `ready`, walking work back from `ready` to `proposed`, changing global rank, cancelling work, superseding an ADR, or changing accepted wiki meaning.
 - Each record's `decisions` field and `## Decisions` section carry decisions drafted in ADR shape; `pending` blocks readiness, and publication as an ADR happens only at primary-branch acceptance.
 - Immutable global `EPIC-NNN` IDs for Epics; `WORK-NNN` for peer Story, Task, and Bug records.
 - Every active executable item appears exactly once in the root global rank. Checklist subtasks for local steps; temporary claims for in-progress coordination.

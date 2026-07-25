@@ -84,7 +84,7 @@ Present findings, proposed edits, resulting research state, and readiness effect
 
 ## Readiness and persistence
 
-- Never change a record from `proposed` to `ready` here — `$backlog` owns that transition.
+- Never change a record's status here — `$backlog` owns all transitions, including the `ready -> proposed` walk-back that makes a record eligible for research again.
 - `pending` research is a hard readiness failure. Never relabel uncertainty as `complete`; the validator requires `complete` or `not-needed` before `ready`.
 - Proposal-specific sources, findings, recommendations, uncertainty, and deviations stay in the backlog record.
 - During post-acceptance reconciliation, promote only conclusions that became durable accepted guidance to the owning wiki concept via `$wiki` under its approval rules, summarizing rather than copying; retain the backlog research as history.

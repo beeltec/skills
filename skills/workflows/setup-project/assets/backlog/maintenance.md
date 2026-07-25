@@ -21,6 +21,7 @@ Epic transitions are:
 - `proposed -> ready` after its outcome, acceptance criteria, and initial child scope are approved.
 - `ready -> in-progress` when execution of a child begins.
 - `in-progress -> done` only when every child is `done` or `cancelled`, Epic acceptance is satisfied, accepted-state wiki updates are complete, and the entire Epic is archived atomically.
+- `ready -> proposed` only with owner approval, a recorded walk-back reason in `## Execution`, and an explicit disposition for every non-`proposed` child.
 - `proposed`, `ready`, or `in-progress -> cancelled` only with a recorded cancellation rationale. Cancel or complete every child and archive the entire Epic atomically.
 
 Executable-work transitions are:
@@ -29,6 +30,7 @@ Executable-work transitions are:
 - `ready -> in-progress` only when an agent records a temporary execution claim.
 - `in-progress -> done` only when acceptance and checklist subtasks are complete and applicable wiki updates are made.
 - `in-progress -> ready` when a claim is released without completion.
+- `ready -> proposed` only with owner approval and a recorded walk-back reason in `## Execution`. Claim fields must be `none`; keep existing research, decisions, criteria, and rank position unchanged.
 - `proposed`, `ready`, or `in-progress -> cancelled` only with a recorded cancellation rationale.
 
 Do not skip states or infer approval. Record owner approval in the work item's `## Execution` section.

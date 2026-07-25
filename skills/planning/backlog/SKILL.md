@@ -11,11 +11,11 @@ Stay on the current branch — never create, switch, merge, or delete branches. 
 
 ## Authority
 
-The project owner controls durable intent and priority. Obtain explicit approval before: creating any record (even a lightweight proposal); changing an outcome, scope, criterion wording, work type, parent, or initial child set; changing relationship links; adding to or reordering global rank; moving work to `ready`; cancelling work (including its rationale and the disposition of unfinished children); or changing accepted wiki state.
+The project owner controls durable intent and priority. Obtain explicit approval before: creating any record (even a lightweight proposal); changing an outcome, scope, criterion wording, work type, parent, or initial child set; changing relationship links; adding to or reordering global rank; moving work to `ready`; walking work back from `ready` to `proposed`; cancelling work (including its rationale and the disposition of unfinished children); or changing accepted wiki state.
 
 Approval covers only the exact transaction presented — never infer it from earlier discussion, a plan, silence, or permission to inspect files. Record approval in `## Execution` when readiness requires it and preserve provenance.
 
-An invoked gate-backed execution workflow that explicitly authorizes an agent/session for a named, already-approved work item permits only: setting, renewing, and clearing its own temporary claim; checking existing acceptance criteria and subtasks with evidence; and the normal `ready <-> in-progress` and `in-progress -> done` transitions. It never permits changing criterion wording, scope, parentage, relationships, rank, cancellation, or wiki acceptance.
+An invoked gate-backed execution workflow that explicitly authorizes an agent/session for a named, already-approved work item permits only: setting, renewing, and clearing its own temporary claim; checking existing acceptance criteria and subtasks with evidence; and the normal `ready <-> in-progress` and `in-progress -> done` transitions. It never permits changing criterion wording, scope, parentage, relationships, rank, cancellation, walking work back to `proposed`, or wiki acceptance.
 
 ## Preflight
 
@@ -101,6 +101,14 @@ Before claiming, verify the item is actionable and no unexpired claim exists. A 
 Releasing unfinished work: set `status: ready`, `claim: none`, `claim_expires: none`. Recording completion: check only criteria and subtasks supported by evidence, apply required accepted-state wiki updates under their own approval rules, clear claim fields, set `done`, and perform rank removal and archival in the same validated transaction where maintenance requires it. Any incomplete criterion or subtask forbids `done`.
 
 Move a ready Epic to `in-progress` when a child's execution begins. Complete an Epic only after every child is terminal, Epic acceptance is evidenced, and required wiki updates are complete.
+
+## Walking Back To Proposed
+
+`ready -> proposed` reverses an approved readiness decision and always requires explicit owner approval and a concrete reason (scope change, stale research or decisions, invalidated approach) recorded in `## Execution`. Refuse while the item is `in-progress` or any claim field is set — release to `ready` first. Preserve research, decisions, criteria, subtasks, and evidence as-is, and keep the rank position; rank removal is reserved for terminal transitions.
+
+Before walking back an Epic, enumerate every non-`proposed` child and obtain an explicit disposition for each: walk it back too, leave it `ready`, or cancel it with its own rationale. Never infer bulk child walk-back. Warn that a child left `ready` remains individually executable.
+
+After the transaction, recommend the re-entry command the reason implies (`/research`, `/to-backlog WORK-NNN`, or `/to-epic EPIC-NNN`) via `Next step:`.
 
 ## Cancellation
 
