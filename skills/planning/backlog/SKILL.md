@@ -128,6 +128,6 @@ For each approved mutation:
 4. Inspect `git diff`, `git diff --cached`, and `git status`. Stage only the transaction's intended `docs/backlog` paths; handle a separately approved wiki update as its own validated workflow and commit. Never use broad staging commands.
 5. Verify the staged path list and diff contain no unrelated files, secrets, working notes, or `docs/tasks` content.
 6. Create one concise Conventional Commit, normally `docs(backlog): <transaction outcome>`. Keep temporary claims in their own transaction when practical.
-7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); recommend only, omit when none follows.
+7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); recommend only, omit when none follows. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.
 
 If approval is denied or changed, revise the proposal in conversation without mutating files. If unrelated worktree changes overlap an affected file, preserve them and ask before proceeding when a safe narrow transaction is not possible.

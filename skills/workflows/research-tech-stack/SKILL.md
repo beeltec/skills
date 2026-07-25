@@ -40,4 +40,4 @@ Stay on the user's current Git branch — never create, switch, merge, or delete
 
 After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, sources, research state, unresolved readiness blockers, commit hash, and validation result.
 
-End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes the record's planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it.
+End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes the record's planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.

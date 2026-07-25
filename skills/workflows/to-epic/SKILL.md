@@ -24,4 +24,4 @@ Stay on the current branch. Never create or use `docs/tasks`.
 
 A failed validator, unresolved research the owner declined, or a missing readiness requirement is a blocker: leave the record `proposed`, keep committed transactions intact, and report — never force `ready`.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `/implement EPIC-NNN` (or `/implement-with-subagents EPIC-NNN` for isolated per-child sessions); a record left `proposed` → the exact command that resumes it after its named blocker. Recommend only — never invoke it.
+End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `/implement EPIC-NNN` (or `/implement-with-subagents EPIC-NNN` for isolated per-child sessions); a record left `proposed` → the exact command that resumes it after its named blocker. Recommend only — never invoke it. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.

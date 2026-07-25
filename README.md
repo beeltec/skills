@@ -88,7 +88,7 @@ flowchart TD
 5. **implement** (single session) or **implement-with-subagents** (one fresh subagent per item) executes ready work: claim, conventional branch, incremental commits with per-subtask evidence, and a **code-review** loop on two independent axes — Standards (wiki and repository rules) and Spec (the work item's desired delta) — until both pass. Wiki changes are only drafted on the work branch, never applied there.
 6. Primary-branch acceptance is a merge commit plus the full suite. Only then are durable knowledge changes applied to the **wiki** as the exact owner-approved transaction, and the terminal backlog record is archived with its history. When no ready work remains, the loop closes by recommending `/discuss` on the next open outcome.
 
-Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments, chosen from the run's outcome — so each step hands off to the next.
+Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments, chosen from the run's outcome, as the report's last line (a numbered list in run order when several must run) — so each step hands off to the next.
 
 **setup-project**, **discuss**, **to-epic**, **to-backlog**, and **to-wiki** are user-invoked only (`disable-model-invocation: true`): invoking them is itself an owner decision — for the to-\* skills it grants the standing approval — so an agent may recommend the command but never run it on its own.
 

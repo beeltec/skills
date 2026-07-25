@@ -21,4 +21,4 @@ Stay on the current branch. Never create or use `docs/tasks`.
 
 A failed validator, evidence contradicting a confirmed conclusion, or unestablished current acceptance is a blocker: publish nothing for that candidate, keep committed transactions intact, and report — never force acceptance.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists. Recommend only — never invoke it; omit the line when no follow-up exists.
+End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists. Recommend only — never invoke it; omit the line when no follow-up exists. The command must be the report's last line — nothing after it; if several must run in order, end with them as a numbered list in run order.

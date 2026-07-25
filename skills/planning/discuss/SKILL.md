@@ -36,4 +36,4 @@ Discuss is fully advisory: it reads and asks but never invokes a mutating skill 
 - A conversation may contain several: route the desired delta to `/to-epic` or `/to-backlog` and only independently current, durable facts to `/to-wiki`, without duplicating the proposal.
 - Unresolved decisions stay in the conversation or the proposed backlog record — never presented as accepted wiki knowledge or as ready work.
 
-Ask one final handoff question in the same numbered format, then end the turn with each accepted command as one complete copy-pasteable prompt — `/to-epic`, `/to-backlog`, or `/to-wiki` followed by the confirmed conclusions it should process — never invoke them or fall back to invoking `$backlog` or `$wiki` yourself.
+Ask one final handoff question in the same numbered format, then end the turn with each accepted command as one complete copy-pasteable prompt — `/to-epic`, `/to-backlog`, or `/to-wiki` followed by the confirmed conclusions it should process. The commands are the turn's final lines — nothing after them; several → a numbered list in run order. Never invoke them or fall back to invoking `$backlog` or `$wiki` yourself.
