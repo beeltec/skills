@@ -39,6 +39,8 @@ A lightweight proposed record needs only:
 - **Epic:** next unused immutable `EPIC-NNN`; type `epic`, a concise outcome-centered title, `status: proposed`; a specific problem, delta, or outcome; declared empty or approved relationship arrays, `cancelled_reason: none`, and provenance.
 - **Executable item:** next unused immutable `WORK-NNN` from the one global sequence shared by Stories, Tasks, and Bugs; the best-supported type, a concise title, `status: proposed`; a specific problem, delta, or outcome; `parent: EPIC-NNN` or `parent: none`, all relationship fields, empty claim fields, and provenance; an explicitly approved position in the one global executable-work rank.
 
+Both start at `decisions: pending` unless the significance test has already been applied and recorded.
+
 Allocate Epic and work sequences independently by scanning active and archived records; never reuse or renumber an ID. Use the type template as the shape, replace template instructions with known facts, and state unresolved detail plainly in the body — no placeholders in the frontmatter outcome. Add `## Provenance` when the source is not already durably clear. Standalone work is first-class: `parent: none` and `standalone/`; never manufacture a single-item Epic.
 
 Before writing files, present the proposed type, ID, title, outcome/delta, provenance, parent, relationships, and exact rank position (plus, for an Epic, any initial child scope) and wait for explicit approval.
@@ -66,13 +68,14 @@ Reject `proposed -> ready` unless all hold:
 - parentage and all relationships resolve, blockers are explicit, and no blocking cycle exists;
 - `wiki_refs` lists every relevant `docs/wiki/...` path, or only `none` after confirming none applies;
 - research is `complete` or `not-needed` with resolved conclusions and sources or a concrete explanation — `pending` research or any unresolved version-specific or security-sensitive question blocks readiness;
+- `decisions` is `none` with a stated reason, or a YAML inline array of published `ADR-NNN` IDs — `pending` blocks readiness. Apply the ADR significance test in `docs/wiki/maintenance.md` to the work's design choices; draft each qualifying decision under `## Decisions` in ADR shape (context, decision, alternatives rejected and why, consequences), and name the ADR it would supersede when one exists;
 - `## Execution` records an actionable approach, verification commands, and the explicit project-owner approval;
 - every subtask is one bounded step naming its scope and its verification, or the section says exactly `No subtasks.`;
 - the item occurs exactly once at its approved position in global rank.
 
 A ready Epic additionally requires an approved outcome, objective acceptance criteria, a coordination approach, and at least one approved child. Show the owner the complete candidate record, rank position, and validation-relevant relationships before requesting the transition; approval to refine is not approval to become ready.
 
-Keep proposal-specific sources, version findings, recommendations, uncertainty, and project deviations in the backlog record. Promote only durable guidance that becomes accepted current state (during implementation reconciliation) to the owning wiki concept; never copy an unimplemented target specification into the wiki.
+Keep proposal-specific sources, version findings, recommendations, uncertainty, project deviations, and drafted decisions in the backlog record. Promote only durable guidance that becomes accepted current state (during implementation reconciliation) to the owning wiki concept; never copy an unimplemented target specification into the wiki. A drafted decision is published as an ADR by `$wiki` at that reconciliation, and its allocated IDs then replace `pending` in `decisions`; never allocate an `ADR-NNN` inside a backlog transaction.
 
 ## Relationships And Actionability
 

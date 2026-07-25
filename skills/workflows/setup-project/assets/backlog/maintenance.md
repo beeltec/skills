@@ -44,11 +44,14 @@ Before executable work becomes `ready`, all of the following are required:
 - The parent and all relationships are valid; blockers are explicit.
 - `wiki_refs` names every relevant accepted-state page as a `docs/wiki/...` project-relative path, or contains only `none` after confirming no page applies.
 - `research` is `pending`, `complete`, or `not-needed` while work is proposed. Ready work requires `complete` or `not-needed`. Keep proposal-specific sources, version findings, recommendations, uncertainty, and project deviations under `## Research`; unresolved version-specific or security-sensitive questions require `pending` and prevent readiness.
+- `decisions` is `pending`, `none`, or a YAML inline array of published `ADR-NNN` IDs. Ready work requires `none` or published IDs. Apply the ADR significance test in `docs/wiki/maintenance.md`: draft each qualifying decision under `## Decisions` in ADR shape, or record `none` with a stated reason. `pending` prevents readiness; never use `none` to skip an unresolved decision.
 - `## Execution` states an actionable approach, verification commands, and explicit project-owner approval.
 - Every checklist subtask under `## Subtasks` is one bounded step — roughly one coherent commit — naming its scope (files, components, or records touched) and its verification (command, test, or observable result). Split any step that cannot state a single verification. Use `No subtasks.` when decomposition adds no value.
 - The item is present exactly once in the root global rank.
 
 Proposal-specific research remains with the backlog record. During post-acceptance implementation reconciliation, promote only guidance that became durable accepted current state to its canonical wiki concept; summarize it there instead of copying the proposal evidence.
+
+A drafted decision under `## Decisions` is published as an ADR under `docs/wiki/architecture/decisions/` during that same reconciliation, and its allocated `ADR-NNN` IDs replace `pending` in `decisions`. Where the new decision replaces one already in force, supersede that ADR in place in the same wiki transaction.
 
 ## Relationships
 

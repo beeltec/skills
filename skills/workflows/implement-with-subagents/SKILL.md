@@ -43,7 +43,7 @@ After every subagent response, independently inspect Git state and history, the 
 
 - acceptance criteria complete without scope creep; focused checks and the full applicable suite passed;
 - both backlog-aware code-review axes passed against the item's fixed point after the last implementation change;
-- the exact owner-approved wiki transaction applied on primary after acceptance, or a recorded reason none was required;
+- the exact owner-approved wiki transaction applied on primary after acceptance, or a recorded reason none was required, including every drafted decision published as an ADR with its allocated `ADR-NNN` and any ADR superseded in both directions, and `decisions` resolved off `pending`;
 - a merge commit and post-merge checks establish primary-branch acceptance before `done`;
 - claim cleared, item removed from rank, status/indexes/archive per backlog maintenance; item branch cleaned up only after its cleanup gates passed.
 
