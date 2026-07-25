@@ -15,6 +15,22 @@ The item's outcome, acceptance criteria, exclusions, and approved relationships 
 
 The invocation is a gate-backed execution workflow: it authorizes temporary claims, checklist evidence, and normal execution status transitions for the selected approved scope — not changes to outcome or acceptance wording, rank, parentage, relationships, cancellation, child scope, or accepted wiki knowledge. Preserve proposed cancellation and out-of-scope decisions in the backlog and stop for owner approval. Obtain explicit approval for the exact durable wiki update unless already explicitly approved.
 
+## Authority Packet Freshness
+
+An authority — record, index, wiki concept, ADR, guidance page, or source file — read completely during this invocation stays read; re-reading it is waste. A skill invoked from here accepts the packet paths and roles this invocation already resolved instead of rediscovering them. Freshness is per-invocation: never inherit it across invocations, and never assume a subagent holds it.
+
+An already-read authority is void and must be re-read when any of these holds:
+
+- context was summarized or compacted since the read, so the content is no longer held;
+- the branch changed, or a merge landed;
+- a commit not made by this invocation touched the path;
+- any transaction mutated the record;
+- the claim expired or was renewed;
+- `node scripts/validate-project.mjs` failed since the read;
+- the fixed point changed.
+
+Always re-read global rank, claims, statuses, and indexes before every selection and terminal transition regardless of freshness. When freshness is uncertain, re-read: a stale authority is a correctness failure, a redundant read is only slow.
+
 ## Preflight
 
 Complete before creating or switching a branch or mutating a claim:
@@ -63,7 +79,7 @@ Renew the claim in a separately validated transaction before expiry; never conti
 
 ## Per-Item Execution
 
-1. Capture the primary branch's current commit as this item's fixed point. Re-read the authority packet and repository evidence after any preceding Epic child integration.
+1. Capture the primary branch's current commit as this item's fixed point. After a preceding Epic child's integration, re-read the paths in that merge commit's diff plus global rank, claims, statuses, and indexes; the rest of the packet stays read under Authority Packet Freshness.
 2. Follow the approved approach and `## Subtasks`. Commit implementation and tests as coherent, independently green increments. Immediately after each green increment, check every subtask it completes, with evidence, in one separate validated backlog transaction staging only its backlog paths — keep bookkeeping out of code commits. Do not start the next subtask while an earlier completed subtask is unchecked; check-off is a per-increment gate, never a batch at the end of the item.
 3. Never broaden scope to fix an adjacent problem; record the observation and ask for an approved backlog transaction when it blocks the outcome.
 4. Run focused tests, typechecks, linters, and other listed verification throughout. Add or update tests that objectively exercise the desired delta. Run the full applicable suite at the end of the item.
@@ -72,11 +88,11 @@ Renew the claim in a separately validated transaction before expiry; never conti
 
 ## Review Loop
 
-After implementation and the full applicable suite are green, invoke `$code-review` with the `WORK-NNN` and this item's captured fixed point (backlog-aware Standards and Spec axes). Then loop:
+After implementation and the full applicable suite are green, invoke `$code-review` with the `WORK-NNN`, this item's captured fixed point, and the packet paths and roles resolved in preflight (backlog-aware Standards and Spec axes). Then loop:
 
 1. Address every actionable finding without changing approved scope.
 2. Rerun affected focused checks and the full applicable suite.
-3. Invoke `$code-review` again against the same fixed point.
+3. Invoke `$code-review` again against the same fixed point as a delta review: pass the previous pass's reviewed commit and its findings so it confirms each is resolved and reviews only the diff since that commit.
 4. Repeat until both axes pass.
 
 Any unresolved finding, unavailable authority, required scope decision, or failed check is a blocker: keep the item `in-progress` with a renewed claim, or release it safely; never prepare completion.

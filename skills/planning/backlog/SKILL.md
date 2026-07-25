@@ -28,6 +28,8 @@ Before proposing or applying a mutation:
 5. Read the backlog root index, maintenance rules, relevant type templates, active and archive indexes, all records related by parent or relationship, and every record needed to determine inward links and blocking state.
 6. Inspect active and archived IDs before allocation, the complete global rank, the current branch, and staged/unstaged changes. Preserve unrelated work; never stage it.
 
+Steps 4-6 apply to an authority-changing transaction. A gate-backed bookkeeping transaction — setting, renewing, or clearing this executor's own claim, checking an existing subtask or criterion with evidence, or recording evidence for a named already-approved item under an authorizing workflow — uses the **bookkeeping preflight** instead: steps 1-3, the target record, and git state. Such a transaction cannot change scope, rank, relationships, parentage, or acceptance, so the wider graph read adds nothing, and the invoking run already resolved it under its authority-packet freshness rule. Use the full preflight for intake, refinement, readiness, walk-back, cancellation, ranking, and archival.
+
 Project-local maintenance rules are authoritative. If they conflict with this skill or cannot represent the transaction, stop and explain rather than weakening validation.
 
 ## Intake

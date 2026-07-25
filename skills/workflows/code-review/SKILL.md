@@ -24,6 +24,8 @@ Use whatever the user gave (SHA, branch, tag, `main`, `HEAD~5`); ask if unspecif
 
 If the diff is empty, report that and stop. Bad refs and empty diffs are handled here, never inside parallel reviews.
 
+When the caller supplies the previous pass's reviewed commit and its findings, this invocation is a **delta review**: keep the same fixed point and the same authorities, capture `git diff <previous-reviewed-commit>...HEAD` as the reviewed diff, and carry the prior findings forward. An empty delta diff means nothing changed since that pass — report it and stop.
+
 ### 2. Read project governance
 
 Resolve the repository root and read all applicable `AGENTS.md`, `CLAUDE.md`, and nested instructions. When the setup-project scaffold exists, also read `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, and the nearest relevant wiki and backlog indexes. Use project-local maintenance rules when stricter. Do not mutate the wiki, backlog, claims, or statuses during review.
@@ -39,6 +41,8 @@ Select one executable `WORK-NNN` record as the Spec authority. Never infer desir
 If no backlog item exists for the change, ask the user to confirm no specification is available; only after that explicit confirmation skip the Spec sub-agent and report `no spec available`. Missing or ambiguous work-item context is a visible review outcome, not a reason to pick a likely candidate.
 
 ### 4. Build the authority packet
+
+When an invoking workflow supplies resolved packet paths and roles, accept them as the packet and read each named path; do not rediscover authorities from directory indexes. Discover only what it did not supply. On a delta review the packet is unchanged from the previous pass — reuse it.
 
 Read every authority completely before starting either sub-agent:
 
@@ -81,6 +85,8 @@ Send one message with two `Agent` calls, both `general-purpose`.
 **Standards sub-agent prompt:** the diff command and commit list; the Standards sources with paths and roles, naming each applicable guidance page and the rule-strength rules from step 5; the full smell baseline pasted in (the sub-agent has no other access to it); the ADR check inputs when present — the significance test text, the in-force ADRs, and the item's `decisions` field and `## Decisions` section, all pasted in; and the brief: "Review only the diff. Report every documented-standard violation by severity and file/hunk, citing the source path and exact rule. Separately report possible baseline smells by name, quoting the hunk. Separately report any unrecorded architecturally significant decision or contradicted in-force ADR, labelled as a judgement call and citing the significance test. Documented rules are hard authority; smells and the ADR check are judgement-call heuristics that an explicit documented rule overrides. Do not use backlog scope to waive a standard. Skip checks tooling already enforces. Under 400 words."
 
 **Spec sub-agent prompt:** the diff command and commit list; the complete work item as primary authority, complete parent Epic as context, linked wiki concepts, and relevant proposal research, each labelled by role; and the brief: "Review only the diff. Report by severity: (a) missing or partial desired behavior or acceptance requirements; (b) incorrect implemented behavior; (c) scope creep. Cite the work-item path and exact requirement for every finding. Cite Epic constraints when relevant, but never expand or replace child scope with Epic scope. Use linked wiki facts only as baseline and constraints; never let existing behavior mask a missing delta. Do not treat a backlog request as permission to violate repository standards; leave that conflict visible for the Standards axis. Under 400 words."
+
+For a delta review, add to both briefs the prior findings verbatim, the delta diff command, and: "State for each prior finding whether it is resolved, citing the hunk that resolves it. Report only new findings introduced by this delta; do not re-derive findings outside it."
 
 If the user explicitly confirmed no specification exists, skip the Spec sub-agent and note it in the report. Otherwise missing or ambiguous context stops the review for user input before any sub-agent starts.
 
