@@ -1,7 +1,5 @@
 # Repository, Auth & Configuration — glab repo / glab auth / glab config
 
-Complete reference for repository management, authentication, and glab configuration.
-
 ## Repository — glab repo
 
 ### Subcommands
@@ -26,97 +24,55 @@ Complete reference for repository management, authentication, and glab configura
 ### glab repo clone
 
 ```bash
-# Clone by path
-glab repo clone owner/repo
-
-# Clone into specific directory
+# A numeric project ID works in place of owner/repo
 glab repo clone owner/repo ./my-dir
 
-# Clone by project ID
-glab repo clone 12345
-
-# Clone a specific branch
+# Arguments after -- are passed through to git clone
 glab repo clone owner/repo -- --branch develop
 
-# Clone all repositories in a group
-glab repo clone -g my-group
-
-# Clone all repos in group (with pagination)
+# Clone every repo in a group, paginated
 glab repo clone -g my-group --per-page 100 --page 1
-
-# Clone preserves fork relationships — adds upstream remote automatically
 ```
+
+Cloning preserves fork relationships — the upstream remote is added automatically.
 
 ### glab repo create
 
 ```bash
-# Interactive creation
-glab repo create
-
-# Create with name (uses current directory name if omitted)
-glab repo create my-new-project
-
-# Create with options
+# Runs interactively with no arguments; uses the current directory name if the name is omitted
 glab repo create my-project --description "My project" --visibility private
-
-# Create in a group
 glab repo create -g my-group my-project
 ```
 
 ### glab repo fork
 
 ```bash
-# Fork the current repo
-glab repo fork
-
-# Fork and clone
+# Forks the current repo when no path is given
 glab repo fork --clone
-
-# Fork with custom name/path
-glab repo fork --name my-fork --path my-fork-path
-
-# Fork a specific repo
-glab repo fork owner/repo
+glab repo fork owner/repo --name my-fork --path my-fork-path
 ```
 
 ### glab repo list
 
 ```bash
-# List your repos
-glab repo list
-
-# List repos in a group
 glab repo list -g my-group
-
-# Exclude archived repos
-glab repo list --archived=false
-
-# JSON output
+glab repo list --archived=false      # Exclude archived repos
 glab repo list -F json --per-page 100
 ```
 
 ### glab repo view / search / archive
 
 ```bash
-# View repo details
 glab repo view owner/repo
-glab repo view --web                # Open in browser
-
-# Search repos
+glab repo view --web                 # Open in browser
 glab repo search -s "keyword"
-
-# Download archive
-glab repo archive owner/repo
 glab repo archive owner/repo --format zip
 ```
 
 ### glab repo delete / transfer
 
 ```bash
-# Delete repository (destructive!)
-glab repo delete owner/repo --yes
-
-# Transfer to another namespace
+glab repo delete owner/repo --yes    # Destructive
 glab repo transfer owner/repo --target-namespace new-group
 ```
 
@@ -133,25 +89,21 @@ glab repo transfer owner/repo --target-namespace new-group
 
 ### glab auth login
 
-Interactive and non-interactive authentication.
-
 Use the least-privileged authentication method and scopes that support the operation. Interactive OAuth is preferred for a user session. In CI, prefer a CI job token when its endpoint permissions are sufficient, then a scoped project or group token; avoid personal access tokens where possible. Read-only operations may need only `read_api` or `read_repository`, while API mutations generally require `api`. `write_repository` grants Git-over-HTTP write access and is not a universal requirement for `glab` login.
 
 ```bash
 # Interactive login (prompts for host, token, protocol)
 glab auth login
 
-# Non-interactive with token
-glab auth login --hostname gitlab.example.com --stdin
-
-# Specify protocols
 glab auth login --hostname gitlab.example.com --git-protocol ssh --api-protocol https
 
-# Login via stdin (for CI)
+# Non-interactive: pipe the token to --stdin
 printf '%s' "$GITLAB_TOKEN" | glab auth login --hostname gitlab.example.com --stdin
 ```
 
 Never place a real token directly in a command argument, URL, shell history, repository file, issue, MR, or log. Use an expiring token, store it in an approved secret manager, and rotate or revoke it when no longer needed.
+
+glab auto-detects which authenticated host to use based on git remotes, so several instances can be logged in at once.
 
 ### glab auth status
 
@@ -179,25 +131,10 @@ Configuration stored in `~/.config/glab-cli/config.yml`.
 | `config get` | Get a configuration value |
 | `config list` | List all configuration |
 
-### Examples
-
 ```bash
-# Set git protocol for a host
+# -h scopes the setting to one host; without it the value is global
 glab config set -h gitlab.example.com git_protocol ssh
-
-# Set API protocol
-glab config set -h gitlab.example.com api_protocol https
-
-# Set default editor
-glab config set editor vim
-
-# Set default browser
-glab config set browser firefox
-
-# Get a config value
 glab config get git_protocol
-
-# List all config
 glab config list
 ```
 
@@ -213,54 +150,30 @@ glab config list
 
 ## Key Management
 
-### SSH Keys — glab ssh-key
+Each of `ssh-key`, `gpg-key`, and `deploy-key` supports `list`, `add`, and `delete <id>`.
 
 ```bash
-glab ssh-key list                    # List SSH keys
 glab ssh-key add ~/.ssh/id_ed25519.pub --title "My Laptop"
-glab ssh-key delete 12345
-```
-
-### GPG Keys — glab gpg-key
-
-```bash
-glab gpg-key list                    # List GPG keys
 glab gpg-key add ./my-key.gpg
-glab gpg-key delete 12345
-```
-
-### Deploy Keys — glab deploy-key
-
-```bash
-glab deploy-key list                 # List deploy keys
 glab deploy-key add ~/.ssh/deploy.pub --title "CI Server" --can-push
-glab deploy-key delete 12345
+glab ssh-key delete 12345
 ```
 
 ## Shell Completion — glab completion
 
-Generate shell completion scripts.
-
 ```bash
-# Bash
 glab completion -s bash > /etc/bash_completion.d/glab
-
-# Zsh
 glab completion -s zsh > "${fpath[1]}/_glab"
-
-# Fish
-glab completion -s fish > ~/.config/fish/completions/glab.fish
-
-# PowerShell
-glab completion -s powershell | Out-File ~\glab.ps1
 ```
+
+`-s` also accepts `fish` (`~/.config/fish/completions/glab.fish`) and `powershell`.
 
 ## Tokens — glab token
 
 Manage personal access tokens.
 
 ```bash
-glab token list                      # List your tokens
+glab token list
 glab token create --name "CI Token" --scopes api,read_repository --expires-at 2025-12-31
 glab token revoke 12345
 ```
@@ -269,32 +182,4 @@ glab token revoke 12345
 
 ```bash
 glab user events                     # View your recent activity
-```
-
-## Common Patterns for Agents
-
-### Initial Setup
-
-```bash
-# 1. Login
-glab auth login
-
-# 2. Verify
-glab auth status
-
-# 3. Clone project
-glab repo clone my-group/my-project
-
-# 4. Set up shell completion (optional)
-glab completion -s zsh > "${fpath[1]}/_glab"
-```
-
-### Multi-Instance Setup
-
-```bash
-# Login to multiple GitLab instances
-glab auth login --hostname gitlab.com
-glab auth login --hostname gitlab.example.com
-
-# glab auto-detects which host to use based on git remotes
 ```

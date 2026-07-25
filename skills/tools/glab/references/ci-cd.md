@@ -1,6 +1,6 @@
 # CI/CD Pipelines & Jobs — glab ci / glab job
 
-Complete reference for managing GitLab CI/CD pipelines and jobs from the CLI.
+Reference for GitLab CI/CD pipelines and jobs. `ci trace`, `ci retry`, and `ci trigger` prompt for a job when invoked bare.
 
 ## CI Subcommands
 
@@ -22,25 +22,14 @@ Complete reference for managing GitLab CI/CD pipelines and jobs from the CLI.
 
 ## glab ci run
 
-Create and run a new pipeline.
+Defaults to the current branch.
 
 ```bash
-# Run pipeline on current branch
-glab ci run
-
-# Run pipeline on a specific branch
-glab ci run -b main
-
-# Run with CI variables
 glab ci run -b main --variables key1:val1,key2:val2
-
-# Run with variables specified separately
 glab ci run -b main --variables key1:val1 --variables key2:val2
 ```
 
 ## glab ci list
-
-List pipelines with filtering.
 
 ### Flags
 
@@ -48,28 +37,24 @@ List pipelines with filtering.
 |------|-------|------|-------------|
 | `--status` | `-s` | string | Filter by status: `running`, `pending`, `success`, `failed`, `canceled`, `skipped`, `manual` |
 | `--order-by` | `-o` | string | Order by: `id`, `status`, `ref`, `updated_at`, `user_id` |
-| `--sort` | — | string | Sort: `asc` or `desc` |
-| `--per-page` | `-P` | int | Items per page (default 30) |
-| `--page` | `-p` | int | Page number |
 | `--output` | `-F` | string | Output format: `text` or `json` |
+
+Also: `--sort` (`asc`/`desc`), `-P/--per-page` (default 30), `-p/--page`.
 
 ### Examples
 
 ```bash
-glab ci list                        # List recent pipelines
-glab ci list -s failed              # Failed pipelines only
-glab ci list -F json                # JSON output
+glab ci list -s failed
+glab ci list -F json
 ```
 
 ## glab ci view
 
-Interactive TUI for viewing and managing the current pipeline. Shows stages, jobs, and their statuses.
+Interactive TUI over the pipeline's stages and jobs.
 
 ```bash
-glab ci view                        # View current branch's pipeline
-glab ci view 12345                  # View specific pipeline by ID
-glab ci view -b main               # View pipeline for a branch
-glab ci view -w                     # Open pipeline in web browser
+glab ci view 12345                  # By pipeline ID
+glab ci view -b main
 ```
 
 ### Interactive Controls
@@ -85,60 +70,46 @@ glab ci view -w                     # Open pipeline in web browser
 
 ## glab ci status
 
-Display the status of the current pipeline.
-
 ```bash
-glab ci status                      # Current branch pipeline status
-glab ci status -b main              # Status for a specific branch
-glab ci status --live               # Live-updating status
+glab ci status -b main
+glab ci status --live
 ```
 
 ## glab ci trace
 
-Trace (tail) a job's log output in real time.
-
 ```bash
-glab ci trace                       # Interactive — select a job
-glab ci trace 224356863             # Trace specific job by ID
-glab ci trace lint                  # Trace job by name
-glab ci trace -b feature-branch    # Trace job on a specific branch
+glab ci trace 224356863             # By job ID
+glab ci trace lint -b feature-branch
 ```
 
 ## glab ci retry
 
-Retry a failed or canceled job.
+Also retries canceled jobs.
 
 ```bash
-glab ci retry                       # Interactive — select a job
-glab ci retry 224356863             # Retry by job ID
-glab ci retry lint                  # Retry by job name
-glab ci retry lint -b main          # Retry on a specific branch
-glab ci retry lint -p 12345         # Retry in a specific pipeline
+glab ci retry 224356863
+glab ci retry lint -b main
+glab ci retry lint -p 12345         # In a specific pipeline
 ```
 
 ## glab ci trigger
 
-Trigger a manual job.
-
 ```bash
-glab ci trigger                     # Interactive — select a manual job
-glab ci trigger 224356863           # Trigger by job ID
-glab ci trigger deploy-staging      # Trigger by job name
-glab ci trigger deploy -b main     # Trigger on a specific branch
+glab ci trigger 224356863
+glab ci trigger deploy -b main      # By job name, on a branch
 ```
 
 ## glab ci run-trig
 
-Run a pipeline using a trigger token. Useful for cross-project triggers and automation.
+Runs a pipeline with a trigger token instead of your credentials.
 
 ```bash
-# Basic trigger
-glab ci run-trig -t $CI_JOB_TOKEN
-
-# Trigger on specific branch with variables
 glab ci run-trig -t $CI_JOB_TOKEN -b main --variables key1:val1,key2:val2
 
-# With typed pipeline inputs
+# Cross-project
+glab ci run-trig -t $TRIGGER_TOKEN -b main -R other-group/other-project
+
+# Typed pipeline inputs
 glab ci run-trig -t $CI_JOB_TOKEN -b main \
   --input "replicas:int(3)" \
   --input "debug:bool(false)" \
@@ -147,42 +118,32 @@ glab ci run-trig -t $CI_JOB_TOKEN -b main \
 
 ## glab ci cancel
 
-Cancel a running pipeline.
-
 ```bash
-glab ci cancel                      # Cancel current branch's pipeline
-glab ci cancel 12345                # Cancel by pipeline ID
+glab ci cancel                      # Current branch's pipeline
+glab ci cancel 12345
 ```
 
 ## glab ci delete
 
-Delete a pipeline.
-
 ```bash
-glab ci delete 12345                # Delete by pipeline ID
+glab ci delete 12345
 ```
 
 ## glab ci lint
 
-Validate CI configuration.
-
 ```bash
-glab ci lint                        # Lint .gitlab-ci.yml in current directory
-glab ci lint path/to/.gitlab-ci.yml # Lint a specific file
+glab ci lint                        # .gitlab-ci.yml in current directory
+glab ci lint path/to/.gitlab-ci.yml
 ```
 
 ## glab ci artifact
 
-Download job artifacts.
-
 ```bash
-glab ci artifact 224356863          # Download artifacts for a job
-glab ci artifact lint               # Download by job name
+glab ci artifact 224356863          # By job ID
+glab ci artifact lint               # By job name
 ```
 
 ## Pipeline Schedules — glab schedule
-
-Manage scheduled pipelines.
 
 | Subcommand | Description |
 |------------|-------------|
@@ -194,57 +155,15 @@ Manage scheduled pipelines.
 ### Examples
 
 ```bash
-# Create a nightly schedule
 glab schedule create --cron "0 2 * * *" --description "Nightly build" --ref main
-
-# List all schedules
 glab schedule list
-
-# Run a schedule immediately
 glab schedule run 42
-
-# Delete a schedule
 glab schedule delete 42
 ```
 
 ## Jobs — glab job
 
-Direct job management.
-
 ```bash
-glab job list                       # List jobs
-glab job list -p 12345             # List jobs in a pipeline
-```
-
-## Common Patterns for Agents
-
-### Monitor Pipeline After Push
-
-```bash
-# Check current pipeline status
-glab ci status --live
-
-# If failed, view the pipeline and retry
-glab ci view
-glab ci retry failed-job-name
-```
-
-### Lint Before Pushing
-
-```bash
-glab ci lint
-```
-
-### Get Artifacts from a Pipeline
-
-```bash
-# List jobs, find the one with artifacts, download
-glab job list -p 12345
-glab ci artifact build-job
-```
-
-### Trigger Cross-Project Pipeline
-
-```bash
-glab ci run-trig -t $TRIGGER_TOKEN -b main -R other-group/other-project
+glab job list
+glab job list -p 12345              # Jobs in a pipeline
 ```

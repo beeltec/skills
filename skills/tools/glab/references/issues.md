@@ -21,18 +21,12 @@ Complete reference for managing GitLab issues and incidents from the CLI.
 
 ## glab issue create
 
-Create a new issue.
-
 ### Flags
 
 | Flag | Short | Type | Description |
 |------|-------|------|-------------|
-| `--title` | `-t` | string | Issue title |
 | `--description` | `-d` | string | Issue description (use `-` to open editor) |
-| `--assignee` | `-a` | strings | Assign to users by username (comma-separated or repeated) |
-| `--label` | `-l` | strings | Add labels (comma-separated or repeated) |
-| `--milestone` | `-m` | string | Milestone ID or title |
-| `--confidential` | `-c` | bool | Mark as confidential |
+| `--confidential` | `-c` | bool | Mark as confidential (note: `-c` means `--closed` in `issue list`) |
 | `--weight` | `-w` | int | Issue weight (>= 0) |
 | `--due-date` | — | string | Due date in `YYYY-MM-DD` format |
 | `--epic` | — | int | Epic ID to add the issue to |
@@ -41,45 +35,25 @@ Create a new issue.
 | `--link-type` | — | string | Link type: `relates_to` (default), `blocks`, `is_blocked_by` |
 | `--time-estimate` | `-e` | string | Time estimate (e.g., `1h30m`, `2d`) |
 | `--time-spent` | `-s` | string | Time already spent |
-| `--no-editor` | — | bool | Use prompt instead of editor |
-| `--web` | — | bool | Continue creation in web browser |
-| `--yes` | `-y` | bool | Skip confirmation prompts |
 | `--recover` | — | bool | Save/restore options on failure (experimental) |
+
+Also: `-t/--title`, `-a/--assignee`, `-l/--label`, `-m/--milestone`, `--no-editor`, `--web`, `-y/--yes`. Strings flags take comma-separated values or repeat.
 
 ### Examples
 
 ```bash
-# Interactive creation
-glab issue create
-
-# Quick issue with title, label, and milestone
 glab issue create -t "Fix login timeout" -l bug -m v2.1
-
-# Confidential security issue linked to an MR
 glab issue new -t "Fix CVE-YYYY-XXXX" -l security --linked-mr 123 -c
-
-# Issue with due date and weight
 glab issue create -t "Write docs" --due-date 2025-03-15 -w 3
-
-# Issue linked to other issues
 glab issue create -t "Parent task" --linked-issues 10,11,12 --link-type blocks
-
-# Open in browser to finish
-glab issue create -t "Complex issue" --web
 ```
 
 ## glab issue list
-
-List project issues with filtering.
 
 ### Flags
 
 | Flag | Short | Type | Description |
 |------|-------|------|-------------|
-| `--assignee` | `-a` | string | Filter by assignee username |
-| `--author` | `-A` | string | Filter by author username |
-| `--label` | `-l` | strings | Filter by labels |
-| `--milestone` | `-m` | string | Filter by milestone |
 | `--mine` | — | bool | Show only your issues |
 | `--confidential` | — | bool | Filter by confidential status |
 | `--closed` | `-c` | bool | Show only closed issues |
@@ -93,50 +67,34 @@ List project issues with filtering.
 | `--page` | `-p` | int | Page number |
 | `--output` | `-F` | string | Output format: `text` or `json` |
 
+Also: `-a/--assignee`, `-A/--author`, `-l/--label`, `-m/--milestone`. Default is open issues only.
+
 ### Examples
 
 ```bash
-# All open issues (default)
-glab issue list
-
-# Issues assigned to you
 glab issue list --mine
-
-# Closed bugs for milestone v3.1
 glab issue list -c -l bug -m v3.1
-
-# Search issues
 glab issue list -s "timeout" --in title
-
-# JSON output for scripting
 glab issue list -F json --per-page 100
-
-# Group-level issues
 glab issue list -g my-group --label "P1"
+glab issue list --label "P1" --assignee "" -F json   # Unassigned: empty --assignee
 ```
 
 ## glab issue view
 
-Display issue details.
-
 ```bash
-glab issue view 123                 # View issue #123
-glab issue view 123 --web           # Open in browser
+glab issue view 123
 glab issue view 123 --comments      # Include comments
 glab issue view 123 --system-logs   # Include system activity
 ```
 
 ## glab issue update
 
-Update issue attributes.
-
 ```bash
 glab issue update 123 --title "New title"
 glab issue update 123 --label "reviewed" --unlabel "triage"
-glab issue update 123 --milestone "v2.0"
-glab issue update 123 --assignee user1,user2
-glab issue update 123 --due-date "2025-06-01"
-glab issue update 123 --weight 5
+glab issue update 123 --assignee user1,user2 --milestone "v2.0"
+glab issue update 123 --due-date "2025-06-01" --weight 5
 glab issue update 123 --confidential    # Make confidential
 glab issue update 123 --milestone ""    # Unassign milestone (use "" or 0)
 ```
@@ -144,15 +102,13 @@ glab issue update 123 --milestone ""    # Unassign milestone (use "" or 0)
 ## glab issue close / reopen / delete
 
 ```bash
-glab issue close 123               # Close issue
-glab issue reopen 123              # Reopen issue
+glab issue close 123
+glab issue reopen 123
 glab issue delete 123              # Delete permanently
 glab issue delete 123 124 125      # Delete multiple
 ```
 
 ## glab issue note
-
-Add a comment to an issue.
 
 ```bash
 glab issue note 123 -m "Investigated — this is caused by the timeout config"
@@ -162,26 +118,23 @@ glab issue note 123                # Opens editor for longer comment
 ## glab issue subscribe / unsubscribe / todo
 
 ```bash
-glab issue subscribe 123           # Subscribe to notifications
+glab issue subscribe 123
 glab issue sub 123                 # Alias
-glab issue unsubscribe 123         # Unsubscribe
+glab issue unsubscribe 123
 glab issue todo 123                # Add to your to-do list
 ```
 
 ## glab issue board
 
-View and interact with issue boards.
-
 ```bash
-glab issue board view                          # View default board
-glab issue board view --assignee username      # Filter by assignee
-glab issue board view --labels "bug,P1"        # Filter by labels
-glab issue board view --milestone "v2.0"       # Filter by milestone
+glab issue board view                          # Default board
+glab issue board view --assignee username
+glab issue board view --labels "bug,P1" --milestone "v2.0"
 ```
 
 ## Incidents — glab incident
 
-Incidents share many commands with issues but are focused on operational incidents.
+Same shape as issues, scoped to operational incidents.
 
 | Subcommand | Description |
 |------------|-------------|
@@ -197,35 +150,8 @@ Incidents share many commands with issues but are focused on operational inciden
 ### Examples
 
 ```bash
-glab incident list                    # List open incidents
-glab incident view 456                # View incident details
-glab incident view 456 --web         # Open in browser
-glab incident view 456 --comments    # Include comments
-glab incident close 456              # Close incident
+glab incident list                    # Open incidents
+glab incident view 456 --comments
+glab incident close 456
 glab incident note 456 -m "Root cause identified"
-```
-
-## Common Patterns for Agents
-
-### Triage Workflow
-
-```bash
-# List unassigned, high-priority issues
-glab issue list --label "P1" --assignee "" -F json
-
-# Assign and label
-glab issue update 123 --assignee developer1 --label "in-progress" --unlabel "triage"
-
-# Add a comment
-glab issue note 123 -m "Assigned to @developer1 for sprint 5"
-```
-
-### Create Issue and Linked MR
-
-```bash
-# Create the issue
-glab issue create -t "Implement feature X" -l enhancement -m v2.0
-
-# Later, create an MR that closes it
-glab mr create --related-issue 123 --copy-issue-labels --fill
 ```
