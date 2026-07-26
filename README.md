@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-19 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+20 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -93,14 +93,61 @@ flowchart TD
 
 **to-guidance** is its owner-invoked entry point, carrying the standing approval for the subjects it names — the same machinery/entry-point split as `backlog`/`to-backlog` and `wiki`/`to-wiki`. Four other skills offer `guidance` at the point they detect the gap: **to-epic** at its evidence decision, so children are sliced against fresh pages and research is not re-derived; **research** when a subject has no page or a stale one; **implement** at post-acceptance reconciliation, the only point in an implementation run where guidance may be published, never from the work branch; and **setup-project** for the `draft` pages a brownfield back-fill seeded. `/code-review` still reports a version-mismatched page as a finding rather than enforcing or refreshing it.
 
+### Run the whole flow unattended — `to-product`
+
+Every skill above is a gate the project owner walks through. **to-product** walks them for you: hand it a PRD, a plan, or a set of proposed records, and it runs the same flow to a finished product without asking anything.
+
+```mermaid
+flowchart TD
+    PRD["PRD, plan, or proposed EPIC/WORK"] --> TP["to-product<br/>autonomous run — asks nothing"]
+    TP -->|scaffold missing| SP["setup-project"]
+    SP --> MAP
+    TP --> MAP["discuss over the whole PRD<br/>→ outcome map + dependency order"]
+    MAP --> D["discuss one outcome<br/>owner-proxy answers, printed on screen"]
+    D --> RT{"route as discuss classifies"}
+    RT -->|coordinated outcome| TE["/to-epic"]
+    RT -->|standalone items| TB["/to-backlog"]
+    RT -->|current-state knowledge| TW["/to-wiki"]
+    RT -->|adopted rules| TG["/to-guidance"]
+    TE --> IWS["implement-with-subagents"]
+    TB --> IWS
+    IWS --> ACC["primary-branch acceptance<br/>+ wiki reconciliation"]
+    ACC --> NEXT{"outcomes left?"}
+    TW --> NEXT
+    TG --> NEXT
+    NEXT -->|yes| D
+    NEXT -->|no| DONE(["every outcome done and archived"])
+    IWS -.->|3 failed attempts| PARK["parked — claim released,<br/>status back to ready,<br/>blocker recorded"]
+    PARK -.-> NEXT
+```
+
+It never does the work itself. Every step goes through the skill that owns it, and `setup-project` installs a work-routing table into the project's agent instructions so ordinary sessions follow the same rule.
+
+The **owner-proxy** is the role `to-product` plays when `discuss` asks a question. It answers from the PRD first, then repository evidence, then the accepted wiki, and prints every question and answer verbatim — the whole discussion is on screen. When no source settles a question it answers anyway, marks the answer `ASSUMPTION`, and adds it to the **assumption register**:
+
+```text
+Question 4 / ~12:
+Session lifetime?
+
+[owner-proxy] 24 hours.
+  ASSUMPTION — the PRD is silent; registered.
+```
+
+Because nothing pauses, the run is auditable after the fact rather than during it. Each assumption lands as provenance on the record it shaped, and every run commits a **run transcript** to `docs/runs/` holding the outcome map, the verbatim discussions, the assumption register, every gate it auto-approved, and the delivery evidence.
+
+Two boundaries are worth knowing before you use it. It **auto-approves destructive knowledge changes** — reversing an adopted guidance rule, deprecating or deleting a concept, superseding an in-force ADR — reporting each individually, with git history as the only undo. And it **never grows the PRD**: scope the PRD does not carry is filed as a `proposed` record and left for you. A blocked item gets three attempts, then its claim is released, its status returns to `ready` with the blocker recorded, and the run moves on — so one bad item never ends the run. Re-invoking `to-product` with the same PRD resumes where it stopped instead of duplicating records.
+
+Read [the autonomous contract](skills/commands/to-product/references/autonomous-contract.md) for the exact gate-by-gate behavior.
+
 A few rules the diagrams don't show: execution always passes through backlog readiness — there is no direct-implementation route — and readiness requires every architecturally significant design choice drafted in ADR shape under `## Decisions`, or explicitly `none`. Wiki changes are only drafted on the work branch, never applied there; at primary-branch acceptance (a merge commit plus the full suite) each drafted decision becomes an ADR with its `ADR-NNN` allocated, and the terminal backlog record is archived. Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments as the report's last line — so each step hands off to the next.
 
-**setup-project**, **discuss**, **to-epic**, **to-backlog**, **to-wiki**, and **to-guidance** are user-invoked only (`disable-model-invocation: true`): invoking them is itself an owner decision — for the to-\* skills it grants the standing approval — so an agent may recommend the command but never run it on its own.
+**setup-project**, **discuss**, **to-epic**, **to-backlog**, **to-wiki**, **to-guidance**, and **to-product** live in `skills/commands/` and are user-invoked only (`disable-model-invocation: true`): invoking them is itself an owner decision — for the to-\* skills it grants the standing approval — so an agent may recommend the command but never run it on its own. The single exception is `to-product`, which invokes the others because starting it is the owner decision they all protect.
 
 ### Greenfield and Brownfield
 
 - **Greenfield** (new application): run **setup-project** on the empty repository, then shape the product through `/discuss` — desired outcomes flow through `/to-epic` or `/to-backlog` to ready work, and the implement → code-review → acceptance loop grows wiki knowledge as features land.
 - **Brownfield** (existing application): run **setup-project** on the existing repository (it upgrades safely and never overwrites project-owned files). On existing code with an empty wiki it back-fills a foundation overview of code-verified facts — stack, architecture, commands, conventions, terminology — and reports owner-judgment knowledge (intent, rationale, product language) as candidates for `/discuss` and `/to-wiki`. From there, desired changes follow the same delivery loop as greenfield.
+- **Unattended** (either of the above): hand an already-defined PRD or plan to `/to-product`. It scaffolds when needed, then walks the same loop to a finished product without asking you anything, leaving a run transcript to review afterwards.
 
 | Skill | Description |
 |-------|-------------|
@@ -117,6 +164,7 @@ A few rules the diagrams don't show: execution always passes through backlog rea
 | **implement** | Execute a ready work item or Epic through claim, implementation, per-item review, Epic-scope review, and completion |
 | **implement-with-subagents** | Orchestrate an Epic or work-item set with one fresh subagent per item, and review the composed Epic before closure |
 | **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's — or a whole Epic's — scope |
+| **to-product** | Run the whole flow unattended from a PRD, answering every owner gate as an owner-proxy, until every outcome has shipped |
 
 ## Standalone Skills
 
