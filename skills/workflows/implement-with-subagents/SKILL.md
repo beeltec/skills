@@ -23,7 +23,7 @@ Before any spawn or backlog mutation:
 2. Require the setup-project scaffold (wiki and backlog indexes and maintenance, ubiquitous language, four templates, `scripts/validate-project.mjs`); otherwise direct the user to `$setup-project`.
 3. Run `node scripts/validate-project.mjs`; stop on any invalid baseline — never delegate against one.
 4. Read completely: the scoped records (all children for an Epic), global rank, active and archive indexes, related and relationship-connected records, `wiki_refs` and nearest wiki indexes, the `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` indexes so each item's applicable guidance pages can be resolved by path, maintenance rules, research, and affected code and tests.
-5. Inspect current and primary branches, remotes, staged/unstaged changes, and recent history; preserve unrelated and shared-workspace changes between delegations.
+5. Inspect current and primary branches, remotes, staged/unstaged changes, and recent history; preserve unrelated and shared-workspace changes between delegations. Pin the primary-branch commit as the immutable epic fixed point for closure review.
 6. Build the immutable authorized ID set with each member's status, rank position, inward blockers, claim details, parent, and archive location. Never add work or rerank during execution.
 
 Reject: a proposed item, malformed Definition of Ready, missing rank entry for active unfinished work, expired or inconsistent claim, live claim owned by another executor, or an unresolved blocker outside the authorized set. Terminal records establish prior disposition but get no subagent. An inward blocker inside the set is a valid dependency chain while at least one member is actionable; if required work remains and nothing is actionable, report the complete deadlocked frontier and stop. Never cancel, reparent, alter relationships, change scope, or rerank autonomously — preserve such proposals for owner approval.
@@ -53,7 +53,11 @@ If evidence is missing or a check fails, send a focused follow-up with concrete 
 
 ## Epic Closure
 
-Only an explicit Epic input authorizes closure. After every approved child is `done` or explicitly owner-cancelled, verify child dispositions, acceptance evidence, the Epic outcome and criteria, wiki reconciliation, reviews, validator, and full suite. On primary, apply direct `$implement`'s final atomic Epic transaction: check evidenced criteria, set `done`, move the whole directory to `archive/epics/`, update indexes, validate, stage only those paths, and commit concisely. Never split the archive, infer cancellation, or close an Epic from a selected-set run.
+Only an explicit Epic input authorizes closure. After every approved child is `done` or explicitly owner-cancelled, verify child dispositions, acceptance evidence, the Epic outcome and criteria, wiki reconciliation, reviews, validator, and full suite.
+
+Then invoke `$code-review` on primary as an Epic-scope review with the `EPIC-NNN` and the pinned epic fixed point. Delegate every actionable finding inside approved Epic scope to one fresh remediation subagent on its own conventional branch — never remediate in the orchestrator; verify its evidence under `## Verification And Recovery`, admit its merge to primary, and re-review the delta from the same epic fixed point until both axes pass. A finding needing scope the Epic never carried stops closure for an owner-approved backlog transaction.
+
+On primary, apply direct `$implement`'s final atomic Epic transaction: check evidenced criteria, set `done`, move the whole directory to `archive/epics/`, update indexes, validate, stage only those paths, and commit concisely. Never split the archive, infer cancellation, or close an Epic from a selected-set run.
 
 ## Invocation Examples
 
@@ -65,6 +69,6 @@ Use $implement-with-subagents with EPIC-012 using model gpt-5.6-sol and reasonin
 
 ## Final Report
 
-Report the authorized scope and selection order; one subagent/session and branch per item; changed paths, commits, and merge commits; checks and both review axes; acceptance and wiki reconciliation evidence; resulting statuses, claims, rank and archive locations; the Epic closure commit when applicable; unsupported passthrough settings; remaining blockers or concerns.
+Report the authorized scope and selection order; one subagent/session and branch per item; changed paths, commits, and merge commits; checks and both review axes; acceptance and wiki reconciliation evidence; resulting statuses, claims, rank and archive locations; the Epic-scope review result and any remediation subagent; the Epic closure commit when applicable; unsupported passthrough settings; remaining blockers or concerns.
 
 End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement-with-subagents` or `/implement` with the next highest-ranked actionable scope, or `/discuss` naming the next open outcome when no ready work remains. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.

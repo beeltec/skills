@@ -45,7 +45,7 @@ Complete before creating or switching a branch or mutating a claim:
 6. Read completely the selected records, the parent Epic and every child in Epic scope, the global rank, active and archive indexes, all related records, and all records needed to calculate inward blockers.
 7. Read backlog maintenance, applicable type templates, every linked wiki concept and nearest index, wiki maintenance and log, relevant engineering and architecture guidance, every in-force ADR under `docs/wiki/architecture/decisions/`, the record's drafted `## Decisions`, proposal research and local evidence, and the affected repository code and tests.
 8. Read every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard this item's delta touches, resolved from its own directory indexes, not the whole set. Their `Requirements` bind the new code; follow `Conventions` and recorded `Deviations` over external habit, and treat a listed `Known gap` as existing non-compliance to work around, never as licence to add more. A technology or standard the delta touches with no page is a reportable gap: implement against the item's research and repository evidence and name it for `/to-guidance` in the final report — never block on it, and never write guidance into `docs/wiki` here.
-9. Determine the invocation's primary-branch fixed point; retain it for review and integration evidence.
+9. Determine the invocation's primary-branch fixed point; retain it for review and integration evidence. For an Epic it is also the immutable **epic fixed point** for the final Epic review; no per-item fixed point replaces it.
 
 Reject before branch creation:
 
@@ -81,7 +81,7 @@ Renew the claim in a separately validated transaction before expiry; never conti
 
 ## Per-Item Execution
 
-1. Capture the primary branch's current commit as this item's fixed point. After a preceding Epic child's integration, re-read the paths in that merge commit's diff plus global rank, claims, statuses, and indexes; the rest of the packet stays read under Authority Packet Freshness.
+1. Capture the primary branch's current commit as this item's fixed point, leaving the epic fixed point unchanged. After a preceding Epic child's integration, re-read the paths in that merge commit's diff plus global rank, claims, statuses, and indexes; the rest of the packet stays read under Authority Packet Freshness.
 2. Follow the approved approach and `## Subtasks`. Commit implementation and tests as coherent, independently green increments. Immediately after each green increment, check every subtask it completes, with evidence, in one separate validated backlog transaction staging only its backlog paths — keep bookkeeping out of code commits. Do not start the next subtask while an earlier completed subtask is unchecked; check-off is a per-increment gate, never a batch at the end of the item.
 3. Never broaden scope to fix an adjacent problem; record the observation and ask for an approved backlog transaction when it blocks the outcome.
 4. Run focused tests, typechecks, linters, and other listed verification throughout. Add or update tests that objectively exercise the desired delta. Run the full applicable suite at the end of the item.
@@ -128,10 +128,19 @@ If integration is unauthorized, primary is unavailable, merge or post-merge chec
 
 ## Epic Completion And Cleanup
 
-After every required child is `done` or explicitly owner-cancelled, verify the Epic outcome and each criterion with concrete primary-branch evidence, reconcile remaining Epic-level durable knowledge and any Epic-level drafted decision through `$wiki`, then run the validator and full suite. Resolve the Epic's `decisions` to the published IDs or `none` in the final transaction.
+After every required child is `done` or explicitly owner-cancelled, and before verifying Epic criteria, invoke `$code-review` on the primary branch as an Epic-scope review with the `EPIC-NNN`, the epic fixed point, and the resolved packet. Skip it only when the epic diff adds nothing to a single child diff already reviewed; report the skip. Then loop:
+
+1. Switch back to the retained work branch and fix every actionable finding falling inside the Epic's approved outcome, criteria, and children — never by broadening scope. Rerun affected focused checks and the full applicable suite.
+2. Merge that branch into primary with a merge commit; rerun `node scripts/validate-project.mjs` and the full suite on primary.
+3. Invoke `$code-review` again from the same epic fixed point as a delta review, passing the previous pass's reviewed commit and its findings.
+4. Repeat until both axes pass.
+
+A finding needing scope the Epic never carried is not fixable here: record it, keep the Epic `in-progress` with a renewed claim, and stop for an owner-approved backlog transaction. Never close an Epic over an unresolved finding.
+
+Then verify the Epic outcome and each criterion with concrete primary-branch evidence, reconcile remaining Epic-level durable knowledge and any Epic-level drafted decision through `$wiki`, then run the validator and full suite. Resolve the Epic's `decisions` to the published IDs or `none` in the final transaction.
 
 In one final primary-branch backlog transaction: check supported Epic criteria, set the Epic `done`, move its whole directory to `archive/epics/`, and update active and archive indexes. The final child's completion may share this transaction only when all child and Epic gates already pass. Commit the archive atomically; never split it.
 
-Remain on primary and delete the local work branch only after every item is integrated, its completion committed, the Epic archive committed when applicable, all checks green, and no authorized scope remains; otherwise retain the branch and report the exact blocker. Report selected scope, claims, changed paths, commits and merge commits, review results, acceptance evidence, reconciliation including every published `ADR-NNN` and each ADR superseded, validation, archive destinations, every technology or standard the delta touched that has no guidance page, and remaining concerns.
+Remain on primary and delete the local work branch only after every item is integrated, its completion committed, the Epic archive committed when applicable, all checks green, and no authorized scope remains; otherwise retain the branch and report the exact blocker. Report selected scope, claims, changed paths, commits and merge commits, review results including the Epic-scope review or its skip, acceptance evidence, reconciliation including every published `ADR-NNN` and each ADR superseded, validation, archive destinations, every technology or standard the delta touched that has no guidance page, and remaining concerns.
 
 End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement` with the next highest-ranked actionable `WORK-NNN`, or `/discuss` naming the next open outcome when no ready work remains. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.

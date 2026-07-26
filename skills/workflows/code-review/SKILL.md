@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review changes since a fixed point on two independent axes — Standards (accepted wiki and repository rules) and Spec (the selected backlog work item's desired delta and acceptance criteria) — via parallel sub-agents reported separately. Use for backlog-backed branch, PR, or work-in-progress reviews.
+description: Review changes since a fixed point on two independent axes — Standards (accepted wiki and repository rules) and Spec (the selected backlog work item's, or for an Epic-scope review the Epic's, desired delta and acceptance criteria) — via parallel sub-agents reported separately. Use for backlog-backed branch, PR, work-in-progress, or Epic-closure reviews.
 ---
 
 # Code Review
@@ -32,9 +32,11 @@ Resolve the repository root and read all applicable `AGENTS.md`, `CLAUDE.md`, an
 
 ### 3. Select the backlog work item
 
-Select one executable `WORK-NNN` record as the Spec authority. Never infer desired behavior from a feature-named wiki page.
+When the caller supplies an `EPIC-NNN` and explicitly requests an **Epic-scope review**, that Epic record is the Spec authority — outcome, criteria, scope, exclusions, constraints — and every child is context. Skip the rest of this step.
 
-1. A user-supplied `WORK-NNN`, backlog path, or complete work-item contents wins over every discovered candidate. If an explicit Epic has several executable children, ask which one.
+Otherwise select one executable `WORK-NNN` record as the Spec authority. Never infer desired behavior from a feature-named wiki page.
+
+1. A user-supplied `WORK-NNN`, backlog path, or complete work-item contents wins over every discovered candidate. If an explicit Epic has several executable children and no Epic-scope review was requested, ask which one.
 2. Otherwise inspect active records under `docs/backlog/epics/` and `docs/backlog/standalone/` (excluding templates, archived, and terminal records). Candidates need a live unexpired execution claim or an explicit branch link — the branch name or reviewed commit messages name the work ID, or the item's Execution/Provenance section names the exact current branch.
 3. Use a discovered item only when the evidence identifies exactly one candidate; ignore expired claims. With several, list each with its evidence and ask. With none, ask for the ID or path — never guess from similar titles, changed paths, or wiki pages.
 
@@ -48,12 +50,13 @@ Read every authority completely before starting either sub-agent:
 
 - the selected work item: outcome/delta, acceptance criteria, relationships, wiki references, Research, Decisions, Execution, subtasks;
 - its complete parent Epic when `parent` is not `none`: outcome, criteria, scope, exclusions, constraints, wiki references, research, execution context;
+- on an Epic-scope review: the Epic record plus every child record in scope — each child's delta, criteria, and recorded review evidence — labelled already-reviewed context;
 - every linked current-state wiki concept relevant to the change (via `wiki_refs` or the Epic) plus the nearest indexes needed for ownership;
 - proposal-specific research in the item or Epic and directly linked local evidence;
 - accepted guidance under `docs/wiki/engineering/` and `docs/wiki/architecture/`, and repository standard sources (instructions, `CONTRIBUTING.md`, `CODING_STANDARDS.md`);
 - every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard the diff touches, resolved from those directory indexes and the changed paths.
 
-Record each source path and role. Current-state wiki facts describe the baseline and constraints; they cannot satisfy or erase a missing desired delta. The child item's delta, criteria, and exclusions are primary Spec authority; Epic context never expands or replaces child scope. Backlog scope never waives a repository or accepted wiki standard.
+Record each source path and role. Current-state wiki facts describe the baseline and constraints; they cannot satisfy or erase a missing desired delta. The child item's delta, criteria, and exclusions are primary Spec authority; Epic context never expands or replaces child scope. On an Epic-scope review the Epic's own outcome and criteria are primary Spec authority and child scope is context; no child's scope expands the Epic's. Backlog scope never waives a repository or accepted wiki standard.
 
 ### 5. Prepare the Standards authority
 
@@ -75,10 +78,12 @@ Send one message with two `Agent` calls, both `general-purpose`.
 
 For a delta review, add to both briefs the prior findings verbatim, the delta diff command, and: "State for each prior finding whether it is resolved, citing the hunk that resolves it. Report only new findings introduced by this delta; do not re-derive findings outside it."
 
+For an Epic-scope review, add to the Spec brief: "The Epic outcome and criteria are primary authority; each child's already-passed review is context. Report by severity: (a) Epic criteria or outcome no child satisfies; (b) contradictions or gaps at the seams between children; (c) scope creep beyond the Epic. Cite the Epic path and exact criterion. Do not re-derive findings already reported and resolved per-child." And to the Standards brief: "Every hunk already passed a per-item Standards review. Prioritize violations and smells that appear only once the children are composed — duplication across children, divergent patterns for one concern, epic-wide drift. Re-report a per-item finding only when it is still live in the composed result."
+
 If the user explicitly confirmed no specification exists, skip the Spec sub-agent and note it in the report. Otherwise missing or ambiguous context stops the review for user input before any sub-agent starts.
 
 ### 7. Aggregate
 
 Present the two reports under `## Standards` and `## Spec`, verbatim or lightly cleaned. Keep severity labels and counts independent; never merge or rerank findings across axes. End with a one-line summary of each axis's total, severity breakdown, and worst issue. Do not pick a single winner.
 
-Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
+Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass inside an Epic closure → continue its Epic archive transaction; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.

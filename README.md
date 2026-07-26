@@ -54,7 +54,7 @@ flowchart TD
 
 ### Execute and accept
 
-Ready work is executed on a conventional branch and reviewed until both axes pass; acceptance happens only on the primary branch:
+Ready work is executed on a conventional branch and reviewed until both axes pass; acceptance happens only on the primary branch. An Epic gets one further review of the composed result before it closes:
 
 ```mermaid
 flowchart TD
@@ -63,6 +63,9 @@ flowchart TD
     CR["code-review<br/>Standards axis + Spec axis"] -->|findings| IMP
     CR -->|both axes pass| ACC["primary-branch acceptance<br/>(merge commit + full suite)"]
     ACC --> DONE(["done, archived"])
+    DONE -->|last Epic child| ECR["code-review<br/>Epic-scope review<br/>from the epic fixed point"]
+    ECR -->|findings| IMP
+    ECR -->|both axes pass| ECL(["Epic done, archived"])
     ACC -->|durable knowledge changed<br/>drafted decisions become ADRs| WK["wiki<br/>apply approved reconciliation"]
 ```
 
@@ -108,9 +111,9 @@ A few rules the diagrams don't show: execution always passes through backlog rea
 | **to-backlog** | Take the conversation's confirmed standalone work items to ready under one standing approval |
 | **research** | Attach current version and guideline evidence to a proposed backlog item before readiness, fanned out per subject |
 | **to-guidance** | Publish and refresh canonical technology and standards guidance under one standing approval, so adopted rules are read instead of re-researched |
-| **implement** | Execute a ready work item or Epic through claim, implementation, review, and completion |
-| **implement-with-subagents** | Orchestrate an Epic or work-item set with one fresh subagent per item |
-| **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's scope |
+| **implement** | Execute a ready work item or Epic through claim, implementation, per-item review, Epic-scope review, and completion |
+| **implement-with-subagents** | Orchestrate an Epic or work-item set with one fresh subagent per item, and review the composed Epic before closure |
+| **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's — or a whole Epic's — scope |
 
 ## Standalone Skills
 
