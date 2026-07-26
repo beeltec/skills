@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-18 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+19 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -76,8 +76,10 @@ The wiki is fed from four directions and feeds back into planning, implementatio
 ```mermaid
 flowchart TD
     TW["to-wiki<br/>publish confirmed knowledge<br/>(one standing approval)"] -->|verified transactions| WK
-    TG["to-guidance<br/>research + publish adopted<br/>technology and standards rules<br/>(one standing approval)"] -->|verified transactions| WK
-    SP["setup-project"] -.->|brownfield back-fill<br/>seeds draft technology pages| WK
+    TG["to-guidance<br/>(one standing approval)"] --> GD
+    TE["to-epic"] -->|owner names subjects<br/>at the evidence decision| GD
+    RT2["research / implement /<br/>setup-project"] -->|offer on a missing<br/>or stale page| GD
+    GD["guidance<br/>research + publish adopted<br/>technology and standards rules"] -->|verified transactions| WK
     ACC["primary-branch acceptance"] -->|durable knowledge changed| WK
     WK["wiki<br/>knowledge lifecycle<br/>+ ADRs superseded in place<br/>+ engineering guidance pages"]
     TW -.->|rejected desired-change candidates| TB["/to-backlog"]
@@ -87,9 +89,9 @@ flowchart TD
     WK -.->|standards authority| CR["code-review"]
 ```
 
-**to-guidance** is the answer to re-researching the same stack for every Epic. It resolves each subject's installed version from repository evidence, fans out one sub-agent per subject, and publishes one canonical page per technology (`docs/wiki/engineering/technologies/`) or cross-cutting standard (`docs/wiki/engineering/standards/`). A page separates `Requirements` that bind new code from `Recommendations`, `Conventions`, and recorded `Deviations`, and lists `Known gaps` where existing code contradicts a rule. Invoking it again for the same subject refreshes the page — re-resolving versions and re-verifying claims — and pauses for explicit approval only when a refresh would reverse or remove an already-adopted rule.
+**guidance** is the answer to re-researching the same stack for every Epic. It resolves each subject's installed version from repository evidence, fans out one sub-agent per subject, and publishes one canonical page per technology (`docs/wiki/engineering/technologies/`) or cross-cutting standard (`docs/wiki/engineering/standards/`). A page separates `Requirements` that bind new code from `Recommendations`, `Conventions`, and recorded `Deviations`, and lists `Known gaps` where existing code contradicts a rule. Running it again for the same subject refreshes the page — re-resolving versions and re-verifying claims — and pauses for explicit approval whenever a refresh would reverse or remove an already-adopted rule, no matter which caller invoked it.
 
-Use it when a technology or standard enters the stack, when guidance a `/research` run produced should become durable, and when a page's recorded version no longer matches the manifest. Nothing detects that staleness for you: `/code-review` reports a version-mismatched page as a finding rather than enforcing it, but refreshing is an explicit `/to-guidance` invocation.
+**to-guidance** is its owner-invoked entry point, carrying the standing approval for the subjects it names — the same machinery/entry-point split as `backlog`/`to-backlog` and `wiki`/`to-wiki`. Four other skills offer `guidance` at the point they detect the gap: **to-epic** at its evidence decision, so children are sliced against fresh pages and research is not re-derived; **research** when a subject has no page or a stale one; **implement** at post-acceptance reconciliation, the only point in an implementation run where guidance may be published, never from the work branch; and **setup-project** for the `draft` pages a brownfield back-fill seeded. `/code-review` still reports a version-mismatched page as a finding rather than enforcing or refreshing it.
 
 A few rules the diagrams don't show: execution always passes through backlog readiness — there is no direct-implementation route — and readiness requires every architecturally significant design choice drafted in ADR shape under `## Decisions`, or explicitly `none`. Wiki changes are only drafted on the work branch, never applied there; at primary-branch acceptance (a merge commit plus the full suite) each drafted decision becomes an ADR with its `ADR-NNN` allocated, and the terminal backlog record is archived. Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments as the report's last line — so each step hands off to the next.
 
@@ -110,7 +112,8 @@ A few rules the diagrams don't show: execution always passes through backlog rea
 | **to-epic** | Plan one Epic end-to-end to ready under one standing approval |
 | **to-backlog** | Take the conversation's confirmed standalone work items to ready under one standing approval |
 | **research** | Attach current version and guideline evidence to a proposed backlog item before readiness, fanned out per subject |
-| **to-guidance** | Publish and refresh canonical technology and standards guidance under one standing approval, so adopted rules are read instead of re-researched |
+| **guidance** | Research, publish, and refresh canonical technology and standards guidance pages, so adopted rules are read instead of re-researched |
+| **to-guidance** | Owner-invoked entry point that runs `guidance` for the named subjects under one standing approval |
 | **implement** | Execute a ready work item or Epic through claim, implementation, per-item review, Epic-scope review, and completion |
 | **implement-with-subagents** | Orchestrate an Epic or work-item set with one fresh subagent per item, and review the composed Epic before closure |
 | **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's — or a whole Epic's — scope |
