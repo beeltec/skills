@@ -23,6 +23,7 @@ Every skill file is billed to the context window on every matched task, so treat
 - Give exact executable commands with their flags, not tool names. Tooling named in an instruction file gets used far more often than tooling left implicit.
 - Provide concrete templates for anything the agent must produce repeatedly; agents pattern-match templates better than prose descriptions.
 - Put deterministic, repeated mechanics in `scripts/` rather than prose the agent must re-derive each run.
+- When a skill fans out sub-agents for mechanical research or discovery against a fixed brief, instruct the cheapest available tier at low reasoning effort, and state the escalation path for an unusable return. Reserve stronger tiers for judgement-heavy work — review, conflict resolution, synthesis, implementation.
 - State boundaries in three tiers where a skill can act destructively or irreversibly: always do, ask first, never do.
 - Close the rationalization loophole: for any step that must not be skipped, say so explicitly and state what to do when it cannot run. A missing guardrail on a required step is the most common defect in published skills.
 - Write once for every harness. The same `SKILL.md` runs in Claude Code, Codex, Cursor, and other clients — do not fork client-specific wording; put client-only metadata in `agents/`.

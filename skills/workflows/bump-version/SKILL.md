@@ -24,11 +24,13 @@ If `.claude/rules/versioning.md` exists, read it (version file locations, update
 
 ### 2. Analyze project structure (only without versioning.md)
 
-Spawn 2-3 code-explorer agents in parallel to find version locations:
+Spawn 2-3 code-explorer agents in parallel, on the cheapest available tier, to find version locations:
 
 - **Package manager files:** `package.json`/`package-lock.json`, `Cargo.toml`, `pyproject.toml`/`setup.py`/`setup.cfg`, `go.mod`, `pom.xml`/`build.gradle`, gemspecs, `pubspec.yaml`, `composer.json`
 - **Dedicated version files:** `VERSION`, `VERSION.txt`, `.version`, `version.*`, `_version.py`, `__version__`/`VERSION` constants
 - **Config/build files:** `*.csproj`/`AssemblyInfo.cs`, `Info.plist`, `gradle.properties`, `CMakeLists.txt`, `config.*`/`settings.*`
+
+Re-run an explorer on a stronger tier only when it returns nothing usable.
 
 Then create `.claude/rules/versioning.md` containing: a table of each version-bearing file with its format and update method, and any special instructions (monorepo notes, `v` prefixes, extra files).
 
@@ -38,7 +40,7 @@ Run `git log --oneline` and collect commits since the last "chore: bump version"
 
 ### 4. Analyze changes (only without an explicit argument)
 
-Spawn 3-4 code-explorer agents in parallel: commit-message prefixes; the actual diff for features or API changes; added/removed files and structural changes; optionally breaking changes and deprecations. Decide:
+Spawn 3-4 code-explorer agents in parallel, on the cheapest available tier: commit-message prefixes; the actual diff for features or API changes; added/removed files and structural changes; optionally breaking changes and deprecations. Decide:
 
 - **Patch:** only bug fixes, docs, or internal refactors with no user-facing changes.
 - **Minor:** any new feature or functionality, modified user-facing behavior, new API endpoints, or significant refactors.

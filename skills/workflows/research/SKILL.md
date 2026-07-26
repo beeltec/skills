@@ -46,7 +46,7 @@ Check each subject against its guidance page under `docs/wiki/engineering/techno
 Degrade by harness capability:
 
 - **Parallel sub-agents available** — spawn one per subject, all in a single message.
-- **Per-agent model selection also available** — give subject agents the cheapest tier that reliably follows the brief below; keep the stronger model for inspection, conflict resolution, and synthesis.
+- **Per-agent model selection also available** — run every subject sub-agent on the cheapest available tier at low reasoning effort; reserve the stronger model for inspection, conflict resolution, and synthesis. If a subject's return breaks the required output shape, cites an unopened source, or leaves its version unresolved, re-run that subject on a stronger tier and record the escalation in the report.
 - **Neither available** — run the same briefs sequentially in the main context, with the same output shape.
 
 Give each sub-agent the subject, the proposed delta, that subject's repository version evidence, the version rules in step 5, and this brief:
@@ -89,6 +89,6 @@ Present findings, proposed edits, resulting research state, and readiness effect
 - Proposal-specific sources, findings, recommendations, uncertainty, and deviations stay in the backlog record.
 - During post-acceptance reconciliation, promote only conclusions that became durable accepted guidance to the owning wiki concept via `$wiki` under its approval rules, summarizing rather than copying; retain the backlog research as history. When the owning subject has no page under `docs/wiki/engineering/technologies/` or `docs/wiki/engineering/standards/`, route the promotion through `/to-guidance` for that subject so it lands on a canonical guidance page instead of being folded into a generic engineering concept.
 
-After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, subjects researched, resolved versions, research state, unresolved readiness blockers, commit hash, and validation result.
+After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, subjects researched, resolved versions, any subject re-run on a stronger tier, research state, unresolved readiness blockers, commit hash, and validation result.
 
 End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
