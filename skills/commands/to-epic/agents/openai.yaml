@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $to-epic to plan this outcome into a ready Epic: Epic intake, the research decision, child work-item intake, and refinement until the Epic and all children are ready."
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false
