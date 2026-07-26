@@ -21,4 +21,4 @@ Stay on the current branch — never create, switch, merge, or delete branches. 
 
 A failed validator, evidence contradicting a confirmed conclusion, or unestablished current acceptance is a blocker: publish nothing for that candidate, keep committed transactions intact, and report — never force acceptance.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists; omit when none follows. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists; omit when none follows. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.

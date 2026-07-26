@@ -34,6 +34,6 @@ For each change:
 
 ## Next-step handoff convention
 
-Every delivery-workflow skill ends its final report with a `Next step:` line — one exact copy-pasteable command for the follow-up, selected from the run's actual outcome with real arguments, never placeholders; omit it only when no follow-up exists. Each skill states the canonical tail verbatim: "Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order." Apply this convention when adding or changing workflow skills.
+Every delivery-workflow skill ends its final report with a `Next step:` line — one exact copy-pasteable command for the follow-up, selected from the run's actual outcome with real arguments, never placeholders; omit it only when no follow-up exists. Each skill states the canonical tail verbatim: "Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply." Apply this convention when adding or changing workflow skills.
 
 See the [Agent Skills specification](https://agentskills.io/specification), [creator best practices](https://agentskills.io/skill-creation/best-practices), and [skills CLI documentation](https://github.com/vercel-labs/skills#readme).

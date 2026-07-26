@@ -21,7 +21,7 @@ An authority — record, index, wiki concept, ADR, guidance page, or source file
 
 An already-read authority is void and must be re-read when any of these holds:
 
-- context was summarized or compacted since the read, so the content is no longer held;
+- context was summarized or compacted since the read;
 - the branch changed, or a merge landed;
 - a commit not made by this invocation touched the path;
 - any transaction mutated the record;
@@ -29,7 +29,7 @@ An already-read authority is void and must be re-read when any of these holds:
 - `node scripts/validate-project.mjs` failed since the read;
 - the fixed point changed.
 
-Always re-read global rank, claims, statuses, and indexes before every selection and terminal transition regardless of freshness. When freshness is uncertain, re-read: a stale authority is a correctness failure, a redundant read is only slow.
+Always re-read global rank, claims, statuses, and indexes before every selection and terminal transition regardless of freshness. When freshness is uncertain, re-read.
 
 **Suite freshness:** a passing full applicable suite is green for the exact tree that produced it. A later gate requiring the suite cites that result while the tree is unchanged, and re-runs it once any tracked file changed. A backlog-only bookkeeping commit cannot affect it.
 
@@ -134,4 +134,4 @@ In one final primary-branch backlog transaction: check supported Epic criteria, 
 
 Remain on primary and delete the local work branch only after every item is integrated, its completion committed, the Epic archive committed when applicable, all checks green, and no authorized scope remains; otherwise retain the branch and report the exact blocker. Report selected scope, claims, changed paths, commits and merge commits, review results, acceptance evidence, reconciliation including every published `ADR-NNN` and each ADR superseded, validation, archive destinations, every technology or standard the delta touched that has no guidance page, and remaining concerns.
 
-End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement` with the next highest-ranked actionable `WORK-NNN`, or `/discuss` naming the next open outcome when no ready work remains. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement` with the next highest-ranked actionable `WORK-NNN`, or `/discuss` naming the next open outcome when no ready work remains. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.

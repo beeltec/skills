@@ -70,7 +70,7 @@ Distinguish requirements, recommendations, and optional conventions. Keep useful
 - Every concept has non-empty `type`, `title`, `description`, ISO 8601 `timestamp`, and `status` frontmatter. Preserve unknown metadata; add `tags`, `confidence`, `last_reviewed`, `resource`, `sources` only when useful.
 - `draft` — incomplete documentation whose statements are all accepted current state; never a holder for speculative claims. `active` — sufficiently complete. `deprecated` — only while the subject remains part of current state and consumers need compatibility or migration guidance.
 - Promote or retire when repository evidence supports it; changing accepted meaning still requires exact owner approval.
-- Delete replaced, erroneous, duplicate, and valueless concepts cleanly after approval instead of creating `superseded` pages — Git and archived backlog records preserve history. ADRs are the sole exception and are never deleted for being replaced.
+- Delete replaced, erroneous, duplicate, and valueless concepts cleanly after approval instead of creating `superseded` pages. ADRs are the sole exception and are never deleted for being replaced.
 
 ## Architecture Decision Records
 
@@ -78,7 +78,7 @@ An ADR is a `type: Decision` concept under `architecture/decisions/`. Follow the
 
 - Allocate `id` at publication, never at draft time: scan every existing ADR and take the next unused `ADR-NNN`. IDs are immutable and never reused. The filename is `adr-NNN-short-slug.md`.
 - Publish a decision only once it is accepted current state — after primary-branch acceptance of the work that made it, or after inspection establishes it was already in force. A proposed decision stays on its backlog record under `decisions:` and `## Decisions`.
-- Supersede in place: set the replaced ADR to `status: superseded` with `superseded_by`, set the replacement's `supersedes`, move neither file, and update `decisions/index.md` so the replaced entry leaves the in-force section. Both directions are required, and superseding is one semantic transaction requiring its own explicit owner approval — it changes which decision governs.
+- Supersede in place: set the replaced ADR to `status: superseded` with `superseded_by`, set the replacement's `supersedes`, move neither file, and update `decisions/index.md` so the replaced entry leaves the in-force section. Both directions are required, and superseding is one semantic transaction requiring its own explicit owner approval.
 - Never rewrite a superseded ADR's Context, Decision, Alternatives considered, or Consequences. Correct a factual error in an `active` ADR; record a change of mind as a new ADR.
 - Record ADR creation and supersession in `log.md`.
 - `status: superseded` is valid for no other concept type.
@@ -102,6 +102,6 @@ For each approved semantic mutation or authorized non-semantic repair:
 3. Run `node scripts/validate-project.mjs`; fix all errors and review every warning. If validation cannot pass, do not commit.
 4. Inspect `git diff`, `git diff --cached`, and `git status`. Stage only the intended `docs/wiki` paths; verify no unrelated changes, secrets, notes, or backlog content.
 5. One concise Conventional Commit: `docs(wiki): <transaction outcome>`.
-6. Report the commit hash, authority/approval, changed and deleted concepts, structural effects, evidence and sources, warnings, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. rejected desired-change content → `/to-backlog` naming it); omit when none follows. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
+6. Report the commit hash, authority/approval, changed and deleted concepts, structural effects, evidence and sources, warnings, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. rejected desired-change content → `/to-backlog` naming it); omit when none follows. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
 
 If approval is denied or revised, update the proposal in conversation without mutating files. If unrelated changes overlap an affected wiki file and a safe narrow transaction is not possible, stop and ask.

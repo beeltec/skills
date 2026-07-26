@@ -21,7 +21,7 @@ The project owner approves the exact meaning of every addition, correction, depr
 - `draft` means documentation is incomplete, but every included statement is accepted current state. It never holds speculative or proposed claims.
 - `active` means the current concept is sufficiently complete.
 - `deprecated` is retained only while its subject remains in current state and consumers need compatibility or migration guidance.
-- Replaced, erroneous, duplicate, and valueless concepts are deleted after approval rather than retained as new `superseded` pages. Git and archived backlog records preserve history. ADRs are the sole exception: they are never deleted for being replaced.
+- Replaced, erroneous, duplicate, and valueless concepts are deleted after approval rather than retained as new `superseded` pages. ADRs are the sole exception: they are never deleted for being replaced.
 - `superseded` applies only to an ADR whose decision has been replaced. No other concept may use it.
 
 Before moving or deleting a concept, repair all wiki references in the same transaction. An active backlog reference blocks the operation until `$backlog` applies a separately approved reference update. Archived backlog records may retain missing historical `wiki_refs`; validation reports those references as warnings.
@@ -54,7 +54,7 @@ Reserved `index.md` and `log.md` files follow OKF rules and are not concepts. `a
 
 ## Architecture decision records
 
-An ADR records one decision at one point in time. It stays true permanently, which is why a replaced ADR is retained rather than deleted.
+An ADR records one decision at one point in time.
 
 Write an ADR when a decision changes system structure, affects a cross-cutting quality (security, performance, compatibility, delivery), adopts or drops a technology or dependency, or is costly to reverse — and a real alternative was rejected. Routine implementation choices do not qualify. When the test does not apply, record that explicitly on the originating backlog record; silence is not an answer.
 
@@ -63,7 +63,7 @@ Write an ADR when a decision changes system structure, affects a cross-cutting q
 - Required sections: Context, Decision, Alternatives considered, Consequences, Affected concepts, Provenance.
 - A replaced ADR keeps its path and filename, becomes `status: superseded`, and sets `superseded_by` to the replacement, which sets `supersedes` back to it. Both directions are required.
 - Never edit a superseded ADR's Context, Decision, Alternatives considered, or Consequences. Correct a factual error in an `active` ADR; record a change of mind as a new ADR.
-- `decisions/index.md` lists in-force and superseded ADRs in separate sections so traversal surfaces only decisions still in force.
+- `decisions/index.md` lists in-force and superseded ADRs in separate sections.
 - A proposed decision belongs on its backlog record under `decisions:` and `## Decisions`. It is published here only after primary-branch acceptance, or retroactively once a decision is established as already in force.
 
 ## Length and splitting

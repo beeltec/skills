@@ -57,7 +57,7 @@ Give each sub-agent the subject, its repository version evidence and observed co
 
 The authoritative version source is a live call to the ecosystem's registry, release feed, or tagged releases — `npm view <pkg> version`, the PyPI JSON API, `gh release list`, crates.io, and equivalents. Record the resolved version, that source, and the resolution date. Distinguish latest stable from prerelease and from the maintained LTS line.
 
-Research and publish at the **installed** version, because guidance must match what the code runs. Record the gap to latest stable and its security relevance in the page; an upgrade is separate `/to-backlog` work, never absorbed here.
+Research and publish at the **installed** version. Record the gap to latest stable and its security relevance in the page; an upgrade is separate `/to-backlog` work, never absorbed here.
 
 ## 4. Synthesize
 
@@ -84,7 +84,7 @@ Run `node scripts/validate-project.mjs`, inspect the diff, stage only the intend
 
 ## 6. Pause on rule replacement
 
-When a refresh would **reverse, weaken, or remove a Requirement or Convention the page already records as adopted**, that is not covered by the standing approval — it changes what binds every implementation agent. Present that exact change individually: the current rule, the replacement, the source authority and version that forces it, affected pages and inbound references, and the code the change makes non-compliant. Apply it only on explicit per-item approval, and never fold it into another transaction.
+When a refresh would **reverse, weaken, or remove a Requirement or Convention the page already records as adopted**, that is not covered by the standing approval. Present that exact change individually: the current rule, the replacement, the source authority and version that forces it, affected pages and inbound references, and the code the change makes non-compliant. Apply it only on explicit per-item approval, and never fold it into another transaction.
 
 A failed validator, a source that contradicts a claim already published, or evidence that a subject is not actually in use is a blocker: publish nothing for that subject, keep committed transactions intact, and report.
 
@@ -92,4 +92,4 @@ A failed validator, a source that contradicts a claim already published, or evid
 
 Report per subject: the page path and whether it was created or refreshed; the installed version with its establishing path and the resolved latest stable with its live source and date; counts of requirements, recommendations, conventions, deviations, and known gaps; sources with authority labels; every rule-replacement pause and its outcome; unresolved questions; commit hashes; and the final validation result.
 
-End the report with `Next step:` — one copy-pasteable command: known gaps found → `/to-backlog` naming the non-compliant areas to remediate; a subject blocked or its research unresolved → the concrete action that resolves it; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command: known gaps found → `/to-backlog` naming the non-compliant areas to remediate; a subject blocked or its research unresolved → the concrete action that resolves it; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.

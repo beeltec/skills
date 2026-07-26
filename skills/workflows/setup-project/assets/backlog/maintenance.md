@@ -82,4 +82,4 @@ Relationships may target Epics or executable work, must resolve to an existing I
 - Move done/cancelled standalone work to `archive/standalone/` and remove it from global rank.
 - Archive an Epic atomically by moving its whole directory to `archive/epics/`. The Epic and every child must already be `done` or `cancelled`; no child may remain active or outside that directory.
 - Active records may not link or relate to archived records. Archived records may retain links among archived records and wiki references for history.
-- Active `wiki_refs` must resolve. Archived records may retain a missing historical wiki path after an approved concept deletion; validation reports it as a warning so archive history is not rewritten.
+- Active `wiki_refs` must resolve. Archived records may retain a missing historical wiki path after an approved concept deletion; validation reports it as a warning.

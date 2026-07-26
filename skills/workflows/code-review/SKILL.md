@@ -5,7 +5,7 @@ description: Review changes since a fixed point on two independent axes — Stan
 
 # Code Review
 
-Review the diff between `HEAD` and a user-supplied fixed point against two authorities, run as **parallel sub-agents** so they do not pollute each other's context, and report them separately:
+Review the diff between `HEAD` and a user-supplied fixed point against two authorities, run as **parallel sub-agents**, and report them separately:
 
 - **Standards** — conformance to accepted wiki engineering/architecture guidance and repository standards.
 - **Spec** — implementation of the selected backlog work item's desired delta and acceptance criteria within its Epic context.
@@ -63,26 +63,13 @@ The applicable guidance pages are hard Standards authority, at the strength each
 
 Standards also carries the **ADR check** when the wiki defines the significance test. Read the in-force ADRs under `docs/wiki/architecture/decisions/`, the significance test in `docs/wiki/maintenance.md`, and the work item's `decisions` field and `## Decisions` section. Report a finding when the diff makes a decision meeting that test and the record carries neither a drafted ADR covering it nor a recorded `none` explaining why none qualifies, and when the diff contradicts an in-force ADR without drafting its supersession. The significance test is a judgement call — label it as one, and never treat a missing ADR as a code defect.
 
-On top of documented rules, Standards always carries this **smell baseline** — a fixed set of Fowler code smells (_Refactoring_, ch.3) applying even when the repo documents nothing. Two binding rules: **a documented repo standard always overrides** (suppress a smell it endorses), and **every smell is a labelled judgement-call heuristic** ("possible Feature Envy"), never a hard violation; skip anything tooling already enforces.
-
-- **Mysterious Name** — name doesn't reveal purpose → rename; if no honest name comes, the design's murky.
-- **Duplicated Code** — same logic shape in multiple hunks/files → extract and share.
-- **Feature Envy** — method uses another object's data more than its own → move it to that data.
-- **Data Clumps** — the same fields/params travel together → bundle into one type.
-- **Primitive Obsession** — primitive standing in for a domain concept → give it a small type.
-- **Repeated Switches** — same `switch`/`if`-cascade on the same type recurs → polymorphism or one shared map.
-- **Shotgun Surgery** — one logical change scattered across many files → gather into one module.
-- **Divergent Change** — one module edited for unrelated reasons → split per reason.
-- **Speculative Generality** — abstraction for needs the spec doesn't have → delete/inline until a real need shows.
-- **Message Chains** — long `a.b().c().d()` navigation → hide behind one method on the first object.
-- **Middle Man** — mostly delegates onward → cut it, call the target directly.
-- **Refused Bequest** — implementer ignores most of what it inherits → composition over inheritance.
+On top of documented rules, Standards always carries the **smell baseline** in [references/smell-baseline.md](references/smell-baseline.md) — a fixed set of Fowler code smells, with its own binding rules, applying even when the repo documents nothing. Never load that file here: the Standards sub-agent reads it itself in step 6.
 
 ### 6. Spawn both sub-agents in parallel
 
 Send one message with two `Agent` calls, both `general-purpose`.
 
-**Standards sub-agent prompt:** the diff command and commit list; the Standards sources with paths and roles, naming each applicable guidance page and the rule-strength rules from step 5; the full smell baseline pasted in (the sub-agent has no other access to it); the ADR check inputs when present — the significance test text, the in-force ADRs, and the item's `decisions` field and `## Decisions` section, all pasted in; and the brief: "Review only the diff. Report every documented-standard violation by severity and file/hunk, citing the source path and exact rule. Separately report possible baseline smells by name, quoting the hunk. Separately report any unrecorded architecturally significant decision or contradicted in-force ADR, labelled as a judgement call and citing the significance test. Documented rules are hard authority; smells and the ADR check are judgement-call heuristics that an explicit documented rule overrides. Do not use backlog scope to waive a standard. Skip checks tooling already enforces. Under 400 words."
+**Standards sub-agent prompt:** the diff command and commit list; the Standards sources with paths and roles, naming each applicable guidance page and the rule-strength rules from step 5; the absolute path of `references/smell-baseline.md` beside this `SKILL.md`, instructing the sub-agent to read that file first and treat it as its smell authority; the ADR check inputs when present — the significance test text, the in-force ADRs, and the item's `decisions` field and `## Decisions` section, all pasted in; and the brief: "Read the smell-baseline file at the path given above before reviewing; if it cannot be read, say so in your report rather than reviewing without it. Review only the diff. Report every documented-standard violation by severity and file/hunk, citing the source path and exact rule. Separately report possible baseline smells by name, quoting the hunk. Separately report any unrecorded architecturally significant decision or contradicted in-force ADR, labelled as a judgement call and citing the significance test. Documented rules are hard authority; smells and the ADR check are judgement-call heuristics that an explicit documented rule overrides. Do not use backlog scope to waive a standard. Skip checks tooling already enforces. Under 400 words."
 
 **Spec sub-agent prompt:** the diff command and commit list; the complete work item as primary authority, complete parent Epic as context, linked wiki concepts, and relevant proposal research, each labelled by role; and the brief: "Review only the diff. Report by severity: (a) missing or partial desired behavior or acceptance requirements; (b) incorrect implemented behavior; (c) scope creep. Cite the work-item path and exact requirement for every finding. Cite Epic constraints when relevant, but never expand or replace child scope with Epic scope. Use linked wiki facts only as baseline and constraints; never let existing behavior mask a missing delta. Do not treat a backlog request as permission to violate repository standards; leave that conflict visible for the Standards axis. Under 400 words."
 
@@ -94,8 +81,4 @@ If the user explicitly confirmed no specification exists, skip the Spec sub-agen
 
 Present the two reports under `## Standards` and `## Spec`, verbatim or lightly cleaned. Keep severity labels and counts independent; never merge or rerank findings across axes. End with a one-line summary of each axis's total, severity breakdown, and worst issue. Do not pick a single winner.
 
-Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
-
-## Why two axes
-
-Code can follow every standard yet implement the wrong delta (Standards pass, Spec fail), or implement the item exactly while breaking a convention (Spec pass, Standards fail). Separate reporting stops one axis from masking the other.
+Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.

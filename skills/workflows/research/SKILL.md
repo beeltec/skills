@@ -60,7 +60,7 @@ The authoritative version source is a live call to the ecosystem's registry, rel
 Never take a version from training memory, a documentation example snippet, a tutorial, or a blog post. Distinguish latest stable from prerelease and from the maintained LTS line.
 
 - **Introduced by this delta** — recommend the latest stable version compatible with the project's real constraints (engine, peers, lockfile). State the reason whenever the recommendation is not the newest stable.
-- **Already installed** — research at the installed version, because guidance must match what the code runs. Record the gap to latest stable and its security relevance as a finding. An upgrade the delta genuinely requires is a finding; anything else is separate proposed work. Never absorb a migration into this record.
+- **Already installed** — research at the installed version. Record the gap to latest stable and its security relevance as a finding. An upgrade the delta genuinely requires is a finding; anything else is separate proposed work. Never absorb a migration into this record.
 
 ## 6. Synthesize
 
@@ -91,4 +91,4 @@ Present findings, proposed edits, resulting research state, and readiness effect
 
 After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, subjects researched, resolved versions, research state, unresolved readiness blockers, commit hash, and validation result.
 
-End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it. It is the report's last line; if several must run, end with a numbered list in run order.
+End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
