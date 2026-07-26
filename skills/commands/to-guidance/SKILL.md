@@ -10,6 +10,8 @@ Invoking this skill is the owner's standing approval for publishing and refreshi
 
 It never authorizes reversing or removing an already-adopted rule without the rule-replacement pause, deprecating or deleting a page, mutating `docs/backlog`, or publishing guidance for a subject the project does not actually use.
 
+User-invoked only — or invoked by `$to-product`, whose autonomous contract additionally auto-approves the rule-replacement pause and reports each reversal individually.
+
 Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
 
 Run `$guidance` under this standing approval for the subjects the user named — with none named, let it inventory candidates from repository evidence and ask — then report its result.

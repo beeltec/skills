@@ -80,7 +80,7 @@ Set the frontmatter research state:
 
 For Epic research, keep the full result in the Epic's `## Research`. Mark every affected proposed child `research: pending` and name the inherited question in its Research section. Epic evidence may be linked rather than copied; each child resolves and records its applicable conclusions before `ready`.
 
-Present findings, proposed edits, resulting research state, and readiness effect to the project owner. Apply only the exact transaction they explicitly approve.
+Present findings, proposed edits, resulting research state, and readiness effect to the project owner. Apply only the exact transaction they explicitly approve. Under an active autonomous run, `$to-product`'s autonomous contract supplies that approval.
 
 ## Readiness and persistence
 

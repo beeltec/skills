@@ -13,6 +13,8 @@ Stay on the current branch — never create, switch, merge, or delete branches. 
 
 The project owner controls accepted project meaning. Before changing accepted knowledge: inspect the evidence and existing knowledge; present the exact proposed meaning, canonical wording, owning concepts, conflicts, deletions, and affected pages; obtain explicit owner approval for that complete semantic transaction.
 
+Under an active autonomous run, `$to-product`'s autonomous contract supplies that approval, including for concept deprecation, concept deletion, and ADR supersession, each of which the run reports individually.
+
 A direct request is intent, not approval of the final transaction. Approval covers only the exact proposal shown — never infer it from discussion, backlog or implementation approval, silence, or earlier wording. Derived index, link, metadata, and log changes needed to apply an approved transaction need no separate approval.
 
 Strictly non-semantic maintenance the user requested (formatting, metadata normalization, broken-link repair, meaning-preserving index coverage) may proceed after reporting the issue and intended repair. Ask when a structural operation could materially change ownership, emphasis, interpretation, or discoverability.

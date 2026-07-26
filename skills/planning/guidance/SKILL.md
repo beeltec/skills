@@ -11,9 +11,9 @@ Follow `$wiki` for record mechanics — ownership, evidence, sources, validation
 
 ## Authority
 
-Obtain explicit owner approval before each page create-or-refresh transaction, unless the caller holds standing approval for it — `$to-guidance` for the subjects that invocation named, `$to-epic` for the subjects the owner named at its evidence decision. That approval also supersedes `$wiki`'s per-transaction pauses for exactly those transactions.
+Obtain explicit owner approval before each page create-or-refresh transaction, unless the caller holds standing approval for it — `$to-guidance` for the subjects that invocation named, `$to-epic` for the subjects the owner named at its evidence decision, `$to-product` for every subject an autonomous run reaches. That approval also supersedes `$wiki`'s per-transaction pauses for exactly those transactions.
 
-Regardless of caller: never publish guidance for a subject repository evidence does not show in use; never deprecate or delete a page; never mutate `docs/backlog`; and always pause per item under step 6 — no standing approval covers reversing an adopted rule.
+Regardless of caller: never publish guidance for a subject repository evidence does not show in use; never deprecate or delete a page; never mutate `docs/backlog`; and always pause per item under step 6 — only `$to-product`'s autonomous contract covers reversing an adopted rule, and it reports each reversal individually.
 
 Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
 

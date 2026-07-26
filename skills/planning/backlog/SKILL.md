@@ -15,6 +15,8 @@ The project owner controls durable intent and priority. Obtain explicit approval
 
 Approval covers only the exact transaction presented — never infer it from earlier discussion, a plan, silence, or permission to inspect files. Record approval in `## Execution` when readiness requires it and preserve provenance.
 
+Under an active autonomous run, `$to-product`'s autonomous contract supplies the approval this section requires for intake, refinement, rank placement, and every `proposed -> ready` transition. It never supplies approval for cancellation.
+
 An invoked gate-backed execution workflow that explicitly authorizes an agent/session for a named, already-approved work item permits only: setting, renewing, and clearing its own temporary claim; checking existing acceptance criteria and subtasks with evidence; and the normal `ready <-> in-progress` and `in-progress -> done` transitions. It never permits changing criterion wording, scope, parentage, relationships, rank, cancellation, walking work back to `proposed`, or wiki acceptance.
 
 ## Preflight

@@ -7,6 +7,8 @@ description: Orchestrate an explicit ready Epic or selected backlog work-item se
 
 Orchestrate approved `setup-project` backlog work: own authority discovery, selection, sequencing, verification, recovery, and Epic closure; delegate each item to exactly one fresh subagent running `$implement`. Never implement work-item scope in the orchestrator, or create, inspect, or depend on `docs/tasks` or a master task document.
 
+Under an active autonomous run, `$to-product`'s autonomous contract supplies every owner approval this workflow and its subagents require, and its blocker rule governs: retry an item three times, then release its claim, return it to `ready` with the blocker recorded, and continue with the next actionable item instead of stopping. State the contract in every subagent brief.
+
 **Serialized integration:** run at most three items concurrently, and only where no `blocks` link joins them in either direction and their declared subtask scopes are disjoint; give each an isolated git worktree. Admit one item to primary at a time. An item whose turn follows another's merge merges primary into its branch, re-verifies, and re-reviews the delta before its own acceptance gate.
 
 ## Inputs

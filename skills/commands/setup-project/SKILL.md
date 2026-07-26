@@ -10,6 +10,8 @@ Initialize or upgrade two governed, tracked systems without overwriting project-
 
 Stay on the current branch — never create, switch, merge, or delete branches.
 
+User-invoked only — or invoked by `$to-product`, whose autonomous contract auto-answers the step 3 terminology approval and the step 9 guidance offer.
+
 ## Workflow
 
 1. Inspect the project root, `AGENTS.md`, `CLAUDE.md`, `package.json`, existing product documentation and code, and any `docs/wiki` or `docs/backlog` content. Read applicable repository instructions first. Never create, inspect, validate, move, or modify `docs/tasks`.

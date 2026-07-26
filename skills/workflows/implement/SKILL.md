@@ -15,6 +15,8 @@ The item's outcome, acceptance criteria, exclusions, and approved relationships 
 
 The invocation is a gate-backed execution workflow: it authorizes temporary claims, checklist evidence, and normal execution status transitions for the selected approved scope — not changes to outcome or acceptance wording, rank, parentage, relationships, cancellation, child scope, or accepted wiki knowledge. Preserve proposed cancellation and out-of-scope decisions in the backlog and stop for owner approval. Obtain explicit approval for the exact durable wiki update unless already explicitly approved.
 
+Under an active autonomous run, `$to-product`'s autonomous contract supplies every owner approval this workflow requires — the durable wiki update, a significant decision first made during implementation, primary-branch acceptance, and Epic closure. It never supplies approval for cancellation or for scope the record does not carry: file that as a `proposed` record and continue.
+
 ## Authority Packet Freshness
 
 An authority — record, index, wiki concept, ADR, guidance page, or source file — read completely during this invocation stays read; re-reading it is waste. A skill invoked from here accepts the packet paths and roles this invocation already resolved instead of rediscovering them. Freshness is per-invocation: never inherit it across invocations, and never assume a subagent holds it.
