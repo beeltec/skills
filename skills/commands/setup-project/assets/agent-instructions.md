@@ -8,4 +8,23 @@
 - Record architecturally significant decisions as ADRs under `docs/wiki/architecture/decisions/`. Draft a proposed decision on its backlog record (`decisions:` and `## Decisions`); publish it as an ADR only at primary-branch acceptance. A replaced ADR is superseded in place, never deleted.
 - Require project-owner approval to mark work `ready`, walk work back from `ready` to `proposed`, change rank, cancel work, supersede an ADR, or change accepted wiki state.
 - Run `node scripts/validate-project.mjs` after wiki or backlog changes and before handoff.
+
+## Work routing
+
+Never perform these intents ad hoc. Invoke the skill that owns each, and follow it:
+
+| Intent | Skill |
+|---|---|
+| Shape, challenge, or decide an idea | `/discuss` |
+| Create or change a backlog record | `$backlog` |
+| Plan a coordinated outcome to a ready Epic | `/to-epic` |
+| Plan standalone items to ready | `/to-backlog` |
+| Resolve technical uncertainty on proposed work | `$research` |
+| Adopt technology or standards rules | `/to-guidance` |
+| Build ready work | `$implement` or `$implement-with-subagents` |
+| Review a diff | `$code-review` |
+| Change accepted knowledge | `/to-wiki` or `$wiki` |
+| Ship a whole PRD unattended | `/to-product` |
+
+There is no direct-implementation route: execution always passes through backlog readiness. When no skill covers the intent, say so before acting.
 <!-- setup-project:end -->
