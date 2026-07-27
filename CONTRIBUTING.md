@@ -33,7 +33,7 @@ For each change:
    npx skills add . --list
    ```
 
-7. After changing a delivery-chain skill (`commands/`, `planning/`, `workflows/`), run its testbed scenarios before publishing — `testbed/bin/run.sh` selects them from the diff; see `testbed/README.md`. Regenerate the checkpoint fixtures (`testbed/bin/regen.sh`) when a skill changes its output shape.
+7. After a substantial behavioral change to a delivery-chain skill (`commands/`, `planning/`, `workflows/`), run its testbed scenarios before publishing — `testbed/bin/run.sh` selects them from the diff; see `testbed/README.md`. Skip wording, formatting, presentation, and other non-behavioral edits. Regenerate checkpoint fixtures (`testbed/bin/regen.sh`) when a skill changes its output shape.
 
 ## Next-step handoff convention
 

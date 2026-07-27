@@ -11,7 +11,16 @@ Under an active autonomous run, `$to-product`'s autonomous contract supplies eve
 
 **Serialized integration:** run at most three items concurrently, and only where no `blocks` link joins them in either direction and their declared subtask scopes are disjoint; give each an isolated git worktree. Admit one item to primary at a time. An item whose turn follows another's merge merges primary into its branch, re-verifies, and re-reviews the delta before its own acceptance gate.
 
-Cap nesting at two child levels: item subagents may spawn only those required by `$implement`'s invoked skills; those children never spawn subagents. State this in every child brief.
+Delegation depth:
+
+```text
+orchestrator (depth 0)
+└─ item subagent running $implement (depth 1)
+   ├─ Standards reviewer (depth 2)
+   └─ Spec reviewer (depth 2)
+```
+
+Only these reviewer roles may run at depth 2; depth-2 agents must not spawn subagents. State this limit in every item brief.
 
 ## Inputs
 
