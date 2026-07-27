@@ -1,6 +1,6 @@
 ---
 name: research
-description: Research a proposed backlog Epic or work item before readiness — current technology versions plus the concepts and standards its delta implicates — via parallel sub-agents, attaching the evidence to its record. Use only when the user explicitly requests research for identified proposed backlog work; never for general questions, ready or in-progress records, or wiki guidance.
+description: Research a proposed backlog record before readiness, attaching version and standards evidence to it. Only on explicit request for identified proposed work; never for general questions or wiki guidance.
 ---
 
 # Research

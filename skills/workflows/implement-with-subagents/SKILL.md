@@ -1,6 +1,6 @@
 ---
 name: implement-with-subagents
-description: Orchestrate an explicit ready Epic or selected backlog work-item set through isolated implementation subagents with serialized integration. Use only when the user explicitly invokes $implement-with-subagents with an EPIC-NNN, WORK-NNN IDs, backlog record paths, or an unambiguous set established by the conversation.
+description: Orchestrate a ready Epic or work-item set through isolated implementation subagents with serialized integration. Use only on explicit invocation with an EPIC-NNN, WORK-NNN set, or unambiguous scope.
 ---
 
 # Implement with Subagents

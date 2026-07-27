@@ -1,6 +1,6 @@
 ---
 name: to-backlog
-description: Intake the conversation's confirmed standalone work items into a setup-project backlog and refine each to ready without per-step approval pauses, pausing only for the owner's research decision. Use when the user asks to turn confirmed standalone (non-Epic) outcomes into ready work items.
+description: Intake the conversation's confirmed standalone work items and refine each to ready under one standing approval. Not for coordinated multi-item outcomes — use to-epic.
 disable-model-invocation: true
 ---
 

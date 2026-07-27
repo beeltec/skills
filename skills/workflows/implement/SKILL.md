@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Execute one ready backlog work item or all actionable children of a ready Epic through claim, implementation, review, primary-branch acceptance, completion, and archival. Use with an explicit WORK-NNN, EPIC-NNN, backlog path, or an unambiguous selection established by the conversation.
+description: Execute one ready backlog work item or Epic through claim, implementation, review, acceptance, and archival. Use with an explicit WORK-NNN, EPIC-NNN, backlog path, or unambiguous conversational selection.
 ---
 
 # Implement

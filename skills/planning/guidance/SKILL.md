@@ -1,6 +1,6 @@
 ---
 name: guidance
-description: Research and publish canonical technology and standards guidance — versions, adopted rules, recommendations, conventions, project deviations — as pages under docs/wiki/engineering/, and refresh them when they go stale. Use when a subject's adopted rules must be persisted so implementation stops re-researching them, including when a caller skill detects a missing, draft, or version-mismatched guidance page.
+description: Research and publish canonical technology and standards guidance pages under docs/wiki/engineering/, and refresh stale ones. Use when a subject's adopted rules must be persisted or a caller detects a missing, draft, or version-mismatched page.
 ---
 
 # Guidance

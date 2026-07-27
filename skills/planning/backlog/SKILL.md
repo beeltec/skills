@@ -1,6 +1,6 @@
 ---
 name: backlog
-description: Manage approved desired work in a setup-project backlog from lightweight intake through refinement, global ranking, execution state, cancellation, and archival. Use when creating or changing Epics, Stories, Tasks, or Bugs in docs/backlog.
+description: Manage approved desired work from intake through refinement, ranking, execution state, cancellation, and archival. Use when creating or changing Epics, Stories, Tasks, or Bugs in docs/backlog.
 ---
 
 # Backlog

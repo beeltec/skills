@@ -1,6 +1,6 @@
 ---
 name: to-wiki
-description: Publish the conversation's confirmed durable knowledge — from discussion or codebase inspection — to a setup-project wiki without per-edit approval pauses, including ADRs for decisions already in force. Use when the user asks to publish confirmed current-state conclusions or ADRs to the wiki.
+description: Publish the conversation's confirmed durable knowledge to the wiki under one standing approval, including ADRs for decisions already in force. Not for unimplemented proposals — use to-backlog.
 disable-model-invocation: true
 ---
 

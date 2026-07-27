@@ -1,6 +1,6 @@
 ---
 name: wiki
-description: Manage the complete lifecycle of accepted project knowledge in a setup-project OKF wiki — discovery, creation, correction, organization, evidence, deprecation, deletion, audits, validation, and commits. Use for any read or mutation involving docs/wiki.
+description: Manage the complete lifecycle of accepted project knowledge in a setup-project OKF wiki. Use for any read or mutation involving docs/wiki.
 ---
 
 # Wiki

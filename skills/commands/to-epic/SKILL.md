@@ -1,6 +1,6 @@
 ---
 name: to-epic
-description: Plan one Epic end-to-end in a setup-project backlog without per-step approval pauses — Epic intake, one explicit owner decision on guidance and research, child work-item intake, and refinement until the Epic and every child are ready. Use when the user asks to plan an outcome into a ready Epic.
+description: Plan one coordinated outcome end-to-end into a ready Epic under one standing approval. Use when asked to plan an Epic; not for standalone items — use to-backlog.
 disable-model-invocation: true
 ---
 

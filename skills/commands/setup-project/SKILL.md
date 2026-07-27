@@ -1,6 +1,6 @@
 ---
 name: setup-project
-description: Initialize or safely upgrade a project with an accepted-state OKF wiki and a desired-change backlog; on brownfield repositories, back-fill a foundation wiki from code-verified facts. Use when creating or migrating project governance, templates, validation, managed CI, or agent instructions.
+description: Initialize or safely upgrade a project's wiki, backlog, validation, and agent instructions; back-fill a foundation wiki on brownfield repositories. Use when creating or upgrading project governance.
 disable-model-invocation: true
 ---
 

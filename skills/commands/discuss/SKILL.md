@@ -1,6 +1,6 @@
 ---
 name: discuss
-description: Stress-test a plan, decision, or idea one question at a time, using accepted project knowledge when available and routing confirmed desired changes to the backlog. Use when the user wants to discuss or challenge their thinking.
+description: Stress-test a plan, decision, or idea one question at a time, then route confirmed conclusions. Use when the user wants to discuss or challenge their thinking.
 disable-model-invocation: true
 ---
 

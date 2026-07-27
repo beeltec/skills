@@ -1,6 +1,6 @@
 ---
 name: to-product
-description: Run the whole delivery flow unattended from a PRD or plan — discussion, planning, research, guidance, implementation, primary-branch acceptance, and wiki reconciliation — answering every owner decision as an owner-proxy and never pausing. Use when handing over an already-defined PRD, plan, or proposed scope for end-to-end delivery, including when it needs several Epics. Not for interactive shaping (use /discuss) or planning one outcome (use /to-epic).
+description: Run the whole delivery flow unattended from a PRD or plan to accepted primary-branch state, answering every owner gate as owner-proxy. Not for interactive shaping (use /discuss) or planning one outcome (use /to-epic).
 disable-model-invocation: true
 ---
 

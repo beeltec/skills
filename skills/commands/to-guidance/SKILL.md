@@ -1,6 +1,6 @@
 ---
 name: to-guidance
-description: Research and publish durable technology and standards guidance — versions, coding guidelines, best practices, adopted rules, project deviations — as canonical wiki pages under docs/wiki/engineering/, and refresh them when they go stale. Use when persisting or updating guidance for a language, framework, runtime, library, tool, or cross-cutting standard so implementation agents stop re-researching it for every Epic.
+description: Owner entry point that runs guidance under one standing approval for the named subjects. Use when asked to persist or refresh adopted technology or standards guidance.
 disable-model-invocation: true
 ---
 

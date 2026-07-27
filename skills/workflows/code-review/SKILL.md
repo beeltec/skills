@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review changes since a fixed point on two independent axes — Standards (accepted wiki and repository rules) and Spec (the selected backlog work item's, or for an Epic-scope review the Epic's, desired delta and acceptance criteria) — via parallel sub-agents reported separately. Use for backlog-backed branch, PR, work-in-progress, or Epic-closure reviews.
+description: Review changes since a fixed point on independent Standards and Spec axes via parallel sub-agents. Use for backlog-backed branch, PR, work-in-progress, or Epic-closure reviews.
 ---
 
 # Code Review
