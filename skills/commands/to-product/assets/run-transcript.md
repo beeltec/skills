@@ -16,11 +16,14 @@
 
 ### Opening — whole PRD
 
-<verbatim questions and owner-proxy answers>
+| # | Question | Answer | Source |
+|---|---|---|---|
+| 1 | | | PRD §N / repo path / wiki path / ASSUMPTION |
 
 ### Outcome 1 — <name>
 
-<verbatim questions and owner-proxy answers>
+| # | Question | Answer | Source |
+|---|---|---|---|
 
 ## Assumption register
 

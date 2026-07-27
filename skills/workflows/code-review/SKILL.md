@@ -28,7 +28,7 @@ When the caller supplies the previous pass's reviewed commit and its findings, t
 
 ### 2. Read project governance
 
-Resolve the repository root and read all applicable `AGENTS.md`, `CLAUDE.md`, and nested instructions. When the setup-project scaffold exists, also read `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/domains/ubiquitous-language.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, and the nearest relevant wiki and backlog indexes. Use project-local maintenance rules when stricter. Do not mutate the wiki, backlog, claims, or statuses during review.
+Resolve the repository root and read all applicable `AGENTS.md`, `CLAUDE.md`, and nested instructions. When the setup-project scaffold exists, also read `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, and the nearest relevant wiki and backlog indexes. Use project-local maintenance rules when stricter. Do not mutate the wiki, backlog, claims, or statuses during review.
 
 ### 3. Select the backlog work item
 
@@ -44,9 +44,9 @@ If no backlog item exists for the change, ask the user to confirm no specificati
 
 ### 4. Build the authority packet
 
-When an invoking workflow supplies resolved packet paths and roles, accept them as the packet and read each named path; do not rediscover authorities from directory indexes. Discover only what it did not supply. On a delta review the packet is unchanged from the previous pass — reuse it.
+When an invoking workflow supplies resolved packet paths and roles, accept them as the packet; do not rediscover authorities from directory indexes, and do not re-read a path whose content that caller already read in this invocation chain under its freshness rule. Discover and read only what it did not supply. On a delta review the packet is unchanged from the previous pass — reuse it.
 
-Read every authority completely before starting either sub-agent:
+Have every authority read — by the caller or here — before starting either sub-agent:
 
 - the selected work item: outcome/delta, acceptance criteria, relationships, wiki references, Research, Decisions, Execution, subtasks;
 - its complete parent Epic when `parent` is not `none`: outcome, criteria, scope, exclusions, constraints, wiki references, research, execution context;
@@ -64,7 +64,7 @@ Use all applicable accepted engineering/architecture wiki guidance and repositor
 
 The applicable guidance pages are hard Standards authority at the strength each rule carries per `docs/wiki/maintenance.md § Adopted guidance`: a violated `Requirements` rule is a documented-standard violation citing the page path and rule; a `Recommendations` departure is a judgement call; `Conventions` bind as documented practice. A recorded `Deviations` entry overrides the upstream guidance it departs from; new code inside a `Known gaps` area still violates the rule. A page whose recorded installed version no longer matches the manifest is unreliable: report the staleness as a finding rather than enforcing its version-specific rules.
 
-Standards also carries the **ADR check** when the wiki defines the significance test. Read the in-force ADRs under `docs/wiki/architecture/decisions/`, the significance test in `docs/wiki/maintenance.md`, and the work item's `decisions` field and `## Decisions` section. Report a finding when the diff makes a decision meeting that test and the record carries neither a drafted ADR covering it nor a recorded `none` explaining why none qualifies, and when the diff contradicts an in-force ADR without drafting its supersession. The significance test is a judgement call — label it as one, and never treat a missing ADR as a code defect.
+Standards also carries the **ADR check** when the wiki defines the significance test. Read the ADR index at `docs/wiki/architecture/decisions/index.md`, the significance test in `docs/wiki/maintenance.md`, and the work item's `decisions` field and `## Decisions` section; open an individual in-force ADR only when its subject intersects the changed paths or the drafted decisions. Report a finding when the diff makes a decision meeting that test and the record carries neither a drafted ADR covering it nor a recorded `none` explaining why none qualifies, and when the diff contradicts an in-force ADR without drafting its supersession. The significance test is a judgement call — label it as one, and never treat a missing ADR as a code defect.
 
 On top of documented rules, Standards always carries the **smell baseline** in [references/smell-baseline.md](references/smell-baseline.md) — a fixed set of Fowler code smells, with its own binding rules, applying even when the repo documents nothing. Never load that file here: the Standards sub-agent reads it itself in step 6.
 
@@ -76,6 +76,6 @@ If the user explicitly confirmed no specification exists, skip the Spec sub-agen
 
 ### 7. Aggregate
 
-Present the two reports under `## Standards` and `## Spec`, verbatim or lightly cleaned. Keep severity labels and counts independent; never merge or rerank findings across axes. End with a one-line summary of each axis's total, severity breakdown, and worst issue. Do not pick a single winner.
+Present under `## Standards` and `## Spec`: per axis, a severity table (count per severity) followed by each actionable finding with its citation — not the sub-agent reports verbatim; they are already in context as tool returns. Keep severity labels and counts independent; never merge, rerank, or drop findings across axes. End with a one-line summary of each axis's total and worst issue. Do not pick a single winner.
 
 Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass inside an Epic closure → continue its Epic archive transaction; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance.

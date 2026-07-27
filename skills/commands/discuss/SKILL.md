@@ -10,7 +10,7 @@ Before interviewing, resolve the project root and read applicable repository ins
 
 Stay on the user's current branch — never create, switch, merge, or delete branches.
 
-User-invoked only — or invoked by `$to-product`, which answers every question below as the owner-proxy under its autonomous contract, printing each question and answer verbatim.
+User-invoked only — or invoked by `$to-product`, which answers every question below as the owner-proxy under its autonomous contract. Under that run only, emit the discussion as one batched block — every numbered question immediately followed by its verbatim answer — instead of one question per turn.
 
 Interview the user relentlessly about every aspect until shared understanding is reached, walking each branch of the decision tree and resolving dependencies between decisions one by one. Provide a recommended answer for each question.
 
@@ -27,7 +27,7 @@ If available, use the ask_user_question tool with multiple-choice answers; the f
 
 Look up any *fact* discoverable from the environment (filesystem, tools) instead of asking. *Decisions* belong to the user — put each one to them and wait.
 
-Track architecturally significant decisions per the ADR significance test in the project's `docs/wiki/maintenance.md`. For each qualifying decision reached, raise a numbered question confirming the decision, the alternatives rejected and why, and the consequences accepted, so the routed command can record it. Read existing ADRs under `docs/wiki/architecture/decisions/` during preflight; when a conclusion replaces one, say which ADR it supersedes.
+Track architecturally significant decisions per the ADR significance test in the project's `docs/wiki/maintenance.md`. For each qualifying decision reached, raise a numbered question confirming the decision, the alternatives rejected and why, and the consequences accepted, so the routed command can record it. Read the ADR index at `docs/wiki/architecture/decisions/index.md` during preflight and open only the ADRs the topic touches; when a conclusion replaces one, say which ADR it supersedes.
 
 Track terminology. When the user uses a domain term absent from the ubiquitous language, an existing term with a different meaning, or several words for one concept, raise a numbered question: confirm the meaning, propose a definition, and ask whether to add or correct it in the ubiquitous language. Collect confirmed terms for the handoff; without a wiki, note them for `$setup-project`.
 

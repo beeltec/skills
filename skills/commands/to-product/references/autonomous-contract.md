@@ -44,7 +44,7 @@ These three destroy or overturn accepted knowledge. The run approves them anyway
 - Never set `research: complete` or `not-needed` without the evidence each state requires.
 - Never present an assumption as sourced, and never omit one from the assumption register.
 - Never perform a covered intent inline instead of invoking the skill that owns it.
-- Never suppress or summarize the on-screen discussion.
+- Never suppress or summarize the on-screen discussion; batching an outcome's questions and answers into one printed block is required, omitting or condensing any of them is not allowed.
 - Never re-attempt a parked item in the same run.
 - Never continue past a third consecutive failure on one item.
 

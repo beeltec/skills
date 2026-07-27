@@ -93,12 +93,12 @@ When the approved transaction is a `ready -> proposed` walk-back, a cancellation
 
 For each approved mutation:
 
-1. Restate the exact approved transaction and affected records. For gate-backed bookkeeping, state the gate and named work item instead of seeking repeated approval.
+1. Restate the exact approved transaction and affected records. For gate-backed bookkeeping, skip the restate — the gate and named work item suffice.
 2. Edit all affected records, reciprocal links, indexes, and rank as one logical transaction, with no unrelated cleanup.
 3. Run `node scripts/validate-project.mjs`. Fix all errors and review warnings. If it cannot pass, do not commit; report the invalid transaction.
 4. Inspect `git diff`, `git diff --cached`, and `git status`; for a bookkeeping transaction, stage first and inspect once with `git status --short` and `git diff --cached`. Stage only the transaction's intended `docs/backlog` paths; handle a separately approved wiki update as its own validated workflow and commit. Never use broad staging commands.
 5. Verify the staged path list and diff contain no unrelated files, secrets, working notes, or `docs/tasks` content.
 6. Create one concise Conventional Commit, normally `docs(backlog): <transaction outcome>`. Keep temporary claims in their own transaction when practical.
-7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); omit when none follows.
+7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result; for a bookkeeping transaction, one line — the commit hash and what was checked or changed. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); omit when none follows.
 
 If approval is denied or changed, revise the proposal in conversation without mutating files. If unrelated worktree changes overlap an affected file, preserve them and ask before proceeding when a safe narrow transaction is not possible.

@@ -31,7 +31,7 @@ Reject a subject the project neither uses nor has adopted; say so and continue w
 1. Resolve the project root and read all applicable `AGENTS.md`, `CLAUDE.md`, nested instructions, and contributing or documentation standards.
 2. Require the `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/wiki/log.md`, `docs/wiki/engineering/index.md`, `docs/wiki/engineering/technologies/index.md`, `docs/wiki/engineering/standards/index.md`, `docs/wiki/engineering/guidance-template.md`, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`.
 3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
-4. Read wiki maintenance rules, the root and nearest indexes, the guidance template, every existing page for the named subjects, the ubiquitous language, and any in-force ADR or `docs/wiki/architecture/` concept bearing on a subject — an ADR outranks external guidance and the page must not contradict it.
+4. Read wiki maintenance rules, the root and nearest indexes, the guidance template, every existing page for the named subjects, and any in-force ADR or `docs/wiki/architecture/` concept bearing on a subject — an ADR outranks external guidance and the page must not contradict it.
 5. Read `docs/wiki/engineering/` concepts that already state rules for a subject, so guidance lands in one canonical page instead of a second competing one.
 
 ## 1. Resolve repository evidence
@@ -46,9 +46,9 @@ Also record observed project conventions and any departure from upstream guidanc
 
 Degrade by harness capability: with parallel sub-agents, spawn one per subject in a single message; with per-agent model selection, run each on the cheapest available tier at low reasoning effort, reserving the stronger model for inspection, conflict resolution, and synthesis; with neither, run the same briefs sequentially in the main context. If a subject's return breaks the required output shape or cites an unopened source, re-run it on a stronger tier and record the escalation in the report.
 
-Give each sub-agent the subject, its repository version evidence and observed conventions, the version rules in step 3, and this brief:
+Resolve each subject's version per step 3 first — a sub-agent never resolves versions. Then give each sub-agent the subject, its repository evidence, observed conventions, and resolved version, and this brief:
 
-> Research this subject only. Verify sources in order: version-matched official documentation, specifications, and repositories; then maintainer guidance; then reputable secondary sources for remaining gaps. Open every source you cite — a search snippet is not evidence. Return only: the resolved version with the exact source and how you resolved it; findings split into normative requirements, recommendations, and optional conventions, each stated concretely enough to implement from without reopening the source; unresolved questions; and sources as title, URL, authority label, applicable version, and review date. No prose outside that shape. Under 500 words.
+> Research this subject only, at the version given. Verify sources in order: version-matched official documentation, specifications, and repositories; then maintainer guidance; then reputable secondary sources for remaining gaps. Open every source you cite — a search snippet is not evidence. Return only: findings split into normative requirements, recommendations, and optional conventions, each stated concretely enough to implement from without reopening the source; unresolved questions; and sources as title, URL, authority label, applicable version, and review date. No prose outside that shape. Under 500 words.
 
 ## 3. Resolve versions from the release source
 
@@ -58,7 +58,7 @@ Research and publish at the **installed** version. Record the gap to latest stab
 
 ## 4. Synthesize
 
-Re-resolve every version with your own live registry call — a sub-agent's version claim is input, not evidence. Reject any source lacking an opened URL and a review date. Demote a finding its source does not support rather than dropping it silently. Resolve contradictions between sub-agents by source authority.
+Reject any source lacking an opened URL and a review date. Demote a finding its source does not support rather than dropping it silently. Resolve contradictions between sub-agents by source authority.
 
 Classify every rule the page will carry:
 

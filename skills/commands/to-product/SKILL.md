@@ -34,7 +34,7 @@ Optional `model` and `reasoning effort` pass unchanged to `$implement-with-subag
 3. When `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, or `scripts/validate-project.mjs` is missing, invoke `$setup-project` under this run's approval and continue once it reports success. Never improvise a partial scaffold.
 4. Run `node scripts/validate-project.mjs`. On an invalid baseline, repair it under this run's approval before any planning; report what was repaired.
 5. Inspect the current branch, primary branch, remotes, staged and unstaged changes, and recent history. Preserve unrelated changes; never stage them.
-6. Read the wiki root index, maintenance rules, ubiquitous language, the `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` indexes, every in-force ADR, and the backlog root index, global rank, and active records.
+6. Read the wiki root index, maintenance rules, the `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` indexes, the ADR index at `docs/wiki/architecture/decisions/index.md`, and the backlog root index and global rank. Open an individual ADR, active record, or the ubiquitous language only when an outcome touches it; the invoked skills read their own authorities.
 7. **Resume detection** — read `docs/runs/` for a prior run transcript naming this PRD. Match each outcome to its existing record: terminal → skip; `in-progress` or parked → resume at its first incomplete step; absent → plan it fresh. Never create a second record for an outcome that already has one.
 8. Open the run transcript from [the template](assets/run-transcript.md) at `docs/runs/<YYYY-MM-DD>-to-product-<slug>.md`. Append to it throughout; it is not written only at the end.
 
@@ -61,7 +61,7 @@ Then take the next outcome. Never start an outcome whose dependencies have not s
 
 ## Owner-proxy protocol
 
-The owner-proxy is a role this run plays in the same context, never a subagent. Print every question and every answer verbatim as they occur — the whole discussion appears on screen.
+The owner-proxy is a role this run plays in the same context, never a subagent. Because the answerer shares the context, `$discuss`'s one-question-per-turn protocol collapses: emit each discussion as **one batched block** — the whole numbered question set for that outcome (or the opening map pass), each question immediately followed by its answer — printed verbatim on screen. Batching is not summarizing: every question and answer still appears in full, and the transcript's discussion rows are the auditable record.
 
 Answer from the PRD first, then repository evidence, then the accepted wiki. Cite which. When no source supports an answer, answer anyway, mark it `ASSUMPTION`, and add it to the **assumption register**.
 
@@ -103,6 +103,6 @@ The run ends when every outcome in the map has a `done`, archived record on the 
 
 ## Report
 
-Report the PRD source and outcome map; every discussion with its question count; the assumption register in full; records created with type, status, and rank; every guidance page created or refreshed; research decisions per outcome; commits, merge commits, and published `ADR-NNN`s with any ADR superseded; every destructive gate auto-approved under the contract, individually; out-of-PRD scope filed as `proposed`; parked items with their blockers and resume commands; the transcript path; the final `node scripts/validate-project.mjs` result.
+Report the PRD source and outcome map; every discussion with its question count; the assumption count, citing the transcript's register; records created with type, status, and rank; every guidance page created or refreshed; research decisions per outcome; commits, merge commits, and published `ADR-NNN`s with any ADR superseded; every destructive gate auto-approved under the contract, individually; out-of-PRD scope filed as `proposed`; parked items with their blockers and resume commands; the transcript path; the final `node scripts/validate-project.mjs` result.
 
 End the report with `Next step:` — one copy-pasteable command: parked items → the exact command that resumes the highest-ranked one; unshipped map outcomes → `/to-product` with the same PRD to resume; out-of-PRD records filed → `/to-backlog` naming them; otherwise omit it.

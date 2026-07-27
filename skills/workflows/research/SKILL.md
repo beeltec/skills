@@ -13,7 +13,7 @@ Resolve technical uncertainty for one identified proposed backlog record before 
 2. Require the `$setup-project` scaffold: `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, and `scripts/validate-project.mjs`. If any is missing, stop and direct the user to `$setup-project`.
 3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Require one named `EPIC-NNN` or `WORK-NNN` with `status: proposed`. Without one, offer `$backlog` intake first. Reject research on a `ready`, `in-progress`, or terminal record; never silently reopen it.
-5. Read backlog maintenance, the matching type template, the complete named record (delta, parent and child scope, relationships) and directly related records; the wiki root, maintenance rules, ubiquitous language, nearest indexes, accepted architecture concepts, and the guidance pages under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` for every subject the delta touches.
+5. Read backlog maintenance, the matching type template, the complete named record (delta, parent and child scope, relationships) and directly related records; the wiki root, maintenance rules, nearest indexes, and accepted architecture concepts. Guidance pages are read per subject at step 3, once the inventory exists.
 
 ## 1. Inspect the repository
 
@@ -43,9 +43,9 @@ Check each subject against its guidance page under `docs/wiki/engineering/techno
 
 Degrade by harness capability: with parallel sub-agents, spawn one per subject in a single message; with per-agent model selection, run each on the cheapest available tier at low reasoning effort, reserving the stronger model for inspection, conflict resolution, and synthesis; with neither, run the same briefs sequentially in the main context. If a subject's return breaks the required output shape or cites an unopened source, re-run it on a stronger tier and record the escalation in the report.
 
-Give each sub-agent the subject, the proposed delta, that subject's repository version evidence, the version rules in step 5, and this brief:
+Resolve each subject's version per step 5 first — a sub-agent never resolves versions. Then give each sub-agent the subject, the proposed delta, that subject's repository evidence and resolved version, and this brief:
 
-> Research this subject only. Verify sources in order: version-matched official documentation, specifications, and repositories; then maintainer guidance; then reputable secondary sources for remaining gaps. Open every source you cite — a search snippet is not evidence. Return only: the resolved version with the exact source and how you resolved it; findings split into normative requirements, recommendations, and optional conventions, each stated concretely enough to implement from without reopening the source; unresolved questions; and sources as title, URL, authority label, applicable version, and review date. No prose outside that shape. Under 500 words.
+> Research this subject only, at the version given. Verify sources in order: version-matched official documentation, specifications, and repositories; then maintainer guidance; then reputable secondary sources for remaining gaps. Open every source you cite — a search snippet is not evidence. Return only: findings split into normative requirements, recommendations, and optional conventions, each stated concretely enough to implement from without reopening the source; unresolved questions; and sources as title, URL, authority label, applicable version, and review date. No prose outside that shape. Under 500 words.
 
 ## 5. Resolve versions from the release source
 
@@ -58,7 +58,7 @@ Never take a version from training memory, a documentation example snippet, a tu
 
 ## 6. Synthesize
 
-Re-resolve every version you are about to record with your own live registry call — a sub-agent's version claim is input, not evidence. Reject any source lacking an opened URL and a review date. Demote any finding its source does not support into uncertainty rather than dropping it. Resolve contradictions between sub-agents by source authority, or preserve them as uncertainty.
+Reject any source lacking an opened URL and a review date. Demote any finding its source does not support into uncertainty rather than dropping it. Resolve contradictions between sub-agents by source authority, or preserve them as uncertainty.
 
 Compare the result with accepted wiki knowledge and actual repository conventions. Record each relevant project deviation and its known rationale; never silently replace current practice.
 

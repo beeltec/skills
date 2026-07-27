@@ -31,7 +31,7 @@ An already-read authority is void and must be re-read when any of these holds:
 - `node scripts/validate-project.mjs` failed since the read;
 - the fixed point changed.
 
-Always re-read global rank, claims, statuses, and indexes before every selection and terminal transition regardless of freshness. When freshness is uncertain, re-read.
+Before every selection and terminal transition, probe `git log -- docs/backlog` since the last read: re-read global rank, claims, statuses, and indexes only when commits this invocation did not make touched them. When freshness is uncertain, re-read.
 
 **Suite freshness:** a passing full applicable suite is green for the exact tree that produced it. A later gate requiring the suite cites that result while the tree is unchanged, and re-runs it once any tracked file changed. A backlog-only bookkeeping commit cannot affect it.
 
@@ -44,8 +44,8 @@ Complete before creating or switching a branch or mutating a claim:
 3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Inspect the current branch, primary branch, remotes, staged/unstaged changes, and recent history. Preserve unrelated changes; never stage them.
 5. Resolve the selection: explicit ID or path wins; otherwise only a single unambiguous conversational selection. List candidates and ask when absent or ambiguous.
-6. Read completely the selected records, the parent Epic and every child in Epic scope, the global rank, active and archive indexes, all related records, and all records needed to calculate inward blockers.
-7. Read backlog maintenance, applicable type templates, every linked wiki concept and nearest index, wiki maintenance and log, relevant engineering and architecture guidance, every in-force ADR under `docs/wiki/architecture/decisions/`, the record's drafted `## Decisions`, proposal research and local evidence, and the affected repository code and tests.
+6. Read completely the selected records, the parent Epic and every child in Epic scope, the global rank, active indexes, all related records, and all records needed to calculate inward blockers. Read an archive index only at the archival step that writes it.
+7. Read backlog maintenance, applicable type templates, every linked wiki concept and nearest index, wiki maintenance, relevant engineering and architecture guidance, the ADR index at `docs/wiki/architecture/decisions/index.md`, the record's drafted `## Decisions`, proposal research and local evidence, and the affected repository code and tests. Open an individual in-force ADR only when its subject intersects the item's delta or drafted decisions.
 8. Read every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard this item's delta touches, resolved from its own directory indexes, not the whole set. Rule strength follows `docs/wiki/maintenance.md § Adopted guidance`; a listed `Known gap` is existing non-compliance to work around, never licence to add more. A touched subject with no page or a stale one is a reportable gap: implement against the item's research and repository evidence and name it for the post-acceptance `$guidance` offer and the final report — never block on it, and never write guidance into `docs/wiki` here.
 9. Determine the invocation's primary-branch fixed point; retain it for review and integration evidence. For an Epic it is also the immutable **epic fixed point** for the final Epic review; no per-item fixed point replaces it.
 
@@ -110,7 +110,7 @@ Before primary-branch integration, compare the reviewed implementation with ever
 - Never edit `docs/wiki` on the work branch to describe the implementation. Record the exact approved transaction in `## Execution` for application after primary-branch acceptance.
 - Re-run review after any implementation change made after the last passing review.
 
-When review and reconciliation pass, verify every acceptance criterion with concrete evidence, check only supported criteria and subtasks, run `node scripts/validate-project.mjs` and the full applicable suite, and commit the completion evidence while leaving `status: in-progress` and the live claim intact. No item may be `done` on the work branch.
+When review and reconciliation pass, verify every acceptance criterion with concrete evidence, check only supported criteria and subtasks, run `node scripts/validate-project.mjs` and the full applicable suite under suite freshness — cite the last green run's tree hash when the tree is unchanged — and commit the completion evidence while leaving `status: in-progress` and the live claim intact. No item may be `done` on the work branch.
 
 ## Primary-Branch Acceptance And Completion
 
