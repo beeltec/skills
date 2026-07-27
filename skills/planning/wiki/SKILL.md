@@ -57,7 +57,6 @@ For mutations, update the existing canonical concept when it owns the subject; o
 - `engineering/technologies/` — accepted version-applicable guidance for languages, frameworks, runtimes, libraries, major tools.
 - `domains/` — product behavior, policies, contracts, controls, agreed terminology.
 - `operations/` — repeatable operational and verification runbooks.
-- `research/` — compiled external evidence other than accepted technology guidance; durable conclusions stay in their owning concept.
 
 Organize by durable responsibility, never by conversation, task, branch, feature request, or agent. Keep one canonical statement per fact or rule; replace duplicate prose with links.
 

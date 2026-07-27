@@ -42,7 +42,6 @@ Non-compliant existing code goes under the page's `## Known gaps` with the path 
 - `engineering/guidance-template.md` is the shared non-record structure for both. Create and refresh those pages with `$to-guidance`; it is a non-record example and states no accepted guidance itself.
 - `domains/` owns product behavior, policies, contracts, and controls.
 - `operations/` owns executable runbooks.
-- `research/` owns compiled evidence supporting durable knowledge.
 
 Organize by durable responsibility, not by the task or agent that created the page. Keep one canonical owner per concept and link to it instead of restating its rules.
 
@@ -76,7 +75,7 @@ Write an ADR when a decision changes system structure, affects a cross-cutting q
 
 ## Provenance and durability
 
-Accepted technology guidance and its durable external basis belong together under `engineering/technologies/`. Verify version-sensitive claims against repository versions and current authoritative sources. Other compiled external evidence supporting accepted knowledge belongs in `research/` and links claims to its sources; durable conclusions belong in their owning architecture, engineering, domain, or operations page. Keep proposal-specific research with its desired change in the backlog. Keep desired changes, work-branch-only behavior, search transcripts, session state, temporary probes, active checklists, and planned commits outside the wiki.
+Accepted technology guidance and its durable external basis belong together under `engineering/technologies/`. Verify version-sensitive claims against repository versions and current authoritative sources. Durable conclusions and the external evidence supporting them belong in their owning architecture, engineering, domain, or operations page, with sources linked beside the claims they support. Keep proposal-specific research with its desired change in the backlog. Keep desired changes, work-branch-only behavior, search transcripts, session state, temporary probes, active checklists, and planned commits outside the wiki.
 
 ## Links and indexes
 

@@ -17,4 +17,3 @@ This wiki is the canonical record of accepted current project state on the prima
 - [Engineering](engineering/) - Application-specific coding and review guidance.
 - [Product domains](domains/) - Product behavior, domain rules, policies, and contracts.
 - [Operations](operations/) - Repeatable operational and verification runbooks.
-- [Research](research/) - Compiled evidence that supports durable project knowledge.

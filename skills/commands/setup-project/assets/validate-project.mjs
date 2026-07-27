@@ -135,7 +135,6 @@ const validateWiki = async () => {
     'engineering/technologies/index.md',
     'engineering/standards/index.md',
     'operations/index.md',
-    'research/index.md',
   ];
 
   const decisionsRoot = path.join(wikiRoot, 'architecture/decisions');
