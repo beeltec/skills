@@ -37,16 +37,19 @@ flowchart TD
 
 ### Plan desired changes to ready — `docs/backlog`
 
-The planners run the same record mechanics as **backlog**, but under one standing approval each, pausing only for the owner's research decision:
+The planners run the same record mechanics as **backlog**, but under one standing approval each, pausing only for the owner's evidence decision: which subjects get a `guidance` page, and which items get `research`. The inventory behind that question covers both technologies and standards — an empty standards half without a recorded reason is invalid — and naming a subject runs `guidance` immediately, before refinement, never deferred to implementation or acceptance:
 
 ```mermaid
 flowchart TD
     TE["to-epic<br/>plan one Epic<br/>(one standing approval)"] --> DEC
     TB["to-backlog<br/>plan standalone items<br/>(one standing approval)"] --> DEC
     BL["backlog<br/>intake, refine, rank<br/>(owner approval per transaction)"] --> DEC
-    DEC{"owner decision:<br/>research needed?"}
-    DEC -->|yes| RT["research<br/>attach current, version-matched evidence"]
-    DEC -->|no| RDY
+    DEC{"evidence decision:<br/>guidance for which subjects?<br/>research for which items?"}
+    DEC -->|named subjects —<br/>technologies and standards| GD["guidance<br/>publish pages now,<br/>before refinement"]
+    DEC -->|research yes| RT["research<br/>attach current, version-matched evidence"]
+    GD -->|research yes| RT
+    GD -->|research no| RDY
+    DEC -->|neither| RDY
     RT --> RDY
     RDY(["ready<br/>Definition of Ready met<br/>decisions resolved<br/>+ owner approval"])
     RDY --> IMP["/implement"]
@@ -77,7 +80,7 @@ The wiki is fed from four directions and feeds back into planning, implementatio
 flowchart TD
     TW["to-wiki<br/>publish confirmed knowledge<br/>(one standing approval)"] -->|verified transactions| WK
     TG["to-guidance<br/>(one standing approval)"] --> GD
-    TE["to-epic"] -->|owner names subjects<br/>at the evidence decision| GD
+    TE["to-epic / to-backlog"] -->|owner names subjects<br/>at the evidence decision| GD
     RT2["research / implement /<br/>setup-project"] -->|offer on a missing<br/>or stale page| GD
     GD["guidance<br/>research + publish adopted<br/>technology and standards rules"] -->|verified transactions| WK
     ACC["primary-branch acceptance"] -->|durable knowledge changed| WK
@@ -91,7 +94,7 @@ flowchart TD
 
 **guidance** is the answer to re-researching the same stack for every Epic. It resolves each subject's installed version from repository evidence, fans out one sub-agent per subject, and publishes one canonical page per technology (`docs/wiki/engineering/technologies/`) or cross-cutting standard (`docs/wiki/engineering/standards/`). A page separates `Requirements` that bind new code from `Recommendations`, `Conventions`, and recorded `Deviations`, and lists `Known gaps` where existing code contradicts a rule. Running it again for the same subject refreshes the page — re-resolving versions and re-verifying claims — and pauses for explicit approval whenever a refresh would reverse or remove an already-adopted rule, no matter which caller invoked it.
 
-**to-guidance** is its owner-invoked entry point, carrying the standing approval for the subjects it names — the same machinery/entry-point split as `backlog`/`to-backlog` and `wiki`/`to-wiki`. Four other skills offer `guidance` at the point they detect the gap: **to-epic** at its evidence decision, so children are sliced against fresh pages and research is not re-derived; **research** when a subject has no page or a stale one; **implement** at post-acceptance reconciliation, the only point in an implementation run where guidance may be published, never from the work branch; and **setup-project** for the `draft` pages a brownfield back-fill seeded. `/code-review` still reports a version-mismatched page as a finding rather than enforcing or refreshing it.
+**to-guidance** is its owner-invoked entry point, carrying the standing approval for the subjects it names — the same machinery/entry-point split as `backlog`/`to-backlog` and `wiki`/`to-wiki`. Other skills offer `guidance` at the point they detect the gap: **to-epic** and **to-backlog** at their evidence decision — naming a subject there runs `guidance` right away, before any child or item is refined, so slicing and research work from fresh pages; **research** when a subject has no page or a stale one; **implement** at post-acceptance reconciliation, the only point in an implementation run where guidance may be published, never from the work branch; and **setup-project** for the `draft` pages a brownfield back-fill seeded. `/code-review` still reports a version-mismatched page as a finding rather than enforcing or refreshing it.
 
 ### Run the whole flow unattended — `to-product`
 
@@ -109,19 +112,24 @@ flowchart TD
     RT -->|standalone items| TB["/to-backlog"]
     RT -->|current-state knowledge| TW["/to-wiki"]
     RT -->|adopted rules| TG["/to-guidance"]
-    TE --> IWS["implement-with-subagents"]
-    TB --> IWS
+    TE --> ED["evidence decision<br/>owner-proxy answers both halves:<br/>guidance subjects + research"]
+    TB --> ED
+    ED --> IWS["implement-with-subagents"]
     IWS --> ACC["primary-branch acceptance<br/>+ wiki reconciliation"]
-    ACC --> NEXT{"outcomes left?"}
+    ACC --> VER{"verify from repository evidence:<br/>guidance pages, ADRs,<br/>version rows, archival, validator"}
+    VER -->|all checks pass| NEXT{"outcomes left?"}
     TW --> NEXT
     TG --> NEXT
     NEXT -->|yes| D
     NEXT -->|no| DONE(["every outcome done and archived"])
     IWS -.->|3 failed attempts| PARK["parked — claim released,<br/>status back to ready,<br/>blocker recorded"]
+    VER -.->|unresolved failed check| PARK
     PARK -.-> NEXT
 ```
 
 It never does the work itself. Every step goes through the skill that owns it, and `setup-project` installs a work-routing table into the project's agent instructions so ordinary sessions follow the same rule.
+
+At the planners' evidence decision the owner-proxy names every subject whose page is missing, `draft`, version-mismatched, or stale — standard subjects included, never technologies only — and answers yes to `research` whenever the outcome carries a version-specific or security-sensitive question. And an outcome only counts as shipped after verification against repository evidence, not the invoked skill's report: every child `done` with a merge commit and green post-merge checks, a current guidance page for every subject named at the evidence decision, published ADRs matching the decisions the outcome's discussion confirmed, live version-resolution rows dated within the run, records archived, validator green. A failed check is resolved or parks the outcome — it is never recorded as shipped.
 
 The **owner-proxy** is the role `to-product` plays when `discuss` asks a question. It answers from the PRD first, then repository evidence, then the accepted wiki, and prints every question and answer verbatim, batched into one block per outcome — the whole discussion is on screen without one-question-per-turn round trips. When no source settles a question it answers anyway, marks the answer `ASSUMPTION`, and adds it to the **assumption register**:
 
@@ -139,14 +147,14 @@ Two boundaries are worth knowing before you use it. It **auto-approves destructi
 
 Read [the autonomous contract](skills/commands/to-product/references/autonomous-contract.md) for the exact gate-by-gate behavior.
 
-A few rules the diagrams don't show: execution always passes through backlog readiness — there is no direct-implementation route — and readiness requires every architecturally significant design choice drafted in ADR shape under `## Decisions`, or explicitly `none`. Wiki changes are only drafted on the work branch, never applied there; at primary-branch acceptance (a merge commit plus the full suite) each drafted decision becomes an ADR with its `ADR-NNN` allocated, and the terminal backlog record is archived. Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments as the report's last line — so each step hands off to the next.
+A few rules the diagrams don't show: execution always passes through backlog readiness — there is no direct-implementation route — and readiness requires every architecturally significant design choice drafted in ADR shape under `## Decisions` — `none` is legal only when the significance test records no qualifying decision, and a decision confirmed in discussion is never deferred in prose. Wiki changes are only drafted on the work branch, never applied there; at primary-branch acceptance (a merge commit plus the full suite) each drafted decision becomes an ADR with its `ADR-NNN` allocated, and the terminal backlog record is archived. Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments as the report's last line — so each step hands off to the next.
 
 **setup-project**, **discuss**, **to-epic**, **to-backlog**, **to-wiki**, **to-guidance**, and **to-product** live in `skills/commands/` and are user-invoked only (`disable-model-invocation: true`): invoking them is itself an owner decision — for the to-\* skills it grants the standing approval — so an agent may recommend the command but never run it on its own. The single exception is `to-product`, which invokes the others because starting it is the owner decision they all protect.
 
 ### Greenfield and Brownfield
 
 - **Greenfield** (new application): run **setup-project** on the empty repository, then shape the product through `/discuss` — desired outcomes flow through `/to-epic` or `/to-backlog` to ready work, and the implement → code-review → acceptance loop grows wiki knowledge as features land.
-- **Brownfield** (existing application): run **setup-project** on the existing repository (it upgrades safely and never overwrites project-owned files). On existing code with an empty wiki it back-fills a foundation overview of code-verified facts — stack, architecture, commands, conventions, terminology — and reports owner-judgment knowledge (intent, rationale, product language) as candidates for `/discuss` and `/to-wiki`. From there, desired changes follow the same delivery loop as greenfield.
+- **Brownfield** (existing application): run **setup-project** on the existing repository (it upgrades safely and never overwrites project-owned files). On existing code with an empty wiki it back-fills a foundation overview of code-verified facts — stack, architecture, commands, conventions, terminology — seeds one `draft` guidance page per detected technology and per detected standard candidate (adopted only when the owner names it), and reports owner-judgment knowledge (intent, rationale, product language) as candidates for `/discuss` and `/to-wiki`. From there, desired changes follow the same delivery loop as greenfield.
 - **Unattended** (either of the above): hand an already-defined PRD or plan to `/to-product`. It scaffolds when needed, then walks the same loop to a finished product without asking you anything, leaving a run transcript to review afterwards.
 
 | Skill | Description |
