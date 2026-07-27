@@ -5,9 +5,7 @@ description: Research a proposed backlog record before readiness, attaching vers
 
 # Research
 
-Resolve technical uncertainty for one identified proposed backlog record before readiness. Research covers both the technologies the delta touches and the concepts, standards, and guidelines it implicates. Findings live with the desired change in `docs/backlog`; `docs/wiki` remains the authority for accepted current guidance.
-
-Stay on the current branch — never create, switch, merge, or delete branches.
+Resolve technical uncertainty for one identified proposed backlog record before readiness. Research covers both the technologies the delta touches and the concepts, standards, and guidelines it implicates. Findings live with the desired change in `docs/backlog`.
 
 ## Preconditions
 
@@ -39,15 +37,11 @@ Drop a subject only when inspected evidence shows the delta touches nothing it g
 
 ## 3. Decide what needs external research
 
-Check each subject against its guidance page under `docs/wiki/engineering/technologies/` or `docs/wiki/engineering/standards/` first. A page whose recorded installed version matches the repository and whose `last_reviewed` is within the thresholds below already answers the subject: cite it, record the conclusions it supplies, and research only what it leaves open — never re-derive rules it already carries. Research a subject when accepted wiki guidance is absent, materially uncertain, or not version-applicable. Treat fast-moving evidence as stale after 30 days, stable after 90. When a subject has no page or a stale one, offer `$guidance` for it before the step 4 fan-out, so its adopted rules land on a durable page instead of being re-derived into this record; on a decline, research it here as normal. Re-check security-sensitive guidance every run regardless of prior review, and re-check immediately when a release, source change, or repository deviation may invalidate prior evidence.
+Check each subject against its guidance page under `docs/wiki/engineering/technologies/` or `docs/wiki/engineering/standards/` first. A page whose recorded installed version matches the repository and whose `last_reviewed` is within thresholds — 30 days for fast-moving evidence, 90 for stable — already answers the subject: cite it and research only what it leaves open. Research a subject when accepted guidance is absent, materially uncertain, or not version-applicable. When a subject has no page or a stale one, offer `$guidance` for it before the step 4 fan-out; on a decline, research it here. Re-check security-sensitive guidance every run, and immediately when a release, source change, or repository deviation may invalidate prior evidence.
 
 ## 4. Fan out one sub-agent per subject
 
-Degrade by harness capability:
-
-- **Parallel sub-agents available** — spawn one per subject, all in a single message.
-- **Per-agent model selection also available** — run every subject sub-agent on the cheapest available tier at low reasoning effort; reserve the stronger model for inspection, conflict resolution, and synthesis. If a subject's return breaks the required output shape, cites an unopened source, or leaves its version unresolved, re-run that subject on a stronger tier and record the escalation in the report.
-- **Neither available** — run the same briefs sequentially in the main context, with the same output shape.
+Degrade by harness capability: with parallel sub-agents, spawn one per subject in a single message; with per-agent model selection, run each on the cheapest available tier at low reasoning effort, reserving the stronger model for inspection, conflict resolution, and synthesis; with neither, run the same briefs sequentially in the main context. If a subject's return breaks the required output shape or cites an unopened source, re-run it on a stronger tier and record the escalation in the report.
 
 Give each sub-agent the subject, the proposed delta, that subject's repository version evidence, the version rules in step 5, and this brief:
 
@@ -91,4 +85,4 @@ Present findings, proposed edits, resulting research state, and readiness effect
 
 After an approved edit, update all affected records as one transaction, run `node scripts/validate-project.mjs`, inspect the diff, and stage only the intended `docs/backlog` paths. Create a concise `docs(backlog): <research outcome>` Conventional Commit and report the record IDs, subjects researched, resolved versions, any subject re-run on a stronger tier, research state, unresolved readiness blockers, commit hash, and validation result.
 
-End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
+End the report with `Next step:` — one copy-pasteable command: research resolved → the exact command that resumes planning (`/to-epic EPIC-NNN` or `/to-backlog WORK-NNN`); `pending` → the concrete action that resolves the open question.

@@ -35,35 +35,11 @@ User-invoked only — or invoked by `$to-product`, whose autonomous contract aut
    Then offer `$guidance` for the seeded `draft` pages and any reported standards candidate, naming each with its evidence. Adoption is owner judgement: publish only the subjects the owner explicitly names in reply, and leave the rest `draft`.
 10. Review the diff, local links, backlog scaffold, agent-instruction block, and wiki log. Run setup a second time and confirm it changes no bytes.
 
-End the report with `Next step:` — one copy-pasteable command: greenfield → `/discuss` naming the first outcome to shape; pages left `draft` after the step 9 guidance offer → `/to-guidance` naming them so their adopted rules and sources get researched; otherwise brownfield → `/discuss` naming the highest-value judgment candidate or first desired change. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
+End the report with `Next step:` — one copy-pasteable command: greenfield → `/discuss` naming the first outcome to shape; pages left `draft` after the step 9 guidance offer → `/to-guidance` naming them so their adopted rules and sources get researched; otherwise brownfield → `/discuss` naming the highest-value judgment candidate or first desired change.
 
-## Structure rules
+## Canonical rules
 
-- `docs/wiki/index.md` stays a small routing entry point: immediate concepts and child directories with one-sentence descriptions. Every directory containing wiki Markdown gets its own `index.md`.
-- `log.md` is newest-first with ISO 8601 `YYYY-MM-DD` headings.
-- Every non-reserved Markdown file has parseable frontmatter with non-empty `type`, `title`, `description`, `timestamp`, and `status`.
-- Use standard Markdown links; prefer bundle-relative `/path.md` links inside the wiki.
-- Organize by durable responsibility or domain, never by the agent, task, or session that created content. One canonical owner per rule or fact; other pages link to it.
-- `docs/wiki/architecture/decisions/` owns ADRs — one `type: Decision` concept per architecturally significant decision, `ADR-NNN` allocated at publication, superseded in place, never deleted for being replaced. `template.md` there is a non-record example. Its `index.md` separates in-force from superseded entries.
-- `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` own adopted guidance — one canonical page per technology or cross-cutting standard, shaped by `docs/wiki/engineering/guidance-template.md` and maintained with `$guidance`. Requirements there bind new code even where existing code is non-compliant; non-compliant areas belong under `## Known gaps` with their remediation tracked in the backlog.
-- `docs/wiki/domains/ubiquitous-language.md` is the canonical language agreement between owner and developers — no lifecycle states or agent signatures. Agents acknowledge it by reading, challenging inconsistencies, and using its terms.
-- Keep transient task state out of the durable wiki.
-
-## Backlog rules
-
-- Read `docs/backlog/maintenance.md` before creating or changing records — it is canonical for hierarchy, statuses, readiness, relationships, ranking, claims, cancellation, and archival.
-- Desired deltas stay in the backlog until completed outcomes are accepted into the wiki. Use `$wiki` for accepted-knowledge operations.
-- Explicit project-owner approval is required before moving work to `ready`, walking work back from `ready` to `proposed`, changing global rank, cancelling work, superseding an ADR, or changing accepted wiki meaning.
-- Each record's `decisions` field and `## Decisions` section carry decisions drafted in ADR shape; `pending` blocks readiness, and publication as an ADR happens only at primary-branch acceptance.
-- Immutable global `EPIC-NNN` IDs for Epics; `WORK-NNN` for peer Story, Task, and Bug records.
-- Every active executable item appears exactly once in the root global rank. Checklist subtasks for local steps; temporary claims for in-progress coordination.
-- Archive standalone terminal work promptly; archive an Epic and all children together only when every record is terminal.
-
-## Length and splitting rules
-
-- Target at most 350 lines per concept page; at that threshold, review whether it is still one cohesive concept. Never exceed 500 (a validator error; reserved `index.md` and `log.md` are exempt but stay concise).
-- Split before 350 lines when sections have different owners, audiences, lifecycles, source sets, or concept types, when a section is independently reusable, or when readers commonly need one section alone. Keep a cohesive runbook or reference intact below the hard limit when splitting would force jumping between files during one task.
-- When splitting: create focused sibling or child concepts, add nearest index entries, replace duplicated prose with links, repair inbound links, record the change in `log.md`.
+The installed assets are canonical for structure and governance — never restate their rules elsewhere: `assets/wiki/maintenance.md` (authority, organization, concept metadata, ADRs, adopted guidance, length and splitting, links, indexes, log), `assets/backlog/maintenance.md` (hierarchy, lifecycle, Definition of Ready, relationships, ranking, claims, cancellation, archival), and `assets/wiki/domains/ubiquitous-language.md` (the canonical language agreement — no lifecycle states or agent signatures). Read the relevant asset before editing what it governs during steps 6-9.
 
 ## Installed resources
 

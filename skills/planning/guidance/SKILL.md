@@ -5,7 +5,7 @@ description: Research and publish canonical technology and standards guidance pa
 
 # Guidance
 
-Create-or-refresh is one mode. Guidance is accepted current state because the owner has **adopted** it as binding on new code — not because every existing file already complies. Non-compliant areas belong in the page's `## Known gaps`; closing them is separate `/to-backlog` work this skill never creates.
+Create-or-refresh is one mode. Adoption semantics follow `docs/wiki/maintenance.md § Adopted guidance`; non-compliant areas belong in the page's `## Known gaps`, and closing them is separate `/to-backlog` work this skill never creates.
 
 Follow `$wiki` for record mechanics — ownership, evidence, sources, validation, staging, commits.
 
@@ -14,8 +14,6 @@ Follow `$wiki` for record mechanics — ownership, evidence, sources, validation
 Obtain explicit owner approval before each page create-or-refresh transaction, unless the caller holds standing approval for it — `$to-guidance` for the subjects that invocation named, `$to-epic` for the subjects the owner named at its evidence decision, `$to-product` for every subject an autonomous run reaches. That approval also supersedes `$wiki`'s per-transaction pauses for exactly those transactions.
 
 Regardless of caller: never publish guidance for a subject repository evidence does not show in use; never deprecate or delete a page; never mutate `docs/backlog`; and always pause per item under step 6 — only `$to-product`'s autonomous contract covers reversing an adopted rule, and it reports each reversal individually.
-
-Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
 
 ## Subjects
 
@@ -46,11 +44,7 @@ Also record observed project conventions and any departure from upstream guidanc
 
 ## 2. Fan out one sub-agent per subject
 
-Degrade by harness capability:
-
-- **Parallel sub-agents available** — spawn one per subject, all in a single message.
-- **Per-agent model selection also available** — run every subject sub-agent on the cheapest available tier at low reasoning effort; reserve the stronger model for evidence inspection, conflict resolution, and synthesis. If a subject's return breaks the required output shape, cites an unopened source, or leaves its version unresolved, re-run that subject on a stronger tier and record the escalation in the report.
-- **Neither available** — run the same briefs sequentially in the main context, with the same output shape.
+Degrade by harness capability: with parallel sub-agents, spawn one per subject in a single message; with per-agent model selection, run each on the cheapest available tier at low reasoning effort, reserving the stronger model for inspection, conflict resolution, and synthesis; with neither, run the same briefs sequentially in the main context. If a subject's return breaks the required output shape or cites an unopened source, re-run it on a stronger tier and record the escalation in the report.
 
 Give each sub-agent the subject, its repository version evidence and observed conventions, the version rules in step 3, and this brief:
 
@@ -97,4 +91,4 @@ A failed validator, a source that contradicts a claim already published, or evid
 
 Report per subject: the page path and whether it was created or refreshed; the installed version with its establishing path and the resolved latest stable with its live source and date; counts of requirements, recommendations, conventions, deviations, and known gaps; sources with authority labels; every rule-replacement pause and its outcome; any subject re-run on a stronger tier; unresolved questions; commit hashes; and the final validation result.
 
-Omit the `Next step:` line when the caller continues its own workflow after this run; that caller's report owns the handoff. Otherwise end the report with `Next step:` — one copy-pasteable command: known gaps found → `/to-backlog` naming the non-compliant areas to remediate; a subject blocked or its research unresolved → the concrete action that resolves it; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
+Omit the `Next step:` line when the caller continues its own workflow after this run; that caller's report owns the handoff. Otherwise end the report with `Next step:` — one copy-pasteable command: known gaps found → `/to-backlog` naming the non-compliant areas to remediate; a subject blocked or its research unresolved → the concrete action that resolves it; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists.

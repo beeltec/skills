@@ -8,6 +8,8 @@
 - Record architecturally significant decisions as ADRs under `docs/wiki/architecture/decisions/`. Draft a proposed decision on its backlog record (`decisions:` and `## Decisions`); publish it as an ADR only at primary-branch acceptance. A replaced ADR is superseded in place, never deleted.
 - Require project-owner approval to mark work `ready`, walk work back from `ready` to `proposed`, change rank, cancel work, supersede an ADR, or change accepted wiki state.
 - Run `node scripts/validate-project.mjs` after wiki or backlog changes and before handoff.
+- Stay on the current branch. Only `$implement` and `$implement-with-subagents` create branches, via `$create-conventional-branch`; never create, switch, merge, or delete branches from any other workflow.
+- Never create, inspect, or depend on `docs/tasks`.
 
 ## Work routing
 
@@ -27,4 +29,6 @@ Never perform these intents ad hoc. Invoke the skill that owns each, and follow 
 | Ship a whole PRD unattended | `/to-product` |
 
 There is no direct-implementation route: execution always passes through backlog readiness. When no skill covers the intent, say so before acting.
+
+Every workflow skill ends its report with `Next step:` — one copy-pasteable command with real arguments as the report's last line, or a numbered list in run order when several apply. Recommend only; never invoke it.
 <!-- setup-project:end -->

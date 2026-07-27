@@ -6,13 +6,9 @@ disable-model-invocation: true
 
 # To Wiki
 
-Invoking this skill is the owner's standing approval for publishing the durable knowledge explicitly confirmed in the current conversation — whether it emerged from discussion or from inspecting the existing codebase: concept creation, correction or extension of existing concepts, ADR publication for decisions already in force, ubiquitous-language additions and corrections, and the derived index, link, metadata, and log changes. This supersedes `$wiki`'s per-transaction approval pauses for exactly these additive and corrective transactions; follow `$wiki` for everything else — preflight, knowledge eligibility, ownership, evidence, sources, validation, staging, commits.
+Invoking this skill is the owner's standing approval for publishing the durable knowledge explicitly confirmed in this conversation — from discussion or codebase inspection: concept creation, correction or extension, ADR publication for decisions already in force, ubiquitous-language additions and corrections, and derived index, link, metadata, and log changes — superseding `$wiki`'s per-transaction pauses for exactly these additive and corrective transactions; follow `$wiki` for everything else. It never authorizes deprecating or deleting an existing concept, superseding an existing ADR, mutating `docs/backlog`, publishing proposal-shaped content, or touching unconfirmed knowledge.
 
-It never authorizes deprecating or deleting an existing concept, superseding an existing ADR, mutating `docs/backlog`, publishing proposal-shaped content, or touching knowledge the conversation did not confirm. Pause for user input only on the per-item candidates in step 3 and hard blockers; otherwise run to completion and report.
-
-User-invoked only — or invoked by `$to-product`, whose autonomous contract additionally auto-approves the step 3 pauses — concept deprecation, concept deletion, and ADR supersession — and reports each individually.
-
-Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
+Pause only at the step 3 per-item candidates and hard blockers; otherwise run to completion and report. User-invoked only — or by `$to-product`, whose autonomous contract additionally auto-approves the step 3 pauses — concept deprecation, concept deletion, ADR supersession — and reports each individually.
 
 ## Workflow
 
@@ -23,4 +19,4 @@ Stay on the current branch — never create, switch, merge, or delete branches. 
 
 A failed validator, evidence contradicting a confirmed conclusion, or unestablished current acceptance is a blocker: publish nothing for that candidate, keep committed transactions intact, and report — never force acceptance.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists; omit when none follows. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
+End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists; omit when none follows.

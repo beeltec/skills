@@ -7,7 +7,7 @@ description: Execute one ready backlog work item or Epic through claim, implemen
 
 Execute approved work from a `setup-project` backlog without changing its desired scope or priority. Accept one explicit `WORK-NNN`, `EPIC-NNN`, record path, or exactly one selection already established by the conversation. A work-item invocation handles only that item; an Epic invocation handles every required child, one at a time, through the same per-item gates.
 
-Use one conventional work branch per invocation — for an Epic, reuse it across per-item integrations; never a branch per child. Never create, inspect, migrate, or depend on `docs/tasks`.
+Use one conventional work branch per invocation — for an Epic, reuse it across per-item integrations; never a branch per child.
 
 ## Authority And Approval
 
@@ -46,7 +46,7 @@ Complete before creating or switching a branch or mutating a claim:
 5. Resolve the selection: explicit ID or path wins; otherwise only a single unambiguous conversational selection. List candidates and ask when absent or ambiguous.
 6. Read completely the selected records, the parent Epic and every child in Epic scope, the global rank, active and archive indexes, all related records, and all records needed to calculate inward blockers.
 7. Read backlog maintenance, applicable type templates, every linked wiki concept and nearest index, wiki maintenance and log, relevant engineering and architecture guidance, every in-force ADR under `docs/wiki/architecture/decisions/`, the record's drafted `## Decisions`, proposal research and local evidence, and the affected repository code and tests.
-8. Read every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard this item's delta touches, resolved from its own directory indexes, not the whole set. Their `Requirements` bind the new code; follow `Conventions` and recorded `Deviations` over external habit, and treat a listed `Known gap` as existing non-compliance to work around, never as licence to add more. A technology or standard the delta touches with no page or a stale one is a reportable gap: implement against the item's research and repository evidence, and name it for the post-acceptance `$guidance` offer and in the final report — never block on it, and never write guidance into `docs/wiki` here.
+8. Read every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard this item's delta touches, resolved from its own directory indexes, not the whole set. Rule strength follows `docs/wiki/maintenance.md § Adopted guidance`; a listed `Known gap` is existing non-compliance to work around, never licence to add more. A touched subject with no page or a stale one is a reportable gap: implement against the item's research and repository evidence and name it for the post-acceptance `$guidance` offer and the final report — never block on it, and never write guidance into `docs/wiki` here.
 9. Determine the invocation's primary-branch fixed point; retain it for review and integration evidence. For an Epic it is also the immutable **epic fixed point** for the final Epic review; no per-item fixed point replaces it.
 
 Reject before branch creation:
@@ -145,4 +145,4 @@ In one final primary-branch backlog transaction: check supported Epic criteria, 
 
 Remain on primary and delete the local work branch only after every item is integrated, its completion committed, the Epic archive committed when applicable, all checks green, and no authorized scope remains; otherwise retain the branch and report the exact blocker. Report selected scope, claims, changed paths, commits and merge commits, review results including the Epic-scope review or its skip, acceptance evidence, reconciliation including every published `ADR-NNN` and each ADR superseded, validation, archive destinations, every technology or standard the delta touched that has no guidance page, and remaining concerns.
 
-End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement` with the next highest-ranked actionable `WORK-NNN`, or `/discuss` naming the next open outcome when no ready work remains. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
+End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement` with the next highest-ranked actionable `WORK-NNN`, or `/discuss` naming the next open outcome when no ready work remains.

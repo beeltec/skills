@@ -5,9 +5,7 @@ description: Manage approved desired work from intake through refinement, rankin
 
 # Backlog
 
-`docs/backlog` is the tracked system of record for desired project deltas and execution state; `docs/wiki` is accepted current state on the primary branch. Never put a proposal in the wiki or treat completed backlog work as accepted until the relevant wiki concepts are updated. Use `$wiki` for accepted-knowledge operations; never mutate wiki concepts inside a backlog transaction.
-
-Stay on the current branch — never create, switch, merge, or delete branches. Never create, inspect, or depend on `docs/tasks`.
+`docs/backlog` owns desired project deltas and execution state; never treat completed backlog work as accepted until the relevant wiki concepts are updated. Use `$wiki` for accepted-knowledge operations; never mutate wiki concepts inside a backlog transaction.
 
 ## Authority
 
@@ -65,32 +63,13 @@ Present every proposed scope, criterion, parent, relationship, or rank change fo
 
 ## Definition Of Ready
 
-Reject `proposed -> ready` unless all hold:
-
-- the outcome/delta is specific, bounded, and placeholder-free;
-- at least one acceptance criterion is objectively checkable;
-- parentage and all relationships resolve, blockers are explicit, and no blocking cycle exists;
-- `wiki_refs` lists every relevant `docs/wiki/...` path, or only `none` after confirming none applies;
-- research is `complete` or `not-needed` with resolved conclusions and sources or a concrete explanation — `pending` research or any unresolved version-specific or security-sensitive question blocks readiness;
-- `decisions` is `none` with a stated reason, or a YAML inline array of published `ADR-NNN` IDs — `pending` blocks readiness. Apply the ADR significance test in `docs/wiki/maintenance.md` to the work's design choices; draft each qualifying decision under `## Decisions` in ADR shape (context, decision, alternatives rejected and why, consequences), and name the ADR it would supersede when one exists;
-- `## Execution` records an actionable approach, verification commands, and the explicit project-owner approval;
-- every subtask is one bounded step naming its scope and its verification, or the section says exactly `No subtasks.`;
-- the item occurs exactly once at its approved position in global rank.
+Reject `proposed -> ready` unless the full Definition of Ready in `docs/backlog/maintenance.md` holds — every requirement, including a resolved `decisions` field with each qualifying decision drafted under `## Decisions` in ADR shape, naming any ADR it would supersede. Never allocate an `ADR-NNN` inside a backlog transaction; drafted decisions are published by `$wiki` at post-acceptance reconciliation, and the allocated IDs then replace `pending`.
 
 A ready Epic additionally requires an approved outcome, objective acceptance criteria, a coordination approach, and at least one approved child. Show the owner the complete candidate record, rank position, and validation-relevant relationships before requesting the transition; approval to refine is not approval to become ready.
 
-Keep proposal-specific sources, version findings, recommendations, uncertainty, project deviations, and drafted decisions in the backlog record. Promote only durable guidance that becomes accepted current state (during implementation reconciliation) to the owning wiki concept; never copy an unimplemented target specification into the wiki. A drafted decision is published as an ADR by `$wiki` at that reconciliation, and its allocated IDs then replace `pending` in `decisions`; never allocate an `ADR-NNN` inside a backlog transaction.
-
 ## Relationships And Actionability
 
-Use only the schema fields installed by setup-project. Directional links live on the outward/source record; derive inward wording while reviewing the graph:
-
-- `A blocks: [B]` — A blocks B; B is blocked by A.
-- `clones`, `duplicates`, `causes` — stored outward only.
-- `relates_to` is symmetric — add or remove on both records in one transaction.
-- a child's `parent` and physical placement represent membership; keep the Epic's scope and relevant indexes consistent with that child set.
-
-Reject self-links, missing targets, duplicate links, blocking cycles, and active-to-archived links. Never invent reciprocal directional fields the schema does not define.
+Use only the schema fields in `docs/backlog/maintenance.md § Relationships`: directional links live on the outward/source record, `relates_to` is added or removed on both records in one transaction, and a child's `parent` plus physical placement represent membership — keep the Epic's scope and indexes consistent with that child set. Reject self-links, missing targets, duplicate links, blocking cycles, and active-to-archived links; never invent reciprocal fields the schema does not define.
 
 Actionability is calculated — never a `blocked` status or field. An item is actionable only when its status is `ready` and no nonterminal active record has an outward `blocks` link to it; otherwise report the blocking record IDs. Rank expresses owner priority, not actionability, so blocked work stays ranked until terminal.
 
@@ -143,6 +122,6 @@ For each approved mutation:
 4. Inspect `git diff`, `git diff --cached`, and `git status`; for a bookkeeping transaction, stage first and inspect once with `git status --short` and `git diff --cached`. Stage only the transaction's intended `docs/backlog` paths; handle a separately approved wiki update as its own validated workflow and commit. Never use broad staging commands.
 5. Verify the staged path list and diff contain no unrelated files, secrets, working notes, or `docs/tasks` content.
 6. Create one concise Conventional Commit, normally `docs(backlog): <transaction outcome>`. Keep temporary claims in their own transaction when practical.
-7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); omit when none follows. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
+7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `/implement WORK-NNN`); omit when none follows.
 
 If approval is denied or changed, revise the proposal in conversation without mutating files. If unrelated worktree changes overlap an affected file, preserve them and ask before proceeding when a safe narrow transaction is not possible.

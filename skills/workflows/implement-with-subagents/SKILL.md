@@ -5,7 +5,7 @@ description: Orchestrate a ready Epic or work-item set through isolated implemen
 
 # Implement with Subagents
 
-Orchestrate approved `setup-project` backlog work: own authority discovery, selection, sequencing, verification, recovery, and Epic closure; delegate each item to exactly one fresh subagent running `$implement`. Never implement work-item scope in the orchestrator, or create, inspect, or depend on `docs/tasks` or a master task document.
+Orchestrate approved `setup-project` backlog work: own authority discovery, selection, sequencing, verification, recovery, and Epic closure; delegate each item to exactly one fresh subagent running `$implement`. Never implement work-item scope in the orchestrator or keep a master task document.
 
 Under an active autonomous run, `$to-product`'s autonomous contract supplies every owner approval this workflow and its subagents require, and its blocker rule governs: retry an item three times, then release its claim, return it to `ready` with the blocker recorded, and continue with the next actionable item instead of stopping. State the contract in every subagent brief.
 
@@ -73,4 +73,4 @@ Use $implement-with-subagents with EPIC-012 using model gpt-5.6-sol and reasonin
 
 Report the authorized scope and selection order; one subagent/session and branch per item; changed paths, commits, and merge commits; checks and both review axes; acceptance and wiki reconciliation evidence; resulting statuses, claims, rank and archive locations; the Epic-scope review result and any remediation subagent; the Epic closure commit when applicable; unsupported passthrough settings; remaining blockers or concerns.
 
-End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement-with-subagents` or `/implement` with the next highest-ranked actionable scope, or `/discuss` naming the next open outcome when no ready work remains. Recommend only — never invoke it; make it the last line, or a numbered list in run order if several apply.
+End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement-with-subagents` or `/implement` with the next highest-ranked actionable scope, or `/discuss` naming the next open outcome when no ready work remains.

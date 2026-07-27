@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Before interviewing, resolve the project root and read applicable repository instructions. When `docs/wiki` exists, read its root index, maintenance rules, ubiquitous language, nearest relevant indexes, and related concepts so accepted current state informs the discussion. When `docs/backlog` exists, also read its root index and any records related to the topic — read-only — so existing proposed work, relationships, and rank inform the questioning and the handoff can refine an existing record instead of proposing a duplicate. Without a wiki, continue without inventing project facts and recommend `$setup-project` if the user wants to persist project state.
 
-Stay on the user's current Git branch — never create, switch, merge, or delete branches, even when inspecting the repository.
+Stay on the user's current branch — never create, switch, merge, or delete branches.
 
 User-invoked only — or invoked by `$to-product`, which answers every question below as the owner-proxy under its autonomous contract, printing each question and answer verbatim.
 
@@ -27,7 +27,7 @@ If available, use the ask_user_question tool with multiple-choice answers; the f
 
 Look up any *fact* discoverable from the environment (filesystem, tools) instead of asking. *Decisions* belong to the user — put each one to them and wait.
 
-Track architecturally significant decisions. Apply the ADR significance test in the project's `docs/wiki/maintenance.md`: a decision qualifies when it changes system structure, affects a cross-cutting quality, adopts or drops a technology or dependency, or is costly to reverse, and a real alternative was rejected. For each qualifying decision reached, raise a numbered question confirming the decision, the alternatives rejected and why, and the consequences accepted, so the routed command can record it. Read existing ADRs under `docs/wiki/architecture/decisions/` during preflight; when a conclusion replaces one, say which ADR it supersedes.
+Track architecturally significant decisions per the ADR significance test in the project's `docs/wiki/maintenance.md`. For each qualifying decision reached, raise a numbered question confirming the decision, the alternatives rejected and why, and the consequences accepted, so the routed command can record it. Read existing ADRs under `docs/wiki/architecture/decisions/` during preflight; when a conclusion replaces one, say which ADR it supersedes.
 
 Track terminology. When the user uses a domain term absent from the ubiquitous language, an existing term with a different meaning, or several words for one concept, raise a numbered question: confirm the meaning, propose a definition, and ask whether to add or correct it in the ubiquitous language. Collect confirmed terms for the handoff; without a wiki, note them for `$setup-project`.
 

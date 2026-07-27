@@ -40,7 +40,7 @@ These three destroy or overturn accepted knowledge. The run approves them anyway
 - Never implement scope the PRD does not carry. File it as a `proposed` backlog record, name it in the report, and continue.
 - Never push to a remote, open a pull or merge request, or publish anything outside the repository.
 - Never force-push, rewrite pushed history, or delete a branch this run did not create.
-- Never cancel, reparent, or rerank a record that is not part of the map.
+- Never cancel a record — cancellation always requires the real owner — and never reparent or rerank a record that is not part of the map.
 - Never set `research: complete` or `not-needed` without the evidence each state requires.
 - Never present an assumption as sourced, and never omit one from the assumption register.
 - Never perform a covered intent inline instead of invoking the skill that owns it.
