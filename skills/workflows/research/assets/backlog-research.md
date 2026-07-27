@@ -8,7 +8,7 @@ Identify the proposed behavior or project-state delta this research informs and 
 
 ### Repository and version evidence
 
-One row per technology. `Installed` is the exact version or constraint with the repository path that establishes it, or `new` when this delta introduces it. `Latest stable` comes from a live registry or release-feed call — never from documentation, a tutorial, or memory. Give a reason whenever the target is not the latest stable.
+One row per technology subject, including the project's language, toolchain, and runtime when the delta builds on them; a technology subject without a row blocks `research: complete`. `Installed` is the exact version or constraint with the repository path that establishes it, or `new` when this delta introduces it. `Latest stable` comes from a live registry or release-feed call — never from documentation, a tutorial, or memory. Give a reason whenever the target is not the latest stable.
 
 | Technology | Installed (path) | Latest stable | Resolved via / on | Target | Reason |
 |---|---|---|---|---|---|

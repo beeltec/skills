@@ -17,7 +17,7 @@ Approve, then log. Each row is a pause the invoked skill would otherwise hold fo
 | Every interview question | `$discuss` | Owner-proxy answers from PRD, then repository, then wiki; otherwise `ASSUMPTION` |
 | Evidence decision — guidance half | `$to-epic` step 2 | Name every subject the outcome touches whose page is missing, `draft`, version-mismatched, or stale |
 | Evidence decision — research half | `$to-epic` step 2 | Yes when the outcome carries a version-specific or security-sensitive question; otherwise no, with the reason recorded |
-| Research decision | `$to-backlog` step 2 | Same rule, per item |
+| Evidence decision — both halves | `$to-backlog` step 2 | Same auto-answers as `$to-epic` step 2, research per item |
 | Intake, refinement, rank placement, `proposed -> ready` | `$backlog` | Approve |
 | Research transaction | `$research` step 7 | Approve the drafted section and the resulting state |
 | Page create-or-refresh | `$guidance` | Approve |

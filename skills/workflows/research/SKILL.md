@@ -21,7 +21,7 @@ Inspect evidence bearing on the proposed delta: manifests, lockfiles, runtime an
 
 ## 2. Build the subject inventory
 
-A **subject** is one technology, or one concept, standard, or guideline, that the proposed delta affects or implicates. Inventory subjects only — never survey the whole stack.
+A **subject** is one technology, or one concept, standard, or guideline, that the proposed delta affects or implicates. Inventory subjects only — never survey the whole stack. The project's language, toolchain, and runtime are always subjects when the delta introduces or builds on them.
 
 Derive concept subjects from the delta. These triggers are the common cases, not the whole list:
 
@@ -49,7 +49,7 @@ Resolve each subject's version per step 5 first — a sub-agent never resolves v
 
 ## 5. Resolve versions from the release source
 
-The authoritative version source is a live call to the ecosystem's registry, release feed, or tagged releases — `npm view <pkg> version`, the PyPI JSON API, `gh release list`, crates.io, and equivalents. Record the resolved version, that source, and the resolution date.
+The authoritative version source is a live call to the ecosystem's registry, release feed, or tagged releases — `npm view <pkg> version`, the PyPI JSON API, `gh release list`, crates.io, and equivalents. Record one resolution row per technology subject in the `## Research` version-evidence table: resolved version, the exact live command or URL, and the resolution date. A technology subject without a resolution row is unresolved and blocks `complete`.
 
 Never take a version from training memory, a documentation example snippet, a tutorial, or a blog post. Distinguish latest stable from prerelease and from the maintained LTS line.
 
@@ -64,11 +64,11 @@ Compare the result with accepted wiki knowledge and actual repository convention
 
 ## 7. Draft and set state
 
-Draft the record's `## Research` section using [the proposal research template](assets/backlog-research.md). Do not create or update a wiki page during planning.
+Draft the record's `## Research` section using [the proposal research template](assets/backlog-research.md). Do not create or update a wiki page during planning; `$guidance` pages published under a caller's approval are the exception.
 
 Set the frontmatter research state:
 
-- `complete` — every applicable version-specific and security-sensitive question is resolved with sufficient conclusions and sources;
+- `complete` — every applicable version-specific and security-sensitive question is resolved with sufficient conclusions and sources, and every technology subject has its step 5 resolution row;
 - `not-needed` — inspected evidence establishes no external research applies, with that reasoning in the section;
 - `pending` — a source is unavailable, version applicability is ambiguous, sources conflict, a security-sensitive question is open, or more investigation is required.
 
