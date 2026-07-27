@@ -45,4 +45,4 @@ Draft each architecturally significant decision this outcome makes, in ADR shape
 
 ## Execution
 
-Record approval, sequencing, verification, and archive coordination.
+Record approval, sequencing, risk-gated review, minimal verification, suite-evidence reuse, and archive coordination.

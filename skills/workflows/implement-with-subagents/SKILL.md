@@ -9,18 +9,18 @@ Orchestrate approved `setup-project` backlog work: own authority discovery, sele
 
 Under an active autonomous run, `$to-product`'s autonomous contract supplies every owner approval this workflow and its subagents require, and its blocker rule governs: retry an item three times, then release its claim, return it to `ready` with the blocker recorded, and continue with the next actionable item instead of stopping. State the contract in every subagent brief.
 
-**Serialized integration:** run at most three items concurrently, and only where no `blocks` link joins them in either direction and their declared subtask scopes are disjoint; give each an isolated git worktree. Admit one item to primary at a time. An item whose turn follows another's merge merges primary into its branch, re-verifies, and re-reviews the delta before its own acceptance gate.
+**Serialized integration:** run at most three dependency-free, scope-disjoint items concurrently in isolated worktrees; admit one to primary at a time. A later item merges primary, reruns affected focused checks, applies risk-gated review when required, and runs its one final suite on that integrated code state.
 
 Delegation depth:
 
 ```text
 orchestrator (depth 0)
-└─ item subagent running $implement (depth 1)
-   ├─ Standards reviewer (depth 2)
-   └─ Spec reviewer (depth 2)
+└─ item subagent running `$implement` (depth 1)
+   ├─ combined reviewer (depth 2, low risk)
+   └─ Standards + Spec reviewers (depth 2, high risk)
 ```
 
-Only these reviewer roles may run at depth 2; depth-2 agents must not spawn subagents. State this limit in every item brief.
+Only reviewer roles may run at depth 2; they never spawn agents.
 
 ## Inputs
 
@@ -45,32 +45,34 @@ Reject: a proposed item, malformed Definition of Ready, missing rank entry for a
 
 Loop over authorized incomplete work:
 
-1. Rerun the validator before every selection and every admission to primary. Probe `git log -- docs/backlog` since the last read: reload global rank, claims, statuses, and indexes when it shows changes, plus every path the completed item's merge commit touched; the rest of the packet stays read under `$implement`'s Authority Packet Freshness rule. First resume an active item with this run's live claim and assigned subagent; otherwise select the first authorized item in global rank that is `ready`, unclaimed, and free of unresolved inward blockers.
+1. Before selection and admission, verify backlog state invariants and probe `git log -- docs/backlog` since the last read; reload rank, claims, statuses, indexes, and merged paths only when changed. Reuse the remaining fresh authority packet. Resume this run's live item; otherwise select the first authorized ready, unclaimed, unblocked item in global rank.
 2. Spawn one fresh subagent dedicated to that `WORK-NNN`; record the item-to-agent/session mapping. Never assign it another item.
-3. Give it a self-contained prompt: invoke and follow `$implement` with the selected ID/path, scoped only to that item; repository root, record and parent Epic paths, authorized-scope description; blocker outcomes, relationship paths, wiki references, fixed constraints, and user instructions; the exact paths of every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` for the technologies and standards that item's delta touches, named explicitly because a fresh subagent cannot inherit them from this context, with the instruction to read each one and treat its `Requirements` as binding, plus every touched subject that has no page so the subagent reports it; inspect repository and Git state before editing, preserve unrelated work, never broaden scope or change rank; pin any dependency or toolchain version not already resolved in the record's `## Research` only from a live registry call, never from memory, recording the source in `## Execution`; complete every direct `$implement` gate (claim, branch, review, reconciliation, primary-branch acceptance, completion, archival); report changed paths, commits and merge commits, checks, review results, acceptance evidence, wiki reconciliation, final status, claim state, archive destination, and concerns.
+3. Give it a self-contained prompt to run `$implement` for only that item with the repository, record/parent paths, authorized scope, blockers, relationships, wiki references, constraints, user instructions, applicable guidance paths and gaps, and delegation-depth limit. Require every applicable gate, including risk-gated review or its policy skip, one final suite, reconciliation, primary acceptance, completion, archival, and concise evidence. Preserve unrelated work and scope; resolve new versions only from live registries.
 4. Pass supported model/effort settings. Select again immediately while a concurrency slot is free; otherwise wait for a subagent to return.
 
 No umbrella branch: each subagent's `$implement` invocation uses exactly one fresh conventional branch; never reuse an earlier item's branch.
 
 ## Verification And Recovery
 
-After every subagent response, verify from cheap evidence: `git show --stat` on the reported merge commit and `git log` for its commits, the record and parent Epic, rank, claims, indexes, and the subagent's cited per-gate evidence; run cheap targeted checks when useful and rerun the validator. Pull a full diff or file contents only where a gate's evidence is missing or contradicted. Do not continue until every direct `$implement` gate is evidenced:
+After each response, verify invariants: commits and merge ancestry; record, parent, rank, claim, index, and archive state; review result or valid policy skip; suite freshness; reconciliation; and acceptance evidence. Trust fresh cited evidence. Read full diffs or rerun validators, suites, or focused checks only when evidence is missing, stale, contradictory, or integration changed code-affecting inputs.
 
-- acceptance criteria complete without scope creep; focused checks and the full applicable suite passed;
-- both backlog-aware code-review axes passed against the item's fixed point after the last implementation change;
-- the exact owner-approved wiki transaction applied on primary after acceptance, or a recorded reason none was required, including every drafted decision published as an ADR with its allocated `ADR-NNN` and any ADR superseded in both directions, and `decisions` resolved off `pending` and `draft`;
-- a merge commit and post-merge checks establish primary-branch acceptance before `done`;
-- claim cleared, item removed from rank, status/indexes/archive per backlog maintenance; item branch cleaned up only after its cleanup gates passed.
+Require:
 
-If evidence is missing or a check fails, send a focused follow-up with concrete evidence to the same assigned subagent and wait — no replacement subagent, and no admission of that item to primary while it is unresolved. If it cannot continue, its claim conflicts, a required owner decision is unavailable, or safe recovery cannot be proved, stop and report the blocker. Never release or overwrite another executor's claim. After an item passes, finish its subagent, reload rank and claim data and the paths its merge commit touched, validate, and recalculate actionability.
+- criteria complete without scope creep and focused checks plus one fresh final suite;
+- required combined/parallel review passed, or an ordinary Epic child recorded its policy skip;
+- approved wiki reconciliation applied or recorded unnecessary, with decisions resolved;
+- merge evidence establishes primary acceptance before `done`;
+- claim, rank, status, indexes, archive, and branch cleanup are correct.
+
+On failure, send one focused follow-up to the same subagent. Never replace it, admit unresolved work, or alter another executor's claim. After success, finish it, reload changed state, and recalculate actionability.
 
 ## Epic Closure
 
-Only an explicit Epic input authorizes closure. After every approved child is `done` or explicitly owner-cancelled, verify child dispositions, acceptance evidence, the Epic outcome and criteria, wiki reconciliation, reviews, validator, and full suite.
+Only explicit Epic input authorizes closure. After all approved children are terminal, verify dispositions, evidence, criteria, reconciliation, review skips/results, validator evidence, and the latest suite's freshness.
 
-Then invoke `$code-review` on primary as an Epic-scope review with the `EPIC-NNN` and the pinned epic fixed point. Delegate every actionable finding inside approved Epic scope to one fresh remediation subagent on its own conventional branch — never remediate in the orchestrator; verify its evidence under `## Verification And Recovery`, admit its merge to primary, and re-review the delta from the same epic fixed point until both axes pass. A finding needing scope the Epic never carried stops closure for an owner-approved backlog transaction.
+Invoke `$code-review` on primary for the mandatory Epic-scope review. Delegate in-scope remediation to one fresh branch subagent; require affected focused checks, substantive-only delta review, and a new full suite only when code-affecting inputs changed. Verify its evidence and admit it serially. Out-of-scope findings block closure.
 
-On primary, apply direct `$implement`'s final atomic Epic transaction: check evidenced criteria, set `done`, move the whole directory to `archive/epics/`, update indexes, validate, stage only those paths, and commit concisely. Never split the archive, infer cancellation, or close an Epic from a selected-set run.
+Then apply `$implement`'s atomic Epic completion transaction on primary: criteria, `done`, archive, indexes, validation, explicit staging, commit.
 
 ## Invocation Examples
 
@@ -82,6 +84,6 @@ Use $implement-with-subagents with EPIC-012 using model gpt-5.6-sol and reasonin
 
 ## Final Report
 
-Report the authorized scope and selection order; one subagent/session and branch per item; changed paths, commits, and merge commits; checks and both review axes; acceptance and wiki reconciliation evidence; resulting statuses, claims, rank and archive locations; the Epic-scope review result and any remediation subagent; the Epic closure commit when applicable; unsupported passthrough settings; remaining blockers or concerns.
+Report scope and order; subagents and branches; changed paths and commits; invariant evidence; review modes, skips, and results; suite freshness; acceptance and reconciliation; final statuses, claims, rank and archives; Epic review/remediation and closure; unsupported settings; blockers.
 
 End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `$implement-with-subagents` or `$implement` with the next highest-ranked actionable scope, or `$discuss` naming the next open outcome when no ready work remains.

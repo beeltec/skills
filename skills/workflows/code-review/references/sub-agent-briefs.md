@@ -1,23 +1,29 @@
 # Sub-agent briefs
 
-Prompt payloads for step 6. Read this file only when spawning the sub-agents.
+Prompt payloads for step 7. Read only when spawning reviewers.
 
-Sub-agents share the filesystem: pass every authority as a **path with its role**, never pasted contents, and instruct each sub-agent to read its named paths before reviewing and to report any path it cannot read instead of reviewing without it. The only inline content is the short significance-test text and the item's `decisions` frontmatter value; the `## Decisions` section travels as the work-item path.
+Sub-agents share the filesystem: pass authorities as paths with roles, never pasted contents; require every named path before review and report unreadable paths. Inline only the significance-test text and `decisions` value. Never demand feature TDD, coverage targets, duplicate layers, or extra tests when existing evidence proves the required observable contract; when durable proof is missing, prefer one acceptance-critical E2E, then boundary integration/contract coverage, and unit coverage only for otherwise impractical isolated edge cases or invariants.
+
+## Combined reviewer prompt
+
+Provide both authority sets, the smell baseline, ADR inputs, diff command, and commits. Brief: "Review only the diff. Report separate `## Standards` and `## Spec` findings using the rules below; never let one axis replace the other. Cite every finding. Apply the minimal-testing rule above. Do not edit files or spawn agents."
 
 ## Standards sub-agent prompt
 
-The diff command and commit list; the Standards source paths with roles, naming each applicable guidance page path and the rule-strength rules from step 5; the absolute path of `references/smell-baseline.md` beside this skill's `SKILL.md` as its smell authority; the ADR check inputs when present — the significance test text, the path of `docs/wiki/architecture/decisions/index.md` plus the paths of the in-force ADRs step 5 found relevant, and the item's `decisions` value with the work-item path for its `## Decisions` section; and the brief: "Read the named paths first, the smell-baseline file before reviewing. Review only the diff. Report every documented-standard violation by severity and file/hunk, citing the source path and exact rule. Separately report possible baseline smells by name, quoting the hunk. Separately report any unrecorded architecturally significant decision or contradicted in-force ADR, labelled as a judgement call and citing the significance test. Documented rules are hard authority; smells and the ADR check are judgement-call heuristics that an explicit documented rule overrides. Do not use backlog scope to waive a standard. Skip checks tooling already enforces. Do not spawn subagents. Under 400 words."
+The diff command and commit list; Standards paths and roles; rule-strength rules; the absolute smell-baseline path; ADR inputs when present; and: "Read every named path and the smell baseline. Review only the diff. Report documented violations by severity with file/hunk and exact rule citation; report possible smells separately as judgement calls. Apply the minimal-testing rule above. Do not edit files or spawn agents."
 
 ## Spec sub-agent prompt
 
-The diff command and commit list; the work item path as primary authority, the parent Epic path as context, linked wiki concept paths, and relevant proposal research paths, each labelled by role; and the brief: "Read the named paths first — the work item completely. Review only the diff. Report by severity: (a) missing or partial desired behavior or acceptance requirements; (b) incorrect implemented behavior; (c) scope creep. Cite the work-item path and exact requirement for every finding. Cite Epic constraints when relevant, but never expand or replace child scope with Epic scope. Use linked wiki facts only as baseline and constraints; never let existing behavior mask a missing delta. Do not treat a backlog request as permission to violate repository standards; leave that conflict visible for the Standards axis. Do not spawn subagents. Under 400 words."
+The diff command and commit list; work item as primary authority; parent Epic, wiki concepts, and research as labelled context; and: "Read every named path and the work item completely. Review only the diff. Report by severity: missing/partial required behavior, incorrect behavior, and scope creep. Cite the exact requirement. Epic context never expands child scope; wiki facts are baseline only. Apply the minimal-testing rule: never infer a test shape when cheaper evidence proves an observable criterion; an explicitly owner-approved test artifact remains required. Do not edit files or spawn agents."
 
-## Delta-review add-on (both briefs)
+## Delta-review add-on
 
-Add the prior findings verbatim, the delta diff command, and: "State for each prior finding whether it is resolved, citing the hunk that resolves it. Report only new findings introduced by this delta; do not re-derive findings outside it."
+Give every reviewer the prior findings, delta diff command, and: "State whether each prior finding is resolved with its resolving hunk. Report only new delta findings; do not re-derive findings outside it."
 
 ## Epic-scope add-ons
 
-To the Spec brief: "The Epic outcome and criteria are primary authority; each child's already-passed review is context. Report by severity: (a) Epic criteria or outcome no child satisfies; (b) contradictions or gaps at the seams between children; (c) scope creep beyond the Epic. Cite the Epic path and exact criterion. Do not re-derive findings already reported and resolved per-child."
+To the Spec brief: "The Epic outcome and criteria are primary; child review results or policy skips are context. Review the composed diff for unsatisfied Epic criteria, child gaps or contradictions, incorrect ordinary-child behavior, and scope creep. Cite exact Epic or child requirements. Do not re-report resolved high-risk-child findings."
 
-To the Standards brief: "Every hunk already passed a per-item Standards review. Prioritize violations and smells that appear only once the children are composed — duplication across children, divergent patterns for one concern, epic-wide drift. Re-report a per-item finding only when it is still live in the composed result."
+To the Standards brief: "Child review results or policy skips are context. Review ordinary-child hunks and composition-wide concerns; prioritize duplication, divergent patterns, and drift across children. Re-report a reviewed-child finding only when still live."
+
+The combined reviewer receives both axis add-ons.

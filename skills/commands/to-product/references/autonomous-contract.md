@@ -24,7 +24,7 @@ Approve, then log. Each row is a pause the invoked skill would otherwise hold fo
 | Concept, terminology, and ADR transactions | `$wiki`, `$to-wiki` | Approve |
 | Wiki reconciliation asserting knowledge the record never carried, or contradicting an in-force ADR | `$implement` | Approve |
 | Significant decision first made during implementation | `$implement` | Approve the backlog transaction adding the draft before completion |
-| Primary-branch acceptance — merge commit and post-merge checks | `$implement` | Approve once both review axes pass and the full suite is green |
+| Primary-branch acceptance — merge commit and post-merge checks | `$implement` | Approve once required review passes or is policy-skipped and one fresh final suite is green |
 | Epic closure | `$implement`, `$implement-with-subagents` | Approve once every child is terminal and the Epic-scope review passes |
 
 ### Destructive gates

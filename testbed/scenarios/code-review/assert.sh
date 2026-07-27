@@ -4,6 +4,8 @@ set -u
 
 assert_report '## Standards'
 assert_report '## Spec'
+assert_report 'Review mode:'
+assert_report 'combined'
 assert_report 'Next step:'
 # Review is read-only: no mutations, no status or claim changes.
 assert_clean_worktree

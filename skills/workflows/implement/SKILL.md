@@ -33,7 +33,7 @@ An already-read authority is void and must be re-read when any of these holds:
 
 Before every selection and terminal transition, probe `git log -- docs/backlog` since the last read: re-read global rank, claims, statuses, and indexes only when commits this invocation did not make touched them. When freshness is uncertain, re-read.
 
-**Suite freshness:** a passing full applicable suite is green for the exact tree that produced it. A later gate requiring the suite cites that result while the tree is unchanged, and re-runs it once any tracked file changed. A backlog-only bookkeeping commit cannot affect it.
+**Verification freshness:** a passing full suite validates the tested contents of code-affecting inputs: source, tests, dependency manifests/lockfiles, runtime/build configuration, generated runtime artifacts, and relevant environment configuration. Record the tested commit and affected-path classification. Reuse the result only when those inputs still match that state; backlog, wiki, and non-executable documentation may differ. After merge, compare resulting code-affecting inputs with the tested branch state, not whole-tree hashes. Rerun when any differs or classification is uncertain.
 
 ## Preflight
 
@@ -82,23 +82,21 @@ Renew the claim in a separately validated transaction before expiry; never conti
 ## Per-Item Execution
 
 1. Capture the primary branch's current commit as this item's fixed point, leaving the epic fixed point unchanged. After a preceding Epic child's integration, re-read the paths in that merge commit's diff plus global rank, claims, statuses, and indexes; the rest of the packet stays read under Authority Packet Freshness.
-2. Follow the approved approach and `## Subtasks`. Commit implementation and tests as coherent, independently green increments. Immediately after each green increment, check every subtask it completes, with evidence, in one separate validated backlog transaction staging only its backlog paths — keep bookkeeping out of code commits. Do not start the next subtask while an earlier completed subtask is unchecked; check-off is a per-increment gate, never a batch at the end of the item.
-3. Pin a dependency or toolchain version not already resolved in the record's `## Research` only from a live registry call — `npm view <pkg> version`, the crates.io API, `gh release list`, or the ecosystem equivalent — never from memory. Record the source and date in `## Execution`.
-4. Never broaden scope to fix an adjacent problem; record the observation and ask for an approved backlog transaction when it blocks the outcome.
-5. Run focused tests, typechecks, linters, and other listed verification throughout. Add or update tests that objectively exercise the desired delta. Run the full applicable suite at the end of the item.
-6. Check a subtask or criterion only with concrete evidence (command and result, test, artifact, or direct inspection); record concise evidence in `## Execution` when not self-evident from committed tests. Validate and verify the narrow staged diff after each such backlog mutation.
-7. Inspect the worktree before every commit. Stage explicit intended paths only, verify `git diff --cached`, use concise Conventional Commits. Never include unrelated changes, secrets, caches, or working notes.
+2. Follow the approved approach and `## Subtasks`. Implement and smoke-test the real changed path first; for a bug, capture a failing-before reproduction by the cheapest reliable method. Commit coherent, independently green increments.
+3. Reuse existing coverage. Unless the owner-approved criterion requires a specific artifact, add one test only when a new observable contract lacks durable proof: prefer acceptance-critical E2E for user-visible behavior, integration/contract coverage for a boundary, and unit coverage only for isolated edges or invariants impractical to prove higher. Never duplicate layers, chase coverage targets, require feature TDD, or add excessive E2E.
+4. Run focused tests, typechecks, linters, and listed verification during implementation. Defer the full applicable suite until after review.
+5. After implementation and focused checks pass, check all supported subtasks and record their concrete evidence in one validated backlog transaction, staging only backlog paths.
+6. Pin a dependency or toolchain version not already resolved in `## Research` only from a live registry call — `npm view <pkg> version`, the crates.io API, `gh release list`, or the ecosystem equivalent — never from memory. Record source and date in `## Execution`.
+7. Never broaden scope to fix an adjacent problem; record it and ask for an approved backlog transaction when it blocks the outcome.
+8. Inspect the worktree before every commit. Stage explicit intended paths only, verify `git diff --cached`, and use concise Conventional Commits. Never include unrelated changes, secrets, caches, or working notes.
 
-## Review Loop
+## Review And Final Suite
 
-After implementation and the full applicable suite are green, invoke `$code-review` with the `WORK-NNN`, this item's captured fixed point, and the packet paths and roles resolved in preflight (backlog-aware Standards and Spec axes). Then loop:
+Classify risk with `$code-review`'s triggers. A standalone item always receives end-of-item review: one combined Spec+Standards reviewer when low risk, two parallel reviewers when high risk. An Epic child receives item review only when high risk; otherwise record the policy skip. Epic closure owns the composed review.
 
-1. Address every actionable finding without changing approved scope.
-2. Rerun affected focused checks and the full applicable suite under suite freshness.
-3. Invoke `$code-review` again against the same fixed point as a delta review: pass the previous pass's reviewed commit and its findings so it confirms each is resolved and reviews only the diff since that commit.
-4. Repeat until both axes pass.
+After implementation and focused checks are green, invoke `$code-review` when required with the item, fixed point, and resolved packet. Address every actionable finding in scope and rerun affected focused checks. Invoke delta review only when remediation changes behavior, a public contract, architecture, security, data handling, standards compliance, or reviewed scope; otherwise inspect the remediation diff directly. Repeat required review until it passes.
 
-Any unresolved finding, unavailable authority, required scope decision, or failed check is a blocker: keep the item `in-progress` with a renewed claim, or release it safely; never prepare completion.
+Then run the full applicable suite once on the final code state. Any later code-affecting change invalidates that result and triggers the applicable review rule plus a new final suite run. An unresolved finding, unavailable authority, scope decision, or failed check blocks completion; keep the item `in-progress` with a renewed claim or release it safely.
 
 ## Wiki Reconciliation And Validation
 
@@ -109,17 +107,17 @@ Before primary-branch integration, compare the reviewed implementation with ever
 - The item's `## Decisions` drafts become ADRs in that same transaction. Include for each: its full ADR body, and the `ADR-NNN` it would supersede where the decision replaces one already in force. Do not allocate the ADR ID yet — allocation happens at publication.
 - Apply the ADR significance test to what was actually built. A significant decision first made during implementation and absent from `## Decisions` requires an approved backlog transaction adding the draft before completion; never publish a decision the record never carried.
 - Never edit `docs/wiki` on the work branch to describe the implementation. Record the exact approved transaction in `## Execution` for application after primary-branch acceptance.
-- Re-run review after any implementation change made after the last passing review.
+- Apply the review rule after any later implementation change; preserve the passing suite only under Verification Freshness.
 
-When review and reconciliation pass, verify every acceptance criterion with concrete evidence, check only supported criteria and subtasks, run `node scripts/validate-project.mjs` and the full applicable suite under suite freshness — cite the last green run's tree hash when the tree is unchanged — and commit the completion evidence while leaving `status: in-progress` and the live claim intact. No item may be `done` on the work branch.
+When reconciliation passes, verify every acceptance criterion with concrete evidence, check only supported criteria and subtasks, run `node scripts/validate-project.mjs`, cite the fresh review outcome or policy skip and final-suite evidence, and commit completion evidence while leaving `status: in-progress` and the live claim intact. No item may be `done` on the work branch.
 
 ## Primary-Branch Acceptance And Completion
 
 Integration is a per-work-item gate, including during an Epic invocation:
 
-1. Confirm: live claim, all criteria and subtasks checked, both review axes pass, reconciliation unnecessary or exactly approved, validator and full suite pass, no unintended staged changes.
+1. Confirm: live claim, all criteria and subtasks checked, required review passed or policy-skipped, reconciliation unnecessary or exactly approved, validator and final suite pass, no unintended staged changes.
 2. Merge the work branch into the primary branch with a merge commit — never squash or fast-forward. Resolve no unexpected conflict by changing scope; stop safely instead.
-3. On the primary branch, rerun `node scripts/validate-project.mjs` and the full suite. When the merge commit's tree hash equals that of the last green tree, cite that result and record both hashes in `## Execution` as the post-merge evidence. The merge commit plus post-merge checks establish primary-branch acceptance.
+3. On primary, rerun `node scripts/validate-project.mjs`. Reuse the final-suite result when the merge preserves Verification Freshness; otherwise rerun the suite. Record the evidence and merge commit establishing primary-branch acceptance.
 4. If durable knowledge changed, invoke `$wiki` on the primary branch: re-verify the approved wording describes the now-accepted state, apply that exact semantic transaction with required indexes, links, metadata, and log changes, validate, and commit only its wiki paths. Publish each approved drafted decision as an ADR here — `$wiki` allocates the next unused `ADR-NNN` at this point and supersedes any replaced ADR in place, in both directions. If the evidence requires different meaning, stop for revised owner approval. For each subject step 8 reported with no guidance page or a stale one, offer `$guidance` here — this is the only point in this workflow where guidance may be published, and the implemented code is the evidence the page needs. Under an autonomous run the contract's auto-approval means run `$guidance` for each such subject; reporting the gap without running it violates this gate. Outside a run, put the offer to the owner and record the answer — never answer it silently.
 5. Apply one validated backlog completion transaction: clear `claim` and `claim_expires`, set `done`, replace `decisions: draft` with the ADR IDs just published (or `none` where the significance test recorded no qualifying decision), remove from global rank, preserve all verified evidence. Move a standalone item to `archive/standalone/` and update indexes immediately; leave a done Epic child in its active Epic directory until the Epic closes.
 6. Stage only the completion transaction's backlog paths, validate the staged diff, and create a concise Conventional Commit on primary. Never mark done before steps 1-4 succeed.
@@ -129,6 +127,6 @@ If integration is unauthorized, primary is unavailable, merge or post-merge chec
 
 ## Completion And Report
 
-Remain on primary and delete the local work branch only after every item is integrated, its completion committed, the Epic archive committed when applicable, all checks green, and no authorized scope remains; otherwise retain the branch and report the exact blocker. Report selected scope, claims, changed paths, commits and merge commits, review results including the Epic-scope review or its skip, acceptance evidence, reconciliation including every published `ADR-NNN` and each ADR superseded, validation, archive destinations, every technology or standard the delta touched that has no guidance page, and remaining concerns.
+Remain on primary and delete the local work branch only after every item is integrated, its completion committed, the Epic archive committed when applicable, all checks green, and no authorized scope remains; otherwise retain the branch and report the exact blocker. Report selected scope, claims, changed paths, commits and merge commits, review mode and result or policy skip, suite evidence and freshness basis, acceptance, reconciliation including published and superseded ADRs, validation, archive destinations, guidance gaps, and remaining concerns.
 
 End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `$implement` with the next highest-ranked actionable `WORK-NNN`, or `$discuss` naming the next open outcome when no ready work remains.

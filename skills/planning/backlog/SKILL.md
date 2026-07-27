@@ -53,11 +53,11 @@ Refine against the matching installed template and accepted wiki state:
 
 - **Story:** a stakeholder-visible behavior delta — who observes what changed behavior; criteria observable from that stakeholder boundary.
 - **Task:** a bounded engineering or operational result — a concrete project-state delta with verification evidence, not a layer-only activity.
-- **Bug:** an observed failure against accepted behavior — impact, reproduction conditions, the behavior to restore, a failing-before/passing-after check, and regression evidence.
+- **Bug:** an observed failure against accepted behavior — impact, reproduction conditions, behavior to restore, a cheapest reliable failing-before/passing-after check, and regression evidence; never require a new unit test for the reproduction.
 
-Slice executable work into the smallest coherent outcome that can be implemented, verified, and accepted independently. Prefer vertical behavior or bounded operational results over horizontal layers, investigation-only fragments, or agent-sized busywork. Decompose execution into checklist subtasks: one bounded step each — roughly one coherent commit — naming its scope (files, components, or records touched) and its verification (command, test, or observable result); split any step that cannot state a single verification. Subtasks are local steps with no independently valuable outcome; never create child work below a Story, Task, or Bug.
+Slice work into the smallest independently implementable, verifiable outcome. Prefer vertical behavior or bounded operational results over layer work or agent-sized busywork. Checklist subtasks are coherent implementation steps with scope and one cheapest observable verification; use none when decomposition adds no value.
 
-Keep verification proportional: each criterion names the cheapest check that objectively proves the outcome, and browser E2E covers only the acceptance-critical path. A tool named in the PRD or by the owner fixes the tool choice, never implies exhaustive depth. Extra verification dimensions — additional viewports, accessibility, console inspection — enter criteria only when the delta implicates them or the owner explicitly asks.
+Keep verification minimal and proportional. Plan implementation and real-path smoke proof first; reuse existing coverage. Add a test only for an uncovered observable contract: one acceptance-critical browser E2E for user-visible behavior, integration/contract coverage for a boundary, or unit coverage only for isolated edges or invariants impractical to prove higher. Never prescribe feature TDD, coverage targets, duplicate layers, or excessive E2E. An owner-specified tool binds, but implies no extra depth.
 
 For Epics, refine a measurable coordinated outcome, objective acceptance criteria, explicit exclusions, and a useful multi-item child scope. Parentless work stays standalone when no genuine shared outcome requires an Epic.
 

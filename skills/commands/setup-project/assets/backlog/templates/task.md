@@ -46,7 +46,7 @@ Draft each architecturally significant decision this work makes, in ADR shape â€
 
 ## Execution
 
-Record the approach, verification commands, and explicit project-owner approval.
+Record the implementation-first approach, minimal verification, coverage reuse, and explicit owner approval. Add tests only for uncovered observable contracts; prefer one acceptance-critical E2E, then boundary integration/contract coverage, and unit coverage only for otherwise impractical isolated edges or invariants.
 
 ## Subtasks
 

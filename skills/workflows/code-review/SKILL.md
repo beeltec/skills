@@ -1,16 +1,16 @@
 ---
 name: code-review
-description: Review changes since a fixed point on independent Standards and Spec axes via parallel sub-agents. Use for backlog-backed branch, PR, work-in-progress, or Epic-closure reviews.
+description: Review changes since a fixed point on Standards and Spec axes with risk-tiered agents. Use for backlog-backed branches, PRs, work in progress, or Epic closure.
 ---
 
 # Code Review
 
-Review the diff between `HEAD` and a user-supplied fixed point against two authorities, run as **parallel sub-agents**, and report them separately:
+Review the diff from a user-supplied fixed point against:
 
-- **Standards** — conformance to accepted wiki engineering/architecture guidance and repository standards.
-- **Spec** — implementation of the selected backlog work item's desired delta and acceptance criteria within its Epic context.
+- **Standards** — accepted engineering/architecture guidance and repository standards.
+- **Spec** — the selected backlog item's desired delta and acceptance criteria within Epic context.
 
-The wiki is accepted current state; the backlog is desired change and execution state. Neither authority replaces the other.
+Low-risk changes use one combined reviewer reporting both axes. High-risk changes use independent parallel reviewers. The wiki is accepted current state; the backlog is desired change.
 
 ## Process
 
@@ -50,15 +50,18 @@ Have every authority read — by the caller or here — before starting either s
 
 - the selected work item: outcome/delta, acceptance criteria, relationships, wiki references, Research, Decisions, Execution, subtasks;
 - its complete parent Epic when `parent` is not `none`: outcome, criteria, scope, exclusions, constraints, wiki references, research, execution context;
-- on an Epic-scope review: the Epic record plus every child record in scope — each child's delta, criteria, and recorded review evidence — labelled already-reviewed context;
+- on Epic-scope review: the Epic plus every child record — each delta, criteria, and recorded review result or policy skip — labelled child context;
 - every linked current-state wiki concept relevant to the change (via `wiki_refs` or the Epic) plus the nearest indexes needed for ownership;
 - proposal-specific research in the item or Epic and directly linked local evidence;
 - accepted guidance under `docs/wiki/engineering/` and `docs/wiki/architecture/`, and repository standard sources (instructions, `CONTRIBUTING.md`, `CODING_STANDARDS.md`);
 - every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard the diff touches, resolved from those directory indexes and the changed paths.
 
 Record each source path and role. Current-state wiki facts describe the baseline and constraints; they cannot satisfy or erase a missing desired delta. The child item's delta, criteria, and exclusions are primary Spec authority; Epic context never expands or replaces child scope. On an Epic-scope review the Epic's own outcome and criteria are primary Spec authority and child scope is context; no child's scope expands the Epic's. Backlog scope never waives a repository or accepted wiki standard.
+### 5. Select review mode
 
-### 5. Prepare the Standards authority
+Use two parallel reviewers when the diff or work item touches security/auth/privacy, destructive data or schema migration, public API compatibility, concurrency/distributed consistency, release/build infrastructure, an ADR-significant decision, or explicitly requires high-risk review. Otherwise use one combined reviewer. Record the mode and reason.
+
+### 6. Prepare the Standards authority
 
 Use all applicable accepted engineering/architecture wiki guidance and repository standards from step 4. Product current-state concepts and backlog requirements are context, not Standards rules.
 
@@ -66,16 +69,14 @@ The applicable guidance pages are hard Standards authority at the strength each 
 
 Standards also carries the **ADR check** when the wiki defines the significance test. Read the ADR index at `docs/wiki/architecture/decisions/index.md`, the significance test in `docs/wiki/maintenance.md`, and the work item's `decisions` field and `## Decisions` section; open an individual in-force ADR only when its subject intersects the changed paths or the drafted decisions. Report a finding when the diff makes a decision meeting that test and the record carries neither a drafted ADR covering it nor a recorded `none` explaining why none qualifies, and when the diff contradicts an in-force ADR without drafting its supersession. The significance test is a judgement call — label it as one, and never treat a missing ADR as a code defect.
 
-On top of documented rules, Standards always carries the **smell baseline** in [references/smell-baseline.md](references/smell-baseline.md) — a fixed set of Fowler code smells, with its own binding rules, applying even when the repo documents nothing. Never load that file here: the Standards sub-agent reads it itself in step 6.
+On top of documented rules, Standards carries the **smell baseline** in [references/smell-baseline.md](references/smell-baseline.md). The reviewer reads it in step 7; the parent does not.
 
-### 6. Spawn both sub-agents in parallel
+### 7. Spawn reviewer(s)
 
-Send one message with two `Agent` calls, both `general-purpose`. Read [references/sub-agent-briefs.md](references/sub-agent-briefs.md) now — not earlier — and build both prompts from it, including the delta-review and Epic-scope add-ons when step 1 or step 3 established those modes.
+Read [references/sub-agent-briefs.md](references/sub-agent-briefs.md) now. Low risk: spawn one general-purpose combined reviewer. High risk: send one message spawning the Standards and Spec reviewers in parallel. If no specification exists, run only Standards. Include delta-review and Epic-scope add-ons when applicable.
 
-If the user explicitly confirmed no specification exists, skip the Spec sub-agent and note it in the report. Otherwise missing or ambiguous context stops the review for user input before any sub-agent starts.
+### 8. Aggregate
 
-### 7. Aggregate
+State `Review mode:` and its reason. Present `## Standards` and `## Spec`: each axis's finding counts and actionable findings with citations, never verbatim agent reports. Keep axis labels and counts independent. A combined reviewer still reports both axes separately.
 
-Present under `## Standards` and `## Spec`: per axis, a table of finding counts using that axis's own severity or category labels, followed by each actionable finding with its citation — not the sub-agent reports verbatim; they are already in context as tool returns. Keep severity labels and counts independent; never merge, rerank, or drop findings across axes. End with a one-line summary of each axis's total and worst issue. Do not pick a single winner.
-
-Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `$code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass inside an Epic closure → continue its Epic archive transaction; both axes pass standalone → `$implement WORK-NNN` to proceed toward acceptance.
+Add `Next step:` — actionable findings → fix them and rerun `$code-review` with the same fixed point and item only when remediation meets the caller's substantive re-review rule; both axes pass inside `$implement` → continue its final-suite gate; Epic-scope pass → continue closure; standalone pass → `$implement WORK-NNN`.
