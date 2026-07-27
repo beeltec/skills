@@ -42,7 +42,7 @@ Record proposal-specific repository and version evidence, findings, recommendati
 
 ## Decisions
 
-Draft each architecturally significant decision this work makes, in ADR shape — context, decision, alternatives considered and why each was rejected, consequences. Published as an ADR at primary-branch acceptance. Keep `decisions: pending` while any significant decision is unresolved; use `none` only after applying the significance test and stating why no decision qualifies.
+Draft each architecturally significant decision this work makes, in ADR shape — context, decision, alternatives considered and why each was rejected, consequences. Published as an ADR at primary-branch acceptance. Keep `decisions: pending` while any significant decision is unresolved; set `decisions: draft` once every qualifying decision is confirmed and drafted here; use `none` only after applying the significance test and stating why no decision qualifies.
 
 ## Execution
 

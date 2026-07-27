@@ -63,7 +63,7 @@ Present every proposed scope, criterion, parent, relationship, or rank change fo
 
 ## Definition Of Ready
 
-Reject `proposed -> ready` unless the full Definition of Ready in `docs/backlog/maintenance.md` holds — every requirement, including a resolved `decisions` field with each qualifying decision drafted under `## Decisions` in ADR shape, naming any ADR it would supersede. Never allocate an `ADR-NNN` inside a backlog transaction; drafted decisions are published by `$wiki` at post-acceptance reconciliation, and the allocated IDs then replace `pending`.
+Reject `proposed -> ready` unless the full Definition of Ready in `docs/backlog/maintenance.md` holds — every requirement, including `decisions` resolved off `pending`: `draft` with each qualifying decision drafted under `## Decisions` in ADR shape, naming any ADR it would supersede, or `none` with the significance-test reason. Never allocate an `ADR-NNN` inside a backlog transaction; drafted decisions are published by `$wiki` at post-acceptance reconciliation, and the allocated IDs then replace `draft`.
 
 A ready Epic additionally requires an approved outcome, objective acceptance criteria, a coordination approach, and at least one approved child. Show the owner the complete candidate record, rank position, and validation-relevant relationships before requesting the transition; approval to refine is not approval to become ready.
 

@@ -41,7 +41,7 @@ Record proposal-specific affected technologies, repository and version evidence,
 
 ## Decisions
 
-Draft each architecturally significant decision this outcome makes, in ADR shape — context, decision, alternatives considered and why each was rejected, consequences. Published as an ADR at primary-branch acceptance. Keep `decisions: pending` while any significant decision is unresolved; use `none` only after applying the significance test and stating why no decision qualifies. Identify affected children whose decisions remain pending.
+Draft each architecturally significant decision this outcome makes, in ADR shape — context, decision, alternatives considered and why each was rejected, consequences. Published as an ADR at primary-branch acceptance. Keep `decisions: pending` while any significant decision is unresolved; set `decisions: draft` once every qualifying decision is confirmed and drafted here; use `none` only after applying the significance test and stating why no decision qualifies. Identify affected children whose decisions remain pending.
 
 ## Execution
 

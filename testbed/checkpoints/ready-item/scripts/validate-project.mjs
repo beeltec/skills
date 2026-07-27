@@ -469,15 +469,18 @@ const validateBacklog = async (adrIds) => {
     const decisions = scalar(record.frontmatter, 'decisions');
     const nonterminalOrDone = ['ready', 'in-progress', 'done'].includes(record.status);
     if (decisions === null) {
-      const message = `${label}: record must declare decisions as pending, none, or an ADR-NNN inline array`;
+      const message = `${label}: record must declare decisions as pending, draft, none, or an ADR-NNN inline array`;
       if (nonterminalOrDone) errors.push(message);
       else warnings.push(message);
     } else if (decisions === 'pending') {
-      if (nonterminalOrDone) errors.push(`${label}: ready work requires decisions none or published ADR IDs`);
+      if (nonterminalOrDone) errors.push(`${label}: ready work requires decisions draft, none, or published ADR IDs`);
+    } else if (decisions === 'draft') {
+      if (record.status === 'done')
+        errors.push(`${label}: done work requires decisions none or published ADR IDs; publish drafts at acceptance`);
     } else if (decisions !== 'none') {
       const decisionIds = inlineList(record.frontmatter, 'decisions');
       if (decisionIds === null) {
-        errors.push(`${label}: decisions must be pending, none, or a YAML inline array of ADR-NNN`);
+        errors.push(`${label}: decisions must be pending, draft, none, or a YAML inline array of ADR-NNN`);
       } else if (decisionIds.length === 0) {
         errors.push(`${label}: decisions inline array must not be empty; use none`);
       } else {
