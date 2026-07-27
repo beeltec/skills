@@ -43,8 +43,8 @@
 
 ## Delivery
 
-| Record | Type | Commits | Merge commit | ADRs | Guidance pages |
-|---|---|---|---|---|---|
+| Outcome record | Topology | Code commits | Acceptance merge | Review | Suite/matrix | Reconciliation | Governance transactions | ADRs | Guidance |
+|---|---|---|---|---|---|---|---|---|---|
 
 ## Out-of-PRD scope filed
 

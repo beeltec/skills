@@ -1,21 +1,23 @@
 # Epic mode
 
-Applies only to `EPIC-NNN`. Each child passes `$implement`'s gates, including risk-gated item review and one final suite; this file owns selection and Epic completion.
+Applies only to `EPIC-NNN`. The Epic and all approved children form one acceptance unit with one branch, one start transaction, and one final acceptance/archive transaction.
 
-## Epic Selection
+## Child selection
 
-First resume this invocation's own live in-progress child. Otherwise scan the authoritative global executable-work rank top to bottom and select the highest-ranked Epic child that is `ready` with no unresolved inward blocker. Rank chooses among actionable children; dependencies determine actionability.
+Resume this invocation's incomplete child first. Otherwise scan global rank and select the highest-ranked child whose inward blockers are provisionally complete. Dependencies determine actionability; rank chooses among actionable children.
 
-Never skip a higher-ranked actionable child for convenience or treat proposed/cancelled children as executable. If no child is actionable but required children remain, stop and report their statuses, blockers, and claims. After each child's primary-branch completion, reload and validate all records before selecting again.
+Implement each child on the Epic branch with focused checks and a real smoke test. Keep its status `in-progress`, claim unchanged, rank entry present, checklist edits uncommitted, and evidence in the invocation ledger. A child is provisional even when its focused checks pass. Do not merge to primary, reconcile wiki state, run a full suite, or mark it `done`.
 
-## Epic Completion And Cleanup
+Run targeted `$code-review` only for an isolated child delta involving security/authentication, destructive migration or credible data loss, or public API compatibility. Fix findings before later children depend on it. If no child is actionable while required work remains, report the full blocker frontier and stop safely.
 
-After every required child is `done` or owner-cancelled, always invoke `$code-review` on primary as an Epic-scope review with the Epic, epic fixed point, and resolved packet. Its risk policy selects combined or parallel mode.
+## Composed closure
 
-Fix every actionable in-scope finding on the retained work branch and run affected focused checks. Delta-review only substantive remediation under `$implement`'s rule; inspect mechanical fixes directly. After required review passes, run the full suite only when the latest child result is stale under Verification Freshness; otherwise reuse it. Merge fixes to primary and rerun the validator; rerun the suite only if integration changes code-affecting inputs.
+After every required child is provisionally complete:
 
-A finding needing scope the Epic never carried is not fixable here: record it, keep the Epic `in-progress` with a renewed claim, and stop for an owner-approved backlog transaction. Never close an Epic over an unresolved finding.
+1. Invoke `$code-review` once against the immutable Epic fixed point with the Epic as Spec authority and every child as context. Use one combined reviewer unless the composed delta meets a narrow high-risk trigger.
+2. Fix every in-scope finding on the Epic branch and rerun affected focused checks. Delta-review only remediation that materially changes behavior, contracts, architecture, security, data handling, or reviewed scope.
+3. Run the full applicable suite once on one representative target. Expand the matrix only for changed platform, adaptive-layout, compatibility, packaging, migration, or other matrix-sensitive behavior. Run every supported dimension when this Epic is the PRD's release outcome.
+4. Verify every child and Epic criterion from the composed result. Draft one wiki/ADR reconciliation for the whole outcome.
+5. Follow `$implement`'s single merge, accepted-state publication, and atomic final transaction. The transaction marks every child and Epic `done`, clears all claims/ranks, resolves decisions, writes accumulated evidence, archives the whole directory, updates indexes, and includes a supplied autonomous transcript.
 
-Then verify the Epic outcome and each criterion with concrete primary evidence, reconcile Epic-level durable knowledge and drafted decisions through `$wiki`, run the validator, and cite the fresh suite result. Resolve `decisions` to published IDs or `none` in the final transaction.
-
-In one final primary-branch backlog transaction: check supported Epic criteria, set the Epic `done`, move its whole directory to `archive/epics/`, and update active and archive indexes. The final child's completion may share this transaction only when all child and Epic gates already pass. Commit the archive atomically; never split it.
+Code-identical integration and later backlog/wiki/transcript-only commits reuse the suite. A finding outside approved Epic scope blocks closure; never expand scope or accept a partial Epic.

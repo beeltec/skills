@@ -15,7 +15,7 @@ Approval covers only the exact transaction presented — never infer it from ear
 
 Under an active autonomous run, `$to-product`'s autonomous contract supplies the approval this section requires for intake, refinement, rank placement, and every `proposed -> ready` transition. It never supplies approval for cancellation.
 
-An invoked gate-backed execution workflow that explicitly authorizes an agent/session for a named, already-approved work item permits only: setting, renewing, and clearing its own temporary claim; checking existing acceptance criteria and subtasks with evidence; and the normal `ready <-> in-progress` and `in-progress -> done` transitions. It never permits changing criterion wording, scope, parentage, relationships, rank, cancellation, walking work back to `proposed`, or wiki acceptance.
+An invoked gate-backed workflow authorizing an agent/session for a named approved standalone item or Epic acceptance unit permits: one start transaction; temporary claims; aggregated criterion, subtask, and execution evidence; normal lifecycle transitions; and one final completion/archive transaction. An Epic unit may move the Epic and all required children to `in-progress`, claim each child under one session/integration branch, then complete and archive them atomically. This authority never changes wording, scope, parentage, relationships, priority, cancellation, readiness approval, or accepted wiki state.
 
 ## Preflight
 
@@ -28,7 +28,7 @@ Before proposing or applying a mutation:
 5. Read the backlog root index, maintenance rules, relevant type templates, active and archive indexes, all records related by parent or relationship, and every record needed to determine inward links and blocking state.
 6. Inspect active and archived IDs before allocation, the complete global rank, the current branch, and staged/unstaged changes. Preserve unrelated work; never stage it.
 
-Steps 4-6 apply to an authority-changing transaction. A gate-backed bookkeeping transaction — setting, renewing, or clearing this executor's own claim, checking an existing subtask or criterion with evidence, or recording evidence for a named already-approved item under an authorizing workflow — uses the **bookkeeping preflight** instead: steps 1-3, the target record, and git state. Such a transaction cannot change scope, rank, relationships, parentage, or acceptance. Use the full preflight for intake, refinement, readiness, walk-back, cancellation, ranking, and archival.
+Steps 4–6 apply to authority-changing transactions. Gate-backed start, recovery, and final acceptance bookkeeping uses steps 1–3, every record in the authorized acceptance unit, and git state. It may aggregate supported evidence and perform only the workflow-authorized claims, lifecycle transitions, required terminal rank removal, and archival; it cannot change scope, priority, relationships, parentage, cancellation, or accepted knowledge.
 
 Project-local maintenance rules are authoritative. If they conflict with this skill or cannot represent the transaction, stop and explain rather than weakening validation.
 
@@ -81,11 +81,11 @@ The ordered links under `## Global executable-work rank` in `docs/backlog/index.
 
 ## Execution Claims And Status
 
-Before claiming, verify the item is actionable and no unexpired claim exists. A gate-backed agent sets `status: in-progress`, a non-empty claim identifying the agent/session, and a future ISO 8601 `claim_expires` in one transaction. Renew before expiry. Never overwrite another live claim.
+For a standalone item, verify actionability and claim it in one start transaction. For an Epic acceptance unit, verify every child, move the Epic and all required children to `in-progress`, and claim each child for one session/integration branch in one start transaction. Epics have no claim fields. Renew before expiry; never overwrite another live claim.
 
-Releasing unfinished work: set `status: ready`, `claim: none`, `claim_expires: none`. Recording completion: check only criteria and subtasks supported by evidence, apply required accepted-state wiki updates under their own approval rules, clear claim fields, set `done`, and perform rank removal and archival in the same validated transaction where maintenance requires it. Any incomplete criterion or subtask forbids `done`.
+Keep focused-check and subtask evidence in the workflow ledger during execution. In the final transaction, check only supported criteria/subtasks, clear claims, set the standalone item or every Epic child and the Epic `done`, remove terminal rank entries, and archive as required. Required accepted-state wiki updates precede this transaction. Incomplete evidence forbids `done`.
 
-Move a ready Epic to `in-progress` when a child's execution begins. Complete an Epic only after every child is terminal, Epic acceptance is evidenced, and required wiki updates are complete.
+Release unfinished standalone work or the complete unfinished Epic unit to `ready` and clear owned child claims in one recovery transaction. Never expose a partially accepted Epic.
 
 ## Lifecycle Exits
 

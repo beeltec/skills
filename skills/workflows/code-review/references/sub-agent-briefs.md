@@ -16,6 +16,10 @@ The diff command and commit list; Standards paths and roles; rule-strength rules
 
 The diff command and commit list; work item as primary authority; parent Epic, wiki concepts, and research as labelled context; and: "Read every named path and the work item completely. Review only the diff. Report by severity: missing/partial required behavior, incorrect behavior, and scope creep. Cite the exact requirement. Epic context never expands child scope; wiki facts are baseline only. Apply the minimal-testing rule: never infer a test shape when cheaper evidence proves an observable criterion; an explicitly owner-approved test artifact remains required. Do not edit files or spawn agents."
 
+## Targeted-child add-on
+
+State: "This is a provisional Epic-child delta with a confirmed narrow high-risk trigger. Review only that risk and the child's complete Spec/Standards obligations. Passing does not accept, complete, or reconcile the child; Epic closure reviews the composed outcome."
+
 ## Delta-review add-on
 
 Give every reviewer the prior findings, delta diff command, and: "State whether each prior finding is resolved with its resolving hunk. Report only new delta findings; do not re-derive findings outside it."

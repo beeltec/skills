@@ -31,12 +31,12 @@ Optional `model` and `reasoning effort` pass unchanged to `$implement-with-subag
 
 1. Resolve the repository root. Read all applicable `AGENTS.md`, `CLAUDE.md`, nested instructions, and contributing or coding standards.
 2. Read the PRD completely. Record its path and the commit that establishes its content.
-3. When `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, all four backlog type templates, or `scripts/validate-project.mjs` is missing, invoke `$setup-project` under this run's approval and continue once it reports success. Never improvise a partial scaffold.
+3. When the scaffold is missing **or** `docs/backlog/maintenance.md` lacks the Epic acceptance-unit lifecycle (one start transaction, provisional children, batched checklist evidence, atomic final acceptance/archive), invoke `$setup-project` under this run's approval. Reconcile any customized maintenance file the installer preserves before planning; never run the redesigned workflow against legacy per-child acceptance rules.
 4. Run `node scripts/validate-project.mjs`. On an invalid baseline, repair it under this run's approval before any planning; report what was repaired.
 5. Inspect the current branch, primary branch, remotes, staged and unstaged changes, and recent history. Preserve unrelated changes; never stage them.
 6. Read the wiki root index, maintenance rules, the `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` indexes, the ADR index at `docs/wiki/architecture/decisions/index.md`, and the backlog root index and global rank. Open an individual ADR, active record, or the ubiquitous language only when an outcome touches it; the invoked skills read their own authorities.
 7. **Resume detection** — read `docs/runs/` for a prior run transcript naming this PRD. Match each outcome to its existing record: terminal → skip; `in-progress` or parked → resume at its first incomplete step; absent → plan it fresh. Never create a second record for an outcome that already has one.
-8. Open the run transcript from [the template](assets/run-transcript.md) at `docs/runs/<YYYY-MM-DD>-to-product-<slug>.md`. Append to it throughout; it is not written only at the end.
+8. Open the run transcript from [the template](assets/run-transcript.md) at `docs/runs/<YYYY-MM-DD>-to-product-<slug>.md`. Append in memory or the worktree throughout, but never commit per-child or per-subtask entries. Pass its path into implementation so the outcome's accumulated delivery evidence can join the final Epic acceptance transaction.
 
 ## 1. Outcome map
 
@@ -50,15 +50,14 @@ Do not plan or slice children here. This pass establishes order only.
 
 For each outcome in map order:
 
-1. **Discuss** — run `$discuss` scoped to that outcome, with the owner-proxy answering. It reads the wiki as it stands now, so outcomes shipped earlier in this run inform it. Print the whole exchange (see below).
-2. **Route** — execute the command `$discuss` recommends, not a substitute: `$to-epic` for a coordinated outcome, `$to-backlog` for standalone items, `$to-wiki` for durable current-state knowledge and confirmed terminology, `$to-guidance` for adopted rules. Several may apply; run them in the order `$discuss` gives.
-3. **Answer the evidence decision** — `$to-epic` step 2 and `$to-backlog` step 2 both stop for the owner. The owner-proxy answers both halves per the contract: name every subject whose page is missing, `draft`, version-mismatched, or stale for `$guidance`, and run `$research` whenever the outcome carries a version-specific or security-sensitive question.
-4. **Ship** — invoke `$implement-with-subagents` with the resulting `EPIC-NNN` or `WORK-NNN` set. Never `$implement` directly, and never implement in this context.
-5. **Verify** — confirm from repository evidence, not from the report alone: every child `done`, a merge commit and green post-merge checks on the primary branch, `decisions` resolved off `pending` and `draft` with each published `ADR-NNN`, a current guidance page for every subject named at the evidence decision, published ADRs matching the decisions the outcome's discussion confirmed — `decisions: none` on a record whose discussion confirmed a decision fails — each research-complete record's version-resolution rows present with a live source and a date within this run, wiki reconciliation applied or its absence justified, claims cleared, records archived, validator green. A failed check is a blocker for the outcome: resolve it or park per Blockers; never record the outcome as shipped.
-6. **Record** — append the outcome's discussion rows (question/answer/source), records, commits, merge commits, published ADRs, and guidance pages to the transcript.
+1. **Discuss** — run `$discuss` scoped to that outcome, with the owner-proxy answering. It reads the wiki as it stands now, so outcomes shipped earlier in this run inform it. Print the whole exchange.
+2. **Route** — execute the command `$discuss` recommends: `$to-epic` for a coordinated outcome, `$to-backlog` for standalone items, `$to-wiki` for durable current-state knowledge and confirmed terminology, `$to-guidance` for adopted rules. Run several in the recommended order.
+3. **Answer the evidence decision** — preserve the complete evidence policy: name every touched subject whose guidance is missing, `draft`, version-mismatched, or stale, and run `$research` whenever the outcome carries a version-specific or security-sensitive question.
+4. **Ship** — invoke `$implement-with-subagents` with the resulting `EPIC-NNN` or `WORK-NNN` set and the transcript path. It chooses one Epic executor for dependency-heavy work and fans out only genuinely independent children. Never `$implement` directly or implement in this context.
+5. **Verify** — confirm from repository evidence, not the report alone. An Epic outcome requires one integration branch and primary acceptance merge, one comprehensive Epic review, one representative full suite, justified risk-triggered matrix expansion, one accepted-state/ADR reconciliation, and exactly one start/claim plus one final acceptance/archive backlog transaction except recorded recovery. Every child and the Epic must be `done` and archived atomically; claims and rank entries must be cleared. A standalone item follows its own single-item acceptance. In either route, require `decisions` resolved to published `ADR-NNN`s or `none`, every evidence-decision guidance subject current, research version rows dated within this run with live sources, and the validator green. A failed check blocks the outcome; resolve it or park it.
+6. **Record** — ensure the final acceptance transaction includes the accumulated outcome discussion, records, implementation commits, one acceptance merge, review and suite evidence, matrix rationale, published ADRs, and guidance pages. Do not create separate child-delivery transcript commits.
 
 Then take the next outcome. Never start an outcome whose dependencies have not shipped.
-
 ## Owner-proxy protocol
 
 The owner-proxy is a role this run plays in the same context, never a subagent. Because the answerer shares the context, `$discuss`'s one-question-per-turn protocol collapses: emit each discussion as **one batched block** — the whole numbered question set for that outcome (or the opening map pass), each question immediately followed by its answer — printed verbatim on screen. Batching is not summarizing: every question and answer still appears in full, and the transcript's discussion rows are the auditable record.
@@ -86,17 +85,16 @@ Carry every assumption into the record it shaped, as provenance naming this run.
 
 ## Blockers
 
-A blocker is a wall, not a decision: a failing suite after fixes, a merge conflict, a validator failure, an unavailable authority, or a dependency deadlock.
+A blocker is a wall, not a decision: a failing required check after fixes, merge conflict, validator failure, unavailable authority, or dependency deadlock.
 
-Retry the item up to **three** times, addressing the actual cause each time. On the third failure:
+Retry the outcome up to **three** times, addressing the actual cause. On the third failure:
 
-1. Release the claim and return the record to `ready` — never invent a blocked status.
-2. Record the blocker, the three attempts, and the resumption point on the record.
-3. Mark it **parked** in the transcript and report, with the exact command that resumes it.
-4. Select the next actionable work and continue.
+1. Release every claim owned by this run and return its unfinished Epic/children or standalone item to `ready` in one validated recovery transaction.
+2. Record the blocker, attempts, and exact resumption point on the affected record and transcript.
+3. Mark the outcome parked and report its exact resume command.
+4. Continue with the next dependency-independent outcome.
 
-Never re-attempt a parked item in the same run. When no actionable work remains and required work is parked, terminate and report — do not idle.
-
+Never re-attempt a parked outcome in the same run. When no actionable work remains, terminate rather than idle.
 ## Termination
 
 The run ends when every outcome in the map has a `done`, archived record on the primary branch and no actionable work remains, or when everything left is parked. Nothing else ends it.

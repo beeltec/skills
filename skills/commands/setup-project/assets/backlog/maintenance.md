@@ -19,8 +19,8 @@ Allowed statuses are `proposed`, `ready`, `in-progress`, `done`, and `cancelled`
 Epic transitions are:
 
 - `proposed -> ready` after its outcome, acceptance criteria, and initial child scope are approved.
-- `ready -> in-progress` when execution of a child begins.
-- `in-progress -> done` only when every child is `done` or `cancelled`, Epic acceptance is satisfied, accepted-state wiki updates are complete, and the entire Epic is archived atomically.
+- `ready -> in-progress` in the Epic acceptance unit's single start transaction, together with every required child.
+- `in-progress -> done` in one final transaction that also moves every child to `done` or preserves an approved cancellation, proves Epic acceptance and accepted-state reconciliation, and archives the whole directory atomically.
 - `ready -> proposed` only with owner approval, a recorded walk-back reason in `## Execution`, and an explicit disposition for every non-`proposed` child.
 - `proposed`, `ready`, or `in-progress -> cancelled` only with a recorded cancellation rationale. Cancel or complete every child and archive the entire Epic atomically.
 
@@ -73,8 +73,8 @@ Relationships may target Epics or executable work, must resolve to an existing I
 ## Ranking, subtasks, and claims
 
 - The ordered list under `## Global executable-work rank` in the root index is the sole global rank. It contains every active `WORK-NNN` exactly once, across Epic and standalone work. Epics are not ranked. Reorder only with project-owner approval.
-- Checklist subtasks are local execution steps, not separate backlog records. Keep them in `## Subtasks`. Check each one with evidence as soon as the increment completing it lands — never batched at the end — and all must be checked before `done`.
-- An in-progress work item has a non-empty `claim` naming the agent/session and an ISO 8601 `claim_expires` in the future. Claims are coordination leases, not ownership. Release or renew before expiry. Every other status uses `claim: none` and `claim_expires: none`.
+- Checklist subtasks are local execution steps, not separate records. During an Epic, retain focused-check evidence in the execution ledger and batch supported child/Epic checklist updates into the final acceptance transaction. A standalone workflow may do the same. Every subtask must have evidence before `done`; never create per-subtask backlog commits.
+- Each in-progress work item has a non-empty claim naming the shared acceptance session/integration branch and a future ISO 8601 `claim_expires`. Epics have no claim fields. Release or renew before expiry; every other work-item status uses `none`.
 
 ## Cancellation and archival
 
