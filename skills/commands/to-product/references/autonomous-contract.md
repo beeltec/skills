@@ -15,7 +15,7 @@ Approve, then log. Each row is a pause the invoked skill would otherwise hold fo
 | Terminology candidate set | `$setup-project` step 3 | Approve every candidate the PRD or code establishes; drop generic technical vocabulary |
 | Guidance offer on seeded `draft` pages | `$setup-project` step 9 | Adopt every page whose subject an outcome in the map touches; leave the rest `draft` |
 | Every interview question | `$discuss` | Owner-proxy answers from PRD, then repository, then wiki; otherwise `ASSUMPTION` |
-| Evidence decision — guidance half | `$to-epic` step 2 | Name every subject the outcome touches whose page is missing, `draft`, version-mismatched, or stale |
+| Evidence decision — guidance half | `$to-epic` step 2 | Name every subject the outcome touches whose page is missing, `draft`, version-mismatched, or stale — including standard subjects per `$research` step 2's triggers, never technologies only |
 | Evidence decision — research half | `$to-epic` step 2 | Yes when the outcome carries a version-specific or security-sensitive question; otherwise no, with the reason recorded |
 | Evidence decision — both halves | `$to-backlog` step 2 | Same auto-answers as `$to-epic` step 2, research per item |
 | Intake, refinement, rank placement, `proposed -> ready` | `$backlog` | Approve |
