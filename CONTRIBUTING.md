@@ -33,6 +33,8 @@ For each change:
    npx skills add . --list
    ```
 
+7. After changing a delivery-chain skill (`commands/`, `planning/`, `workflows/`), run its testbed scenarios before publishing — `testbed/bin/run.sh` selects them from the diff; see `testbed/README.md`. Regenerate the checkpoint fixtures (`testbed/bin/regen.sh`) when a skill changes its output shape.
+
 ## Next-step handoff convention
 
 Every delivery-workflow skill ends its final report with a `Next step:` line — one exact copy-pasteable command for the follow-up, selected from the run's actual outcome with real arguments, never placeholders; omit it only when no follow-up exists. The canonical convention — recommend only, never invoke, last line, numbered list in run order when several apply — is stated once in `skills/commands/setup-project/assets/agent-instructions.md`, which `setup-project` installs into every project's agent instructions; each skill states only its outcome-to-command routing. Apply this convention when adding or changing workflow skills.
