@@ -57,6 +57,8 @@ Refine against the matching installed template and accepted wiki state:
 
 Slice executable work into the smallest coherent outcome that can be implemented, verified, and accepted independently. Prefer vertical behavior or bounded operational results over horizontal layers, investigation-only fragments, or agent-sized busywork. Decompose execution into checklist subtasks: one bounded step each — roughly one coherent commit — naming its scope (files, components, or records touched) and its verification (command, test, or observable result); split any step that cannot state a single verification. Subtasks are local steps with no independently valuable outcome; never create child work below a Story, Task, or Bug.
 
+Keep verification proportional: each criterion names the cheapest check that objectively proves the outcome, and browser E2E covers only the acceptance-critical path. A tool named in the PRD or by the owner fixes the tool choice, never implies exhaustive depth. Extra verification dimensions — additional viewports, accessibility, console inspection — enter criteria only when the delta implicates them or the owner explicitly asks.
+
 For Epics, refine a measurable coordinated outcome, objective acceptance criteria, explicit exclusions, and a useful multi-item child scope. Parentless work stays standalone when no genuine shared outcome requires an Epic.
 
 Present every proposed scope, criterion, parent, relationship, or rank change for explicit owner approval before editing.

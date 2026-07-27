@@ -66,6 +66,8 @@ Classify every rule the page will carry:
 - **Recommendations** — preferred approaches with their rationale.
 - **Conventions** — project-local choices verified in the repository.
 
+On verification-tooling pages (browser testing, test frameworks), state Requirements conditionally on what a change touches — never as blanket per-check mandates.
+
 Then determine `## Known gaps`: code areas that contradict a Requirement, each with the path that shows it and its existing `WORK-NNN`/`EPIC-NNN` link when one exists. Leave unresolved research questions out of the page entirely — report them instead.
 
 ## 5. Publish or refresh
