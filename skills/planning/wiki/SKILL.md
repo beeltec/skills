@@ -5,7 +5,7 @@ description: Manage the complete lifecycle of accepted project knowledge in a se
 
 # Wiki
 
-`docs/wiki` owns durable accepted current state on the primary branch. Agreement, work-branch implementation, or approval of a target specification does not make that target current.
+`docs/wiki` owns durable accepted current state on the primary branch. Agreement, work-branch implementation, or approval of a target specification does not make that target current. Stay on the current branch; never touch `docs/tasks`.
 
 Read §3-§8 of [the bundled OKF 0.1 specification](references/okf-spec.md) before a structural mutation — creating, moving, splitting, merging, or deleting a concept, directory, or index — or when frontmatter, link, index, or citation semantics are uncertain. A prose-only edit inside an existing concept needs no spec read; the project's `docs/wiki/maintenance.md` governs it. Apply stricter project-local maintenance rules when they do not conflict with the spec.
 

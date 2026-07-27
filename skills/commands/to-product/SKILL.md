@@ -42,7 +42,7 @@ Optional `model` and `reasoning effort` pass unchanged to `$implement-with-subag
 
 Run `$discuss` once over the whole PRD with the owner-proxy answering, to establish the **outcome map**: every distinct outcome the PRD requires, its dependencies, and the order they must ship in.
 
-Classify each outcome by `$discuss`'s own routing rules — coordinated multi-item outcome, standalone item, durable current-state knowledge, adopted technology or standard rules. Record the map in the transcript before planning anything.
+Classify each outcome by `$discuss`'s own routing rules — coordinated multi-item outcome, standalone item, durable current-state knowledge, adopted technology or standard rules. Record the map and the opening discussion's question/answer/source rows in the transcript before planning anything.
 
 Do not plan or slice children here. This pass establishes order only.
 
@@ -55,7 +55,7 @@ For each outcome in map order:
 3. **Answer the evidence decision** — `$to-epic` step 2 and `$to-backlog` step 2 both stop for the owner. The owner-proxy answers both halves per the contract: name every subject whose page is missing, `draft`, version-mismatched, or stale for `$guidance`, and run `$research` whenever the outcome carries a version-specific or security-sensitive question.
 4. **Ship** — invoke `$implement-with-subagents` with the resulting `EPIC-NNN` or `WORK-NNN` set. Never `$implement` directly, and never implement in this context.
 5. **Verify** — confirm from repository evidence, not from the report alone: every child `done`, a merge commit and green post-merge checks on the primary branch, `decisions` resolved off `pending` with each published `ADR-NNN`, wiki reconciliation applied or its absence justified, claims cleared, records archived, validator green.
-6. **Record** — append the outcome's records, commits, merge commits, published ADRs, and guidance pages to the transcript.
+6. **Record** — append the outcome's discussion rows (question/answer/source), records, commits, merge commits, published ADRs, and guidance pages to the transcript.
 
 Then take the next outcome. Never start an outcome whose dependencies have not shipped.
 

@@ -5,7 +5,7 @@ description: Research a proposed backlog record before readiness, attaching vers
 
 # Research
 
-Resolve technical uncertainty for one identified proposed backlog record before readiness. Research covers both the technologies the delta touches and the concepts, standards, and guidelines it implicates. Findings live with the desired change in `docs/backlog`.
+Resolve technical uncertainty for one identified proposed backlog record before readiness. Research covers both the technologies the delta touches and the concepts, standards, and guidelines it implicates. Findings live with the desired change in `docs/backlog`. Stay on the current branch.
 
 ## Preconditions
 

@@ -76,6 +76,6 @@ If the user explicitly confirmed no specification exists, skip the Spec sub-agen
 
 ### 7. Aggregate
 
-Present under `## Standards` and `## Spec`: per axis, a severity table (count per severity) followed by each actionable finding with its citation — not the sub-agent reports verbatim; they are already in context as tool returns. Keep severity labels and counts independent; never merge, rerank, or drop findings across axes. End with a one-line summary of each axis's total and worst issue. Do not pick a single winner.
+Present under `## Standards` and `## Spec`: per axis, a table of finding counts using that axis's own severity or category labels, followed by each actionable finding with its citation — not the sub-agent reports verbatim; they are already in context as tool returns. Keep severity labels and counts independent; never merge, rerank, or drop findings across axes. End with a one-line summary of each axis's total and worst issue. Do not pick a single winner.
 
 Then add `Next step:` — one copy-pasteable command: actionable findings → fix them and rerun `/code-review` with the same fixed point and `WORK-NNN`; both axes pass inside an `$implement` run → continue its acceptance gate; both axes pass inside an Epic closure → continue its Epic archive transaction; both axes pass standalone → `/implement WORK-NNN` to proceed toward acceptance.

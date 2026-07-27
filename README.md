@@ -123,7 +123,7 @@ flowchart TD
 
 It never does the work itself. Every step goes through the skill that owns it, and `setup-project` installs a work-routing table into the project's agent instructions so ordinary sessions follow the same rule.
 
-The **owner-proxy** is the role `to-product` plays when `discuss` asks a question. It answers from the PRD first, then repository evidence, then the accepted wiki, and prints every question and answer verbatim — the whole discussion is on screen. When no source settles a question it answers anyway, marks the answer `ASSUMPTION`, and adds it to the **assumption register**:
+The **owner-proxy** is the role `to-product` plays when `discuss` asks a question. It answers from the PRD first, then repository evidence, then the accepted wiki, and prints every question and answer verbatim, batched into one block per outcome — the whole discussion is on screen without one-question-per-turn round trips. When no source settles a question it answers anyway, marks the answer `ASSUMPTION`, and adds it to the **assumption register**:
 
 ```text
 Question 4 / ~12:

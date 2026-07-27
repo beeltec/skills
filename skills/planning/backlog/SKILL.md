@@ -5,7 +5,7 @@ description: Manage approved desired work from intake through refinement, rankin
 
 # Backlog
 
-`docs/backlog` owns desired project deltas and execution state; never treat completed backlog work as accepted until the relevant wiki concepts are updated. Use `$wiki` for accepted-knowledge operations; never mutate wiki concepts inside a backlog transaction.
+`docs/backlog` owns desired project deltas and execution state; never treat completed backlog work as accepted until the relevant wiki concepts are updated. Use `$wiki` for accepted-knowledge operations; never mutate wiki concepts inside a backlog transaction. Stay on the current branch; never touch `docs/tasks`.
 
 ## Authority
 

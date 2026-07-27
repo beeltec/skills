@@ -7,7 +7,7 @@ description: Research and publish canonical technology and standards guidance pa
 
 Create-or-refresh is one mode. Adoption semantics follow `docs/wiki/maintenance.md § Adopted guidance`; non-compliant areas belong in the page's `## Known gaps`, and closing them is separate `/to-backlog` work this skill never creates.
 
-Follow `$wiki` for record mechanics — ownership, evidence, sources, validation, staging, commits.
+Follow `$wiki` for record mechanics — ownership, evidence, sources, validation, staging, commits. Stay on the current branch; never touch `docs/tasks`.
 
 ## Authority
 
