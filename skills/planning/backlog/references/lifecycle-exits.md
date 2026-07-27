@@ -8,7 +8,7 @@ Procedures for walk-back, cancellation, and archival transactions. Read this fil
 
 Before walking back an Epic, enumerate every non-`proposed` child and obtain an explicit disposition for each: walk it back too, leave it `ready`, or cancel it with its own rationale. Never infer bulk child walk-back. Warn that a child left `ready` remains individually executable.
 
-After the transaction, recommend the re-entry command the reason implies (`/research`, `/to-backlog WORK-NNN`, or `/to-epic EPIC-NNN`) via `Next step:`.
+After the transaction, recommend the re-entry command the reason implies (`$research`, `$to-backlog WORK-NNN`, or `$to-epic EPIC-NNN`) via `Next step:`.
 
 ## Cancellation
 

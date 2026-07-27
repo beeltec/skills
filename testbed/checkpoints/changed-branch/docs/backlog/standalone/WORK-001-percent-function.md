@@ -48,7 +48,7 @@ Standalone (`parent: none`), no relationships — confirmed by the project owner
 
 ### Evidence decision record
 
-`/to-backlog` step 2 requires asking the owner one question covering `$guidance` subjects and `$research` items. That question could not be posed: the owner's invocation (2026-07-27) directs "Proceed under your standing approval without asking me anything; if a required step cannot run, record why on the record rather than skipping silently." Recorded here per that instruction:
+`$to-backlog` step 2 requires asking the owner one question covering `$guidance` subjects and `$research` items. That question could not be posed: the owner's invocation (2026-07-27) directs "Proceed under your standing approval without asking me anything; if a required step cannot run, record why on the record rather than skipping silently." Recorded here per that instruction:
 
 - Implicated technology subjects and page states under `docs/wiki/engineering/`: TypeScript (`draft`, version-seeded), Vitest (`draft`, version-seeded), ESLint (`draft`, incidental — lints the new file). No `$guidance` run: the owner named no subjects and directed no questions.
 - Standards half: no standard subject applies — the delta has no security, privacy, accessibility, protocol, or regulatory surface (pure arithmetic, no external input or output boundary).
@@ -70,11 +70,11 @@ npm run lint
 npm test
 ```
 
-Project-owner approval: the owner's `/to-backlog` invocation of 2026-07-27 is the recorded standing approval for this story's intake, rank position 1, refinement, and the `proposed -> ready` transition.
+Project-owner approval: the owner's `$to-backlog` invocation of 2026-07-27 is the recorded standing approval for this story's intake, rank position 1, refinement, and the `proposed -> ready` transition.
 
 ## Provenance
 
-Confirmed conclusions from a discussion between the project owner (cbeelte@markveys.com) and the agent, submitted via the owner's `/to-backlog` invocation on 2026-07-27. That invocation is the owner's standing approval for intake, rank position 1, refinement, and the `proposed -> ready` transition of this item, and directs the agent to proceed without further questions, recording on this record any required step that cannot run.
+Confirmed conclusions from a discussion between the project owner (cbeelte@markveys.com) and the agent, submitted via the owner's `$to-backlog` invocation on 2026-07-27. That invocation is the owner's standing approval for intake, rank position 1, refinement, and the `proposed -> ready` transition of this item, and directs the agent to proceed without further questions, recording on this record any required step that cannot run.
 
 ## Subtasks
 

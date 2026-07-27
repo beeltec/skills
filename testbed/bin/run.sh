@@ -6,7 +6,7 @@
 #   -a, --all     run every scenario
 #   (default)     run scenarios affected by skill changes since REF (--since, default HEAD:
 #                 uncommitted changes; use e.g. --since origin/main for committed work)
-#   -H, --harness claude|codex|opencode|pi|omp (default: $HARNESS or claude)
+#   -H, --harness claude|codex|opencode|pi|omp (default: $HARNESS or current harness)
 #
 # Run artifacts land under $TESTBED_RUNS_DIR (default: $TMPDIR/skills-testbed).
 
@@ -15,7 +15,7 @@ set -euo pipefail
 TESTBED="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 REPO="$(cd "$TESTBED/.." && pwd)"
 RUNS_DIR="${TESTBED_RUNS_DIR:-${TMPDIR:-/tmp}/skills-testbed}"
-HARNESS="${HARNESS:-claude}"
+HARNESS="${HARNESS:-}"
 SINCE="HEAD"
 ALL=0
 SELECTED=()
@@ -33,6 +33,7 @@ done
 
 # shellcheck source=../lib/harness.sh
 . "$TESTBED/lib/harness.sh"
+HARNESS="$(resolve_harness)"
 # shellcheck source=../lib/project.sh
 . "$TESTBED/lib/project.sh"
 

@@ -16,11 +16,12 @@ set -euo pipefail
 TESTBED="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 REPO="$(cd "$TESTBED/.." && pwd)"
 RUNS_DIR="${TESTBED_RUNS_DIR:-${TMPDIR:-/tmp}/skills-testbed}"
-HARNESS="${HARNESS:-claude}"
+HARNESS="${HARNESS:-}"
 TARGET="${1:-all}"
 
 # shellcheck source=../lib/harness.sh
 . "$TESTBED/lib/harness.sh"
+HARNESS="$(resolve_harness)"
 # shellcheck source=../lib/project.sh
 . "$TESTBED/lib/project.sh"
 

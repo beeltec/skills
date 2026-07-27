@@ -1,6 +1,6 @@
 ---
 name: to-product
-description: Run the whole delivery flow unattended from a PRD or plan to accepted primary-branch state, answering every owner gate as owner-proxy. Not for interactive shaping (use /discuss) or planning one outcome (use /to-epic).
+description: Run the whole delivery flow unattended from a PRD or plan to accepted primary-branch state, answering every owner gate as owner-proxy. Not for interactive shaping (use $discuss) or planning one outcome (use $to-epic).
 disable-model-invocation: true
 ---
 
@@ -18,10 +18,10 @@ Realize the PRD. Never grow it.
 
 Resolve exactly one:
 
-- a PRD file path — `/to-product docs/prd/checkout-v2.md`;
-- a directory of PRD files — `/to-product docs/prd/`;
-- inline prose — `/to-product "Build a CLI that ..."`;
-- existing `proposed` `EPIC-NNN` or `WORK-NNN` IDs — `/to-product EPIC-012 EPIC-013`.
+- a PRD file path — `$to-product docs/prd/checkout-v2.md`;
+- a directory of PRD files — `$to-product docs/prd/`;
+- inline prose — `$to-product "Build a CLI that ..."`;
+- existing `proposed` `EPIC-NNN` or `WORK-NNN` IDs — `$to-product EPIC-012 EPIC-013`.
 
 With none resolvable, or more than one, list what was found and stop. Never infer a PRD from repository contents.
 
@@ -51,7 +51,7 @@ Do not plan or slice children here. This pass establishes order only.
 For each outcome in map order:
 
 1. **Discuss** — run `$discuss` scoped to that outcome, with the owner-proxy answering. It reads the wiki as it stands now, so outcomes shipped earlier in this run inform it. Print the whole exchange (see below).
-2. **Route** — execute the command `$discuss` recommends, not a substitute: `/to-epic` for a coordinated outcome, `/to-backlog` for standalone items, `/to-wiki` for durable current-state knowledge and confirmed terminology, `/to-guidance` for adopted rules. Several may apply; run them in the order `$discuss` gives.
+2. **Route** — execute the command `$discuss` recommends, not a substitute: `$to-epic` for a coordinated outcome, `$to-backlog` for standalone items, `$to-wiki` for durable current-state knowledge and confirmed terminology, `$to-guidance` for adopted rules. Several may apply; run them in the order `$discuss` gives.
 3. **Answer the evidence decision** — `$to-epic` step 2 and `$to-backlog` step 2 both stop for the owner. The owner-proxy answers both halves per the contract: name every subject whose page is missing, `draft`, version-mismatched, or stale for `$guidance`, and run `$research` whenever the outcome carries a version-specific or security-sensitive question.
 4. **Ship** — invoke `$implement-with-subagents` with the resulting `EPIC-NNN` or `WORK-NNN` set. Never `$implement` directly, and never implement in this context.
 5. **Verify** — confirm from repository evidence, not from the report alone: every child `done`, a merge commit and green post-merge checks on the primary branch, `decisions` resolved off `pending` and `draft` with each published `ADR-NNN`, a current guidance page for every subject named at the evidence decision, published ADRs matching the decisions the outcome's discussion confirmed — `decisions: none` on a record whose discussion confirmed a decision fails — each research-complete record's version-resolution rows present with a live source and a date within this run, wiki reconciliation applied or its absence justified, claims cleared, records archived, validator green. A failed check is a blocker for the outcome: resolve it or park per Blockers; never record the outcome as shipped.
@@ -105,4 +105,4 @@ The run ends when every outcome in the map has a `done`, archived record on the 
 
 Report the PRD source and outcome map; every discussion with its question count; the assumption count, citing the transcript's register; records created with type, status, and rank; every guidance page created or refreshed; research decisions per outcome; commits, merge commits, and published `ADR-NNN`s with any ADR superseded; every destructive gate auto-approved under the contract, individually; out-of-PRD scope filed as `proposed`; parked items with their blockers and resume commands; the transcript path; the final `node scripts/validate-project.mjs` result.
 
-End the report with `Next step:` — one copy-pasteable command: parked items → the exact command that resumes the highest-ranked one; unshipped map outcomes → `/to-product` with the same PRD to resume; out-of-PRD records filed → `/to-backlog` naming them; otherwise omit it.
+End the report with `Next step:` — one copy-pasteable command: parked items → the exact command that resumes the highest-ranked one; unshipped map outcomes → `$to-product` with the same PRD to resume; out-of-PRD records filed → `$to-backlog` naming them; otherwise omit it.

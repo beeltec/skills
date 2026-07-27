@@ -9,8 +9,8 @@
 
 | # | Outcome | Route | Depends on | Record | Status |
 |---|---|---|---|---|---|
-| 1 | | `/to-epic` | — | `EPIC-NNN` | done |
-| 2 | | `/to-backlog` | 1 | `WORK-NNN` | parked |
+| 1 | | `$to-epic` | — | `EPIC-NNN` | done |
+| 2 | | `$to-backlog` | 1 | `WORK-NNN` | parked |
 
 ## Discussions
 
@@ -55,7 +55,7 @@
 
 | Record | Blocker | Attempts | Resume |
 |---|---|---|---|
-| `WORK-NNN` | | 3/3 | `/implement WORK-NNN` |
+| `WORK-NNN` | | 3/3 | `$implement WORK-NNN` |
 
 ## Result
 

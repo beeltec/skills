@@ -19,4 +19,4 @@ Pause only at the step 3 per-item candidates and hard blockers; otherwise run to
 
 A failed validator, evidence contradicting a confirmed conclusion, or unestablished current acceptance is a blocker: publish nothing for that candidate, keep committed transactions intact, and report — never force acceptance.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `/to-backlog` naming them; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists; omit when none follows.
+End the report with `Next step:` — one copy-pasteable command from the outcome: rejected desired-change candidates → `$to-backlog` naming them; otherwise `$implement` with the highest-ranked ready `WORK-NNN` when one exists; omit when none follows.

@@ -11,6 +11,8 @@ Under an active autonomous run, `$to-product`'s autonomous contract supplies eve
 
 **Serialized integration:** run at most three items concurrently, and only where no `blocks` link joins them in either direction and their declared subtask scopes are disjoint; give each an isolated git worktree. Admit one item to primary at a time. An item whose turn follows another's merge merges primary into its branch, re-verifies, and re-reviews the delta before its own acceptance gate.
 
+Cap nesting at two child levels: item subagents may spawn only those required by `$implement`'s invoked skills; those children never spawn subagents. State this in every child brief.
+
 ## Inputs
 
 Require one explicit authorized scope: an active `EPIC-NNN`/path (authorizing all approved children and Epic closure) or a non-empty set of `WORK-NNN` IDs/paths. An unambiguous scope already established by the conversation counts; otherwise list candidates and ask — never infer a set from similar titles, changed paths, or rank adjacency. A set never authorizes siblings, parents, outside dependencies, or Epic closure; an Epic supplies coordination context but never expands a child's approved outcome.
@@ -73,4 +75,4 @@ Use $implement-with-subagents with EPIC-012 using model gpt-5.6-sol and reasonin
 
 Report the authorized scope and selection order; one subagent/session and branch per item; changed paths, commits, and merge commits; checks and both review axes; acceptance and wiki reconciliation evidence; resulting statuses, claims, rank and archive locations; the Epic-scope review result and any remediation subagent; the Epic closure commit when applicable; unsupported passthrough settings; remaining blockers or concerns.
 
-End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `/implement-with-subagents` or `/implement` with the next highest-ranked actionable scope, or `/discuss` naming the next open outcome when no ready work remains.
+End the report with `Next step:` — one copy-pasteable command: blocked → the exact command that resumes this scope after the blocker; otherwise `$implement-with-subagents` or `$implement` with the next highest-ranked actionable scope, or `$discuss` naming the next open outcome when no ready work remains.

@@ -11,9 +11,9 @@ need external systems).
 ```bash
 testbed/bin/run.sh                       # scenarios affected by uncommitted skill changes
 testbed/bin/run.sh --since origin/main   # affected by committed changes since origin/main
-testbed/bin/run.sh --all                 # full suite
+testbed/bin/run.sh --all                 # full suite, using the current harness
 testbed/bin/run.sh implement code-review # named scenarios
-HARNESS=codex testbed/bin/run.sh --all   # different harness (or -H codex)
+HARNESS=codex testbed/bin/run.sh --all   # override detection (or -H codex)
 ```
 
 Run artifacts (project copy, `report.txt`, `report.txt.stderr`) land under
@@ -21,9 +21,11 @@ Run artifacts (project copy, `report.txt`, `report.txt.stderr`) land under
 
 ## Harnesses
 
+The current parent harness is detected automatically. Set `HARNESS` or `-H` when detection fails or an override is required.
+
 | Harness | Headless invocation |
 | --- | --- |
-| claude (default) | `claude -p --dangerously-skip-permissions "<prompt>"` |
+| claude | `claude -p --dangerously-skip-permissions "<prompt>"` |
 | codex | `codex exec --dangerously-bypass-approvals-and-sandbox "<prompt>"` |
 | opencode | `opencode run [--model $OPENCODE_MODEL] "<prompt>"` |
 | pi | `pi -p "<prompt>"` |

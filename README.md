@@ -30,9 +30,9 @@ These skills form one connected delivery workflow built on two strictly separate
 flowchart TD
     SP["setup-project<br/>scaffold wiki, backlog, validator,<br/>agent instructions"] --> D
     D["discuss<br/>advisory — stress-test an idea<br/>one question at a time"]
-    D -->|coordinated multi-item outcome| TE["/to-epic"]
-    D -->|standalone desired change| TB["/to-backlog"]
-    D -->|current-state knowledge<br/>+ confirmed terminology<br/>+ decisions already in force| TW["/to-wiki"]
+    D -->|coordinated multi-item outcome| TE["$to-epic"]
+    D -->|standalone desired change| TB["$to-backlog"]
+    D -->|current-state knowledge<br/>+ confirmed terminology<br/>+ decisions already in force| TW["$to-wiki"]
 ```
 
 ### Plan desired changes to ready — `docs/backlog`
@@ -52,7 +52,7 @@ flowchart TD
     DEC -->|neither| RDY
     RT --> RDY
     RDY(["ready<br/>Definition of Ready met<br/>decisions resolved<br/>+ owner approval"])
-    RDY --> IMP["/implement"]
+    RDY --> IMP["$implement"]
 ```
 
 ### Execute and accept
@@ -85,7 +85,7 @@ flowchart TD
     GD["guidance<br/>research + publish adopted<br/>technology and standards rules"] -->|verified transactions| WK
     ACC["primary-branch acceptance"] -->|durable knowledge changed| WK
     WK["wiki<br/>knowledge lifecycle<br/>+ ADRs superseded in place<br/>+ engineering guidance pages"]
-    TW -.->|rejected desired-change candidates| TB["/to-backlog"]
+    TW -.->|rejected desired-change candidates| TB["$to-backlog"]
     WK -.->|baseline knowledge| D["discuss"]
     WK -.->|adopted guidance already answers a subject| RT["research"]
     WK -.->|adopted rules bind new code| IMP["implement"]
@@ -108,10 +108,10 @@ flowchart TD
     TP --> MAP["discuss over the whole PRD<br/>→ outcome map + dependency order"]
     MAP --> D["discuss one outcome<br/>owner-proxy answers, printed on screen"]
     D --> RT{"route as discuss classifies"}
-    RT -->|coordinated outcome| TE["/to-epic"]
-    RT -->|standalone items| TB["/to-backlog"]
-    RT -->|current-state knowledge| TW["/to-wiki"]
-    RT -->|adopted rules| TG["/to-guidance"]
+    RT -->|coordinated outcome| TE["$to-epic"]
+    RT -->|standalone items| TB["$to-backlog"]
+    RT -->|current-state knowledge| TW["$to-wiki"]
+    RT -->|adopted rules| TG["$to-guidance"]
     TE --> ED["evidence decision<br/>owner-proxy answers both halves:<br/>guidance subjects + research"]
     TB --> ED
     ED --> IWS["implement-with-subagents"]
@@ -153,14 +153,14 @@ A few rules the diagrams don't show: execution always passes through backlog rea
 
 ### Greenfield and Brownfield
 
-- **Greenfield** (new application): run **setup-project** on the empty repository, then shape the product through `/discuss` — desired outcomes flow through `/to-epic` or `/to-backlog` to ready work, and the implement → code-review → acceptance loop grows wiki knowledge as features land.
+- **Greenfield** (new application): run **setup-project** on the empty repository, then shape the product through `$discuss` — desired outcomes flow through `$to-epic` or `$to-backlog` to ready work, and the implement → code-review → acceptance loop grows wiki knowledge as features land.
 - **Brownfield** (existing application): run **setup-project** on the existing repository (it upgrades safely and never overwrites project-owned files). On existing code with an empty wiki it back-fills a foundation overview of code-verified facts — stack, architecture, commands, conventions, terminology — seeds one `draft` guidance page per detected technology and per detected standard candidate (adopted only when the owner names it), and reports owner-judgment knowledge (intent, rationale, product language) as candidates for `/discuss` and `/to-wiki`. From there, desired changes follow the same delivery loop as greenfield.
-- **Unattended** (either of the above): hand an already-defined PRD or plan to `/to-product`. It scaffolds when needed, then walks the same loop to a finished product without asking you anything, leaving a run transcript to review afterwards.
+- **Unattended** (either of the above): hand an already-defined PRD or plan to `$to-product`. It scaffolds when needed, then walks the same loop to a finished product without asking you anything, leaving a run transcript to review afterwards.
 
 | Skill | Description |
 |-------|-------------|
 | **setup-project** | Initialize or safely upgrade a project with wiki, backlog, validation, and agent instructions; back-fill a foundation wiki on brownfield repositories |
-| **discuss** | Stress-test an idea one question at a time, then recommend `/to-epic`, `/to-backlog`, or `/to-wiki` per conclusion |
+| **discuss** | Stress-test an idea one question at a time, then recommend `$to-epic`, `$to-backlog`, or `$to-wiki` per conclusion |
 | **wiki** | Manage the lifecycle of accepted project knowledge, including ADRs and their supersession |
 | **to-wiki** | Publish the conversation's confirmed durable knowledge, including ADRs for decisions in force, under one standing approval |
 | **backlog** | Manage approved desired work from intake through refinement, ranking, execution, and archival |

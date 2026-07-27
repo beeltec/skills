@@ -54,7 +54,7 @@ Resolve each subject's version per step 3 first — a sub-agent never resolves v
 
 The authoritative version source is a live call to the ecosystem's registry, release feed, or tagged releases — `npm view <pkg> version`, the PyPI JSON API, `gh release list`, crates.io, and equivalents. Record the resolved version, that source, and the resolution date. Distinguish latest stable from prerelease and from the maintained LTS line.
 
-Research and publish at the **installed** version. Record the gap to latest stable and its security relevance in the page; an upgrade is separate `/to-backlog` work, never absorbed here.
+Research and publish at the **installed** version. Record the gap to latest stable and its security relevance in the page; an upgrade is separate `$to-backlog` work, never absorbed here.
 
 ## 4. Synthesize
 
@@ -93,4 +93,4 @@ A failed validator, a source that contradicts a claim already published, or evid
 
 Report per subject: the page path and whether it was created or refreshed; the installed version with its establishing path and the resolved latest stable with its live source and date; counts of requirements, recommendations, conventions, deviations, and known gaps; sources with authority labels; every rule-replacement pause and its outcome; any subject re-run on a stronger tier; unresolved questions; commit hashes; and the final validation result.
 
-Omit the `Next step:` line when the caller continues its own workflow after this run; that caller's report owns the handoff. Otherwise end the report with `Next step:` — one copy-pasteable command: known gaps found → `/to-backlog` naming the non-compliant areas to remediate; a subject blocked or its research unresolved → the concrete action that resolves it; otherwise `/implement` with the highest-ranked ready `WORK-NNN` when one exists.
+Omit the `Next step:` line when the caller continues its own workflow after this run; that caller's report owns the handoff. Otherwise end the report with `Next step:` — one copy-pasteable command: known gaps found → `$to-backlog` naming the non-compliant areas to remediate; a subject blocked or its research unresolved → the concrete action that resolves it; otherwise `$implement` with the highest-ranked ready `WORK-NNN` when one exists.

@@ -37,7 +37,7 @@ For each change:
 
 ## Next-step handoff convention
 
-Every delivery-workflow skill ends its final report with a `Next step:` line — one exact copy-pasteable command for the follow-up, selected from the run's actual outcome with real arguments, never placeholders; omit it only when no follow-up exists. The canonical convention — recommend only, never invoke, last line, numbered list in run order when several apply — is stated once in `skills/commands/setup-project/assets/agent-instructions.md`, which `setup-project` installs into every project's agent instructions; each skill states only its outcome-to-command routing. Apply this convention when adding or changing workflow skills.
+Every delivery-workflow skill ends its final report with a `Next step:` line — one exact copy-pasteable command for the follow-up in canonical `$name` form, selected from the run's actual outcome with real arguments, never placeholders; omit it only when no follow-up exists. The canonical convention — recommend only, never invoke, last line, numbered list in run order when several apply, `$name` rendered per harness — is stated once in `skills/commands/setup-project/assets/agent-instructions.md`, which `setup-project` installs into every project's agent instructions; each skill states only its outcome-to-command routing. Apply this convention when adding or changing workflow skills.
 
 The line stays a recommendation in the skill that writes it. Under an autonomous run, `to-product` reads it as control flow and executes it — which is why it must always be a real command with real arguments.
 

@@ -25,4 +25,4 @@ Execute the task given as arguments in one pass. Invocation is the authorization
 
 ## Report
 
-Report the change, commits, and verification results. When the work grew beyond small, state what exceeded the declaration. End with `Next step:` only when a follow-up exists: overrun in a governed repo → `/to-backlog` with the follow-up scope; overrun elsewhere → the concrete command or edit that addresses it.
+Report the change, commits, and verification results. When the work grew beyond small, state what exceeded the declaration. End with `Next step:` only when a follow-up exists: overrun in a governed repo → `$to-backlog` with the follow-up scope; overrun elsewhere → the concrete command or edit that addresses it.

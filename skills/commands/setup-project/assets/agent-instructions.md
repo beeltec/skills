@@ -17,16 +17,18 @@ Never perform these intents ad hoc. Invoke the skill that owns each, and follow 
 
 | Intent | Skill |
 |---|---|
-| Shape, challenge, or decide an idea | `/discuss` |
+| Shape, challenge, or decide an idea | `$discuss` |
 | Create or change a backlog record | `$backlog` |
-| Plan a coordinated outcome to a ready Epic | `/to-epic` |
-| Plan standalone items to ready | `/to-backlog` |
+| Plan a coordinated outcome to a ready Epic | `$to-epic` |
+| Plan standalone items to ready | `$to-backlog` |
 | Resolve technical uncertainty on proposed work | `$research` |
-| Adopt technology or standards rules | `/to-guidance` |
+| Adopt technology or standards rules | `$to-guidance` |
 | Build ready work | `$implement` or `$implement-with-subagents` |
 | Review a diff | `$code-review` |
-| Change accepted knowledge | `/to-wiki` or `$wiki` |
-| Ship a whole PRD unattended | `/to-product` |
+| Change accepted knowledge | `$to-wiki` or `$wiki` |
+| Ship a whole PRD unattended | `$to-product` |
+
+`$name` is the harness-neutral command form. Render every command offered to the user in the running harness's syntax: Codex CLI `$name`; Claude Code and OpenCode `/name`; Kimi Code, Pi, and Oh-My-Pi `/skill:name`.
 
 There is no direct-implementation route: execution always passes through backlog readiness. When no skill covers the intent, say so before acting.
 
