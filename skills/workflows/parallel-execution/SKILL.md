@@ -35,15 +35,13 @@ If per-agent selection is unavailable, use the harness default and report it onc
 
 Launch the ready frontier together. Give each worker only its brief, authority paths and roles, required output shape, validation, and stop conditions. Require it to report unreadable authority and never spawn agents.
 
-Parallelize read-only discovery by concern. For mutations, assign one owner per conflict domain and isolate every writer in its own worktree. Add another writer only behind a fixed interface with disjoint scope.
+Parallelize read-only work only when the caller supplies at least two concrete unresolved questions that cannot be answered cheaply in its context; never create generic code, test, guidance, or risk inventories. For mutations, assign one owner per conflict domain and isolate every writer in its own worktree. Add another writer only behind a fixed interface with disjoint scope.
 
 Use a rolling ready queue: refill a free slot immediately with a dependency-free unit while the manager inspects and serially admits completed work. Never start a unit that depends on an unadmitted result.
 
 ### 4. Admit and verify
 
-Inspect every return and verify its cited artifacts or commands. Admit mutations serially in dependency order; revalidate the graph, authority freshness, and affected checks after each admission.
-
-Start targeted review when a stable admitted increment meets the caller's narrow high-risk rule and unrelated work remains. Keep the caller's one final composed review after integration; never add routine duplicate review.
+Inspect every return and verify its cited artifacts or commands. Admit mutations serially in dependency order; revalidate the graph and authority freshness after each admission. Trust fresh worker checks; rerun only checks invalidated by integration. Review only once at the caller's final acceptance-unit boundary.
 
 ### 5. Recover
 
@@ -53,7 +51,7 @@ Retry a unit-local acceptance failure through the same worker and pause only its
 
 ### 6. Return
 
-Return the dependency graph, worker roles, model/effort applied or unsupported, admission order, checks, targeted reviews, retries, conflicts, rework, and blockers. Report wall-clock and token use when the harness exposes them; never invent either metric.
+Return the dependency graph, worker roles, model/effort applied or unsupported, admission order, checks, retries, conflicts, rework, and blockers. Report wall-clock and token use when the harness exposes them; never invent either metric.
 
 ## Boundaries
 
@@ -64,7 +62,7 @@ Return the dependency graph, worker roles, model/effort applied or unsupported, 
 ## Examples
 
 ```text
-Planning: four read-only workers analyze slicing, dependencies, conflicts, and verification; the caller synthesizes and commits one backlog transaction.
+Planning: two workers answer named, independent unresolved compatibility questions; the caller handles routine inspection, synthesis, and the one backlog transaction.
 Epic: isolated writers implement dependency-free children; the manager serially admits commits and never starts a dependent child early.
 Verification: run isolation-safe lint and typecheck processes concurrently; spawn one diagnostic worker only after a failure needs judgement.
 ```

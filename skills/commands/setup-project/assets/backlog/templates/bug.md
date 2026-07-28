@@ -47,7 +47,7 @@ Draft each architecturally significant decision this work makes, in ADR shape â€
 
 ## Execution
 
-Record the implementation-first fix, cheapest failing-before/passing-after reproduction, minimal regression verification, and explicit owner approval.
+Record the implementation-first fix, cheapest failing-before/passing-after reproduction, smallest affected checks after the stable fix, each applicable lint/typecheck once unless invalidated, coverage reuse, and explicit owner approval. At the standalone or parent-Epic acceptance boundary, review once, remediate directly, then run one representative suite; never review per child or remediation.
 
 ## Subtasks
 

@@ -49,7 +49,7 @@ Complete before creating or switching a branch or mutating a claim:
 8. Read every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard this item's delta touches, resolved from its own directory indexes, not the whole set. Rule strength follows `docs/wiki/maintenance.md § Adopted guidance`; a listed `Known gap` is existing non-compliance to work around, never licence to add more. A touched subject with no page or a stale one is a reportable gap: implement against the item's research and repository evidence and name it for the post-acceptance `$guidance` offer and the final report — never block on it, and never write guidance into `docs/wiki` here.
 9. Determine the invocation's primary-branch fixed point; retain it for review and integration evidence. For an Epic it is also the immutable **epic fixed point** for the final Epic review; no per-item fixed point replaces it.
 
-For a top-level invocation, use `$parallel-execution` when at least two read-only discovery concerns or approved, dependency-free, conflict-disjoint units exist. For an Epic, apply the ready-frontier policy below. Keep one mutating owner per conflict domain and serially admit isolated writer commits. An internal provisional worker never delegates; it executes its packet locally.
+Inspect affected code, tests, and guidance in this context. Use a read-only subagent only for a concrete unresolved question that cannot be answered cheaply here; never fan out generic code, test, guidance, or risk inventories. Use `$parallel-execution` for at least two approved, dependency-free, conflict-disjoint implementation units. For an Epic, apply the ready-frontier policy below. Keep one mutating owner per conflict domain and serially admit isolated writer commits. An internal provisional worker never delegates; it executes its packet locally.
 
 An internal provisional packet is valid only when it names the orchestrator's live execution session, acceptance unit, isolated branch, claims, fixed point, authority packet, and mode (`child` or `standalone`). The worker does not own or mutate claims.
 
@@ -95,7 +95,7 @@ Do not write backlog evidence during normal execution. Renewal, safe release, or
 For a standalone item, an internal provisional packet, or each locally owned Epic child selected by [Epic mode](references/epic-mode.md):
 
 1. Capture the code commit at which its delta starts. Follow the approved approach and subtasks; implement and smoke-test the real changed path first. For a bug, capture the cheapest reliable failing-before reproduction.
-2. Commit coherent code increments. Run focused tests, typechecks, linters, and the listed verification relevant to the changed path. Run deterministic checks as parallel processes only when their state is isolated; serialize shared caches, outputs, ports, databases, simulators, and worktrees. Do not run the full suite or broad platform matrix here.
+2. Commit coherent code increments. Stabilize an increment before verification, then run the smallest affected check. Run each applicable lint or typecheck once at the stable increment; rerun only a failed check or one invalidated by later input changes. Run deterministic checks as parallel processes only when their state is isolated; serialize shared caches, outputs, ports, databases, simulators, and worktrees. Do not run the full suite or broad platform matrix here.
 3. Reuse existing coverage. Add one durable test only when a new observable contract lacks proof: prefer acceptance-critical E2E, then integration/contract, then unit coverage for otherwise impractical edges. Never duplicate layers, chase coverage, require feature TDD, or add excessive E2E.
 4. Keep verification-only executables outside the workspace when possible; otherwise remove them before acceptance. Retain one only when it protects an observable contract in a conventional test location and established command.
 5. Pin unresolved dependency or tool versions only from a live registry and retain source/date evidence.
@@ -105,15 +105,11 @@ For a standalone item, an internal provisional packet, or each locally owned Epi
 An internal provisional invocation stops after these steps and returns commits and concise evidence to the orchestrator; it never touches review, primary, wiki, rank, claims, statuses, or archives.
 ## Review And Final Verification
 
-Classify against `$code-review`'s narrow high-risk triggers: security or authentication, destructive migration or credible data-loss risk, and public API compatibility.
+Run exactly one comprehensive `$code-review` per acceptance unit: at the end of a standalone item or during composed Epic closure. Never review a provisional child independently inside an active Epic acceptance unit. Security/authentication, destructive migration or credible data-loss risk, and public API compatibility select the review's split Standards/Spec mode; they never add another review.
 
-- **Epic child:** no routine review. During main-agent Epic child work, invoke a targeted child review only when its isolated delta meets a narrow trigger; use the child-start commit and resolved packet. An orchestrated provisional child returns before review so its manager can review the admitted delta independently. Address findings and rerun affected focused checks.
-- **Standalone:** run one end-of-item review, combined Standards+Spec by default and independent axes only for a narrow trigger.
-- **Epic:** defer comprehensive review and full verification to [Epic mode](references/epic-mode.md).
+Fix every in-scope finding, inspect the remediation diff directly, and rerun only affected checks. Never invoke a remediation or delta review. Stop if remediation requires unapproved scope.
 
-Rerun review after remediation only when it materially changes behavior, a public contract, architecture, security, data handling, or reviewed scope. Inspect mechanical or documentation-only fixes directly.
-
-Run the full suite once per acceptance unit on one representative supported target after review passes. Expand devices/runtimes only when the changed code touches platform-specific behavior, adaptive layout, compatibility, packaging, migration, or another matrix-sensitive contract; record why each dimension applies. A release outcome always runs the complete supported matrix. Any later code-affecting change invalidates the result; backlog, wiki, run transcript, and other non-executable documentation do not.
+After review remediation is stable, run the full suite once per acceptance unit on one representative supported target. Expand devices/runtimes only when the changed code touches platform-specific behavior, adaptive layout, compatibility, packaging, migration, or another matrix-sensitive contract; record why each dimension applies. A release outcome always runs the complete supported matrix. Make no later code-affecting change; if an unavoidable change invalidates the suite, rerun it and report the exception. Backlog, wiki, run transcript, and other non-executable documentation do not invalidate it.
 ## Reconciliation
 
 After the acceptance unit's review and verification pass, compare the complete implementation with linked wiki concepts, research, guidance, and drafted decisions once:
@@ -128,7 +124,7 @@ Keep the proposal and all criteria/subtask/review/suite evidence in the invocati
 
 For a standalone item or complete Epic:
 
-1. Confirm live claims; supported criteria and subtasks; required targeted and comprehensive reviews; one fresh representative full suite plus justified matrix expansion; exact reconciliation; validator pass; and no unintended changes.
+1. Confirm live claims; supported criteria and subtasks; the one comprehensive review; one fresh representative full suite plus justified matrix expansion; exact reconciliation; validator pass; and no unintended changes.
 2. Merge the acceptance branch to primary once with a merge commit, never squash or fast-forward. Compare code-affecting inputs with the verified branch state. Reuse the suite when they match; rerun only affected focused checks or the suite when they differ or classification is uncertain.
 3. Run `node scripts/validate-project.mjs` on primary. Non-executable backlog, wiki, transcript, or documentation changes never invalidate executable verification.
 4. Apply the one approved wiki transaction on primary. Publish every drafted ADR, update indexes/logs, validate, and commit only wiki paths. Offer missing/stale post-acceptance guidance once. Do not rerun executable suites after wiki-only changes.
@@ -138,6 +134,6 @@ For a standalone item or complete Epic:
 If merge, authorization, reconciliation, or a required check fails, stop before `done`; preserve the live acceptance unit or release all its claims safely in one recovery transaction.
 ## Completion And Report
 
-Remain on primary and delete the local acceptance branch only after the final transaction, validation, and all authorized scope complete. Report scope; branch and claims; child execution order; code commits; targeted review or skips; one comprehensive review; representative suite and matrix rationale; acceptance merge; reconciliation and ADRs; the two normal governance transactions; archive paths; guidance gaps; and blockers.
+Remain on primary and delete the local acceptance branch only after the final transaction, validation, and all authorized scope complete. Report scope; branch and claims; child execution order; code commits; one comprehensive review; representative suite and matrix rationale; acceptance merge; reconciliation and ADRs; the two normal governance transactions; archive paths; guidance gaps; and blockers.
 
 End with `Next step:` — blocked → exact resume command; otherwise `$implement` with the next highest-ranked standalone item or Epic, or `$discuss` naming the next open outcome.

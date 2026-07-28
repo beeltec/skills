@@ -46,7 +46,7 @@ Draft each architecturally significant decision this work makes, in ADR shape â€
 
 ## Execution
 
-Record the implementation-first approach, minimal verification, coverage reuse, and explicit owner approval. Add tests only for uncovered observable contracts; prefer one acceptance-critical E2E, then boundary integration/contract coverage, and unit coverage only for otherwise impractical isolated edges or invariants.
+Record the implementation-first approach, minimal verification, coverage reuse, and explicit owner approval. Run the smallest affected checks after stable increments and each applicable lint/typecheck once unless invalidated. Add tests only for uncovered observable contracts; prefer one acceptance-critical E2E, then boundary integration/contract coverage, and unit coverage only for otherwise impractical isolated edges or invariants. At the standalone or parent-Epic acceptance boundary, review once, remediate directly, then run one representative suite; never review per child or remediation.
 
 ## Subtasks
 

@@ -28,8 +28,6 @@ Use whatever the user gave (SHA, branch, tag, `main`, `HEAD~5`); ask if unspecif
 
 If the diff is empty, report that and stop. Bad refs and empty diffs are handled here, never inside parallel reviews.
 
-When the caller supplies the previous reviewed commit and findings, this is a **delta review**. Keep the fixed point and authorities, review only `git diff <previous-reviewed-commit>...HEAD`, and carry prior findings forward. Workflows invoke it only when remediation materially changes behavior, contracts, architecture, security, data handling, or reviewed scope; mechanical and documentation-only remediation is inspected directly. An empty delta ends immediately.
-
 ### 2. Read project governance
 
 Resolve the repository root and read all applicable `AGENTS.md`, `CLAUDE.md`, and nested instructions. When the setup-project scaffold exists, also read `docs/wiki/index.md`, `docs/wiki/maintenance.md`, `docs/backlog/index.md`, `docs/backlog/maintenance.md`, and the nearest relevant wiki and backlog indexes. Use project-local maintenance rules when stricter. Do not mutate the wiki, backlog, claims, or statuses during review.
@@ -40,7 +38,7 @@ When the caller requests an **Epic-scope review**, the Epic is primary Spec auth
 
 Otherwise select one `WORK-NNN`:
 
-1. A supplied ID, path, or complete record wins. A child review must be explicitly identified as a targeted narrow-high-risk review; routine Epic-child review is invalid and returns control to the caller.
+1. A supplied ID, path, or complete record wins. A provisional child inside an active Epic acceptance unit is invalid and returns control to the caller; review the composed Epic once instead. A `WORK-NNN` invoked as its own acceptance unit receives its one standalone review.
 2. Otherwise inspect active records for exactly one live claim or exact branch/commit link. Ignore terminal records and expired claims; ask when none or several qualify.
 3. A standalone item is its own comprehensive review boundary. An Epic child remains provisional and never gains acceptance from this review.
 
@@ -48,13 +46,13 @@ With no backlog item, require explicit confirmation that no Spec exists, then re
 
 ### 4. Build the authority packet
 
-When an invoking workflow supplies resolved packet paths and roles, accept them as the packet; do not rediscover authorities from directory indexes, and do not re-read a path whose content that caller already read in this invocation chain under its freshness rule. Discover and read only what it did not supply. On a delta review the packet is unchanged from the previous pass — reuse it.
+When an invoking workflow supplies resolved packet paths and roles, accept them as the packet; do not rediscover authorities from directory indexes, and do not re-read a path whose content that caller already read in this invocation chain under its freshness rule. Discover and read only what it did not supply.
 
 Have every authority read — by the caller or here — before starting either sub-agent:
 
 - the selected work item: outcome/delta, acceptance criteria, relationships, wiki references, Research, Decisions, Execution, subtasks;
 - its complete parent Epic when `parent` is not `none`: outcome, criteria, scope, exclusions, constraints, wiki references, research, execution context;
-- on Epic-scope review: the Epic plus every child record — each delta, criteria, and recorded review result or policy skip — labelled child context;
+- on Epic-scope review: the Epic plus every child record — each delta and criteria labelled child context;
 - every linked current-state wiki concept relevant to the change (via `wiki_refs` or the Epic) plus the nearest indexes needed for ownership;
 - proposal-specific research in the item or Epic and directly linked local evidence;
 - accepted guidance under `docs/wiki/engineering/` and `docs/wiki/architecture/`, and repository standard sources (instructions, `CONTRIBUTING.md`, `CODING_STANDARDS.md`);
@@ -77,10 +75,10 @@ On top of documented rules, Standards carries the **smell baseline** in [referen
 
 ### 7. Spawn reviewer(s)
 
-Read [references/sub-agent-briefs.md](references/sub-agent-briefs.md). Default: spawn one combined reviewer. Narrow high risk: give `$parallel-execution` one Standards and one Spec unit. With no Spec, run Standards only. Include targeted-child, delta, and Epic add-ons when applicable.
+Read [references/sub-agent-briefs.md](references/sub-agent-briefs.md). Default: spawn one combined reviewer. Narrow high risk: give `$parallel-execution` one Standards and one Spec unit as the same comprehensive review. With no Spec, run Standards only. Include Epic add-ons when applicable.
 
 ### 8. Aggregate
 
 State `Review mode:` and its reason. Present `## Standards` and `## Spec`: each axis's finding counts and actionable findings with citations, never verbatim agent reports. Keep axis labels and counts independent. A combined reviewer still reports both axes separately.
 
-Add `Next step:` — actionable findings → fix them and rerun `$code-review` with the same fixed point only when remediation meets the substantive rule; pass inside `$implement` → continue the acceptance unit's representative-suite gate; Epic pass → continue atomic closure; standalone pass → continue single-item acceptance.
+Add `Next step:` — actionable findings → fix them once, inspect the remediation directly, rerun only affected checks, then continue the acceptance unit's representative-suite gate without another review; pass inside `$implement` → continue that gate; Epic pass → continue atomic closure; standalone pass → continue single-item acceptance.

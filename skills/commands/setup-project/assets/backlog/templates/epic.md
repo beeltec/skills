@@ -45,7 +45,7 @@ Draft each architecturally significant decision this outcome makes, in ADR shape
 
 ## Execution
 
-Record approval, sequencing, risk-gated review, minimal verification, suite-evidence reuse, and archive coordination.
+Record approval, sequencing, one composed acceptance-unit review, minimal verification, suite-evidence reuse, and archive coordination. Never prescribe child or remediation reviews. Run the smallest affected checks after stable increments, each applicable lint/typecheck once unless invalidated, and one representative suite after final-review remediation.
 
 ### Provisional execution graph
 
