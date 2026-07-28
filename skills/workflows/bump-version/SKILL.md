@@ -24,7 +24,7 @@ If `.claude/rules/versioning.md` exists, read it (version file locations, update
 
 ### 2. Analyze project structure (only without versioning.md)
 
-Spawn 2-3 code-explorer agents in parallel, on the cheapest available tier, to find version locations:
+Spawn 2-4 code-explorer agents in parallel, on the cheapest available tier, to find version locations:
 
 - **Package manager files:** `package.json`/`package-lock.json`, `Cargo.toml`, `pyproject.toml`/`setup.py`/`setup.cfg`, `go.mod`, `pom.xml`/`build.gradle`, gemspecs, `pubspec.yaml`, `composer.json`
 - **Dedicated version files:** `VERSION`, `VERSION.txt`, `.version`, `version.*`, `_version.py`, `__version__`/`VERSION` constants

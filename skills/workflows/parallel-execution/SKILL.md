@@ -21,7 +21,7 @@ Never delegate from a depth-one worker. Without parallel sub-agents, execute the
 
 Map a dependency graph and its ready frontier. Mark shared contracts, files, state, and integration order as conflict domains. Treat a planning graph as provisional until revalidated against live code.
 
-Reserve the manager's capacity. Use one shared budget for the complete top-level run; nested caller skills consume its remaining slots rather than opening another pool. Run at most three workers concurrently, or fewer when the harness exposes fewer free slots. Queue the remainder.
+Reserve the manager's capacity. Use one shared budget for the complete top-level run; nested caller skills consume its remaining slots rather than opening another pool. Run at most four workers concurrently, or fewer when the harness exposes fewer free slots. Queue the remainder.
 
 Route roles by capability:
 
@@ -64,7 +64,7 @@ Return the dependency graph, worker roles, model/effort applied or unsupported, 
 ## Examples
 
 ```text
-Planning: three read-only workers analyze slicing, dependencies, and verification; the caller synthesizes and commits one backlog transaction.
+Planning: four read-only workers analyze slicing, dependencies, conflicts, and verification; the caller synthesizes and commits one backlog transaction.
 Epic: isolated writers implement dependency-free children; the manager serially admits commits and never starts a dependent child early.
 Verification: run isolation-safe lint and typecheck processes concurrently; spawn one diagnostic worker only after a failure needs judgement.
 ```
