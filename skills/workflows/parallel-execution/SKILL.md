@@ -11,11 +11,11 @@ Minimize delivery wall-clock time without weakening the caller's authority, acce
 
 ### 1. Qualify the fan-out
 
-Require a fixed brief and at least two units with explicit scope, output, dependencies, conflict domain, and mutation permission. Continue locally when independence is uncertain, coordination would dominate, or units need the same context.
+Require a fixed brief and at least two units with explicit scope, output, dependencies, conflict domain, and mutation permission. When they do not qualify, return them to the caller's serial topology; never change caller-defined mutation ownership.
 
 Use sub-agents for judgement or separate context. Run deterministic lint, typecheck, test, and build commands as parallel processes only when their caches, generated outputs, ports, databases, simulators, and worktrees are isolated; otherwise serialize them.
 
-Never delegate from a depth-one worker. Without parallel sub-agents, execute the same units sequentially and report that limitation.
+Never delegate from a depth-one worker. Without parallel sub-agents, return control to the caller. If its contract requires workers, report an explicit capability/capacity blocker; never move their work into the manager.
 
 ### 2. Build the schedule
 

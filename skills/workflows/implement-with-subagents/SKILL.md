@@ -1,15 +1,15 @@
 ---
 name: implement-with-subagents
-description: Orchestrate ready Epics adaptively through one integration branch, or standalone work-item sets through isolated executors. Use only on explicit EPIC-NNN, WORK-NNN set, or unambiguous scope.
+description: Execute explicit ready Epics or work-item sets with one fresh implementation subagent per work item, serialized admission, and manager-owned acceptance. Never implements work items in the manager context.
 ---
 
 # Implement with Subagents
 
-Orchestrate approved backlog work while owning authority discovery, execution topology, integration, verification, recovery, and acceptance. For an Epic, optimize for one executor and one integration branch; fan out only genuinely independent, scope-disjoint children. For standalone WORK sets, delegate each item through its normal single-item `$implement` acceptance.
+Orchestrate approved backlog work while owning authority discovery, scheduling, integration, verification, recovery, and acceptance. Every work item runs in a fresh implementation subagent. Dependencies and conflict domains control concurrency and admission order, never implementation ownership.
 
 Under `$to-product`, its autonomous contract supplies owner approvals and blocker policy. Pass that contract and any run-transcript path through every brief.
 
-Invoke `$parallel-execution` when at least two independent discovery or execution units exist. This skill remains its central manager and owns phase-specific authority and acceptance.
+Invoke `$parallel-execution` for frontiers with at least two independent discovery or execution units. This skill remains the central manager and owns phase-specific authority and acceptance; it dispatches a lone actionable work item directly to one bounded subagent.
 
 ## Inputs
 
@@ -27,40 +27,40 @@ Before spawning or mutating backlog:
 4. Inspect branches, remotes, changes, and recent history. Preserve unrelated work. Pin the primary commit as the immutable Epic fixed point.
 5. Reject proposed/malformed work, missing ranks/readiness, inconsistent or foreign claims, and outside-scope blockers. Never add, rerank, cancel, reparent, or alter scope.
 
-For an Epic, compare the record's provisional execution graph with live code and classify topology before any spawn:
+For an Epic, compare the record's provisional execution graph with live code before any implementation spawn. Record each ready frontier and the evidence that makes it parallel or serial:
 
-- **Single executor (default):** dependencies dominate, children share core files/interfaces, or parallel work would duplicate discovery or create likely conflicts.
-- **Parallel scheduler:** at least two currently actionable children are dependency-free, scope-disjoint, and can be integrated without inventing a shared contract.
+- **Parallel frontier:** at least two actionable children are dependency-free and conflict-disjoint behind fixed interfaces.
+- **Serial frontier:** dependencies, shared interfaces, or conflict domains require one-at-a-time execution.
 
-Record the choice and evidence. Mere availability of multiple children is not enough to fan out.
+Mere availability of several children does not justify concurrent writers. A serial frontier still requires a fresh implementation subagent for each child.
+
 ## Execution topology
 
-### Single-executor Epic
-
-Run `$implement EPIC-NNN` in this manager context; dependency-heavy execution does not justify a worker handoff. Use `$parallel-execution` only for qualifying read-only support or fixed, conflict-disjoint subtasks. Require one Epic branch, focused child checks, narrow targeted child reviews only, one composed review, one representative suite with risk-triggered matrix expansion, one reconciliation, one primary merge, and two normal backlog transactions.
-
-### Parallel Epic
+### Epic
 
 1. Create and check out one Epic integration branch in the manager's worktree, then apply `$implement`'s single start/claim transaction for the Epic and all required children.
-2. Give `$parallel-execution` one bounded-implementation unit per actionable child, each on a distinct worker branch/worktree based on the integration start commit. Each isolated worker runs `$implement` in internal provisional-child mode: code, focused checks, and smoke test only. It returns commits and evidence without review, backlog/wiki/status/rank/primary changes.
-3. Admit returned commits serially to the Epic integration branch. Revalidate the execution graph and affected checks after each admission. When an admitted child meets the narrow high-risk rule, invoke targeted `$code-review` in this manager context; it may schedule its strongest/high read-only axes from the shared budget and overlap unrelated implementation, but must pass before dependents start. Preserve one shared authority packet and reload only paths changed by admitted commits.
-4. Refill the rolling ready queue with newly actionable children while unrelated admissions continue. Never start a child depending on an unadmitted commit. Assign a remaining dependency chain to one executor rather than creating avoidable handoffs.
-5. After all children are provisional, the orchestrator follows `$implement` Epic closure: one composed review, remediation, one representative suite and justified matrix, one reconciliation, one merge, accepted-state publication, and one atomic final transaction.
+2. Give every actionable child to a fresh bounded subagent on a distinct worker branch/worktree based on the latest admitted integration commit. Each worker runs `$implement` in internal provisional-child mode: code, focused checks, and smoke test only. It returns commits and evidence without review, backlog/wiki/status/rank/primary changes. Never assign a second work item to that subagent.
+3. Dispatch a parallel frontier through `$parallel-execution`. Dispatch one worker directly for a serial frontier. Never start a child depending on an unadmitted commit; shared conflict domains serialize workers rather than moving implementation into this manager.
+4. Admit returned commits serially to the Epic integration branch. Revalidate the execution graph and affected checks after each admission. When an admitted child meets the narrow high-risk rule, invoke targeted `$code-review` in this manager context; it may overlap unrelated implementation but must pass before dependents start.
+5. Refill the ready queue after every admission. A retry continues the same work item's worker; no worker receives another item.
+6. After all children are provisional, follow `$implement` Epic closure: one composed review, remediation, one representative suite and justified matrix, one reconciliation, one merge, accepted-state publication, and one atomic final transaction.
+
+If the harness cannot start a required implementation subagent or has no worker capacity, stop with the exact capability/capacity blocker and recovery state. Never implement the item in this manager context, wait indefinitely, or silently invoke top-level `$implement` as a fallback.
 
 No child branch merges to primary or becomes terminal. Do not commit per-child evidence or maintain a second task document.
 
 ### Standalone WORK set
 
-For each authorized, scope-disjoint standalone item, create and check out its integration branch in the manager's worktree and apply `$implement`'s start/claim transaction serially. Give `$parallel-execution` one internal provisional-standalone unit per item on a distinct worker branch/worktree based on that start commit; otherwise execute them serially. Each worker implements, runs focused checks and smoke proof, and returns commits/evidence without review, primary integration, wiki, rank, status, or archive mutation.
+For each authorized standalone item, create and check out its integration branch in the manager's worktree and apply `$implement`'s start/claim transaction serially. Give every item to a fresh subagent on a distinct worker branch/worktree based on that start commit. Use `$parallel-execution` for at least two scope-disjoint items; otherwise dispatch serially. Each worker runs `$implement` in internal provisional-standalone mode and returns commits/evidence without review, primary integration, wiki, rank, status, or archive mutation. Never implement an item locally or reuse its worker for another item.
 
-Admit each return serially, then resume `$implement WORK-NNN` in this manager context for its one review, representative suite, merge, reconciliation, and final transaction. Reuse verification across code-identical merges and non-executable documentation changes.
+Admit each return serially, then resume `$implement WORK-NNN` in this manager context only for its review, representative suite, merge, reconciliation, and final transaction. Reuse verification across code-identical merges and non-executable documentation changes. The same unavailable-worker blocker and no-fallback rule applies.
 ## Verification And Recovery
 
 Verify cited commits, merge ancestry, claims, rank, statuses, indexes, archives, review mode, focused checks, suite freshness, matrix rationale, reconciliation, and acceptance. Trust fresh consistent evidence; rerun only when evidence is missing, stale, contradictory, or code-affecting integration inputs differ.
 
 For an Epic require one integration branch and acceptance merge; all children provisional until atomic completion; targeted reviews only for narrow high risk; one comprehensive Epic review; one representative suite; justified risk-triggered matrix expansion or complete release matrix; one wiki/ADR transaction; and exactly one normal start plus final backlog transaction.
 
-On failure, follow `$parallel-execution`: retry the same worker with focused evidence, pause only dependents, and continue unaffected units. Under an autonomous run, retry the affected outcome three times, then release all owned claims and return unfinished records to `ready` in one recovery transaction. Only a shared-contract, baseline-validator, or integration failure stops the affected concurrency group. Never replace a live agent, accept partial Epic state, or alter another executor's claim.
+On failure, follow `$parallel-execution`: retry the same item with focused evidence through its existing worker, pause only dependents, and continue unaffected units. Under an autonomous run, retry the affected outcome three times, then release all owned claims and return unfinished records to `ready` in one recovery transaction. Only a shared-contract, baseline-validator, or integration failure stops the affected concurrency group. Never replace a live agent, give its next work item to a prior item's worker, accept partial Epic state, or alter another executor's claim.
 ## Epic Closure
 
 Only explicit Epic input authorizes closure. Follow `$implement` and [its Epic reference](../implement/references/epic-mode.md); do not add an orchestrator-specific review, suite, merge, reconciliation, or completion gate. The closure report and repository evidence must show the single shared acceptance transaction set.

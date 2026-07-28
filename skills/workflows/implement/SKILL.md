@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Execute one ready backlog work item or Epic through claim, implementation, review, acceptance, and archival. Use with an explicit WORK-NNN, EPIC-NNN, backlog path, or unambiguous conversational selection.
+description: Execute one ready backlog work item or Epic adaptively through claim, implementation, review, acceptance, and archival. Use with an explicit WORK-NNN, EPIC-NNN, backlog path, or unambiguous conversational selection.
 ---
 
 # Implement
@@ -49,7 +49,7 @@ Complete before creating or switching a branch or mutating a claim:
 8. Read every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard this item's delta touches, resolved from its own directory indexes, not the whole set. Rule strength follows `docs/wiki/maintenance.md § Adopted guidance`; a listed `Known gap` is existing non-compliance to work around, never licence to add more. A touched subject with no page or a stale one is a reportable gap: implement against the item's research and repository evidence and name it for the post-acceptance `$guidance` offer and the final report — never block on it, and never write guidance into `docs/wiki` here.
 9. Determine the invocation's primary-branch fixed point; retain it for review and integration evidence. For an Epic it is also the immutable **epic fixed point** for the final Epic review; no per-item fixed point replaces it.
 
-For a top-level invocation, use `$parallel-execution` when at least two read-only discovery concerns or approved, dependency-free, conflict-disjoint subtasks exist. Keep one mutating owner per conflict domain and serially admit isolated writer commits. An internal provisional worker never delegates; it executes its packet locally.
+For a top-level invocation, use `$parallel-execution` when at least two read-only discovery concerns or approved, dependency-free, conflict-disjoint units exist. For an Epic, apply the ready-frontier policy below. Keep one mutating owner per conflict domain and serially admit isolated writer commits. An internal provisional worker never delegates; it executes its packet locally.
 
 An internal provisional packet is valid only when it names the orchestrator's live execution session, acceptance unit, isolated branch, claims, fixed point, authority packet, and mode (`child` or `standalone`). The worker does not own or mutate claims.
 
@@ -72,6 +72,15 @@ Report every blocking record, conflicting claim and expiry, malformed field, or 
 
 When the invocation resolved to an `EPIC-NNN`, read [references/epic-mode.md](references/epic-mode.md) after preflight and before selecting the first child — it owns child selection order and Epic completion and cleanup. A `WORK-NNN` invocation never reads it.
 
+### Adaptive ready frontiers
+
+Before each top-level Epic frontier, revalidate actionability and conflict domains against admitted code:
+
+- **Parallel frontier:** when at least two actionable children are dependency-free and conflict-disjoint behind fixed interfaces, dispatch each to a fresh isolated subagent through `$parallel-execution`. Each runs `$implement` with one internal provisional-child packet. Admit commits serially before releasing dependents.
+- **Local frontier:** when dependencies or shared conflict domains leave no qualifying parallel frontier, implement the highest-ranked actionable child in this main-agent context.
+
+Reclassify after every admission. Never reuse a child subagent for another work item. Topology changes execution ownership only; this invocation retains claims, authority, review, reconciliation, integration, and acceptance.
+
 ## Branch And Claim
 
 After preflight:
@@ -83,7 +92,7 @@ After preflight:
 Do not write backlog evidence during normal execution. Renewal, safe release, or blocker recovery is an exceptional validated transaction, not a routine gate. Never continue with an expired claim or alter another executor's claim.
 ## Execution
 
-For a standalone item, or each actionable Epic child in the order defined by [Epic mode](references/epic-mode.md):
+For a standalone item, an internal provisional packet, or each locally owned Epic child selected by [Epic mode](references/epic-mode.md):
 
 1. Capture the code commit at which its delta starts. Follow the approved approach and subtasks; implement and smoke-test the real changed path first. For a bug, capture the cheapest reliable failing-before reproduction.
 2. Commit coherent code increments. Run focused tests, typechecks, linters, and the listed verification relevant to the changed path. Run deterministic checks as parallel processes only when their state is isolated; serialize shared caches, outputs, ports, databases, simulators, and worktrees. Do not run the full suite or broad platform matrix here.
@@ -98,7 +107,7 @@ An internal provisional invocation stops after these steps and returns commits a
 
 Classify against `$code-review`'s narrow high-risk triggers: security or authentication, destructive migration or credible data-loss risk, and public API compatibility.
 
-- **Epic child:** no routine review. During normal single-executor Epic work, invoke a targeted child review only when its isolated delta meets a narrow trigger; use the child-start commit and resolved packet. An orchestrated provisional child returns before review so its manager can review the admitted delta independently. Address findings and rerun affected focused checks.
+- **Epic child:** no routine review. During main-agent Epic child work, invoke a targeted child review only when its isolated delta meets a narrow trigger; use the child-start commit and resolved packet. An orchestrated provisional child returns before review so its manager can review the admitted delta independently. Address findings and rerun affected focused checks.
 - **Standalone:** run one end-of-item review, combined Standards+Spec by default and independent axes only for a narrow trigger.
 - **Epic:** defer comprehensive review and full verification to [Epic mode](references/epic-mode.md).
 

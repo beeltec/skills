@@ -169,8 +169,8 @@ A few rules the diagrams don't show: execution always passes through backlog rea
 | **research** | Attach current version and guideline evidence to a proposed backlog item before readiness, fanned out per subject |
 | **guidance** | Research, publish, and refresh canonical technology and standards guidance pages, so adopted rules are read instead of re-researched |
 | **to-guidance** | Owner-invoked entry point that runs `guidance` for the named subjects under one standing approval |
-| **implement** | Execute a ready work item or Epic through claim, implementation, per-item review, Epic-scope review, and completion |
-| **implement-with-subagents** | Orchestrate an Epic or work-item set with one fresh subagent per item, and review the composed Epic before closure |
+| **implement** | Execute a ready work item or Epic adaptively, using fresh subagents for qualifying parallel frontiers and the main agent for serial or conflict-heavy work |
+| **implement-with-subagents** | Execute an Epic or work-item set with one fresh implementation subagent per item, serialized admission, and manager-owned acceptance |
 | **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's — or a whole Epic's — scope |
 | **to-product** | Run the whole flow unattended from a PRD, answering every owner gate as an owner-proxy, until every outcome has shipped |
 
