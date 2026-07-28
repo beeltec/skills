@@ -4,7 +4,7 @@ title: ESLint
 description: Version evidence and observed project conventions for ESLint with typescript-eslint; rules and sources not yet researched.
 resource: ESLint
 tags: [engineering, technology, eslint, typescript-eslint]
-timestamp: 2026-07-27T09:22:55+02:00
+timestamp: 2026-07-27T21:27:58+02:00
 status: draft
 ---
 

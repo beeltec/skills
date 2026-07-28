@@ -10,6 +10,8 @@ Before interviewing, resolve the project root and read applicable repository ins
 
 Stay on the user's current branch — never create, switch, merge, or delete branches.
 
+When preflight exposes at least two independent fact-finding concerns, invoke `$parallel-execution` for read-only discovery across repository evidence, project records, and external evidence. Keep synthesis, terminology and ADR tracking, every question, and every user or owner-proxy decision in this context.
+
 User-invoked only — or invoked by `$to-product`, which answers every question below as the owner-proxy under its autonomous contract. Under that run only, emit the discussion as one batched block — every numbered question immediately followed by its verbatim answer — instead of one question per turn.
 
 Interview the user relentlessly about every aspect until shared understanding is reached, walking each branch of the decision tree and resolving dependencies between decisions one by one. Provide a recommended answer for each question.

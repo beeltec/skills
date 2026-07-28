@@ -13,6 +13,10 @@
 - Stay on the current branch. Only `$implement` and `$implement-with-subagents` create branches, via `$create-conventional-branch`; never create, switch, merge, or delete branches from any other workflow.
 - Never create, inspect, or depend on `docs/tasks`.
 
+## Verification artifacts
+
+- Any executable created only to verify the change is temporary, regardless of extension: use the system temporary directory when writable; otherwise delete the workspace fallback before final verification and handoff. Keep it only when it protects an observable contract, lives in a conventional test or test-helper location, and runs through an established or clearly documented test command; a new obscure alias alone does not qualify. With no test structure, add no permanent test infrastructure unless approved scope requires automated coverage.
+
 ## Work routing
 
 Never perform these intents ad hoc. Invoke the skill that owns each, and follow it:

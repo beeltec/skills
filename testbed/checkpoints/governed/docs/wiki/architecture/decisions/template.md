@@ -4,7 +4,7 @@ type: Decision
 title: Replace with a short decision phrase
 description: Replace with a one-sentence summary of the decision.
 decided: YYYY-MM-DD
-timestamp: 2026-07-27T09:21:14+02:00
+timestamp: 2026-07-27T21:27:58+02:00
 status: active
 supersedes: none
 superseded_by: none

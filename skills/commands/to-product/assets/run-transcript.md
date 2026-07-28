@@ -5,12 +5,12 @@
 - **Execution**: `$implement-with-subagents`<, model X, effort Y>
 - **Resumes**: `<prior transcript path>` or `none`
 
-## Outcome map
+## Outcome graph
 
-| # | Outcome | Route | Depends on | Record | Status |
-|---|---|---|---|---|---|
-| 1 | | `$to-epic` | — | `EPIC-NNN` | done |
-| 2 | | `$to-backlog` | 1 | `WORK-NNN` | parked |
+| # | Outcome | Route | Depends on | Shared contract/files | Conflict domain | Candidate frontier | Record | Status |
+|---|---|---|---|---|---|---|---|---|
+| 1 | | `$to-epic` | — | | | 1 | `EPIC-NNN` | done |
+| 2 | | `$to-backlog` | 1 | | | 2 | `WORK-NNN` | parked |
 
 ## Discussions
 
@@ -43,8 +43,13 @@
 
 ## Delivery
 
-| Outcome record | Topology | Code commits | Acceptance merge | Review | Suite/matrix | Reconciliation | Governance transactions | ADRs | Guidance |
-|---|---|---|---|---|---|---|---|---|---|
+| Outcome record | Topology | Workers and roles | Admission order | Code commits | Acceptance merge | Review | Suite/matrix | Reconciliation | Governance transactions | ADRs | Guidance |
+|---|---|---|---|---|---|---|---|---|---|---|
+
+## Execution metrics
+
+| Outcome record | Wall-clock | Token use | Retries | Conflicts | Rework | Unsupported settings |
+|---|---|---|---|---|---|---|
 
 ## Out-of-PRD scope filed
 

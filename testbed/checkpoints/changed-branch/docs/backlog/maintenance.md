@@ -18,9 +18,9 @@ Allowed statuses are `proposed`, `ready`, `in-progress`, `done`, and `cancelled`
 
 Epic transitions are:
 
-- `proposed -> ready` after its outcome, acceptance criteria, and initial child scope are approved.
-- `ready -> in-progress` when execution of a child begins.
-- `in-progress -> done` only when every child is `done` or `cancelled`, Epic acceptance is satisfied, accepted-state wiki updates are complete, and the entire Epic is archived atomically.
+- `proposed -> ready` after its outcome, acceptance criteria, initial child scope, and provisional execution graph are approved.
+- `ready -> in-progress` in the Epic acceptance unit's single start transaction, together with every required child.
+- `in-progress -> done` in one final transaction that also moves every child to `done` or preserves an approved cancellation, proves Epic acceptance and accepted-state reconciliation, and archives the whole directory atomically.
 - `ready -> proposed` only with owner approval, a recorded walk-back reason in `## Execution`, and an explicit disposition for every non-`proposed` child.
 - `proposed`, `ready`, or `in-progress -> cancelled` only with a recorded cancellation rationale. Cancel or complete every child and archive the entire Epic atomically.
 
@@ -47,9 +47,11 @@ Before executable work becomes `ready`, all of the following are required:
 - `wiki_refs` names every relevant accepted-state page as a `docs/wiki/...` project-relative path, or contains only `none` after confirming no page applies.
 - `research` is `pending`, `complete`, or `not-needed` while work is proposed. Ready work requires `complete` or `not-needed`. Keep proposal-specific sources, version findings, recommendations, uncertainty, and project deviations under `## Research`; unresolved version-specific or security-sensitive questions require `pending` and prevent readiness.
 - `decisions` is `pending`, `draft`, `none`, or a YAML inline array of published `ADR-NNN` IDs. Ready work requires `draft`, `none`, or published IDs. Apply the ADR significance test in `docs/wiki/maintenance.md`: draft each qualifying decision under `## Decisions` in ADR shape and set `draft`, or record `none` with a stated reason. `pending` means a qualifying decision is still unresolved and prevents readiness; never use `none` to skip an unresolved decision, and never use `draft` without every qualifying decision drafted in ADR shape.
-- `## Execution` states an actionable approach, verification commands, and explicit project-owner approval.
-- Every checklist subtask under `## Subtasks` is one bounded step — roughly one coherent commit — naming its scope (files, components, or records touched) and its verification (command, test, or observable result). Split any step that cannot state a single verification. Use `No subtasks.` when decomposition adds no value.
+- `## Execution` states the implementation-first approach, minimal verification commands, and explicit owner approval. Reuse coverage; add only the cheapest test for an uncovered observable contract: acceptance-critical E2E for user-visible behavior, integration/contract for a boundary, unit only for otherwise impractical isolated edges or invariants. Never require feature TDD, coverage targets, duplicate layers, or excessive E2E.
+- Every checklist subtask is one bounded coherent implementation step naming scope and its cheapest command, test, or observable verification. Use `No subtasks.` when decomposition adds no value.
 - The item is present exactly once in the root global rank.
+
+A ready Epic's `## Execution` also names dependency edges, shared contracts/files, conflict domains with provisional owner children, candidate parallel frontiers, and required live-code revalidation. An unresolved row keeps the Epic `proposed`.
 
 Proposal-specific research remains with the backlog record. During post-acceptance implementation reconciliation, promote only guidance that became durable accepted current state to its canonical wiki concept; summarize it there instead of copying the proposal evidence.
 
@@ -73,8 +75,8 @@ Relationships may target Epics or executable work, must resolve to an existing I
 ## Ranking, subtasks, and claims
 
 - The ordered list under `## Global executable-work rank` in the root index is the sole global rank. It contains every active `WORK-NNN` exactly once, across Epic and standalone work. Epics are not ranked. Reorder only with project-owner approval.
-- Checklist subtasks are local execution steps, not separate backlog records. Keep them in `## Subtasks`. Check each one with evidence as soon as the increment completing it lands — never batched at the end — and all must be checked before `done`.
-- An in-progress work item has a non-empty `claim` naming the agent/session and an ISO 8601 `claim_expires` in the future. Claims are coordination leases, not ownership. Release or renew before expiry. Every other status uses `claim: none` and `claim_expires: none`.
+- Checklist subtasks are local execution steps, not separate records. During an Epic, retain focused-check evidence in the execution ledger and batch supported child/Epic checklist updates into the final acceptance transaction. A standalone workflow may do the same. Every subtask must have evidence before `done`; never create per-subtask backlog commits.
+- Each in-progress work item has a non-empty claim naming the shared acceptance session/integration branch and a future ISO 8601 `claim_expires`. Epics have no claim fields. Release or renew before expiry; every other work-item status uses `none`.
 
 ## Cancellation and archival
 

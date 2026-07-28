@@ -46,3 +46,11 @@ Draft each architecturally significant decision this outcome makes, in ADR shape
 ## Execution
 
 Record approval, sequencing, risk-gated review, minimal verification, suite-evidence reuse, and archive coordination.
+
+### Provisional execution graph
+
+- **Dependencies:** child edges or `none`.
+- **Shared contracts/files:** paths or interfaces shared by children, or `none`.
+- **Conflict domains:** `domain -> provisional owner child` mappings, or `none`; one mutating owner per domain.
+- **Candidate parallel frontiers:** dependency-free, conflict-disjoint child sets, or `none`.
+- **Revalidation:** required against live code before dispatch.

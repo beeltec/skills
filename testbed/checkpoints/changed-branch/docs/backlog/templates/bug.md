@@ -26,8 +26,8 @@ Describe the observed behavior, expected accepted behavior, impact, and reproduc
 
 ## Acceptance criteria
 
-- [ ] Reproduction fails before the fix and passes afterward.
-- [ ] Relevant regression evidence passes.
+- [ ] The cheapest reliable reproduction fails before the fix and passes afterward; it need not be a new unit test.
+- [ ] Existing or minimal new regression evidence covers the restored contract.
 
 ## Relationships
 
@@ -47,7 +47,7 @@ Draft each architecturally significant decision this work makes, in ADR shape â€
 
 ## Execution
 
-Record the fix approach, regression commands, and explicit project-owner approval.
+Record the implementation-first fix, cheapest failing-before/passing-after reproduction, minimal regression verification, and explicit owner approval.
 
 ## Subtasks
 

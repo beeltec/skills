@@ -28,6 +28,8 @@ Before proposing or applying a mutation:
 5. Read the backlog root index, maintenance rules, relevant type templates, active and archive indexes, all records related by parent or relationship, and every record needed to determine inward links and blocking state.
 6. Inspect active and archived IDs before allocation, the complete global rank, the current branch, and staged/unstaged changes. Preserve unrelated work; never stage it.
 
+When steps 4–6 expose at least two independent read-only concerns, invoke `$parallel-execution`. Keep synthesis, owner decisions, and every mutation in this context.
+
 Steps 4–6 apply to authority-changing transactions. Gate-backed start, recovery, and final acceptance bookkeeping uses steps 1–3, every record in the authorized acceptance unit, and git state. It may aggregate supported evidence and perform only the workflow-authorized claims, lifecycle transitions, required terminal rank removal, and archival; it cannot change scope, priority, relationships, parentage, cancellation, or accepted knowledge.
 
 Project-local maintenance rules are authoritative. If they conflict with this skill or cannot represent the transaction, stop and explain rather than weakening validation.
@@ -59,7 +61,7 @@ Slice work into the smallest independently implementable, verifiable outcome. Pr
 
 Keep verification minimal and proportional. Plan implementation and real-path smoke proof first; reuse existing coverage. Add a test only for an uncovered observable contract: one acceptance-critical browser E2E for user-visible behavior, integration/contract coverage for a boundary, or unit coverage only for isolated edges or invariants impractical to prove higher. Never prescribe feature TDD, coverage targets, duplicate layers, or excessive E2E. An owner-specified tool binds, but implies no extra depth.
 
-For Epics, refine a measurable coordinated outcome, objective acceptance criteria, explicit exclusions, and a useful multi-item child scope. Parentless work stays standalone when no genuine shared outcome requires an Epic.
+For Epics, refine a measurable coordinated outcome, objective acceptance criteria, explicit exclusions, a useful multi-item child scope, and a provisional execution graph naming dependencies, shared contracts/files, conflict domains, candidate parallel frontiers, and required live-code revalidation. Parentless work stays standalone when no genuine shared outcome requires an Epic.
 
 Present every proposed scope, criterion, parent, relationship, or rank change for explicit owner approval before editing.
 
@@ -67,7 +69,7 @@ Present every proposed scope, criterion, parent, relationship, or rank change fo
 
 Reject `proposed -> ready` unless the full Definition of Ready in `docs/backlog/maintenance.md` holds — every requirement, including `decisions` resolved off `pending`: `draft` with each qualifying decision drafted under `## Decisions` in ADR shape, naming any ADR it would supersede, or `none` with the significance-test reason. Never allocate an `ADR-NNN` inside a backlog transaction; drafted decisions are published by `$wiki` at post-acceptance reconciliation, and the allocated IDs then replace `draft`.
 
-A ready Epic additionally requires an approved outcome, objective acceptance criteria, a coordination approach, and at least one approved child. Show the owner the complete candidate record, rank position, and validation-relevant relationships before requesting the transition; approval to refine is not approval to become ready.
+A ready Epic additionally requires an approved outcome, objective acceptance criteria, a coordination approach with the provisional execution graph, and at least one approved child. Show the owner the complete candidate record, rank position, and validation-relevant relationships before requesting the transition; approval to refine is not approval to become ready.
 
 ## Relationships And Actionability
 

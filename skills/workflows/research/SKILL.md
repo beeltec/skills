@@ -39,13 +39,13 @@ Drop a subject only when inspected evidence shows the delta touches nothing it g
 
 Check each subject against its guidance page under `docs/wiki/engineering/technologies/` or `docs/wiki/engineering/standards/` first. A page whose recorded installed version matches the repository and whose `last_reviewed` is within thresholds — 30 days for fast-moving evidence, 90 for stable — already answers the subject: cite it and research only what it leaves open. Research a subject when accepted guidance is absent, materially uncertain, or not version-applicable. When a subject has no page or a stale one, offer `$guidance` for it before the step 4 fan-out; on a decline, research it here. Re-check security-sensitive guidance every run, and immediately when a release, source change, or repository deviation may invalidate prior evidence.
 
-## 4. Fan out one sub-agent per subject
+## 4. Research subjects
 
-Degrade by harness capability: with parallel sub-agents, spawn one per subject in a single message; with per-agent model selection, run each on the cheapest available tier at low reasoning effort, reserving the stronger model for inspection, conflict resolution, and synthesis; with neither, run the same briefs sequentially in the main context. If a subject's return breaks the required output shape or cites an unopened source, re-run it on a stronger tier and record the escalation in the report.
+Group subjects sharing version or source context into the fewest coherent read-only units that fit one ready frontier; keep each subject's evidence separate. Invoke `$parallel-execution` only when at least two independent units remain; otherwise execute the grouped brief here. If the skill or parallel capacity is unavailable, execute the same grouped briefs sequentially here and report the limitation; never mark evidence pending solely for missing concurrency. If a return breaks the required output shape or cites an unopened source, follow `$parallel-execution` recovery and record any escalation.
 
 Resolve each subject's version per step 5 first — a sub-agent never resolves versions. Then give each sub-agent the subject, the proposed delta, that subject's repository evidence and resolved version, and this brief:
 
-> Research this subject only, at the version given. Verify sources in order: version-matched official documentation, specifications, and repositories; then maintainer guidance; then reputable secondary sources for remaining gaps. Open every source you cite — a search snippet is not evidence. Return only: findings split into normative requirements, recommendations, and optional conventions, each stated concretely enough to implement from without reopening the source; unresolved questions; and sources as title, URL, authority label, applicable version, and review date. No prose outside that shape. Under 500 words.
+> Research only the assigned subject or related subject group, at the versions given. Keep output separated by subject. Verify sources in order: version-matched official documentation, specifications, and repositories; then maintainer guidance; then reputable secondary sources for remaining gaps. Open every source you cite — a search snippet is not evidence. Return only: findings split into normative requirements, recommendations, and optional conventions, each stated concretely enough to implement from without reopening the source; unresolved questions; and sources as title, URL, authority label, applicable version, and review date. No prose outside that shape. Under 500 words per subject.
 
 ## 5. Resolve versions from the release source
 
@@ -71,6 +71,8 @@ Set the frontmatter research state:
 - `complete` — every applicable version-specific and security-sensitive question is resolved with sufficient conclusions and sources, and every technology subject has its step 5 resolution row;
 - `not-needed` — inspected evidence establishes no external research applies, with that reasoning in the section;
 - `pending` — a source is unavailable, version applicability is ambiguous, sources conflict, a security-sensitive question is open, or more investigation is required.
+
+Keep unresolved product-contract or acceptance choices for planning; record them, but do not use them to keep research `pending` after its questions are resolved. An absent runtime pin is a project deviation, not ambiguous applicability, when the delta uses no runtime-specific API and introduces no minimum.
 
 For Epic research, keep the full result in the Epic's `## Research`. Mark every affected proposed child `research: pending` and name the inherited question in its Research section. Epic evidence may be linked rather than copied; each child resolves and records its applicable conclusions before `ready`.
 

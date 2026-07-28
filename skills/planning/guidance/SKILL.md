@@ -42,13 +42,13 @@ For a standard, record instead what the project actually applies today: the targ
 
 Also record observed project conventions and any departure from upstream guidance — these become `## Conventions` and `## Deviations`, and they are never silently replaced by an external recommendation.
 
-## 2. Fan out one sub-agent per subject
+## 2. Research subjects
 
-Degrade by harness capability: with parallel sub-agents, spawn one per subject in a single message; with per-agent model selection, run each on the cheapest available tier at low reasoning effort, reserving the stronger model for inspection, conflict resolution, and synthesis; with neither, run the same briefs sequentially in the main context. If a subject's return breaks the required output shape or cites an unopened source, re-run it on a stronger tier and record the escalation in the report.
+Group subjects sharing version or source context into the fewest coherent read-only units that fit one ready frontier; keep each subject's evidence separate. Invoke `$parallel-execution` only when at least two independent units remain; otherwise execute the grouped brief here. If the skill or parallel capacity is unavailable, execute the same grouped briefs sequentially here and report the limitation; never leave evidence unresolved solely for missing concurrency. If a return breaks the required output shape or cites an unopened source, follow `$parallel-execution` recovery and record any escalation.
 
 Resolve each subject's version per step 3 first — a sub-agent never resolves versions. Then give each sub-agent the subject, its repository evidence, observed conventions, and resolved version, and this brief:
 
-> Research this subject only, at the version given. Verify sources in order: version-matched official documentation, specifications, and repositories; then maintainer guidance; then reputable secondary sources for remaining gaps. Open every source you cite — a search snippet is not evidence. Return only: findings split into normative requirements, recommendations, and optional conventions, each stated concretely enough to implement from without reopening the source; unresolved questions; and sources as title, URL, authority label, applicable version, and review date. No prose outside that shape. Under 500 words.
+> Research only the assigned subject or related subject group, at the versions given. Keep output separated by subject. Verify sources in order: version-matched official documentation, specifications, and repositories; then maintainer guidance; then reputable secondary sources for remaining gaps. Open every source you cite — a search snippet is not evidence. Return only: findings split into normative requirements, recommendations, and optional conventions, each stated concretely enough to implement from without reopening the source; unresolved questions; and sources as title, URL, authority label, applicable version, and review date. No prose outside that shape. Under 500 words per subject.
 
 ## 3. Resolve versions from the release source
 

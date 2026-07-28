@@ -4,7 +4,7 @@ title: TypeScript
 description: Version evidence and observed project conventions for TypeScript; rules and sources not yet researched.
 resource: TypeScript
 tags: [engineering, technology, typescript]
-timestamp: 2026-07-27T09:22:55+02:00
+timestamp: 2026-07-27T21:27:58+02:00
 status: draft
 ---
 

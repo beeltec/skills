@@ -7,7 +7,7 @@ description: Execute one ready backlog work item or Epic through claim, implemen
 
 Execute approved work from a `setup-project` backlog without changing scope or priority. A standalone `WORK-NNN` is one acceptance unit. An `EPIC-NNN` and all approved children are one outcome acceptance unit: children remain provisional until the composed Epic is reviewed, verified, merged, reconciled, completed, and archived.
 
-Use one conventional branch per acceptance unit. Epic children never integrate to primary, publish wiki state, or become `done` independently. An internal provisional-child packet from `$implement-with-subagents` may execute one child on an isolated branch but cannot perform governance or acceptance gates.
+Use one conventional branch per acceptance unit. Epic children never integrate to primary, publish wiki state, or become `done` independently. An internal provisional-child or provisional-standalone packet from `$implement-with-subagents` may execute one isolated delta. Neither performs review, governance, integration, or acceptance gates.
 
 ## Authority And Approval
 
@@ -49,12 +49,14 @@ Complete before creating or switching a branch or mutating a claim:
 8. Read every applicable guidance page under `docs/wiki/engineering/technologies/` and `docs/wiki/engineering/standards/` — one per technology and cross-cutting standard this item's delta touches, resolved from its own directory indexes, not the whole set. Rule strength follows `docs/wiki/maintenance.md § Adopted guidance`; a listed `Known gap` is existing non-compliance to work around, never licence to add more. A touched subject with no page or a stale one is a reportable gap: implement against the item's research and repository evidence and name it for the post-acceptance `$guidance` offer and the final report — never block on it, and never write guidance into `docs/wiki` here.
 9. Determine the invocation's primary-branch fixed point; retain it for review and integration evidence. For an Epic it is also the immutable **epic fixed point** for the final Epic review; no per-item fixed point replaces it.
 
-An internal provisional-child packet is valid only when it names the orchestrator's live Epic execution session, integration branch, child claims, fixed point, and authority packet. The child executor works from an isolated branch owned by that orchestrator; it does not own or mutate claims.
+For a top-level invocation, use `$parallel-execution` when at least two read-only discovery concerns or approved, dependency-free, conflict-disjoint subtasks exist. Keep one mutating owner per conflict domain and serially admit isolated writer commits. An internal provisional worker never delegates; it executes its packet locally.
+
+An internal provisional packet is valid only when it names the orchestrator's live execution session, acceptance unit, isolated branch, claims, fixed point, authority packet, and mode (`child` or `standalone`). The worker does not own or mutate claims.
 
 Reject before branch creation:
 
 - an explicit item that is `proposed`, `done`, or `cancelled`;
-- an item that is not `ready`, unless it is the active acceptance unit owned by this executor/session or a child covered by a valid internal provisional-child packet;
+- an item that is not `ready`, unless it is the active acceptance unit owned by this executor/session or covered by a valid internal provisional packet;
 - a ready item missing any Definition of Ready field, objective criterion, approved execution approach, verification command, rank entry, resolved parent/relationship, completed/not-needed research, or resolved `decisions`;
 - a ready item whose `## Subtasks` are too coarse to execute as checkable increments — any subtask missing its scope or its verification — unless the section is exactly `No subtasks.`;
 - a ready item with an unresolved inward `blocks` relationship;
@@ -62,7 +64,7 @@ Reject before branch creation:
 - any live claim owned by another executor — never overwrite it;
 - an Epic that is not `ready` (unless resuming that `in-progress` Epic) or that has no approved children;
 - Epic scope containing a required nonterminal child claimed by another executor.
-The internal provisional-child exception changes only claim ownership and branch matching; all readiness, blocker, scope, authority, and validation checks still apply.
+The internal provisional exception changes only claim ownership and branch matching; all readiness, blocker, scope, authority, and validation checks still apply.
 
 Report every blocking record, conflicting claim and expiry, malformed field, or owner decision. Do not use a separate blocked status; do not create a branch after rejection.
 
@@ -74,9 +76,9 @@ When the invocation resolved to an `EPIC-NNN`, read [references/epic-mode.md](re
 
 After preflight:
 
-1. For an internal provisional child, verify the packet and use its isolated branch without changing governance. Otherwise resume only when the current branch, session, and live claims match, or invoke `$create-conventional-branch` once for the standalone item or Epic.
+1. For an internal provisional packet, verify it and use its isolated branch without changing governance. Otherwise resume only when the current branch, session, and live claims match, or invoke `$create-conventional-branch` once for the standalone item or Epic.
 2. For a normal standalone or Epic invocation, set claim expiry to cover the complete acceptance unit. Claim and move the standalone item `ready -> in-progress`, or move the Epic plus every required nonterminal child to `in-progress` and claim each child for the same session/integration branch. Epics have no claim fields.
-3. For a normal invocation, record branch/session once in `## Execution`; run `node scripts/validate-project.mjs`; stage only affected backlog paths; verify the diff; commit this single start transaction. An internal provisional child skips steps 2–3 and proceeds directly to execution.
+3. For a normal invocation, record branch/session once in `## Execution`; run `node scripts/validate-project.mjs`; stage only affected backlog paths; verify the diff; commit this single start transaction. An internal provisional packet skips steps 2–3 and proceeds directly to execution.
 
 Do not write backlog evidence during normal execution. Renewal, safe release, or blocker recovery is an exceptional validated transaction, not a routine gate. Never continue with an expired claim or alter another executor's claim.
 ## Execution
@@ -84,19 +86,19 @@ Do not write backlog evidence during normal execution. Renewal, safe release, or
 For a standalone item, or each actionable Epic child in the order defined by [Epic mode](references/epic-mode.md):
 
 1. Capture the code commit at which its delta starts. Follow the approved approach and subtasks; implement and smoke-test the real changed path first. For a bug, capture the cheapest reliable failing-before reproduction.
-2. Commit coherent code increments. Run focused tests, typechecks, linters, and the listed verification relevant to the changed path. Do not run the full suite or broad platform matrix here.
+2. Commit coherent code increments. Run focused tests, typechecks, linters, and the listed verification relevant to the changed path. Run deterministic checks as parallel processes only when their state is isolated; serialize shared caches, outputs, ports, databases, simulators, and worktrees. Do not run the full suite or broad platform matrix here.
 3. Reuse existing coverage. Add one durable test only when a new observable contract lacks proof: prefer acceptance-critical E2E, then integration/contract, then unit coverage for otherwise impractical edges. Never duplicate layers, chase coverage, require feature TDD, or add excessive E2E.
 4. Keep verification-only executables outside the workspace when possible; otherwise remove them before acceptance. Retain one only when it protects an observable contract in a conventional test location and established command.
 5. Pin unresolved dependency or tool versions only from a live registry and retain source/date evidence.
 6. Aggregate criteria, subtask, commit, focused-check, and smoke evidence in the invocation ledger, optional autonomous-run transcript, or final record edit. Do not mutate or commit backlog records per subtask or child.
 7. Never broaden scope. A blocking adjacent change requires an approved backlog transaction.
 
-An internal provisional-child invocation stops after these steps and the targeted-review rule below. It returns commits and concise evidence to the Epic orchestrator; it never touches primary, wiki, rank, claims, statuses, or archives.
+An internal provisional invocation stops after these steps and returns commits and concise evidence to the orchestrator; it never touches review, primary, wiki, rank, claims, statuses, or archives.
 ## Review And Final Verification
 
 Classify against `$code-review`'s narrow high-risk triggers: security or authentication, destructive migration or credible data-loss risk, and public API compatibility.
 
-- **Epic child:** no routine review. Invoke a targeted child review only when its isolated delta meets a narrow trigger; use the child-start commit and resolved packet. Address findings and rerun affected focused checks.
+- **Epic child:** no routine review. During normal single-executor Epic work, invoke a targeted child review only when its isolated delta meets a narrow trigger; use the child-start commit and resolved packet. An orchestrated provisional child returns before review so its manager can review the admitted delta independently. Address findings and rerun affected focused checks.
 - **Standalone:** run one end-of-item review, combined Standards+Spec by default and independent axes only for a narrow trigger.
 - **Epic:** defer comprehensive review and full verification to [Epic mode](references/epic-mode.md).
 

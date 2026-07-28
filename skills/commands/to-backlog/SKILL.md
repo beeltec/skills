@@ -10,6 +10,8 @@ Invoking this skill is the owner's standing approval for the full planning trans
 
 Pause only at the evidence decision (step 2), a `$guidance` rule-replacement pause, and hard blockers; otherwise run to completion and report. Only `$to-product`'s contract covers the rule-replacement pause — never otherwise suppress it. User-invoked only — or by `$to-product`, whose autonomous contract auto-answers every pause.
 
+When at least two items or planning concerns are independent, invoke `$parallel-execution` for read-only analysis of decomposition, dependencies, risks, acceptance, and verification. This context synthesizes the plan and serializes every evidence decision and `$backlog` mutation.
+
 ## Workflow
 
 1. **Item intake** — Enumerate the desired changes the user explicitly confirmed in this conversation and create each as the smallest coherent, independently valuable Story, Task, or Bug with `parent: none`, relationships, blockers, and provenance via `$backlog` intake. If the changes are coherent parts of one coordinated outcome that should form an Epic, stop and recommend `$to-epic` instead — never manufacture sibling fragments of a hidden Epic. If the user names existing `proposed` standalone records, resume each at its first incomplete step; reject `ready`, `in-progress`, or terminal records. Rank placement: the user's stated position, else append in dependency order at the end of the global rank.

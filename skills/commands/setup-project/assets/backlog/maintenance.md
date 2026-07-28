@@ -18,7 +18,7 @@ Allowed statuses are `proposed`, `ready`, `in-progress`, `done`, and `cancelled`
 
 Epic transitions are:
 
-- `proposed -> ready` after its outcome, acceptance criteria, and initial child scope are approved.
+- `proposed -> ready` after its outcome, acceptance criteria, initial child scope, and provisional execution graph are approved.
 - `ready -> in-progress` in the Epic acceptance unit's single start transaction, together with every required child.
 - `in-progress -> done` in one final transaction that also moves every child to `done` or preserves an approved cancellation, proves Epic acceptance and accepted-state reconciliation, and archives the whole directory atomically.
 - `ready -> proposed` only with owner approval, a recorded walk-back reason in `## Execution`, and an explicit disposition for every non-`proposed` child.
@@ -50,6 +50,8 @@ Before executable work becomes `ready`, all of the following are required:
 - `## Execution` states the implementation-first approach, minimal verification commands, and explicit owner approval. Reuse coverage; add only the cheapest test for an uncovered observable contract: acceptance-critical E2E for user-visible behavior, integration/contract for a boundary, unit only for otherwise impractical isolated edges or invariants. Never require feature TDD, coverage targets, duplicate layers, or excessive E2E.
 - Every checklist subtask is one bounded coherent implementation step naming scope and its cheapest command, test, or observable verification. Use `No subtasks.` when decomposition adds no value.
 - The item is present exactly once in the root global rank.
+
+A ready Epic's `## Execution` also names dependency edges, shared contracts/files, conflict domains with provisional owner children, candidate parallel frontiers, and required live-code revalidation. An unresolved row keeps the Epic `proposed`.
 
 Proposal-specific research remains with the backlog record. During post-acceptance implementation reconciliation, promote only guidance that became durable accepted current state to its canonical wiki concept; summarize it there instead of copying the proposal evidence.
 

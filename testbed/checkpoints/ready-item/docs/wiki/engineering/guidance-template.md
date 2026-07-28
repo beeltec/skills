@@ -3,7 +3,7 @@ type: Reference
 title: Guidance page template
 description: Non-record example structure for a technology or standard guidance page under engineering/.
 tags: [okf, engineering, guidance, template]
-timestamp: 2026-07-27T09:21:14+02:00
+timestamp: 2026-07-27T21:27:58+02:00
 status: active
 ---
 

@@ -1,7 +1,7 @@
 interface:
   display_name: "Implement with Subagents"
-  short_description: "Run backlog work through sequential subagents"
-  default_prompt: "Use $implement-with-subagents to execute this EPIC-NNN or explicit WORK-NNN set through one fresh, sequential subagent per work item."
+  short_description: "Run backlog work through bounded subagents"
+  default_prompt: "Use $implement-with-subagents to execute this EPIC-NNN or explicit WORK-NNN set through bounded dependency-aware workers and serialized integration."
 
 policy:
   allow_implicit_invocation: false

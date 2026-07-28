@@ -25,7 +25,7 @@ Resolve exactly one:
 
 With none resolvable, or more than one, list what was found and stop. Never infer a PRD from repository contents.
 
-Optional `model` and `reasoning effort` pass unchanged to `$implement-with-subagents`.
+Optional `model` and `reasoning effort` select `$implement-with-subagents`' bounded-implementation tier; discovery and judgement keep `$parallel-execution`'s role routing unless the user explicitly requires one uniform setting.
 
 ## Preflight
 
@@ -38,9 +38,11 @@ Optional `model` and `reasoning effort` pass unchanged to `$implement-with-subag
 7. **Resume detection** — read `docs/runs/` for a prior run transcript naming this PRD. Match each outcome to its existing record: terminal → skip; `in-progress` or parked → resume at its first incomplete step; absent → plan it fresh. Never create a second record for an outcome that already has one.
 8. Open the run transcript from [the template](assets/run-transcript.md) at `docs/runs/<YYYY-MM-DD>-to-product-<slug>.md`. Append in memory or the worktree throughout, but never commit per-child or per-subtask entries. Pass its path into implementation so the outcome's accumulated delivery evidence can join the final Epic acceptance transaction.
 
-## 1. Outcome map
+When the PRD exposes at least two independent discovery or delivery units, invoke `$parallel-execution`. This run remains the central manager; owner-proxy decisions, routing, backlog/wiki writes, admission, primary merges, and acceptance stay serialized here.
 
-Run `$discuss` once over the whole PRD with the owner-proxy answering, to establish the **outcome map**: every distinct outcome the PRD requires, its dependencies, and the order they must ship in.
+## 1. Outcome graph
+
+Run `$discuss` once over the whole PRD with the owner-proxy answering, to establish the **outcome graph**: every distinct outcome the PRD requires, its dependencies, shared contracts or files, conflict domains, and candidate parallel frontiers.
 
 Classify each outcome by `$discuss`'s own routing rules — coordinated multi-item outcome, standalone item, durable current-state knowledge, adopted technology or standard rules. Record the map and the opening discussion's question/answer/source rows in the transcript before planning anything.
 
@@ -48,7 +50,7 @@ Do not plan or slice children here. This pass establishes order only.
 
 ## 2. Per-outcome loop
 
-For each outcome in map order:
+Maintain a rolling ready queue from the outcome graph. Precompute read-only evidence and planning analysis for dependency-independent outcomes through `$parallel-execution`, then revalidate it against current primary state before use. For each admitted outcome:
 
 1. **Discuss** — run `$discuss` scoped to that outcome, with the owner-proxy answering. It reads the wiki as it stands now, so outcomes shipped earlier in this run inform it. Print the whole exchange.
 2. **Route** — execute the command `$discuss` recommends: `$to-epic` for a coordinated outcome, `$to-backlog` for standalone items, `$to-wiki` for durable current-state knowledge and confirmed terminology, `$to-guidance` for adopted rules. Run several in the recommended order.
@@ -57,10 +59,10 @@ For each outcome in map order:
 5. **Verify** — confirm from repository evidence, not the report alone. An Epic outcome requires one integration branch and primary acceptance merge, one comprehensive Epic review, one representative full suite, justified risk-triggered matrix expansion, one accepted-state/ADR reconciliation, and exactly one start/claim plus one final acceptance/archive backlog transaction except recorded recovery. Every child and the Epic must be `done` and archived atomically; claims and rank entries must be cleared. A standalone item follows its own single-item acceptance. In either route, require `decisions` resolved to published `ADR-NNN`s or `none`, every evidence-decision guidance subject current, research version rows dated within this run with live sources, and the validator green. A failed check blocks the outcome; resolve it or park it.
 6. **Record** — ensure the final acceptance transaction includes the accumulated outcome discussion, records, implementation commits, one acceptance merge, review and suite evidence, matrix rationale, published ADRs, and guidance pages. Do not create separate child-delivery transcript commits.
 
-Then take the next outcome. Never start an outcome whose dependencies have not shipped.
+Refill free capacity with dependency-independent read-only work while admissions continue. Implementation may overlap only behind fixed, disjoint interfaces in isolated worktrees; serialize routing mutations, integration, accepted-state publication, and final transactions. Never start work depending on an unadmitted result.
 ## Owner-proxy protocol
 
-The owner-proxy is a role this run plays in the same context, never a subagent. Because the answerer shares the context, `$discuss`'s one-question-per-turn protocol collapses: emit each discussion as **one batched block** — the whole numbered question set for that outcome (or the opening map pass), each question immediately followed by its answer — printed verbatim on screen. Batching is not summarizing: every question and answer still appears in full, and the transcript's discussion rows are the auditable record.
+The owner-proxy is a role this run plays in the same context, never a subagent. Because the answerer shares the context, `$discuss`'s one-question-per-turn protocol collapses: emit each discussion as **one batched block** — the whole numbered question set for that outcome (or the opening graph pass), each question immediately followed by its answer — printed verbatim on screen. Batching is not summarizing: every question and answer still appears in full, and the transcript's discussion rows are the auditable record.
 
 Answer from the PRD first, then repository evidence, then the accepted wiki. Cite which. When no source supports an answer, answer anyway, mark it `ASSUMPTION`, and add it to the **assumption register**.
 
@@ -101,6 +103,6 @@ The run ends when every outcome in the map has a `done`, archived record on the 
 
 ## Report
 
-Report the PRD source and outcome map; every discussion with its question count; the assumption count, citing the transcript's register; records created with type, status, and rank; every guidance page created or refreshed; research decisions per outcome; commits, merge commits, and published `ADR-NNN`s with any ADR superseded; every destructive gate auto-approved under the contract, individually; out-of-PRD scope filed as `proposed`; parked items with their blockers and resume commands; the transcript path; the final `node scripts/validate-project.mjs` result.
+Report the PRD source and outcome graph; worker roles, models/effort applied or unsupported, admission order, wall-clock and token use when exposed, retries, conflicts, and rework; every discussion with its question count; the assumption count, citing the transcript's register; records created with type, status, and rank; every guidance page created or refreshed; research decisions per outcome; commits, merge commits, and published `ADR-NNN`s with any ADR superseded; every destructive gate auto-approved under the contract, individually; out-of-PRD scope filed as `proposed`; parked items with their blockers and resume commands; the transcript path; the final `node scripts/validate-project.mjs` result.
 
 End the report with `Next step:` — one copy-pasteable command: parked items → the exact command that resumes the highest-ranked one; unshipped map outcomes → `$to-product` with the same PRD to resume; out-of-PRD records filed → `$to-backlog` naming them; otherwise omit it.

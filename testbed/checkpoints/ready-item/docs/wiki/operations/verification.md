@@ -3,7 +3,7 @@ title: 'Verification runbook'
 type: How-to
 description: Commands to type-check, lint, test, and validate the governed documentation of seed-metrics.
 tags: [operations, verification, testing]
-timestamp: 2026-07-27T09:22:55+02:00
+timestamp: 2026-07-27T21:27:58+02:00
 confidence: high
 status: active
 ---

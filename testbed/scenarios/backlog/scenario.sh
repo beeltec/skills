@@ -1,2 +1,2 @@
 CHECKPOINT=governed
-SKILLS="planning/backlog"
+SKILLS="planning/backlog workflows/parallel-execution"

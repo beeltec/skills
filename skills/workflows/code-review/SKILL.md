@@ -12,6 +12,10 @@ Review the diff from a user-supplied fixed point against:
 
 Use one combined reviewer by default. Use independent parallel Standards and Spec reviewers only for security/authentication, destructive migration or credible data-loss risk, or public API compatibility. The wiki is accepted current state; the backlog is desired change.
 
+When split review applies, invoke `$parallel-execution` with two read-only judgement units. This context owns authority resolution, synthesis, findings, and the handoff. A combined review uses one reviewer without loading the shared scheduler.
+
+Under a depth-one provisional worker, never spawn: execute the selected brief or briefs locally, sequence split axes, and report the missing parallel capacity.
+
 ## Process
 
 ### 1. Pin the fixed point
@@ -59,7 +63,7 @@ Have every authority read — by the caller or here — before starting either s
 Record each source path and role. Current-state wiki facts describe the baseline and constraints; they cannot satisfy or erase a missing desired delta. The child item's delta, criteria, and exclusions are primary Spec authority; Epic context never expands or replaces child scope. On an Epic-scope review the Epic's own outcome and criteria are primary Spec authority and child scope is context; no child's scope expands the Epic's. Backlog scope never waives a repository or accepted wiki standard.
 ### 5. Select review mode
 
-Use two parallel reviewers only when the reviewed delta involves security/authentication, destructive migration or credible data-loss risk, or public API compatibility. Privacy wording, ordinary persistence, concurrency, build/release infrastructure, and ADR significance alone do not trigger split review. Otherwise use one combined reviewer. Record the concrete trigger or `combined default`.
+Use two parallel reviewers only when the reviewed delta involves security/authentication, destructive migration or credible data-loss risk, or public API compatibility. Compatibility requires a changed or removed existing contract or another plausible consumer break; a purely additive export does not trigger it. Privacy wording, ordinary persistence, concurrency, build/release infrastructure, and ADR significance alone do not trigger split review. Otherwise use one combined reviewer. Record the concrete trigger or `combined default`.
 
 ### 6. Prepare the Standards authority
 
@@ -73,7 +77,7 @@ On top of documented rules, Standards carries the **smell baseline** in [referen
 
 ### 7. Spawn reviewer(s)
 
-Read [references/sub-agent-briefs.md](references/sub-agent-briefs.md). Default: spawn one combined reviewer. Narrow high risk: spawn Standards and Spec reviewers in parallel. With no Spec, run Standards only. Include targeted-child, delta, and Epic add-ons when applicable.
+Read [references/sub-agent-briefs.md](references/sub-agent-briefs.md). Default: spawn one combined reviewer. Narrow high risk: give `$parallel-execution` one Standards and one Spec unit. With no Spec, run Standards only. Include targeted-child, delta, and Epic add-ons when applicable.
 
 ### 8. Aggregate
 

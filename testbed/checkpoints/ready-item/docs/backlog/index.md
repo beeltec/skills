@@ -12,5 +12,5 @@ This tracked backlog owns desired changes and execution state. The [project wiki
 
 ## Global executable-work rank
 
-1. [WORK-001](standalone/WORK-001-percent-function.md)
-2. [WORK-002](standalone/WORK-002-format-bytes-helper.md)
+1. [WORK-001 Add percent function](standalone/WORK-001-add-percent-function.md)
+2. [WORK-002 Add a formatBytes helper](standalone/WORK-002-add-a-formatbytes-helper.md)

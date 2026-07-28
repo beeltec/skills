@@ -12,7 +12,7 @@ assert_glob 'docs/backlog/archive/standalone/WORK-001-*.md'
 assert_grep_glob 'status: done' 'docs/backlog/archive/standalone/WORK-001-*.md'
 assert_grep_glob 'claim: none' 'docs/backlog/archive/standalone/WORK-001-*.md'
 assert_validate
-assert_report 'combined'
+assert_report '[Rr]eview( mode)?:.*combined'
 assert_report 'suite'
 assert_report 'Next step:'
 

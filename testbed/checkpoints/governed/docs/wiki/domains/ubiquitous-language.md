@@ -3,7 +3,7 @@ title: 'Ubiquitous language'
 type: Reference
 description: Product and domain terminology agreed between the project owner and developers.
 tags: [domain, terminology, ubiquitous-language]
-timestamp: 2026-07-27T09:21:14+02:00
+timestamp: 2026-07-27T21:27:58+02:00
 confidence: high
 status: active
 ---

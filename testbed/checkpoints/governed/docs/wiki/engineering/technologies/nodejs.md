@@ -4,7 +4,7 @@ title: Node.js
 description: Version evidence and observed project conventions for the Node.js runtime; rules and sources not yet researched.
 resource: Node.js
 tags: [engineering, technology, nodejs]
-timestamp: 2026-07-27T09:22:55+02:00
+timestamp: 2026-07-27T21:27:58+02:00
 status: draft
 ---
 

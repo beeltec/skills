@@ -3,7 +3,7 @@ title: 'Project orientation'
 type: Overview
 description: Purpose, boundaries, and constraints of the seed-metrics TypeScript utility library.
 tags: [overview]
-timestamp: 2026-07-27T09:22:55+02:00
+timestamp: 2026-07-27T21:27:58+02:00
 confidence: high
 status: active
 ---
