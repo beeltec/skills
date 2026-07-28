@@ -16,15 +16,17 @@ Every skill file is billed to the context window on every matched task, so treat
 
 ## Creating a skill
 
-- One skill fixes one repeatable failure or encodes one procedure of real domain expertise. Do not create a skill for behavior the agent already handles reliably without help.
+- Ground each skill in real executions, corrections, failure cases, runbooks, specifications, or project history. Do not create one from generic model knowledge or for behavior the agent already handles reliably.
 - Keep `SKILL.md` under 500 lines and roughly 5,000 tokens: the minimum viable procedure — when to use it, the ordered steps, the critical decision branches, and the definition of done. Move bulky references, examples, schemas, and scripts into `references/`, `assets/`, or `scripts/`, loaded only on demand.
 - Keep resource files exactly one level deep (`references/schema.md`, not `references/db/v1/schema.md`) and link them with relative forward-slash paths.
 - Gate every resource load on a stated condition — "Read `references/api-errors.md` when the API returns a non-200" — never a bare "see `references/` for details".
+- Keep non-obvious gotchas in `SKILL.md` when an agent may not recognize the condition that would trigger a reference load.
 - Follow a predictable body shape: short overview, when-to-use, numbered workflow, concrete examples.
 - Write instructions as direct third-person imperative commands, in strict chronological order, with explicit decision branches.
+- Match prescription to fragility: mandate exact sequences for risky or consistency-sensitive work; otherwise state the goal and give one default, not a menu of equal options.
 - Give exact executable commands with their flags, not tool names. Tooling named in an instruction file gets used far more often than tooling left implicit.
 - Provide concrete templates for anything the agent must produce repeatedly; agents pattern-match templates better than prose descriptions.
-- Put deterministic, repeated mechanics in `scripts/` rather than prose the agent must re-derive each run.
+- Put deterministic, repeated mechanics in self-contained `scripts/` rather than prose the agent must re-derive. Document dependencies, emit actionable errors, handle known edges, and state the exact command, success signal, and recovery path.
 - When a skill fans out sub-agents for mechanical research or discovery against a fixed brief, instruct the cheapest available tier at low reasoning effort, and state the escalation path for an unusable return. Reserve stronger tiers for judgement-heavy work — review, conflict resolution, synthesis, implementation.
 - State boundaries in three tiers where a skill can act destructively or irreversibly: always do, ask first, never do.
 - Close the rationalization loophole: for any step that must not be skipped, say so explicitly and state what to do when it cannot run. A missing guardrail on a required step is the most common defect in published skills.
@@ -32,15 +34,15 @@ Every skill file is billed to the context window on every matched task, so treat
 
 ## Frontmatter and activation
 
-- `name` and `description` are required; `name` matches the directory and symlink, lowercase with hyphens, 64 characters maximum.
+- `name` and `description` are required. `name` must match the directory and symlink, use only lowercase letters, digits, and single hyphens, neither start nor end with a hyphen, and stay within 64 characters. `description` must be non-empty and at most 1,024 characters.
 - The `description` is the only part competing for activation — the body is never read if it fails to match. State both the capability and the activation context in phrasing users actually use. Never pair a detailed body with a lazy one-line description.
 - Keep the `description` discriminative rather than padded: generic trigger phrases make routing noisier, not broader. Add explicit negative triggers when a neighbouring skill would otherwise be shadowed ("not for X — use `<other-skill>`").
 
 ## Validating a skill
 
-- Test discovery from metadata alone: given only `name` and `description`, is the skill selected for tasks it owns and skipped for tasks it does not?
-- Test execution against at least three real historical tasks, not hypotheticals. Establish the baseline without the skill first, then confirm the skill improves the outcome.
-- Test the failure edges: unsupported inputs, missing tools, and the branches where the procedure must stop and ask.
+- Evaluate activation and execution separately. Activation cases include realistic positive, negative, and ambiguous prompts; execution cases define observable success and required evidence.
+- Test execution against at least three real historical tasks with varied phrasing and at least one boundary case. Compare against no skill or the previous version in a clean context.
+- Grade concrete assertions, inspect outputs and execution traces, and fix the underlying procedure rather than patching one prompt. Test unsupported inputs, missing tools, and every stop-or-ask branch.
 - Verify discovery after structural changes: `npx skills add . --list`.
 
 ## Maintaining a skill
