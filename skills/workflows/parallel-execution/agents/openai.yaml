@@ -1,7 +1,7 @@
 interface:
   display_name: "Parallel Execution"
-  short_description: "Coordinate safe bounded delivery concurrency"
-  default_prompt: "Use $parallel-execution to schedule these independent delivery units through one bounded central orchestrator."
+  short_description: "Coordinate bounded read-only concurrency"
+  default_prompt: "Use $parallel-execution to schedule these independent read-only units through one bounded central manager."
 
 policy:
   allow_implicit_invocation: false

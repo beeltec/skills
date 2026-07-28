@@ -28,7 +28,7 @@ Before a mutation:
 3. Run `node scripts/validate-project.mjs`; on an invalid baseline, report and stop unless the user explicitly asks to repair that state.
 4. Read the root index, maintenance rules, log, ubiquitous language, nearest relevant indexes, related concepts, and every page needed to detect duplicate ownership and inbound links.
 5. Read relevant active and archived backlog records when they establish proposal state, acceptance, implementation history, research provenance, or references affected by a move or deletion.
-6. Inspect repository code, tests, manifests, configuration, version evidence, branches, and worktree state needed to verify the candidate claims. Preserve unrelated changes; never stage them.
+6. Inspect repository code, tests, manifests, configuration, version evidence, branches, and checkout state needed to verify the candidate claims. Preserve unrelated changes; never stage them.
 
 Read-only discovery, explanation, and audits may inspect an incomplete or invalid setup — report its limits, mutate nothing, and recommend `$setup-project` when the scaffold is absent.
 

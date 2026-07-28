@@ -47,10 +47,10 @@ Draft each architecturally significant decision this outcome makes, in ADR shape
 
 Record approval, sequencing, one composed acceptance-unit review, minimal verification, suite-evidence reuse, and archive coordination. Never prescribe child or remediation reviews. Run the smallest affected checks after stable increments, each applicable lint/typecheck once unless invalidated, and one representative suite after final-review remediation.
 
-### Provisional execution graph
+### Provisional serial execution graph
 
 - **Dependencies:** child edges or `none`.
 - **Shared contracts/files:** paths or interfaces shared by children, or `none`.
-- **Conflict domains:** `domain -> provisional owner child` mappings, or `none`; one mutating owner per domain.
-- **Candidate parallel frontiers:** dependency-free, conflict-disjoint child sets, or `none`.
-- **Revalidation:** required against live code before dispatch.
+- **Conflict domains:** `domain -> owner child` mappings, or `none`.
+- **Child order:** dependency-safe sequence with the reason for each edge.
+- **Revalidation:** required against live code before execution.

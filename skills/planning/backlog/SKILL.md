@@ -13,9 +13,9 @@ The project owner controls durable intent and priority. Obtain explicit approval
 
 Approval covers only the exact transaction presented — never infer it from earlier discussion, a plan, silence, or permission to inspect files. Record approval in `## Execution` when readiness requires it and preserve provenance.
 
-Under an active autonomous run, `$to-product`'s autonomous contract supplies the approval this section requires for intake, refinement, rank placement, and every `proposed -> ready` transition. It never supplies approval for cancellation.
+Under `$to-product`, its contract approves every schema-valid record/Epic transaction the PRD requires: creation, rewrite, split/merge, type, scope, criteria, exclusions, child set, parentage, relationships, rank, readiness, claims, status, cancellation, recovery, and archival. It never authorizes unrelated or out-of-PRD implementation.
 
-An invoked gate-backed workflow authorizing an agent/session for a named approved standalone item or Epic acceptance unit permits: one start transaction; temporary claims; aggregated criterion, subtask, and execution evidence; normal lifecycle transitions; and one final completion/archive transaction. An Epic unit may move the Epic and all required children to `in-progress`, claim each child under one session/integration branch, then complete and archive them atomically. This authority never changes wording, scope, parentage, relationships, priority, cancellation, readiness approval, or accepted wiki state.
+An invoked gate-backed workflow authorizing an agent/session for a named standalone item or Epic permits one start transaction, temporary claims, aggregated evidence, normal lifecycle transitions, and one final completion/archive transaction. An Epic may move itself and required children to `in-progress`, claim each child under one session/acceptance branch, then complete/archive atomically. This authority never changes wording, scope, parentage, relationships, priority, cancellation, readiness approval, or accepted wiki state.
 
 ## Preflight
 
@@ -61,7 +61,7 @@ Slice work into the smallest independently implementable, verifiable outcome. Pr
 
 Keep verification minimal and proportional. Plan implementation and real-path smoke proof first; reuse existing coverage. Add a test only for an uncovered observable contract: one acceptance-critical browser E2E for user-visible behavior, integration/contract coverage for a boundary, or unit coverage only for isolated edges or invariants impractical to prove higher. Never prescribe feature TDD, coverage targets, duplicate layers, or excessive E2E. An owner-specified tool binds, but implies no extra depth.
 
-For Epics, refine a measurable coordinated outcome, objective acceptance criteria, explicit exclusions, a useful multi-item child scope, and a provisional execution graph naming dependencies, shared contracts/files, conflict domains, candidate parallel frontiers, and required live-code revalidation. Parentless work stays standalone when no genuine shared outcome requires an Epic.
+For Epics, refine a measurable coordinated outcome, objective criteria, exclusions, useful child scope, and a provisional serial execution graph naming dependencies, shared contracts/files, conflict domains, child order, and required live-code revalidation. Parentless work stays standalone when no genuine shared outcome requires an Epic.
 
 Present every proposed scope, criterion, parent, relationship, or rank change for explicit owner approval before editing.
 
@@ -83,7 +83,7 @@ The ordered links under `## Global executable-work rank` in `docs/backlog/index.
 
 ## Execution Claims And Status
 
-For a standalone item, verify actionability and claim it in one start transaction. For an Epic acceptance unit, verify every child, move the Epic and all required children to `in-progress`, and claim each child for one session/integration branch in one start transaction. Epics have no claim fields. Renew before expiry; never overwrite another live claim.
+For a standalone item, verify actionability and claim it in one start transaction. For an Epic, verify every child, move the Epic and required children to `in-progress`, and claim each child for one session/acceptance branch in one start transaction. Epics have no claim fields. Renew before expiry; never overwrite another live claim.
 
 Keep focused-check and subtask evidence in the workflow ledger during execution. In the final transaction, check only supported criteria/subtasks, clear claims, set the standalone item or every Epic child and the Epic `done`, remove terminal rank entries, and archive as required. Required accepted-state wiki updates precede this transaction. Incomplete evidence forbids `done`.
 
@@ -105,4 +105,4 @@ For each approved mutation:
 6. Create one concise Conventional Commit, normally `docs(backlog): <transaction outcome>`. Keep temporary claims in their own transaction when practical.
 7. Report the commit hash, changed records, resulting statuses and actionability, rank effects, and validation result; for a bookkeeping transaction, one line — the commit hash and what was checked or changed. End with `Next step:` — one exact command the transaction implies (e.g. a `ready` transition → `$implement WORK-NNN`); omit when none follows.
 
-If approval is denied or changed, revise the proposal in conversation without mutating files. If unrelated worktree changes overlap an affected file, preserve them and ask before proceeding when a safe narrow transaction is not possible.
+If approval is denied or changed, revise the proposal in conversation without mutating files. If unrelated checkout changes overlap an affected file, preserve them and ask before proceeding when a safe narrow transaction is not possible.

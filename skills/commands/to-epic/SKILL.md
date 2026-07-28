@@ -25,4 +25,4 @@ When at least two planning concerns are independent, invoke `$parallel-execution
 
 A failed validator, unresolved research the owner declined, or a missing readiness requirement is a blocker: leave the record `proposed`, keep committed transactions intact, and report — never force `ready`.
 
-End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `$implement EPIC-NNN` (adaptive per ready frontier) or `$implement-with-subagents EPIC-NNN` (a fresh implementation subagent per child); a record left `proposed` → the exact command that resumes it after its named blocker.
+End the report with `Next step:` — one copy-pasteable command from the outcome: everything ready → `$implement EPIC-NNN` (local serial execution) or `$implement-with-subagents EPIC-NNN` (fresh subagents, serial on one branch); a record left `proposed` → the exact resume command after its named blocker.

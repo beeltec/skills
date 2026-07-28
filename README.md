@@ -57,7 +57,7 @@ flowchart TD
 
 ### Execute and accept
 
-Ready work is executed on a conventional branch and reviewed until both axes pass; acceptance happens only on the primary branch. An Epic gets one further review of the composed result before it closes:
+Ready work uses the sole local acceptance branch: one writer at a time, one review per acceptance unit, then primary merge and branch deletion:
 
 ```mermaid
 flowchart TD
@@ -127,7 +127,7 @@ flowchart TD
     PARK -.-> NEXT
 ```
 
-It never does the work itself. Every step goes through the skill that owns it, and `setup-project` installs a work-routing table into the project's agent instructions so ordinary sessions follow the same rule.
+It routes every step through its owning skill. Implementation uses fresh subagents serially on one acceptance branch; if no worker is available, the manager runs `$implement` so capacity never stops the run.
 
 At the planners' evidence decision the owner-proxy names every subject whose page is missing, `draft`, version-mismatched, or stale — standard subjects included, never technologies only — and answers yes to `research` whenever the outcome carries a version-specific or security-sensitive question. And an outcome only counts as shipped after verification against repository evidence, not the invoked skill's report: every child `done` with a merge commit and green post-merge checks, a current guidance page for every subject named at the evidence decision, published ADRs matching the decisions the outcome's discussion confirmed, live version-resolution rows dated within the run, records archived, validator green. A failed check is resolved or parks the outcome — it is never recorded as shipped.
 
@@ -143,7 +143,7 @@ Session lifetime?
 
 Because nothing pauses, the run is auditable after the fact rather than during it. Each assumption lands as provenance on the record it shaped, and every run commits a **run transcript** to `docs/runs/` holding the outcome map, the verbatim discussions, the assumption register, every gate it auto-approved, and the delivery evidence.
 
-Two boundaries are worth knowing before you use it. It **auto-approves destructive knowledge changes** — reversing an adopted guidance rule, deprecating or deleting a concept, superseding an in-force ADR — reporting each individually, with git history as the only undo. And it **never grows the PRD**: scope the PRD does not carry is filed as a `proposed` record and left for you. A blocked item gets three attempts, then its claim is released, its status returns to `ready` with the blocker recorded, and the run moves on — so one bad item never ends the run. Re-invoking `to-product` with the same PRD resumes where it stopped instead of duplicating records.
+`to-product` may authorize every PRD-required decision the owner could: reshape or cancel records/Epics, repair claims and workflow state, clean extra local branches after preserving recovery state, and approve destructive knowledge changes. It never grows the PRD or changes unrelated records. Workflow conditions never stop it; a technical/external blocker gets three attempts, then recovery state is preserved, the branch is deleted, and the run continues. Re-invocation resumes instead of duplicating records.
 
 Read [the autonomous contract](skills/commands/to-product/references/autonomous-contract.md) for the exact gate-by-gate behavior.
 
@@ -169,8 +169,8 @@ A few rules the diagrams don't show: execution always passes through backlog rea
 | **research** | Attach current version and guideline evidence to a proposed backlog item before readiness, fanned out per subject |
 | **guidance** | Research, publish, and refresh canonical technology and standards guidance pages, so adopted rules are read instead of re-researched |
 | **to-guidance** | Owner-invoked entry point that runs `guidance` for the named subjects under one standing approval |
-| **implement** | Execute a ready work item or Epic adaptively, using fresh subagents for qualifying parallel frontiers and the main agent for serial or conflict-heavy work |
-| **implement-with-subagents** | Execute an Epic or work-item set with one fresh implementation subagent per item, serialized admission, and manager-owned acceptance |
+| **implement** | Execute a ready work item or Epic serially on its sole acceptance branch |
+| **implement-with-subagents** | Execute items through fresh subagents, one writer at a time on the sole acceptance branch |
 | **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's — or a whole Epic's — scope |
 | **to-product** | Run the whole flow unattended from a PRD, answering every owner gate as an owner-proxy, until every outcome has shipped |
 
@@ -182,7 +182,7 @@ Independent skills that work in any project:
 |-------|-------------|
 | **bump-version** | Detect patch/minor/major bumps, update version files and changelog, create a release commit |
 | **codex-subagent** | Delegate implementation tasks to a workspace-scoped Codex CLI agent |
-| **create-conventional-branch** | Create and switch to a branch following the Conventional Branch specification |
+| **create-conventional-branch** | Enforce the sole local acceptance branch and its Conventional Branch lifecycle |
 | **elementor-content** | Create and edit Elementor JSON or WordPress database content via WP-CLI |
 | **glab** | Manage GitLab merge requests, issues, pipelines, releases, and repositories with `glab` |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |

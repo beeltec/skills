@@ -8,7 +8,7 @@
 - Record architecturally significant decisions as ADRs under `docs/wiki/architecture/decisions/`. Draft a proposed decision on its backlog record (`decisions:` and `## Decisions`); publish it as an ADR only at primary-branch acceptance. A replaced ADR is superseded in place, never deleted.
 - Require project-owner approval to mark work `ready`, walk work back from `ready` to `proposed`, change rank, cancel work, supersede an ADR, or change accepted wiki state.
 - Run `node scripts/validate-project.mjs` after wiki or backlog changes and before handoff.
-- Stay on the current branch. Only `$implement` and `$implement-with-subagents` create branches, via `$create-conventional-branch`; never create, switch, merge, or delete branches from any other workflow.
+- Allow only the primary branch plus one local acceptance branch. `$implement` and `$implement-with-subagents` own it through `$create-conventional-branch`; serialize every writer, then merge/delete or preserve recovery state/delete before the next unit. Other workflows never change branches, except `$to-product` may clean extras under its autonomous contract.
 - Never create, inspect, or depend on `docs/tasks`.
 
 ## Verification artifacts

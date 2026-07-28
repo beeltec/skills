@@ -7,7 +7,7 @@
 
 ## Outcome graph
 
-| # | Outcome | Route | Depends on | Shared contract/files | Conflict domain | Candidate frontier | Record | Status |
+| # | Outcome | Route | Depends on | Shared contract/files | Conflict domain | Read-only frontier | Record | Status |
 |---|---|---|---|---|---|---|---|---|
 | 1 | | `$to-epic` | — | | | 1 | `EPIC-NNN` | done |
 | 2 | | `$to-backlog` | 1 | | | 2 | `WORK-NNN` | parked |
@@ -43,7 +43,7 @@
 
 ## Delivery
 
-| Outcome record | Topology | Workers and roles | Admission order | Code commits | Acceptance merge | Review | Suite/matrix | Reconciliation | Governance transactions | ADRs | Guidance |
+| Outcome record | Topology | Agents and fallback | Execution order | Code commits | Acceptance merge | Review | Suite/matrix | Reconciliation | Governance transactions | ADRs | Guidance |
 |---|---|---|---|---|---|---|---|---|---|---|
 
 ## Execution metrics
@@ -58,9 +58,9 @@
 
 ## Parked
 
-| Record | Blocker | Attempts | Resume |
-|---|---|---|---|
-| `WORK-NNN` | | 3/3 | `$implement WORK-NNN` |
+| Record | Blocker | Attempts | Recovery ref/stash | Resume |
+|---|---|---|---|---|
+| `WORK-NNN` | | 3/3 | | `$implement WORK-NNN` |
 
 ## Result
 

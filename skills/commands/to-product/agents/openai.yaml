@@ -1,7 +1,7 @@
 interface:
   display_name: "To Product"
   short_description: "Ship a PRD end to end, unattended"
-  default_prompt: "Use $to-product to run the whole delivery flow from this PRD without pausing: discussion answered by an owner-proxy, planning, research, guidance, implementation, primary-branch acceptance, and wiki reconciliation, until every outcome has shipped."
+  default_prompt: "Use $to-product to run this PRD without workflow pauses: owner-proxy discussion, planning, research, guidance, serial implementation on one acceptance branch, primary acceptance, and wiki reconciliation until each outcome ships or is technically parked."
 
 policy:
   allow_implicit_invocation: false

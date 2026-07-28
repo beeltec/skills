@@ -22,6 +22,8 @@ Approve, then log. Each row is a pause the invoked skill would otherwise hold fo
 | Research transaction | `$research` step 7 | Approve the drafted section and the resulting state |
 | Page create-or-refresh | `$guidance` | Approve |
 | Concept, terminology, and ADR transactions | `$wiki`, `$to-wiki` | Approve |
+| Any PRD-required record or Epic transaction | `$backlog`, `$to-epic`, `$to-backlog`, `$implement` | Approve creation, rewrite, split/merge, type, scope, criteria, exclusions, child set, parentage, relationships, rank, readiness, claims, status, cancellation, recovery, and archival |
+| Extra local branch cleanup | `$create-conventional-branch` | Preserve unique or uncommitted state, delete every extra local branch, and log recovery refs/stashes |
 | Wiki reconciliation asserting knowledge the record never carried, or contradicting an in-force ADR | `$implement` | Approve |
 | Significant decision first made during implementation | `$implement` | Approve the backlog transaction adding the draft before completion |
 | Primary-branch acceptance — merge commit and post-merge checks | `$implement` | Approve once required review passes or is policy-skipped and one fresh final suite is green |
@@ -29,18 +31,21 @@ Approve, then log. Each row is a pause the invoked skill would otherwise hold fo
 
 ### Destructive gates
 
-These three destroy or overturn accepted knowledge. The run approves them anyway, and git history is the only undo. Log each one **individually** in the report with the record that forced it:
+These actions destroy or overturn state. Approve and log each individually:
 
 - reversing or removing an already-adopted rule — `$guidance` step 6;
 - deprecating or deleting an existing concept — `$to-wiki` step 3, `$wiki`;
-- superseding an in-force ADR — `$to-wiki` step 3, `$wiki`.
+- superseding an in-force ADR — `$to-wiki` step 3, `$wiki`;
+- cancelling or materially reshaping an existing record/Epic — `$backlog`;
+- deleting a pre-existing local branch after preserving recoverable state — `$create-conventional-branch`.
+
+Workflow state never pauses or parks the run. Repair approvals, record shape, claims, branches, merge conflicts, dependency order, and worker capacity autonomously. Only technical or external impossibility may park an outcome.
 
 ## Never do
 
-- Never implement scope the PRD does not carry. File it as a `proposed` backlog record, name it in the report, and continue.
+- Never implement scope the PRD does not carry or change unrelated records. File adjacent scope as `proposed`, name it, and continue.
 - Never push to a remote, open a pull or merge request, or publish anything outside the repository.
-- Never force-push, rewrite pushed history, or delete a branch this run did not create.
-- Never cancel a record — cancellation always requires the real owner — and never reparent or rerank a record that is not part of the map.
+- Never force-push or rewrite pushed history.
 - Never set `research: complete` or `not-needed` without the evidence each state requires.
 - Never present an assumption as sourced, and never omit one from the assumption register.
 - Never perform a covered intent inline instead of invoking the skill that owns it.

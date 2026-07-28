@@ -1,7 +1,7 @@
 interface:
   display_name: "Implement with Subagents"
-  short_description: "Run every backlog item in a fresh subagent"
-  default_prompt: "Use $implement-with-subagents to execute this EPIC-NNN or explicit WORK-NNN set with one fresh implementation subagent per item and serialized integration."
+  short_description: "Run fresh subagents serially on one branch"
+  default_prompt: "Use $implement-with-subagents to execute this EPIC-NNN or explicit WORK-NNN set with one fresh subagent per item, one writer at a time on the sole acceptance branch."
 
 policy:
   allow_implicit_invocation: false

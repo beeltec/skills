@@ -6,7 +6,7 @@ Applies only to `EPIC-NNN`. The Epic and all approved children form one acceptan
 
 Resume this invocation's incomplete child first. Otherwise scan global rank and select the highest-ranked child whose inward blockers are provisionally complete. Dependencies determine actionability; rank chooses among actionable children.
 
-Execute each child locally or through one internal provisional-child packet according to `$implement`'s adaptive ready-frontier policy or the invoking orchestrator's stricter topology. Keep its status `in-progress`, claim unchanged, rank entry present, checklist edits uncommitted, and evidence in the invocation ledger. A child is provisional even when its focused checks pass. Do not merge to primary, reconcile wiki state, run a full suite, or mark it `done`.
+Execute children one at a time, locally or through one internal provisional-child packet. Keep status `in-progress`, claim unchanged, rank present, checklist edits uncommitted, and evidence in the invocation ledger. A child remains provisional after focused checks pass. Do not merge to primary, reconcile wiki state, run a full suite, or mark it `done`.
 
 Do not review children independently. Preserve high-risk child context for the one composed review. If no child is actionable while required work remains, report the full blocker frontier and stop safely.
 

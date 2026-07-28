@@ -51,7 +51,7 @@ Before executable work becomes `ready`, all of the following are required:
 - Every checklist subtask is one bounded coherent implementation step naming scope and its cheapest command, test, or observable verification. Use `No subtasks.` when decomposition adds no value.
 - The item is present exactly once in the root global rank.
 
-A ready Epic's `## Execution` also names dependency edges, shared contracts/files, conflict domains with provisional owner children, candidate parallel frontiers, and required live-code revalidation. An unresolved row keeps the Epic `proposed`.
+A ready Epic's `## Execution` also names dependency edges, shared contracts/files, conflict domains, serial child order, and required live-code revalidation. An unresolved row keeps the Epic `proposed`.
 
 Proposal-specific research remains with the backlog record. During post-acceptance implementation reconciliation, promote only guidance that became durable accepted current state to its canonical wiki concept; summarize it there instead of copying the proposal evidence.
 
@@ -76,7 +76,7 @@ Relationships may target Epics or executable work, must resolve to an existing I
 
 - The ordered list under `## Global executable-work rank` in the root index is the sole global rank. It contains every active `WORK-NNN` exactly once, across Epic and standalone work. Epics are not ranked. Reorder only with project-owner approval.
 - Checklist subtasks are local execution steps, not separate records. During an Epic, retain focused-check evidence in the execution ledger and batch supported child/Epic checklist updates into the final acceptance transaction. A standalone workflow may do the same. Every subtask must have evidence before `done`; never create per-subtask backlog commits.
-- Each in-progress work item has a non-empty claim naming the shared acceptance session/integration branch and a future ISO 8601 `claim_expires`. Epics have no claim fields. Release or renew before expiry; every other work-item status uses `none`.
+- Each in-progress work item has a non-empty claim naming the shared acceptance session/branch and a future ISO 8601 `claim_expires`. Epics have no claim fields. Release or renew before expiry; every other status uses `none`.
 
 ## Cancellation and archival
 
