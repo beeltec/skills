@@ -42,7 +42,6 @@ Every skill file is billed to the context window on every matched task, so treat
 - Test execution against at least three real historical tasks, not hypotheticals. Establish the baseline without the skill first, then confirm the skill improves the outcome.
 - Test the failure edges: unsupported inputs, missing tools, and the branches where the procedure must stop and ask.
 - Verify discovery after structural changes: `npx skills add . --list`.
-- Run `testbed/bin/run.sh` only for substantial behavioral changes to delivery-chain skills (`commands/`, `planning/`, `workflows/`); skip wording, formatting, presentation, and other non-behavioral edits.
 
 ## Maintaining a skill
 
