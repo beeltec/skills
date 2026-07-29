@@ -78,6 +78,7 @@ Legacy `to-epic`, `to-backlog`, `research <record>`, `to-wiki`, and `to-guidance
 | `$develop to-epic plan checkout v2` | Epic planning |
 | `$develop research WORK-014` | planning plus proposal research |
 | `$develop implement-with-subagents EPIC-003` | governed execution with fresh implementation workers |
+| `$develop implement EPIC-003` | governed execution; apply the context-fit gate automatically |
 | `$develop plan checkout v2` | planning; Epic only if multiple independently valuable children serve one outcome |
 | `$develop WORK-014` | governed implementation when ready/in-progress; otherwise refine a proposed record to ready and stop |
 | `$develop update our React guidance` | guidance publication |

@@ -24,6 +24,7 @@
 | `$develop research WORK-014.` | Load `develop`; route to proposal research within planning. |
 | `$develop research-tech-stack Redis.` | Load `develop`; route to adopted guidance, not proposal research. |
 | `$develop implement-with-subagents EPIC-003.` | Load `develop`; route to execution plus implementation-worker delegation. |
+| `$develop implement EPIC-003.` | Load `develop`; route to governed execution and apply the context-fit gate without requiring special mode words. |
 | `Add CSV export.` | Do not load `develop`. |
 | `$develop` | Ask for the missing objective; mutate nothing. |
 | `$develop run all workflow modes` | Route one outcome; do not preload every procedure. |
@@ -39,10 +40,10 @@ Grade observable behavior and traces, not exact prose.
 5. **Project state:** keep accepted facts in the wiki and desired deltas in the backlog. Exact `knowledge`/`to-wiki` and `guidance`/`to-guidance` transactions may commit locally; destructive knowledge or adopted-rule replacement still pauses.
 6. **Setup:** install the scaffold on the current branch, preserve customized files, validate, and produce no byte changes on rerun. A missing or failing validator blocks completion.
 7. **Evidence and guidance:** resolve installed and current versions from live evidence, separate requirements from recommendations, publish only named adopted subjects, and keep proposal evidence on its record.
-8. **Execution:** keep bounded direct work on the current branch; branch substantial or governed work; preserve unrelated changes; run focused checks and one acceptance review. Missing governance blocks only selected governed work.
+8. **Execution:** keep bounded direct work on the current branch; branch substantial or governed work; preserve unrelated changes; apply the context-fit gate before coding and after every delta; run focused checks and one acceptance review. Missing governance blocks only selected governed work.
 9. **Deployment:** discover the repository mechanism, present target, effect, and rollback, then stop for confirmation.
 10. **Review:** resolve a non-empty fixed-point diff, report separate Standards and Spec findings, never fix during terminal review, and run no second review after in-run remediation.
-11. **Delegation:** fan out only independent read-only units; allow one implementation writer at a time; keep decisions, records, review, merge, and acceptance with the manager; follow the unavailable-worker branch.
+11. **Delegation:** fan out only independent read-only units; use fresh serial implementation workers when the remaining acceptance unit fails the context-fit gate; keep decisions, records, review, merge, and acceptance with the manager; follow the unavailable-worker branch.
 12. **Release:** update every authoritative version and the changelog, run the complete release matrix, commit only release paths, and keep publish, tag, and deploy separately confirmed.
 13. **Autonomous:** require explicit autonomous intent and a resolvable source, log proxy decisions and assumptions, stay inside the PRD, bound retries, park only after the third addressed failure, and never push or publish without separate authority.
 14. **Handoff:** offer one exact recommended `$develop ...` request plus stop when a question tool exists; otherwise emit one `Next step:` line. Never do both.
@@ -59,3 +60,15 @@ Run each case in a clean context. Grade the map, trace, and closing ledger; keyw
 | Narrow change | `$develop discuss changing a WordPress timeline from date order to editorial order.` | Infers query semantics, editor workflow, existing content migration, fallback behavior, regression coverage, local/staging verification, and rollback; excludes unrelated areas with reasons instead of expanding scope mechanically. |
 
 For every case, fail when the agent hides the map, treats the baseline as a fixed questionnaire, asks several decisions together, stops after the stated concern, omits the challenge pass, or closes with an `open` area.
+
+## Context-Fit Execution
+
+Run each case in a clean context. Inspect delegation decisions and worker briefs.
+
+| Historical shape | Expected |
+|---|---|
+| One bounded `WORK-NNN` in a familiar subsystem with focused checks | Implement locally when the complete acceptance unit fits with ample context. |
+| Tiny Epic with two tightly coupled children and one focused verification path | May implement locally when the complete Epic passes the gate. |
+| Multi-child Epic spanning schema, API, UI, and browser acceptance | Use one fresh serial implementation worker per child by default; keep Epic acceptance with the manager. |
+| Local item expands into multiple subsystems after its first coherent delta | Checkpoint that delta, then delegate the remainder instead of relying on compaction. |
+| Context-risking unit with no worker capacity | Execute only a bounded local delta that independently passes the gate; otherwise stop or park it. |

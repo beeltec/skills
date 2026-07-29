@@ -23,7 +23,7 @@ Create `docs/runs/<YYYY-MM-DD>-develop-<slug>.md` from `assets/run-transcript.md
 1. Build an outcome graph: outcomes, dependencies, shared contracts/files, conflict domains, serial order, and read-only frontiers. Do not slice children during this pass.
 2. For each ready outcome, run the discussion questions as one visible batched block, each numbered question immediately followed by the verbatim owner-proxy answer and source/`ASSUMPTION`.
 3. Route internally to planning, current knowledge, guidance, or execution. Inspect touched technologies and standards; adopt/refresh missing, draft, mismatched, or stale guidance only when required by the PRD. Research version/security-sensitive questions.
-4. Use fresh serial implementation workers when available, otherwise implement locally. Keep mutation and acceptance serial.
+4. Apply `execution.md`'s context-fit gate. Use fresh serial implementation workers for work that fails it. Without worker capacity, implement only a coherent local delta that passes the gate; park the outcome when none does. Keep mutation and acceptance serial.
 5. Verify from repository evidence, not reports: scope, review, representative suite/matrix, reconciliation, records/archives, decisions/ADRs, current named guidance, dated version evidence, validator, branch cleanup, and transcript.
 6. Record outcome evidence and continue dependency-independent work.
 

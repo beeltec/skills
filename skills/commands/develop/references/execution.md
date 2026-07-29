@@ -10,6 +10,12 @@ Load for code changes, deployments, explicit branch/PR intent, selected governed
 
 If direct work grows, finish safely in the selected lane and report the overrun. Never abandon a partly applied coherent fix solely to introduce ceremony.
 
+## Context-Fit Gate
+
+Before coding and after each coherent delta, assess the complete remaining acceptance unit: implementation, focused checks, final review, remediation, and reconciliation. Use exposed context capacity when available; never rely on future compaction as capacity.
+
+Keep work local only when it should finish with ample context and is one bounded item or a tiny, tightly coupled Epic. Broad discovery, multiple subsystems, migration, large verification evidence, uncertainty about fit, or compaction since the authority packet fails the gate. Then load `delegation.md` and use fresh serial implementation workers. If local work grows, finish the current coherent delta, record its fixed point and evidence, and delegate the remainder.
+
 ## Branches
 
 Inspect `git status --short --branch`, remotes, worktrees, and local branches before switching. Follow repository branch conventions; otherwise use `<feat|fix|hotfix|release|chore>/<lowercase-description>`. Never overwrite a remote name.
@@ -30,7 +36,7 @@ Direct/advisory/planning/knowledge/setup work stays on the current branch unless
 
 An Epic and approved children are one acceptance unit. Execute eligible children serially. Before start, eligibility uses normal actionability. After Epic start or resume, a child is eligible when it is `in-progress`, claimed by this session/branch, not yet provisionally complete, and its inward blockers are provisionally complete; rank breaks ties. Keep children provisional: no child review, merge, wiki publication, terminal status, rank removal, or evidence commit. After every child, verify its commit/evidence and revalidate dependencies/shared interfaces.
 
-A fresh worker receives the live session, acceptance unit, branch and expected HEAD, fixed point, claims, authority paths, exact delta, verification, optional model/effort settings, and stop conditions. Only one writer runs at a time. The manager owns claims, ordering, review, reconciliation, merge, recovery, and acceptance. A worker stops after code commits and focused evidence.
+When the context-fit gate requires workers, dispatch one child per fresh worker by default. Combine only tiny, tightly coupled children whose combined scope would pass the local gate. A fresh worker receives the live session, acceptance unit, branch and expected HEAD, fixed point, claims, authority paths, exact delta, verification, optional model/effort settings, and stop conditions. Only one writer runs at a time. The manager owns claims, ordering, review, reconciliation, merge, recovery, and acceptance. A worker stops after code commits and a compact evidence return.
 
 ## Deployment
 

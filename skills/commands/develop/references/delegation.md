@@ -1,6 +1,6 @@
 # Delegation
 
-Load only for at least two independent read-only units or requested fresh implementation workers. The manager owns synthesis, decisions, every governance mutation, and final acceptance.
+Load only for at least two independent read-only units, requested fresh implementation workers, or implementation that fails `execution.md`'s context-fit gate. The manager owns synthesis, decisions, every governance mutation, and final acceptance.
 
 ## Read-Only Fan-Out
 
@@ -14,8 +14,10 @@ Deterministic checks may run concurrently only when they share no mutable caches
 
 ## Implementation Workers
 
-Run one writer at a time on the manager-owned branch. Give each fresh worker one exact delta, authority packet, expected HEAD, verification commands, and stop conditions. The worker implements, commits when authorized, runs focused checks, and returns evidence. It never owns claims, planning, review, merge, wiki/backlog mutation, acceptance, or another worker.
+Use workers for context isolation, not concurrent mutation. Run one writer at a time on the manager-owned branch. Give each fresh worker one exact delta, authority packet, expected HEAD, verification commands, and stop conditions. The worker implements, commits when authorized, runs focused checks, and returns only the commit, changed paths, checks, failures, and remaining risk. It never owns claims, planning, review, merge, wiki/backlog mutation, acceptance, or another worker.
 
-Verify each return before the next writer. Retry focused failures through the same worker. Outside explicit autonomy, stop when no worker is available if the user specifically required workers; otherwise continue locally. In autonomous mode, worker capacity is never a blocker: record fallback and continue locally.
+Dispatch one `WORK-NNN` per fresh worker by default. Combine only tiny, tightly coupled children whose combined scope would pass the local context-fit gate. Verify each return before the next writer, then re-run the gate for all remaining work. Retry focused failures through the same worker.
+
+When no worker is available, stop if the user required workers. Otherwise implement only a coherent local delta that passes the gate; checkpoint and stop when none does. In autonomous mode, park that outcome and continue independent outcomes. Never fall back to implementing the whole context-risking unit locally.
 
 Report roles, models/effort applied or unsupported, completion order, checks, retries, conflicts, rework, blockers, and exposed metrics. Never invent timing or token data.
