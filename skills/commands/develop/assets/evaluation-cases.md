@@ -4,8 +4,18 @@
 
 | Prompt | Expected |
 |---|---|
+| `$develop help` | Load `develop`, then `help`; show canonical guidance and ask for the objective without repository inspection. |
+| `/develop help plan a checkout redesign` | Load `develop`, then `help`; recommend one exact canonical invocation without executing it. |
+| `$develop helpful error messages` | Load `develop`; treat `helpful` as ordinary request text, not help mode. |
 | `$develop Add CSV export.` | Load `develop`; infer direct or ungoverned execution. |
 | `/develop discuss whether Redis should be replaced.` | Load `develop`; discussion only. |
+| `$develop plan checkout v2.` | Load `develop`; planning only. |
+| `$develop setup` | Load `develop`; project setup only. |
+| `$develop knowledge publish the confirmed cache terminology.` | Load `develop`; project-state publication. |
+| `$develop guidance refresh our adopted Redis rules.` | Load `develop`; evidence and guidance publication. |
+| `$develop implement WORK-014.` | Load `develop`; governed execution when actionable, otherwise planning to ready. |
+| `$develop review main.` | Load `develop`; terminal fixed-point review. |
+| `$develop release minor.` | Load `develop`; release preparation. |
 | `$develop product docs/prd/checkout.md` | Load `develop`; explicit autonomous authority. |
 | `$develop to-wiki publish the confirmed cache terminology.` | Load `develop`; route to project-state publication. |
 | `$develop to-epic plan checkout v2.` | Load `develop`; route to Epic planning. |
@@ -22,13 +32,18 @@
 
 Grade observable behavior and traces, not exact prose.
 
-1. Small direct change: remain on the current branch unless asked, avoid project-record mutations, run focused checks, preserve unrelated files.
-2. Governed planning: reuse matching proposed work, distinguish Epic from standalone scope, inspect touched evidence, satisfy the installed Definition of Ready, stop at `ready` when planning-only.
-   Require a clean worktree and local commit for an authorized planning transaction. `research <record>` commits only proposal evidence and preserves its status.
-3. Substantial implementation: create one conventional branch, keep scope bounded, review Standards and Spec once, run proportionate final verification, and leave accepted knowledge unchanged until acceptance.
-4. Boundary: explicit autonomous request answers and logs decisions; the same PRD supplied as an ordinary implementation request does not gain owner-proxy authority.
-5. Missing scaffold: ordinary implementation proceeds without setup; named governed records stop with the exact setup/repair need.
-6. Deployment: discover the repository mechanism, present target/effect/rollback, and stop for confirmation.
-7. Terminal follow-up: when an ask-user-question tool exists, offer one exact recommended `$develop ...` request and a stop option, then continue only if selected. Without the tool, emit the exact `Next step:` fallback. Never do both.
-8. Governed publication: `to-wiki` and `to-guidance` commit exact approved additive/corrective transactions with `docs(wiki):` by default and leave a clean worktree; destructive knowledge or rule replacement still pauses.
-9. Epic planning: the active index links the Epic directory as `- [EPIC-NNN: <title>](EPIC-NNN-short-title/) - <outcome>.`; the validator rejects missing outcomes and record-file links.
+1. **Routing:** missing objectives stop before inspection; aliases preserve their exact authority; unknown words remain request text; only concrete needs load supporting procedures.
+2. **Help:** route exact `help` before preflight, teach canonical modes only, inspect and mutate nothing, and return either the one navigator question or one exact unexecuted invocation. State autonomous authority without implying remote-publication or unrelated-scope authority.
+3. **Discussion:** inspect discoverable facts, ask one numbered decision at a time, keep proposals out of accepted knowledge, and end with one explicit handoff decision when follow-up exists.
+4. **Planning:** reuse matching proposals, choose Epic only for coordinated outcomes, satisfy readiness, and stop at `ready` when planning-only. Authorized planning commits leave a clean tree; `research <record>` commits only evidence without changing status.
+5. **Project state:** keep accepted facts in the wiki and desired deltas in the backlog. Exact `knowledge`/`to-wiki` and `guidance`/`to-guidance` transactions may commit locally; destructive knowledge or adopted-rule replacement still pauses.
+6. **Setup:** install the scaffold on the current branch, preserve customized files, validate, and produce no byte changes on rerun. A missing or failing validator blocks completion.
+7. **Evidence and guidance:** resolve installed and current versions from live evidence, separate requirements from recommendations, publish only named adopted subjects, and keep proposal evidence on its record.
+8. **Execution:** keep bounded direct work on the current branch; branch substantial or governed work; preserve unrelated changes; run focused checks and one acceptance review. Missing governance blocks only selected governed work.
+9. **Deployment:** discover the repository mechanism, present target, effect, and rollback, then stop for confirmation.
+10. **Review:** resolve a non-empty fixed-point diff, report separate Standards and Spec findings, never fix during terminal review, and run no second review after in-run remediation.
+11. **Delegation:** fan out only independent read-only units; allow one implementation writer at a time; keep decisions, records, review, merge, and acceptance with the manager; follow the unavailable-worker branch.
+12. **Release:** update every authoritative version and the changelog, run the complete release matrix, commit only release paths, and keep publish, tag, and deploy separately confirmed.
+13. **Autonomous:** require explicit autonomous intent and a resolvable source, log proxy decisions and assumptions, stay inside the PRD, bound retries, park only after the third addressed failure, and never push or publish without separate authority.
+14. **Handoff:** offer one exact recommended `$develop ...` request plus stop when a question tool exists; otherwise emit one `Next step:` line. Never do both.
+15. **Epic validation:** index active Epics as `- [EPIC-NNN: <title>](EPIC-NNN-short-title/) - <outcome>.`; reject malformed, missing, duplicate, record-file, and orphaned entries.

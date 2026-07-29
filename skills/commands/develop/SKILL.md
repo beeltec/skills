@@ -12,10 +12,11 @@ Invocation authorizes routing and the requested work, not unrelated scope, destr
 
 ## Workflow
 
-1. Read [references/routing.md](references/routing.md). Resolve the objective first; when absent, ask without repository inspection. Then resolve the project root and applicable instructions. Inspect only enough repository, git, wiki, and backlog state to classify the request; preserve unrelated changes.
+1. Read [references/routing.md](references/routing.md). For explicit `help`, load [references/help.md](references/help.md) and stop before repository resolution or inspection. Otherwise resolve the objective first; when absent, ask without repository inspection. Then resolve the project root and applicable instructions. Inspect only enough repository, git, wiki, and backlog state to classify the request; preserve unrelated changes.
 2. Honor an explicit mode when compatible with the request. Otherwise select the least burdensome lane. State the lane in one short sentence and start it without route approval. Ask only for a missing objective, a genuine product decision, destructive action, deployment, or unresolved ambiguity.
 3. Build one authority packet containing the objective, scope, exclusions, branch policy, approvals, relevant records and knowledge, fixed point, and verification expectations. Pass it between procedures; re-read an authority only after compaction, branch change, external commit, mutation, failed validation, expired claim, or changed fixed point.
 4. Load only the applicable procedure files:
+   - explicit `help` -> [references/help.md](references/help.md)
    - shaping or decision interview -> [references/discussion.md](references/discussion.md)
    - desired-state planning, backlog records, or research -> [references/planning.md](references/planning.md)
    - wiki/backlog lifecycle or accepted knowledge -> [references/project-state.md](references/project-state.md)
@@ -35,6 +36,7 @@ Invocation authorizes routing and the requested work, not unrelated scope, destr
 Mode words are optional disambiguators, not separate skills:
 
 ```text
+$develop help [goal]
 $develop discuss <idea>
 $develop plan <outcome>
 $develop setup

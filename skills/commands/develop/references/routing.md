@@ -2,6 +2,10 @@
 
 Read this file on every `develop` invocation. Select the first specific match; do not load every procedure speculatively.
 
+## Help
+
+When `help` is the first word after the explicit invocation, load `help.md` and stop before preflight. Treat `helpful`, embedded mentions of help, and other words as ordinary request text.
+
 ## Preflight
 
 1. Resolve the requested outcome and stopping point. When no objective is supplied, ask and stop before repository inspection.
@@ -19,6 +23,8 @@ Read this file on every `develop` invocation. Select the first specific match; d
 6. **Ordinary implementation:** use direct execution when the request is bounded and no governed record was selected. Use ungoverned implementation for substantial work without a scaffold. Do not create governance merely to execute code.
 
 ## Aliases
+
+Canonical modes route directly: `discuss` to discussion, `plan` to planning, `setup` to setup, `knowledge` to project state, `guidance` to evidence and guidance, `implement` to execution, `review` to review, `release` to release, and `product` to autonomous delivery.
 
 Legacy skill names are routing aliases, not separate skill invocations.
 
@@ -63,6 +69,8 @@ Legacy `to-epic`, `to-backlog`, `research <record>`, `to-wiki`, and `to-guidance
 
 | Request | Route |
 |---|---|
+| `$develop help` | canonical help and objective navigator; no repository preflight |
+| `$develop help plan a checkout redesign` | canonical help plus one recommended invocation; do not execute it |
 | `$develop Add CSV export` | direct or ungoverned implementation, based on scope |
 | `$develop discuss whether to replace Redis` | advisory discussion |
 | `$develop let's talk about replacing Redis` | advisory discussion |

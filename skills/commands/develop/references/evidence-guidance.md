@@ -36,7 +36,7 @@ Publish one canonical page per used subject under `docs/wiki/engineering/technol
 
 Create or refresh only under explicit subject approval or an authority packet carrying it. Never infer adoption from research, publish unused subjects, mutate backlog in the same transaction, or absorb an upgrade. Reversing, weakening, or removing an adopted Requirement/Convention requires a separate approval outside explicit autonomy.
 
-Re-resolve versions and security-sensitive claims on refresh. Change only meaning affected by evidence, preserve deliberate deviations, update review metadata, indexes, and log, then validate and commit the coherent wiki transaction when authorized.
+An explicit `guidance` or `to-guidance` request naming the subject authorizes its exact additive or refresh transaction and local commit. Re-resolve versions and security-sensitive claims on refresh. Change only meaning affected by evidence, preserve deliberate deviations, update review metadata, indexes, and log, then validate and commit the coherent wiki transaction.
 
 ## Research Persistence
 
