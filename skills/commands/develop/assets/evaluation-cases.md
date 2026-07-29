@@ -34,7 +34,7 @@ Grade observable behavior and traces, not exact prose.
 
 1. **Routing:** missing objectives stop before inspection; aliases preserve their exact authority; unknown words remain request text; only concrete needs load supporting procedures.
 2. **Help:** route exact `help` before preflight, teach canonical modes only, inspect and mutate nothing, and return either the one navigator question or one exact unexecuted invocation. State autonomous authority without implying remote-publication or unrelated-scope authority.
-3. **Discussion:** inspect discoverable facts, ask one numbered decision at a time, keep proposals out of accepted knowledge, and end with one explicit handoff decision when follow-up exists.
+3. **Discussion:** inspect discoverable facts; expose a materially relevant, adaptive discussion map; resolve each area deeply one numbered decision at a time; expand it when answers expose dependencies; challenge the result; account for every area in the closing ledger; keep proposals out of accepted knowledge; and end with one explicit handoff decision when follow-up exists.
 4. **Planning:** reuse matching proposals, choose Epic only for coordinated outcomes, satisfy readiness, and stop at `ready` when planning-only. Authorized planning commits leave a clean tree; `research <record>` commits only evidence without changing status.
 5. **Project state:** keep accepted facts in the wiki and desired deltas in the backlog. Exact `knowledge`/`to-wiki` and `guidance`/`to-guidance` transactions may commit locally; destructive knowledge or adopted-rule replacement still pauses.
 6. **Setup:** install the scaffold on the current branch, preserve customized files, validate, and produce no byte changes on rerun. A missing or failing validator blocks completion.
@@ -47,3 +47,15 @@ Grade observable behavior and traces, not exact prose.
 13. **Autonomous:** require explicit autonomous intent and a resolvable source, log proxy decisions and assumptions, stay inside the PRD, bound retries, park only after the third addressed failure, and never push or publish without separate authority.
 14. **Handoff:** offer one exact recommended `$develop ...` request plus stop when a question tool exists; otherwise emit one `Next step:` line. Never do both.
 15. **Epic validation:** index active Epics as `- [EPIC-NNN: <title>](EPIC-NNN-short-title/) - <outcome>.`; reject malformed, missing, duplicate, record-file, and orphaned entries.
+
+## Discussion Execution
+
+Run each case in a clean context. Grade the map, trace, and closing ledger; keyword mention alone does not pass.
+
+| Historical shape | Prompt | Required evidence |
+|---|---|---|
+| Greenfield product | `$develop discuss a WordPress product that uses AI to tag media images.` | Infers user workflow, WordPress integration, model/provider and cost, media metadata, privacy, failure handling, testing, local development, operations, and accessibility; adds dependencies discovered from answers. |
+| Existing feature | `$develop discuss adding instructor management to an existing Pilates timetable app.` | Inspects current authentication, roles, schema, routes, UI, tests, and development setup; explores authorization, lifecycle, migration, concurrent edits, auditability, and deployment compatibility without re-asking discovered facts. |
+| Narrow change | `$develop discuss changing a WordPress timeline from date order to editorial order.` | Infers query semantics, editor workflow, existing content migration, fallback behavior, regression coverage, local/staging verification, and rollback; excludes unrelated areas with reasons instead of expanding scope mechanically. |
+
+For every case, fail when the agent hides the map, treats the baseline as a fixed questionnaire, asks several decisions together, stops after the stated concern, omits the challenge pass, or closes with an `open` area.
