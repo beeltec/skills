@@ -61,6 +61,12 @@ Run each case in a clean context. Grade the map, trace, and closing ledger; keyw
 
 For every case, fail when the agent hides the map, treats the baseline as a fixed questionnaire, asks several decisions together, stops after the stated concern, omits the challenge pass, or closes with an `open` area.
 
+## Setup Execution
+
+| Historical shape | Expected |
+|---|---|
+| Legacy wiki-only brownfield with existing terms plus approved additions or revisions | Upgrade the scaffold, apply only approved term transactions, preserve every unmentioned term, validate, and require a byte-idempotent installer rerun. |
+
 ## Context-Fit Execution
 
 Run each case in a clean context. Inspect delegation decisions and worker briefs.
