@@ -32,7 +32,7 @@ Include only claims already true and accepted on primary. Reject proposals, targ
 
 Update the existing canonical concept or create the narrowest cohesive owner under architecture, engineering, domains, or operations. Keep one canonical statement and link instead of duplicating it. Read [okf-spec.md](okf-spec.md) before structural concept operations or when format semantics are uncertain.
 
-Every semantic transaction needs exact approved meaning unless the invocation already carries standing approval for those confirmed additive/corrective facts. Deprecation, deletion, ADR supersession, and meaning-changing reorganization require per-item approval outside explicit autonomy. Repair indexes, inbound links, metadata, and the newest-first log in the same transaction.
+Every semantic transaction needs exact approved meaning unless the invocation already carries standing approval for those confirmed additive/corrective facts. An explicit `knowledge` or `to-wiki` publication request authorizes the exact additive/corrective transaction and its local commit. Deprecation, deletion, ADR supersession, and meaning-changing reorganization require per-item approval outside explicit autonomy. Repair indexes, inbound links, metadata, and the newest-first log in the same transaction.
 
 ## Decisions
 
@@ -42,4 +42,4 @@ During implementation, draft the exact conditional wiki transaction after review
 
 ## Transactions
 
-Apply one coherent logical transaction across records, reciprocal links, indexes, rank, metadata, and log. Stage narrow paths, preserve unknown metadata and unrelated edits, validate, inspect staged diff/status, and use concise repository-conventional commits when authorized. A failed transaction never becomes terminal; keep earlier valid commits intact and report the recovery point.
+Apply one coherent logical transaction across records, reciprocal links, indexes, rank, metadata, and log. Stage narrow paths, preserve unknown metadata and unrelated edits, validate, and inspect staged diff/status. Default to `docs(wiki): <summary>` for wiki transactions and `docs(backlog): <summary>` for backlog transactions unless the repository requires another convention. A failed transaction never becomes terminal; keep earlier valid commits intact and report the recovery point.

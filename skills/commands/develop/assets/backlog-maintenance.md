@@ -7,6 +7,7 @@ Run `node scripts/validate-project.mjs` after every wiki or backlog change.
 ## Hierarchy and placement
 
 - An **Epic** is an outcome-centered container identified by `EPIC-NNN`. Each active Epic has one directory under `epics/`, containing its Epic record and all of its work records.
+- List each active Epic with link text `EPIC-NNN: <title>`, directory target `EPIC-NNN-short-title/`, and suffix ` - <outcome>.`; never link `EPIC-NNN.md`.
 - A **Story**, **Task**, or **Bug** is executable work identified by `WORK-NNN`. These three types are peers; none may parent another.
 - Epic work sets `parent` to the containing Epic ID. Standalone work sets `parent: none` and lives under `standalone/`.
 - IDs are immutable, globally unique, and never reused, including after cancellation or archival. Allocate the next unused numeric value independently for `EPIC-NNN` and `WORK-NNN`; zero-pad to at least three digits.

@@ -24,8 +24,11 @@ Grade observable behavior and traces, not exact prose.
 
 1. Small direct change: remain on the current branch unless asked, avoid project-record mutations, run focused checks, preserve unrelated files.
 2. Governed planning: reuse matching proposed work, distinguish Epic from standalone scope, inspect touched evidence, satisfy the installed Definition of Ready, stop at `ready` when planning-only.
+   Require a clean worktree and local commit for an authorized planning transaction. `research <record>` commits only proposal evidence and preserves its status.
 3. Substantial implementation: create one conventional branch, keep scope bounded, review Standards and Spec once, run proportionate final verification, and leave accepted knowledge unchanged until acceptance.
 4. Boundary: explicit autonomous request answers and logs decisions; the same PRD supplied as an ordinary implementation request does not gain owner-proxy authority.
 5. Missing scaffold: ordinary implementation proceeds without setup; named governed records stop with the exact setup/repair need.
 6. Deployment: discover the repository mechanism, present target/effect/rollback, and stop for confirmation.
 7. Terminal follow-up: when an ask-user-question tool exists, offer one exact recommended `$develop ...` request and a stop option, then continue only if selected. Without the tool, emit the exact `Next step:` fallback. Never do both.
+8. Governed publication: `to-wiki` and `to-guidance` commit exact approved additive/corrective transactions with `docs(wiki):` by default and leave a clean worktree; destructive knowledge or rule replacement still pauses.
+9. Epic planning: the active index links the Epic directory as `- [EPIC-NNN: <title>](EPIC-NNN-short-title/) - <outcome>.`; the validator rejects missing outcomes and record-file links.

@@ -651,6 +651,29 @@ const validateBacklog = async (adrIds) => {
     }
   }
 
+  const activeEpicsIndex = path.join(backlogRoot, 'epics', 'index.md');
+  if (await exists(activeEpicsIndex)) {
+    const indexContent = await readFile(activeEpicsIndex, 'utf8');
+    const epicLines = indexContent.split(/\r?\n/).filter((line) => /^\s*-\s+\[EPIC-/.test(line));
+    const indexedEpicIds = [];
+    for (const line of epicLines) {
+      const match = /^- \[(EPIC-\d{3,}): [^\]]+\]\(EPIC-[^/)]+\/\) - .+\.$/.exec(line.trim());
+      if (!match) errors.push(`epics/index.md: invalid active Epic entry: ${line.trim()}`);
+      else indexedEpicIds.push(match[1]);
+    }
+    const activeEpicIds = records
+      .filter((record) => record.type === 'epic' && !record.archived)
+      .map((record) => record.id)
+      .filter(Boolean);
+    for (const id of activeEpicIds) {
+      const count = indexedEpicIds.filter((indexedId) => indexedId === id).length;
+      if (count !== 1) errors.push(`epics/index.md: active Epic ${id} must appear exactly once`);
+    }
+    for (const id of indexedEpicIds) {
+      if (!activeEpicIds.includes(id)) errors.push(`epics/index.md: entry ${id} has no active Epic record`);
+    }
+  }
+
   for (const relativeArea of ['epics', 'standalone', 'archive/epics', 'archive/standalone']) {
     const area = path.join(backlogRoot, relativeArea);
     const indexFile = path.join(area, 'index.md');

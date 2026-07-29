@@ -39,6 +39,8 @@ Legacy skill names are routing aliases, not separate skill invocations.
 
 Disambiguate `research-tech-stack` as adopted guidance and `research <record>` as proposal evidence. A general factual research question remains advisory unless the request asks to persist evidence or guidance.
 
+Legacy `to-epic`, `to-backlog`, `research <record>`, `to-wiki`, and `to-guidance` aliases preserve their former standing approval for the exact scoped governed transaction and its local commit. They never authorize implementation, remote publication, destructive knowledge changes, rule replacement, or unrelated records.
+
 ## Burden Rules
 
 - Direct work may span multiple files when coherent; file count alone never forces backlog governance.

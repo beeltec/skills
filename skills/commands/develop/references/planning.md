@@ -5,13 +5,14 @@ Load for desired-state decomposition, backlog intake/refinement, proposal resear
 ## Select The Shape
 
 - Use an Epic only for one coordinated outcome with multiple coherent, independently valuable work items, shared acceptance, or ordering. A single outcome stays standalone.
+- Index an active Epic as `- [EPIC-NNN: <title>](EPIC-NNN-short-title/) - <outcome>.`; link its directory, never its record.
 - Use a Story for stakeholder-visible behavior, a Task for a bounded engineering/operational result, and a Bug for observed failure against accepted behavior.
 - Slice vertically into the smallest independently implementable and verifiable outcomes. Avoid layer tasks and agent-sized busywork.
 - Reuse an existing matching `proposed` record. Never duplicate it.
 
 ## Authority
 
-An explicit request to plan a named outcome, or bare selection of one `proposed` record, authorizes its non-destructive intake/refinement, relationship updates, rank placement, evidence edits, and transition to `ready`; bare selection stops there. Present and ask before cancellation, destructive lifecycle changes, material scope not carried by the request, rule replacement, or accepted-knowledge mutation. Planning intent alone never authorizes implementation.
+An explicit request to plan a named outcome, or bare selection of one `proposed` record, authorizes its non-destructive intake/refinement, relationship updates, rank placement, evidence edits, transition to `ready`, and local commits for those coherent transactions; bare selection stops there. An explicit `research <record>` request authorizes only proposal-evidence edits and their local commit, never refinement or a status change. Present and ask before cancellation, destructive lifecycle changes, material scope not carried by the request, rule replacement, or accepted-knowledge mutation. Planning intent alone never authorizes implementation.
 
 ## Procedure
 
