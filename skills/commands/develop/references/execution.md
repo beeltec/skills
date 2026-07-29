@@ -18,7 +18,7 @@ Keep work local only when it should finish with ample context and is one bounded
 
 ## Branches
 
-Inspect `git status --short --branch`, remotes, worktrees, and local branches before switching. Follow repository branch conventions; otherwise use `<feat|fix|hotfix|release|chore>/<lowercase-description>`. Never overwrite a remote name.
+Inspect `git status --short --branch`, remotes, worktrees, and local branches before switching. Follow a documented or enforced repository branch convention; otherwise use `<feat|fix|hotfix|release|chore>/<lowercase-description>`. Do not rename existing branches solely to apply this default. Never overwrite a remote name.
 
 Direct/advisory/planning/knowledge/setup work stays on the current branch unless explicitly requested. Substantial or governed implementation uses one branch per acceptance unit. Selecting ungoverned implementation authorizes that local branch and coherent commits needed for fixed-point review, but not merge, push, or PR/MR creation. Outside explicit autonomy, stop and list conflicting local branches; never delete them. For accepted work, merge/delete only when the requested outcome includes acceptance. For parked work, preserve uncommitted/unique state with a recorded stash and recovery ref before deletion.
 
