@@ -1,7 +1,0 @@
-interface:
-  display_name: "Discuss"
-  short_description: "Resolve decisions and route desired changes"
-  default_prompt: "Use $discuss to stress-test this idea one decision at a time, using accepted project knowledge when available, then offer the correct backlog or wiki handoff."
-
-policy:
-  allow_implicit_invocation: false

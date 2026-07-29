@@ -1,7 +1,0 @@
-interface:
-  display_name: "Research"
-  short_description: "Resolve proposed work's technical readiness"
-  default_prompt: "Use $research to research the named proposed Epic or work item — current versions plus the concepts and guidelines its delta implicates — attach the evidence to its backlog record, and report unresolved readiness blockers."
-
-policy:
-  allow_implicit_invocation: false

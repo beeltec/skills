@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/beeltec/skills)](https://skills.sh/beeltec/skills)
 
-20 reusable skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io) open standard.
+Five reusable skills for Codex, Claude Code, Cursor, and other agents supporting the [Agent Skills](https://agentskills.io) open standard.
 
 ## Install
 
@@ -10,182 +10,76 @@
 npx skills add beeltec/skills
 ```
 
-Choose skills interactively, or install a specific skill:
+Choose skills interactively, or install one:
 
 ```bash
-npx skills add beeltec/skills --skill glab
+npx skills add beeltec/skills --skill develop
 ```
 
 Add `--global` to install globally, or `--list` to inspect the catalog without installing.
 
-## Development Workflow Skills
+## Development Gateway
 
-These skills form one connected delivery workflow built on two strictly separated project records: `docs/wiki` owns accepted current state on the primary branch, `docs/backlog` owns approved desired changes and their execution state. A proposal never enters the wiki, and completed work becomes accepted knowledge only after primary-branch acceptance and reconciliation. Architecturally significant decisions are recorded as ADRs under `docs/wiki/architecture/decisions/` — drafted on the backlog record, published only at acceptance, and superseded in place rather than deleted, because a decision stays true even after it stops governing.
-
-### Shape an idea and route it
-
-**discuss** stress-tests an idea against accepted knowledge, then recommends exactly one command per confirmed conclusion:
-
-```mermaid
-flowchart TD
-    SP["setup-project<br/>scaffold wiki, backlog, validator,<br/>agent instructions"] --> D
-    D["discuss<br/>advisory — stress-test an idea<br/>one question at a time"]
-    D -->|coordinated multi-item outcome| TE["$to-epic"]
-    D -->|standalone desired change| TB["$to-backlog"]
-    D -->|current-state knowledge<br/>+ confirmed terminology<br/>+ decisions already in force| TW["$to-wiki"]
-```
-
-### Plan desired changes to ready — `docs/backlog`
-
-The planners run the same record mechanics as **backlog**, but under one standing approval each, pausing only for the owner's evidence decision: which subjects get a `guidance` page, and which items get `research`. The inventory behind that question covers both technologies and standards — an empty standards half without a recorded reason is invalid — and naming a subject runs `guidance` immediately, before refinement, never deferred to implementation or acceptance:
-
-```mermaid
-flowchart TD
-    TE["to-epic<br/>plan one Epic<br/>(one standing approval)"] --> DEC
-    TB["to-backlog<br/>plan standalone items<br/>(one standing approval)"] --> DEC
-    BL["backlog<br/>intake, refine, rank<br/>(owner approval per transaction)"] --> DEC
-    DEC{"evidence decision:<br/>guidance for which subjects?<br/>research for which items?"}
-    DEC -->|named subjects —<br/>technologies and standards| GD["guidance<br/>publish pages now,<br/>before refinement"]
-    DEC -->|research yes| RT["research<br/>attach current, version-matched evidence"]
-    GD -->|research yes| RT
-    GD -->|research no| RDY
-    DEC -->|neither| RDY
-    RT --> RDY
-    RDY(["ready<br/>Definition of Ready met<br/>decisions resolved<br/>+ owner approval"])
-    RDY --> IMP["$implement"]
-```
-
-### Execute and accept
-
-Ready work uses the sole local acceptance branch: one writer at a time, one review per acceptance unit, then primary merge and branch deletion:
-
-```mermaid
-flowchart TD
-    RDY(["ready work item"]) --> IMP
-    IMP["implement /<br/>implement-with-subagents<br/>claim, branch, build, test"] --> CR
-    CR["code-review<br/>Standards axis + Spec axis"] -->|findings| IMP
-    CR -->|both axes pass| ACC["primary-branch acceptance<br/>(merge commit + full suite)"]
-    ACC --> DONE(["done, archived"])
-    DONE -->|last Epic child| ECR["code-review<br/>Epic-scope review<br/>from the epic fixed point"]
-    ECR -->|findings| IMP
-    ECR -->|both axes pass| ECL(["Epic done, archived"])
-    ACC -->|durable knowledge changed<br/>drafted decisions become ADRs| WK["wiki<br/>apply approved reconciliation"]
-```
-
-### Grow accepted knowledge — `docs/wiki`
-
-The wiki is fed from four directions and feeds back into planning, implementation, and review:
-
-```mermaid
-flowchart TD
-    TW["to-wiki<br/>publish confirmed knowledge<br/>(one standing approval)"] -->|verified transactions| WK
-    TG["to-guidance<br/>(one standing approval)"] --> GD
-    TE["to-epic / to-backlog"] -->|owner names subjects<br/>at the evidence decision| GD
-    RT2["research / implement /<br/>setup-project"] -->|offer on a missing<br/>or stale page| GD
-    GD["guidance<br/>research + publish adopted<br/>technology and standards rules"] -->|verified transactions| WK
-    ACC["primary-branch acceptance"] -->|durable knowledge changed| WK
-    WK["wiki<br/>knowledge lifecycle<br/>+ ADRs superseded in place<br/>+ engineering guidance pages"]
-    TW -.->|rejected desired-change candidates| TB["$to-backlog"]
-    WK -.->|baseline knowledge| D["discuss"]
-    WK -.->|adopted guidance already answers a subject| RT["research"]
-    WK -.->|adopted rules bind new code| IMP["implement"]
-    WK -.->|standards authority| CR["code-review"]
-```
-
-**guidance** is the answer to re-researching the same stack for every Epic. It resolves each subject's installed version from repository evidence, fans out one sub-agent per subject, and publishes one canonical page per technology (`docs/wiki/engineering/technologies/`) or cross-cutting standard (`docs/wiki/engineering/standards/`). A page separates `Requirements` that bind new code from `Recommendations`, `Conventions`, and recorded `Deviations`, and lists `Known gaps` where existing code contradicts a rule. Running it again for the same subject refreshes the page — re-resolving versions and re-verifying claims — and pauses for explicit approval whenever a refresh would reverse or remove an already-adopted rule, no matter which caller invoked it.
-
-**to-guidance** is its owner-invoked entry point, carrying the standing approval for the subjects it names — the same machinery/entry-point split as `backlog`/`to-backlog` and `wiki`/`to-wiki`. Other skills offer `guidance` at the point they detect the gap: **to-epic** and **to-backlog** at their evidence decision — naming a subject there runs `guidance` right away, before any child or item is refined, so slicing and research work from fresh pages; **research** when a subject has no page or a stale one; **implement** at post-acceptance reconciliation, the only point in an implementation run where guidance may be published, never from the work branch; and **setup-project** for the `draft` pages a brownfield back-fill seeded. `/code-review` still reports a version-mismatched page as a finding rather than enforcing or refreshing it.
-
-### Run the whole flow unattended — `to-product`
-
-Every skill above is a gate the project owner walks through. **to-product** walks them for you: hand it a PRD, a plan, or a set of proposed records, and it runs the same flow to a finished product without asking anything.
-
-```mermaid
-flowchart TD
-    PRD["PRD, plan, or proposed EPIC/WORK"] --> TP["to-product<br/>autonomous run — asks nothing"]
-    TP -->|scaffold missing| SP["setup-project"]
-    SP --> MAP
-    TP --> MAP["discuss over the whole PRD<br/>→ outcome map + dependency order"]
-    MAP --> D["discuss one outcome<br/>owner-proxy answers, printed on screen"]
-    D --> RT{"route as discuss classifies"}
-    RT -->|coordinated outcome| TE["$to-epic"]
-    RT -->|standalone items| TB["$to-backlog"]
-    RT -->|current-state knowledge| TW["$to-wiki"]
-    RT -->|adopted rules| TG["$to-guidance"]
-    TE --> ED["evidence decision<br/>owner-proxy answers both halves:<br/>guidance subjects + research"]
-    TB --> ED
-    ED --> IWS["implement-with-subagents"]
-    IWS --> ACC["primary-branch acceptance<br/>+ wiki reconciliation"]
-    ACC --> VER{"verify from repository evidence:<br/>guidance pages, ADRs,<br/>version rows, archival, validator"}
-    VER -->|all checks pass| NEXT{"outcomes left?"}
-    TW --> NEXT
-    TG --> NEXT
-    NEXT -->|yes| D
-    NEXT -->|no| DONE(["every outcome done and archived"])
-    IWS -.->|3 failed attempts| PARK["parked — claim released,<br/>status back to ready,<br/>blocker recorded"]
-    VER -.->|unresolved failed check| PARK
-    PARK -.-> NEXT
-```
-
-It routes every step through its owning skill. Implementation uses fresh subagents serially on one acceptance branch; if no worker is available, the manager runs `$implement` so capacity never stops the run.
-
-At the planners' evidence decision the owner-proxy names every subject whose page is missing, `draft`, version-mismatched, or stale — standard subjects included, never technologies only — and answers yes to `research` whenever the outcome carries a version-specific or security-sensitive question. And an outcome only counts as shipped after verification against repository evidence, not the invoked skill's report: every child `done` with a merge commit and green post-merge checks, a current guidance page for every subject named at the evidence decision, published ADRs matching the decisions the outcome's discussion confirmed, live version-resolution rows dated within the run, records archived, validator green. A failed check is resolved or parks the outcome — it is never recorded as shipped.
-
-The **owner-proxy** is the role `to-product` plays when `discuss` asks a question. It answers from the PRD first, then repository evidence, then the accepted wiki, and prints every question and answer verbatim, batched into one block per outcome — the whole discussion is on screen without one-question-per-turn round trips. When no source settles a question it answers anyway, marks the answer `ASSUMPTION`, and adds it to the **assumption register**:
+**develop** is the sole development-workflow skill. It activates only when the user explicitly invokes `$develop` (rendered as `/develop` or `/skill:develop` by slash-command clients). Ordinary development requests use the agent's normal behavior and load none of the gateway's procedures.
 
 ```text
-Question 4 / ~12:
-Session lifetime?
-
-[owner-proxy] 24 hours.
-  ASSUMPTION — the PRD is silent; registered.
+$develop Add CSV export.
+$develop discuss whether to replace Redis.
+$develop plan checkout v2.
+$develop implement WORK-014.
+$develop review main.
+$develop release minor.
+$develop product docs/prd/checkout.md.
 ```
 
-Because nothing pauses, the run is auditable after the fact rather than during it. Each assumption lands as provenance on the record it shaped, and every run commits a **run transcript** to `docs/runs/` holding the outcome map, the verbatim discussions, the assumption register, every gate it auto-approved, and the delivery evidence.
+Mode words are optional. The gateway infers the least burdensome suitable procedure and starts it without a route-confirmation pause:
 
-`to-product` may authorize every PRD-required decision the owner could: reshape or cancel records/Epics, repair claims and workflow state, clean extra local branches after preserving recovery state, and approve destructive knowledge changes. It never grows the PRD or changes unrelated records. Workflow conditions never stop it; a technical/external blocker gets three attempts, then recovery state is preserved, the branch is deleted, and the run continues. Re-invocation resumes instead of duplicating records.
+```mermaid
+flowchart TD
+    U["explicit $develop request"] --> R{"intent + repository state"}
+    R -->|shape or decide| D["discussion"]
+    R -->|plan desired state| P["standalone or Epic planning"]
+    R -->|accepted knowledge| K["wiki lifecycle"]
+    R -->|adopted rules| G["guidance + evidence"]
+    R -->|ordinary change| X["direct or ungoverned implementation"]
+    R -->|ready record| I["governed acceptance"]
+    R -->|fixed-point review| V["Standards + Spec review"]
+    R -->|version or release| L["release"]
+    R -->|explicit unattended intent| A["autonomous owner-proxy run"]
+```
 
-Read [the autonomous contract](skills/commands/to-product/references/autonomous-contract.md) for the exact gate-by-gate behavior.
+### Routing Principles
 
-A few rules the diagrams don't show: execution always passes through backlog readiness — there is no direct-implementation route — and readiness requires every architecturally significant design choice drafted in ADR shape under `## Decisions` — `none` is legal only when the significance test records no qualifying decision, and a decision confirmed in discussion is never deferred in prose. Wiki changes are only drafted on the work branch, never applied there; at primary-branch acceptance (a merge commit plus the full suite) each drafted decision becomes an ADR with its `ADR-NNN` allocated, and the terminal backlog record is archived. Every workflow skill ends its report with a `Next step:` line — one copy-pasteable command with real arguments as the report's last line — so each step hands off to the next.
+- **Opt-in:** only explicit `$develop`, `/develop`, or harness-equivalent command invocation activates the gateway.
+- **Conditional context:** former workflow capabilities are internal procedure files loaded only after routing.
+- **Adaptive governance:** existing `docs/wiki` and `docs/backlog` inform relevant work but never force every change through records. Setup is never automatic for ordinary implementation.
+- **Intent-sensitive branches:** advisory, planning, knowledge, setup, and bounded direct work stay on the current branch by default. Substantial or governed implementation uses one conventional acceptance branch.
+- **Explicit autonomy:** only `product`, `unattended`, `autonomous`, or `owner-proxy` language authorizes the gateway to answer owner decisions and carry a run uninterrupted.
+- **Proportionate verification:** direct work uses focused checks; governed acceptance adds one Standards/Spec review and one representative suite, expanding matrices only when the changed contract requires it.
 
-**setup-project**, **discuss**, **to-epic**, **to-backlog**, **to-wiki**, **to-guidance**, and **to-product** live in `skills/commands/` and are user-invoked only (`disable-model-invocation: true`): invoking them is itself an owner decision — for the to-\* skills it grants the standing approval — so an agent may recommend the command but never run it on its own. The single exception is `to-product`, which invokes the others because starting it is the owner decision they all protect.
+### Governed Projects
 
-### Greenfield and Brownfield
+When a project uses the optional scaffold, `docs/wiki` owns accepted primary-branch state and `docs/backlog` owns desired deltas, proposal evidence, priority, claims, and execution history. The gateway keeps proposals out of the wiki, drafts significant proposed decisions on backlog records, and publishes ADRs only after decisions become current.
 
-- **Greenfield** (new application): run **setup-project** on the empty repository, then shape the product through `$discuss` — desired outcomes flow through `$to-epic` or `$to-backlog` to ready work, and the implement → code-review → acceptance loop grows wiki knowledge as features land.
-- **Brownfield** (existing application): run **setup-project** on the existing repository (it upgrades safely and never overwrites project-owned files). On existing code with an empty wiki it back-fills a foundation overview of code-verified facts — stack, architecture, commands, conventions, terminology — seeds one `draft` guidance page per detected technology and per detected standard candidate (adopted only when the owner names it), and reports owner-judgment knowledge (intent, rationale, product language) as candidates for `/discuss` and `/to-wiki`. From there, desired changes follow the same delivery loop as greenfield.
-- **Unattended** (either of the above): hand an already-defined PRD or plan to `$to-product`. It scaffolds when needed, then walks the same loop to a finished product without asking you anything, leaving a run transcript to review afterwards.
+`$develop setup` installs or upgrades that scaffold, its validator, and a compact instruction block. It remains optional: repositories without it can use discussion, direct changes, reviews, releases, and substantial ungoverned implementation.
+
+### Autonomous Delivery
+
+`$develop product <PRD>` is the explicit unattended lane. It builds an outcome graph, records visible owner-proxy decisions and assumptions, routes each outcome through only the needed procedures, serializes writers, verifies repository evidence, and parks technically impossible outcomes after bounded retries. It never grows the PRD, pushes, opens a PR/MR, or publishes remotely without separate authority.
+
+Read [the gateway evaluation cases](skills/commands/develop/assets/evaluation-cases.md) for activation and execution expectations.
+
+## Skill Catalog
 
 | Skill | Description |
-|-------|-------------|
-| **setup-project** | Initialize or safely upgrade a project with wiki, backlog, validation, and agent instructions; back-fill a foundation wiki on brownfield repositories |
-| **discuss** | Stress-test an idea one question at a time, then recommend `$to-epic`, `$to-backlog`, or `$to-wiki` per conclusion |
-| **wiki** | Manage the lifecycle of accepted project knowledge, including ADRs and their supersession |
-| **to-wiki** | Publish the conversation's confirmed durable knowledge, including ADRs for decisions in force, under one standing approval |
-| **backlog** | Manage approved desired work from intake through refinement, ranking, execution, and archival |
-| **to-epic** | Plan one Epic end-to-end to ready under one standing approval |
-| **to-backlog** | Take the conversation's confirmed standalone work items to ready under one standing approval |
-| **research** | Attach current version and guideline evidence to a proposed backlog item before readiness, fanned out per subject |
-| **guidance** | Research, publish, and refresh canonical technology and standards guidance pages, so adopted rules are read instead of re-researched |
-| **to-guidance** | Owner-invoked entry point that runs `guidance` for the named subjects under one standing approval |
-| **implement** | Execute a ready work item or Epic serially on its sole acceptance branch |
-| **implement-with-subagents** | Execute items through fresh subagents, one writer at a time on the sole acceptance branch |
-| **code-review** | Review changes against accepted standards, unrecorded architectural decisions, and the work item's — or a whole Epic's — scope |
-| **to-product** | Run the whole flow unattended from a PRD, answering every owner gate as an owner-proxy, until every outcome has shipped |
-
-## Standalone Skills
-
-Independent skills that work in any project:
-
-| Skill | Description |
-|-------|-------------|
-| **bump-version** | Detect patch/minor/major bumps, update version files and changelog, create a release commit |
-| **codex-subagent** | Delegate implementation tasks to a workspace-scoped Codex CLI agent |
-| **create-conventional-branch** | Enforce the sole local acceptance branch and its Conventional Branch lifecycle |
+|---|---|
+| **develop** | Explicit-invocation-only gateway for discussion, planning, governance, implementation, review, release, and autonomous delivery |
+| **codex-subagent** | Delegate coding tasks to a workspace-scoped Codex CLI agent when explicitly requested |
 | **elementor-content** | Create and edit Elementor JSON or WordPress database content via WP-CLI |
 | **glab** | Manage GitLab merge requests, issues, pipelines, releases, and repositories with `glab` |
 | **maestro-e2e-testing** | Write, run, and debug Maestro end-to-end tests for mobile apps |
+
+The four specialized tools remain independently discoverable. They are not development-flow entry points and do not activate `$develop`.
 
 ## Manual Installation
 
@@ -193,16 +87,16 @@ Clone the repository and copy or symlink the desired skill directory:
 
 ```bash
 git clone https://github.com/beeltec/skills.git
-cp -RL skills/.agents/skills/glab ~/.codex/skills/glab
+cp -RL skills/.agents/skills/develop ~/.codex/skills/develop
 ```
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for repository layout and skill authoring guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for repository layout, validation, and skill authoring guidance.
 
 ## Acknowledgments
 
-The **discuss**, **code-review**, and **implement** skills are customized adaptations of skills created by [Matt Pocock](https://github.com/mattpocock) in [mattpocock/skills](https://github.com/mattpocock/skills) (MIT License).
+The internal discussion, review, and implementation procedures are customized adaptations of skills created by [Matt Pocock](https://github.com/mattpocock) in [mattpocock/skills](https://github.com/mattpocock/skills) (MIT License).
 
 ## License
 

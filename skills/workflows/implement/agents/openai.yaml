@@ -1,7 +1,0 @@
-interface:
-  display_name: "Implement"
-  short_description: "Execute ready work on one acceptance branch"
-  default_prompt: "Use $implement to execute this ready WORK-NNN or EPIC-NNN serially on its sole acceptance branch through claim, implementation, review, primary acceptance, completion, and archival."
-
-policy:
-  allow_implicit_invocation: true

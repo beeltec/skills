@@ -1,4 +1,0 @@
-interface:
-  display_name: "Code Review"
-  short_description: "Review changes against standards and backlog scope"
-  default_prompt: "Use $code-review to review changes since the specified fixed point against accepted wiki and repository standards and the active backlog work item."

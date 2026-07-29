@@ -1,0 +1,6 @@
+interface:
+  display_name: "Develop"
+  short_description: "Route an explicit development workflow"
+  default_prompt: "Use $develop to route this request through the lightest suitable development procedure."
+policy:
+  allow_implicit_invocation: false

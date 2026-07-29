@@ -5,10 +5,8 @@ Keep canonical skill directories categorized under `skills/`. Expose each skill 
 ```text
 skills/
 ├── commands/
-├── planning/
 ├── tools/
-├── utilities/
-└── workflows/
+└── <future narrow categories>/
 
 skills/<category>/<skill-name>/
 ├── SKILL.md            # Required metadata and core instructions
@@ -22,7 +20,7 @@ skills/<category>/<skill-name>/
 
 For each change:
 
-1. Choose the narrowest existing category; add a category only when several related skills need it. `commands/` holds every skill with `disable-model-invocation: true`, where invoking it is itself the owner's decision; put the machinery it drives in `planning/` or `workflows/`.
+1. Choose the narrowest existing category; add one only when several related skills need it. `commands/` holds explicitly invoked orchestration. Keep a command's non-discoverable procedures under its `references/`; put independently discoverable integrations in `tools/`.
 2. Keep the canonical directory name, symlink name, and frontmatter `name` identical and lowercase with hyphens.
 3. Create symlinks relative to `.agents/skills/` so they remain valid in every clone.
 4. Make `description` explain both capability and activation context.
@@ -36,8 +34,8 @@ For each change:
 
 ## Next-step handoff convention
 
-Every delivery-workflow skill ends its final report with a `Next step:` line — one exact copy-pasteable command for the follow-up in canonical `$name` form, selected from the run's actual outcome with real arguments, never placeholders; omit it only when no follow-up exists. The canonical convention — recommend only, never invoke, last line, numbered list in run order when several apply, `$name` rendered per harness — is stated once in `skills/commands/setup-project/assets/agent-instructions.md`, which `setup-project` installs into every project's agent instructions; each skill states only its outcome-to-command routing. Apply this convention when adding or changing workflow skills.
+The `develop` gateway ends its final report with `Next step: $develop ...` only when follow-up exists: one exact copy-pasteable request selected from the actual outcome, with real arguments and no placeholders. Internal procedures continue automatically when the originating request includes execution; they never hand off to one another with synthetic commands.
 
-The line stays a recommendation in the skill that writes it. Under an autonomous run, `to-product` reads it as control flow and executes it — which is why it must always be a real command with real arguments.
+The line remains a recommendation. An autonomous `develop product` run owns continuation directly and emits a next step only for parked or remaining work.
 
 See the [Agent Skills specification](https://agentskills.io/specification), [creator best practices](https://agentskills.io/skill-creation/best-practices), and [skills CLI documentation](https://github.com/vercel-labs/skills#readme).

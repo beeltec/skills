@@ -1,6 +1,0 @@
-interface:
-  display_name: "Create Conventional Branch"
-  short_description: "Enforce one local acceptance branch"
-  default_prompt: "Use $create-conventional-branch to open, resume, or close the sole local acceptance branch for this task."
-policy:
-  allow_implicit_invocation: true

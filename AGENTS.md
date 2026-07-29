@@ -2,7 +2,7 @@
 
 This repository contains agent skills under `skills/<category>/<skill-name>/`. Follow `CONTRIBUTING.md` for repository layout, symlinks, and the next-step handoff convention. The rules below govern creating and maintaining skills.
 
-This repo is the toolbox, not a governed project. It has no `docs/wiki`, no `docs/backlog`, and no `scripts/validate-project.mjs`, and never gains them. Never run `$setup-project` here, and never route work here through `$backlog`, `$wiki`, `$research`, `$implement`, or the `to-*` entry points — they all require a scaffold this repo deliberately lacks. Change skill files directly.
+This repo is the toolbox, not a governed project. It has no `docs/wiki`, no `docs/backlog`, and no `scripts/validate-project.mjs`, and never gains them. Never run `develop`'s setup or governed-record procedures here. An explicit `$develop` request routes to direct or ungoverned repository work; otherwise change skill files normally.
 
 ## Word economy
 
