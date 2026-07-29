@@ -12,11 +12,32 @@ Read this file on every `develop` invocation. Select the first specific match; d
 ## Precedence
 
 1. **Explicit autonomy:** `product`, `unattended`, `autonomous`, or `owner-proxy` -> autonomous, plus every procedure the outcome requires. A PRD path or broad build request alone is not autonomous authority.
-2. **Explicit operation:** `discuss`, `plan`, `setup`, `knowledge`, `guidance`, `implement`, `review`, `release`, deploy, branch, PR/MR, or a named record -> matching procedure.
-3. **Advisory intent:** challenge, decide, compare, explain, audit, or review without requested mutation -> discussion or review; stop after the requested answer.
+2. **Explicit operation:** resolve the aliases below, then compose only procedures required by an explicitly requested later outcome.
+3. **Advisory intent:** challenge, decide, compare, explain, audit, or review without requested mutation -> discussion or review; stop after the requested answer. Treat close conversational variants of the explicit discussion phrases the same way.
 4. **Accepted current state:** publish or correct already-current knowledge -> project state. Proposed target state never enters the wiki.
 5. **Desired state:** explicit planning/tracking intent, a named active backlog record, or a coordinated outcome needing durable decomposition -> planning. Continue to execution only when the request includes build, implement, ship, or end-to-end delivery.
 6. **Ordinary implementation:** use direct execution when the request is bounded and no governed record was selected. Use ungoverned implementation for substantial work without a scaffold. Do not create governance merely to execute code.
+
+## Aliases
+
+Legacy skill names are routing aliases, not separate skill invocations.
+
+| Words or intent | Route |
+|---|---|
+| `discuss`, `let's discuss`, `let's talk about`, `talk through`, `think through`, `brainstorm`, `help me decide` | discussion |
+| `to-epic`, `plan epic`, coordinated outcome, break into work items | Epic planning |
+| `to-backlog`, add to backlog, create/refine a Story, Task, Bug, or standalone item | standalone planning |
+| `to-wiki`, publish/document accepted knowledge, current-state fact, terminology, or decision already in force | project state |
+| `to-guidance`, `guidance`, `research-tech-stack`, adopt/refresh technology or standards rules | evidence and guidance |
+| `research`, research a named proposed `EPIC-NNN`/`WORK-NNN`, resolve proposal evidence | planning plus proposal research |
+| `setup-project`, initialize/upgrade wiki or backlog governance | setup |
+| `implement`, build, fix, ship | execution |
+| `implement-with-subagents`, implement with workers/subagents, delegate implementation | execution plus implementation-worker delegation |
+| `code-review`, review a fixed point, audit changes | review |
+| `to-product`, product, unattended, autonomous, owner-proxy | autonomous |
+| `bump-version`, prepare/release a version | release |
+
+Disambiguate `research-tech-stack` as adopted guidance and `research <record>` as proposal evidence. A general factual research question remains advisory unless the request asks to persist evidence or guidance.
 
 ## Burden Rules
 
@@ -33,7 +54,8 @@ Read this file on every `develop` invocation. Select the first specific match; d
 - `discuss`, `plan`, `review`, `knowledge`, `guidance`, `setup`, and `release` stop when explicitly requested as the terminal outcome.
 - `implement`, `build`, `fix`, and `ship` continue through code and proportionate verification. Governed scope continues through its selected acceptance lifecycle.
 - `product` continues through all required outcomes until complete or technically parked.
-- Never emit chains of old skill commands. Any follow-up is `$develop <complete request>`.
+- Preserve the governed lifecycle: discussion classifies each conclusion; accepted current knowledge may publish directly, while desired change enters Epic or standalone planning; planning resolves adopted guidance and proposal research before readiness; ready work enters local or requested worker execution; acceptance reconciles durable wiki/ADR state.
+- Never emit chains of old skill commands. Any follow-up is one complete `$develop ...` request presented through the gateway handoff convention.
 
 ## Examples
 
@@ -41,6 +63,11 @@ Read this file on every `develop` invocation. Select the first specific match; d
 |---|---|
 | `$develop Add CSV export` | direct or ungoverned implementation, based on scope |
 | `$develop discuss whether to replace Redis` | advisory discussion |
+| `$develop let's talk about replacing Redis` | advisory discussion |
+| `$develop to-wiki publish the confirmed cache terminology` | project-state publication |
+| `$develop to-epic plan checkout v2` | Epic planning |
+| `$develop research WORK-014` | planning plus proposal research |
+| `$develop implement-with-subagents EPIC-003` | governed execution with fresh implementation workers |
 | `$develop plan checkout v2` | planning; Epic only if multiple independently valuable children serve one outcome |
 | `$develop WORK-014` | governed implementation when ready/in-progress; otherwise refine a proposed record to ready and stop |
 | `$develop update our React guidance` | guidance publication |

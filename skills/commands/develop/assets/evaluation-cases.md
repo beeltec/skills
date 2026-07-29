@@ -7,6 +7,13 @@
 | `$develop Add CSV export.` | Load `develop`; infer direct or ungoverned execution. |
 | `/develop discuss whether Redis should be replaced.` | Load `develop`; discussion only. |
 | `$develop product docs/prd/checkout.md` | Load `develop`; explicit autonomous authority. |
+| `$develop to-wiki publish the confirmed cache terminology.` | Load `develop`; route to project-state publication. |
+| `$develop to-epic plan checkout v2.` | Load `develop`; route to Epic planning. |
+| `$develop to-backlog add the confirmed cache invalidation bug.` | Load `develop`; route to standalone planning. |
+| `$develop to-guidance refresh our adopted Redis rules.` | Load `develop`; route to adopted guidance. |
+| `$develop research WORK-014.` | Load `develop`; route to proposal research within planning. |
+| `$develop research-tech-stack Redis.` | Load `develop`; route to adopted guidance, not proposal research. |
+| `$develop implement-with-subagents EPIC-003.` | Load `develop`; route to execution plus implementation-worker delegation. |
 | `Add CSV export.` | Do not load `develop`. |
 | `$develop` | Ask for the missing objective; mutate nothing. |
 | `$develop run all workflow modes` | Route one outcome; do not preload every procedure. |
@@ -21,3 +28,4 @@ Grade observable behavior and traces, not exact prose.
 4. Boundary: explicit autonomous request answers and logs decisions; the same PRD supplied as an ordinary implementation request does not gain owner-proxy authority.
 5. Missing scaffold: ordinary implementation proceeds without setup; named governed records stop with the exact setup/repair need.
 6. Deployment: discover the repository mechanism, present target/effect/rollback, and stop for confirmation.
+7. Terminal follow-up: when an ask-user-question tool exists, offer one exact recommended `$develop ...` request and a stop option, then continue only if selected. Without the tool, emit the exact `Next step:` fallback. Never do both.

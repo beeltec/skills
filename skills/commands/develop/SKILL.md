@@ -28,7 +28,7 @@ Invocation authorizes routing and the requested work, not unrelated scope, destr
    - explicit `product`, `unattended`, `autonomous`, or `owner-proxy` intent -> [references/autonomous.md](references/autonomous.md)
 5. Compose procedures only when the outcome needs them. Keep mutations and owner decisions serial. Continue internally when the original request includes execution; stop at discussion, planning, review, or publication when that is the requested outcome.
 6. Run proportionate verification. Remove temporary verification artifacts. Inspect status and diffs; never overwrite or stage unrelated work. Commit, merge, push, open a PR/MR, release, or deploy only when the request or selected procedure authorizes it.
-7. Report the selected lane, changes, decisions, branches, commits, checks, records, blockers, and remaining risk. When follow-up exists, end with one exact `Next step: $develop ...` line; otherwise omit it.
+7. Report the selected lane, changes, decisions, branches, commits, checks, records, blockers, and remaining risk. For a follow-up, form one exact `$develop ...` request with real arguments. When the harness provides an ask-user-question tool, offer that request as the recommended option plus a stop option; continue only when selected, treating selection as a new explicit request with no broader authority. Otherwise end with `Next step: $develop ...`. Never emit both. Omit the handoff when no follow-up exists.
 
 ## Modes
 

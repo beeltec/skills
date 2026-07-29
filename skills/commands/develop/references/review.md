@@ -25,7 +25,7 @@ Keep axis counts separate even for one combined reviewer. If no findings exist, 
 
 ## Terminal Review
 
-When review is the requested terminal outcome, never edit code, mutate records, reconcile, merge, or accept. Report findings and one exact `$develop implement ...` follow-up when remediation is wanted.
+When review is the requested terminal outcome, never edit code, mutate records, reconcile, merge, or accept. Report findings and use the gateway handoff convention with one exact `$develop implement ...` request when remediation is wanted.
 
 ## Remediation And Verification
 

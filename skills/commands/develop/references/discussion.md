@@ -38,4 +38,4 @@ Classify conclusions:
 - adopted technology or standards rule -> guidance;
 - unresolved decision -> conversation or proposed record, never accepted knowledge.
 
-Ask one final numbered handoff question. If discussion was the terminal request, return one complete `Next step: $develop ...` only when the user accepts follow-up. If the original request also named planning, publication, guidance, execution, release, or autonomy, continue internally after recording the confirmed decisions.
+Ask one final numbered handoff question. When discussion was terminal and a follow-up exists, make that question the gateway's ask-user-question handoff when the tool is available; otherwise use its `Next step:` fallback after acceptance. If the original request also named planning, publication, guidance, execution, release, or autonomy, continue internally after recording the confirmed decisions.

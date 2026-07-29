@@ -34,7 +34,7 @@ For each change:
 
 ## Next-step handoff convention
 
-The `develop` gateway ends its final report with `Next step: $develop ...` only when follow-up exists: one exact copy-pasteable request selected from the actual outcome, with real arguments and no placeholders. Internal procedures continue automatically when the originating request includes execution; they never hand off to one another with synthetic commands.
+When follow-up exists, the `develop` gateway forms one exact `$develop ...` request selected from the outcome, with real arguments and no placeholders. If the harness provides an ask-user-question tool, it offers that request as the recommended option plus a stop option and continues only when selected. Otherwise its final report ends with `Next step: $develop ...`. It never does both. Internal procedures continue automatically when the originating request includes execution; they never hand off with synthetic commands.
 
 The line remains a recommendation. An autonomous `develop product` run owns continuation directly and emits a next step only for parked or remaining work.
 
