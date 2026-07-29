@@ -10,9 +10,11 @@ Read repository instructions and standards. When relevant, read the selected rec
 
 ## Mode
 
-Use one combined reviewer by default. Split independent Standards and Spec reviewers only for security/authentication, destructive migration or credible data-loss risk, or changed public API compatibility. Privacy wording, ordinary persistence/concurrency, release infrastructure, or ADR significance alone do not trigger a split. If delegation is unavailable, perform the same axes locally.
+Attempt every formal review with a fresh read-only sub-agent distinct from every implementation agent. Use one combined reviewer by default. Split independent Standards and Spec reviewers only for security/authentication, destructive migration or credible data-loss risk, or changed public API compatibility. Privacy wording, ordinary persistence/concurrency, release infrastructure, or ADR significance alone do not trigger a split.
 
-Read [smell-baseline.md](smell-baseline.md) and, when dispatching reviewers, [review-briefs.md](review-briefs.md). Review only the fixed-point diff.
+Follow `delegation.md` for dispatch and retry. Fall back to local review only when the harness lacks sub-agents or an initial or retry dispatch cannot obtain capacity; report the fallback and loss of reviewer independence. An incomplete reviewer return does not itself authorize local review.
+
+Read [smell-baseline.md](smell-baseline.md) and, before dispatch, [review-briefs.md](review-briefs.md). Review only the fixed-point diff.
 
 ## Findings
 

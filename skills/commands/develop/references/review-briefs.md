@@ -2,7 +2,7 @@
 
 Read only when spawning reviewers.
 
-Sub-agents share the filesystem: pass authorities as paths with roles, never pasted contents; require every named path before review and report unreadable paths. Inline only the significance-test text and `decisions` value. Never demand feature TDD, coverage targets, duplicate layers, or extra tests when existing evidence proves the required observable contract; when durable proof is missing, prefer one acceptance-critical E2E, then boundary integration/contract coverage, and unit coverage only for otherwise impractical isolated edge cases or invariants.
+Use only fresh read-only reviewers distinct from every implementation agent. Sub-agents share the filesystem: pass authorities as paths with roles, never pasted contents; require every named path before review and report unreadable paths. Inline only the significance-test text and `decisions` value. Never demand feature TDD, coverage targets, duplicate layers, or extra tests when existing evidence proves the required observable contract; when durable proof is missing, prefer one acceptance-critical E2E, then boundary integration/contract coverage, and unit coverage only for otherwise impractical isolated edge cases or invariants.
 
 ## Combined reviewer prompt
 

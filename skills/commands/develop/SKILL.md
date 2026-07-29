@@ -24,7 +24,7 @@ Invocation authorizes routing and the requested work, not unrelated scope, destr
    - technology or standards evidence and adopted guidance -> [references/evidence-guidance.md](references/evidence-guidance.md)
    - code, deployment, branching, governed acceptance, or worker implementation -> [references/execution.md](references/execution.md)
    - review or acceptance verification -> [references/review.md](references/review.md)
-   - at least two independent read-only units, requested implementation workers, or implementation that fails the context-fit gate -> [references/delegation.md](references/delegation.md)
+   - formal review, at least two independent read-only units, requested implementation workers, or implementation that fails the context-fit gate -> [references/delegation.md](references/delegation.md)
    - version bump or release preparation -> [references/release.md](references/release.md)
    - explicit `product`, `unattended`, `autonomous`, or `owner-proxy` intent -> [references/autonomous.md](references/autonomous.md)
 5. Compose procedures only when the outcome needs them. Keep mutations and owner decisions serial. Continue internally when the original request includes execution; stop at discussion, planning, review, or publication when that is the requested outcome.

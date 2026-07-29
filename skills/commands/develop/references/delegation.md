@@ -1,16 +1,22 @@
 # Delegation
 
-Load only for at least two independent read-only units, requested fresh implementation workers, or implementation that fails `execution.md`'s context-fit gate. The manager owns synthesis, decisions, every governance mutation, and final acceptance.
+Load for every formal review, at least two independent read-only units, requested fresh implementation workers, or implementation that fails `execution.md`'s context-fit gate. The manager owns synthesis, decisions, every governance mutation, and final acceptance.
 
 ## Read-Only Fan-Out
 
-1. Require fixed briefs with scope, output, dependencies, validation, and stop conditions. Otherwise work serially.
+1. Require fixed briefs with scope, output, dependencies, validation, and stop conditions. Otherwise perform ordinary fact-finding serially; never skip a formal-review dispatch.
 2. Map dependencies and the ready frontier. Use at most four workers or fewer when capacity is lower; reserve manager capacity.
 3. Route mechanical discovery to the cheapest capable tier, bounded analysis to a balanced tier, and high-risk review judgement to the strongest available tier. If selection is unavailable, use the default and report once.
 4. Launch only independent units together. Workers read named authorities, report unreadable inputs, never delegate, and never edit, commit, branch, change records, or run shared-side-effect commands.
 5. Verify cited artifacts and commands. Retry an invalid/incomplete return through the same worker with focused evidence; pause only dependents.
 
 Deterministic checks may run concurrently only when they share no mutable caches, outputs, ports, databases, simulators, or repository state.
+
+## Formal Review
+
+Dispatch a fresh read-only reviewer that performed no implementation for the acceptance unit. Use one combined reviewer by default; use the risk-triggered split in `review.md`. After an incomplete return, attempt one focused retry through the same reviewer.
+
+If the harness has no sub-agent capability, review locally and report the fallback and lost independence. If an initial or retry dispatch cannot obtain capacity, record the attempt, review locally, and report the same. A completed dispatch that returns failed or still incomplete blocks review; reviewer failure alone never permits a local substitute.
 
 ## Implementation Workers
 
