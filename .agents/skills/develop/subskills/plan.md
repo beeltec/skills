@@ -8,7 +8,9 @@ Based on the data you got think about what would make the most sense:
 - Is it simple enough to fit into one Story? -> Create a standalone Story
 - Do we need multiple Stories to reflect it? -> Create an Epic with multiple Stories
 
-Before creating the markdown files, make sure the backlog structure noted in `references/folder-structure` exists. If not create it.
+Before creating the markdown files, make sure the backlog structure noted in `references/folder-structure` exists. If not create it. 
+
+This is only about backlog, not Wiki. Do not read Wiki related references like okf.md if not explicitly stated.
 
 Use one of these templates:
 
