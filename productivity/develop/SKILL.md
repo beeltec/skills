@@ -27,4 +27,7 @@ Based on the prompt load the instructions for one of the following subskills fro
 - setup -> Exact word `setup` or invoked by the model. Sets up the file and folder structure or adds a note that this project is not using it
 - wiki -> Use it when writing to the Wiki
 
+If mapping the project is required for any of the subskills use up to 5 subagents using the cheapest model (see `references/models.md`). 
+Create an aggregated report from all subagents with a heading for each of them verbatim or lightly cleaned. Do not merge or rerank findings.
+
 When asking the user anything (not just in the discuss subskill) use AskUserQuestion tool if it is available (in that case **it is non negotiable**).
