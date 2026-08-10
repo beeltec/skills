@@ -9,7 +9,7 @@ metadata:
 First check the AGENTS.md if we are using our file and folder structure for the backlog and Wiki. If no mention of it is in it, load `setup` subskill and execute it. 
 The execution of this skill **has to be done before the execution of any other skill** and the user needs to answer. It cannot be run autonomously.
 
-Instructions mentioning the Wiki must only be executed if the project uses the Beelte Wiki. **Skip them otherwise**.
+Instructions mentioning the Wiki and/or Backlog must only be executed if the project uses the Beelte Wiki and/or Backlog. **Skip them otherwise**.
 
 Only use the terms from the Wiki's ubiquitous language document. If a new term is introduced by the user, ask if it should be added to the document.
 

@@ -3,14 +3,12 @@ name: plan
 description: Plan an Epic, a User Story or a Bug Ticket
 ---
 
+If this project does not use the Beelte backlog, do the planning in a single root `PLAN-XXX.md` file in the root of the project.
+
 Based on the data you got think about what would make the most sense:
 
 - Is it simple enough to fit into one Story? -> Create a standalone Story
 - Do we need multiple Stories to reflect it? -> Create an Epic with multiple Stories
-
-Before creating the markdown files, make sure the backlog structure noted in `references/folder-structure` exists. If not create it. 
-
-This is only about backlog, not Wiki. Do not read Wiki related references like okf.md if not explicitly stated.
 
 Use one of these templates:
 
@@ -22,3 +20,5 @@ Use one of these templates:
 Keep the Backlog index current at all times. Update it after adding or updating work items.
 
 When creating subtasks be very granular about it. Always ask yourself "Will the agent implementing it likely exceed a context window of 150.000?". If so, be more granular so it will likely stay under it.
+
+Check the Wiki for each mentioned technology. If it does not exist in it, use tools like Context7 and the web search to fill it with guidelines, best practices, examples, etc. Otherwise read these documents and use their info.
