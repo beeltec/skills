@@ -18,6 +18,14 @@ Use one of these templates:
 - Story: `assets/templates/backlog/story.md`
 - Bug Ticket: `assets/templates/backlog/bug.md`
 
+## Testing
+
+- Unless otherwise stated, create the bare minimum of unit tests. Always ask yourself if the unit test is necessary. When in doubt the answer is no.
+- Run integration suites seldom and only when necessary to keep things fast.
+- You have to run acceptance tests. These have to be run in real environments (for example using a real browser or device simulators).
+
+These testing guidelines need to be reflected as tasks inside Epics and/or tickets.
+
 Keep the Backlog index current at all times. Update it after adding or updating work items.
 
 When creating subtasks be very granular about it. Always ask yourself "Will the agent implementing it likely exceed a context window of 150.000?". If so, be more granular so it will likely stay under it.

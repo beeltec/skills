@@ -23,14 +23,6 @@ If that is the case, work on the tasks sequentially. If not, use parallel subage
 When claiming a ticket in the backlog use the exact model name of the implementing agent as the owner and the asignee. 
 The asignee must not be changed or removed afterwards while the owner will be released after implementation.
 
-## Testing
-
-- Unless otherwise stated, create the bare minimum of unit tests. Always ask yourself if the unit test is necessary. When in doubt the answer is no.
-- Run integration suites seldom and only when necessary to keep things fast.
-- You have to run acceptance tests. These have to be run in real environments (for example using a real browser or device simulators).
-
-These testing guidelines need to be reflected as tasks inside Epics and/or tickets.
-
 ## Code review
 
 After each ticket is done, do a code review using the review subskill. Fix all findings that are reported. 
