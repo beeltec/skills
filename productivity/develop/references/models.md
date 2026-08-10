@@ -8,18 +8,18 @@ This is a summary of available AI models.
 
 | Model             | Intelligence | Taste | Efficiency | Cost / job | Overall |
 | ----------------- | -----------: | ----: | ---------: | ---------: | ------: |
-| **GPT-5.6 Sol**   |            9 |     8 |          8 |          8 |   **9** |
-| **GPT-5.6 Terra** |            8 |     7 |      **9** |          9 |   **8** |
-| **GPT-5.6 Luna**  |            6 |     5 |          9 |     **10** |   **8** |
+| **GPT-5.6 Sol**   |        **9** | **8** |          7 |          7 |   **9** |
+| **GPT-5.6 Terra** |            7 |     7 |      **9** |          9 |   **8** |
+| **GPT-5.6 Luna**  |            6 |     5 |      **9** |     **10** |   **8** |
 
 ## Anthropic / Claude Code
 
 | Model                | Intelligence |  Taste | Efficiency | Cost / job | Overall |
 | -------------------- | -----------: | -----: | ---------: | ---------: | ------: |
-| **Claude Fable 5**   |       **10** | **10** |          6 |          4 |   **9** |
-| **Claude Opus 5**    |            8 |      6 |          8 |          7 |   **7** |
-| **Claude Sonnet 5**  |            7 |      7 |          9 |          8 |   **7** |
-| **Claude Haiku 4.5** |            5 |      5 |      **9** |          7 |   **6** |
+| **Claude Fable 5**   |       **10** | **10** |          6 |          3 |   **8** |
+| **Claude Opus 5**    |            7 |      5 |          6 |          6 |   **6** |
+| **Claude Sonnet 5**  |            6 |      6 |          7 |          7 |   **6** |
+| **Claude Haiku 4.5** |            4 |      4 |      **9** |          6 |   **5** |
 
 ### Description
 
