@@ -5,6 +5,7 @@ title: ""
 status: todo
 priority: medium
 owner:
+assignee:
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---

@@ -8,6 +8,7 @@ severity: medium
 epic:
 story:
 owner:
+assignee:
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---

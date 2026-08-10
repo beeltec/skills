@@ -6,6 +6,7 @@ status: todo
 priority: medium
 epic: EPIC-XXX
 owner:
+assignee:
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
