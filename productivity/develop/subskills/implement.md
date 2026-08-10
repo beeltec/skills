@@ -13,3 +13,5 @@ If there are several tasks to be worked on, analyze them first to see if multipl
 - UI-heavy work: role: Frontend engineer; job: implement the UI heavy task; model: the one with the best taste
 - Coding-heavy work: role: Backend engineer; job: implement the Coding-heavy task; model: the most intelligent model
 - Database-heavy work: role: Database specialist; job: implement the Database-heavy task; model: a balanced one
+
+Add or update the Wiki as the tasks are implemented.

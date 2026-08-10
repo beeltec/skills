@@ -21,4 +21,6 @@ Keep the Backlog index current at all times. Update it after adding or updating 
 
 When creating subtasks be very granular about it. Always ask yourself "Will the agent implementing it likely exceed a context window of 150.000?". If so, be more granular so it will likely stay under it.
 
-Check the Wiki for each mentioned technology. If it does not exist in it, use tools like Context7 and the web search to fill it with guidelines, best practices, examples, etc. Otherwise read these documents and use their info.
+Check the Wiki for each mentioned technology. If it does not exist in it, use tools like Context7 and the web search to fill it with guidelines, best practices, examples, etc. 
+Use research subagents (max amount of 4, see `references/models.md`) with cheapest model. 
+Otherwise read these documents and use their info.
