@@ -1,42 +1,67 @@
 ---
-type: Example
-title: "<Technology> examples"
-description: "Canonical <Technology> implementations in this project worth imitating."
-tags: [stack, examples]
+type: Examples
+title: "<Technology> Examples"
+description: "Canonical <technology> implementations worth imitating."
+tags: [examples, <technology>]
+technology: <technology>
+version: "<version or version range>"
 status: stable
 generated:
   by: human:<id>
   at: <ISO-8601 timestamp>
 ---
 
-# Purpose
+# Scope
 
-Implementations of <Technology> in this codebase that are worth copying.
+Each example points at real code in this repository and explains what makes it
+the reference to copy. Prefer linking to a file over pasting a long snippet, so
+the example cannot drift from the code.
 
-Keep this list short. One good example per situation beats several mediocre
-ones.
+For `general/examples.md`, collect examples that are not tied to one technology.
 
-# <Situation>
+# Examples
 
-**Imitate:** `<path>`
+## <What the example demonstrates>
+
+**Reference:** `<path/to/file.ext>`
+
+**Use when:** <The situation this pattern is the right answer to.>
+
+**Key points:**
+
+* <What to notice and reproduce.>
+* <What to notice and reproduce.>
 
 ```<language>
-<The essential part of the implementation>
+<the smallest excerpt that conveys the shape>
 ```
 
-**Copy:** <Structure, naming, or layering to reproduce.>
+**Do not:** <A tempting variation that breaks a guideline or a boundary.>
 
-**Do not copy:** <Incidental detail.>
+**Follows:** [<Guideline or ADR>](/technology/<technology>/guidelines.md)
 
-**Applies:** [<pattern>](patterns.md), [<best practice>](best-practices.md)
+## <What the example demonstrates>
 
-# <Situation>
+**Reference:** `<path/to/file.ext>`
 
-**Imitate:** `<path>`
+**Use when:** <Situation.>
 
-**Copy:** <What to reproduce.>
+**Key points:**
+
+* <Point.>
+
+# Anti-Examples
+
+## <Pattern to avoid>
+
+**Found in:** `<path/to/file.ext>` (kept for compatibility; do not copy)
+
+**Why it is wrong:** <Reason.>
+
+**Do this instead:** [<Example above>](#examples)
 
 # Related
 
-* [<Technology>](index.md)
-* [<Project example>](/examples/<example>.md)
+* [<Technology> Guidelines](/technology/<technology>/guidelines.md)
+* [<Technology> Best Practices](/technology/<technology>/best-practices.md)
+* [<Technology> API Contracts](/technology/<technology>/api.md)

@@ -1,25 +1,17 @@
 # Architecture Decisions
 
-Why significant technical decisions were made. An ADR is written after a
-decision exists, so there is no proposed state.
+Decisions are recorded once they are made. Numbers are assigned sequentially
+and never reused.
 
-# Decisions
+# Accepted
 
-| ID | Decision | Status | Notes |
-|----|----------|--------|-------|
-| [0001](0001-<decision>.md) | <Decision title> | accepted | |
-| [0002](0002-<decision>.md) | <Decision title> | superseded | Superseded by [0012](0012-<decision>.md) |
+* [ADR-001 — <Decision title>](adr-001-<slug>.md) - <One-sentence summary.>
+* [ADR-002 — <Decision title>](adr-002-<slug>.md) - <One-sentence summary.>
 
-# Conventions
+# Superseded
 
-* Filenames are `NNNN-<short-decision-title>.md` with a monotonically
-  increasing number.
-* The number is a stable identifier and never changes, even if the title does.
-* `decision_status` is `accepted` or `superseded`. The lifecycle is
-  `accepted → superseded`.
-* A superseded ADR keeps its content and adds
-  `superseded_by: /adrs/NNNN-<decision>.md`.
-* Rejected options are documented under **Alternatives considered** inside the
-  accepted ADR rather than as separate records.
-* The OKF `status` field describes the document (normally `stable`) and is
-  independent of `decision_status`.
+* [ADR-XXX — <Decision title>](adr-XXX-<slug>.md) - Superseded by [ADR-YYY](adr-YYY-<slug>.md).
+
+# Deprecated
+
+* [ADR-XXX — <Decision title>](adr-XXX-<slug>.md) - <Why it no longer applies.>

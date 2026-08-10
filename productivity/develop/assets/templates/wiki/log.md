@@ -1,16 +1,10 @@
 # Wiki Update Log
 
-Record only meaningful wiki-level changes: new sections, new or superseded
-ADRs, and changes that alter project doctrine. Do not log typo fixes or
-routine wording changes.
-
-Entries are grouped by ISO 8601 date, newest first.
-
 ## YYYY-MM-DD
 
-* **Update**: <What changed> - [<Document>](/<section>/<document>.md)
-* **Creation**: Added [<Document>](/<section>/<document>.md).
-* **Deprecation**: <Document> is superseded by [<Replacement>](/<section>/<document>.md).
+* **Update**: <What changed> in [<Document title>](/<path>.md).
+* **Creation**: Added [<Document title>](/<path>.md).
+* **Deprecation**: Marked [<Document title>](/<path>.md) as deprecated, superseded by [<Replacement>](/<path>.md).
 
 ## YYYY-MM-DD
 

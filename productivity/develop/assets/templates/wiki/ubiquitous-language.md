@@ -1,7 +1,7 @@
 ---
 type: Ubiquitous Language
-title: "Ubiquitous Language"
-description: "Canonical domain and project terminology used across code, data, APIs, and documentation."
+title: Ubiquitous Language
+description: "Canonical terminology for this project's domain."
 tags: [domain, terminology]
 status: stable
 generated:
@@ -11,57 +11,42 @@ generated:
 
 # Purpose
 
-This document defines the canonical vocabulary of the project.
+This document is the single source of truth for domain terminology. Code,
+documentation, commit messages, and conversation use these terms and no
+synonyms.
 
-The same terms MUST be used consistently in:
-
-* source code (types, functions, modules);
-* database schemas and migrations;
-* API contracts and payloads;
-* events and message names;
-* user interface copy;
-* tests;
-* documentation.
-
-When a term here conflicts with existing code, this document is the target
-state. Record the reasoning for a term in an [ADR](/adrs/) when it is
-contested.
+Every term below states what it means in **this** project, not what it means
+in general.
 
 # Terms
 
 ## <Term>
 
-**Definition:** <One or two sentences defining the concept in domain language.>
+**Definition:** <One or two sentences defining the term precisely.>
 
-**Use for:** <What this term covers.>
+**Applies to:** <Bounded context, module, or subsystem the term belongs to.>
 
-**Do not use for:** <Nearby concept this term must not be applied to, with a
-link to the correct term.>
+**In code:** `<ClassName>`, `<table_name>`, `<field_name>`
 
-**Avoid:** <Synonym or legacy name> - use `<Term>` instead.
+**Not to be confused with:** <Neighbouring term and how it differs.>
 
-**In code:** `<TypeOrIdentifier>`
-
-**Related:** [<Architecture document>](/architecture/<document>.md),
-[<Pattern>](/patterns/<pattern>.md)
+**Avoid:** <Synonym that must not be used>, <another synonym>
 
 ## <Term>
 
 **Definition:** <Definition>
 
-**Use for:** <Scope>
+**Applies to:** <Context>
 
-**In code:** `<TypeOrIdentifier>`
+**In code:** `<identifier>`
 
-# Discouraged terms
+# Deprecated Terms
 
-| Do not use | Use instead | Reason |
-|------------|-------------|--------|
-| `<term>`   | `<Term>`    | <Why the alternative is preferred> |
+| Term | Replaced by | Reason |
+|------|-------------|--------|
+| `<old term>` | `<new term>` | <Why it changed> |
 
-# Naming conventions
+# Related
 
-* <Convention for entities, events, or identifiers that follows from the terms above>
-* <Convention for plural, abbreviation, or casing choices>
-
-See [coding guidelines](/guidelines/coding.md) for language-level naming rules.
+* [Architecture](/architecture.md)
+* [Architecture Decisions](/adrs/index.md)

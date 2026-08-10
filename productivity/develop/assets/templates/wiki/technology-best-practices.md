@@ -1,61 +1,88 @@
 ---
-type: Technology Guide
-title: "<Technology> best practices"
-description: "Preferred and discouraged ways of using <Technology> in this project."
-tags: [stack]
+type: Best Practices
+title: "<Technology> Best Practices"
+description: "Recommended approaches and known pitfalls for <technology>."
+tags: [best-practices, <technology>]
+technology: <technology>
+version: "<version or version range>"
 status: stable
 generated:
   by: human:<id>
   at: <ISO-8601 timestamp>
+sources:
+  - id: <source-key>
+    resource: <URL or path>
+    title: <Human-readable source title>
+    last_modified: YYYY-MM-DD
 ---
 
-# Purpose
+# Scope
 
-Rules for using <Technology> in this project. Generic advice available in the
-vendor documentation belongs in [references](/references/); record here only
-what is specific to us.
+Guidelines are rules; best practices are judgement. This document records the
+approaches that have worked here and the mistakes that have cost us time.
 
-See [<Technology>](index.md) for what the technology is used for.
+For `general/best-practices.md`, cover practices independent of any single
+technology.
 
-# Rules
+# Practices
 
-1. <Rule stated so compliance is verifiable.>
-2. <Rule.>
+## <Practice>
 
-# Preferred
+**Do:** <The recommended approach.>
 
-## <Situation>
+**Instead of:** <The approach it replaces.>
 
-Prefer <approach>.
+**Why:** <The concrete benefit, ideally something observed in this project.>
+
+**When it does not apply:** <Cases where the trade-off flips.>
 
 ```<language>
-<Short illustration>
+<code showing the recommended approach>
 ```
 
-Because: <reason specific to this project>.
+## <Practice>
 
-# Discouraged
+**Do:** <The recommended approach.>
 
-| Do not | Reason | Instead |
-|--------|--------|---------|
-| <Usage> | <Why it hurts this project> | <Preferred usage> |
+**Why:** <Benefit.>[^<source-key>]
 
-# Forbidden
+# Pitfalls
 
-* <Usage> - <consequence or the ADR that forbids it>.
+## <Pitfall>
 
-# Configuration
+**Symptom:** <How the problem shows up — an error, a slow query, a flaky test.>
 
-| Setting | Value | Reason |
-|---------|-------|--------|
-| `<setting>` | `<value>` | <Why> |
+**Cause:** <What actually goes wrong.>
 
-# Performance and cost
+**Fix:** <How to resolve or avoid it.>
 
-* <Project-specific consideration, quota, or limit to respect.>
+## <Pitfall>
+
+**Symptom:** <Observable symptom.>
+
+**Cause:** <Root cause.>
+
+**Fix:** <Resolution.>
+
+# Performance
+
+* <Practice with a measured or expected impact.>
+* <Practice with a measured or expected impact.>
+
+# Security
+
+* <Practice that closes a specific risk.>
+* <Practice that closes a specific risk.>
+
+# Testing
+
+* <How code using this technology should be tested.>
+* <Test doubles, fixtures, or harnesses that exist for it.>
 
 # Related
 
-* [Patterns](patterns.md)
-* [Examples](examples.md)
-* [<Guideline>](/guidelines/<document>.md)
+* [General Best Practices](/technology/general/best-practices.md)
+* [<Technology> Guidelines](/technology/<technology>/guidelines.md)
+* [<Technology> Examples](/technology/<technology>/examples.md)
+
+[^<source-key>]: <Human-readable source title>

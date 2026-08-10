@@ -1,62 +1,28 @@
----
-type: Technology Guide
-title: "<Technology>"
-description: "How this project uses <Technology>."
-tags: [stack]
-status: stable
-generated:
-  by: human:<id>
-  at: <ISO-8601 timestamp>
----
+# Technology Stack
 
-# Purpose
+Each technology has the same four documents. `general/` holds the guidance that
+applies to every technology; a technology directory holds only what is specific
+to it and does not repeat the general rules.
 
-How **this project** uses <Technology>. This is not a tutorial; consult the
-[official documentation](<url>) for the technology itself.
+# Cross-Cutting
 
-**Version:** <version or range>
+* [General](general/) - Guidance that applies across the whole codebase.
 
-**Configured in:** `<path>`
+# Technologies
 
-# Documents
+* [<Technology>](<technology>/) - <Where and why it is used, and its version.>
+* [<Technology>](<technology>/) - <Where and why it is used, and its version.>
 
-* [Best practices](best-practices.md) - How we are expected to use it.
-* [Patterns](patterns.md) - Recurring solutions specific to this technology.
-* [Examples](examples.md) - Canonical implementations to imitate.
+# Per Technology
 
-# What we use it for
+Every directory above contains:
 
-* <Responsibility this technology carries in the system.>
-* <Responsibility.>
-
-# Features we use
-
-| Feature | Used for | Notes |
-|---------|----------|-------|
-| <Feature> | <Purpose> | <Constraint or caveat> |
-
-# Features we do not use
-
-| Feature | Reason |
-|---------|--------|
-| <Feature> | <Why it is avoided, or a link to the ADR that decided it> |
-
-# Project abstractions
-
-Use these instead of calling the technology directly.
-
-| Abstraction | Location | Use for |
-|-------------|----------|---------|
-| `<Name>` | `<path>` | <Purpose> |
-
-# Fit with our architecture
-
-* Which layer it lives in: <layer>, per
-  [dependency rules](/architecture/dependency-rules.md).
-* What must not leak out of that layer: <types or concepts>.
+* `guidelines.md` - Rules contributors must follow.
+* `best-practices.md` - Recommended approaches and known pitfalls.
+* `examples.md` - Canonical implementations worth imitating.
+* `api.md` - API contracts the technology exposes or consumes.
 
 # Related
 
-* [Architecture overview](/architecture/overview.md)
-* [<ADR>](/adrs/<adr>.md)
-* [External documentation](/references/<reference>.md)
+* [Architecture](/architecture.md)
+* [Architecture Decisions](/adrs/index.md)
