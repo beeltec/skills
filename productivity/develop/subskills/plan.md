@@ -14,8 +14,11 @@ This is only about backlog, not Wiki. Do not read Wiki related references like o
 
 Use one of these templates:
 
+- Backlog Index `assets/templates/backlog/backlog-index.md`
 - Epic: `assets/templates/backlog/epic.md`
 - Story: `assets/templates/backlog/story.md`
 - Bug Ticket: `assets/templates/backlog/bug.md`
+
+Keep the Backlog index current at all times. Update it after adding or updating work items.
 
 When creating subtasks be very granular about it. Always ask yourself "Will the agent implementing it likely exceed a context window of 150.000?". If so, be more granular so it will likely stay under it.
