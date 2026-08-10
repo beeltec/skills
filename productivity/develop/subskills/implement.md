@@ -23,7 +23,11 @@ After each ticket is done, do a code review using the review subskill. Fix all f
 
 Add or update the Wiki as the tasks are implemented.
 
+## Backlog Updates
+
+- When a ticket or Epic is done, check all marks inside the document and mark it as done inside the backlog index document. Release the claim on it.
+
 ## Versioning
 
-- If on main branch create a new branch per Story/Bug Ticket and merge it with a merge commit when done and green
-- Commit units of work (ie. one commit after each subtask and after a Story, Bug Ticket or Epic is done)
+- If on main branch create a new branch per ticket and merge it with a merge commit when done and green
+- Commit units of work (ie. one commit after each subtask and after a ticket or Epic is done)

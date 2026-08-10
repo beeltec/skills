@@ -21,6 +21,7 @@ Based on the prompt load the instructions for one of the following subskills fro
 - discuss -> Exact words `discuss`, `let's talk about...` or if the prompt contains a question about a new feature or extension of an existing one
 - implement -> Exact word `implement` or if the user mentions coding or implementing something
 - plan -> Exact word `plan` or if the user mentions creating an Epic, a User Story or a Bug Ticket. Can be a follow-up from a discussion session
+- review -> Exact words `code review` or `review` as well as being invoked by the model. Does an adversarial code review on the changes since a fixed point on two axes
 - setup -> Exact word `setup` or invoked by the model. Sets up the file and folder structure or adds a note that this project is not using it
 - wiki -> Use it when writing to the Wiki
 

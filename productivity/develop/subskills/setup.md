@@ -17,6 +17,14 @@ Based on their answer append the following to the AGENTS.md:
 This project {uses/does not use} the Beelte folder structure for {the backlog and wiki/the backlog/the wiki/neither the backlog or the wiki}
 ```
 
+If the user decided to use the backlog, add this to the same paragraph:
+
+```
+### Backlog
+
+Possible work items are Epics, Stories and Bug Tickets. The latter two are also uniformly also referred to as "tickets".
+```
+
 Also add two additional paragraphs:
 
 1. Git Commit Messaging: Use Conventional Commits
