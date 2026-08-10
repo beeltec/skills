@@ -31,3 +31,5 @@ $RECYCLE.BIN/
 .Trash-*
 .nfs*
 .fuse_hidden*
+
+.playwright-mcp/
