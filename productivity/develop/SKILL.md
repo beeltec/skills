@@ -36,7 +36,8 @@ Create an aggregated report from all subagents with a heading for each of them v
 
 ## Working with subagents
 
-- Always make sure to close a subagent when you received it's report
+Always make sure to close a subagent when you received it's report except for implementation agents as they might still be needed for further work after code reviews. 
+Close them when all work is done from them.
 
 ## Asking the user
 
