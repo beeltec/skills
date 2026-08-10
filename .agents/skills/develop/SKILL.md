@@ -12,3 +12,4 @@ Based on the prompt load the instructions for one of the following subskills fro
 
 - discuss -> Exact word's `discuss`, `let's talk about...` or if the prompt contains a question about a new feature or extension of an existing one
 - plan -> Exact word `plan` or if the user mentions creating an Epic, a User Story or a Bug Ticket. Can be a follow-up from a discussion session
+- implement -> Exact word `implement` or if the user mentions coding or implementing something
