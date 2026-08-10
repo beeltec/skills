@@ -17,6 +17,22 @@ Based on their answer append the following to the AGENTS.md:
 This project {uses/does not use} the Beelte folder structure for {the backlog and wiki/the backlog/the wiki/neither the backlog or the wiki}
 ```
 
+Also add two additional paragraphs:
+
+1. Git Commit Messaging: Use Conventional Commits
+
+  `type(optional_scope): description`
+  [optional body]
+  [optional footer(s)]
+
+  Possible types: feat, fix, build, chore, ci, docs, style, refactor, perf, test
+
+  Mark breaking changes with exclamation mark (`feat(optional_scope)!: breaking change`)
+  
+2. Conventional Branches: Use Conventional Git branch names (`feat/add-login-page`, `fix/header-bug`, `hotfix/security-patch`, `release/v1.2.0`, `chore/update-dependencies`).
+
 If the project should use one of the structures, create their file and folder structures. 
 
 Make also sure to create the Wiki's index.md files (root and all sub indexes), log.md, architecture.md and ubiquitous-language.md with barebone content. Use the templates from `assets/templates/wiki` for these files.
+
+Commit your work when done.

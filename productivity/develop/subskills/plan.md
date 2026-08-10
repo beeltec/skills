@@ -9,6 +9,7 @@ Based on the data you got think about what would make the most sense:
 
 - Is it simple enough to fit into one Story? -> Create a standalone Story
 - Do we need multiple Stories to reflect it? -> Create an Epic with multiple Stories
+- Create more than one Epic if the Stories can be broken up into several logical units
 
 Use one of these templates:
 
@@ -24,3 +25,5 @@ When creating subtasks be very granular about it. Always ask yourself "Will the 
 Check the Wiki for each mentioned technology. If it does not exist in it, use tools like Context7 and the web search to fill it with guidelines, best practices, examples, etc. 
 Use research subagents (max amount of 4, see `references/models.md`) with cheapest model. 
 Otherwise read these documents and use their info.
+
+Commit your work when done.

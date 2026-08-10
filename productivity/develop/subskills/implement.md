@@ -15,3 +15,5 @@ If there are several tasks to be worked on, analyze them first to see if multipl
 - Database-heavy work: role: Database specialist; job: implement the Database-heavy task; model: a balanced one
 
 Add or update the Wiki as the tasks are implemented.
+
+Commit units of work (ie. one commit after each Story or Bug Ticket and after an Epic is done)
