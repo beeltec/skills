@@ -3,9 +3,11 @@ name: setup
 description: Sets up the file and folder structure or adds a note that this project is not using it
 ---
 
-If the AGENTS.md does not exist or if no backlog/wiki block exists within, check the project for the file and folder structure noted in `references/folder-structure` for both the backlog and wiki.
+Check the project for the file and folder structure noted in `references/folder-structure` for both the backlog and wiki.
 
 If the AGENTS.md does not exist yet, create it and a symlink to it called CLAUDE.md (title is "# Instruction for agents").
+
+Explicitly write `AGENTS.md not found. Creating it.`
 
 **Ask the user if they want to use the backlog, the wiki, both or neither** - Do not assume it will use either and explicitly ask!
 

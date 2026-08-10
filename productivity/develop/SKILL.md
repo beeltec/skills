@@ -6,7 +6,9 @@ metadata:
   version "0.1"
 ---
 
-First check the AGENTS.md if we are using our file and folder structure for the backlog and Wiki. If no mention of it is in it, load `setup` subskill and execute it. 
+First check if AGENTS.md exists using `[ -f ./AGENTS.md ] && echo 1 || echo 0`. If 0 load `setup` subskill and execute it.
+If 1 check it if we are using our file and folder structure for the backlog and Wiki. If no mention of it is in it, load `setup` subskill and execute it.
+In both cases explicitly write `Setup necessary, loading setup subskill`.
 The execution of this skill **has to be done before the execution of any other skill** and the user needs to answer. It cannot be run autonomously.
 
 Instructions mentioning the Wiki and/or Backlog must only be executed if the project uses the Beelte Wiki and/or Backlog. **Skip them otherwise**.
