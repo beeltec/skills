@@ -54,4 +54,6 @@ If the project should use one of the structures, create their file and folder st
 
 Make also sure to create the Wiki's index.md files (root and all sub indexes), log.md, architecture.md and ubiquitous-language.md with barebone content. Use the templates from `assets/templates/wiki` for these files.
 
+If this is a brownfield project (there is an existing codebase) use the codebase subskill to analyze it and populate the Wiki with it using the wiki subskill.
+
 Commit your work when done.
