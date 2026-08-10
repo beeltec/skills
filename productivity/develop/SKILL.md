@@ -9,7 +9,9 @@ metadata:
 First check the AGENTS.md if we are using our file and folder structure for the backlog and Wiki. If no mention of it is in it, load `setup` subskill and execute it. 
 The execution of this skill **has to be done before the execution of any other skill** and the user needs to answer. It cannot be run autonomously.
 
-If this project uses the Wiki only use the terms from `docs/wiki/ubiquitous-language.md`. If a new term is introduced by the user, ask if it should be added to the document.
+Instructions mentioning the Wiki must only be executed if the project uses the Beelte Wiki. **Skip them otherwise**.
+
+Only use the terms from the Wiki's ubiquitous language document. If a new term is introduced by the user, ask if it should be added to the document.
 
 When communicating with the user always adhere to ISO 24495 at `references/iso-24495.md`. and ASD-STE100 Simplified Technical English at `references/asd-ste100.md`.
 

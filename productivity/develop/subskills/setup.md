@@ -16,3 +16,7 @@ Based on their answer append the following to the AGENTS.md:
 
 This project {uses/does not use} the Beelte folder structure for {the backlog and wiki/the backlog/the wiki/neither the backlog or the wiki}
 ```
+
+If the project should use one of the structures, create their file and folder structures. 
+
+Make also sure to create the Wiki's index.md files (root and all sub indexes), log.md, architecture.md and ubiquitous-language.md with barebone content. Use the templates from `assets/templates/wiki` for these files.

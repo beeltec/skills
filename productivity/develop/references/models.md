@@ -2,6 +2,8 @@
 
 This is a summary of available AI models.
 
+**Note**: Always use a model from the same company as the orchestrating agent until otherwise noted.
+
 ## OpenAI / Codex
 
 | Model             | Intelligence | Taste | Efficiency | Cost / job | Overall |
