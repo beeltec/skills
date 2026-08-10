@@ -12,6 +12,7 @@ If this project uses the okf wiki (check if docs/wiki/ubiquitous-language.md exi
 
 Based on the prompt load the instructions for one of the following subskills from `subskills/{subskill_name}.md`:
 
-- discuss -> Exact word's `discuss`, `let's talk about...` or if the prompt contains a question about a new feature or extension of an existing one
+- codebase -> Exact words `analyze codebase` or general instruction to analyze and/or map the codebase
+- discuss -> Exact words `discuss`, `let's talk about...` or if the prompt contains a question about a new feature or extension of an existing one
 - plan -> Exact word `plan` or if the user mentions creating an Epic, a User Story or a Bug Ticket. Can be a follow-up from a discussion session
 - implement -> Exact word `implement` or if the user mentions coding or implementing something
