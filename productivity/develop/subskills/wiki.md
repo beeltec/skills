@@ -3,6 +3,8 @@ name: wiki
 description: Write to the project's OKF Wiki
 ---
 
+## The bundle
+
 The wiki is an [OKF](references/okf.md) v0.2 knowledge bundle rooted at `docs/wiki/`.
 
 Check if it exists in this project (based on the file and folder structure in `references/folder-structure.md` ## OKF Wiki)
@@ -11,7 +13,7 @@ If not, ask the user if it should be created. Cancel here if the answer is "no".
 
 Bundle-relative links (starting with `/`) resolve against `docs/wiki/`.
 
-### Naming
+## Naming
 
 - Files and directories are lowercase kebab-case.
 - Technology directories are named after the technology, not the layer
@@ -22,7 +24,7 @@ Bundle-relative links (starting with `/`) resolve against `docs/wiki/`.
 - `index.md` and `log.md` are reserved OKF filenames and carry no frontmatter,
   except the bundle-root `index.md`, which may carry only `okf_version`.
 
-### Conventions
+## Conventions
 
 - Every other `.md` file carries YAML frontmatter with a non-empty `type`.
 - A technology directory holds only what is specific to that technology;
@@ -39,7 +41,7 @@ Bundle-relative links (starting with `/`) resolve against `docs/wiki/`.
 - `log.md` records meaningful changes, newest first, under ISO 8601 date
   headings.
 
-### Templates
+## Templates
 
 Templates live in `assets/templates/wiki/`.
 

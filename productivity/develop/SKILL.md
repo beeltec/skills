@@ -6,16 +6,23 @@ metadata:
   version "0.1"
 ---
 
+## Setup check
+
 First check if AGENTS.md exists using `[ -f ./AGENTS.md ] && echo 1 || echo 0`. If 0 load `setup` subskill and execute it.
 If 1 check it if we are using our file and folder structure for the backlog and Wiki. If no mention of it is in it, load `setup` subskill and execute it.
 In both cases explicitly write `Setup necessary, loading setup subskill`.
 The execution of this skill **has to be done before the execution of any other skill** and the user needs to answer. It cannot be run autonomously.
 
+## Wiki and Backlog scope
+
 Instructions mentioning the Wiki and/or Backlog must only be executed if the project uses the Beelte Wiki and/or Backlog. **Skip them otherwise**.
+
+## Language
 
 Only use the terms from the Wiki's ubiquitous language document. If a new term is introduced by the user, ask if it should be added to the document.
 
 When communicating with the user always adhere to ISO 24495 at `references/iso-24495.md`. and ASD-STE100 Simplified Technical English at `references/asd-ste100.md`.
+Also assume the user is not a native English speaker and use simple terms during communication with them.
 
 ## List of subskills
 
