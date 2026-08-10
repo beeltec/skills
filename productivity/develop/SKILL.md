@@ -6,6 +6,8 @@ metadata:
   version "0.1"
 ---
 
+First check the AGENTS.md if we are using our file and folder structure for the backlog and Wiki. If no mention of it is in it, load `setup` subskill and execute it.
+
 When communicating with the user always adhere to ISO 24495 at `references/iso-24495.md`. and ASD-STE100 Simplified Technical English at `references/asd-ste100.md`.
 
 If this project uses the okf wiki (check if docs/wiki/ubiquitous-language.md exists) only use these terms. If a new term is introduced by the user, ask if it should be added to the document.
@@ -16,4 +18,5 @@ Based on the prompt load the instructions for one of the following subskills fro
 - discuss -> Exact words `discuss`, `let's talk about...` or if the prompt contains a question about a new feature or extension of an existing one
 - implement -> Exact word `implement` or if the user mentions coding or implementing something
 - plan -> Exact word `plan` or if the user mentions creating an Epic, a User Story or a Bug Ticket. Can be a follow-up from a discussion session
+- setup -> Exact word `setup` or invoked by the model. Sets up the file and folder structure or adds a note that this project is not using it
 - wiki -> Use it when writing to the Wiki
