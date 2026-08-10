@@ -27,4 +27,4 @@ Based on the prompt load the instructions for one of the following subskills fro
 - setup -> Exact word `setup` or invoked by the model. Sets up the file and folder structure or adds a note that this project is not using it
 - wiki -> Use it when writing to the Wiki
 
-When asking the user anything use AskUserQuestion tool for every question if the tool is available (in that case **it is non negotiable**).
+When asking the user anything (not just in the discuss subskill) use AskUserQuestion tool if it is available (in that case **it is non negotiable**).
