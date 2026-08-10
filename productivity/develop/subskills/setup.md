@@ -25,11 +25,20 @@ Also add two additional paragraphs:
   [optional body]
   [optional footer(s)]
 
-  Possible types: feat, fix, build, chore, ci, docs, style, refactor, perf, test
+  Possible types: feat, fix, build, chore, ci, docs, style, refactor, perf, test, merge
 
   Mark breaking changes with exclamation mark (`feat(optional_scope)!: breaking change`)
   
-2. Conventional Branches: Use Conventional Git branch names (`feat/add-login-page`, `fix/header-bug`, `hotfix/security-patch`, `release/v1.2.0`, `chore/update-dependencies`).
+2. Conventional Branches: Use Conventional Git branch names
+
+  `type/branch-name`
+
+  Possible types: 
+  - feat (for new features)
+  - fix (for bug fixes)
+  - hotfix (for urgent fixes)
+  - release (for branches preparing a release)
+  - chore (for non-code tasks like dependency, docs updates)
 
 If the project should use one of the structures, create their file and folder structures. 
 
