@@ -4,6 +4,7 @@
 
 docs/
 └── backlog/
+    ├── index.md    
     ├── epics/
     │   ├── EPIC-001-authentication.md
     │   └── EPIC-002-billing.md
@@ -23,51 +24,64 @@ docs/
 └── wiki/
     ├── index.md
     ├── log.md
+    ├── ubiquitous-language.md
     │
-    ├── data/
+    ├── architecture/
     │   ├── index.md
-    │   ├── datasets/
-    │   │   ├── index.md
-    │   │   ├── sales.md
-    │   │   └── finance.md
+    │   ├── overview.md
+    │   ├── boundaries.md
+    │   └── dependency-rules.md
+    │
+    ├── adrs/
+    │   ├── index.md
+    │   ├── 0001-<decision>.md
+    │   ├── 0002-<decision>.md
+    │   └── ...
+    │
+    ├── guidelines/
+    │   ├── index.md
+    │   ├── coding.md
+    │   ├── testing.md
+    │   ├── error-handling.md
+    │   ├── logging.md
+    │   ├── security.md
+    │   └── <topic>.md
+    │
+    ├── stack/
+    │   ├── index.md
     │   │
-    │   └── tables/
-    │       ├── index.md
-    │       ├── customers.md
-    │       ├── orders.md
-    │       └── recognized-revenue.md
+    │   ├── <technology>/
+    │   │   ├── index.md
+    │   │   ├── best-practices.md
+    │   │   ├── patterns.md
+    │   │   └── examples.md
+    │   │
+    │   ├── <technology>/
+    │   │   ├── index.md
+    │   │   ├── best-practices.md
+    │   │   └── examples.md
+    │   │
+    │   └── ...
     │
-    ├── metrics/
+    ├── patterns/
     │   ├── index.md
-    │   ├── revenue.md
-    │   ├── gross-profit.md
-    │   └── conversion-rate.md
+    │   ├── <pattern>.md
+    │   ├── <pattern>.md
+    │   └── ...
     │
-    ├── computations/
+    ├── examples/
     │   ├── index.md
-    │   ├── revenue.md
-    │   └── gross-profit.md
+    │   ├── <example>.md
+    │   ├── <example>.md
+    │   └── ...
     │
-    ├── dashboards/
+    ├── workflows/
     │   ├── index.md
-    │   ├── executive-revenue.md
-    │   └── sales-performance.md
-    │
-    ├── playbooks/
-    │   ├── index.md
-    │   ├── data-freshness-incident.md
-    │   └── revenue-discrepancy.md
+    │   ├── local-development.md
+    │   ├── <workflow>.md
+    │   └── ...
     │
     └── references/
         ├── index.md
-        ├── policies/
-        │   ├── revenue-recognition.md
-        │   └── cost-allocation.md
-        ├── computations/
-        │   └── revenue.sql
-        ├── skills/
-        │   ├── run-on-bq.md
-        │   └── run-dbt.md
-        └── attesters/
-            ├── sql-equality.py
-            └── dbt-binding.py
+        ├── <reference>.md
+        └── ...
