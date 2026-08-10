@@ -1,0 +1,729 @@
+- generic [active] [ref=f44e1]:
+  - link "Zum Hauptinhalt springen" [ref=f44e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f44e6]:
+    - generic:
+      - generic: "GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking : r/codex"
+      - banner [ref=f44e10]:
+        - navigation [ref=f44e11]:
+          - link "Home" [ref=f44e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f44e34]:
+            - generic [ref=f44e36]:
+              - textbox "Fragen" [ref=f44e43]:
+                - /placeholder: Finde alles
+              - separator [ref=f44e44]
+              - link "Fragen" [ref=f44e48] [cursor=pointer]:
+                - /url: /answers/
+              - generic: Finde alles
+          - generic [ref=f44e54]:
+            - link "Registrieren" [ref=f44e60] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Anmelden" [ref=f44e66] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Nutzermenü ausklappen" [ref=f44e73] [cursor=pointer]
+      - generic [ref=f44e79]:
+        - generic [ref=f44e80]:
+          - generic [ref=f44e81]:
+            - generic:
+              - generic:
+                - link "Weiter zur Registrierung" [ref=f44e82] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Zur rechten Seitenleiste springen" [ref=f44e83] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f44e84]:
+            - main [ref=f44e85]:
+              - 'generic "GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking : r/codex"'
+              - generic [ref=f44e86]:
+                - generic [ref=f44e87]:
+                  - generic [ref=f44e88]:
+                    - button "Zurück" [ref=f44e90] [cursor=pointer]
+                    - link "Zu codex" [ref=f44e98] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/codex/
+                    - group [ref=f44e103]:
+                      - generic [ref=f44e104]:
+                        - link "r/codex" [ref=f44e107] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/codex/
+                        - generic [ref=f44e108]: •
+                        - time [ref=f44e110]: vor 5 Tagen
+                      - 'link "Autor*in: BorderIll6043" [ref=f44e115] [cursor=pointer]':
+                        - /url: https://www.reddit.com/user/BorderIll6043/
+                        - generic [ref=f44e116]: BorderIll6043
+                  - button "Handlungen für Nutzer*innen öffnen" [ref=f44e120] [cursor=pointer]
+                - 'heading "Beitragstitel: GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking" [level=1] [ref=f44e127]': "GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking"
+                - generic [ref=f44e130]:
+                  - generic [ref=f44e131]:
+                    - paragraph [ref=f44e132]: I have been looking at the latest DeepSWE results, especially the GPT-5.6 Sol, Luna and Terra variants. My main takeaway is that asking which model is “the best” is probably the wrong question.
+                    - paragraph [ref=f44e133]:
+                      - text: "The better question is:"
+                      - strong [ref=f44e134]: what are you optimizing for—cost, speed, raw capability, or reliability?
+                    - paragraph [ref=f44e135]: "Some relevant results:"
+                    - figure [ref=f44e136]:
+                      - link [ref=f44e137] [cursor=pointer]:
+                        - /url: https://preview.redd.it/gpt-5-6-sol-luna-and-terra-choosing-by-cost-speed-and-v0-5erpqcw1fhhh1.png?width=1223&format=png&auto=webp&s=b3ed997190886796357838a755a168f2fa8c3be5
+                        - 'img "r/codex - GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking" [ref=f44e138]'
+                    - paragraph [ref=f44e139]: "My practical interpretation is:"
+                    - paragraph [ref=f44e140]:
+                      - strong [ref=f44e141]: Luna max is probably the best value when cost matters more than time.
+                      - text: It is only six points behind Sol max while costing almost fourteen times less. It uses many more steps, so it may be slower or less direct, but with a good plan, clear acceptance criteria and tests, it becomes extremely attractive even for some complex tasks.
+                    - paragraph [ref=f44e142]:
+                      - strong [ref=f44e143]: Sol high looks like the best premium balance.
+                      - text: It is only four points behind Sol max, costs much less, and uses far fewer tokens and steps than Terra max. For difficult work where speed and reliability matter, this may be the most sensible default.
+                    - paragraph [ref=f44e144]:
+                      - strong [ref=f44e145]: Sol xhigh is the near-max option.
+                      - text: It gets close to Sol max while saving a significant amount of money. I would not use it for routine work, but it makes sense for difficult debugging, architecture and deep code analysis where Sol high may not be enough.
+                    - paragraph [ref=f44e146]:
+                      - strong [ref=f44e147]: "Sol max should probably be reserved for critical or genuinely difficult problems:"
+                      - text: unclear bugs, architectural decisions, deep repository analysis, or cases where the cost of a wrong answer is much higher than the model cost.
+                    - paragraph [ref=f44e148]:
+                      - strong [ref=f44e149]: Luna xhigh makes sense for small, repetitive and easy-to-verify tasks
+                      - text: ", especially at scale. However, for only $0.30 more, Luna max gains around ten percentage points, so max may still be the better choice for individual tasks."
+                    - paragraph [ref=f44e150]:
+                      - strong [ref=f44e151]: Terra max remains interesting as a strong executor when the plan is already defined
+                      - text: ", but based on these numbers, Sol high appears more efficient overall. Terra xhigh also looks somewhat redundant next to Sol medium, Terra high and Terra max."
+                    - paragraph [ref=f44e152]: "A simple routing strategy could be:"
+                    - paragraph [ref=f44e153]:
+                      - strong [ref=f44e154]: Luna xhigh → Luna max → Sol high → Sol xhigh → Sol max
+                    - paragraph [ref=f44e155]: Not every task should start at the cheapest tier. A complex and ambiguous problem may deserve Sol high or xhigh immediately, while a clear implementation with strong tests may be perfect for Luna max.
+                    - paragraph [ref=f44e156]:
+                      - text: I know there are many benchmarks and data sources, and some people will say DeepSWE is not reliable or representative of real-world Codex usage. That criticism is fair. But the reality is that
+                      - strong [ref=f44e157]: no benchmark has the absolute truth
+                      - text: . Every evaluation measures a limited environment, agent setup and task distribution.
+                    - paragraph [ref=f44e158]: I see DeepSWE as one useful signal, not a final verdict. Real-world performance will still depend on the repository, prompt, planning, tests and the type of work being done.
+                    - paragraph [ref=f44e159]: What has your actual experience been with Sol, Luna and Terra? Does this match how you route tasks?
+                  - button "Weiterlesen" [ref=f44e160] [cursor=pointer]
+                - generic [ref=f44e166]:
+                  - generic [ref=f44e169]: "99"
+                  - generic [ref=f44e172]: ·
+                  - generic [ref=f44e175]: "35"
+              - separator [ref=f44e176]
+              - generic "Cut code review time & bugs in half, instantly. Reviews for AI-powered teams who move fast (but don’t break things)" [ref=f44e177]:
+                - generic [ref=f44e178]:
+                  - 'generic "Advertisement: Cut code review time & bugs in half, instantly. Reviews for AI-powered teams who move fast (but don’t break things)" [ref=f44e179]':
+                    - 'link "Advertisement: Cut code review time & bugs in half, instantly. Reviews for AI-powered teams who move fast (but don’t break things)" [ref=f44e180] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=8z-jAEwUaYEgTyxoh0zVQQz6MLDmNv1Z6ttNUA-rl4bBZYhjV8RncBrmUyyZuRfazrJKN5BjBqqis7dYpGB0bmMlA5wZ4h5bbynosGhB8jLGB3Esh2QCp52p-Ehnc0DtPX3xLYx30_agKFFlYoVlTOUZX4HMh3hyvd4ZnpxNkRcvsYlKADW816Er9UOsuJ3kuc4OO6Ce6o18JupnO1XkQPvafRJczyfzQl0tNjDywGaGP3NdsPbKXU0w9eSyQMlWAQMagQ3Mf90yp0A8wbphPhPZXz_IAFBJbFhGHPsUS8I41Qr11uHtsK0n1JFK3dKKHXO4UXtxEKiwVzKqkepzhrKtWQ2k4z9lyYKyFhAnlH9h80WzrYmUhFdvqS5ysPu3ZivwhEiASLOskzHBKnKLTl9WBGST0MEdHdAmxV7OF9d75Wm3lwPkQos7Qa3uGExoDSEIOtOsLXxpjbbnTqrpVUQ2vvwE3ZfkAsqfS8qLukxLgAdQEIRLU37wCXXWsG988iEPV4_5Wa12oX4PM0bcQ8YSuPtLN_BxlkrEN_uplLFVht1lRgfG9b0UYQhiTK7DDqdNGhsqtpxsh-yDtsQZXfMs_k3hSVCYN0WdQBgkvlMfBPOG9muU_W9FPTWrjoAZhsAH-pnAyJwkLyetdWtc3K079P7ZCAkz&zp=G3T5N_vECJVDPhbKQpuhjWS2m7JJ0NZhHXXb7ZOqIPRXTvHaf4w4dpKLFeNhtyUf6AeBNkZ3_WmjhUhSl5_c713g4mcgYnOVzaU-tY5uG_d1ay0FAi175yu3BqFdxHhqVQrbdi7BLNl7WX3JoNefb-1voV-fG8eYyFs5XwRwDAmXAIK_9u3Y8lTp5uV3eHwZIfUmigE88R4r24k77YXaW9WKja2ApHHV9HhygKcwlwtdQWh2OLBrz3qnw5Cm7CbAJK9jPjfg911RXZLr3t89MPoSHjyo-MdhB1iwFavwXDlEAaFECCk_nXK3LyuWlneGfaXJaPTOj7_26jl1e0Gx9WKp5apxNdBw6mXB
+                  - generic [ref=f44e181]:
+                    - generic [ref=f44e182]:
+                      - link "CodeRabbitAI" [ref=f44e184] [cursor=pointer]:
+                        - /url: /user/CodeRabbitAI/
+                        - img "Avatar von u/CodeRabbitAI" [ref=f44e187]
+                      - generic [ref=f44e189]: •
+                      - link "Gesponsert" [ref=f44e191] [cursor=pointer]:
+                        - /url: /user/CodeRabbitAI/
+                      - link [ref=f44e194] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=8z-jAEwUaYEgTyxoh0zVQQz6MLDmNv1Z6ttNUA-rl4bBZYhjV8RncBrmUyyZuRfazrJKN5BjBqqis7dYpGB0bmMlA5wZ4h5bbynosGhB8jLGB3Esh2QCp52p-Ehnc0DtPX3xLYx30_agKFFlYoVlTOUZX4HMh3hyvd4ZnpxNkRcvsYlKADW816Er9UOsuJ3kuc4OO6Ce6o18JupnO1XkQPvafRJczyfzQl0tNjDywGaGP3NdsPbKXU0w9eSyQMlWAQMagQ3Mf90yp0A8wbphPhPZXz_IAFBJbFhGHPsUS8I41Qr11uHtsK0n1JFK3dKKHXO4UXtxEKiwVzKqkepzhrKtWQ2k4z9lyYKyFhAnlH9h80WzrYmUhFdvqS5ysPu3ZivwhEiASLOskzHBKnKLTl9WBGST0MEdHdAmxV7OF9d75Wm3lwPkQos7Qa3uGExoDSEIOtOsLXxpjbbnTqrpVUQ2vvwE3ZfkAsqfS8qLukxLgAdQEIRLU37wCXXWsG988iEPV4_5Wa12oX4PM0bcQ8YSuPtLN_BxlkrEN_uplLFVht1lRgfG9b0UYQhiTK7DDqdNGhsqtpxsh-yDtsQZXfMs_k3hSVCYN0WdQBgkvlMfBPOG9muU_W9FPTWrjoAZhsAH-pnAyJwkLyetdWtc3K079P7ZCAkz&zp=G3T5N_vECJVDPhbKQpuhjWS2m7JJ0NZhHXXb7ZOqIPRXTvHaf4w4dpKLFeNhtyUf6AeBNkZ3_WmjhUhSl5_c713g4mcgYnOVzaU-tY5uG_d1ay0FAi175yu3BqFdxHhqVQrbdi7BLNl7WX3JoNefb-1voV-fG8eYyFs5XwRwDAmXAIK_9u3Y8lTp5uV3eHwZIfUmigE88R4r24k77YXaW9WKja2ApHHV9HhygKcwlwtdQWh2OLBrz3qnw5Cm7CbAJK9jPjfg911RXZLr3t89MPoSHjyo-MdhB1iwFavwXDlEAaFECCk_nXK3LyuWlneGfaXJaPTOj7_26jl1e0Gx9WKp5apxNdBw6mXB
+                    - button "Handlungen für Nutzer*innen öffnen" [ref=f44e200] [cursor=pointer]
+                  - generic [ref=f44e206]:
+                    - generic [ref=f44e207]:
+                      - link "Cut code review time & bugs in half, instantly. Reviews for AI-powered teams who move fast (but don’t break things)" [ref=f44e209] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=8z-jAEwUaYEgTyxoh0zVQQz6MLDmNv1Z6ttNUA-rl4bBZYhjV8RncBrmUyyZuRfazrJKN5BjBqqis7dYpGB0bmMlA5wZ4h5bbynosGhB8jLGB3Esh2QCp52p-Ehnc0DtPX3xLYx30_agKFFlYoVlTOUZX4HMh3hyvd4ZnpxNkRcvsYlKADW816Er9UOsuJ3kuc4OO6Ce6o18JupnO1XkQPvafRJczyfzQl0tNjDywGaGP3NdsPbKXU0w9eSyQMlWAQMagQ3Mf90yp0A8wbphPhPZXz_IAFBJbFhGHPsUS8I41Qr11uHtsK0n1JFK3dKKHXO4UXtxEKiwVzKqkepzhrKtWQ2k4z9lyYKyFhAnlH9h80WzrYmUhFdvqS5ysPu3ZivwhEiASLOskzHBKnKLTl9WBGST0MEdHdAmxV7OF9d75Wm3lwPkQos7Qa3uGExoDSEIOtOsLXxpjbbnTqrpVUQ2vvwE3ZfkAsqfS8qLukxLgAdQEIRLU37wCXXWsG988iEPV4_5Wa12oX4PM0bcQ8YSuPtLN_BxlkrEN_uplLFVht1lRgfG9b0UYQhiTK7DDqdNGhsqtpxsh-yDtsQZXfMs_k3hSVCYN0WdQBgkvlMfBPOG9muU_W9FPTWrjoAZhsAH-pnAyJwkLyetdWtc3K079P7ZCAkz&zp=G3T5N_vECJVDPhbKQpuhjWS2m7JJ0NZhHXXb7ZOqIPRXTvHaf4w4dpKLFeNhtyUf6AeBNkZ3_WmjhUhSl5_c713g4mcgYnOVzaU-tY5uG_d1ay0FAi175yu3BqFdxHhqVQrbdi7BLNl7WX3JoNefb-1voV-fG8eYyFs5XwRwDAmXAIK_9u3Y8lTp5uV3eHwZIfUmigE88R4r24k77YXaW9WKja2ApHHV9HhygKcwlwtdQWh2OLBrz3qnw5Cm7CbAJK9jPjfg911RXZLr3t89MPoSHjyo-MdhB1iwFavwXDlEAaFECCk_nXK3LyuWlneGfaXJaPTOj7_26jl1e0Gx9WKp5apxNdBw6mXB
+                      - generic [ref=f44e210]:
+                        - link [ref=f44e212] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=8z-jAEwUaYEgTyxoh0zVQQz6MLDmNv1Z6ttNUA-rl4bBZYhjV8RncBrmUyyZuRfazrJKN5BjBqqis7dYpGB0bmMlA5wZ4h5bbynosGhB8jLGB3Esh2QCp52p-Ehnc0DtPX3xLYx30_agKFFlYoVlTOUZX4HMh3hyvd4ZnpxNkRcvsYlKADW816Er9UOsuJ3kuc4OO6Ce6o18JupnO1XkQPvafRJczyfzQl0tNjDywGaGP3NdsPbKXU0w9eSyQMlWAQMagQ3Mf90yp0A8wbphPhPZXz_IAFBJbFhGHPsUS8I41Qr11uHtsK0n1JFK3dKKHXO4UXtxEKiwVzKqkepzhrKtWQ2k4z9lyYKyFhAnlH9h80WzrYmUhFdvqS5ysPu3ZivwhEiASLOskzHBKnKLTl9WBGST0MEdHdAmxV7OF9d75Wm3lwPkQos7Qa3uGExoDSEIOtOsLXxpjbbnTqrpVUQ2vvwE3ZfkAsqfS8qLukxLgAdQEIRLU37wCXXWsG988iEPV4_5Wa12oX4PM0bcQ8YSuPtLN_BxlkrEN_uplLFVht1lRgfG9b0UYQhiTK7DDqdNGhsqtpxsh-yDtsQZXfMs_k3hSVCYN0WdQBgkvlMfBPOG9muU_W9FPTWrjoAZhsAH-pnAyJwkLyetdWtc3K079P7ZCAkz&zp=G3T5N_vECJVDPhbKQpuhjWS2m7JJ0NZhHXXb7ZOqIPRXTvHaf4w4dpKLFeNhtyUf6AeBNkZ3_WmjhUhSl5_c713g4mcgYnOVzaU-tY5uG_d1ay0FAi175yu3BqFdxHhqVQrbdi7BLNl7WX3JoNefb-1voV-fG8eYyFs5XwRwDAmXAIK_9u3Y8lTp5uV3eHwZIfUmigE88R4r24k77YXaW9WKja2ApHHV9HhygKcwlwtdQWh2OLBrz3qnw5Cm7CbAJK9jPjfg911RXZLr3t89MPoSHjyo-MdhB1iwFavwXDlEAaFECCk_nXK3LyuWlneGfaXJaPTOj7_26jl1e0Gx9WKp5apxNdBw6mXB
+                        - generic [ref=f44e213]:
+                          - link "Mehr erfahren" [ref=f44e215] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=8z-jAEwUaYEgTyxoh0zVQQz6MLDmNv1Z6ttNUA-rl4bBZYhjV8RncBrmUyyZuRfazrJKN5BjBqqis7dYpGB0bmMlA5wZ4h5bbynosGhB8jLGB3Esh2QCp52p-Ehnc0DtPX3xLYx30_agKFFlYoVlTOUZX4HMh3hyvd4ZnpxNkRcvsYlKADW816Er9UOsuJ3kuc4OO6Ce6o18JupnO1XkQPvafRJczyfzQl0tNjDywGaGP3NdsPbKXU0w9eSyQMlWAQMagQ3Mf90yp0A8wbphPhPZXz_IAFBJbFhGHPsUS8I41Qr11uHtsK0n1JFK3dKKHXO4UXtxEKiwVzKqkepzhrKtWQ2k4z9lyYKyFhAnlH9h80WzrYmUhFdvqS5ysPu3ZivwhEiASLOskzHBKnKLTl9WBGST0MEdHdAmxV7OF9d75Wm3lwPkQos7Qa3uGExoDSEIOtOsLXxpjbbnTqrpVUQ2vvwE3ZfkAsqfS8qLukxLgAdQEIRLU37wCXXWsG988iEPV4_5Wa12oX4PM0bcQ8YSuPtLN_BxlkrEN_uplLFVht1lRgfG9b0UYQhiTK7DDqdNGhsqtpxsh-yDtsQZXfMs_k3hSVCYN0WdQBgkvlMfBPOG9muU_W9FPTWrjoAZhsAH-pnAyJwkLyetdWtc3K079P7ZCAkz&zp=G3T5N_vECJVDPhbKQpuhjWS2m7JJ0NZhHXXb7ZOqIPRXTvHaf4w4dpKLFeNhtyUf6AeBNkZ3_WmjhUhSl5_c713g4mcgYnOVzaU-tY5uG_d1ay0FAi175yu3BqFdxHhqVQrbdi7BLNl7WX3JoNefb-1voV-fG8eYyFs5XwRwDAmXAIK_9u3Y8lTp5uV3eHwZIfUmigE88R4r24k77YXaW9WKja2ApHHV9HhygKcwlwtdQWh2OLBrz3qnw5Cm7CbAJK9jPjfg911RXZLr3t89MPoSHjyo-MdhB1iwFavwXDlEAaFECCk_nXK3LyuWlneGfaXJaPTOj7_26jl1e0Gx9WKp5apxNdBw6mXB
+                          - link "coderabbit.ai" [ref=f44e220] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=8z-jAEwUaYEgTyxoh0zVQQz6MLDmNv1Z6ttNUA-rl4bBZYhjV8RncBrmUyyZuRfazrJKN5BjBqqis7dYpGB0bmMlA5wZ4h5bbynosGhB8jLGB3Esh2QCp52p-Ehnc0DtPX3xLYx30_agKFFlYoVlTOUZX4HMh3hyvd4ZnpxNkRcvsYlKADW816Er9UOsuJ3kuc4OO6Ce6o18JupnO1XkQPvafRJczyfzQl0tNjDywGaGP3NdsPbKXU0w9eSyQMlWAQMagQ3Mf90yp0A8wbphPhPZXz_IAFBJbFhGHPsUS8I41Qr11uHtsK0n1JFK3dKKHXO4UXtxEKiwVzKqkepzhrKtWQ2k4z9lyYKyFhAnlH9h80WzrYmUhFdvqS5ysPu3ZivwhEiASLOskzHBKnKLTl9WBGST0MEdHdAmxV7OF9d75Wm3lwPkQos7Qa3uGExoDSEIOtOsLXxpjbbnTqrpVUQ2vvwE3ZfkAsqfS8qLukxLgAdQEIRLU37wCXXWsG988iEPV4_5Wa12oX4PM0bcQ8YSuPtLN_BxlkrEN_uplLFVht1lRgfG9b0UYQhiTK7DDqdNGhsqtpxsh-yDtsQZXfMs_k3hSVCYN0WdQBgkvlMfBPOG9muU_W9FPTWrjoAZhsAH-pnAyJwkLyetdWtc3K079P7ZCAkz&zp=G3T5N_vECJVDPhbKQpuhjWS2m7JJ0NZhHXXb7ZOqIPRXTvHaf4w4dpKLFeNhtyUf6AeBNkZ3_WmjhUhSl5_c713g4mcgYnOVzaU-tY5uG_d1ay0FAi175yu3BqFdxHhqVQrbdi7BLNl7WX3JoNefb-1voV-fG8eYyFs5XwRwDAmXAIK_9u3Y8lTp5uV3eHwZIfUmigE88R4r24k77YXaW9WKja2ApHHV9HhygKcwlwtdQWh2OLBrz3qnw5Cm7CbAJK9jPjfg911RXZLr3t89MPoSHjyo-MdhB1iwFavwXDlEAaFECCk_nXK3LyuWlneGfaXJaPTOj7_26jl1e0Gx9WKp5apxNdBw6mXB
+                    - link [ref=f44e223] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=8z-jAEwUaYEgTyxoh0zVQQz6MLDmNv1Z6ttNUA-rl4bBZYhjV8RncBrmUyyZuRfazrJKN5BjBqqis7dYpGB0bmMlA5wZ4h5bbynosGhB8jLGB3Esh2QCp52p-Ehnc0DtPX3xLYx30_agKFFlYoVlTOUZX4HMh3hyvd4ZnpxNkRcvsYlKADW816Er9UOsuJ3kuc4OO6Ce6o18JupnO1XkQPvafRJczyfzQl0tNjDywGaGP3NdsPbKXU0w9eSyQMlWAQMagQ3Mf90yp0A8wbphPhPZXz_IAFBJbFhGHPsUS8I41Qr11uHtsK0n1JFK3dKKHXO4UXtxEKiwVzKqkepzhrKtWQ2k4z9lyYKyFhAnlH9h80WzrYmUhFdvqS5ysPu3ZivwhEiASLOskzHBKnKLTl9WBGST0MEdHdAmxV7OF9d75Wm3lwPkQos7Qa3uGExoDSEIOtOsLXxpjbbnTqrpVUQ2vvwE3ZfkAsqfS8qLukxLgAdQEIRLU37wCXXWsG988iEPV4_5Wa12oX4PM0bcQ8YSuPtLN_BxlkrEN_uplLFVht1lRgfG9b0UYQhiTK7DDqdNGhsqtpxsh-yDtsQZXfMs_k3hSVCYN0WdQBgkvlMfBPOG9muU_W9FPTWrjoAZhsAH-pnAyJwkLyetdWtc3K079P7ZCAkz&zp=G3T5N_vECJVDPhbKQpuhjWS2m7JJ0NZhHXXb7ZOqIPRXTvHaf4w4dpKLFeNhtyUf6AeBNkZ3_WmjhUhSl5_c713g4mcgYnOVzaU-tY5uG_d1ay0FAi175yu3BqFdxHhqVQrbdi7BLNl7WX3JoNefb-1voV-fG8eYyFs5XwRwDAmXAIK_9u3Y8lTp5uV3eHwZIfUmigE88R4r24k77YXaW9WKja2ApHHV9HhygKcwlwtdQWh2OLBrz3qnw5Cm7CbAJK9jPjfg911RXZLr3t89MPoSHjyo-MdhB1iwFavwXDlEAaFECCk_nXK3LyuWlneGfaXJaPTOj7_26jl1e0Gx9WKp5apxNdBw6mXB
+                      - 'img "Thumbnail image: Cut code review time & bugs in half, instantly. Reviews for AI-powered teams who move fast (but don’t break things)" [ref=f44e224]'
+              - separator [ref=f44e225]
+              - region "Kommentare" [ref=f44e228]:
+                - heading "Kommentarbereich" [level=1] [ref=f44e229]
+                - article "Kommentar von hellomistershifty vor 5 Tagen" [ref=f44e231]:
+                  - generic [ref=f44e232] [cursor=pointer]:
+                    - link "Profil von hellomistershifty --- Avatar" [ref=f44e237]:
+                      - /url: https://www.reddit.com/user/hellomistershifty/
+                    - generic [ref=f44e247]:
+                      - link "Profil von hellomistershifty" [ref=f44e250]:
+                        - /url: https://www.reddit.com/user/hellomistershifty/
+                        - text: hellomistershifty
+                      - generic [ref=f44e251]: •
+                      - link [ref=f44e253]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1swaaz/
+                        - time [ref=f44e255]: vor 5 Tagen
+                  - generic [ref=f44e257]:
+                    - paragraph [ref=f44e261]:
+                      - text: Getting way, way better results with
+                      - link "terra xhigh" [ref=f44e264] [cursor=pointer]:
+                        - /url: /search/?q=terra+xhigh+model+performance&cId=0671644b-756d-4d89-8f0d-5d1c5c9fa7d1&iId=3f6839b1-60df-48ea-8514-1b2020a308eb
+                      - text: than
+                      - link "luna max" [ref=f44e270] [cursor=pointer]:
+                        - /url: /search/?q=luna+max+model+performance&cId=caccfa76-badd-4df1-87cb-d269428bbb3a&iId=76200cd9-df0c-43bb-8bb5-bea71890291d
+                      - text: on real tasks. It runs about twice as fast as Sol, too
+                    - generic [ref=f44e274]: "24"
+                    - generic [ref=f44e281]:
+                      - 'article "Kommentarthread-Level1: Antwort von Yablan vor 5 Tagen" [ref=f44e283]':
+                        - generic [ref=f44e284] [cursor=pointer]:
+                          - link "Profil von Yablan --- Avatar" [ref=f44e289]:
+                            - /url: https://www.reddit.com/user/Yablan/
+                          - generic [ref=f44e299]:
+                            - link "Profil von Yablan" [ref=f44e302]:
+                              - /url: https://www.reddit.com/user/Yablan/
+                              - text: Yablan
+                            - generic [ref=f44e303]: •
+                            - link [ref=f44e305]:
+                              - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1t68xf/
+                              - time [ref=f44e307]: vor 5 Tagen
+                        - generic [ref=f44e309]:
+                          - paragraph [ref=f44e313]: Interesting. My default is now Luna xhigh. Sol overthinks and overcomplicates too much.I would like to use Luna max, but you cannot toggle that in the Codex/ChatGPT desktop app.But I thought Terra was quite basic.
+                          - generic [ref=f44e314]: "3"
+                          - 'article "Kommentarthread-Level2: Antwort von SneekyReeky vor 5 Tagen" [ref=f44e323]':
+                            - generic [ref=f44e324] [cursor=pointer]:
+                              - link "Profil von SneekyReeky --- Avatar" [ref=f44e329]:
+                                - /url: https://www.reddit.com/user/SneekyReeky/
+                                - img "Avatar von u/SneekyReeky" [ref=f44e332]
+                              - generic [ref=f44e336]:
+                                - link "Profil von SneekyReeky" [ref=f44e339]:
+                                  - /url: https://www.reddit.com/user/SneekyReeky/
+                                  - text: SneekyReeky
+                                - generic [ref=f44e340]: •
+                                - link [ref=f44e342]:
+                                  - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1t6yvz/
+                                  - time [ref=f44e344]: vor 5 Tagen
+                            - generic [ref=f44e346]:
+                              - paragraph [ref=f44e350]: You can use "Max" in the desktop app too, but you'll need to enable it somewhere in the app settings
+                              - generic [ref=f44e351]: "5"
+                              - button "1 weitere Antwort" [ref=f44e361] [cursor=pointer]:
+                                - generic [ref=f44e366]:
+                                  - generic [ref=f44e367]: "1"
+                                  - text: weitere Antwort
+                      - 'article "Kommentarthread-Level1: Antwort von bondage-mastermind vor 5 Tagen" [ref=f44e371]':
+                        - generic [ref=f44e372] [cursor=pointer]:
+                          - link "Profil von bondage-mastermind --- Avatar" [ref=f44e377]:
+                            - /url: https://www.reddit.com/user/bondage-mastermind/
+                            - img "Avatar von u/bondage-mastermind" [ref=f44e380]
+                          - generic [ref=f44e384]:
+                            - link "Profil von bondage-mastermind" [ref=f44e387]:
+                              - /url: https://www.reddit.com/user/bondage-mastermind/
+                              - text: bondage-mastermind
+                            - generic [ref=f44e388]: •
+                            - link [ref=f44e390]:
+                              - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1tfkjx/
+                              - time [ref=f44e392]: vor 5 Tagen
+                        - generic [ref=f44e394]:
+                          - paragraph [ref=f44e398]: this is correct
+                          - generic [ref=f44e399]: "1"
+                      - button "3 weitere Antworten" [ref=f44e408] [cursor=pointer]:
+                        - generic [ref=f44e413]:
+                          - generic [ref=f44e414]: "3"
+                          - text: weitere Antworten
+                - article "Kommentar von zigzoing vor 5 Tagen" [ref=f44e418]:
+                  - generic [ref=f44e419] [cursor=pointer]:
+                    - link "Profil von zigzoing --- Avatar" [ref=f44e424]:
+                      - /url: https://www.reddit.com/user/zigzoing/
+                      - img "Avatar von u/zigzoing" [ref=f44e427]
+                    - generic [ref=f44e431]:
+                      - link "Profil von zigzoing" [ref=f44e434]:
+                        - /url: https://www.reddit.com/user/zigzoing/
+                        - text: zigzoing
+                      - generic [ref=f44e435]: •
+                      - link [ref=f44e437]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1t3c07/
+                        - time [ref=f44e439]: vor 5 Tagen
+                  - generic [ref=f44e441]:
+                    - generic [ref=f44e444]:
+                      - paragraph [ref=f44e445]: I think the problem is that people think that everyone is working on the same thing, and it's the same as what the benchmarkers use to benchmark the models.
+                      - paragraph [ref=f44e446]: Luna max may work for some people, but not for others that work on different stuff. Everybody has to try it for themselves and use whatever they think is best.
+                    - generic [ref=f44e447]: "15"
+                    - 'article "Kommentarthread-Level1: Antwort von sagiroth vor 5 Tagen" [ref=f44e456]':
+                      - generic [ref=f44e457] [cursor=pointer]:
+                        - link "Profil von sagiroth --- Avatar" [ref=f44e462]:
+                          - /url: https://www.reddit.com/user/sagiroth/
+                        - generic [ref=f44e472]:
+                          - link "Profil von sagiroth" [ref=f44e475]:
+                            - /url: https://www.reddit.com/user/sagiroth/
+                            - text: sagiroth
+                          - generic [ref=f44e476]: •
+                          - link [ref=f44e478]:
+                            - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1t9kfc/
+                            - time [ref=f44e480]: vor 5 Tagen
+                      - generic [ref=f44e482]:
+                        - paragraph [ref=f44e486]:
+                          - text: This, nobody accounts for type of sub plus/pro 20x etc and that some people work on easy
+                          - link "Typescript projects" [ref=f44e489] [cursor=pointer]:
+                            - /url: /search/?q=Typescript+projects+GPT+models&cId=52e668b5-8f5e-479d-805a-ba4e175aa0c6&iId=a4561f20-a0e6-4518-8c9b-24c08b56608f
+                          - text: ", some work on very deterministic java c++ ones. There is no way to compare apples to apples. You have to test yourself what works for you and ideally start from small model and go up judging the outcome yourself."
+                        - generic [ref=f44e493]: "3"
+                - article "Kommentar von QWERTY_FUCKER vor 5 Tagen" [ref=f44e501]:
+                  - generic [ref=f44e502] [cursor=pointer]:
+                    - link "Profil von QWERTY_FUCKER --- Avatar" [ref=f44e507]:
+                      - /url: https://www.reddit.com/user/QWERTY_FUCKER/
+                      - img "Avatar von u/QWERTY_FUCKER" [ref=f44e510]
+                    - generic [ref=f44e514]:
+                      - link "Profil von QWERTY_FUCKER" [ref=f44e517]:
+                        - /url: https://www.reddit.com/user/QWERTY_FUCKER/
+                        - text: QWERTY_FUCKER
+                      - generic [ref=f44e518]: •
+                      - link [ref=f44e520]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1sniat/
+                        - time [ref=f44e522]: vor 5 Tagen
+                  - generic [ref=f44e524]:
+                    - generic [ref=f44e527]:
+                      - paragraph [ref=f44e528]: I don’t trust the benchmarks on this. I, like a lot of other people, tried out a lot of usage with Luna Max after hearing about how great it is on Max and it’s so affordable and blah blah blah.
+                      - paragraph [ref=f44e529]: Maybe for ultra low level stuff. I ended up having to fix just about everything that Luna Max touched with Sol. Would have been cheaper to use Sol from the start.
+                    - generic [ref=f44e530]: "17"
+                    - generic [ref=f44e537]:
+                      - 'article "Kommentarthread-Level1: Antwort von 7racin vor 5 Tagen" [ref=f44e539]':
+                        - generic [ref=f44e540] [cursor=pointer]:
+                          - link "Profil von 7racin --- Avatar" [ref=f44e545]:
+                            - /url: https://www.reddit.com/user/7racin/
+                            - img "Avatar von u/7racin" [ref=f44e548]
+                          - generic [ref=f44e552]:
+                            - link "Profil von 7racin" [ref=f44e555]:
+                              - /url: https://www.reddit.com/user/7racin/
+                              - text: 7racin
+                            - generic [ref=f44e556]: •
+                            - link [ref=f44e558]:
+                              - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1t5xze/
+                              - time [ref=f44e560]: vor 5 Tagen
+                        - generic [ref=f44e562]:
+                          - generic [ref=f44e565]:
+                            - paragraph [ref=f44e566]:
+                              - text: It’s really not cheaper using sol. I’ve had Luna max with
+                              - link "Luna subagents" [ref=f44e569] [cursor=pointer]:
+                                - /url: /search/?q=Luna+subagents+GPT&cId=f4012ffe-3826-45d0-b5cc-5d5804cbbdba&iId=2457a855-3d94-4d94-8cb3-b1551d1da170
+                              - text: chew through a gazillion of tokens throughout almost half a day of continuous work and my limit barely decreased. I tried
+                              - link "Sol high" [ref=f44e575] [cursor=pointer]:
+                                - /url: /search/?q=Sol+high+model+performance&cId=7f645b2c-0004-4a08-869c-60b4076212ec&iId=293d2605-cc8b-4385-a3e3-1c9c51445e4b
+                              - text: with Luna medium/high subagents, had it working for like an hour max, got my usage from 90% to 24% and it barely outperformed Luna max in quality of the work (which still turned out to be complete and utter slop).
+                            - paragraph [ref=f44e579]: That being said, Luna max overthinks wayy to much just like Sol does, which makes it run around in circles coming up with the most bs solutions instead of doing something simple and obvious, the perfect middle-ground imho is xhigh Luna for us Plus folks.
+                          - generic [ref=f44e580]: "7"
+                      - button "1 weitere Antwort" [ref=f44e589] [cursor=pointer]:
+                        - generic [ref=f44e594]:
+                          - generic [ref=f44e595]: "1"
+                          - text: weitere Antwort
+                - generic "\"Mega genial\" IRL. Der Shark PowerDetect Akku-Staubsauger spart dir und deiner Familie mit cleveren Funktionen Zeit und Nerven. Verständlich bei der Leistung. Überzeug dich selbst!" [ref=f44e600]:
+                  - generic [ref=f44e601]:
+                    - 'generic "Advertisement: \"Mega genial\" IRL. Der Shark PowerDetect Akku-Staubsauger spart dir und deiner Familie mit cleveren Funktionen Zeit und Nerven. Verständlich bei der Leistung. Überzeug dich selbst!" [ref=f44e602]':
+                      - 'link "Advertisement: \"Mega genial\" IRL. Der Shark PowerDetect Akku-Staubsauger spart dir und deiner Familie mit cleveren Funktionen Zeit und Nerven. Verständlich bei der Leistung. Überzeug dich selbst!" [ref=f44e603] [cursor=pointer]':
+                        - /url: https://alb.reddit.com/cr?za=1Cdi8XMy3a2Gq-1U3hnBMlUG9liLuva49eU_sxOSmSamN5dl-RXUmW4jnRprNE9ZHReJzv3kVt15MBFb6pPvOFEgRSMqUc_c7nqacK6jaVQ8MUUiWMRRERaEMrH2_urqxqdqb_hfwphKHZKOrKNrJijjSB-m3LongTsrqfqSRowHAeuuNtqyXtDJS8NrChkab1Znpq5-pD0KTB1sG3ueNM2b_zVPv5C_Bus04fk6bAppoV2ycbAYJctMs10JVe-644pR282AWEbF2n0hAczLXA_Tj9u55PgXSwV7OV_b3M5Mnfb3njJIKHWUYDE8q4OBt2nmQIOxqtgmitSqz390jS-JBF165U1eAnqvHxOLzmCGtsFunu_XFshKMWsaA_NwgI9zSppBOe_3ZxUx3QsohWJ-__SWJDI1DluUOQ6ya4SXQ1Sb7xZMJkWCV1JMg7q9mOrODr7U08MWlr7WMU1brdo11hUdYJhwhBKZb-1f29GKenE-WWz1MgEzs2H1mR0RByeCao6Yqtevm6FvSOZjdZJ3jn7Dprkp1O80fjgJLG3_quR9QBfu1L3hLH4JF3vjmj7dk-CYAJi4IXO1tbVflBDxQQsjI1-twd3UndzkO_61dVolP4IIkvJHATgsZlB-05Nf-jZbGdW4i7_K6hHOFSKg1aqxQ_dwt91J_T9u&zp=yTn3dNRwDzD32siV3qFD8LDZtGPxg52gK2UBxSyCQP2uYNOuhPts42_0NE8KLIpSeBjtw91PUgmWVi2RgIECOkn7_fnlwmnFDV8FAWg0HDvRVc0JZtAEDkpl3x5ARwtfqJ2wPDUtqX0NrrAgrXRRxV1oVcpYFu61BwcwCzIYW_iYJI7ic5SLTQ1Y6jFz2XRn2pRMld6NtEAoCqyI4bvNXf6l9CyrXcDK9XC-bDytXZqlGydawppEj7z6lm51tBnVy38G0MLMAqk0-_9XfwvlGCzT90qoCQhxduY195nUXQ1tA1wAX6Gf1FsCEnBUI8yxC1ElPrIOs-UU4S-5i3mvVp3_AiqDBwgHGRWIdRCwsi_rZUla8z3antZmYfV35nqK7THp6xqbUeUSdVzJrswF9eUIep5LWTDW_og4N1yfCv8Rhd7NlQr_jQca4Pujy87DM61o8Cukjzboj9m6vrujvIbO5o5gE0KFtLPU_8g_QMigMlmDOzHKvXfnNS4pXdkUGhcoeqDfNJESsAfbGu7VE4EjPx8opG3BFNK3f0d6OWNqr0ttGV27FCpqyg
+                    - generic [ref=f44e604]:
+                      - generic [ref=f44e605]:
+                        - link "u/Shark_Deutschland" [ref=f44e607] [cursor=pointer]:
+                          - /url: /user/Shark_Deutschland/
+                          - img "Avatar von u/Shark_Deutschland" [ref=f44e610]
+                        - generic [ref=f44e612]: •
+                        - link "Gesponsert" [ref=f44e614] [cursor=pointer]:
+                          - /url: /user/Shark_Deutschland/
+                        - link [ref=f44e617] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=1Cdi8XMy3a2Gq-1U3hnBMlUG9liLuva49eU_sxOSmSamN5dl-RXUmW4jnRprNE9ZHReJzv3kVt15MBFb6pPvOFEgRSMqUc_c7nqacK6jaVQ8MUUiWMRRERaEMrH2_urqxqdqb_hfwphKHZKOrKNrJijjSB-m3LongTsrqfqSRowHAeuuNtqyXtDJS8NrChkab1Znpq5-pD0KTB1sG3ueNM2b_zVPv5C_Bus04fk6bAppoV2ycbAYJctMs10JVe-644pR282AWEbF2n0hAczLXA_Tj9u55PgXSwV7OV_b3M5Mnfb3njJIKHWUYDE8q4OBt2nmQIOxqtgmitSqz390jS-JBF165U1eAnqvHxOLzmCGtsFunu_XFshKMWsaA_NwgI9zSppBOe_3ZxUx3QsohWJ-__SWJDI1DluUOQ6ya4SXQ1Sb7xZMJkWCV1JMg7q9mOrODr7U08MWlr7WMU1brdo11hUdYJhwhBKZb-1f29GKenE-WWz1MgEzs2H1mR0RByeCao6Yqtevm6FvSOZjdZJ3jn7Dprkp1O80fjgJLG3_quR9QBfu1L3hLH4JF3vjmj7dk-CYAJi4IXO1tbVflBDxQQsjI1-twd3UndzkO_61dVolP4IIkvJHATgsZlB-05Nf-jZbGdW4i7_K6hHOFSKg1aqxQ_dwt91J_T9u&zp=yTn3dNRwDzD32siV3qFD8LDZtGPxg52gK2UBxSyCQP2uYNOuhPts42_0NE8KLIpSeBjtw91PUgmWVi2RgIECOkn7_fnlwmnFDV8FAWg0HDvRVc0JZtAEDkpl3x5ARwtfqJ2wPDUtqX0NrrAgrXRRxV1oVcpYFu61BwcwCzIYW_iYJI7ic5SLTQ1Y6jFz2XRn2pRMld6NtEAoCqyI4bvNXf6l9CyrXcDK9XC-bDytXZqlGydawppEj7z6lm51tBnVy38G0MLMAqk0-_9XfwvlGCzT90qoCQhxduY195nUXQ1tA1wAX6Gf1FsCEnBUI8yxC1ElPrIOs-UU4S-5i3mvVp3_AiqDBwgHGRWIdRCwsi_rZUla8z3antZmYfV35nqK7THp6xqbUeUSdVzJrswF9eUIep5LWTDW_og4N1yfCv8Rhd7NlQr_jQca4Pujy87DM61o8Cukjzboj9m6vrujvIbO5o5gE0KFtLPU_8g_QMigMlmDOzHKvXfnNS4pXdkUGhcoeqDfNJESsAfbGu7VE4EjPx8opG3BFNK3f0d6OWNqr0ttGV27FCpqyg
+                      - button "Handlungen für Nutzer*innen öffnen" [ref=f44e623] [cursor=pointer]
+                    - generic [ref=f44e629]:
+                      - generic [ref=f44e630]:
+                        - link "\"Mega genial\" IRL. Der Shark PowerDetect Akku-Staubsauger spart dir und deiner Familie mit cleveren Funktionen Zeit und Nerven. Verständlich bei der Leistung. Überzeug dich selbst!" [ref=f44e632] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=1Cdi8XMy3a2Gq-1U3hnBMlUG9liLuva49eU_sxOSmSamN5dl-RXUmW4jnRprNE9ZHReJzv3kVt15MBFb6pPvOFEgRSMqUc_c7nqacK6jaVQ8MUUiWMRRERaEMrH2_urqxqdqb_hfwphKHZKOrKNrJijjSB-m3LongTsrqfqSRowHAeuuNtqyXtDJS8NrChkab1Znpq5-pD0KTB1sG3ueNM2b_zVPv5C_Bus04fk6bAppoV2ycbAYJctMs10JVe-644pR282AWEbF2n0hAczLXA_Tj9u55PgXSwV7OV_b3M5Mnfb3njJIKHWUYDE8q4OBt2nmQIOxqtgmitSqz390jS-JBF165U1eAnqvHxOLzmCGtsFunu_XFshKMWsaA_NwgI9zSppBOe_3ZxUx3QsohWJ-__SWJDI1DluUOQ6ya4SXQ1Sb7xZMJkWCV1JMg7q9mOrODr7U08MWlr7WMU1brdo11hUdYJhwhBKZb-1f29GKenE-WWz1MgEzs2H1mR0RByeCao6Yqtevm6FvSOZjdZJ3jn7Dprkp1O80fjgJLG3_quR9QBfu1L3hLH4JF3vjmj7dk-CYAJi4IXO1tbVflBDxQQsjI1-twd3UndzkO_61dVolP4IIkvJHATgsZlB-05Nf-jZbGdW4i7_K6hHOFSKg1aqxQ_dwt91J_T9u&zp=yTn3dNRwDzD32siV3qFD8LDZtGPxg52gK2UBxSyCQP2uYNOuhPts42_0NE8KLIpSeBjtw91PUgmWVi2RgIECOkn7_fnlwmnFDV8FAWg0HDvRVc0JZtAEDkpl3x5ARwtfqJ2wPDUtqX0NrrAgrXRRxV1oVcpYFu61BwcwCzIYW_iYJI7ic5SLTQ1Y6jFz2XRn2pRMld6NtEAoCqyI4bvNXf6l9CyrXcDK9XC-bDytXZqlGydawppEj7z6lm51tBnVy38G0MLMAqk0-_9XfwvlGCzT90qoCQhxduY195nUXQ1tA1wAX6Gf1FsCEnBUI8yxC1ElPrIOs-UU4S-5i3mvVp3_AiqDBwgHGRWIdRCwsi_rZUla8z3antZmYfV35nqK7THp6xqbUeUSdVzJrswF9eUIep5LWTDW_og4N1yfCv8Rhd7NlQr_jQca4Pujy87DM61o8Cukjzboj9m6vrujvIbO5o5gE0KFtLPU_8g_QMigMlmDOzHKvXfnNS4pXdkUGhcoeqDfNJESsAfbGu7VE4EjPx8opG3BFNK3f0d6OWNqr0ttGV27FCpqyg
+                        - generic [ref=f44e633]:
+                          - link [ref=f44e635] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=1Cdi8XMy3a2Gq-1U3hnBMlUG9liLuva49eU_sxOSmSamN5dl-RXUmW4jnRprNE9ZHReJzv3kVt15MBFb6pPvOFEgRSMqUc_c7nqacK6jaVQ8MUUiWMRRERaEMrH2_urqxqdqb_hfwphKHZKOrKNrJijjSB-m3LongTsrqfqSRowHAeuuNtqyXtDJS8NrChkab1Znpq5-pD0KTB1sG3ueNM2b_zVPv5C_Bus04fk6bAppoV2ycbAYJctMs10JVe-644pR282AWEbF2n0hAczLXA_Tj9u55PgXSwV7OV_b3M5Mnfb3njJIKHWUYDE8q4OBt2nmQIOxqtgmitSqz390jS-JBF165U1eAnqvHxOLzmCGtsFunu_XFshKMWsaA_NwgI9zSppBOe_3ZxUx3QsohWJ-__SWJDI1DluUOQ6ya4SXQ1Sb7xZMJkWCV1JMg7q9mOrODr7U08MWlr7WMU1brdo11hUdYJhwhBKZb-1f29GKenE-WWz1MgEzs2H1mR0RByeCao6Yqtevm6FvSOZjdZJ3jn7Dprkp1O80fjgJLG3_quR9QBfu1L3hLH4JF3vjmj7dk-CYAJi4IXO1tbVflBDxQQsjI1-twd3UndzkO_61dVolP4IIkvJHATgsZlB-05Nf-jZbGdW4i7_K6hHOFSKg1aqxQ_dwt91J_T9u&zp=yTn3dNRwDzD32siV3qFD8LDZtGPxg52gK2UBxSyCQP2uYNOuhPts42_0NE8KLIpSeBjtw91PUgmWVi2RgIECOkn7_fnlwmnFDV8FAWg0HDvRVc0JZtAEDkpl3x5ARwtfqJ2wPDUtqX0NrrAgrXRRxV1oVcpYFu61BwcwCzIYW_iYJI7ic5SLTQ1Y6jFz2XRn2pRMld6NtEAoCqyI4bvNXf6l9CyrXcDK9XC-bDytXZqlGydawppEj7z6lm51tBnVy38G0MLMAqk0-_9XfwvlGCzT90qoCQhxduY195nUXQ1tA1wAX6Gf1FsCEnBUI8yxC1ElPrIOs-UU4S-5i3mvVp3_AiqDBwgHGRWIdRCwsi_rZUla8z3antZmYfV35nqK7THp6xqbUeUSdVzJrswF9eUIep5LWTDW_og4N1yfCv8Rhd7NlQr_jQca4Pujy87DM61o8Cukjzboj9m6vrujvIbO5o5gE0KFtLPU_8g_QMigMlmDOzHKvXfnNS4pXdkUGhcoeqDfNJESsAfbGu7VE4EjPx8opG3BFNK3f0d6OWNqr0ttGV27FCpqyg
+                          - generic [ref=f44e636]:
+                            - link "Mehr erfahren" [ref=f44e638] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=1Cdi8XMy3a2Gq-1U3hnBMlUG9liLuva49eU_sxOSmSamN5dl-RXUmW4jnRprNE9ZHReJzv3kVt15MBFb6pPvOFEgRSMqUc_c7nqacK6jaVQ8MUUiWMRRERaEMrH2_urqxqdqb_hfwphKHZKOrKNrJijjSB-m3LongTsrqfqSRowHAeuuNtqyXtDJS8NrChkab1Znpq5-pD0KTB1sG3ueNM2b_zVPv5C_Bus04fk6bAppoV2ycbAYJctMs10JVe-644pR282AWEbF2n0hAczLXA_Tj9u55PgXSwV7OV_b3M5Mnfb3njJIKHWUYDE8q4OBt2nmQIOxqtgmitSqz390jS-JBF165U1eAnqvHxOLzmCGtsFunu_XFshKMWsaA_NwgI9zSppBOe_3ZxUx3QsohWJ-__SWJDI1DluUOQ6ya4SXQ1Sb7xZMJkWCV1JMg7q9mOrODr7U08MWlr7WMU1brdo11hUdYJhwhBKZb-1f29GKenE-WWz1MgEzs2H1mR0RByeCao6Yqtevm6FvSOZjdZJ3jn7Dprkp1O80fjgJLG3_quR9QBfu1L3hLH4JF3vjmj7dk-CYAJi4IXO1tbVflBDxQQsjI1-twd3UndzkO_61dVolP4IIkvJHATgsZlB-05Nf-jZbGdW4i7_K6hHOFSKg1aqxQ_dwt91J_T9u&zp=yTn3dNRwDzD32siV3qFD8LDZtGPxg52gK2UBxSyCQP2uYNOuhPts42_0NE8KLIpSeBjtw91PUgmWVi2RgIECOkn7_fnlwmnFDV8FAWg0HDvRVc0JZtAEDkpl3x5ARwtfqJ2wPDUtqX0NrrAgrXRRxV1oVcpYFu61BwcwCzIYW_iYJI7ic5SLTQ1Y6jFz2XRn2pRMld6NtEAoCqyI4bvNXf6l9CyrXcDK9XC-bDytXZqlGydawppEj7z6lm51tBnVy38G0MLMAqk0-_9XfwvlGCzT90qoCQhxduY195nUXQ1tA1wAX6Gf1FsCEnBUI8yxC1ElPrIOs-UU4S-5i3mvVp3_AiqDBwgHGRWIdRCwsi_rZUla8z3antZmYfV35nqK7THp6xqbUeUSdVzJrswF9eUIep5LWTDW_og4N1yfCv8Rhd7NlQr_jQca4Pujy87DM61o8Cukjzboj9m6vrujvIbO5o5gE0KFtLPU_8g_QMigMlmDOzHKvXfnNS4pXdkUGhcoeqDfNJESsAfbGu7VE4EjPx8opG3BFNK3f0d6OWNqr0ttGV27FCpqyg
+                            - link "sharkninja.de" [ref=f44e643] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=1Cdi8XMy3a2Gq-1U3hnBMlUG9liLuva49eU_sxOSmSamN5dl-RXUmW4jnRprNE9ZHReJzv3kVt15MBFb6pPvOFEgRSMqUc_c7nqacK6jaVQ8MUUiWMRRERaEMrH2_urqxqdqb_hfwphKHZKOrKNrJijjSB-m3LongTsrqfqSRowHAeuuNtqyXtDJS8NrChkab1Znpq5-pD0KTB1sG3ueNM2b_zVPv5C_Bus04fk6bAppoV2ycbAYJctMs10JVe-644pR282AWEbF2n0hAczLXA_Tj9u55PgXSwV7OV_b3M5Mnfb3njJIKHWUYDE8q4OBt2nmQIOxqtgmitSqz390jS-JBF165U1eAnqvHxOLzmCGtsFunu_XFshKMWsaA_NwgI9zSppBOe_3ZxUx3QsohWJ-__SWJDI1DluUOQ6ya4SXQ1Sb7xZMJkWCV1JMg7q9mOrODr7U08MWlr7WMU1brdo11hUdYJhwhBKZb-1f29GKenE-WWz1MgEzs2H1mR0RByeCao6Yqtevm6FvSOZjdZJ3jn7Dprkp1O80fjgJLG3_quR9QBfu1L3hLH4JF3vjmj7dk-CYAJi4IXO1tbVflBDxQQsjI1-twd3UndzkO_61dVolP4IIkvJHATgsZlB-05Nf-jZbGdW4i7_K6hHOFSKg1aqxQ_dwt91J_T9u&zp=yTn3dNRwDzD32siV3qFD8LDZtGPxg52gK2UBxSyCQP2uYNOuhPts42_0NE8KLIpSeBjtw91PUgmWVi2RgIECOkn7_fnlwmnFDV8FAWg0HDvRVc0JZtAEDkpl3x5ARwtfqJ2wPDUtqX0NrrAgrXRRxV1oVcpYFu61BwcwCzIYW_iYJI7ic5SLTQ1Y6jFz2XRn2pRMld6NtEAoCqyI4bvNXf6l9CyrXcDK9XC-bDytXZqlGydawppEj7z6lm51tBnVy38G0MLMAqk0-_9XfwvlGCzT90qoCQhxduY195nUXQ1tA1wAX6Gf1FsCEnBUI8yxC1ElPrIOs-UU4S-5i3mvVp3_AiqDBwgHGRWIdRCwsi_rZUla8z3antZmYfV35nqK7THp6xqbUeUSdVzJrswF9eUIep5LWTDW_og4N1yfCv8Rhd7NlQr_jQca4Pujy87DM61o8Cukjzboj9m6vrujvIbO5o5gE0KFtLPU_8g_QMigMlmDOzHKvXfnNS4pXdkUGhcoeqDfNJESsAfbGu7VE4EjPx8opG3BFNK3f0d6OWNqr0ttGV27FCpqyg
+                      - generic [ref=f44e644] [cursor=pointer]:
+                        - 'img "Clickable image which will reveal the video player: \"Mega genial\" IRL. Der Shark PowerDetect Akku-Staubsauger spart dir und deiner Familie mit cleveren Funktionen Zeit und Nerven. Verständlich bei der Leistung. Überzeug dich selbst!" [ref=f44e645]'
+                        - button "Video abspielen" [ref=f44e646]
+                    - generic:
+                      - generic:
+                        - button "Videoplayer einklappen" [ref=f44e649] [cursor=pointer]
+                        - generic [ref=f44e658]:
+                          - generic [ref=f44e659]:
+                            - button "Wiedergabe ein-/ausschalten" [ref=f44e660] [cursor=pointer]
+                            - generic "Medienzeit" [ref=f44e663]:
+                              - generic [ref=f44e665] [cursor=pointer]
+                            - generic [ref=f44e668]:
+                              - generic [ref=f44e669]: 0:00
+                              - generic [ref=f44e670]: / 0:00
+                            - button "Untertitel ein/aus" [ref=f44e671] [cursor=pointer]
+                            - generic [ref=f44e675]:
+                              - button "Einstellungen" [ref=f44e676] [cursor=pointer]
+                              - generic:
+                                - button:
+                                  - generic: Auto
+                            - button "Vollbild ein/aus" [ref=f44e679] [cursor=pointer]
+                          - button "Lautstärke umschalten" [ref=f44e685] [cursor=pointer]
+                - article "Kommentar von Clord123 vor 5 Tagen" [ref=f44e690]:
+                  - generic [ref=f44e691] [cursor=pointer]:
+                    - link "Profil von Clord123 --- Avatar" [ref=f44e696]:
+                      - /url: https://www.reddit.com/user/Clord123/
+                      - img "Avatar von u/Clord123" [ref=f44e699]
+                    - generic [ref=f44e703]:
+                      - link "Profil von Clord123" [ref=f44e706]:
+                        - /url: https://www.reddit.com/user/Clord123/
+                        - text: Clord123
+                      - generic [ref=f44e707]: •
+                      - link [ref=f44e709]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1sw2tm/
+                        - time [ref=f44e711]: vor 5 Tagen
+                  - generic [ref=f44e713]:
+                    - paragraph [ref=f44e717]: Sol Ultra is also awesome, but I suppose it's harder to benchmark models when they take advantage of subagents. With proper instructions it can get quite bit of done and while yeah, it eats tokens it also get things done properly when project has been going for a while. Same with Sol Max too, without agents does quality work so in a way it can save in tokens then expecting Terra or Luna to handle it.
+                    - generic [ref=f44e718]: "2"
+                - article "Kommentar von wintoid vor 5 Tagen" [ref=f44e726]:
+                  - generic [ref=f44e727] [cursor=pointer]:
+                    - link "Profil von wintoid --- Avatar" [ref=f44e732]:
+                      - /url: https://www.reddit.com/user/wintoid/
+                    - generic [ref=f44e742]:
+                      - link "Profil von wintoid" [ref=f44e745]:
+                        - /url: https://www.reddit.com/user/wintoid/
+                        - text: wintoid
+                      - generic [ref=f44e746]: •
+                      - link [ref=f44e748]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1t787n/
+                        - time [ref=f44e750]: vor 5 Tagen
+                  - generic [ref=f44e752]:
+                    - generic [ref=f44e755]:
+                      - paragraph [ref=f44e756]: I don't currently have an OpenAI subscription as I'm in a lull, taking a break from LLMs. I used it previously when it was 5.5 without all this Sol/Terra/Luna business.
+                      - paragraph [ref=f44e757]: I think if and when I return to OpenAI, I am going to feel a little paralysed by choice. I suppose you can make the same criticism of Fable/Opus/Sonnet/Haiku.
+                    - generic [ref=f44e758]: "2"
+                - article "Kommentar von ReliableIceberg vor 5 Tagen" [ref=f44e766]:
+                  - generic [ref=f44e767] [cursor=pointer]:
+                    - link "Profil von ReliableIceberg --- Avatar" [ref=f44e772]:
+                      - /url: https://www.reddit.com/user/ReliableIceberg/
+                    - generic [ref=f44e788]:
+                      - link "Profil von ReliableIceberg" [ref=f44e791]:
+                        - /url: https://www.reddit.com/user/ReliableIceberg/
+                        - text: ReliableIceberg
+                      - generic [ref=f44e792]: •
+                      - link [ref=f44e794]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1tcha0/
+                        - time [ref=f44e796]: vor 5 Tagen
+                  - generic [ref=f44e798]:
+                    - paragraph [ref=f44e802]: I'm at Codex Pro and I don't see "Luna Max" only "Luna xhigh". What am I missing?
+                    - generic [ref=f44e803]: "2"
+                    - generic [ref=f44e810]:
+                      - 'article "Kommentarthread-Level1: Antwort von Puzzleheaded_Phase98 vor 4 Tagen" [ref=f44e812]':
+                        - generic [ref=f44e813] [cursor=pointer]:
+                          - link "Profil von Puzzleheaded_Phase98 --- Avatar" [ref=f44e818]:
+                            - /url: https://www.reddit.com/user/Puzzleheaded_Phase98/
+                          - generic [ref=f44e828]:
+                            - link "Profil von Puzzleheaded_Phase98" [ref=f44e831]:
+                              - /url: https://www.reddit.com/user/Puzzleheaded_Phase98/
+                              - text: Puzzleheaded_Phase98
+                            - generic [ref=f44e832]: •
+                            - link [ref=f44e834]:
+                              - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p20freo/
+                              - time [ref=f44e836]: vor 4 Tagen
+                        - generic [ref=f44e838]:
+                          - paragraph [ref=f44e842]: In the codex (chatgpt) desktop app you have to enabled Max in the settings. You can also enable Ultra there. It's under Settings/Configuration/Model features
+                          - generic [ref=f44e843]: "2"
+                      - 'article "Kommentarthread-Level1: Antwort von Kant-fan vor 5 Tagen" [ref=f44e851]':
+                        - generic [ref=f44e852] [cursor=pointer]:
+                          - link "Profil von Kant-fan --- Avatar" [ref=f44e857]:
+                            - /url: https://www.reddit.com/user/Kant-fan/
+                            - img "Avatar von u/Kant-fan" [ref=f44e860]
+                          - generic [ref=f44e864]:
+                            - link "Profil von Kant-fan" [ref=f44e867]:
+                              - /url: https://www.reddit.com/user/Kant-fan/
+                              - text: Kant-fan
+                            - generic [ref=f44e868]: •
+                            - link [ref=f44e870]:
+                              - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1tn2bj/
+                              - time [ref=f44e872]: vor 5 Tagen
+                        - generic [ref=f44e874]:
+                          - generic [ref=f44e877]:
+                            - paragraph [ref=f44e878]: Using the desktop app? I don't know either what's going on. When I connect remotely with my phone I can retroactively change it to max as well for some reason. It's honestly just illogical.
+                            - paragraph [ref=f44e879]: I think the CLI is better in that regard but I would have to test it myself again tbh.
+                          - generic [ref=f44e880]: "1"
+                          - button "5 weitere Antworten" [ref=f44e890] [cursor=pointer]:
+                            - generic [ref=f44e895]:
+                              - generic [ref=f44e896]: "5"
+                              - text: weitere Antworten
+                      - button "1 weitere Antwort" [ref=f44e901] [cursor=pointer]:
+                        - generic [ref=f44e906]:
+                          - generic [ref=f44e907]: "1"
+                          - text: weitere Antwort
+                - article "Kommentar von m3kw vor 5 Tagen" [ref=f44e911]:
+                  - generic [ref=f44e912] [cursor=pointer]:
+                    - link "Profil von m3kw --- Avatar" [ref=f44e917]:
+                      - /url: https://www.reddit.com/user/m3kw/
+                      - img "Avatar von u/m3kw" [ref=f44e920]
+                    - generic [ref=f44e924]:
+                      - link "Profil von m3kw" [ref=f44e927]:
+                        - /url: https://www.reddit.com/user/m3kw/
+                        - text: m3kw
+                      - generic [ref=f44e928]: •
+                      - link [ref=f44e930]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1w6apt/
+                        - time [ref=f44e932]: vor 5 Tagen
+                  - generic [ref=f44e934]:
+                    - paragraph [ref=f44e938]: The right way is to know when to use what. You have to know this Pass test is likely for a very difficult problem. So you may still want to use Sol -max for those insane stuff. Where as if you have an easy problem like parsing a CSV and converting it, the pass rate for Luna light may be already killing it.
+                    - generic [ref=f44e939]: "2"
+                - article "Kommentar von xxcxcxc vor 5 Tagen" [ref=f44e947]:
+                  - generic [ref=f44e948] [cursor=pointer]:
+                    - link "Profil von xxcxcxc --- Avatar" [ref=f44e953]:
+                      - /url: https://www.reddit.com/user/xxcxcxc/
+                      - img "Avatar von u/xxcxcxc" [ref=f44e956]
+                    - generic [ref=f44e960]:
+                      - link "Profil von xxcxcxc" [ref=f44e963]:
+                        - /url: https://www.reddit.com/user/xxcxcxc/
+                        - text: xxcxcxc
+                      - generic [ref=f44e964]: •
+                      - link [ref=f44e966]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1szbmi/
+                        - time [ref=f44e968]: vor 5 Tagen
+                  - generic [ref=f44e970]:
+                    - paragraph [ref=f44e974]: I write pretty in depth specs and tasks files with narrow slices and use red-green TDD. I write these with SOL High and ChatGPT so what would the best executor be?
+                    - generic [ref=f44e975]: "1"
+                    - 'article "Kommentarthread-Level1: Antwort von Megamygdala vor 3 Tagen" [ref=f44e984]':
+                      - generic [ref=f44e985] [cursor=pointer]:
+                        - link "Profil von Megamygdala --- Avatar" [ref=f44e990]:
+                          - /url: https://www.reddit.com/user/Megamygdala/
+                          - img "Avatar von u/Megamygdala" [ref=f44e993]
+                        - generic [ref=f44e997]:
+                          - link "Profil von Megamygdala" [ref=f44e1000]:
+                            - /url: https://www.reddit.com/user/Megamygdala/
+                            - text: Megamygdala
+                          - generic [ref=f44e1001]: •
+                          - link [ref=f44e1003]:
+                            - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p29d2yq/
+                            - time [ref=f44e1005]: vor 3 Tagen
+                      - generic [ref=f44e1007]:
+                        - paragraph [ref=f44e1011]:
+                          - text: You should use something like
+                          - link "https://stencil.so/blog/prewalk" [ref=f44e1012] [cursor=pointer]:
+                            - /url: https://stencil.so/blog/prewalk
+                          - text: ". Have the Sol High agent (same context as when it made the plan) make the first edit to the file, and then switch to Luna high to xhigh depending on how hard the task is. This comes built in with `oh-my-pi` which I HIGHLY recommend"
+                        - generic [ref=f44e1013]: "1"
+                - article "Kommentar von dydzio vor 5 Tagen" [ref=f44e1021]:
+                  - generic [ref=f44e1022] [cursor=pointer]:
+                    - link "Profil von dydzio --- Avatar" [ref=f44e1027]:
+                      - /url: https://www.reddit.com/user/dydzio/
+                      - img "Avatar von u/dydzio" [ref=f44e1030]
+                    - generic [ref=f44e1034]:
+                      - link "Profil von dydzio" [ref=f44e1037]:
+                        - /url: https://www.reddit.com/user/dydzio/
+                        - text: dydzio
+                      - generic [ref=f44e1038]: •
+                      - link [ref=f44e1040]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1t9q0y/
+                        - time [ref=f44e1042]: vor 5 Tagen
+                  - generic [ref=f44e1044]:
+                    - generic [ref=f44e1047]:
+                      - paragraph [ref=f44e1048]: I have useful rule, though it does not take speed into account - look at your usage, use what you can comfortably use without hitting weekly limits
+                      - paragraph [ref=f44e1049]: "If it's sol - use sol (i would not use model switch as a fix for sol's overengineering). If sol is too expensive: if running terra all the time won't burn your weekly credits then use terra, simple as that. No need to switch to luna if using terra all the time won't burn 100% of your usage. If running terra all the time doesn't suffice, use luna. If your usage on sticking to terra/luna isn't close to limits, fill the gaps with switching to stronger models in appropriate extent for harder tasks."
+                    - generic [ref=f44e1050]: "1"
+                - generic "The indie AI game that allows you to be and do whatever you want, complete with illustrations" [ref=f44e1059]:
+                  - generic [ref=f44e1060]:
+                    - 'generic "Advertisement: The indie AI game that allows you to be and do whatever you want, complete with illustrations" [ref=f44e1061]':
+                      - 'link "Advertisement: The indie AI game that allows you to be and do whatever you want, complete with illustrations" [ref=f44e1062] [cursor=pointer]':
+                        - /url: https://alb.reddit.com/cr?za=BhLuPem9w3Dd7sQ2--LbIL2Xjx-FGtkPgkRS0k2VjjeMn4QRYWOV2W1z2GXuxdLjaXs_XuD9JmZlYulLgQmPyvdQl2ozvAbyXp9mDjgsITi65s39BjsHGe8SaaxNzU_-YXeFfWURVjMAkZURjRhcdZuSDAXvvOas5KxNHvONgdObjMR7JJg5BMKfVL7y__MNw_1KRni_CpMGJ-QdDQF3f8YYkNBGkkq_hcqmRXyx85HlAje8dXwWW-F4EcyV11VhGGr4VKi7malMUpHmS5i9VW0-UZKUI4vY6g_SXgoR-kbO3S4hbTVZw-hIwWQcrIyrJkkLnAd0ikpzMfsPnEo50KaWl98n0lr7iR6WNa-7WG0q_YDm3k-v-wkxmtupKSW06bpzf6R-WAm-FqSZpnCBvxm-yNRBmB0BzMYPv0F3wWkYyTOo42BCtXFD0v3cTwoKW68KSSHNnhxXKw0oYDQbQM4Vwi830ahUHxn7F66rCCqghuRmKdQlpO7oIjvsdI2H8XFBtDCH1ugoKqBGQTfEI-N8vV7BR4bcsFrjOewOW-_MHRAQQcbWRK4AsMEXAkxUNSJSRaxCOjDEMMhS0LXPlOq_lScsnhoh0PNxvyoSRx6ebLVzpeSqpdcQYuneYi_w8JedhTujtvwzdrDgqBtTRsZKXkHVJ1GfRu4B&zp=I4otsie2ZZSQdGyyaPucfmeqn3foVqKz2QvD4zcAcaZuM7xXyQ88Fc00dg1Do_-TKlKxiTOTSuwKgcbSgqiP0Cw_Diz3zkp9LfU5UlfwZ1oRHXIfoBQmJxWbgpBndYle-WQfUzZuWtDoLyXxbc-Id-M8ScVOKWldR8lpRuxVp0mnShndaI_MADNJ2eecr7mu_2jVFbuYVeSbiuy8KowULhOo6TzDbZ3q31giUB7lXIyhCvRCPyNqspkTuh1U6AGGKo_wmXLH8L9U71l5IwTgd-9nAA
+                    - generic [ref=f44e1063]:
+                      - generic [ref=f44e1064]:
+                        - link "u/friendly_fox_games" [ref=f44e1066] [cursor=pointer]:
+                          - /url: /user/friendly_fox_games/
+                          - img "Avatar von u/friendly_fox_games" [ref=f44e1069]
+                        - generic [ref=f44e1071]: •
+                        - link "Gesponsert" [ref=f44e1073] [cursor=pointer]:
+                          - /url: /user/friendly_fox_games/
+                        - link [ref=f44e1076] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=BhLuPem9w3Dd7sQ2--LbIL2Xjx-FGtkPgkRS0k2VjjeMn4QRYWOV2W1z2GXuxdLjaXs_XuD9JmZlYulLgQmPyvdQl2ozvAbyXp9mDjgsITi65s39BjsHGe8SaaxNzU_-YXeFfWURVjMAkZURjRhcdZuSDAXvvOas5KxNHvONgdObjMR7JJg5BMKfVL7y__MNw_1KRni_CpMGJ-QdDQF3f8YYkNBGkkq_hcqmRXyx85HlAje8dXwWW-F4EcyV11VhGGr4VKi7malMUpHmS5i9VW0-UZKUI4vY6g_SXgoR-kbO3S4hbTVZw-hIwWQcrIyrJkkLnAd0ikpzMfsPnEo50KaWl98n0lr7iR6WNa-7WG0q_YDm3k-v-wkxmtupKSW06bpzf6R-WAm-FqSZpnCBvxm-yNRBmB0BzMYPv0F3wWkYyTOo42BCtXFD0v3cTwoKW68KSSHNnhxXKw0oYDQbQM4Vwi830ahUHxn7F66rCCqghuRmKdQlpO7oIjvsdI2H8XFBtDCH1ugoKqBGQTfEI-N8vV7BR4bcsFrjOewOW-_MHRAQQcbWRK4AsMEXAkxUNSJSRaxCOjDEMMhS0LXPlOq_lScsnhoh0PNxvyoSRx6ebLVzpeSqpdcQYuneYi_w8JedhTujtvwzdrDgqBtTRsZKXkHVJ1GfRu4B&zp=I4otsie2ZZSQdGyyaPucfmeqn3foVqKz2QvD4zcAcaZuM7xXyQ88Fc00dg1Do_-TKlKxiTOTSuwKgcbSgqiP0Cw_Diz3zkp9LfU5UlfwZ1oRHXIfoBQmJxWbgpBndYle-WQfUzZuWtDoLyXxbc-Id-M8ScVOKWldR8lpRuxVp0mnShndaI_MADNJ2eecr7mu_2jVFbuYVeSbiuy8KowULhOo6TzDbZ3q31giUB7lXIyhCvRCPyNqspkTuh1U6AGGKo_wmXLH8L9U71l5IwTgd-9nAA
+                      - button "Handlungen für Nutzer*innen öffnen" [ref=f44e1082] [cursor=pointer]
+                    - generic [ref=f44e1088]:
+                      - generic [ref=f44e1089]:
+                        - link "The indie AI game that allows you to be and do whatever you want, complete with illustrations" [ref=f44e1091] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=BhLuPem9w3Dd7sQ2--LbIL2Xjx-FGtkPgkRS0k2VjjeMn4QRYWOV2W1z2GXuxdLjaXs_XuD9JmZlYulLgQmPyvdQl2ozvAbyXp9mDjgsITi65s39BjsHGe8SaaxNzU_-YXeFfWURVjMAkZURjRhcdZuSDAXvvOas5KxNHvONgdObjMR7JJg5BMKfVL7y__MNw_1KRni_CpMGJ-QdDQF3f8YYkNBGkkq_hcqmRXyx85HlAje8dXwWW-F4EcyV11VhGGr4VKi7malMUpHmS5i9VW0-UZKUI4vY6g_SXgoR-kbO3S4hbTVZw-hIwWQcrIyrJkkLnAd0ikpzMfsPnEo50KaWl98n0lr7iR6WNa-7WG0q_YDm3k-v-wkxmtupKSW06bpzf6R-WAm-FqSZpnCBvxm-yNRBmB0BzMYPv0F3wWkYyTOo42BCtXFD0v3cTwoKW68KSSHNnhxXKw0oYDQbQM4Vwi830ahUHxn7F66rCCqghuRmKdQlpO7oIjvsdI2H8XFBtDCH1ugoKqBGQTfEI-N8vV7BR4bcsFrjOewOW-_MHRAQQcbWRK4AsMEXAkxUNSJSRaxCOjDEMMhS0LXPlOq_lScsnhoh0PNxvyoSRx6ebLVzpeSqpdcQYuneYi_w8JedhTujtvwzdrDgqBtTRsZKXkHVJ1GfRu4B&zp=I4otsie2ZZSQdGyyaPucfmeqn3foVqKz2QvD4zcAcaZuM7xXyQ88Fc00dg1Do_-TKlKxiTOTSuwKgcbSgqiP0Cw_Diz3zkp9LfU5UlfwZ1oRHXIfoBQmJxWbgpBndYle-WQfUzZuWtDoLyXxbc-Id-M8ScVOKWldR8lpRuxVp0mnShndaI_MADNJ2eecr7mu_2jVFbuYVeSbiuy8KowULhOo6TzDbZ3q31giUB7lXIyhCvRCPyNqspkTuh1U6AGGKo_wmXLH8L9U71l5IwTgd-9nAA
+                        - generic [ref=f44e1092]:
+                          - link [ref=f44e1094] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=BhLuPem9w3Dd7sQ2--LbIL2Xjx-FGtkPgkRS0k2VjjeMn4QRYWOV2W1z2GXuxdLjaXs_XuD9JmZlYulLgQmPyvdQl2ozvAbyXp9mDjgsITi65s39BjsHGe8SaaxNzU_-YXeFfWURVjMAkZURjRhcdZuSDAXvvOas5KxNHvONgdObjMR7JJg5BMKfVL7y__MNw_1KRni_CpMGJ-QdDQF3f8YYkNBGkkq_hcqmRXyx85HlAje8dXwWW-F4EcyV11VhGGr4VKi7malMUpHmS5i9VW0-UZKUI4vY6g_SXgoR-kbO3S4hbTVZw-hIwWQcrIyrJkkLnAd0ikpzMfsPnEo50KaWl98n0lr7iR6WNa-7WG0q_YDm3k-v-wkxmtupKSW06bpzf6R-WAm-FqSZpnCBvxm-yNRBmB0BzMYPv0F3wWkYyTOo42BCtXFD0v3cTwoKW68KSSHNnhxXKw0oYDQbQM4Vwi830ahUHxn7F66rCCqghuRmKdQlpO7oIjvsdI2H8XFBtDCH1ugoKqBGQTfEI-N8vV7BR4bcsFrjOewOW-_MHRAQQcbWRK4AsMEXAkxUNSJSRaxCOjDEMMhS0LXPlOq_lScsnhoh0PNxvyoSRx6ebLVzpeSqpdcQYuneYi_w8JedhTujtvwzdrDgqBtTRsZKXkHVJ1GfRu4B&zp=I4otsie2ZZSQdGyyaPucfmeqn3foVqKz2QvD4zcAcaZuM7xXyQ88Fc00dg1Do_-TKlKxiTOTSuwKgcbSgqiP0Cw_Diz3zkp9LfU5UlfwZ1oRHXIfoBQmJxWbgpBndYle-WQfUzZuWtDoLyXxbc-Id-M8ScVOKWldR8lpRuxVp0mnShndaI_MADNJ2eecr7mu_2jVFbuYVeSbiuy8KowULhOo6TzDbZ3q31giUB7lXIyhCvRCPyNqspkTuh1U6AGGKo_wmXLH8L9U71l5IwTgd-9nAA
+                          - generic [ref=f44e1095]:
+                            - link "Jetzt spielen" [ref=f44e1097] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=BhLuPem9w3Dd7sQ2--LbIL2Xjx-FGtkPgkRS0k2VjjeMn4QRYWOV2W1z2GXuxdLjaXs_XuD9JmZlYulLgQmPyvdQl2ozvAbyXp9mDjgsITi65s39BjsHGe8SaaxNzU_-YXeFfWURVjMAkZURjRhcdZuSDAXvvOas5KxNHvONgdObjMR7JJg5BMKfVL7y__MNw_1KRni_CpMGJ-QdDQF3f8YYkNBGkkq_hcqmRXyx85HlAje8dXwWW-F4EcyV11VhGGr4VKi7malMUpHmS5i9VW0-UZKUI4vY6g_SXgoR-kbO3S4hbTVZw-hIwWQcrIyrJkkLnAd0ikpzMfsPnEo50KaWl98n0lr7iR6WNa-7WG0q_YDm3k-v-wkxmtupKSW06bpzf6R-WAm-FqSZpnCBvxm-yNRBmB0BzMYPv0F3wWkYyTOo42BCtXFD0v3cTwoKW68KSSHNnhxXKw0oYDQbQM4Vwi830ahUHxn7F66rCCqghuRmKdQlpO7oIjvsdI2H8XFBtDCH1ugoKqBGQTfEI-N8vV7BR4bcsFrjOewOW-_MHRAQQcbWRK4AsMEXAkxUNSJSRaxCOjDEMMhS0LXPlOq_lScsnhoh0PNxvyoSRx6ebLVzpeSqpdcQYuneYi_w8JedhTujtvwzdrDgqBtTRsZKXkHVJ1GfRu4B&zp=I4otsie2ZZSQdGyyaPucfmeqn3foVqKz2QvD4zcAcaZuM7xXyQ88Fc00dg1Do_-TKlKxiTOTSuwKgcbSgqiP0Cw_Diz3zkp9LfU5UlfwZ1oRHXIfoBQmJxWbgpBndYle-WQfUzZuWtDoLyXxbc-Id-M8ScVOKWldR8lpRuxVp0mnShndaI_MADNJ2eecr7mu_2jVFbuYVeSbiuy8KowULhOo6TzDbZ3q31giUB7lXIyhCvRCPyNqspkTuh1U6AGGKo_wmXLH8L9U71l5IwTgd-9nAA
+                            - link "infiniteworlds.app" [ref=f44e1102] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=BhLuPem9w3Dd7sQ2--LbIL2Xjx-FGtkPgkRS0k2VjjeMn4QRYWOV2W1z2GXuxdLjaXs_XuD9JmZlYulLgQmPyvdQl2ozvAbyXp9mDjgsITi65s39BjsHGe8SaaxNzU_-YXeFfWURVjMAkZURjRhcdZuSDAXvvOas5KxNHvONgdObjMR7JJg5BMKfVL7y__MNw_1KRni_CpMGJ-QdDQF3f8YYkNBGkkq_hcqmRXyx85HlAje8dXwWW-F4EcyV11VhGGr4VKi7malMUpHmS5i9VW0-UZKUI4vY6g_SXgoR-kbO3S4hbTVZw-hIwWQcrIyrJkkLnAd0ikpzMfsPnEo50KaWl98n0lr7iR6WNa-7WG0q_YDm3k-v-wkxmtupKSW06bpzf6R-WAm-FqSZpnCBvxm-yNRBmB0BzMYPv0F3wWkYyTOo42BCtXFD0v3cTwoKW68KSSHNnhxXKw0oYDQbQM4Vwi830ahUHxn7F66rCCqghuRmKdQlpO7oIjvsdI2H8XFBtDCH1ugoKqBGQTfEI-N8vV7BR4bcsFrjOewOW-_MHRAQQcbWRK4AsMEXAkxUNSJSRaxCOjDEMMhS0LXPlOq_lScsnhoh0PNxvyoSRx6ebLVzpeSqpdcQYuneYi_w8JedhTujtvwzdrDgqBtTRsZKXkHVJ1GfRu4B&zp=I4otsie2ZZSQdGyyaPucfmeqn3foVqKz2QvD4zcAcaZuM7xXyQ88Fc00dg1Do_-TKlKxiTOTSuwKgcbSgqiP0Cw_Diz3zkp9LfU5UlfwZ1oRHXIfoBQmJxWbgpBndYle-WQfUzZuWtDoLyXxbc-Id-M8ScVOKWldR8lpRuxVp0mnShndaI_MADNJ2eecr7mu_2jVFbuYVeSbiuy8KowULhOo6TzDbZ3q31giUB7lXIyhCvRCPyNqspkTuh1U6AGGKo_wmXLH8L9U71l5IwTgd-9nAA
+                      - link [ref=f44e1105] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=BhLuPem9w3Dd7sQ2--LbIL2Xjx-FGtkPgkRS0k2VjjeMn4QRYWOV2W1z2GXuxdLjaXs_XuD9JmZlYulLgQmPyvdQl2ozvAbyXp9mDjgsITi65s39BjsHGe8SaaxNzU_-YXeFfWURVjMAkZURjRhcdZuSDAXvvOas5KxNHvONgdObjMR7JJg5BMKfVL7y__MNw_1KRni_CpMGJ-QdDQF3f8YYkNBGkkq_hcqmRXyx85HlAje8dXwWW-F4EcyV11VhGGr4VKi7malMUpHmS5i9VW0-UZKUI4vY6g_SXgoR-kbO3S4hbTVZw-hIwWQcrIyrJkkLnAd0ikpzMfsPnEo50KaWl98n0lr7iR6WNa-7WG0q_YDm3k-v-wkxmtupKSW06bpzf6R-WAm-FqSZpnCBvxm-yNRBmB0BzMYPv0F3wWkYyTOo42BCtXFD0v3cTwoKW68KSSHNnhxXKw0oYDQbQM4Vwi830ahUHxn7F66rCCqghuRmKdQlpO7oIjvsdI2H8XFBtDCH1ugoKqBGQTfEI-N8vV7BR4bcsFrjOewOW-_MHRAQQcbWRK4AsMEXAkxUNSJSRaxCOjDEMMhS0LXPlOq_lScsnhoh0PNxvyoSRx6ebLVzpeSqpdcQYuneYi_w8JedhTujtvwzdrDgqBtTRsZKXkHVJ1GfRu4B&zp=I4otsie2ZZSQdGyyaPucfmeqn3foVqKz2QvD4zcAcaZuM7xXyQ88Fc00dg1Do_-TKlKxiTOTSuwKgcbSgqiP0Cw_Diz3zkp9LfU5UlfwZ1oRHXIfoBQmJxWbgpBndYle-WQfUzZuWtDoLyXxbc-Id-M8ScVOKWldR8lpRuxVp0mnShndaI_MADNJ2eecr7mu_2jVFbuYVeSbiuy8KowULhOo6TzDbZ3q31giUB7lXIyhCvRCPyNqspkTuh1U6AGGKo_wmXLH8L9U71l5IwTgd-9nAA
+                        - 'img "Thumbnail image: The indie AI game that allows you to be and do whatever you want, complete with illustrations" [ref=f44e1106]'
+                - article "Kommentar von iDonBite vor 5 Tagen" [ref=f44e1108]:
+                  - generic [ref=f44e1109] [cursor=pointer]:
+                    - link "Profil von iDonBite --- Avatar" [ref=f44e1114]:
+                      - /url: https://www.reddit.com/user/iDonBite/
+                      - img "Avatar von u/iDonBite" [ref=f44e1117]
+                    - generic [ref=f44e1121]:
+                      - link "Profil von iDonBite" [ref=f44e1124]:
+                        - /url: https://www.reddit.com/user/iDonBite/
+                        - text: iDonBite
+                      - generic [ref=f44e1125]: •
+                      - link [ref=f44e1127]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1vdeql/
+                        - time [ref=f44e1129]: vor 5 Tagen
+                  - generic [ref=f44e1131]:
+                    - paragraph [ref=f44e1135]: Really depends on what you are working on. Extremely complicated projects that require thinking sol is unbeatable regardless what the charts say. Example, I had a project that I used Luna max to save money and gave it tools, instructions skills, guidance and still would not complete my task, it will create bugs, etc. But once I gave sol high the same task it one shoted the solution although took long. Basically sol did in one shot what 5 Luna max sessions failed to do correctly.
+                    - generic [ref=f44e1136]: "1"
+                - article "Kommentar von willdone vor 5 Tagen" [ref=f44e1144]:
+                  - generic [ref=f44e1145] [cursor=pointer]:
+                    - link "Profil von willdone --- Avatar" [ref=f44e1150]:
+                      - /url: https://www.reddit.com/user/willdone/
+                    - generic [ref=f44e1166]:
+                      - link "Profil von willdone" [ref=f44e1169]:
+                        - /url: https://www.reddit.com/user/willdone/
+                        - text: willdone
+                      - generic [ref=f44e1170]: •
+                      - link [ref=f44e1172]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p1vldvy/
+                        - time [ref=f44e1174]: vor 5 Tagen
+                  - generic [ref=f44e1176]:
+                    - paragraph [ref=f44e1180]: Are there benchmarks on certain types of tasks? For example, I want to know which model and reasoning level is going to be "good enough" for natural language usage, such as using the LLM as a judge for evals.
+                    - generic [ref=f44e1181]: "1"
+                - article "Kommentar von Mohammed_Azeem_ vor 4 Tagen" [ref=f44e1189]:
+                  - generic [ref=f44e1190] [cursor=pointer]:
+                    - link "Profil von Mohammed_Azeem_ --- Avatar" [ref=f44e1195]:
+                      - /url: https://www.reddit.com/user/Mohammed_Azeem_/
+                    - generic [ref=f44e1205]:
+                      - link "Profil von Mohammed_Azeem_" [ref=f44e1208]:
+                        - /url: https://www.reddit.com/user/Mohammed_Azeem_/
+                        - text: Mohammed_Azeem_
+                      - generic [ref=f44e1209]: •
+                      - link [ref=f44e1211]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p20c49s/
+                        - time [ref=f44e1213]: vor 4 Tagen
+                  - generic [ref=f44e1215]:
+                    - generic [ref=f44e1218]:
+                      - paragraph [ref=f44e1219]: I'm working on a project and one of the agent is a chat based interface. We do not have the streaming response enabled with the integrated service.
+                      - paragraph [ref=f44e1220]: "Architecture: Receives request in JSON from the service A >> Azure Service Bus Queues picks up & process & sends the response back to Service A once completed."
+                      - paragraph [ref=f44e1221]: "Issue: When user selects/writes any input & until the response is presented on UX there's a delay (8-9 sec total [5-6 in LLM processing] rest in http calls etc.), I need to optimize this."
+                      - paragraph [ref=f44e1222]: "Current Model: GPT 5.4 base"
+                      - paragraph [ref=f44e1223]: I was exploring if the latest GPR 5.6 would perform better here and without loosing the quality, could it be faster? which option shall I opt for. Also any suggestion on how to improve this chat interface further for better UI/UX
+                    - generic [ref=f44e1224]: "1"
+                - article "Kommentar von Puzzleheaded_Phase98 vor 4 Tagen" [ref=f44e1232]:
+                  - generic [ref=f44e1233] [cursor=pointer]:
+                    - link "Profil von Puzzleheaded_Phase98 --- Avatar" [ref=f44e1238]:
+                      - /url: https://www.reddit.com/user/Puzzleheaded_Phase98/
+                    - generic [ref=f44e1248]:
+                      - link "Profil von Puzzleheaded_Phase98" [ref=f44e1251]:
+                        - /url: https://www.reddit.com/user/Puzzleheaded_Phase98/
+                        - text: Puzzleheaded_Phase98
+                      - generic [ref=f44e1252]: •
+                      - link [ref=f44e1254]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p20qx4a/
+                        - time [ref=f44e1256]: vor 4 Tagen
+                  - generic [ref=f44e1258]:
+                    - paragraph [ref=f44e1262]: Have you tested with Ultra?
+                    - generic [ref=f44e1263]: "1"
+                - article "Kommentar von UnityMathProf vor 4 Tagen" [ref=f44e1271]:
+                  - generic [ref=f44e1272] [cursor=pointer]:
+                    - link "Profil von UnityMathProf --- Avatar" [ref=f44e1277]:
+                      - /url: https://www.reddit.com/user/UnityMathProf/
+                      - img "Avatar von u/UnityMathProf" [ref=f44e1280]
+                    - generic [ref=f44e1284]:
+                      - link "Profil von UnityMathProf" [ref=f44e1287]:
+                        - /url: https://www.reddit.com/user/UnityMathProf/
+                        - text: UnityMathProf
+                      - generic [ref=f44e1288]: •
+                      - link [ref=f44e1290]:
+                        - /url: https://www.reddit.com/r/codex/comments/1vfwsug/comment/p24t9pe/
+                        - time [ref=f44e1292]: vor 4 Tagen
+                  - generic [ref=f44e1294]:
+                    - paragraph [ref=f44e1298]: The thing with those evals is that Luna max would be the obv. winner but everyone using it knows you can't trust it longterm. Terra max on the other hand is much more trustworthy
+                    - generic [ref=f44e1299]: "1"
+            - generic [ref=f44e1306]:
+              - complementary "Informationen zur Community" [ref=f44e1611]:
+                - generic [ref=f44e1613]:
+                  - heading "Community-Info-Bereich" [level=1] [ref=f44e1614]
+                  - generic [ref=f44e1615]:
+                    - generic [ref=f44e1616]:
+                      - link "r/codex" [ref=f44e1617] [cursor=pointer]:
+                        - /url: /r/codex/
+                      - 'button "Community-Status: r/codex performance tracker" [ref=f44e1621] [cursor=pointer]':
+                        - img "upvote" [ref=f44e1622]
+                    - button "Beitreten" [ref=f44e1626] [cursor=pointer]
+                  - generic [ref=f44e1627]:
+                    - generic [ref=f44e1628]: Codex coding tools by OpenAI - Codex CLI and IDE Extension
+                    - generic [ref=f44e1629]: This is the information and discussion subreddit for OpenAI Codex tools - Codex CLI, Codex IDE Extension and Codex in the Cloud that are included in ChatGPT Plus, Pro, Business, Edu, and Enterprise plans. The subreddit's focus recently changed and the prior subreddit content has been respectfully archived. This subreddit is not an official OpenAI subreddit.
+                    - button "Weitere anzeigen" [ref=f44e1630] [cursor=pointer]
+                    - generic: Öffentlich
+              - list [ref=f44e1639]:
+                - listitem [ref=f44e1640]:
+                  - link "Home" [ref=f44e1642] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f44e1643]:
+                  - link "Beliebt" [ref=f44e1645] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f44e1646]:
+                  - link "Nachrichten" [ref=f44e1648] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f44e1649]:
+                  - link "Entdecken" [ref=f44e1651] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f44e1652]:
+                  - link "Das Beste von Reddit" [ref=f44e1654] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f44e1655]:
+                  - link "Das Beste von Reddit auf Portugiesisch" [ref=f44e1657] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f44e1658]:
+                  - link "Das Beste von Reddit auf Deutsch" [ref=f44e1660] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f44e1661]:
+                  - link "Regeln von Reddit" [ref=f44e1663] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f44e1664]:
+                  - link "Datenschutzerklärung" [ref=f44e1666] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f44e1667]:
+                  - link "Nutzungsvereinbarung" [ref=f44e1669] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f44e1670]:
+                  - link "Barrierefreiheit" [ref=f44e1672] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f44e1673]:
+                  - link "Impressum" [ref=f44e1675] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/impressum
+                - listitem [ref=f44e1676]:
+                  - link "Reddit, Inc. © 2026. Alle Rechte vorbehalten." [ref=f44e1677] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f44e1680]:
+          - paragraph [ref=f44e1681]: Werde Teil des authentischsten Orts im Internet
+          - generic [ref=f44e1683]:
+            - generic [ref=f44e1686]:
+              - iframe [ref=f44e1691]:
+                - button "Weiter mit Google. (Wird in neuem Tab geöffnet)" [ref=f45e3] [cursor=pointer]:
+                  - generic [ref=f45e5]: Weiter mit Google
+              - generic [ref=f44e1693] [cursor=pointer]:
+                - generic [ref=f44e1694]: Mit Apple fortfahren
+                - button "Sign in with Apple" [ref=f44e1700]:
+                  - generic [ref=f44e1701]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Weiter mit Telefonnummer" [ref=f44e1706] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Mit Mail fortfahren" [ref=f44e1715] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f44e1722]:
+            - text: Wenn du fortfährst, stimmst du unserer
+            - link "Nutzungsvereinbarung" [ref=f44e1723] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: zu und bestätigst, dass du die
+            - link "Datenschutzerklärung" [ref=f44e1724] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: verstehst.
+      - dialog "Data Protection Consent" [ref=f44e1726]:
+        - generic [ref=f44e1727]:
+          - generic [ref=f44e1729]:
+            - generic:
+              - button "Schließen" [ref=f44e1733] [cursor=pointer]
+              - generic [ref=f44e1738]:
+                - generic [ref=f44e1739]: Lege deine Cookie-Einstellungen fest
+                - generic [ref=f44e1742]:
+                  - paragraph [ref=f44e1743]: "Reddit verwendet Cookies und ähnliche Technologien, um:"
+                  - list [ref=f44e1744]:
+                    - listitem [ref=f44e1745]: die Website funktionsfähig zu halten und ordnungsgemäß zu betreiben
+                    - listitem [ref=f44e1746]: Betrug und Missbrauch zu verhindern
+                    - listitem [ref=f44e1747]: die Nutzung der Website und Leistungskennzahlen zu überwachen
+                  - paragraph [ref=f44e1748]: "Wenn du „Alle akzeptieren“ wählst, verwenden wir Cookies auch, um:"
+                  - list [ref=f44e1749]:
+                    - listitem [ref=f44e1750]: deine Empfehlungen und Anzeigen zu personalisieren
+                    - listitem [ref=f44e1751]: die Performance von Anzeigen zu messen
+                    - listitem [ref=f44e1752]: neue Funktionen und Dienste zu entwickeln und zu verbessern
+                  - paragraph [ref=f44e1753]: Wenn du „Optionale Cookies ablehnen“ wählst, verwenden wir keine Cookies für diese zusätzlichen Zwecke. Du kannst die Cookie-Einstellungen in deinen Einstellungen aktualisieren.
+                  - paragraph [ref=f44e1754]:
+                    - text: Erfahre mehr darüber,
+                    - link "wie Reddit Cookies verwendet" [ref=f44e1755] [cursor=pointer]:
+                      - /url: /de-de/policies/cookies
+                    - text: .
+          - generic [ref=f44e1757]:
+            - button "Optionale Cookies ablehnen" [ref=f44e1758] [cursor=pointer]
+            - button "Alle akzeptieren" [ref=f44e1761] [cursor=pointer]

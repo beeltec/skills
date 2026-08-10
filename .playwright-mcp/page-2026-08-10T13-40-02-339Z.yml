@@ -1,0 +1,1064 @@
+- generic [active] [ref=f8e1]:
+  - link "Zum Hauptinhalt springen" [ref=f8e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f8e6]:
+    - generic:
+      - generic: "Fable 5 vs Opus 5 after a week of switching between them: they're good at different things and I stopped treating them as a ladder : r/ClaudeAI"
+      - banner [ref=f8e10]:
+        - navigation [ref=f8e11]:
+          - link "Home" [ref=f8e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f8e34]:
+            - generic [ref=f8e36]:
+              - textbox "Fragen" [ref=f8e43]:
+                - /placeholder: Finde alles
+              - separator [ref=f8e44]
+              - link "Fragen" [ref=f8e48] [cursor=pointer]:
+                - /url: /answers/
+              - generic: Finde alles
+          - generic [ref=f8e54]:
+            - link "Registrieren" [ref=f8e60] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Anmelden" [ref=f8e66] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Nutzermenü ausklappen" [ref=f8e73] [cursor=pointer]
+      - generic [ref=f8e79]:
+        - generic [ref=f8e80]:
+          - generic [ref=f8e81]:
+            - generic:
+              - generic:
+                - link "Weiter zur Registrierung" [ref=f8e82] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Zur rechten Seitenleiste springen" [ref=f8e83] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f8e84]:
+            - main [ref=f8e85]:
+              - 'generic "Fable 5 vs Opus 5 after a week of switching between them: they''re good at different things and I stopped treating them as a ladder : r/ClaudeAI"'
+              - generic [ref=f8e86]:
+                - generic [ref=f8e87]:
+                  - generic [ref=f8e88]:
+                    - button "Zurück" [ref=f8e90] [cursor=pointer]
+                    - link "Zu ClaudeAI" [ref=f8e98] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/ClaudeAI/
+                    - group [ref=f8e103]:
+                      - generic [ref=f8e104]:
+                        - link "r/ClaudeAI" [ref=f8e107] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/ClaudeAI/
+                        - generic [ref=f8e108]: •
+                        - time [ref=f8e110]: vor 10 Tagen
+                      - 'link "Autor*in: Low_Air5390" [ref=f8e115] [cursor=pointer]':
+                        - /url: https://www.reddit.com/user/Low_Air5390/
+                        - generic [ref=f8e116]: Low_Air5390
+                  - button "Handlungen für Nutzer*innen öffnen" [ref=f8e120] [cursor=pointer]
+                - 'heading "Beitragstitel: Fable 5 vs Opus 5 after a week of switching between them: they''re good at different things and I stopped treating them as a ladder" [level=1] [ref=f8e127]': "Fable 5 vs Opus 5 after a week of switching between them: they're good at different things and I stopped treating them as a ladder"
+                - generic [ref=f8e130]:
+                  - generic [ref=f8e131]:
+                    - paragraph [ref=f8e132]: Everyone frames the models as a straight ranking, Fable above Opus above Sonnet. After a week of deliberately running my normal day's work through both, that's not how it plays out for me.
+                    - paragraph [ref=f8e133]: Opus 5 wins on anything short and self-contained. One file, one function, a bug with a clear repro. It's fast, it doesn't overthink, and it costs a fraction of the tokens.
+                    - paragraph [ref=f8e134]: Fable 5 wins the moment the problem gets wide. A spec that references three other documents, a change that has to stay consistent across a dozen files, something where you have to hold the whole shape in your head at once. Fable keeps the picture intact way longer before it starts filling gaps with guesses. Opus starts guessing once the context spreads out.
+                    - paragraph [ref=f8e135]: The mistake I was making was reaching for the "best" model by default. Half my tasks don't need the big-context strength and I was just burning limit for nothing. Now it's Opus for narrow, Fable for wide, Sonnet for mechanical.
+                    - paragraph [ref=f8e136]: How are you splitting them? Anyone found a task where Opus 5 actually beats Fable on the genuinely hard stuff?
+                  - button "Weiterlesen" [ref=f8e137] [cursor=pointer]
+                - generic [ref=f8e143]:
+                  - generic [ref=f8e146]: "13"
+                  - generic [ref=f8e149]: ·
+                  - generic [ref=f8e152]: "16"
+              - separator [ref=f8e153]
+              - generic "[SPOILER] Ihr glaubt nicht, wie schnell und günstig Buchhaltung sein kann. Trust me!" [ref=f8e154]:
+                - generic [ref=f8e155]:
+                  - 'generic "Advertisement: [SPOILER] Ihr glaubt nicht, wie schnell und günstig Buchhaltung sein kann. Trust me!" [ref=f8e156]':
+                    - 'link "Advertisement: [SPOILER] Ihr glaubt nicht, wie schnell und günstig Buchhaltung sein kann. Trust me!" [ref=f8e157] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=mPFoXdSiFDXWSF7bEIwopWXknFjBZ6REtcYJhe4QALCvJtrKHOozQwybL5d8-tX0ilrfkO5pl_I6lDd1GZhBwnMm1Emxe1PQh4SiHgvgzX3ZE1PuO4q7O8Mz60kl9GrjGCdsLzvRQTvBgd8G4LQZYMdofGnE0QILw5M4jWgJX8wQMwlG2WBj-WxFoyKpVA-AdBaRudYAUKfFhJyKwe9QxkS5tXrAVSFPJ7oUGDN7iJje-JEkGvt7KhsSmuj6rU77Xn4EAdM6lFlvRaO6tUElbTaPW-JztP70iROOq5Ks7fqCYS9qTegA9mQq36IhpuOvLECotMnJ-iMMiWNm1UEdnuMTT2-YkCymjXeXchOuR3BgpoQL8m-smXIJzd9E-leemGYOy2V9z-fU9XFgR-DCCb8cH6e50H0eQktxyS1obys8tPGxvmm1pU-66d0zH1qX-uTzRxFtnKHskY194bE6SC8f1VaKvuIQsC_PCpYxPIudLiKF49i7xg-Z-MaSjb06mWo882LF7kwwTNh2sY8exvITd4iHLy07Fy8usICiEg78c0A9UAk6VRIAJfYF9CM5LJGCIR5hLLylfP49F6A0exz4w6ux_fmIuu2G5StSemkfskmMNXoPzqy15AnlB02DaDGQ07WJHPVy2S35P9GYBvs8zMRvOv-hiSe0ov_Hqw&zp=oqDNWt0W2itSBY4BhRzpYauW_CStBSsy8H8e5hmloFJpxSXBFiDesqPsbp5DgpYwcEBR1eEFBgW3M_J3kwxB5olQMofynjz-so6y2EtJhWDq29HRExthG3xX6darB5_8M_cWaqjIgONSsb0vOPahumywkcvuS90ukydmdunkxijPtoPBi5b9yp2FdT_E6qt6VWtTPTfRjaPRX6q_dvn00F1AoHZ1w73NBjsi6CTc8ok1W0J6hZ_CzuxjzGsgLH5YfKyZ7uBprRIwnSs3tfPDNvyh-Tp6O4-JojYMgcqKGxzPx_2ehUI6G8sqb8VAydOnkVYUfu-yrb8jvgDe1qNod6TeDIGV40Mz2sVPgHUPKp4BMOyIOMGmBa1aL6-3W1H3XuOfiWi7kHmAtF8sko-9KyQq6fgVDCf7gx1v42w4ZhEdvqE7UPqn-6JwmxGXag
+                  - generic [ref=f8e158]:
+                    - generic [ref=f8e159]:
+                      - link "lexware_office" [ref=f8e161] [cursor=pointer]:
+                        - /url: /user/lexware_office/
+                        - img "Avatar von u/lexware_office" [ref=f8e164]
+                      - generic [ref=f8e166]: •
+                      - link "Gesponsert" [ref=f8e168] [cursor=pointer]:
+                        - /url: /user/lexware_office/
+                      - link [ref=f8e171] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=mPFoXdSiFDXWSF7bEIwopWXknFjBZ6REtcYJhe4QALCvJtrKHOozQwybL5d8-tX0ilrfkO5pl_I6lDd1GZhBwnMm1Emxe1PQh4SiHgvgzX3ZE1PuO4q7O8Mz60kl9GrjGCdsLzvRQTvBgd8G4LQZYMdofGnE0QILw5M4jWgJX8wQMwlG2WBj-WxFoyKpVA-AdBaRudYAUKfFhJyKwe9QxkS5tXrAVSFPJ7oUGDN7iJje-JEkGvt7KhsSmuj6rU77Xn4EAdM6lFlvRaO6tUElbTaPW-JztP70iROOq5Ks7fqCYS9qTegA9mQq36IhpuOvLECotMnJ-iMMiWNm1UEdnuMTT2-YkCymjXeXchOuR3BgpoQL8m-smXIJzd9E-leemGYOy2V9z-fU9XFgR-DCCb8cH6e50H0eQktxyS1obys8tPGxvmm1pU-66d0zH1qX-uTzRxFtnKHskY194bE6SC8f1VaKvuIQsC_PCpYxPIudLiKF49i7xg-Z-MaSjb06mWo882LF7kwwTNh2sY8exvITd4iHLy07Fy8usICiEg78c0A9UAk6VRIAJfYF9CM5LJGCIR5hLLylfP49F6A0exz4w6ux_fmIuu2G5StSemkfskmMNXoPzqy15AnlB02DaDGQ07WJHPVy2S35P9GYBvs8zMRvOv-hiSe0ov_Hqw&zp=oqDNWt0W2itSBY4BhRzpYauW_CStBSsy8H8e5hmloFJpxSXBFiDesqPsbp5DgpYwcEBR1eEFBgW3M_J3kwxB5olQMofynjz-so6y2EtJhWDq29HRExthG3xX6darB5_8M_cWaqjIgONSsb0vOPahumywkcvuS90ukydmdunkxijPtoPBi5b9yp2FdT_E6qt6VWtTPTfRjaPRX6q_dvn00F1AoHZ1w73NBjsi6CTc8ok1W0J6hZ_CzuxjzGsgLH5YfKyZ7uBprRIwnSs3tfPDNvyh-Tp6O4-JojYMgcqKGxzPx_2ehUI6G8sqb8VAydOnkVYUfu-yrb8jvgDe1qNod6TeDIGV40Mz2sVPgHUPKp4BMOyIOMGmBa1aL6-3W1H3XuOfiWi7kHmAtF8sko-9KyQq6fgVDCf7gx1v42w4ZhEdvqE7UPqn-6JwmxGXag
+                    - button "Handlungen für Nutzer*innen öffnen" [ref=f8e177] [cursor=pointer]
+                  - generic [ref=f8e183]:
+                    - generic [ref=f8e184]:
+                      - link "[SPOILER] Ihr glaubt nicht, wie schnell und günstig Buchhaltung sein kann. Trust me!" [ref=f8e186] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=mPFoXdSiFDXWSF7bEIwopWXknFjBZ6REtcYJhe4QALCvJtrKHOozQwybL5d8-tX0ilrfkO5pl_I6lDd1GZhBwnMm1Emxe1PQh4SiHgvgzX3ZE1PuO4q7O8Mz60kl9GrjGCdsLzvRQTvBgd8G4LQZYMdofGnE0QILw5M4jWgJX8wQMwlG2WBj-WxFoyKpVA-AdBaRudYAUKfFhJyKwe9QxkS5tXrAVSFPJ7oUGDN7iJje-JEkGvt7KhsSmuj6rU77Xn4EAdM6lFlvRaO6tUElbTaPW-JztP70iROOq5Ks7fqCYS9qTegA9mQq36IhpuOvLECotMnJ-iMMiWNm1UEdnuMTT2-YkCymjXeXchOuR3BgpoQL8m-smXIJzd9E-leemGYOy2V9z-fU9XFgR-DCCb8cH6e50H0eQktxyS1obys8tPGxvmm1pU-66d0zH1qX-uTzRxFtnKHskY194bE6SC8f1VaKvuIQsC_PCpYxPIudLiKF49i7xg-Z-MaSjb06mWo882LF7kwwTNh2sY8exvITd4iHLy07Fy8usICiEg78c0A9UAk6VRIAJfYF9CM5LJGCIR5hLLylfP49F6A0exz4w6ux_fmIuu2G5StSemkfskmMNXoPzqy15AnlB02DaDGQ07WJHPVy2S35P9GYBvs8zMRvOv-hiSe0ov_Hqw&zp=oqDNWt0W2itSBY4BhRzpYauW_CStBSsy8H8e5hmloFJpxSXBFiDesqPsbp5DgpYwcEBR1eEFBgW3M_J3kwxB5olQMofynjz-so6y2EtJhWDq29HRExthG3xX6darB5_8M_cWaqjIgONSsb0vOPahumywkcvuS90ukydmdunkxijPtoPBi5b9yp2FdT_E6qt6VWtTPTfRjaPRX6q_dvn00F1AoHZ1w73NBjsi6CTc8ok1W0J6hZ_CzuxjzGsgLH5YfKyZ7uBprRIwnSs3tfPDNvyh-Tp6O4-JojYMgcqKGxzPx_2ehUI6G8sqb8VAydOnkVYUfu-yrb8jvgDe1qNod6TeDIGV40Mz2sVPgHUPKp4BMOyIOMGmBa1aL6-3W1H3XuOfiWi7kHmAtF8sko-9KyQq6fgVDCf7gx1v42w4ZhEdvqE7UPqn-6JwmxGXag
+                      - generic [ref=f8e187]:
+                        - link [ref=f8e189] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=mPFoXdSiFDXWSF7bEIwopWXknFjBZ6REtcYJhe4QALCvJtrKHOozQwybL5d8-tX0ilrfkO5pl_I6lDd1GZhBwnMm1Emxe1PQh4SiHgvgzX3ZE1PuO4q7O8Mz60kl9GrjGCdsLzvRQTvBgd8G4LQZYMdofGnE0QILw5M4jWgJX8wQMwlG2WBj-WxFoyKpVA-AdBaRudYAUKfFhJyKwe9QxkS5tXrAVSFPJ7oUGDN7iJje-JEkGvt7KhsSmuj6rU77Xn4EAdM6lFlvRaO6tUElbTaPW-JztP70iROOq5Ks7fqCYS9qTegA9mQq36IhpuOvLECotMnJ-iMMiWNm1UEdnuMTT2-YkCymjXeXchOuR3BgpoQL8m-smXIJzd9E-leemGYOy2V9z-fU9XFgR-DCCb8cH6e50H0eQktxyS1obys8tPGxvmm1pU-66d0zH1qX-uTzRxFtnKHskY194bE6SC8f1VaKvuIQsC_PCpYxPIudLiKF49i7xg-Z-MaSjb06mWo882LF7kwwTNh2sY8exvITd4iHLy07Fy8usICiEg78c0A9UAk6VRIAJfYF9CM5LJGCIR5hLLylfP49F6A0exz4w6ux_fmIuu2G5StSemkfskmMNXoPzqy15AnlB02DaDGQ07WJHPVy2S35P9GYBvs8zMRvOv-hiSe0ov_Hqw&zp=oqDNWt0W2itSBY4BhRzpYauW_CStBSsy8H8e5hmloFJpxSXBFiDesqPsbp5DgpYwcEBR1eEFBgW3M_J3kwxB5olQMofynjz-so6y2EtJhWDq29HRExthG3xX6darB5_8M_cWaqjIgONSsb0vOPahumywkcvuS90ukydmdunkxijPtoPBi5b9yp2FdT_E6qt6VWtTPTfRjaPRX6q_dvn00F1AoHZ1w73NBjsi6CTc8ok1W0J6hZ_CzuxjzGsgLH5YfKyZ7uBprRIwnSs3tfPDNvyh-Tp6O4-JojYMgcqKGxzPx_2ehUI6G8sqb8VAydOnkVYUfu-yrb8jvgDe1qNod6TeDIGV40Mz2sVPgHUPKp4BMOyIOMGmBa1aL6-3W1H3XuOfiWi7kHmAtF8sko-9KyQq6fgVDCf7gx1v42w4ZhEdvqE7UPqn-6JwmxGXag
+                        - generic [ref=f8e190]:
+                          - link "Mehr erfahren" [ref=f8e192] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=mPFoXdSiFDXWSF7bEIwopWXknFjBZ6REtcYJhe4QALCvJtrKHOozQwybL5d8-tX0ilrfkO5pl_I6lDd1GZhBwnMm1Emxe1PQh4SiHgvgzX3ZE1PuO4q7O8Mz60kl9GrjGCdsLzvRQTvBgd8G4LQZYMdofGnE0QILw5M4jWgJX8wQMwlG2WBj-WxFoyKpVA-AdBaRudYAUKfFhJyKwe9QxkS5tXrAVSFPJ7oUGDN7iJje-JEkGvt7KhsSmuj6rU77Xn4EAdM6lFlvRaO6tUElbTaPW-JztP70iROOq5Ks7fqCYS9qTegA9mQq36IhpuOvLECotMnJ-iMMiWNm1UEdnuMTT2-YkCymjXeXchOuR3BgpoQL8m-smXIJzd9E-leemGYOy2V9z-fU9XFgR-DCCb8cH6e50H0eQktxyS1obys8tPGxvmm1pU-66d0zH1qX-uTzRxFtnKHskY194bE6SC8f1VaKvuIQsC_PCpYxPIudLiKF49i7xg-Z-MaSjb06mWo882LF7kwwTNh2sY8exvITd4iHLy07Fy8usICiEg78c0A9UAk6VRIAJfYF9CM5LJGCIR5hLLylfP49F6A0exz4w6ux_fmIuu2G5StSemkfskmMNXoPzqy15AnlB02DaDGQ07WJHPVy2S35P9GYBvs8zMRvOv-hiSe0ov_Hqw&zp=oqDNWt0W2itSBY4BhRzpYauW_CStBSsy8H8e5hmloFJpxSXBFiDesqPsbp5DgpYwcEBR1eEFBgW3M_J3kwxB5olQMofynjz-so6y2EtJhWDq29HRExthG3xX6darB5_8M_cWaqjIgONSsb0vOPahumywkcvuS90ukydmdunkxijPtoPBi5b9yp2FdT_E6qt6VWtTPTfRjaPRX6q_dvn00F1AoHZ1w73NBjsi6CTc8ok1W0J6hZ_CzuxjzGsgLH5YfKyZ7uBprRIwnSs3tfPDNvyh-Tp6O4-JojYMgcqKGxzPx_2ehUI6G8sqb8VAydOnkVYUfu-yrb8jvgDe1qNod6TeDIGV40Mz2sVPgHUPKp4BMOyIOMGmBa1aL6-3W1H3XuOfiWi7kHmAtF8sko-9KyQq6fgVDCf7gx1v42w4ZhEdvqE7UPqn-6JwmxGXag
+                          - link "go.lexware.de" [ref=f8e197] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=mPFoXdSiFDXWSF7bEIwopWXknFjBZ6REtcYJhe4QALCvJtrKHOozQwybL5d8-tX0ilrfkO5pl_I6lDd1GZhBwnMm1Emxe1PQh4SiHgvgzX3ZE1PuO4q7O8Mz60kl9GrjGCdsLzvRQTvBgd8G4LQZYMdofGnE0QILw5M4jWgJX8wQMwlG2WBj-WxFoyKpVA-AdBaRudYAUKfFhJyKwe9QxkS5tXrAVSFPJ7oUGDN7iJje-JEkGvt7KhsSmuj6rU77Xn4EAdM6lFlvRaO6tUElbTaPW-JztP70iROOq5Ks7fqCYS9qTegA9mQq36IhpuOvLECotMnJ-iMMiWNm1UEdnuMTT2-YkCymjXeXchOuR3BgpoQL8m-smXIJzd9E-leemGYOy2V9z-fU9XFgR-DCCb8cH6e50H0eQktxyS1obys8tPGxvmm1pU-66d0zH1qX-uTzRxFtnKHskY194bE6SC8f1VaKvuIQsC_PCpYxPIudLiKF49i7xg-Z-MaSjb06mWo882LF7kwwTNh2sY8exvITd4iHLy07Fy8usICiEg78c0A9UAk6VRIAJfYF9CM5LJGCIR5hLLylfP49F6A0exz4w6ux_fmIuu2G5StSemkfskmMNXoPzqy15AnlB02DaDGQ07WJHPVy2S35P9GYBvs8zMRvOv-hiSe0ov_Hqw&zp=oqDNWt0W2itSBY4BhRzpYauW_CStBSsy8H8e5hmloFJpxSXBFiDesqPsbp5DgpYwcEBR1eEFBgW3M_J3kwxB5olQMofynjz-so6y2EtJhWDq29HRExthG3xX6darB5_8M_cWaqjIgONSsb0vOPahumywkcvuS90ukydmdunkxijPtoPBi5b9yp2FdT_E6qt6VWtTPTfRjaPRX6q_dvn00F1AoHZ1w73NBjsi6CTc8ok1W0J6hZ_CzuxjzGsgLH5YfKyZ7uBprRIwnSs3tfPDNvyh-Tp6O4-JojYMgcqKGxzPx_2ehUI6G8sqb8VAydOnkVYUfu-yrb8jvgDe1qNod6TeDIGV40Mz2sVPgHUPKp4BMOyIOMGmBa1aL6-3W1H3XuOfiWi7kHmAtF8sko-9KyQq6fgVDCf7gx1v42w4ZhEdvqE7UPqn-6JwmxGXag
+                    - generic [ref=f8e198] [cursor=pointer]:
+                      - 'img "Clickable image which will reveal the video player: [SPOILER] Ihr glaubt nicht, wie schnell und günstig Buchhaltung sein kann. Trust me!" [ref=f8e199]'
+                      - button "Video abspielen" [ref=f8e200]
+                  - generic:
+                    - generic:
+                      - button "Videoplayer einklappen" [ref=f8e203] [cursor=pointer]
+                      - generic [ref=f8e212]:
+                        - generic [ref=f8e213]:
+                          - button "Wiedergabe ein-/ausschalten" [ref=f8e214] [cursor=pointer]
+                          - generic "Medienzeit" [ref=f8e217]:
+                            - generic [ref=f8e219] [cursor=pointer]
+                          - generic [ref=f8e222]:
+                            - generic [ref=f8e223]: 0:00
+                            - generic [ref=f8e224]: / 0:00
+                          - button "Untertitel ein/aus" [ref=f8e225] [cursor=pointer]
+                          - generic [ref=f8e229]:
+                            - button "Einstellungen" [ref=f8e230] [cursor=pointer]
+                            - generic:
+                              - button:
+                                - generic: Auto
+                          - button "Vollbild ein/aus" [ref=f8e233] [cursor=pointer]
+                        - button "Lautstärke umschalten" [ref=f8e239] [cursor=pointer]
+              - separator [ref=f8e243]
+              - region "Kommentare" [ref=f8e246]:
+                - heading "Kommentarbereich" [level=1] [ref=f8e247]
+                - article "Kommentar von GigaGrandpa vor 10 Tagen" [ref=f8e249]:
+                  - generic [ref=f8e250] [cursor=pointer]:
+                    - link "Profil von GigaGrandpa --- Avatar" [ref=f8e255]:
+                      - /url: https://www.reddit.com/user/GigaGrandpa/
+                      - img "Avatar von u/GigaGrandpa" [ref=f8e258]
+                    - generic [ref=f8e262]:
+                      - link "Profil von GigaGrandpa" [ref=f8e265]:
+                        - /url: https://www.reddit.com/user/GigaGrandpa/
+                        - text: GigaGrandpa
+                      - generic [ref=f8e266]: •
+                      - link [ref=f8e268]:
+                        - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0u4bnb/
+                        - time [ref=f8e270]: vor 10 Tagen
+                  - generic [ref=f8e272]:
+                    - paragraph [ref=f8e276]:
+                      - link "Sonnet" [ref=f8e279] [cursor=pointer]:
+                        - /url: /search/?q=Sonnet+Claude+AI+coding&cId=c1703c0e-4042-4842-a876-3f3ed41b16ed&iId=5fb1738c-aa6b-47cc-9061-ef3b91205bec
+                      - text: can code too :)
+                    - generic [ref=f8e283]: "5"
+                    - 'article "Kommentarthread-Level1: Antwort von jeanschoen vor 10 Tagen" [ref=f8e292]':
+                      - generic [ref=f8e293] [cursor=pointer]:
+                        - link "Profil von jeanschoen --- Avatar" [ref=f8e298]:
+                          - /url: https://www.reddit.com/user/jeanschoen/
+                        - generic [ref=f8e314]:
+                          - link "Profil von jeanschoen" [ref=f8e317]:
+                            - /url: https://www.reddit.com/user/jeanschoen/
+                            - text: jeanschoen
+                          - generic [ref=f8e318]: •
+                          - link [ref=f8e320]:
+                            - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0uur8p/
+                            - time [ref=f8e322]: vor 10 Tagen
+                      - generic [ref=f8e324]:
+                        - paragraph [ref=f8e328]: That's what Sonnet would say 🧐
+                        - generic [ref=f8e329]: "3"
+                        - 'article "Kommentarthread-Level2: Antwort von GigaGrandpa vor 10 Tagen" [ref=f8e338]':
+                          - generic [ref=f8e339] [cursor=pointer]:
+                            - link "Profil von GigaGrandpa --- Avatar" [ref=f8e344]:
+                              - /url: https://www.reddit.com/user/GigaGrandpa/
+                              - img "Avatar von u/GigaGrandpa" [ref=f8e347]
+                            - generic [ref=f8e351]:
+                              - link "Profil von GigaGrandpa" [ref=f8e354]:
+                                - /url: https://www.reddit.com/user/GigaGrandpa/
+                                - text: GigaGrandpa
+                              - generic [ref=f8e355]: •
+                              - link [ref=f8e357]:
+                                - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0uydvv/
+                                - time [ref=f8e359]: vor 10 Tagen
+                          - generic [ref=f8e361]:
+                            - paragraph [ref=f8e365]: "The smoking gun: AI can make mistakes too!"
+                            - generic [ref=f8e366]: "1"
+                - article "Kommentar von triolingo vor 10 Tagen" [ref=f8e374]:
+                  - generic [ref=f8e375] [cursor=pointer]:
+                    - link "Profil von triolingo --- Avatar" [ref=f8e380]:
+                      - /url: https://www.reddit.com/user/triolingo/
+                    - generic [ref=f8e390]:
+                      - link "Profil von triolingo" [ref=f8e393]:
+                        - /url: https://www.reddit.com/user/triolingo/
+                        - text: triolingo
+                      - generic [ref=f8e394]: •
+                      - link [ref=f8e396]:
+                        - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0u6rlz/
+                        - time [ref=f8e398]: vor 10 Tagen
+                  - generic [ref=f8e400]:
+                    - paragraph [ref=f8e404]: So if I'm working on a wide problem, lots of references, large context window necessary, but can't afford to use Fable, should I use Opus or Sonnet?
+                    - generic [ref=f8e405]: "3"
+                    - generic [ref=f8e412]:
+                      - 'article "Kommentarthread-Level1: Antwort von Vozu_ vor 10 Tagen" [ref=f8e414]':
+                        - generic [ref=f8e415] [cursor=pointer]:
+                          - link "Profil von Vozu_ --- Avatar" [ref=f8e420]:
+                            - /url: https://www.reddit.com/user/Vozu_/
+                            - img "Avatar von u/Vozu_" [ref=f8e423]
+                          - generic [ref=f8e427]:
+                            - link "Profil von Vozu_" [ref=f8e430]:
+                              - /url: https://www.reddit.com/user/Vozu_/
+                              - text: Vozu_
+                            - generic [ref=f8e431]: •
+                            - link [ref=f8e433]:
+                              - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0u7bk7/
+                              - time [ref=f8e435]: vor 10 Tagen
+                        - generic [ref=f8e437]:
+                          - paragraph [ref=f8e441]: Opus 4.8 works well there, Opus 5 will get lost in it. I personally recommend telling Fable to act as orchestrator and reasoning engine, but delegetate everything it can to Sonnet's and occassionally Opuses. It does not burn that much of its usage, and it can keep all of the subagents doing good work.
+                          - generic [ref=f8e442]: "3"
+                          - 'article "Kommentarthread-Level2: Antwort von Specific-College-194 vor 10 Tagen" [ref=f8e451]':
+                            - generic [ref=f8e452] [cursor=pointer]:
+                              - link "Profil von Specific-College-194 --- Avatar" [ref=f8e457]:
+                                - /url: https://www.reddit.com/user/Specific-College-194/
+                                - img "Avatar von u/Specific-College-194" [ref=f8e460]
+                              - generic [ref=f8e464]:
+                                - link "Profil von Specific-College-194" [ref=f8e467]:
+                                  - /url: https://www.reddit.com/user/Specific-College-194/
+                                  - text: Specific-College-194
+                                - generic [ref=f8e468]: •
+                                - link [ref=f8e470]:
+                                  - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0ufv8i/
+                                  - time [ref=f8e472]: vor 10 Tagen
+                            - generic [ref=f8e474]:
+                              - paragraph [ref=f8e478]: is there no documentation on what model to use and when?
+                              - generic [ref=f8e479]: "1"
+                              - button "1 weitere Antwort" [ref=f8e489] [cursor=pointer]:
+                                - generic [ref=f8e494]:
+                                  - generic [ref=f8e495]: "1"
+                                  - text: weitere Antwort
+                      - 'article "Kommentarthread-Level1: Antwort von Xaxaxa-9 vor 10 Tagen" [ref=f8e499]':
+                        - generic [ref=f8e500] [cursor=pointer]:
+                          - link "Profil von Xaxaxa-9 --- Avatar" [ref=f8e505]:
+                            - /url: https://www.reddit.com/user/Xaxaxa-9/
+                            - img "Avatar von u/Xaxaxa-9" [ref=f8e508]
+                          - generic [ref=f8e512]:
+                            - link "Profil von Xaxaxa-9" [ref=f8e515]:
+                              - /url: https://www.reddit.com/user/Xaxaxa-9/
+                              - text: Xaxaxa-9
+                            - generic [ref=f8e516]: •
+                            - link [ref=f8e518]:
+                              - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0vtssx/
+                              - time [ref=f8e520]: vor 10 Tagen
+                        - generic [ref=f8e522]:
+                          - paragraph [ref=f8e526]: You should only feel bad about not using Fable if you managed to create a task that's too tough for Opus. Most of the time, Opus is fine, and I should even use Sonnet more.
+                          - generic [ref=f8e527]: "1"
+                      - 'article "Kommentarthread-Level1: Antwort von MaybeNo2485 vor 10 Tagen" [ref=f8e535]':
+                        - generic [ref=f8e536] [cursor=pointer]:
+                          - link "Profil von MaybeNo2485 --- Avatar" [ref=f8e541]:
+                            - /url: https://www.reddit.com/user/MaybeNo2485/
+                          - generic [ref=f8e551]:
+                            - link "Profil von MaybeNo2485" [ref=f8e554]:
+                              - /url: https://www.reddit.com/user/MaybeNo2485/
+                              - text: MaybeNo2485
+                            - generic [ref=f8e555]: •
+                            - link [ref=f8e557]:
+                              - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0ufgal/
+                              - time [ref=f8e559]: vor 10 Tagen
+                        - generic [ref=f8e561]:
+                          - generic [ref=f8e564]:
+                            - paragraph [ref=f8e565]: Honestly, for the kind of task you're describing, GPT 5.6 Sol is the one to reach for when Fable isn't available. Fable's still better overall; though Sol is legitimately impressive on broad, ambitious, subtle, or complex work, and it handles that better than any version of Opus.
+                            - paragraph [ref=f8e566]: You also get an excellent amount of usage out of it, even on the cheaper subscription tiers. If you're trying to maximize what you can get done with top-tier models while keeping costs manageable, adding Sol to your workflow will let you go a lot further without dumping money into Fable API costs.
+                          - generic [ref=f8e567]: "1"
+                          - 'article "Kommentarthread-Level2: Antwort von IllustriousWedding94 vor 10 Tagen" [ref=f8e576]':
+                            - generic [ref=f8e577] [cursor=pointer]:
+                              - link "Profil von IllustriousWedding94 --- Avatar" [ref=f8e582]:
+                                - /url: https://www.reddit.com/user/IllustriousWedding94/
+                                - img "Avatar von u/IllustriousWedding94" [ref=f8e585]
+                              - generic [ref=f8e589]:
+                                - link "Profil von IllustriousWedding94" [ref=f8e592]:
+                                  - /url: https://www.reddit.com/user/IllustriousWedding94/
+                                  - text: IllustriousWedding94
+                                - generic [ref=f8e593]: •
+                                - link [ref=f8e595]:
+                                  - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0uu7ws/
+                                  - time [ref=f8e597]: vor 10 Tagen
+                            - generic [ref=f8e599]:
+                              - generic [ref=f8e602]:
+                                - paragraph [ref=f8e603]: Totally agree and just wrote similar. Matching a chatgpt subscription to a Claude one is better bang for buck.
+                                - paragraph [ref=f8e604]: I have Claude Max 20x (£200) and GPT pro 5x (£89). There may come a time when I could drop Claude back to 5x.
+                              - generic [ref=f8e605]: "1"
+                - article "Kommentar von Chrolm vor 10 Tagen" [ref=f8e613]:
+                  - generic [ref=f8e614] [cursor=pointer]:
+                    - link "Profil von Chrolm --- Avatar" [ref=f8e619]:
+                      - /url: https://www.reddit.com/user/Chrolm/
+                    - generic [ref=f8e629]:
+                      - link "Profil von Chrolm" [ref=f8e632]:
+                        - /url: https://www.reddit.com/user/Chrolm/
+                        - text: Chrolm
+                      - generic [ref=f8e633]: •
+                      - link [ref=f8e635]:
+                        - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0ufiiz/
+                        - time [ref=f8e637]: vor 10 Tagen
+                  - generic [ref=f8e639]:
+                    - paragraph [ref=f8e643]: That mirrors my experience. Fable 5 is not awesome when the problem gets small. Needed a formula fixed in sheets. Took it 12 minutes to come up with the wrong solution. 😮 But give it a big job with lots of components, and it's fantastic.
+                    - generic [ref=f8e644]: "1"
+                - generic "Alle im Blick. Immer. - Telefonie-App mit Live-Status, AI & CRM-Anbindung." [ref=f8e653]:
+                  - generic [ref=f8e654]:
+                    - 'generic "Advertisement: Alle im Blick. Immer. - Telefonie-App mit Live-Status, AI & CRM-Anbindung." [ref=f8e655]':
+                      - 'link "Advertisement: Alle im Blick. Immer. - Telefonie-App mit Live-Status, AI & CRM-Anbindung." [ref=f8e656] [cursor=pointer]':
+                        - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=TqJWVuWWtzoNOxqOqv1WZ_ebrkC5Qf-jJtLmkPbygRQaSVFk94cHEYy33E1f8aBJoVX_GH8ZQ4zH5ruKXjXvAov0GSycDe2u4HcHseC7nKniNwT0ObW71BsAGcoSjsF3ZVHhKNlIpL8cEDyeCMdPYz4-p2J8c_DG8Jflbir8iC0skNeKVETimnBd0MhETG6wcw0aG6-e36Vw5Y4TSDEb4K0KC6Wjb8SXLIfH8rrwnAh1_YfeoEeeMQXfWgfiX869UyIcZyWF7b3YFFM9STmdJLgl5jxb8iJQpKwRKvDf7ZbE6Ih3HnJelovncSNmWp0Ql97qfOZtadAP2146AOg8KIAMN4RUki8HID_HhU0fUQHb
+                    - generic [ref=f8e657]:
+                      - generic [ref=f8e658]:
+                        - link "u/sipgateDE" [ref=f8e660] [cursor=pointer]:
+                          - /url: /user/sipgateDE/
+                          - img "Avatar von u/sipgateDE" [ref=f8e663]
+                        - generic [ref=f8e665]: •
+                        - link "Gesponsert" [ref=f8e667] [cursor=pointer]:
+                          - /url: /user/sipgateDE/
+                        - link [ref=f8e670] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=TqJWVuWWtzoNOxqOqv1WZ_ebrkC5Qf-jJtLmkPbygRQaSVFk94cHEYy33E1f8aBJoVX_GH8ZQ4zH5ruKXjXvAov0GSycDe2u4HcHseC7nKniNwT0ObW71BsAGcoSjsF3ZVHhKNlIpL8cEDyeCMdPYz4-p2J8c_DG8Jflbir8iC0skNeKVETimnBd0MhETG6wcw0aG6-e36Vw5Y4TSDEb4K0KC6Wjb8SXLIfH8rrwnAh1_YfeoEeeMQXfWgfiX869UyIcZyWF7b3YFFM9STmdJLgl5jxb8iJQpKwRKvDf7ZbE6Ih3HnJelovncSNmWp0Ql97qfOZtadAP2146AOg8KIAMN4RUki8HID_HhU0fUQHb
+                      - button "Handlungen für Nutzer*innen öffnen" [ref=f8e676] [cursor=pointer]
+                    - generic [ref=f8e681]:
+                      - link "Alle im Blick. Immer. - Telefonie-App mit Live-Status, AI & CRM-Anbindung." [ref=f8e683] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=TqJWVuWWtzoNOxqOqv1WZ_ebrkC5Qf-jJtLmkPbygRQaSVFk94cHEYy33E1f8aBJoVX_GH8ZQ4zH5ruKXjXvAov0GSycDe2u4HcHseC7nKniNwT0ObW71BsAGcoSjsF3ZVHhKNlIpL8cEDyeCMdPYz4-p2J8c_DG8Jflbir8iC0skNeKVETimnBd0MhETG6wcw0aG6-e36Vw5Y4TSDEb4K0KC6Wjb8SXLIfH8rrwnAh1_YfeoEeeMQXfWgfiX869UyIcZyWF7b3YFFM9STmdJLgl5jxb8iJQpKwRKvDf7ZbE6Ih3HnJelovncSNmWp0Ql97qfOZtadAP2146AOg8KIAMN4RUki8HID_HhU0fUQHb
+                      - list [ref=f8e687]:
+                        - generic:
+                          - listitem [ref=f8e688]:
+                            - generic [ref=f8e689]:
+                              - link [ref=f8e691] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=TqJWVuWWtzoNOxqOqv1WZ_ebrkC5Qf-jJtLmkPbygRQaSVFk94cHEYy33E1f8aBJoVX_GH8ZQ4zH5ruKXjXvAov0GSycDe2u4HcHseC7nKniNwT0ObW71BsAGcoSjsF3ZVHhKNlIpL8cEDyeCMdPYz4-p2J8c_DG8Jflbir8iC0skNeKVETimnBd0MhETG6wcw0aG6-e36Vw5Y4TSDEb4K0KC6Wjb8SXLIfH8rrwnAh1_YfeoEeeMQXfWgfiX869UyIcZyWF7b3YFFM9STmdJLgl5jxb8iJQpKwRKvDf7ZbE6Ih3HnJelovncSNmWp0Ql97qfOZtadAP2146AOg8KIAMN4RUki8HID_HhU0fUQHb
+                              - link [ref=f8e693] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=TqJWVuWWtzoNOxqOqv1WZ_ebrkC5Qf-jJtLmkPbygRQaSVFk94cHEYy33E1f8aBJoVX_GH8ZQ4zH5ruKXjXvAov0GSycDe2u4HcHseC7nKniNwT0ObW71BsAGcoSjsF3ZVHhKNlIpL8cEDyeCMdPYz4-p2J8c_DG8Jflbir8iC0skNeKVETimnBd0MhETG6wcw0aG6-e36Vw5Y4TSDEb4K0KC6Wjb8SXLIfH8rrwnAh1_YfeoEeeMQXfWgfiX869UyIcZyWF7b3YFFM9STmdJLgl5jxb8iJQpKwRKvDf7ZbE6Ih3HnJelovncSNmWp0Ql97qfOZtadAP2146AOg8KIAMN4RUki8HID_HhU0fUQHb
+                                - img "Alle im Blick. Immer. - Telefonie-App mit Live-Status, AI & CRM-Anbindung." [ref=f8e694]
+                          - listitem [ref=f8e695]:
+                            - generic [ref=f8e696]:
+                              - link [ref=f8e698] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=htgKl4p9N7cwqegpXFsFGzQAQkkaAc-LCLrWnotNp7iAkAtay9S5Anc8qwqaZYlOfauMfQOXHF501gxX2v11gYPlVLoMdHB4wg0LN4Qdh6tEHCSErOZUAvEUz533z1PM8rod90Tm0lwIXiRg6Fe2wMFqQ9dvCcZtWv5K5Kjcj0so12zs-FAeZeoEhZTMxGJ6nkUarFJWYGX7xyXCiVs4cqEchXMS_MArbE_KyAPzl8MYv7r1jM-otaeNGUxfFhS4KsTp0srZckT52xaReB9eroiV_imFEJHI95UyJSfu5flupxA23nJg84JWWh2_t3lscOIXA2nmLkojDqOAUl4AyUy89F00XqSv3atKp1CaQ3uy
+                              - link [ref=f8e700] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=htgKl4p9N7cwqegpXFsFGzQAQkkaAc-LCLrWnotNp7iAkAtay9S5Anc8qwqaZYlOfauMfQOXHF501gxX2v11gYPlVLoMdHB4wg0LN4Qdh6tEHCSErOZUAvEUz533z1PM8rod90Tm0lwIXiRg6Fe2wMFqQ9dvCcZtWv5K5Kjcj0so12zs-FAeZeoEhZTMxGJ6nkUarFJWYGX7xyXCiVs4cqEchXMS_MArbE_KyAPzl8MYv7r1jM-otaeNGUxfFhS4KsTp0srZckT52xaReB9eroiV_imFEJHI95UyJSfu5flupxA23nJg84JWWh2_t3lscOIXA2nmLkojDqOAUl4AyUy89F00XqSv3atKp1CaQ3uy
+                                - img "Alle im Blick. Immer. - Telefonie-App mit Live-Status, AI & CRM-Anbindung." [ref=f8e701]
+                          - listitem [ref=f8e702]:
+                            - generic [ref=f8e703]:
+                              - link [ref=f8e705] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=Jk3UK669y2mY9JBftydP3JrBZbVVl6SD1rECWWN7yMYvPH1AFY-nv3VbYoIKmugDO9lWlL0VHvG4td_vta3omhgYKEMWosysyIQGhDrou_Au03ezcE0yzA8AtYWxpahmaRa0FOdWA4NA_dhsB3GcmZXKgRD6iC3tNV81tJrgD_z8fI29zqfqfxL0Rf4kFV_wCO4uB-tOIsNs0vWiZFEhEglsoNxwTjUwGMr43Q82eBx81YK3cRM6kxJ8KsxYTIJBRfv0VPFfOdgvjciHKIWNvg4ZhEN7wREEUVGcBqj9agktA7_2Zmp2re0tFd6sD9kQMyKDZTv_UiNQWVgx6ky1VCLf5-pZnRuOHIqTNW6cQ2X9
+                              - link [ref=f8e707] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=Jk3UK669y2mY9JBftydP3JrBZbVVl6SD1rECWWN7yMYvPH1AFY-nv3VbYoIKmugDO9lWlL0VHvG4td_vta3omhgYKEMWosysyIQGhDrou_Au03ezcE0yzA8AtYWxpahmaRa0FOdWA4NA_dhsB3GcmZXKgRD6iC3tNV81tJrgD_z8fI29zqfqfxL0Rf4kFV_wCO4uB-tOIsNs0vWiZFEhEglsoNxwTjUwGMr43Q82eBx81YK3cRM6kxJ8KsxYTIJBRfv0VPFfOdgvjciHKIWNvg4ZhEN7wREEUVGcBqj9agktA7_2Zmp2re0tFd6sD9kQMyKDZTv_UiNQWVgx6ky1VCLf5-pZnRuOHIqTNW6cQ2X9
+                                - img "Alle im Blick. Immer. - Telefonie-App mit Live-Status, AI & CRM-Anbindung." [ref=f8e708]
+                          - listitem [ref=f8e709]:
+                            - generic [ref=f8e710]:
+                              - link [ref=f8e712] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=ihGCeyw5LyMQsInGkUyN5DM0FA7fHZWm60qUOP96E3FAD-M_6Tea7EXVtNe_dQ0aM8tKzmue2NyoaWpKfekEWlDussZ0KBLQa-Af3hU-p1QCAGWahsNhjpylpC-VQBlIrMnduA5Z34lOZlRmKa8n2OrDK5IeXmm7XPpNxOXawAPlXmQvFoUS96ekT-P0zw_oPEGJK2O0n23pfmxja3UEkXTQ0G-e7k4eh5H7xucuDuxlys7jN85NXAlG5-l7ewjY53eLoF8MhJZ3arSBcURNWKTH1Ku9tJG9XXGpxWgnmsGYNfB9xdJIH33GfrHacU6GdiPj3CnbyFiirKGQGyPcUFEuEIvnPbl3BV5qbKkkCGeX
+                              - link [ref=f8e714] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=ihGCeyw5LyMQsInGkUyN5DM0FA7fHZWm60qUOP96E3FAD-M_6Tea7EXVtNe_dQ0aM8tKzmue2NyoaWpKfekEWlDussZ0KBLQa-Af3hU-p1QCAGWahsNhjpylpC-VQBlIrMnduA5Z34lOZlRmKa8n2OrDK5IeXmm7XPpNxOXawAPlXmQvFoUS96ekT-P0zw_oPEGJK2O0n23pfmxja3UEkXTQ0G-e7k4eh5H7xucuDuxlys7jN85NXAlG5-l7ewjY53eLoF8MhJZ3arSBcURNWKTH1Ku9tJG9XXGpxWgnmsGYNfB9xdJIH33GfrHacU6GdiPj3CnbyFiirKGQGyPcUFEuEIvnPbl3BV5qbKkkCGeX
+                                - img "Alle im Blick. Immer. - Telefonie-App mit Live-Status, AI & CRM-Anbindung." [ref=f8e715]
+                      - generic [ref=f8e716]:
+                        - link [ref=f8e718] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=TqJWVuWWtzoNOxqOqv1WZ_ebrkC5Qf-jJtLmkPbygRQaSVFk94cHEYy33E1f8aBJoVX_GH8ZQ4zH5ruKXjXvAov0GSycDe2u4HcHseC7nKniNwT0ObW71BsAGcoSjsF3ZVHhKNlIpL8cEDyeCMdPYz4-p2J8c_DG8Jflbir8iC0skNeKVETimnBd0MhETG6wcw0aG6-e36Vw5Y4TSDEb4K0KC6Wjb8SXLIfH8rrwnAh1_YfeoEeeMQXfWgfiX869UyIcZyWF7b3YFFM9STmdJLgl5jxb8iJQpKwRKvDf7ZbE6Ih3HnJelovncSNmWp0Ql97qfOZtadAP2146AOg8KIAMN4RUki8HID_HhU0fUQHb
+                        - generic [ref=f8e719]:
+                          - link "sipgate.de" [ref=f8e723] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=TqJWVuWWtzoNOxqOqv1WZ_ebrkC5Qf-jJtLmkPbygRQaSVFk94cHEYy33E1f8aBJoVX_GH8ZQ4zH5ruKXjXvAov0GSycDe2u4HcHseC7nKniNwT0ObW71BsAGcoSjsF3ZVHhKNlIpL8cEDyeCMdPYz4-p2J8c_DG8Jflbir8iC0skNeKVETimnBd0MhETG6wcw0aG6-e36Vw5Y4TSDEb4K0KC6Wjb8SXLIfH8rrwnAh1_YfeoEeeMQXfWgfiX869UyIcZyWF7b3YFFM9STmdJLgl5jxb8iJQpKwRKvDf7ZbE6Ih3HnJelovncSNmWp0Ql97qfOZtadAP2146AOg8KIAMN4RUki8HID_HhU0fUQHb
+                          - link "Mehr anzeigen" [ref=f8e725] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=wW1fEaYTOudoOEXu0YyDhWDcLknwijX_p7IIf0ZUnkKsotGJefQfCjfdmR26WvJV9_Vd4bzypUc-NCrXTGv02lGMnBPgrbUzHY8o455FK5Ugegrm0H_vORFTO_ru0fUQxbeYNYJ2EF3q4JPNy5b7nn7E-VEdxZazw0kwl5cwmxyXHa7g-mZkDhZjh3pQ0b6vWegVKG8Z96eOsfKAYovEQlsCkVEJaqxJRfAnq4sRLfjrLsHVfZir6QzIUyoeQVxqQ253VNDc-qXc5l19T3s-640lxsjVXh3peldUL0k6Xwk4s0oTMsQBI1ZknDf1u-F2CruRsbxCZlnn2dKBBI22LtgUjnFpNJb4oJWybXxdPq336KWacvZ17DVVt_UUzxPesGoldiRBPbgHfxrpBlDwIpZGpDNsPn-KcsN6nfxYXmfTfN1wDuu5mvvUmFRVCHk8Y4v6QAR6-MtulbwUV-6IoH8OIoS3y9hxWMnXfYEMMEdJggGDGLTB2gQ4YNg7DkH4zP1mJQ23piREIfFzMWBjz-UfcrUBJFKgcKWZBG_VUxDCSXYcMuJj-j0stbXvfzaQDuq82s1qcqLVCWmb2gq4fAoaUeyW1nq6VWfeHmJziA_fxhSE9F4KPJLWDW6jwiGVlufeBhy82-V_T0OYl9jkPFzxe4u8woBrXs2yk4ikfoY&zp=TqJWVuWWtzoNOxqOqv1WZ_ebrkC5Qf-jJtLmkPbygRQaSVFk94cHEYy33E1f8aBJoVX_GH8ZQ4zH5ruKXjXvAov0GSycDe2u4HcHseC7nKniNwT0ObW71BsAGcoSjsF3ZVHhKNlIpL8cEDyeCMdPYz4-p2J8c_DG8Jflbir8iC0skNeKVETimnBd0MhETG6wcw0aG6-e36Vw5Y4TSDEb4K0KC6Wjb8SXLIfH8rrwnAh1_YfeoEeeMQXfWgfiX869UyIcZyWF7b3YFFM9STmdJLgl5jxb8iJQpKwRKvDf7ZbE6Ih3HnJelovncSNmWp0Ql97qfOZtadAP2146AOg8KIAMN4RUki8HID_HhU0fUQHb
+                - article "Kommentar von Beginning-Raisin9723 vor 10 Tagen" [ref=f8e729]:
+                  - generic [ref=f8e730] [cursor=pointer]:
+                    - link "Profil von Beginning-Raisin9723 --- Avatar" [ref=f8e735]:
+                      - /url: https://www.reddit.com/user/Beginning-Raisin9723/
+                      - img "Avatar von u/Beginning-Raisin9723" [ref=f8e738]
+                    - generic [ref=f8e742]:
+                      - link "Profil von Beginning-Raisin9723" [ref=f8e745]:
+                        - /url: https://www.reddit.com/user/Beginning-Raisin9723/
+                        - text: Beginning-Raisin9723
+                      - generic [ref=f8e746]: •
+                      - link [ref=f8e748]:
+                        - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0uipnm/
+                        - time [ref=f8e750]: vor 10 Tagen
+                  - generic [ref=f8e752]:
+                    - paragraph [ref=f8e756]: "Funny how the whole ladder framing falls apart once you actually time your own work. I split it the same way now: Opus for the narrow stuff, Fable when the scope spreads across files, Sonnet for the mechanical. The real win was just stopping the reflex to grab the biggest model for everything."
+                    - generic [ref=f8e757]: "1"
+                - article "Kommentar von IllustriousWedding94 vor 10 Tagen" [ref=f8e765]:
+                  - generic [ref=f8e766] [cursor=pointer]:
+                    - link "Profil von IllustriousWedding94 --- Avatar" [ref=f8e771]:
+                      - /url: https://www.reddit.com/user/IllustriousWedding94/
+                      - img "Avatar von u/IllustriousWedding94" [ref=f8e774]
+                    - generic [ref=f8e778]:
+                      - link "Profil von IllustriousWedding94" [ref=f8e781]:
+                        - /url: https://www.reddit.com/user/IllustriousWedding94/
+                        - text: IllustriousWedding94
+                      - generic [ref=f8e782]: •
+                      - link [ref=f8e784]:
+                        - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0utbh2/
+                        - time [ref=f8e786]: vor 10 Tagen
+                  - generic [ref=f8e788]:
+                    - generic [ref=f8e791]:
+                      - paragraph [ref=f8e792]: I think a better model is Fable 5 and GPT 5.6 Sol. I let Fable delegate tasks within a build session to lower models such as Sonnet and Opus, but would rather use 5.6 Sol on an Opus hand-off if looking to running a new session to conserve Fable usage.
+                      - paragraph [ref=f8e793]: Everything is architected around either product executing the work.
+                      - paragraph [ref=f8e794]: I blew through 43% of my weekly Fable allowance (Max 20x) on day 1 of my week yesterday, so this morning 5.6 Sol is working through the next batches that Fable had lined up last night.
+                    - generic [ref=f8e795]: "1"
+                - article "Kommentar von msedek vor 10 Tagen" [ref=f8e803]:
+                  - generic [ref=f8e804] [cursor=pointer]:
+                    - link "Profil von msedek --- Avatar" [ref=f8e809]:
+                      - /url: https://www.reddit.com/user/msedek/
+                    - generic [ref=f8e819]:
+                      - link "Profil von msedek" [ref=f8e822]:
+                        - /url: https://www.reddit.com/user/msedek/
+                        - text: msedek
+                      - generic [ref=f8e823]: •
+                      - link [ref=f8e825]:
+                        - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0uzr08/
+                        - time [ref=f8e827]: vor 10 Tagen
+                  - generic [ref=f8e829]:
+                    - generic [ref=f8e832]:
+                      - paragraph [ref=f8e833]: I csncelled my max plan on July 12th when they were removing fable, subbed to gpt and then they released opus 5 and paid another max to test..
+                      - paragraph [ref=f8e834]: I'm renewing my gpt on August 12th and not renewing Claude lol.. I like fable don't get me wrong but I don't like the constant scarcity feeling that comes with it and opus 5 is not much better (if not worst) than 4.8 and Sol 5.6 is milles ahead any opus
+                    - generic [ref=f8e835]: "1"
+                - article "Kommentar von ynotelbon vor 10 Tagen" [ref=f8e843]:
+                  - generic [ref=f8e844] [cursor=pointer]:
+                    - link "Profil von ynotelbon --- Avatar" [ref=f8e849]:
+                      - /url: https://www.reddit.com/user/ynotelbon/
+                    - generic [ref=f8e859]:
+                      - link "Profil von ynotelbon" [ref=f8e862]:
+                        - /url: https://www.reddit.com/user/ynotelbon/
+                        - text: ynotelbon
+                      - generic [ref=f8e863]: •
+                      - link [ref=f8e865]:
+                        - /url: https://www.reddit.com/r/ClaudeAI/comments/1vbkzxq/comment/p0v3pk1/
+                        - time [ref=f8e867]: vor 10 Tagen
+                  - generic [ref=f8e869]:
+                    - paragraph [ref=f8e873]: I literally have a soft ban on Fable writing any code. Been using it all week to coordinate and orchestrate and only at 50% usage. Meanwhile I have 5 long running agents that run just fine on O5 - if they treat mistakes as recoverable and finding them is an easter egg hunt. Otherwise they thrash. And GPT Sol is in the mix too, but more like a cuck in a chair broadcasting critical observations while it watches.
+                    - generic [ref=f8e874]: "1"
+            - generic [ref=f8e881]:
+              - generic [ref=f8e882]:
+                - complementary "Die Leute fragen auch nach dem Abschnitt" [ref=f8e884]:
+                  - heading "Die Leute fragen auch nach dem Abschnitt" [level=1] [ref=f8e885]
+                  - generic [ref=f8e886]: Die Leute fragen auch nach …
+                  - generic [ref=f8e891]:
+                    - link "Comparison of Fable 5 and Opus 5 features" [ref=f8e893] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/ffc5bde3-f1e4-47dd-996b-94d580ddb434/?q=Comparison+of+Fable+5+and+Opus+5+features&source=PDP&ep=pdp_unit&relatedPostId=t3_1vbkzxq
+                    - link "Best use cases for Fable 5 and Opus 5" [ref=f8e902] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/1f939703-e05f-4569-9f55-8f0191e5cc8a/?q=Best+use+cases+for+Fable+5+and+Opus+5&source=PDP&ep=pdp_unit&relatedPostId=t3_1vbkzxq
+                    - link "Fable 5 model API details" [ref=f8e911] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/2a5d4686-24dc-4cff-b18d-4d195268a2d1/?q=Fable+5+model+API+details&source=PDP&ep=pdp_unit&relatedPostId=t3_1vbkzxq
+                    - link "Understanding Fable 5 usage credits" [ref=f8e920] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/cb83b159-6a2d-4c92-8ad4-904b1b88bfb2/?q=Understanding+Fable+5+usage+credits&source=PDP&ep=pdp_unit&relatedPostId=t3_1vbkzxq
+                    - link "Best use cases for ClaudeAI in business" [ref=f8e929] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/61d907a0-e29b-49b3-afa8-5d7c266030af/?q=Best+use+cases+for+ClaudeAI+in+business&source=PDP&ep=pdp_unit&relatedPostId=t3_1vbkzxq
+                - complementary "Abschnitt „Ähnliche Beiträge“" [ref=f8e937]:
+                  - heading "Abschnitt „Ähnliche Beiträge“" [level=1] [ref=f8e938]: Weitere Beiträge, die dir gefallen könnten
+                  - generic [ref=f8e939]: Ähnliche Beiträge
+                  - list [ref=f8e945]:
+                    - listitem [ref=f8e946]:
+                      - generic [ref=f8e947]:
+                        - generic [ref=f8e948]:
+                          - link "Opus 5 vs Fable 5" [ref=f8e949] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/WritingWithAI/comments/1v7baxo/opus_5_vs_fable_5/
+                          - generic [ref=f8e952]:
+                            - generic [ref=f8e954]:
+                              - link "r/WritingWithAI" [ref=f8e955] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/WritingWithAI/
+                              - generic [ref=f8e960]: •
+                              - time [ref=f8e962]: vor 15 Tagen
+                            - link [ref=f8e964] [cursor=pointer]:
+                              - /url: /r/WritingWithAI/comments/1v7baxo/opus_5_vs_fable_5/
+                              - heading "Listenelementbeitrag – Opus 5 vs Fable 5" [level=3] [ref=f8e967]: Opus 5 vs Fable 5
+                          - generic [ref=f8e969]:
+                            - generic [ref=f8e970]: "17"
+                            - text: Upvotes ·
+                            - generic [ref=f8e971]: "16"
+                            - text: Kommentare
+                        - separator [ref=f8e972]
+                    - listitem [ref=f8e973]:
+                      - generic [ref=f8e975]:
+                        - generic:
+                          - 'generic "Advertisement: Spiele zwischen 6. und 12. August GTA Online und erhalte 1.000.000GTA$ als Bonus." [ref=f8e976]':
+                            - 'link "Advertisement: Spiele zwischen 6. und 12. August GTA Online und erhalte 1.000.000GTA$ als Bonus." [ref=f8e977] [cursor=pointer]':
+                              - /url: https://alb.reddit.com/cr?za=mfkcvrqRE_-OqYj_PmEAcd0NgMlf77Jie6MlzIwqSUjcGs1C3o8JVCeX0Z7L3vx7xKQFkAW9XIiHm3ea9ePxUcIY-pTPE4QrWkA6cg1Z5bELbL5ckxghTqqKoyx-spypQpOZ9nOWSQd_Xp9HQFlclO0mw8gidkLQDT8qPh7w6JpK1VXYRBvvNb4AEf0wZydfw9spH1H9wtfZS9yy7oT7G6RToEncSTRi3YvGrKQNLxM_meF0pMFN2gjTNbYjAJlNsTxmxHSSIHZmYrbc5wNLITAHAnzsc16nJ2c1ANppy9xPhI5XuTlJiI1brfs93LzmBb7UWyp7_jJ9uJIuP9x6kUNJU7_Bmh3SCniklPOxuKyM8VOfi4LlukrOk9VhJ4rzun4sHfUVkJtNn7FfFosTUZ9IFIuJgwhoMlP_czUliT7LWctBm6OsGoQkYW2Q53vN93-MO-cVALyjxJlEiHNLzLN0SsxNp9QniiMcyESBDZlk19ufU99HUnX8q7_j8uU3s1Wy9EAPxrlSlpO4eGAogBUTG_pc7TCB7FKREQKsu0inAtM_GvJhhU-QQDI_71c3BWnPwKIfC9OvcwdutzjeeT_UFfBX_CbQqoardinCpI0yijuJFBdeUP-ttcgjWGj5MkbuHNIqrII_0cf1-WdXEA&zp=5ik1Phy5OO4zqBhFa26gnzQdbHTUdyPZeNXAo2WDRVBZ3XbJWelDCIafiC5uQ35JLfMAlklI-dAB-3Tb6I9lSXcjtbMdnRRMc_eKXGg6NpZEtNoKPRMDkbEyWjQcY3DEJUAYZPzzn9UX9NqiSUEC-zNHGBH3QvsY67_B8F9j_znhipI-dRlo6ccHTKJ75K5i0X97XBRLuRVlNIpVEqd2pvHk9hypbj-dwESNo-MzOOOfspZ5uvSWpDsxwXI4M-Na_cCndGk3Auhcau7s3Xe1afR_7_5vph55Q6g0QRknzQifiIh7PWvDceo5CalgtSHRIS9EbbZk2TWkdAMpwqlZCVfyhYjXo3AMieZWJuiJdT2eaoqNo3mE01b7EAh6hrIgSWF_vD_MHHKnRGaF4TVXFNfVy02Vou884oQTNbcRtPN7ELjS6EMCrWsqvL1ERwX_IA8RmX7_LOmPZ2zsayT3J-zhUa7lbBGS5HqUm34ZX0nPK8gy5_qDKKU1S2kkPaego0kei1Elnvg
+                          - generic [ref=f8e978]:
+                            - generic [ref=f8e979]:
+                              - generic [ref=f8e980]:
+                                - generic [ref=f8e981]:
+                                  - generic [ref=f8e982]:
+                                    - link "Avatar von u/RockstarGames_ RockstarGames_" [ref=f8e984] [cursor=pointer]:
+                                      - /url: /user/RockstarGames_/
+                                      - img "Avatar von u/RockstarGames_" [ref=f8e987]
+                                      - generic [ref=f8e988]: RockstarGames_
+                                    - generic [ref=f8e989]: •
+                                    - link "Gesponsert" [ref=f8e991] [cursor=pointer]:
+                                      - /url: /user/RockstarGames_/
+                                    - generic:
+                                      - link:
+                                        - /url: https://alb.reddit.com/cr?za=mfkcvrqRE_-OqYj_PmEAcd0NgMlf77Jie6MlzIwqSUjcGs1C3o8JVCeX0Z7L3vx7xKQFkAW9XIiHm3ea9ePxUcIY-pTPE4QrWkA6cg1Z5bELbL5ckxghTqqKoyx-spypQpOZ9nOWSQd_Xp9HQFlclO0mw8gidkLQDT8qPh7w6JpK1VXYRBvvNb4AEf0wZydfw9spH1H9wtfZS9yy7oT7G6RToEncSTRi3YvGrKQNLxM_meF0pMFN2gjTNbYjAJlNsTxmxHSSIHZmYrbc5wNLITAHAnzsc16nJ2c1ANppy9xPhI5XuTlJiI1brfs93LzmBb7UWyp7_jJ9uJIuP9x6kUNJU7_Bmh3SCniklPOxuKyM8VOfi4LlukrOk9VhJ4rzun4sHfUVkJtNn7FfFosTUZ9IFIuJgwhoMlP_czUliT7LWctBm6OsGoQkYW2Q53vN93-MO-cVALyjxJlEiHNLzLN0SsxNp9QniiMcyESBDZlk19ufU99HUnX8q7_j8uU3s1Wy9EAPxrlSlpO4eGAogBUTG_pc7TCB7FKREQKsu0inAtM_GvJhhU-QQDI_71c3BWnPwKIfC9OvcwdutzjeeT_UFfBX_CbQqoardinCpI0yijuJFBdeUP-ttcgjWGj5MkbuHNIqrII_0cf1-WdXEA&zp=5ik1Phy5OO4zqBhFa26gnzQdbHTUdyPZeNXAo2WDRVBZ3XbJWelDCIafiC5uQ35JLfMAlklI-dAB-3Tb6I9lSXcjtbMdnRRMc_eKXGg6NpZEtNoKPRMDkbEyWjQcY3DEJUAYZPzzn9UX9NqiSUEC-zNHGBH3QvsY67_B8F9j_znhipI-dRlo6ccHTKJ75K5i0X97XBRLuRVlNIpVEqd2pvHk9hypbj-dwESNo-MzOOOfspZ5uvSWpDsxwXI4M-Na_cCndGk3Auhcau7s3Xe1afR_7_5vph55Q6g0QRknzQifiIh7PWvDceo5CalgtSHRIS9EbbZk2TWkdAMpwqlZCVfyhYjXo3AMieZWJuiJdT2eaoqNo3mE01b7EAh6hrIgSWF_vD_MHHKnRGaF4TVXFNfVy02Vou884oQTNbcRtPN7ELjS6EMCrWsqvL1ERwX_IA8RmX7_LOmPZ2zsayT3J-zhUa7lbBGS5HqUm34ZX0nPK8gy5_qDKKU1S2kkPaego0kei1Elnvg
+                                  - button "Handlungen für Nutzer*innen öffnen" [ref=f8e998] [cursor=pointer]
+                                - link "Spiele zwischen 6. und 12. August GTA Online und erhalte 1.000.000GTA$ als Bonus." [ref=f8e1005] [cursor=pointer]:
+                                  - /url: https://alb.reddit.com/cr?za=mfkcvrqRE_-OqYj_PmEAcd0NgMlf77Jie6MlzIwqSUjcGs1C3o8JVCeX0Z7L3vx7xKQFkAW9XIiHm3ea9ePxUcIY-pTPE4QrWkA6cg1Z5bELbL5ckxghTqqKoyx-spypQpOZ9nOWSQd_Xp9HQFlclO0mw8gidkLQDT8qPh7w6JpK1VXYRBvvNb4AEf0wZydfw9spH1H9wtfZS9yy7oT7G6RToEncSTRi3YvGrKQNLxM_meF0pMFN2gjTNbYjAJlNsTxmxHSSIHZmYrbc5wNLITAHAnzsc16nJ2c1ANppy9xPhI5XuTlJiI1brfs93LzmBb7UWyp7_jJ9uJIuP9x6kUNJU7_Bmh3SCniklPOxuKyM8VOfi4LlukrOk9VhJ4rzun4sHfUVkJtNn7FfFosTUZ9IFIuJgwhoMlP_czUliT7LWctBm6OsGoQkYW2Q53vN93-MO-cVALyjxJlEiHNLzLN0SsxNp9QniiMcyESBDZlk19ufU99HUnX8q7_j8uU3s1Wy9EAPxrlSlpO4eGAogBUTG_pc7TCB7FKREQKsu0inAtM_GvJhhU-QQDI_71c3BWnPwKIfC9OvcwdutzjeeT_UFfBX_CbQqoardinCpI0yijuJFBdeUP-ttcgjWGj5MkbuHNIqrII_0cf1-WdXEA&zp=5ik1Phy5OO4zqBhFa26gnzQdbHTUdyPZeNXAo2WDRVBZ3XbJWelDCIafiC5uQ35JLfMAlklI-dAB-3Tb6I9lSXcjtbMdnRRMc_eKXGg6NpZEtNoKPRMDkbEyWjQcY3DEJUAYZPzzn9UX9NqiSUEC-zNHGBH3QvsY67_B8F9j_znhipI-dRlo6ccHTKJ75K5i0X97XBRLuRVlNIpVEqd2pvHk9hypbj-dwESNo-MzOOOfspZ5uvSWpDsxwXI4M-Na_cCndGk3Auhcau7s3Xe1afR_7_5vph55Q6g0QRknzQifiIh7PWvDceo5CalgtSHRIS9EbbZk2TWkdAMpwqlZCVfyhYjXo3AMieZWJuiJdT2eaoqNo3mE01b7EAh6hrIgSWF_vD_MHHKnRGaF4TVXFNfVy02Vou884oQTNbcRtPN7ELjS6EMCrWsqvL1ERwX_IA8RmX7_LOmPZ2zsayT3J-zhUa7lbBGS5HqUm34ZX0nPK8gy5_qDKKU1S2kkPaego0kei1Elnvg
+                                  - generic "Spiele zwischen 6. und 12. August GTA Online und erhalte 1.000.000GTA$ als Bonus." [ref=f8e1006]
+                              - link [ref=f8e1009] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=mfkcvrqRE_-OqYj_PmEAcd0NgMlf77Jie6MlzIwqSUjcGs1C3o8JVCeX0Z7L3vx7xKQFkAW9XIiHm3ea9ePxUcIY-pTPE4QrWkA6cg1Z5bELbL5ckxghTqqKoyx-spypQpOZ9nOWSQd_Xp9HQFlclO0mw8gidkLQDT8qPh7w6JpK1VXYRBvvNb4AEf0wZydfw9spH1H9wtfZS9yy7oT7G6RToEncSTRi3YvGrKQNLxM_meF0pMFN2gjTNbYjAJlNsTxmxHSSIHZmYrbc5wNLITAHAnzsc16nJ2c1ANppy9xPhI5XuTlJiI1brfs93LzmBb7UWyp7_jJ9uJIuP9x6kUNJU7_Bmh3SCniklPOxuKyM8VOfi4LlukrOk9VhJ4rzun4sHfUVkJtNn7FfFosTUZ9IFIuJgwhoMlP_czUliT7LWctBm6OsGoQkYW2Q53vN93-MO-cVALyjxJlEiHNLzLN0SsxNp9QniiMcyESBDZlk19ufU99HUnX8q7_j8uU3s1Wy9EAPxrlSlpO4eGAogBUTG_pc7TCB7FKREQKsu0inAtM_GvJhhU-QQDI_71c3BWnPwKIfC9OvcwdutzjeeT_UFfBX_CbQqoardinCpI0yijuJFBdeUP-ttcgjWGj5MkbuHNIqrII_0cf1-WdXEA&zp=5ik1Phy5OO4zqBhFa26gnzQdbHTUdyPZeNXAo2WDRVBZ3XbJWelDCIafiC5uQ35JLfMAlklI-dAB-3Tb6I9lSXcjtbMdnRRMc_eKXGg6NpZEtNoKPRMDkbEyWjQcY3DEJUAYZPzzn9UX9NqiSUEC-zNHGBH3QvsY67_B8F9j_znhipI-dRlo6ccHTKJ75K5i0X97XBRLuRVlNIpVEqd2pvHk9hypbj-dwESNo-MzOOOfspZ5uvSWpDsxwXI4M-Na_cCndGk3Auhcau7s3Xe1afR_7_5vph55Q6g0QRknzQifiIh7PWvDceo5CalgtSHRIS9EbbZk2TWkdAMpwqlZCVfyhYjXo3AMieZWJuiJdT2eaoqNo3mE01b7EAh6hrIgSWF_vD_MHHKnRGaF4TVXFNfVy02Vou884oQTNbcRtPN7ELjS6EMCrWsqvL1ERwX_IA8RmX7_LOmPZ2zsayT3J-zhUa7lbBGS5HqUm34ZX0nPK8gy5_qDKKU1S2kkPaego0kei1Elnvg
+                                - 'img "Thumbnail image: Spiele zwischen 6. und 12. August GTA Online und erhalte 1.000.000GTA$ als Bonus." [ref=f8e1011]'
+                            - generic [ref=f8e1012]:
+                              - link [ref=f8e1014] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=mfkcvrqRE_-OqYj_PmEAcd0NgMlf77Jie6MlzIwqSUjcGs1C3o8JVCeX0Z7L3vx7xKQFkAW9XIiHm3ea9ePxUcIY-pTPE4QrWkA6cg1Z5bELbL5ckxghTqqKoyx-spypQpOZ9nOWSQd_Xp9HQFlclO0mw8gidkLQDT8qPh7w6JpK1VXYRBvvNb4AEf0wZydfw9spH1H9wtfZS9yy7oT7G6RToEncSTRi3YvGrKQNLxM_meF0pMFN2gjTNbYjAJlNsTxmxHSSIHZmYrbc5wNLITAHAnzsc16nJ2c1ANppy9xPhI5XuTlJiI1brfs93LzmBb7UWyp7_jJ9uJIuP9x6kUNJU7_Bmh3SCniklPOxuKyM8VOfi4LlukrOk9VhJ4rzun4sHfUVkJtNn7FfFosTUZ9IFIuJgwhoMlP_czUliT7LWctBm6OsGoQkYW2Q53vN93-MO-cVALyjxJlEiHNLzLN0SsxNp9QniiMcyESBDZlk19ufU99HUnX8q7_j8uU3s1Wy9EAPxrlSlpO4eGAogBUTG_pc7TCB7FKREQKsu0inAtM_GvJhhU-QQDI_71c3BWnPwKIfC9OvcwdutzjeeT_UFfBX_CbQqoardinCpI0yijuJFBdeUP-ttcgjWGj5MkbuHNIqrII_0cf1-WdXEA&zp=5ik1Phy5OO4zqBhFa26gnzQdbHTUdyPZeNXAo2WDRVBZ3XbJWelDCIafiC5uQ35JLfMAlklI-dAB-3Tb6I9lSXcjtbMdnRRMc_eKXGg6NpZEtNoKPRMDkbEyWjQcY3DEJUAYZPzzn9UX9NqiSUEC-zNHGBH3QvsY67_B8F9j_znhipI-dRlo6ccHTKJ75K5i0X97XBRLuRVlNIpVEqd2pvHk9hypbj-dwESNo-MzOOOfspZ5uvSWpDsxwXI4M-Na_cCndGk3Auhcau7s3Xe1afR_7_5vph55Q6g0QRknzQifiIh7PWvDceo5CalgtSHRIS9EbbZk2TWkdAMpwqlZCVfyhYjXo3AMieZWJuiJdT2eaoqNo3mE01b7EAh6hrIgSWF_vD_MHHKnRGaF4TVXFNfVy02Vou884oQTNbcRtPN7ELjS6EMCrWsqvL1ERwX_IA8RmX7_LOmPZ2zsayT3J-zhUa7lbBGS5HqUm34ZX0nPK8gy5_qDKKU1S2kkPaego0kei1Elnvg
+                              - generic [ref=f8e1015]:
+                                - link "rockstargames.com" [ref=f8e1018] [cursor=pointer]:
+                                  - /url: https://alb.reddit.com/cr?za=mfkcvrqRE_-OqYj_PmEAcd0NgMlf77Jie6MlzIwqSUjcGs1C3o8JVCeX0Z7L3vx7xKQFkAW9XIiHm3ea9ePxUcIY-pTPE4QrWkA6cg1Z5bELbL5ckxghTqqKoyx-spypQpOZ9nOWSQd_Xp9HQFlclO0mw8gidkLQDT8qPh7w6JpK1VXYRBvvNb4AEf0wZydfw9spH1H9wtfZS9yy7oT7G6RToEncSTRi3YvGrKQNLxM_meF0pMFN2gjTNbYjAJlNsTxmxHSSIHZmYrbc5wNLITAHAnzsc16nJ2c1ANppy9xPhI5XuTlJiI1brfs93LzmBb7UWyp7_jJ9uJIuP9x6kUNJU7_Bmh3SCniklPOxuKyM8VOfi4LlukrOk9VhJ4rzun4sHfUVkJtNn7FfFosTUZ9IFIuJgwhoMlP_czUliT7LWctBm6OsGoQkYW2Q53vN93-MO-cVALyjxJlEiHNLzLN0SsxNp9QniiMcyESBDZlk19ufU99HUnX8q7_j8uU3s1Wy9EAPxrlSlpO4eGAogBUTG_pc7TCB7FKREQKsu0inAtM_GvJhhU-QQDI_71c3BWnPwKIfC9OvcwdutzjeeT_UFfBX_CbQqoardinCpI0yijuJFBdeUP-ttcgjWGj5MkbuHNIqrII_0cf1-WdXEA&zp=5ik1Phy5OO4zqBhFa26gnzQdbHTUdyPZeNXAo2WDRVBZ3XbJWelDCIafiC5uQ35JLfMAlklI-dAB-3Tb6I9lSXcjtbMdnRRMc_eKXGg6NpZEtNoKPRMDkbEyWjQcY3DEJUAYZPzzn9UX9NqiSUEC-zNHGBH3QvsY67_B8F9j_znhipI-dRlo6ccHTKJ75K5i0X97XBRLuRVlNIpVEqd2pvHk9hypbj-dwESNo-MzOOOfspZ5uvSWpDsxwXI4M-Na_cCndGk3Auhcau7s3Xe1afR_7_5vph55Q6g0QRknzQifiIh7PWvDceo5CalgtSHRIS9EbbZk2TWkdAMpwqlZCVfyhYjXo3AMieZWJuiJdT2eaoqNo3mE01b7EAh6hrIgSWF_vD_MHHKnRGaF4TVXFNfVy02Vou884oQTNbcRtPN7ELjS6EMCrWsqvL1ERwX_IA8RmX7_LOmPZ2zsayT3J-zhUa7lbBGS5HqUm34ZX0nPK8gy5_qDKKU1S2kkPaego0kei1Elnvg
+                                - link "Mehr erfahren" [ref=f8e1020] [cursor=pointer]:
+                                  - /url: https://alb.reddit.com/cr?za=mfkcvrqRE_-OqYj_PmEAcd0NgMlf77Jie6MlzIwqSUjcGs1C3o8JVCeX0Z7L3vx7xKQFkAW9XIiHm3ea9ePxUcIY-pTPE4QrWkA6cg1Z5bELbL5ckxghTqqKoyx-spypQpOZ9nOWSQd_Xp9HQFlclO0mw8gidkLQDT8qPh7w6JpK1VXYRBvvNb4AEf0wZydfw9spH1H9wtfZS9yy7oT7G6RToEncSTRi3YvGrKQNLxM_meF0pMFN2gjTNbYjAJlNsTxmxHSSIHZmYrbc5wNLITAHAnzsc16nJ2c1ANppy9xPhI5XuTlJiI1brfs93LzmBb7UWyp7_jJ9uJIuP9x6kUNJU7_Bmh3SCniklPOxuKyM8VOfi4LlukrOk9VhJ4rzun4sHfUVkJtNn7FfFosTUZ9IFIuJgwhoMlP_czUliT7LWctBm6OsGoQkYW2Q53vN93-MO-cVALyjxJlEiHNLzLN0SsxNp9QniiMcyESBDZlk19ufU99HUnX8q7_j8uU3s1Wy9EAPxrlSlpO4eGAogBUTG_pc7TCB7FKREQKsu0inAtM_GvJhhU-QQDI_71c3BWnPwKIfC9OvcwdutzjeeT_UFfBX_CbQqoardinCpI0yijuJFBdeUP-ttcgjWGj5MkbuHNIqrII_0cf1-WdXEA&zp=5ik1Phy5OO4zqBhFa26gnzQdbHTUdyPZeNXAo2WDRVBZ3XbJWelDCIafiC5uQ35JLfMAlklI-dAB-3Tb6I9lSXcjtbMdnRRMc_eKXGg6NpZEtNoKPRMDkbEyWjQcY3DEJUAYZPzzn9UX9NqiSUEC-zNHGBH3QvsY67_B8F9j_znhipI-dRlo6ccHTKJ75K5i0X97XBRLuRVlNIpVEqd2pvHk9hypbj-dwESNo-MzOOOfspZ5uvSWpDsxwXI4M-Na_cCndGk3Auhcau7s3Xe1afR_7_5vph55Q6g0QRknzQifiIh7PWvDceo5CalgtSHRIS9EbbZk2TWkdAMpwqlZCVfyhYjXo3AMieZWJuiJdT2eaoqNo3mE01b7EAh6hrIgSWF_vD_MHHKnRGaF4TVXFNfVy02Vou884oQTNbcRtPN7ELjS6EMCrWsqvL1ERwX_IA8RmX7_LOmPZ2zsayT3J-zhUa7lbBGS5HqUm34ZX0nPK8gy5_qDKKU1S2kkPaego0kei1Elnvg
+                      - separator [ref=f8e1023]
+                    - listitem [ref=f8e1024]:
+                      - generic [ref=f8e1025]:
+                        - generic [ref=f8e1026]:
+                          - link "Opus 5 First Impressions (vs Fable)" [ref=f8e1027] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeCode/comments/1v5q0ot/opus_5_first_impressions_vs_fable/
+                          - generic [ref=f8e1030]:
+                            - generic [ref=f8e1032]:
+                              - link "r/ClaudeCode" [ref=f8e1033] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeCode/
+                              - generic [ref=f8e1038]: •
+                              - time [ref=f8e1040]: vor 17 Tagen
+                            - link [ref=f8e1042] [cursor=pointer]:
+                              - /url: /r/ClaudeCode/comments/1v5q0ot/opus_5_first_impressions_vs_fable/
+                              - heading "Listenelementbeitrag – Opus 5 First Impressions (vs Fable)" [level=3] [ref=f8e1045]: Opus 5 First Impressions (vs Fable)
+                          - generic [ref=f8e1047]:
+                            - generic [ref=f8e1048]: "106"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1049]: "87"
+                            - text: Kommentare
+                        - separator [ref=f8e1050]
+                    - listitem [ref=f8e1051]:
+                      - generic [ref=f8e1052]:
+                        - generic [ref=f8e1053]:
+                          - link "So far Fable 5 > Opus 5" [ref=f8e1054] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/claude/comments/1v6xw8n/so_far_fable_5_opus_5/
+                          - generic [ref=f8e1057]:
+                            - generic [ref=f8e1059]:
+                              - link "r/claude" [ref=f8e1060] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/claude/
+                              - generic [ref=f8e1065]: •
+                              - time [ref=f8e1067]: vor 15 Tagen
+                            - link [ref=f8e1069] [cursor=pointer]:
+                              - /url: /r/claude/comments/1v6xw8n/so_far_fable_5_opus_5/
+                              - heading "Listenelementbeitrag – So far Fable 5 > Opus 5" [level=3] [ref=f8e1072]: So far Fable 5 > Opus 5
+                          - generic [ref=f8e1074]:
+                            - generic [ref=f8e1075]: "27"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1076]: "25"
+                            - text: Kommentare
+                        - separator [ref=f8e1077]
+                    - listitem
+                    - listitem [ref=f8e1078]:
+                      - generic [ref=f8e1079]:
+                        - generic [ref=f8e1080]:
+                          - link "If Opus 5 performs better than Fable 5 in many areas, is it even worth using Fable anymore?" [ref=f8e1081] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeCode/comments/1v7h8a7/if_opus_5_performs_better_than_fable_5_in_many/
+                          - generic [ref=f8e1084]:
+                            - generic [ref=f8e1086]:
+                              - link "r/ClaudeCode" [ref=f8e1087] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeCode/
+                              - generic [ref=f8e1092]: •
+                              - time [ref=f8e1094]: vor 15 Tagen
+                            - link [ref=f8e1096] [cursor=pointer]:
+                              - /url: /r/ClaudeCode/comments/1v7h8a7/if_opus_5_performs_better_than_fable_5_in_many/
+                              - heading "Listenelementbeitrag – If Opus 5 performs better than Fable 5 in many areas, is it..." [level=3] [ref=f8e1099]: If Opus 5 performs better than Fable 5 in many areas, is it even worth using Fable anymore?
+                          - generic [ref=f8e1101]:
+                            - generic [ref=f8e1102]: "42"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1103]: "77"
+                            - text: Kommentare
+                        - separator [ref=f8e1104]
+                    - listitem [ref=f8e1105]:
+                      - generic [ref=f8e1106]:
+                        - generic [ref=f8e1107]:
+                          - link "Fable 5 isn't better than Opus 5, even Anthropic's docs say two different things" [ref=f8e1108] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeCode/comments/1vec6w2/fable_5_isnt_better_than_opus_5_even_anthropics/
+                          - generic [ref=f8e1111]:
+                            - generic [ref=f8e1113]:
+                              - link "r/ClaudeCode" [ref=f8e1114] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeCode/
+                              - generic [ref=f8e1119]: •
+                              - time [ref=f8e1121]: vor 7 Tagen
+                            - link [ref=f8e1123] [cursor=pointer]:
+                              - /url: /r/ClaudeCode/comments/1vec6w2/fable_5_isnt_better_than_opus_5_even_anthropics/
+                              - heading "Listenelementbeitrag – Fable 5 isn't better than Opus 5, even Anthropic's docs say..." [level=3] [ref=f8e1126]: Fable 5 isn't better than Opus 5, even Anthropic's docs say two different things
+                          - generic [ref=f8e1128]:
+                            - generic [ref=f8e1129]: "11"
+                            - text: Kommentare
+                        - separator [ref=f8e1130]
+                    - listitem [ref=f8e1131]:
+                      - generic [ref=f8e1132]:
+                        - generic [ref=f8e1133]:
+                          - link "Opus 5 is definitely better than Fable" [ref=f8e1134] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/claude/comments/1v5jxtf/opus_5_is_definitely_better_than_fable/
+                          - generic [ref=f8e1137]:
+                            - generic [ref=f8e1139]:
+                              - link "r/claude" [ref=f8e1140] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/claude/
+                              - generic [ref=f8e1145]: •
+                              - time [ref=f8e1147]: vor 17 Tagen
+                            - link [ref=f8e1149] [cursor=pointer]:
+                              - /url: /r/claude/comments/1v5jxtf/opus_5_is_definitely_better_than_fable/
+                              - heading "Listenelementbeitrag – Opus 5 is definitely better than Fable" [level=3] [ref=f8e1152]: Opus 5 is definitely better than Fable
+                          - generic [ref=f8e1154]:
+                            - generic [ref=f8e1155]: "129"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1156]: "49"
+                            - text: Kommentare
+                        - separator [ref=f8e1157]
+                    - listitem [ref=f8e1158]:
+                      - generic [ref=f8e1159]:
+                        - generic [ref=f8e1160]:
+                          - link "My results - Opus 5 vs Fable 5" [ref=f8e1161] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeCode/comments/1v5p7oo/my_results_opus_5_vs_fable_5/
+                          - generic [ref=f8e1164]:
+                            - generic [ref=f8e1166]:
+                              - link "r/ClaudeCode" [ref=f8e1167] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeCode/
+                              - generic [ref=f8e1172]: •
+                              - time [ref=f8e1174]: vor 17 Tagen
+                            - link [ref=f8e1176] [cursor=pointer]:
+                              - /url: /r/ClaudeCode/comments/1v5p7oo/my_results_opus_5_vs_fable_5/
+                              - heading "Listenelementbeitrag – My results - Opus 5 vs Fable 5" [level=3] [ref=f8e1179]: My results - Opus 5 vs Fable 5
+                          - generic [ref=f8e1181]:
+                            - generic [ref=f8e1182]: "190"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1183]: "37"
+                            - text: Kommentare
+                        - separator [ref=f8e1184]
+                    - listitem [ref=f8e1185]:
+                      - generic [ref=f8e1186]:
+                        - generic [ref=f8e1187]:
+                          - link "Fable + Opus 5 are great together" [ref=f8e1188] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeCode/comments/1venb17/fable_opus_5_are_great_together/
+                          - generic [ref=f8e1190]:
+                            - generic [ref=f8e1191]:
+                              - generic [ref=f8e1193]:
+                                - link "r/ClaudeCode" [ref=f8e1194] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/ClaudeCode/
+                                - generic [ref=f8e1199]: •
+                                - time [ref=f8e1201]: vor 7 Tagen
+                              - link [ref=f8e1203] [cursor=pointer]:
+                                - /url: /r/ClaudeCode/comments/1venb17/fable_opus_5_are_great_together/
+                                - heading "Listenelementbeitrag – Fable + Opus 5 are great together" [level=3] [ref=f8e1206]: Fable + Opus 5 are great together
+                            - generic [ref=f8e1208]:
+                              - link "r/ClaudeCode - Fable + Opus 5 are great together" [ref=f8e1209] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeCode/comments/1venb17/fable_opus_5_are_great_together/
+                                - img "r/ClaudeCode - Fable + Opus 5 are great together" [ref=f8e1210]
+                              - generic: 0:32
+                          - generic [ref=f8e1212]:
+                            - generic [ref=f8e1213]: "11"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1214]: "6"
+                            - text: Kommentare
+                        - separator [ref=f8e1215]
+                    - listitem
+                    - listitem [ref=f8e1216]:
+                      - generic [ref=f8e1217]:
+                        - generic [ref=f8e1218]:
+                          - link "Planning on Fable or Opus 5?" [ref=f8e1219] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeCode/comments/1v5qnk0/planning_on_fable_or_opus_5/
+                          - generic [ref=f8e1222]:
+                            - generic [ref=f8e1224]:
+                              - link "r/ClaudeCode" [ref=f8e1225] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeCode/
+                              - generic [ref=f8e1230]: •
+                              - time [ref=f8e1232]: vor 17 Tagen
+                            - link [ref=f8e1234] [cursor=pointer]:
+                              - /url: /r/ClaudeCode/comments/1v5qnk0/planning_on_fable_or_opus_5/
+                              - heading "Listenelementbeitrag – Planning on Fable or Opus 5?" [level=3] [ref=f8e1237]: Planning on Fable or Opus 5?
+                          - generic [ref=f8e1239]:
+                            - generic [ref=f8e1240]: "3"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1241]: "22"
+                            - text: Kommentare
+                        - separator [ref=f8e1242]
+                    - listitem [ref=f8e1243]:
+                      - generic [ref=f8e1244]:
+                        - generic [ref=f8e1245]:
+                          - link "This sums up my experince with Opus 5 vs Fable 5" [ref=f8e1246] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeAI/comments/1va3521/this_sums_up_my_experince_with_opus_5_vs_fable_5/
+                          - generic [ref=f8e1248]:
+                            - generic [ref=f8e1249]:
+                              - generic [ref=f8e1251]:
+                                - link "r/ClaudeAI" [ref=f8e1252] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/ClaudeAI/
+                                - generic [ref=f8e1257]: •
+                                - time [ref=f8e1259]: vor 12 Tagen
+                              - link [ref=f8e1261] [cursor=pointer]:
+                                - /url: /r/ClaudeAI/comments/1va3521/this_sums_up_my_experince_with_opus_5_vs_fable_5/
+                                - heading "Listenelementbeitrag – This sums up my experince with Opus 5 vs Fable 5" [level=3] [ref=f8e1264]: This sums up my experince with Opus 5 vs Fable 5
+                            - link "r/ClaudeAI - This sums up my experince with Opus 5 vs Fable 5" [ref=f8e1267] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/ClaudeAI/comments/1va3521/this_sums_up_my_experince_with_opus_5_vs_fable_5/
+                              - img "r/ClaudeAI - This sums up my experince with Opus 5 vs Fable 5" [ref=f8e1268]
+                          - generic [ref=f8e1270]:
+                            - generic [ref=f8e1271]: "358"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1272]: "56"
+                            - text: Kommentare
+                        - separator [ref=f8e1273]
+                    - listitem [ref=f8e1274]:
+                      - generic [ref=f8e1275]:
+                        - generic [ref=f8e1276]:
+                          - link "Opus 5 is really testing my patience. Fable 5 is great, but Opus 5… man, it’s frustrating." [ref=f8e1277] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/Anthropic/comments/1v80o35/opus_5_is_really_testing_my_patience_fable_5_is/
+                          - generic [ref=f8e1280]:
+                            - generic [ref=f8e1282]:
+                              - link "r/Anthropic" [ref=f8e1283] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Anthropic/
+                              - generic [ref=f8e1288]: •
+                              - time [ref=f8e1290]: vor 14 Tagen
+                            - link [ref=f8e1292] [cursor=pointer]:
+                              - /url: /r/Anthropic/comments/1v80o35/opus_5_is_really_testing_my_patience_fable_5_is/
+                              - heading "Listenelementbeitrag – Opus 5 is really testing my patience. Fable 5 is great, but..." [level=3] [ref=f8e1295]: Opus 5 is really testing my patience. Fable 5 is great, but Opus 5… man, it’s frustrating.
+                          - generic [ref=f8e1297]:
+                            - generic [ref=f8e1298]: "190"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1299]: "78"
+                            - text: Kommentare
+                        - separator [ref=f8e1300]
+                    - listitem [ref=f8e1301]:
+                      - generic [ref=f8e1302]:
+                        - generic [ref=f8e1303]:
+                          - link "My results - Opus 5 vs Fable 5" [ref=f8e1304] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeAI/comments/1v5p34g/my_results_opus_5_vs_fable_5/
+                          - generic [ref=f8e1307]:
+                            - generic [ref=f8e1309]:
+                              - link "r/ClaudeAI" [ref=f8e1310] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeAI/
+                              - generic [ref=f8e1315]: •
+                              - time [ref=f8e1317]: vor 17 Tagen
+                            - link [ref=f8e1319] [cursor=pointer]:
+                              - /url: /r/ClaudeAI/comments/1v5p34g/my_results_opus_5_vs_fable_5/
+                              - heading "Listenelementbeitrag – My results - Opus 5 vs Fable 5" [level=3] [ref=f8e1322]: My results - Opus 5 vs Fable 5
+                          - generic [ref=f8e1324]:
+                            - generic [ref=f8e1325]: "591"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1326]: "77"
+                            - text: Kommentare
+                        - separator [ref=f8e1327]
+                    - listitem [ref=f8e1328]:
+                      - generic [ref=f8e1329]:
+                        - generic [ref=f8e1330]:
+                          - link "My results - Opus 5 vs Fable 5" [ref=f8e1331] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/vibecoding/comments/1v5pa5t/my_results_opus_5_vs_fable_5/
+                          - generic [ref=f8e1334]:
+                            - generic [ref=f8e1336]:
+                              - link "r/vibecoding" [ref=f8e1337] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/vibecoding/
+                              - generic [ref=f8e1342]: •
+                              - time [ref=f8e1344]: vor 17 Tagen
+                            - link [ref=f8e1346] [cursor=pointer]:
+                              - /url: /r/vibecoding/comments/1v5pa5t/my_results_opus_5_vs_fable_5/
+                              - heading "Listenelementbeitrag – My results - Opus 5 vs Fable 5" [level=3] [ref=f8e1349]: My results - Opus 5 vs Fable 5
+                          - generic [ref=f8e1351]:
+                            - generic [ref=f8e1352]: "2"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1353]: "5"
+                            - text: Kommentare
+                        - separator [ref=f8e1354]
+                    - listitem [ref=f8e1355]:
+                      - generic [ref=f8e1356]:
+                        - generic [ref=f8e1357]:
+                          - link "So far Fable 5 > Opus 5" [ref=f8e1358] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeCode/comments/1v6xvtv/so_far_fable_5_opus_5/
+                          - generic [ref=f8e1361]:
+                            - generic [ref=f8e1363]:
+                              - link "r/ClaudeCode" [ref=f8e1364] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeCode/
+                              - generic [ref=f8e1369]: •
+                              - time [ref=f8e1371]: vor 15 Tagen
+                            - link [ref=f8e1373] [cursor=pointer]:
+                              - /url: /r/ClaudeCode/comments/1v6xvtv/so_far_fable_5_opus_5/
+                              - heading "Listenelementbeitrag – So far Fable 5 > Opus 5" [level=3] [ref=f8e1376]: So far Fable 5 > Opus 5
+                          - generic [ref=f8e1378]:
+                            - generic [ref=f8e1379]: "29"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1380]: "18"
+                            - text: Kommentare
+                        - separator [ref=f8e1381]
+                    - listitem [ref=f8e1382]:
+                      - generic [ref=f8e1383]:
+                        - generic [ref=f8e1384]:
+                          - link "What's the point of Fable 5 now when we have Opus 5?" [ref=f8e1385] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/Anthropic/comments/1v5q55w/whats_the_point_of_fable_5_now_when_we_have_opus_5/
+                          - generic [ref=f8e1388]:
+                            - generic [ref=f8e1390]:
+                              - link "r/Anthropic" [ref=f8e1391] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Anthropic/
+                              - generic [ref=f8e1396]: •
+                              - time [ref=f8e1398]: vor 17 Tagen
+                            - link [ref=f8e1400] [cursor=pointer]:
+                              - /url: /r/Anthropic/comments/1v5q55w/whats_the_point_of_fable_5_now_when_we_have_opus_5/
+                              - heading "Listenelementbeitrag – What's the point of Fable 5 now when we have Opus 5?" [level=3] [ref=f8e1403]: What's the point of Fable 5 now when we have Opus 5?
+                          - generic [ref=f8e1405]:
+                            - generic [ref=f8e1406]: "23"
+                            - text: Kommentare
+                        - separator [ref=f8e1407]
+                    - listitem [ref=f8e1408]:
+                      - generic [ref=f8e1409]:
+                        - generic [ref=f8e1410]:
+                          - link "Opus 5> Fable 5" [ref=f8e1411] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeAI/comments/1v5ixn6/opus_5_fable_5/
+                          - generic [ref=f8e1413]:
+                            - generic [ref=f8e1414]:
+                              - generic [ref=f8e1416]:
+                                - link "r/ClaudeAI" [ref=f8e1417] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/ClaudeAI/
+                                - generic [ref=f8e1422]: •
+                                - time [ref=f8e1424]: vor 17 Tagen
+                              - link [ref=f8e1426] [cursor=pointer]:
+                                - /url: /r/ClaudeAI/comments/1v5ixn6/opus_5_fable_5/
+                                - heading "Listenelementbeitrag – Opus 5> Fable 5" [level=3] [ref=f8e1429]: Opus 5> Fable 5
+                            - link "r/ClaudeAI - Opus 5> Fable 5" [ref=f8e1432] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/ClaudeAI/comments/1v5ixn6/opus_5_fable_5/
+                              - img "r/ClaudeAI - Opus 5> Fable 5" [ref=f8e1433]
+                          - generic [ref=f8e1435]:
+                            - generic [ref=f8e1436]: "63"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1437]: "16"
+                            - text: Kommentare
+                        - separator [ref=f8e1438]
+                    - listitem [ref=f8e1439]:
+                      - generic [ref=f8e1440]:
+                        - generic [ref=f8e1441]:
+                          - link "Is Fable 5 the Opus tier, or is Opus 5 the Opus tier?" [ref=f8e1442] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeAI/comments/1v61q6g/is_fable_5_the_opus_tier_or_is_opus_5_the_opus/
+                          - generic [ref=f8e1445]:
+                            - generic [ref=f8e1447]:
+                              - link "r/ClaudeAI" [ref=f8e1448] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeAI/
+                              - generic [ref=f8e1453]: •
+                              - time [ref=f8e1455]: vor 16 Tagen
+                            - link [ref=f8e1457] [cursor=pointer]:
+                              - /url: /r/ClaudeAI/comments/1v61q6g/is_fable_5_the_opus_tier_or_is_opus_5_the_opus/
+                              - heading "Listenelementbeitrag – Is Fable 5 the Opus tier, or is Opus 5 the Opus tier?" [level=3] [ref=f8e1460]: Is Fable 5 the Opus tier, or is Opus 5 the Opus tier?
+                          - generic [ref=f8e1462]:
+                            - generic [ref=f8e1463]: "34"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1464]: "36"
+                            - text: Kommentare
+                        - separator [ref=f8e1465]
+                    - listitem [ref=f8e1466]:
+                      - generic [ref=f8e1467]:
+                        - generic [ref=f8e1468]:
+                          - link "Fable 5 vs Opus 4.8 (Claude)" [ref=f8e1469] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/aigamedev/comments/1ukzylx/fable_5_vs_opus_48_claude/
+                          - generic [ref=f8e1472]:
+                            - generic [ref=f8e1474]:
+                              - link "r/aigamedev" [ref=f8e1475] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/aigamedev/
+                              - generic [ref=f8e1480]: •
+                              - time [ref=f8e1482]: vor 1 Monat
+                            - link [ref=f8e1484] [cursor=pointer]:
+                              - /url: /r/aigamedev/comments/1ukzylx/fable_5_vs_opus_48_claude/
+                              - heading "Listenelementbeitrag – Fable 5 vs Opus 4.8 (Claude)" [level=3] [ref=f8e1487]: Fable 5 vs Opus 4.8 (Claude)
+                          - generic [ref=f8e1489]:
+                            - generic [ref=f8e1490]: "11"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1491]: "26"
+                            - text: Kommentare
+                        - separator [ref=f8e1492]
+                    - listitem [ref=f8e1493]:
+                      - generic [ref=f8e1494]:
+                        - generic [ref=f8e1495]:
+                          - link "Opus 5 First Impressions (vs Fable)" [ref=f8e1496] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/Anthropic/comments/1v5q1ju/opus_5_first_impressions_vs_fable/
+                          - generic [ref=f8e1499]:
+                            - generic [ref=f8e1501]:
+                              - link "r/Anthropic" [ref=f8e1502] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Anthropic/
+                              - generic [ref=f8e1507]: •
+                              - time [ref=f8e1509]: vor 17 Tagen
+                            - link [ref=f8e1511] [cursor=pointer]:
+                              - /url: /r/Anthropic/comments/1v5q1ju/opus_5_first_impressions_vs_fable/
+                              - heading "Listenelementbeitrag – Opus 5 First Impressions (vs Fable)" [level=3] [ref=f8e1514]: Opus 5 First Impressions (vs Fable)
+                          - generic [ref=f8e1516]:
+                            - generic [ref=f8e1517]: "52"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1518]: "29"
+                            - text: Kommentare
+                        - separator [ref=f8e1519]
+                    - listitem [ref=f8e1520]:
+                      - generic [ref=f8e1521]:
+                        - generic [ref=f8e1522]:
+                          - link "My view on Opus5 vs Fable5 vs Opus 4.8" [ref=f8e1523] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeCode/comments/1vc73q2/my_view_on_opus5_vs_fable5_vs_opus_48/
+                          - generic [ref=f8e1526]:
+                            - generic [ref=f8e1528]:
+                              - link "r/ClaudeCode" [ref=f8e1529] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeCode/
+                              - generic [ref=f8e1534]: •
+                              - time [ref=f8e1536]: vor 10 Tagen
+                            - link [ref=f8e1538] [cursor=pointer]:
+                              - /url: /r/ClaudeCode/comments/1vc73q2/my_view_on_opus5_vs_fable5_vs_opus_48/
+                              - heading "Listenelementbeitrag – My view on Opus5 vs Fable5 vs Opus 4.8" [level=3] [ref=f8e1541]: My view on Opus5 vs Fable5 vs Opus 4.8
+                          - generic [ref=f8e1543]:
+                            - generic [ref=f8e1544]: "15"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1545]: "13"
+                            - text: Kommentare
+                        - separator [ref=f8e1546]
+                    - listitem [ref=f8e1547]:
+                      - generic [ref=f8e1548]:
+                        - generic [ref=f8e1549]:
+                          - link "Opus 5 First Impressions (vs Fable)" [ref=f8e1550] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/claude/comments/1v5q2rv/opus_5_first_impressions_vs_fable/
+                          - generic [ref=f8e1553]:
+                            - generic [ref=f8e1555]:
+                              - link "r/claude" [ref=f8e1556] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/claude/
+                              - generic [ref=f8e1561]: •
+                              - time [ref=f8e1563]: vor 17 Tagen
+                            - link [ref=f8e1565] [cursor=pointer]:
+                              - /url: /r/claude/comments/1v5q2rv/opus_5_first_impressions_vs_fable/
+                              - heading "Listenelementbeitrag – Opus 5 First Impressions (vs Fable)" [level=3] [ref=f8e1568]: Opus 5 First Impressions (vs Fable)
+                          - generic [ref=f8e1570]:
+                            - generic [ref=f8e1571]: "197"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1572]: "96"
+                            - text: Kommentare
+                        - separator [ref=f8e1573]
+                    - listitem [ref=f8e1574]:
+                      - generic [ref=f8e1575]:
+                        - generic [ref=f8e1576]:
+                          - link "So, is Opus 5 or Fable better for long-context orchestration now?" [ref=f8e1577] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/ClaudeAI/comments/1vdglf9/so_is_opus_5_or_fable_better_for_longcontext/
+                          - generic [ref=f8e1580]:
+                            - generic [ref=f8e1582]:
+                              - link "r/ClaudeAI" [ref=f8e1583] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeAI/
+                              - generic [ref=f8e1588]: •
+                              - time [ref=f8e1590]: vor 8 Tagen
+                            - link [ref=f8e1592] [cursor=pointer]:
+                              - /url: /r/ClaudeAI/comments/1vdglf9/so_is_opus_5_or_fable_better_for_longcontext/
+                              - heading "Listenelementbeitrag – So, is Opus 5 or Fable better for long-context orchestratio..." [level=3] [ref=f8e1595]: So, is Opus 5 or Fable better for long-context orchestration now?
+                          - generic [ref=f8e1597]:
+                            - generic [ref=f8e1598]: "2"
+                            - text: Upvotes ·
+                            - generic [ref=f8e1599]: "23"
+                            - text: Kommentare
+                        - separator [ref=f8e1600]
+                    - listitem [ref=f8e1601]:
+                      - generic [ref=f8e1602]:
+                        - generic [ref=f8e1603]:
+                          - 'link "Opus 5 vs Fable 5 for coding on Max: has anyone actually compared them on a real codebase yet?" [ref=f8e1604] [cursor=pointer]':
+                            - /url: https://www.reddit.com/r/ClaudeAI/comments/1v5idua/opus_5_vs_fable_5_for_coding_on_max_has_anyone/
+                          - generic [ref=f8e1607]:
+                            - generic [ref=f8e1609]:
+                              - link "r/ClaudeAI" [ref=f8e1610] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ClaudeAI/
+                              - generic [ref=f8e1615]: •
+                              - time [ref=f8e1617]: vor 17 Tagen
+                            - link [ref=f8e1619] [cursor=pointer]:
+                              - /url: /r/ClaudeAI/comments/1v5idua/opus_5_vs_fable_5_for_coding_on_max_has_anyone/
+                              - 'heading "Listenelementbeitrag – Opus 5 vs Fable 5 for coding on Max: has anyone actually co..." [level=3] [ref=f8e1622]': "Opus 5 vs Fable 5 for coding on Max: has anyone actually compared them on a real codebase yet?"
+                          - generic [ref=f8e1624]:
+                            - generic [ref=f8e1625]: "48"
+                            - text: Kommentare
+                        - separator [ref=f8e1626]
+                    - listitem [ref=f8e1627]:
+                      - generic [ref=f8e1629]:
+                        - link "Fable 5 feels noticeably worse since Opus 5 launched" [ref=f8e1630] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/ClaudeCode/comments/1v60h5x/fable_5_feels_noticeably_worse_since_opus_5/
+                        - generic [ref=f8e1633]:
+                          - generic [ref=f8e1635]:
+                            - link "r/ClaudeCode" [ref=f8e1636] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/ClaudeCode/
+                            - generic [ref=f8e1641]: •
+                            - time [ref=f8e1643]: vor 16 Tagen
+                          - link [ref=f8e1645] [cursor=pointer]:
+                            - /url: /r/ClaudeCode/comments/1v60h5x/fable_5_feels_noticeably_worse_since_opus_5/
+                            - heading "Listenelementbeitrag – Fable 5 feels noticeably worse since Opus 5 launched" [level=3] [ref=f8e1648]: Fable 5 feels noticeably worse since Opus 5 launched
+                        - generic [ref=f8e1650]:
+                          - generic [ref=f8e1651]: "4"
+                          - text: Kommentare
+                - complementary "Informationen zur Community" [ref=f8e1652]:
+                  - generic [ref=f8e1654]:
+                    - heading "Community-Info-Bereich" [level=1] [ref=f8e1655]
+                    - generic [ref=f8e1656]:
+                      - generic [ref=f8e1657]:
+                        - link "r/ClaudeAI" [ref=f8e1658] [cursor=pointer]:
+                          - /url: /r/ClaudeAI/
+                        - 'button "Community-Status: Check Claude service status." [ref=f8e1662] [cursor=pointer]':
+                          - img "hp" [ref=f8e1663]
+                      - button "Beitreten" [ref=f8e1667] [cursor=pointer]
+                    - generic [ref=f8e1668]:
+                      - generic [ref=f8e1669]: ClaudeAI
+                      - generic [ref=f8e1670]: This is a Claude and Claude Code discussion subreddit to help you make a fully informed decision about using Claude and Claude Code to best effect for your own purposes. ¹⌉ Anthropic does not control or operate this subreddit or endorse views expressed here. ²⌉ If your problem requires Anthropic's help, visit https://support.anthropic.com/ This subreddit is not the right place to fix your account issues. ³⌉ For more help, check the resources below. ⁴⌉ Please read the rules before posting.
+                      - button "Weitere anzeigen" [ref=f8e1671] [cursor=pointer]
+                      - generic: Öffentlich
+              - list [ref=f8e1680]:
+                - listitem [ref=f8e1681]:
+                  - link "Home" [ref=f8e1683] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f8e1684]:
+                  - link "Beliebt" [ref=f8e1686] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f8e1687]:
+                  - link "Nachrichten" [ref=f8e1689] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f8e1690]:
+                  - link "Entdecken" [ref=f8e1692] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f8e1693]:
+                  - link "Das Beste von Reddit" [ref=f8e1695] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f8e1696]:
+                  - link "Das Beste von Reddit auf Portugiesisch" [ref=f8e1698] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f8e1699]:
+                  - link "Das Beste von Reddit auf Deutsch" [ref=f8e1701] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f8e1702]:
+                  - link "Regeln von Reddit" [ref=f8e1704] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f8e1705]:
+                  - link "Datenschutzerklärung" [ref=f8e1707] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f8e1708]:
+                  - link "Nutzungsvereinbarung" [ref=f8e1710] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f8e1711]:
+                  - link "Barrierefreiheit" [ref=f8e1713] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f8e1714]:
+                  - link "Impressum" [ref=f8e1716] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/impressum
+                - listitem [ref=f8e1717]:
+                  - link "Reddit, Inc. © 2026. Alle Rechte vorbehalten." [ref=f8e1718] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f8e1721]:
+          - paragraph [ref=f8e1722]: Werde Teil des authentischsten Orts im Internet
+          - generic [ref=f8e1724]:
+            - generic [ref=f8e1727]:
+              - generic [ref=f8e1731]:
+                - button "Weiter mit Google. (Wird in neuem Tab geöffnet)" [ref=f8e1733] [cursor=pointer]:
+                  - generic [ref=f8e1735]: Weiter mit Google
+                - iframe
+              - generic [ref=f8e1746] [cursor=pointer]:
+                - generic [ref=f8e1747]: Mit Apple fortfahren
+                - button "Sign in with Apple" [ref=f8e1753]:
+                  - generic [ref=f8e1754]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Weiter mit Telefonnummer" [ref=f8e1759] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Mit Mail fortfahren" [ref=f8e1768] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f8e1775]:
+            - text: Wenn du fortfährst, stimmst du unserer
+            - link "Nutzungsvereinbarung" [ref=f8e1776] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: zu und bestätigst, dass du die
+            - link "Datenschutzerklärung" [ref=f8e1777] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: verstehst.
+      - dialog "Data Protection Consent" [ref=f8e1779]:
+        - generic [ref=f8e1780]:
+          - generic [ref=f8e1782]:
+            - generic:
+              - button "Schließen" [ref=f8e1786] [cursor=pointer]
+              - generic [ref=f8e1791]:
+                - generic [ref=f8e1792]: Lege deine Cookie-Einstellungen fest
+                - generic [ref=f8e1795]:
+                  - paragraph [ref=f8e1796]: "Reddit verwendet Cookies und ähnliche Technologien, um:"
+                  - list [ref=f8e1797]:
+                    - listitem [ref=f8e1798]: die Website funktionsfähig zu halten und ordnungsgemäß zu betreiben
+                    - listitem [ref=f8e1799]: Betrug und Missbrauch zu verhindern
+                    - listitem [ref=f8e1800]: die Nutzung der Website und Leistungskennzahlen zu überwachen
+                  - paragraph [ref=f8e1801]: "Wenn du „Alle akzeptieren“ wählst, verwenden wir Cookies auch, um:"
+                  - list [ref=f8e1802]:
+                    - listitem [ref=f8e1803]: deine Empfehlungen und Anzeigen zu personalisieren
+                    - listitem [ref=f8e1804]: die Performance von Anzeigen zu messen
+                    - listitem [ref=f8e1805]: neue Funktionen und Dienste zu entwickeln und zu verbessern
+                  - paragraph [ref=f8e1806]: Wenn du „Optionale Cookies ablehnen“ wählst, verwenden wir keine Cookies für diese zusätzlichen Zwecke. Du kannst die Cookie-Einstellungen in deinen Einstellungen aktualisieren.
+                  - paragraph [ref=f8e1807]:
+                    - text: Erfahre mehr darüber,
+                    - link "wie Reddit Cookies verwendet" [ref=f8e1808] [cursor=pointer]:
+                      - /url: /de-de/policies/cookies
+                    - text: .
+          - generic [ref=f8e1810]:
+            - button "Optionale Cookies ablehnen" [ref=f8e1811] [cursor=pointer]
+            - button "Alle akzeptieren" [ref=f8e1814] [cursor=pointer]

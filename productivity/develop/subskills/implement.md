@@ -19,7 +19,7 @@ If there are several tasks to be worked on, analyze them first to see if multipl
 
 ## Claiming
 
-When claiming a ticket in the backlog use the exact model name as the owner
+When claiming a ticket in the backlog use the exact model name of the implementing agent as the owner.
 
 ## Code review
 

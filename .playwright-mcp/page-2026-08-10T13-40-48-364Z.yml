@@ -1,0 +1,300 @@
+- generic [active] [ref=f26e1]:
+  - link "Zum Hauptinhalt springen" [ref=f26e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f26e6]:
+    - generic:
+      - banner [ref=f26e9]:
+        - navigation [ref=f26e10]:
+          - link "Home" [ref=f26e14] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - textbox "Finde alles" [ref=f26e35]: GPT-5.6 Sol vs Fable 5 coding
+          - generic [ref=f26e36]:
+            - link "Registrieren" [ref=f26e42] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Anmelden" [ref=f26e48] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Nutzermenü ausklappen" [ref=f26e55] [cursor=pointer]
+      - generic "GPT-5.6 Sol vs Fable 5 coding – Reddit-Suche!"
+      - generic [ref=f26e64]:
+        - generic [ref=f26e65]:
+          - generic [ref=f26e69]:
+            - button "All" [ref=f26e70] [cursor=pointer]
+            - link "Beiträge" [ref=f26e75] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Sol+vs+Fable+5+coding&type=posts&iId=7ab280ac-b5bb-44c4-ba3d-1bf5e0e0c48d
+            - link "Communitys" [ref=f26e81] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Sol+vs+Fable+5+coding&type=communities&iId=7ab280ac-b5bb-44c4-ba3d-1bf5e0e0c48d
+            - link "Kommentare" [ref=f26e87] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Sol+vs+Fable+5+coding&type=comments&iId=7ab280ac-b5bb-44c4-ba3d-1bf5e0e0c48d
+            - link "Medien" [ref=f26e93] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Sol+vs+Fable+5+coding&type=media&iId=7ab280ac-b5bb-44c4-ba3d-1bf5e0e0c48d
+            - link "Profile" [ref=f26e99] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Sol+vs+Fable+5+coding&type=people&iId=7ab280ac-b5bb-44c4-ba3d-1bf5e0e0c48d
+          - generic [ref=f26e108]:
+            - main [ref=f26e109]:
+              - generic [ref=f26e110]:
+                - generic [ref=f26e111]:
+                  - generic [ref=f26e112]: Was die Leute sagen
+                  - separator [ref=f26e117]
+                - generic [ref=f26e118]:
+                  - generic [ref=f26e119]: Beiträge
+                  - link "Mehr anzeigen" [ref=f26e122] [cursor=pointer]:
+                    - /url: /search/?q=GPT-5.6+Sol+vs+Fable+5+coding&type=posts
+                - generic [ref=f26e128]:
+                  - generic:
+                    - heading "Choosing between fable, gpt 5.6 sol and kimi k3" [level=2]:
+                      - link "Choosing between fable, gpt 5.6 sol and kimi k3" [ref=f26e129] [cursor=pointer]:
+                        - /url: /r/ChatGPTCoding/comments/1vjq5t1/choosing_between_fable_gpt_56_sol_and_kimi_k3/
+                  - generic [ref=f26e131]:
+                    - generic [ref=f26e134]:
+                      - link "r/ChatGPTCoding" [ref=f26e137] [cursor=pointer]:
+                        - /url: /r/ChatGPTCoding/
+                      - generic [ref=f26e142]: ·
+                    - link "Choosing between fable, gpt 5.6 sol and kimi k3" [ref=f26e143] [cursor=pointer]:
+                      - /url: /r/ChatGPTCoding/comments/1vjq5t1/choosing_between_fable_gpt_56_sol_and_kimi_k3/
+                    - generic [ref=f26e144]:
+                      - generic [ref=f26e145]: Votes
+                      - text: ·
+                      - generic [ref=f26e146]: Kommentare
+                - separator [ref=f26e147]
+                - generic [ref=f26e149]:
+                  - generic:
+                    - heading "GPT 5.6 Sol and Fable 5 settle a 25 year old problem in wireless communication theory" [level=2]:
+                      - link "GPT 5.6 Sol and Fable 5 settle a 25 year old problem in wireless communication theory" [ref=f26e150] [cursor=pointer]:
+                        - /url: /r/singularity/comments/1vj5d09/gpt_56_sol_and_fable_5_settle_a_25_year_old/
+                  - generic [ref=f26e152]:
+                    - generic [ref=f26e155]:
+                      - link "r/singularity" [ref=f26e158] [cursor=pointer]:
+                        - /url: /r/singularity/
+                      - generic [ref=f26e163]: ·
+                    - link "GPT 5.6 Sol and Fable 5 settle a 25 year old problem in wireless communication theory" [ref=f26e164] [cursor=pointer]:
+                      - /url: /r/singularity/comments/1vj5d09/gpt_56_sol_and_fable_5_settle_a_25_year_old/
+                    - link "AI solved it in 30 mins while people spent years researching it" [ref=f26e166] [cursor=pointer]:
+                      - /url: /r/singularity/comments/1vj5d09/gpt_56_sol_and_fable_5_settle_a_25_year_old/
+                    - generic [ref=f26e167]:
+                      - generic [ref=f26e168]: Votes
+                      - text: ·
+                      - generic [ref=f26e169]: Kommentare
+                - separator [ref=f26e170]
+                - generic [ref=f26e172]:
+                  - generic:
+                    - heading "Fable 5 or GPT 5.6 Sol" [level=2]:
+                      - link "Fable 5 or GPT 5.6 Sol" [ref=f26e173] [cursor=pointer]:
+                        - /url: /r/Anthropic/comments/1v04q9o/fable_5_or_gpt_56_sol/
+                  - generic [ref=f26e175]:
+                    - generic [ref=f26e178]:
+                      - link "r/Anthropic" [ref=f26e181] [cursor=pointer]:
+                        - /url: /r/Anthropic/
+                      - generic [ref=f26e186]: ·
+                    - link "Fable 5 or GPT 5.6 Sol" [ref=f26e187] [cursor=pointer]:
+                      - /url: /r/Anthropic/comments/1v04q9o/fable_5_or_gpt_56_sol/
+                    - link "So far, Sol is giving me better results than Fable. It’s also weird not keeping a continuous eye on the session limit counter" [ref=f26e189] [cursor=pointer]:
+                      - /url: /r/Anthropic/comments/1v04q9o/fable_5_or_gpt_56_sol/
+                    - generic [ref=f26e190]:
+                      - generic [ref=f26e191]: Votes
+                      - text: ·
+                      - generic [ref=f26e192]: Kommentare
+                - separator [ref=f26e193]
+                - generic [ref=f26e195]:
+                  - generic:
+                    - heading "Choosing between fable, gpt 5.6 sol and kimi k3" [level=2]:
+                      - link "Choosing between fable, gpt 5.6 sol and kimi k3" [ref=f26e196] [cursor=pointer]:
+                        - /url: /r/kimi/comments/1vjq60z/choosing_between_fable_gpt_56_sol_and_kimi_k3/
+                  - generic [ref=f26e198]:
+                    - generic [ref=f26e201]:
+                      - link "r/kimi" [ref=f26e204] [cursor=pointer]:
+                        - /url: /r/kimi/
+                      - generic [ref=f26e209]: ·
+                    - link "Choosing between fable, gpt 5.6 sol and kimi k3" [ref=f26e210] [cursor=pointer]:
+                      - /url: /r/kimi/comments/1vjq60z/choosing_between_fable_gpt_56_sol_and_kimi_k3/
+                    - generic [ref=f26e211]:
+                      - generic [ref=f26e212]: Votes
+                      - text: ·
+                      - generic [ref=f26e213]: Kommentare
+                - separator [ref=f26e214]
+                - generic [ref=f26e216]:
+                  - generic:
+                    - heading "Gpt 5.6 Sol or Fable 5" [level=2]:
+                      - link "Gpt 5.6 Sol or Fable 5" [ref=f26e217] [cursor=pointer]:
+                        - /url: /r/vibecoding/comments/1uz6qpz/gpt_56_sol_or_fable_5/
+                  - generic [ref=f26e219]:
+                    - generic [ref=f26e222]:
+                      - link "r/vibecoding" [ref=f26e225] [cursor=pointer]:
+                        - /url: /r/vibecoding/
+                      - generic [ref=f26e230]: ·
+                    - link "Gpt 5.6 Sol or Fable 5" [ref=f26e231] [cursor=pointer]:
+                      - /url: /r/vibecoding/comments/1uz6qpz/gpt_56_sol_or_fable_5/
+                    - link "Fable 5 is still better at reasoning, handling edge cases better than GPT-5.6 Sol." [ref=f26e233] [cursor=pointer]:
+                      - /url: /r/vibecoding/comments/1uz6qpz/gpt_56_sol_or_fable_5/
+                    - generic [ref=f26e234]:
+                      - generic [ref=f26e235]: Votes
+                      - text: ·
+                      - generic [ref=f26e236]: Kommentare
+                - separator [ref=f26e237]
+                - generic [ref=f26e239]:
+                  - generic:
+                    - heading "GPT 5.6 Sol and Fable 5 are great models, but they both have a critical flaw for AI RPG" [level=2]:
+                      - link "GPT 5.6 Sol and Fable 5 are great models, but they both have a critical flaw for AI RPG" [ref=f26e240] [cursor=pointer]:
+                        - /url: /r/aiRPGofficial/comments/1uv01q6/gpt_56_sol_and_fable_5_are_great_models_but_they/
+                  - generic [ref=f26e242]:
+                    - generic [ref=f26e245]:
+                      - link "r/aiRPGofficial" [ref=f26e248] [cursor=pointer]:
+                        - /url: /r/aiRPGofficial/
+                      - generic [ref=f26e255]: ·
+                    - link "GPT 5.6 Sol and Fable 5 are great models, but they both have a critical flaw for AI RPG" [ref=f26e256] [cursor=pointer]:
+                      - /url: /r/aiRPGofficial/comments/1uv01q6/gpt_56_sol_and_fable_5_are_great_models_but_they/
+                    - 'link "For Fable I use this in my prompt / preset and it works very well: Consequences Actions have consequences." [ref=f26e258] [cursor=pointer]':
+                      - /url: /r/aiRPGofficial/comments/1uv01q6/gpt_56_sol_and_fable_5_are_great_models_but_they/
+                    - generic [ref=f26e259]:
+                      - generic [ref=f26e260]: Votes
+                      - text: ·
+                      - generic [ref=f26e261]: Kommentare
+                - separator [ref=f26e262]
+                - generic [ref=f26e264]:
+                  - generic:
+                    - heading "GPT-5.6-Sol vs. Fable 5 vs. Kimi K3" [level=2]:
+                      - link "GPT-5.6-Sol vs. Fable 5 vs. Kimi K3" [ref=f26e265] [cursor=pointer]:
+                        - /url: /r/vibecoding/comments/1v1sf9b/gpt56sol_vs_fable_5_vs_kimi_k3/
+                  - generic [ref=f26e267]:
+                    - generic [ref=f26e270]:
+                      - link "r/vibecoding" [ref=f26e273] [cursor=pointer]:
+                        - /url: /r/vibecoding/
+                      - generic [ref=f26e278]: ·
+                    - link "GPT-5.6-Sol vs. Fable 5 vs. Kimi K3" [ref=f26e279] [cursor=pointer]:
+                      - /url: /r/vibecoding/comments/1v1sf9b/gpt56sol_vs_fable_5_vs_kimi_k3/
+                    - link "Kimi’s version felt a little less polished to me, although it also cost only around $5 compared with roughly $78 for Fable." [ref=f26e281] [cursor=pointer]:
+                      - /url: /r/vibecoding/comments/1v1sf9b/gpt56sol_vs_fable_5_vs_kimi_k3/
+                    - generic [ref=f26e282]:
+                      - generic [ref=f26e283]: Votes
+                      - text: ·
+                      - generic [ref=f26e284]: Kommentare
+                  - link "Vorschaubild von GPT-5.6-Sol vs. Fable 5 vs. Kimi K3" [ref=f26e286] [cursor=pointer]:
+                    - /url: /r/vibecoding/comments/1v1sf9b/gpt56sol_vs_fable_5_vs_kimi_k3/
+                - separator [ref=f26e291]
+                - generic [ref=f26e292]: Andere suchen auch nach
+                - generic [ref=f26e295]:
+                  - link "Is GPT 5.6 Sol better than Fable?" [ref=f26e298] [cursor=pointer]:
+                    - /url: /search/?q=Is+GPT+5.6+Sol+better+than+Fable%3F&cId=dc27b82e-0eff-4d48-bf11-5f51aaf0f34b&iId=163b964b-9c92-45e8-9f77-3496868157fe
+                  - link "Comparison of Fable and Sol in coding" [ref=f26e306] [cursor=pointer]:
+                    - /url: /search/?q=Comparison+of+Fable+and+Sol+in+coding&cId=36952b8c-60d6-4234-b994-924cf4c8d8c6&iId=b8b8f072-b6ba-4b1e-bbc0-a73ec0e49991
+                  - link "Best features of GPT 5.6 Sol for coding" [ref=f26e314] [cursor=pointer]:
+                    - /url: /search/?q=Best+features+of+GPT+5.6+Sol+for+coding&cId=13d7d9e7-12ef-4e1f-b0f3-95d762ed2409&iId=65781ba1-f7f8-4299-89f2-08f69c465793
+                  - link "GLM 5.2 vs Fable 5 comparison" [ref=f26e322] [cursor=pointer]:
+                    - /url: /search/?q=GLM+5.2+vs+Fable+5+comparison&cId=11663136-95cb-4c95-aacd-a1f4a04f57d9&iId=ec1b95bb-6d8c-464d-b69a-44b536f6aed8
+                  - link "Fable versus Sonnet 5" [ref=f26e330] [cursor=pointer]:
+                    - /url: /search/?q=Fable+versus+Sonnet+5&cId=df7060dd-95d2-4c47-b669-621f697b9921&iId=48383662-f12e-4a73-93ff-51eff1ef873f
+                  - link "Fable 5 AI model performance" [ref=f26e338] [cursor=pointer]:
+                    - /url: /search/?q=Fable+5+AI+model+performance&cId=53135345-6916-4bdc-a870-65e8709aa10e&iId=7b6d26ec-d82d-4cbe-8e2b-6f9423492908
+                - separator [ref=f26e344]
+            - generic [ref=f26e348]:
+              - generic [ref=f26e352]:
+                - heading "Communitys" [level=2] [ref=f26e353]
+                - generic [ref=f26e355]:
+                  - link "ChatGPTCoding" [ref=f26e356] [cursor=pointer]:
+                    - /url: /r/ChatGPTCoding/
+                  - generic [ref=f26e364]:
+                    - heading "r/ChatGPTCoding" [level=3] [ref=f26e365]
+                    - generic [ref=f26e367]:
+                      - paragraph [ref=f26e368]: r/ChatGPTCoding is a community for people building, learning, and experimenting with AI-assisted coding. Discuss workflows, questions, technical lessons, news, and projects with any AI model or tool—from ChatGPT and Codex to Claude, Cursor, open-source models, and whatever comes next.
+                      - generic [ref=f26e369]:
+                        - generic [ref=f26e370]: wöchentliche Besucher*innen
+                        - generic [ref=f26e371]: ·
+                        - generic [ref=f26e372]: wöchentliche Beiträge
+                - generic [ref=f26e374]:
+                  - link "AI_Coders" [ref=f26e375] [cursor=pointer]:
+                    - /url: /r/AI_Coders/
+                  - generic [ref=f26e383]:
+                    - heading "r/AI_Coders" [level=3] [ref=f26e384]
+                    - generic [ref=f26e386]:
+                      - paragraph [ref=f26e387]: "A community for developers building with AI: best models, tools, coding workflows, LLM-friendly languages, and real-world tips. From vibe coders to AI engineers — learn, share, and level up."
+                      - generic [ref=f26e388]:
+                        - generic [ref=f26e389]: wöchentliche Besucher*innen
+                        - generic [ref=f26e390]: ·
+                        - generic [ref=f26e391]: wöchentliche Beiträge
+                - generic [ref=f26e393]:
+                  - link "opencode" [ref=f26e394] [cursor=pointer]:
+                    - /url: /r/opencode/
+                  - generic [ref=f26e402]:
+                    - heading "r/opencode" [level=3] [ref=f26e403]
+                    - generic [ref=f26e405]:
+                      - paragraph [ref=f26e406]: Welcome to the OpenCode subreddit. OpenCode is a popular, free, open-source AI coding agent that integrates powerful AI models directly into your terminal, IDE, or desktop, allowing developers to write, refactor, debug, and explain code using natural language commands. OpenCode supports OpenAI, Anthropic, Gemini models as well as fully local models. Find OpenCode here https://opencode.ai/
+                      - generic [ref=f26e407]:
+                        - generic [ref=f26e408]: wöchentliche Besucher*innen
+                        - generic [ref=f26e409]: ·
+                        - generic [ref=f26e410]: wöchentliche Beiträge
+                - generic [ref=f26e412]:
+                  - link "ChatGPT" [ref=f26e413] [cursor=pointer]:
+                    - /url: /r/ChatGPT/
+                  - generic [ref=f26e421]:
+                    - heading "r/ChatGPT" [level=3] [ref=f26e422]
+                    - generic [ref=f26e424]:
+                      - paragraph [ref=f26e425]: Subreddit to discuss ChatGPT and AI. Not affiliated with OpenAI. Thanks, Nat!
+                      - generic [ref=f26e426]:
+                        - generic [ref=f26e427]: wöchentliche Besucher*innen
+                        - generic [ref=f26e428]: ·
+                        - generic [ref=f26e429]: wöchentliche Beiträge
+                - generic [ref=f26e431]:
+                  - link "AIProgrammingHardware" [ref=f26e432] [cursor=pointer]:
+                    - /url: /r/AIProgrammingHardware/
+                  - generic [ref=f26e440]:
+                    - heading "r/AIProgrammingHardware" [level=3] [ref=f26e441]
+                    - generic [ref=f26e443]:
+                      - paragraph [ref=f26e444]: "Everything related to hardware powering AI, programming, and deep learning! GPUs for training and inference, benchmark comparisons, and optimization tips. Laptops built for AI workloads, coding, and data science. CPUs tailored for machine learning, parallel processing, and high-performance computing. DIY AI Workstations: Share your custom builds, seek advice on components, and explore creative ways to construct deep learning rigs. General Hardware for AI and software development."
+                      - generic [ref=f26e445]:
+                        - generic [ref=f26e446]: wöchentliche Besucher*innen
+                        - generic [ref=f26e447]: ·
+                        - generic [ref=f26e448]: wöchentliche Beiträge
+                - link "Weitere Communitys anzeigen" [ref=f26e450] [cursor=pointer]:
+                  - /url: /search/?q=GPT-5.6+Sol+vs+Fable+5+coding&type=communities
+              - list [ref=f26e452]:
+                - listitem [ref=f26e453]:
+                  - link "Home" [ref=f26e455] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f26e456]:
+                  - link "Beliebt" [ref=f26e458] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f26e459]:
+                  - link "Nachrichten" [ref=f26e461] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f26e462]:
+                  - link "Entdecken" [ref=f26e464] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f26e465]:
+                  - link "Das Beste von Reddit" [ref=f26e467] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f26e468]:
+                  - link "Das Beste von Reddit auf Portugiesisch" [ref=f26e470] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f26e471]:
+                  - link "Das Beste von Reddit auf Deutsch" [ref=f26e473] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f26e474]:
+                  - link "Regeln von Reddit" [ref=f26e476] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f26e477]:
+                  - link "Datenschutzerklärung" [ref=f26e479] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f26e480]:
+                  - link "Nutzungsvereinbarung" [ref=f26e482] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f26e483]:
+                  - link "Barrierefreiheit" [ref=f26e485] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f26e486]:
+                  - link "Impressum" [ref=f26e488] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/impressum
+                - listitem [ref=f26e489]:
+                  - link "Reddit, Inc. © 2026. Alle Rechte vorbehalten." [ref=f26e490] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f26e493]:
+          - paragraph [ref=f26e494]: Werde Teil des authentischsten Orts im Internet
+          - generic [ref=f26e496]:
+            - generic [ref=f26e498]: Weiter mit Telefonnummer
+            - generic [ref=f26e506]: Mit Mail fortfahren
+          - paragraph [ref=f26e513]:
+            - text: Wenn du fortfährst, stimmst du unserer
+            - link "Nutzungsvereinbarung" [ref=f26e514] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: zu und bestätigst, dass du die
+            - link "Datenschutzerklärung" [ref=f26e515] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: verstehst.

@@ -1,0 +1,327 @@
+- generic [active] [ref=f2e1]:
+  - link "Zum Hauptinhalt springen" [ref=f2e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f2e6]:
+    - generic:
+      - generic: Fable 5 vs Opus 5 – Reddit-Suche!
+      - banner [ref=f2e10]:
+        - navigation [ref=f2e11]:
+          - link "Home" [ref=f2e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f2e34]:
+            - generic [ref=f2e36]:
+              - generic "Entferne den r/ClaudeAI-Filter und erweitere die Suche auf ganz Reddit" [ref=f2e42] [cursor=pointer]:
+                - button [pressed] [ref=f2e43]:
+                  - generic [ref=f2e46]: r/ClaudeAI
+              - textbox "Entferne den r/ClaudeAI-Filter und erweitere die Suche auf ganz Reddit Suche leeren" [ref=f2e53]:
+                - /placeholder: Suche in ⁨r/ClaudeAI⁩
+                - text: Fable 5 vs Opus 5
+              - button "Suche leeren" [ref=f2e55] [cursor=pointer]
+          - generic [ref=f2e61]:
+            - link "Registrieren" [ref=f2e67] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Anmelden" [ref=f2e73] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Nutzermenü ausklappen" [ref=f2e80] [cursor=pointer]
+      - generic "Fable 5 vs Opus 5 – Reddit-Suche!"
+      - generic [ref=f2e89]:
+        - generic [ref=f2e90]:
+          - generic [ref=f2e92]:
+            - generic [ref=f2e95]:
+              - tablist [ref=f2e96]:
+                - tab [selected] [ref=f2e97]:
+                  - button "Beiträge" [ref=f2e98] [cursor=pointer]
+                - tab [ref=f2e103]:
+                  - link "Kommentare" [ref=f2e104] [cursor=pointer]:
+                    - /url: /r/ClaudeAI/search/?q=Fable+5+vs+Opus+5&type=comments&iId=c57d85e0-2417-49f8-bf3e-679793b1ff0a
+                - tab [ref=f2e110]:
+                  - link "Medien" [ref=f2e111] [cursor=pointer]:
+                    - /url: /r/ClaudeAI/search/?q=Fable+5+vs+Opus+5&type=media&iId=c57d85e0-2417-49f8-bf3e-679793b1ff0a
+              - button "forward" [ref=f2e118] [cursor=pointer]
+              - button "back" [ref=f2e125] [cursor=pointer]
+            - generic:
+              - generic:
+                - tabpanel
+            - generic [ref=f2e131]:
+              - button "Relevanz" [ref=f2e135] [cursor=pointer]
+              - button "Aller Zeiten" [ref=f2e144] [cursor=pointer]
+          - generic [ref=f2e151]:
+            - generic:
+              - generic:
+                - link "Weiter zur Registrierung" [ref=f2e152] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Zur rechten Seitenleiste springen" [ref=f2e153] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f2e154]:
+            - main [ref=f2e155]:
+              - generic [ref=f2e156]:
+                - paragraph [ref=f2e159]:
+                  - text: Ergebnisse anzeigen von
+                  - link "ganz Reddit" [ref=f2e161] [cursor=pointer]:
+                    - /url: /search/?q=Fable+5+vs+Opus+5
+                - generic [ref=f2e166]:
+                  - generic:
+                    - heading "Fable >>>> Opus5" [level=2]:
+                      - link "Fable >>>> Opus5" [ref=f2e167] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1v8cpbr/fable_opus5/
+                  - generic [ref=f2e169]:
+                    - generic [ref=f2e172]:
+                      - link "r/ClaudeAI" [ref=f2e175] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f2e180]: ·
+                      - time [ref=f2e182]: vor 14 Tagen
+                    - link "Fable >>>> Opus5" [ref=f2e183] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1v8cpbr/fable_opus5/
+                    - generic [ref=f2e184]:
+                      - generic [ref=f2e185]:
+                        - generic [ref=f2e186]: "390"
+                        - text: Votes
+                      - text: ·
+                      - generic [ref=f2e187]:
+                        - generic [ref=f2e188]: "125"
+                        - text: Kommentare
+                - separator [ref=f2e189]
+                - generic [ref=f2e191]:
+                  - generic:
+                    - 'heading "Fable 5 vs Opus 5 after a week of switching between them: they''re good at different things and I stopped treating them as a ladder" [level=2]':
+                      - 'link "Fable 5 vs Opus 5 after a week of switching between them: they''re good at different things and I stopped treating them as a ladder" [ref=f2e192] [cursor=pointer]':
+                        - /url: /r/ClaudeAI/comments/1vbkzxq/fable_5_vs_opus_5_after_a_week_of_switching/
+                  - generic [ref=f2e194]:
+                    - generic [ref=f2e197]:
+                      - link "r/ClaudeAI" [ref=f2e200] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f2e205]: ·
+                      - time [ref=f2e207]: vor 10 Tagen
+                    - 'link "Fable 5 vs Opus 5 after a week of switching between them: they''re good at different things and I stopped treating them as a ladder" [ref=f2e208] [cursor=pointer]':
+                      - /url: /r/ClaudeAI/comments/1vbkzxq/fable_5_vs_opus_5_after_a_week_of_switching/
+                    - generic [ref=f2e209]:
+                      - generic [ref=f2e210]:
+                        - generic [ref=f2e211]: "13"
+                        - text: Votes
+                      - text: ·
+                      - generic [ref=f2e212]:
+                        - generic [ref=f2e213]: "16"
+                        - text: Kommentare
+                - separator [ref=f2e214]
+                - generic [ref=f2e216]:
+                  - generic:
+                    - heading "So, is Opus 5 or Fable better for long-context orchestration now?" [level=2]:
+                      - link "So, is Opus 5 or Fable better for long-context orchestration now?" [ref=f2e217] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1vdglf9/so_is_opus_5_or_fable_better_for_longcontext/
+                  - generic [ref=f2e219]:
+                    - generic [ref=f2e222]:
+                      - link "r/ClaudeAI" [ref=f2e225] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f2e230]: ·
+                      - time [ref=f2e232]: vor 8 Tagen
+                    - link "So, is Opus 5 or Fable better for long-context orchestration now?" [ref=f2e233] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1vdglf9/so_is_opus_5_or_fable_better_for_longcontext/
+                    - generic [ref=f2e234]:
+                      - generic [ref=f2e235]:
+                        - generic [ref=f2e236]: "2"
+                        - text: Votes
+                      - text: ·
+                      - generic [ref=f2e237]:
+                        - generic [ref=f2e238]: "23"
+                        - text: Kommentare
+                - separator [ref=f2e239]
+                - generic [ref=f2e241]:
+                  - generic:
+                    - heading "My results - Opus 5 vs Fable 5" [level=2]:
+                      - link "My results - Opus 5 vs Fable 5" [ref=f2e242] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1v5p34g/my_results_opus_5_vs_fable_5/
+                  - generic [ref=f2e244]:
+                    - generic [ref=f2e247]:
+                      - link "r/ClaudeAI" [ref=f2e250] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f2e255]: ·
+                      - time [ref=f2e257]: vor 17 Tagen
+                    - link "My results - Opus 5 vs Fable 5" [ref=f2e258] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1v5p34g/my_results_opus_5_vs_fable_5/
+                    - generic [ref=f2e259]:
+                      - generic [ref=f2e260]:
+                        - generic [ref=f2e261]: "591"
+                        - text: Votes
+                      - text: ·
+                      - generic [ref=f2e262]:
+                        - generic [ref=f2e263]: "77"
+                        - text: Kommentare
+                - separator [ref=f2e264]
+                - generic [ref=f2e266]:
+                  - generic:
+                    - heading "Fabel vs Opus for Law" [level=2]:
+                      - link "Fabel vs Opus for Law" [ref=f2e267] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1um2l6d/fabel_vs_opus_for_law/
+                  - generic [ref=f2e269]:
+                    - generic [ref=f2e272]:
+                      - link "r/ClaudeAI" [ref=f2e275] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f2e280]: ·
+                      - time [ref=f2e282]: vor 1 Monat
+                    - link "Fabel vs Opus for Law" [ref=f2e283] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1um2l6d/fabel_vs_opus_for_law/
+                    - generic [ref=f2e284]:
+                      - generic [ref=f2e285]:
+                        - generic [ref=f2e286]: "11"
+                        - text: Votes
+                      - text: ·
+                      - generic [ref=f2e287]:
+                        - generic [ref=f2e288]: "1"
+                        - text: Kommentar
+                - separator [ref=f2e289]
+                - generic [ref=f2e291]:
+                  - generic:
+                    - heading "So is Opus officially better then Fable for most use cases?" [level=2]:
+                      - link "So is Opus officially better then Fable for most use cases?" [ref=f2e292] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1v848on/so_is_opus_officially_better_then_fable_for_most/
+                  - generic [ref=f2e294]:
+                    - generic [ref=f2e297]:
+                      - link "r/ClaudeAI" [ref=f2e300] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f2e305]: ·
+                      - time [ref=f2e307]: vor 14 Tagen
+                    - link "So is Opus officially better then Fable for most use cases?" [ref=f2e308] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1v848on/so_is_opus_officially_better_then_fable_for_most/
+                    - generic [ref=f2e309]:
+                      - generic [ref=f2e310]:
+                        - generic [ref=f2e311]: "4"
+                        - text: Votes
+                      - text: ·
+                      - generic [ref=f2e312]:
+                        - generic [ref=f2e313]: "14"
+                        - text: Kommentare
+                - separator [ref=f2e314]
+                - generic [ref=f2e316]:
+                  - generic:
+                    - heading "I think right now Fable is cheaper than Opus 5 in practice, anyone noticed ?" [level=2]:
+                      - link "I think right now Fable is cheaper than Opus 5 in practice, anyone noticed ?" [ref=f2e317] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1vdw5aq/i_think_right_now_fable_is_cheaper_than_opus_5_in/
+                  - generic [ref=f2e319]:
+                    - generic [ref=f2e322]:
+                      - link "r/ClaudeAI" [ref=f2e325] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f2e330]: ·
+                      - time [ref=f2e332]: vor 8 Tagen
+                    - link "I think right now Fable is cheaper than Opus 5 in practice, anyone noticed ?" [ref=f2e333] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1vdw5aq/i_think_right_now_fable_is_cheaper_than_opus_5_in/
+                    - generic [ref=f2e334]:
+                      - generic [ref=f2e335]:
+                        - generic [ref=f2e336]: "37"
+                        - text: Votes
+                      - text: ·
+                      - generic [ref=f2e337]:
+                        - generic [ref=f2e338]: "53"
+                        - text: Kommentare
+                - separator [ref=f2e339]
+            - generic [ref=f2e343]:
+              - generic [ref=f2e348]:
+                - heading "Community-Info-Bereich" [level=1] [ref=f2e349]
+                - generic [ref=f2e350]:
+                  - generic [ref=f2e351]: ClaudeAI
+                  - generic [ref=f2e352]: This is a Claude and Claude Code discussion subreddit to help you make a fully informed decision about using Claude and Claude Code to best effect for your own purposes. ¹⌉ Anthropic does not control or operate this subreddit or endorse views expressed here. ²⌉ If your problem requires Anthropic's help, visit https://support.anthropic.com/ This subreddit is not the right place to fix your account issues. ³⌉ For more help, check the resources below. ⁴⌉ Please read the rules before posting.
+                  - generic [ref=f2e353]:
+                    - generic [ref=f2e354]: Erstellt am 23. Jan. 2023
+                    - generic [ref=f2e358]: Öffentlich
+                - generic [ref=f2e362]:
+                  - generic [ref=f2e363]:
+                    - strong [ref=f2e365]:
+                      - generic: 1,7 Mio.
+                    - generic [ref=f2e366]: wöchentliche Besucher*innen
+                  - generic [ref=f2e367]:
+                    - strong [ref=f2e369]:
+                      - generic: "23.495"
+                    - generic [ref=f2e370]: wöchentliche Beiträge
+              - list [ref=f2e372]:
+                - listitem [ref=f2e373]:
+                  - link "Home" [ref=f2e375] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f2e376]:
+                  - link "Beliebt" [ref=f2e378] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f2e379]:
+                  - link "Nachrichten" [ref=f2e381] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f2e382]:
+                  - link "Entdecken" [ref=f2e384] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f2e385]:
+                  - link "Das Beste von Reddit" [ref=f2e387] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f2e388]:
+                  - link "Das Beste von Reddit auf Portugiesisch" [ref=f2e390] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f2e391]:
+                  - link "Das Beste von Reddit auf Deutsch" [ref=f2e393] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f2e394]:
+                  - link "Regeln von Reddit" [ref=f2e396] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f2e397]:
+                  - link "Datenschutzerklärung" [ref=f2e399] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f2e400]:
+                  - link "Nutzungsvereinbarung" [ref=f2e402] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f2e403]:
+                  - link "Barrierefreiheit" [ref=f2e405] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f2e406]:
+                  - link "Impressum" [ref=f2e408] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/impressum
+                - listitem [ref=f2e409]:
+                  - link "Reddit, Inc. © 2026. Alle Rechte vorbehalten." [ref=f2e410] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f2e413]:
+          - paragraph [ref=f2e414]: Werde Teil des authentischsten Orts im Internet
+          - generic [ref=f2e416]:
+            - generic [ref=f2e419]:
+              - iframe [ref=f2e424]:
+                - button "Weiter mit Google. (Wird in neuem Tab geöffnet)" [ref=f3e3] [cursor=pointer]:
+                  - generic [ref=f3e5]: Weiter mit Google
+              - generic [ref=f2e426] [cursor=pointer]:
+                - generic [ref=f2e427]: Mit Apple fortfahren
+                - button "Sign in with Apple" [ref=f2e433]:
+                  - generic [ref=f2e434]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Weiter mit Telefonnummer" [ref=f2e439] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Mit Mail fortfahren" [ref=f2e448] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f2e455]:
+            - text: Wenn du fortfährst, stimmst du unserer
+            - link "Nutzungsvereinbarung" [ref=f2e456] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: zu und bestätigst, dass du die
+            - link "Datenschutzerklärung" [ref=f2e457] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: verstehst.
+      - dialog "Data Protection Consent" [ref=f2e459]:
+        - generic [ref=f2e460]:
+          - generic [ref=f2e462]:
+            - generic:
+              - button "Schließen" [ref=f2e466] [cursor=pointer]
+              - generic [ref=f2e471]:
+                - generic [ref=f2e472]: Lege deine Cookie-Einstellungen fest
+                - generic [ref=f2e475]:
+                  - paragraph [ref=f2e476]: "Reddit verwendet Cookies und ähnliche Technologien, um:"
+                  - list [ref=f2e477]:
+                    - listitem [ref=f2e478]: die Website funktionsfähig zu halten und ordnungsgemäß zu betreiben
+                    - listitem [ref=f2e479]: Betrug und Missbrauch zu verhindern
+                    - listitem [ref=f2e480]: die Nutzung der Website und Leistungskennzahlen zu überwachen
+                  - paragraph [ref=f2e481]: "Wenn du „Alle akzeptieren“ wählst, verwenden wir Cookies auch, um:"
+                  - list [ref=f2e482]:
+                    - listitem [ref=f2e483]: deine Empfehlungen und Anzeigen zu personalisieren
+                    - listitem [ref=f2e484]: die Performance von Anzeigen zu messen
+                    - listitem [ref=f2e485]: neue Funktionen und Dienste zu entwickeln und zu verbessern
+                  - paragraph [ref=f2e486]: Wenn du „Optionale Cookies ablehnen“ wählst, verwenden wir keine Cookies für diese zusätzlichen Zwecke. Du kannst die Cookie-Einstellungen in deinen Einstellungen aktualisieren.
+                  - paragraph [ref=f2e487]:
+                    - text: Erfahre mehr darüber,
+                    - link "wie Reddit Cookies verwendet" [ref=f2e488] [cursor=pointer]:
+                      - /url: /de-de/policies/cookies
+                    - text: .
+          - generic [ref=f2e490]:
+            - button "Optionale Cookies ablehnen" [ref=f2e491] [cursor=pointer]
+            - button "Alle akzeptieren" [ref=f2e494] [cursor=pointer]

@@ -1,0 +1,764 @@
+- generic [active] [ref=f32e1]:
+  - link "Zum Hauptinhalt springen" [ref=f32e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f32e6]:
+    - generic:
+      - generic: "Fable 5 or GPT 5.6 Sol : r/Anthropic"
+      - banner [ref=f32e10]:
+        - navigation [ref=f32e11]:
+          - link "Home" [ref=f32e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f32e34]:
+            - generic [ref=f32e36]:
+              - textbox "Fragen" [ref=f32e43]:
+                - /placeholder: Finde alles
+              - separator [ref=f32e44]
+              - link "Fragen" [ref=f32e48] [cursor=pointer]:
+                - /url: /answers/
+              - generic: Finde alles
+          - generic [ref=f32e54]:
+            - link "Registrieren" [ref=f32e60] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Anmelden" [ref=f32e66] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Nutzermenü ausklappen" [ref=f32e73] [cursor=pointer]
+      - generic [ref=f32e79]:
+        - generic [ref=f32e80]:
+          - generic [ref=f32e81]:
+            - generic:
+              - generic:
+                - link "Weiter zur Registrierung" [ref=f32e82] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Zur rechten Seitenleiste springen" [ref=f32e83] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f32e84]:
+            - main [ref=f32e85]:
+              - 'generic "Fable 5 or GPT 5.6 Sol : r/Anthropic"'
+              - generic [ref=f32e86]:
+                - generic [ref=f32e87]:
+                  - generic [ref=f32e88]:
+                    - button "Zurück" [ref=f32e90] [cursor=pointer]
+                    - link "Zu Anthropic" [ref=f32e98] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/Anthropic/
+                    - group [ref=f32e103]:
+                      - generic [ref=f32e104]:
+                        - link "r/Anthropic" [ref=f32e107] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/Anthropic/
+                        - generic [ref=f32e108]: •
+                        - time [ref=f32e110]: vor 23 Tagen
+                      - 'link "Autor*in: ZottiTheOtter" [ref=f32e115] [cursor=pointer]':
+                        - /url: https://www.reddit.com/user/ZottiTheOtter/
+                        - generic [ref=f32e116]: ZottiTheOtter
+                  - button "Handlungen für Nutzer*innen öffnen" [ref=f32e120] [cursor=pointer]
+                - 'heading "Beitragstitel: Fable 5 or GPT 5.6 Sol" [level=1] [ref=f32e127]': Fable 5 or GPT 5.6 Sol
+                - generic [ref=f32e131]:
+                  - paragraph [ref=f32e132]: I yesterday downgraded to Claude Pro with the intention of switching to GPT.
+                  - paragraph [ref=f32e133]: Meanwhile, Fable stays and the extra 50% Claude Code usage as well.
+                  - paragraph [ref=f32e134]: "The million-dollar question: should I still switch? Anyone who did and is happy with the choice?"
+                - generic [ref=f32e135]:
+                  - generic [ref=f32e138]: "7"
+                  - generic [ref=f32e141]: ·
+                  - generic [ref=f32e144]: "45"
+              - separator [ref=f32e145]
+              - generic "Stuck in academia and wondering what's next? Make the switch to Data Science, Data Engineering, or AI Engineering. Full-time, remote, 4–6 months. 100% funded if you're unemployed." [ref=f32e146]:
+                - generic [ref=f32e147]:
+                  - 'generic "Advertisement: Stuck in academia and wondering what''s next? Make the switch to Data Science, Data Engineering, or AI Engineering. Full-time, remote, 4–6 months. 100% funded if you''re unemployed." [ref=f32e148]':
+                    - 'link "Advertisement: Stuck in academia and wondering what''s next? Make the switch to Data Science, Data Engineering, or AI Engineering. Full-time, remote, 4–6 months. 100% funded if you''re unemployed." [ref=f32e149] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=8PgRL2MV_KFU6qcfozrO1Kn5ImrlRESDzxeEFQ6dDDzsCFVvEqnuH3HH-vcD004-upfHPgM-c35JgYPZeG1PVN_lLhXK0OUwalNWZ1bWvqP5w14lz5vt6_cWuGw7eNVM45AkSIoRUb5jbCSua5QTM6mfujTRz7N28Wuu9ISPL15ON9L9mwikJBtOWNE60i5bUVUzGmX08kW4XJ4wWNFMjag26uj1FkBLMD48GwWDnxgll0AvU1i4vrntmIvdWTz7skplqsNup6dov9wXtKG9ucCzF-aS7_4uTsGQnGO5UFLSbKA-o4MhRHiqGG7Les89TXl7yzzOR7gpT77yp5uMCqna2EvlxIt093BWF_OFmk2igdBGb5mCGsJj25CwLYpLM-XHXRwmA5DdaNmeADvxmzuK5C7ip-Ul5UENIR4Lfl4IYr_O1Q2Fx7t2esFa_wpCKQdUYGy0M20wB2IKolzjsOjRMgMOffNZS1xKUZ4BDG9r9M4pVZjn6MMrmVOMGC8ZI1ps10I60XtCT6eJhjGxWwBSA1kaMDnrxEXCwDu9AUpTNMu0TOdG_OLC-EydgSWx3CoXrbS-B1GWglxm3eonDWv-3TFmdfeuTuZGxl88dcFhuHm1FCFwBZ7v6uWwP5QNPsu3uFYjt6NdYkFORUCQItKo9D5sR9oKWv3RDKCByg&zp=N8zHdy2WQML0muJjBTfZ80baJmKs5Y3XRUJy15Mkr7BNl3KiLxiaMciwxtm5DqcjnAtua_bPgtgWBXU5wxLecDWyEEIoRUvT0mo-Ps4810SB1_mKhF1iZ1g_u3JLefQmvSDQOu_f6SnAmDEN8TwHBCjBWl8O1hlolYzPUzXYYgvjOr-4w0eJ0Z7X7yLuETWvmFbu3-adOET8iH7NqynVIz7BIgrstA6BtkBgmfdma11X_KShDOo0YN1ko-JLMYkT49YRlWQQ6iBSLP4izGK2scn82MjpM8d9HZze09uPUqXsMRO0jt3R8yy_shDM
+                  - generic [ref=f32e150]:
+                    - generic [ref=f32e151]:
+                      - link "Neue_Fische" [ref=f32e153] [cursor=pointer]:
+                        - /url: /user/Neue_Fische/
+                        - img "Avatar von u/Neue_Fische" [ref=f32e156]
+                      - generic [ref=f32e158]: •
+                      - link "Gesponsert" [ref=f32e160] [cursor=pointer]:
+                        - /url: /user/Neue_Fische/
+                      - link [ref=f32e163] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=8PgRL2MV_KFU6qcfozrO1Kn5ImrlRESDzxeEFQ6dDDzsCFVvEqnuH3HH-vcD004-upfHPgM-c35JgYPZeG1PVN_lLhXK0OUwalNWZ1bWvqP5w14lz5vt6_cWuGw7eNVM45AkSIoRUb5jbCSua5QTM6mfujTRz7N28Wuu9ISPL15ON9L9mwikJBtOWNE60i5bUVUzGmX08kW4XJ4wWNFMjag26uj1FkBLMD48GwWDnxgll0AvU1i4vrntmIvdWTz7skplqsNup6dov9wXtKG9ucCzF-aS7_4uTsGQnGO5UFLSbKA-o4MhRHiqGG7Les89TXl7yzzOR7gpT77yp5uMCqna2EvlxIt093BWF_OFmk2igdBGb5mCGsJj25CwLYpLM-XHXRwmA5DdaNmeADvxmzuK5C7ip-Ul5UENIR4Lfl4IYr_O1Q2Fx7t2esFa_wpCKQdUYGy0M20wB2IKolzjsOjRMgMOffNZS1xKUZ4BDG9r9M4pVZjn6MMrmVOMGC8ZI1ps10I60XtCT6eJhjGxWwBSA1kaMDnrxEXCwDu9AUpTNMu0TOdG_OLC-EydgSWx3CoXrbS-B1GWglxm3eonDWv-3TFmdfeuTuZGxl88dcFhuHm1FCFwBZ7v6uWwP5QNPsu3uFYjt6NdYkFORUCQItKo9D5sR9oKWv3RDKCByg&zp=N8zHdy2WQML0muJjBTfZ80baJmKs5Y3XRUJy15Mkr7BNl3KiLxiaMciwxtm5DqcjnAtua_bPgtgWBXU5wxLecDWyEEIoRUvT0mo-Ps4810SB1_mKhF1iZ1g_u3JLefQmvSDQOu_f6SnAmDEN8TwHBCjBWl8O1hlolYzPUzXYYgvjOr-4w0eJ0Z7X7yLuETWvmFbu3-adOET8iH7NqynVIz7BIgrstA6BtkBgmfdma11X_KShDOo0YN1ko-JLMYkT49YRlWQQ6iBSLP4izGK2scn82MjpM8d9HZze09uPUqXsMRO0jt3R8yy_shDM
+                    - button "Handlungen für Nutzer*innen öffnen" [ref=f32e169] [cursor=pointer]
+                  - generic [ref=f32e175]:
+                    - generic [ref=f32e176]:
+                      - link "Stuck in academia and wondering what's next? Make the switch to Data Science, Data Engineering, or AI Engineering. Full-time, remote, 4–6 months. 100% funded if you're unemployed." [ref=f32e178] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=8PgRL2MV_KFU6qcfozrO1Kn5ImrlRESDzxeEFQ6dDDzsCFVvEqnuH3HH-vcD004-upfHPgM-c35JgYPZeG1PVN_lLhXK0OUwalNWZ1bWvqP5w14lz5vt6_cWuGw7eNVM45AkSIoRUb5jbCSua5QTM6mfujTRz7N28Wuu9ISPL15ON9L9mwikJBtOWNE60i5bUVUzGmX08kW4XJ4wWNFMjag26uj1FkBLMD48GwWDnxgll0AvU1i4vrntmIvdWTz7skplqsNup6dov9wXtKG9ucCzF-aS7_4uTsGQnGO5UFLSbKA-o4MhRHiqGG7Les89TXl7yzzOR7gpT77yp5uMCqna2EvlxIt093BWF_OFmk2igdBGb5mCGsJj25CwLYpLM-XHXRwmA5DdaNmeADvxmzuK5C7ip-Ul5UENIR4Lfl4IYr_O1Q2Fx7t2esFa_wpCKQdUYGy0M20wB2IKolzjsOjRMgMOffNZS1xKUZ4BDG9r9M4pVZjn6MMrmVOMGC8ZI1ps10I60XtCT6eJhjGxWwBSA1kaMDnrxEXCwDu9AUpTNMu0TOdG_OLC-EydgSWx3CoXrbS-B1GWglxm3eonDWv-3TFmdfeuTuZGxl88dcFhuHm1FCFwBZ7v6uWwP5QNPsu3uFYjt6NdYkFORUCQItKo9D5sR9oKWv3RDKCByg&zp=N8zHdy2WQML0muJjBTfZ80baJmKs5Y3XRUJy15Mkr7BNl3KiLxiaMciwxtm5DqcjnAtua_bPgtgWBXU5wxLecDWyEEIoRUvT0mo-Ps4810SB1_mKhF1iZ1g_u3JLefQmvSDQOu_f6SnAmDEN8TwHBCjBWl8O1hlolYzPUzXYYgvjOr-4w0eJ0Z7X7yLuETWvmFbu3-adOET8iH7NqynVIz7BIgrstA6BtkBgmfdma11X_KShDOo0YN1ko-JLMYkT49YRlWQQ6iBSLP4izGK2scn82MjpM8d9HZze09uPUqXsMRO0jt3R8yy_shDM
+                      - generic [ref=f32e179]:
+                        - link [ref=f32e181] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=8PgRL2MV_KFU6qcfozrO1Kn5ImrlRESDzxeEFQ6dDDzsCFVvEqnuH3HH-vcD004-upfHPgM-c35JgYPZeG1PVN_lLhXK0OUwalNWZ1bWvqP5w14lz5vt6_cWuGw7eNVM45AkSIoRUb5jbCSua5QTM6mfujTRz7N28Wuu9ISPL15ON9L9mwikJBtOWNE60i5bUVUzGmX08kW4XJ4wWNFMjag26uj1FkBLMD48GwWDnxgll0AvU1i4vrntmIvdWTz7skplqsNup6dov9wXtKG9ucCzF-aS7_4uTsGQnGO5UFLSbKA-o4MhRHiqGG7Les89TXl7yzzOR7gpT77yp5uMCqna2EvlxIt093BWF_OFmk2igdBGb5mCGsJj25CwLYpLM-XHXRwmA5DdaNmeADvxmzuK5C7ip-Ul5UENIR4Lfl4IYr_O1Q2Fx7t2esFa_wpCKQdUYGy0M20wB2IKolzjsOjRMgMOffNZS1xKUZ4BDG9r9M4pVZjn6MMrmVOMGC8ZI1ps10I60XtCT6eJhjGxWwBSA1kaMDnrxEXCwDu9AUpTNMu0TOdG_OLC-EydgSWx3CoXrbS-B1GWglxm3eonDWv-3TFmdfeuTuZGxl88dcFhuHm1FCFwBZ7v6uWwP5QNPsu3uFYjt6NdYkFORUCQItKo9D5sR9oKWv3RDKCByg&zp=N8zHdy2WQML0muJjBTfZ80baJmKs5Y3XRUJy15Mkr7BNl3KiLxiaMciwxtm5DqcjnAtua_bPgtgWBXU5wxLecDWyEEIoRUvT0mo-Ps4810SB1_mKhF1iZ1g_u3JLefQmvSDQOu_f6SnAmDEN8TwHBCjBWl8O1hlolYzPUzXYYgvjOr-4w0eJ0Z7X7yLuETWvmFbu3-adOET8iH7NqynVIz7BIgrstA6BtkBgmfdma11X_KShDOo0YN1ko-JLMYkT49YRlWQQ6iBSLP4izGK2scn82MjpM8d9HZze09uPUqXsMRO0jt3R8yy_shDM
+                        - generic [ref=f32e182]:
+                          - link "Mehr erfahren" [ref=f32e184] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=8PgRL2MV_KFU6qcfozrO1Kn5ImrlRESDzxeEFQ6dDDzsCFVvEqnuH3HH-vcD004-upfHPgM-c35JgYPZeG1PVN_lLhXK0OUwalNWZ1bWvqP5w14lz5vt6_cWuGw7eNVM45AkSIoRUb5jbCSua5QTM6mfujTRz7N28Wuu9ISPL15ON9L9mwikJBtOWNE60i5bUVUzGmX08kW4XJ4wWNFMjag26uj1FkBLMD48GwWDnxgll0AvU1i4vrntmIvdWTz7skplqsNup6dov9wXtKG9ucCzF-aS7_4uTsGQnGO5UFLSbKA-o4MhRHiqGG7Les89TXl7yzzOR7gpT77yp5uMCqna2EvlxIt093BWF_OFmk2igdBGb5mCGsJj25CwLYpLM-XHXRwmA5DdaNmeADvxmzuK5C7ip-Ul5UENIR4Lfl4IYr_O1Q2Fx7t2esFa_wpCKQdUYGy0M20wB2IKolzjsOjRMgMOffNZS1xKUZ4BDG9r9M4pVZjn6MMrmVOMGC8ZI1ps10I60XtCT6eJhjGxWwBSA1kaMDnrxEXCwDu9AUpTNMu0TOdG_OLC-EydgSWx3CoXrbS-B1GWglxm3eonDWv-3TFmdfeuTuZGxl88dcFhuHm1FCFwBZ7v6uWwP5QNPsu3uFYjt6NdYkFORUCQItKo9D5sR9oKWv3RDKCByg&zp=N8zHdy2WQML0muJjBTfZ80baJmKs5Y3XRUJy15Mkr7BNl3KiLxiaMciwxtm5DqcjnAtua_bPgtgWBXU5wxLecDWyEEIoRUvT0mo-Ps4810SB1_mKhF1iZ1g_u3JLefQmvSDQOu_f6SnAmDEN8TwHBCjBWl8O1hlolYzPUzXYYgvjOr-4w0eJ0Z7X7yLuETWvmFbu3-adOET8iH7NqynVIz7BIgrstA6BtkBgmfdma11X_KShDOo0YN1ko-JLMYkT49YRlWQQ6iBSLP4izGK2scn82MjpM8d9HZze09uPUqXsMRO0jt3R8yy_shDM
+                          - link "course.neuefische.de" [ref=f32e189] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=8PgRL2MV_KFU6qcfozrO1Kn5ImrlRESDzxeEFQ6dDDzsCFVvEqnuH3HH-vcD004-upfHPgM-c35JgYPZeG1PVN_lLhXK0OUwalNWZ1bWvqP5w14lz5vt6_cWuGw7eNVM45AkSIoRUb5jbCSua5QTM6mfujTRz7N28Wuu9ISPL15ON9L9mwikJBtOWNE60i5bUVUzGmX08kW4XJ4wWNFMjag26uj1FkBLMD48GwWDnxgll0AvU1i4vrntmIvdWTz7skplqsNup6dov9wXtKG9ucCzF-aS7_4uTsGQnGO5UFLSbKA-o4MhRHiqGG7Les89TXl7yzzOR7gpT77yp5uMCqna2EvlxIt093BWF_OFmk2igdBGb5mCGsJj25CwLYpLM-XHXRwmA5DdaNmeADvxmzuK5C7ip-Ul5UENIR4Lfl4IYr_O1Q2Fx7t2esFa_wpCKQdUYGy0M20wB2IKolzjsOjRMgMOffNZS1xKUZ4BDG9r9M4pVZjn6MMrmVOMGC8ZI1ps10I60XtCT6eJhjGxWwBSA1kaMDnrxEXCwDu9AUpTNMu0TOdG_OLC-EydgSWx3CoXrbS-B1GWglxm3eonDWv-3TFmdfeuTuZGxl88dcFhuHm1FCFwBZ7v6uWwP5QNPsu3uFYjt6NdYkFORUCQItKo9D5sR9oKWv3RDKCByg&zp=N8zHdy2WQML0muJjBTfZ80baJmKs5Y3XRUJy15Mkr7BNl3KiLxiaMciwxtm5DqcjnAtua_bPgtgWBXU5wxLecDWyEEIoRUvT0mo-Ps4810SB1_mKhF1iZ1g_u3JLefQmvSDQOu_f6SnAmDEN8TwHBCjBWl8O1hlolYzPUzXYYgvjOr-4w0eJ0Z7X7yLuETWvmFbu3-adOET8iH7NqynVIz7BIgrstA6BtkBgmfdma11X_KShDOo0YN1ko-JLMYkT49YRlWQQ6iBSLP4izGK2scn82MjpM8d9HZze09uPUqXsMRO0jt3R8yy_shDM
+                    - link [ref=f32e192] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=8PgRL2MV_KFU6qcfozrO1Kn5ImrlRESDzxeEFQ6dDDzsCFVvEqnuH3HH-vcD004-upfHPgM-c35JgYPZeG1PVN_lLhXK0OUwalNWZ1bWvqP5w14lz5vt6_cWuGw7eNVM45AkSIoRUb5jbCSua5QTM6mfujTRz7N28Wuu9ISPL15ON9L9mwikJBtOWNE60i5bUVUzGmX08kW4XJ4wWNFMjag26uj1FkBLMD48GwWDnxgll0AvU1i4vrntmIvdWTz7skplqsNup6dov9wXtKG9ucCzF-aS7_4uTsGQnGO5UFLSbKA-o4MhRHiqGG7Les89TXl7yzzOR7gpT77yp5uMCqna2EvlxIt093BWF_OFmk2igdBGb5mCGsJj25CwLYpLM-XHXRwmA5DdaNmeADvxmzuK5C7ip-Ul5UENIR4Lfl4IYr_O1Q2Fx7t2esFa_wpCKQdUYGy0M20wB2IKolzjsOjRMgMOffNZS1xKUZ4BDG9r9M4pVZjn6MMrmVOMGC8ZI1ps10I60XtCT6eJhjGxWwBSA1kaMDnrxEXCwDu9AUpTNMu0TOdG_OLC-EydgSWx3CoXrbS-B1GWglxm3eonDWv-3TFmdfeuTuZGxl88dcFhuHm1FCFwBZ7v6uWwP5QNPsu3uFYjt6NdYkFORUCQItKo9D5sR9oKWv3RDKCByg&zp=N8zHdy2WQML0muJjBTfZ80baJmKs5Y3XRUJy15Mkr7BNl3KiLxiaMciwxtm5DqcjnAtua_bPgtgWBXU5wxLecDWyEEIoRUvT0mo-Ps4810SB1_mKhF1iZ1g_u3JLefQmvSDQOu_f6SnAmDEN8TwHBCjBWl8O1hlolYzPUzXYYgvjOr-4w0eJ0Z7X7yLuETWvmFbu3-adOET8iH7NqynVIz7BIgrstA6BtkBgmfdma11X_KShDOo0YN1ko-JLMYkT49YRlWQQ6iBSLP4izGK2scn82MjpM8d9HZze09uPUqXsMRO0jt3R8yy_shDM
+                      - 'img "Thumbnail image: Stuck in academia and wondering what''s next? Make the switch to Data Science, Data Engineering, or AI Engineering. Full-time, remote, 4–6 months. 100% funded if you''re unemployed." [ref=f32e193]'
+              - separator [ref=f32e194]
+              - region "Kommentare" [ref=f32e197]:
+                - heading "Kommentarbereich" [level=1] [ref=f32e198]
+                - article "Kommentar von rd_64 vor 23 Tagen" [ref=f32e200]:
+                  - generic [ref=f32e201] [cursor=pointer]:
+                    - link "Profil von rd_64 --- Avatar" [ref=f32e206]:
+                      - /url: https://www.reddit.com/user/rd_64/
+                      - img "Avatar von u/rd_64" [ref=f32e209]
+                    - generic [ref=f32e213]:
+                      - link "Profil von rd_64" [ref=f32e216]:
+                        - /url: https://www.reddit.com/user/rd_64/
+                        - text: rd_64
+                      - generic [ref=f32e217]: •
+                      - link [ref=f32e219]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycgwtu/
+                        - time [ref=f32e221]: vor 23 Tagen
+                  - generic [ref=f32e223]:
+                    - generic [ref=f32e226]:
+                      - paragraph [ref=f32e227]:
+                        - text: I use
+                        - link "Claude Code" [ref=f32e230] [cursor=pointer]:
+                          - /url: /search/?q=Claude+Code+AI&cId=d2a25859-21f2-462a-9e68-f4797dae20b0&iId=cc39f9f3-4ac1-4724-b3dc-031828f66dba
+                        - text: at work (Max plan) and have a personal Codex Plus plan (the 20$ one) for personal projects and I have to say I've been enjoying Codex more ever since GPT5.5 came out, and GPT5.6 made it even better.
+                      - paragraph [ref=f32e234]:
+                        - link "Fable" [ref=f32e237] [cursor=pointer]:
+                          - /url: /search/?q=Fable+AI+model&cId=382a08d6-f3a8-4a6c-8a12-b029cca015fe&iId=35d1d621-f2db-4ba8-b6fb-d944d1275b15
+                        - text: still seems to be the best model, but with the strict limits it's hardly usable even on the Max plan, and I always find myself switching to other models and nervously checking the usage, which doesn't make the programming experience very good. I never liked
+                        - link "Opus 4.8" [ref=f32e243] [cursor=pointer]:
+                          - /url: /search/?q=Opus+4.8+AI+model&cId=c1aef840-6911-4fba-b443-7930381d7de9&iId=43ba1d1a-8cc2-45c0-8d86-f21b5b8f16c7
+                        - text: because of the constant hallucinations, so I prefer
+                        - link "Sonnet 5" [ref=f32e249] [cursor=pointer]:
+                          - /url: /search/?q=Sonnet+5+AI+model&cId=9f49be39-6183-4c27-82cc-062d3deba76f&iId=413c6b3f-327b-4e04-b913-abac83f2cc70
+                        - text: for most work, which is much worse than the GPT models.
+                      - paragraph [ref=f32e253]: "I'd say try for yourself and see. With the 5 hour usage limit removed the Plus plan is an insane value for money. Just a tip: use the default Low effort for Sol and go with higher effort only if you have a really complicated task, the higher effort tends to over-engineer simple tasks."
+                    - generic [ref=f32e254]: "11"
+                    - 'article "Kommentarthread-Level1: Antwort von Reaper_1492 vor 23 Tagen" [ref=f32e263]':
+                      - generic [ref=f32e264] [cursor=pointer]:
+                        - link "Profil von Reaper_1492 --- Avatar" [ref=f32e269]:
+                          - /url: https://www.reddit.com/user/Reaper_1492/
+                        - generic [ref=f32e285]:
+                          - link "Profil von Reaper_1492" [ref=f32e288]:
+                            - /url: https://www.reddit.com/user/Reaper_1492/
+                            - text: Reaper_1492
+                          - generic [ref=f32e289]: •
+                          - link [ref=f32e291]:
+                            - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyd4704/
+                            - time [ref=f32e293]: vor 23 Tagen
+                      - generic [ref=f32e295]:
+                        - generic [ref=f32e298]:
+                          - paragraph [ref=f32e299]: I think it’s subjective, maybe.
+                          - paragraph [ref=f32e300]: I use both Claude and Codex at work, and Codex for personal.
+                          - paragraph [ref=f32e301]: I can tell you I have a project that Fable couldn’t handle and it reverted to building in brittle heuristics when the model needed to be generalizing.
+                          - paragraph [ref=f32e302]: I gave it to 5.6 Sol Ultra and when it analyzed the project after I gave up on Fable, it basically said “WTF”, and got it working (and generalizing).
+                          - paragraph [ref=f32e303]: I think 5.6 Sol is the top model in practice, despite what the benchmarks say, at least for me & my experience.
+                          - paragraph [ref=f32e304]: And while I think both OpenAI and Anthropic have been caught rerouting/quantizing subscription models in the past, I personally feel like it’s a lot more obvious/more frequent with Anthropic. I don’t trust them to maintain service levels for more than a few days at a time, especially the farther you get from release.
+                        - generic [ref=f32e305]: "2"
+                - article "Kommentar von Current_Ad7104 vor 23 Tagen" [ref=f32e313]:
+                  - generic [ref=f32e314] [cursor=pointer]:
+                    - link "Profil von Current_Ad7104 --- Avatar" [ref=f32e319]:
+                      - /url: https://www.reddit.com/user/Current_Ad7104/
+                      - img "Avatar von u/Current_Ad7104" [ref=f32e322]
+                    - generic [ref=f32e326]:
+                      - link "Profil von Current_Ad7104" [ref=f32e329]:
+                        - /url: https://www.reddit.com/user/Current_Ad7104/
+                        - text: Current_Ad7104
+                      - generic [ref=f32e330]: •
+                      - link [ref=f32e332]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycultp/
+                        - time [ref=f32e334]: vor 23 Tagen
+                  - generic [ref=f32e336]:
+                    - generic [ref=f32e339]:
+                      - paragraph [ref=f32e340]:
+                        - text: Use both. Get Max20 for Fable and Plus/Pro for
+                        - link "5.6 Sol Ultra" [ref=f32e343] [cursor=pointer]:
+                          - /url: /search/?q=GPT+5.6+Sol+Ultra&cId=319071db-7342-4959-b2c5-815942172b16&iId=349e2751-3048-4fc8-9212-afadd77b19a8
+                        - text: .
+                      - paragraph [ref=f32e347]: Connect Codex’s CLI to your Claude code and make them collaborate on whatever you do. Ask codex to review fable’s work, challenge it, improve it.
+                      - paragraph [ref=f32e348]: Been using this setup for my Claude and it’s been working drastically better than purely relying on Fable.
+                    - generic [ref=f32e349]: "6"
+                    - generic [ref=f32e356]:
+                      - 'article "Kommentarthread-Level1: Antwort von M3TAGH0ST vor 19 Tagen" [ref=f32e358]':
+                        - generic [ref=f32e359] [cursor=pointer]:
+                          - link "Profil von M3TAGH0ST --- Avatar" [ref=f32e364]:
+                            - /url: https://www.reddit.com/user/M3TAGH0ST/
+                          - generic [ref=f32e374]:
+                            - link "Profil von M3TAGH0ST" [ref=f32e377]:
+                              - /url: https://www.reddit.com/user/M3TAGH0ST/
+                              - text: M3TAGH0ST
+                            - generic [ref=f32e378]: •
+                            - link [ref=f32e380]:
+                              - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oz2mer6/
+                              - time [ref=f32e382]: vor 19 Tagen
+                        - generic [ref=f32e384]:
+                          - paragraph [ref=f32e388]: Hi there, can you explain to me how you did it ?
+                          - generic [ref=f32e389]: "1"
+                          - button "2 weitere Antworten" [ref=f32e399] [cursor=pointer]:
+                            - generic [ref=f32e404]:
+                              - generic [ref=f32e405]: "2"
+                              - text: weitere Antworten
+                      - button "1 weitere Antwort" [ref=f32e410] [cursor=pointer]:
+                        - generic [ref=f32e415]:
+                          - generic [ref=f32e416]: "1"
+                          - text: weitere Antwort
+                - article "Kommentar von be_super_cereal_now vor 23 Tagen" [ref=f32e420]:
+                  - generic [ref=f32e421] [cursor=pointer]:
+                    - link "Profil von be_super_cereal_now --- Avatar" [ref=f32e426]:
+                      - /url: https://www.reddit.com/user/be_super_cereal_now/
+                    - generic [ref=f32e442]:
+                      - link "Profil von be_super_cereal_now" [ref=f32e445]:
+                        - /url: https://www.reddit.com/user/be_super_cereal_now/
+                        - text: be_super_cereal_now
+                      - generic [ref=f32e446]: •
+                      - link [ref=f32e448]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycefmw/
+                        - time [ref=f32e450]: vor 23 Tagen
+                  - generic [ref=f32e452]:
+                    - paragraph [ref=f32e456]: Use both. When did this become an either/or decision?
+                    - generic [ref=f32e457]: "2"
+                    - button "5 weitere Antworten" [ref=f32e467] [cursor=pointer]:
+                      - generic [ref=f32e472]:
+                        - generic [ref=f32e473]: "5"
+                        - text: weitere Antworten
+                - article "Kommentar von tanbirj vor 23 Tagen" [ref=f32e477]:
+                  - generic [ref=f32e478] [cursor=pointer]:
+                    - link "Profil von tanbirj --- Avatar" [ref=f32e483]:
+                      - /url: https://www.reddit.com/user/tanbirj/
+                    - generic [ref=f32e499]:
+                      - link "Profil von tanbirj" [ref=f32e502]:
+                        - /url: https://www.reddit.com/user/tanbirj/
+                        - text: tanbirj
+                      - generic [ref=f32e503]: •
+                      - link [ref=f32e505]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycpgfo/
+                        - time [ref=f32e507]: vor 23 Tagen
+                  - generic [ref=f32e509]:
+                    - paragraph [ref=f32e513]: I have both at the moment (Max plan on Claude). My work is finance and strategy consulting. So far, Sol is giving me better results than Fable. It’s also weird not keeping a continuous eye on the session limit counter
+                    - generic [ref=f32e514]: "4"
+                    - generic [ref=f32e521]:
+                      - 'article "Kommentarthread-Level1: Antwort von therottenworld vor 22 Tagen" [ref=f32e523]':
+                        - generic [ref=f32e524] [cursor=pointer]:
+                          - link "Profil von therottenworld --- Avatar" [ref=f32e529]:
+                            - /url: https://www.reddit.com/user/therottenworld/
+                            - img "Avatar von u/therottenworld" [ref=f32e532]
+                          - generic [ref=f32e536]:
+                            - link "Profil von therottenworld" [ref=f32e539]:
+                              - /url: https://www.reddit.com/user/therottenworld/
+                              - text: therottenworld
+                            - generic [ref=f32e540]: •
+                            - link [ref=f32e542]:
+                              - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyhlm89/
+                              - time [ref=f32e544]: vor 22 Tagen
+                        - generic [ref=f32e546]:
+                          - paragraph [ref=f32e550]: How is Codex as a harnass compared to Claude Code?
+                          - generic [ref=f32e551]: "1"
+                          - button "1 weitere Antwort" [ref=f32e561] [cursor=pointer]:
+                            - generic [ref=f32e566]:
+                              - generic [ref=f32e567]: "1"
+                              - text: weitere Antwort
+                      - button "1 weitere Antwort" [ref=f32e572] [cursor=pointer]:
+                        - generic [ref=f32e577]:
+                          - generic [ref=f32e578]: "1"
+                          - text: weitere Antwort
+                - generic "So I came back to Meshy after months away and... what happened? The mesh quality is actually insane now." [ref=f32e583]:
+                  - generic [ref=f32e584]:
+                    - 'generic "Advertisement: So I came back to Meshy after months away and... what happened? The mesh quality is actually insane now." [ref=f32e585]':
+                      - 'link "Advertisement: So I came back to Meshy after months away and... what happened? The mesh quality is actually insane now." [ref=f32e586] [cursor=pointer]':
+                        - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=HW7MmTc6rpY672InGdiySdESjEYfLN4YDD3Z8OjSlqepSdmxRfVIf2B4bXrrxVjFueki9nu7tB6hg2Hrf2sfuYM3zQ6npzrYMUa_O3vYqvKjhIItTAfxRepn9l0f6bYCFSdv5AEvvWLJDJHe_Sru9W2YaqmVpTN4rH2ZXz03gf3rSJ0NDyfzz6Edg47K-tHwuLntqnIiAHVNbqvNZyWwWnJmXlH-oA5hBhreOFnjl42wpMnhBh6d4cBa9KKRMfblzEI1VCTVpY_62464KfVFf0dlnH4qmw2xt0jZWfHRT8o3RkxOYisvNGT-FgQaID_5PS-_m04E6-NZM48HD5yJ8j-i9inxo-IdAO5j6Ih6dY_ba8mqX-akZEi-HtyOs2OL-rXYijavSbrMiLq03a2S6k-f11tzP_fF2GI2FslQjbPubmAUbmfKQFlr4LGu2CFDNfM
+                    - generic [ref=f32e587]:
+                      - generic [ref=f32e588]:
+                        - link "u/Meshyai" [ref=f32e590] [cursor=pointer]:
+                          - /url: /user/Meshyai/
+                          - img "Avatar von u/Meshyai" [ref=f32e593]
+                        - generic [ref=f32e595]: •
+                        - link "Gesponsert" [ref=f32e597] [cursor=pointer]:
+                          - /url: /user/Meshyai/
+                        - link [ref=f32e600] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=HW7MmTc6rpY672InGdiySdESjEYfLN4YDD3Z8OjSlqepSdmxRfVIf2B4bXrrxVjFueki9nu7tB6hg2Hrf2sfuYM3zQ6npzrYMUa_O3vYqvKjhIItTAfxRepn9l0f6bYCFSdv5AEvvWLJDJHe_Sru9W2YaqmVpTN4rH2ZXz03gf3rSJ0NDyfzz6Edg47K-tHwuLntqnIiAHVNbqvNZyWwWnJmXlH-oA5hBhreOFnjl42wpMnhBh6d4cBa9KKRMfblzEI1VCTVpY_62464KfVFf0dlnH4qmw2xt0jZWfHRT8o3RkxOYisvNGT-FgQaID_5PS-_m04E6-NZM48HD5yJ8j-i9inxo-IdAO5j6Ih6dY_ba8mqX-akZEi-HtyOs2OL-rXYijavSbrMiLq03a2S6k-f11tzP_fF2GI2FslQjbPubmAUbmfKQFlr4LGu2CFDNfM
+                      - button "Handlungen für Nutzer*innen öffnen" [ref=f32e606] [cursor=pointer]
+                    - generic [ref=f32e611]:
+                      - link "So I came back to Meshy after months away and... what happened? The mesh quality is actually insane now." [ref=f32e613] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=HW7MmTc6rpY672InGdiySdESjEYfLN4YDD3Z8OjSlqepSdmxRfVIf2B4bXrrxVjFueki9nu7tB6hg2Hrf2sfuYM3zQ6npzrYMUa_O3vYqvKjhIItTAfxRepn9l0f6bYCFSdv5AEvvWLJDJHe_Sru9W2YaqmVpTN4rH2ZXz03gf3rSJ0NDyfzz6Edg47K-tHwuLntqnIiAHVNbqvNZyWwWnJmXlH-oA5hBhreOFnjl42wpMnhBh6d4cBa9KKRMfblzEI1VCTVpY_62464KfVFf0dlnH4qmw2xt0jZWfHRT8o3RkxOYisvNGT-FgQaID_5PS-_m04E6-NZM48HD5yJ8j-i9inxo-IdAO5j6Ih6dY_ba8mqX-akZEi-HtyOs2OL-rXYijavSbrMiLq03a2S6k-f11tzP_fF2GI2FslQjbPubmAUbmfKQFlr4LGu2CFDNfM
+                      - list [ref=f32e617]:
+                        - generic:
+                          - listitem [ref=f32e618]:
+                            - generic [ref=f32e619]:
+                              - link [ref=f32e621] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=HW7MmTc6rpY672InGdiySdESjEYfLN4YDD3Z8OjSlqepSdmxRfVIf2B4bXrrxVjFueki9nu7tB6hg2Hrf2sfuYM3zQ6npzrYMUa_O3vYqvKjhIItTAfxRepn9l0f6bYCFSdv5AEvvWLJDJHe_Sru9W2YaqmVpTN4rH2ZXz03gf3rSJ0NDyfzz6Edg47K-tHwuLntqnIiAHVNbqvNZyWwWnJmXlH-oA5hBhreOFnjl42wpMnhBh6d4cBa9KKRMfblzEI1VCTVpY_62464KfVFf0dlnH4qmw2xt0jZWfHRT8o3RkxOYisvNGT-FgQaID_5PS-_m04E6-NZM48HD5yJ8j-i9inxo-IdAO5j6Ih6dY_ba8mqX-akZEi-HtyOs2OL-rXYijavSbrMiLq03a2S6k-f11tzP_fF2GI2FslQjbPubmAUbmfKQFlr4LGu2CFDNfM
+                              - link [ref=f32e623] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=HW7MmTc6rpY672InGdiySdESjEYfLN4YDD3Z8OjSlqepSdmxRfVIf2B4bXrrxVjFueki9nu7tB6hg2Hrf2sfuYM3zQ6npzrYMUa_O3vYqvKjhIItTAfxRepn9l0f6bYCFSdv5AEvvWLJDJHe_Sru9W2YaqmVpTN4rH2ZXz03gf3rSJ0NDyfzz6Edg47K-tHwuLntqnIiAHVNbqvNZyWwWnJmXlH-oA5hBhreOFnjl42wpMnhBh6d4cBa9KKRMfblzEI1VCTVpY_62464KfVFf0dlnH4qmw2xt0jZWfHRT8o3RkxOYisvNGT-FgQaID_5PS-_m04E6-NZM48HD5yJ8j-i9inxo-IdAO5j6Ih6dY_ba8mqX-akZEi-HtyOs2OL-rXYijavSbrMiLq03a2S6k-f11tzP_fF2GI2FslQjbPubmAUbmfKQFlr4LGu2CFDNfM
+                                - img "So I came back to Meshy after months away and... what happened? The mesh quality is actually insane now." [ref=f32e624]
+                          - listitem [ref=f32e625]:
+                            - generic [ref=f32e626]:
+                              - link [ref=f32e628] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=lOA1jd_oFgddQtcHOzYYwK0Z4epOf7-BKEtcugq2Nei2TWnwj70hViShXwy6lBuSnK_19zgXPqkAKCXWa_lYxJH7MMxaMuxILch-s8oF1U9q7hzlbCX1wRGA6FSfW4FkB5szGbO6CG4B1NQxTNihDLGdKR4X1gxQPLpT1Cvk13uej_p0HwXBNRhpULfRl_K8TOH2NQVNS74Zc4Je17wEFoIT-vo0MF85aWa-fA7qLC-9fMQ1mGuxVhot4LkUQjcJvNeawqWwero9hfYl02i37HgsowmHiU1H6HyAVv5vjZUA5gWUYDzuxO4Dcm_QpzG-zlckbqzT7MPKE2GR2UBPXOWdj0raUHAvdJA-s6DKF3ywh6_1r3GmtLCVwOke7Y41kiSk
+                              - link [ref=f32e630] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=lOA1jd_oFgddQtcHOzYYwK0Z4epOf7-BKEtcugq2Nei2TWnwj70hViShXwy6lBuSnK_19zgXPqkAKCXWa_lYxJH7MMxaMuxILch-s8oF1U9q7hzlbCX1wRGA6FSfW4FkB5szGbO6CG4B1NQxTNihDLGdKR4X1gxQPLpT1Cvk13uej_p0HwXBNRhpULfRl_K8TOH2NQVNS74Zc4Je17wEFoIT-vo0MF85aWa-fA7qLC-9fMQ1mGuxVhot4LkUQjcJvNeawqWwero9hfYl02i37HgsowmHiU1H6HyAVv5vjZUA5gWUYDzuxO4Dcm_QpzG-zlckbqzT7MPKE2GR2UBPXOWdj0raUHAvdJA-s6DKF3ywh6_1r3GmtLCVwOke7Y41kiSk
+                                - img "So I came back to Meshy after months away and... what happened? The mesh quality is actually insane now." [ref=f32e631]
+                          - listitem [ref=f32e632]:
+                            - generic [ref=f32e633]:
+                              - link [ref=f32e635] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=vqJ7GV2CpZc_kZK2B1BtNVMTEpfvvXKG8FtrD0Qs2XCp4SSPdRqCwi9Cdw5XN1vZv6U_3zT3EJHs2YQ8U_YzTsMW-H0OrHZEOyZEEDXFAj6u2lmSvnotTQc1xkPy6GxA_wIfKPcjhV8nZEXjo0RZ6SzFc-dfzhg-JQn8v8ao4wKjcionnbp33Fce5kruAGhW6kDRoeKgNH6KaTRe6kW3mvw3Vq3ugIiUUA0oToecDL4gK4FpttkM_F4OAxYw6lxwAxmIK8fq2x-V_bdXZceGHbNWqinTdQePptjeUZS8z1Px2qcVOFAPZs_xaBLF0FxqJ1yOEkSREbrVOcaH5KIrSqMJgXGpogafn49kV1TBWoCxxC9dcM70lt-UX2H-ofqzR0AF
+                              - link [ref=f32e637] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=vqJ7GV2CpZc_kZK2B1BtNVMTEpfvvXKG8FtrD0Qs2XCp4SSPdRqCwi9Cdw5XN1vZv6U_3zT3EJHs2YQ8U_YzTsMW-H0OrHZEOyZEEDXFAj6u2lmSvnotTQc1xkPy6GxA_wIfKPcjhV8nZEXjo0RZ6SzFc-dfzhg-JQn8v8ao4wKjcionnbp33Fce5kruAGhW6kDRoeKgNH6KaTRe6kW3mvw3Vq3ugIiUUA0oToecDL4gK4FpttkM_F4OAxYw6lxwAxmIK8fq2x-V_bdXZceGHbNWqinTdQePptjeUZS8z1Px2qcVOFAPZs_xaBLF0FxqJ1yOEkSREbrVOcaH5KIrSqMJgXGpogafn49kV1TBWoCxxC9dcM70lt-UX2H-ofqzR0AF
+                                - img "So I came back to Meshy after months away and... what happened? The mesh quality is actually insane now." [ref=f32e638]
+                      - generic [ref=f32e639]:
+                        - link [ref=f32e641] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=HW7MmTc6rpY672InGdiySdESjEYfLN4YDD3Z8OjSlqepSdmxRfVIf2B4bXrrxVjFueki9nu7tB6hg2Hrf2sfuYM3zQ6npzrYMUa_O3vYqvKjhIItTAfxRepn9l0f6bYCFSdv5AEvvWLJDJHe_Sru9W2YaqmVpTN4rH2ZXz03gf3rSJ0NDyfzz6Edg47K-tHwuLntqnIiAHVNbqvNZyWwWnJmXlH-oA5hBhreOFnjl42wpMnhBh6d4cBa9KKRMfblzEI1VCTVpY_62464KfVFf0dlnH4qmw2xt0jZWfHRT8o3RkxOYisvNGT-FgQaID_5PS-_m04E6-NZM48HD5yJ8j-i9inxo-IdAO5j6Ih6dY_ba8mqX-akZEi-HtyOs2OL-rXYijavSbrMiLq03a2S6k-f11tzP_fF2GI2FslQjbPubmAUbmfKQFlr4LGu2CFDNfM
+                        - generic [ref=f32e642]:
+                          - link "meshy.ai" [ref=f32e646] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=HW7MmTc6rpY672InGdiySdESjEYfLN4YDD3Z8OjSlqepSdmxRfVIf2B4bXrrxVjFueki9nu7tB6hg2Hrf2sfuYM3zQ6npzrYMUa_O3vYqvKjhIItTAfxRepn9l0f6bYCFSdv5AEvvWLJDJHe_Sru9W2YaqmVpTN4rH2ZXz03gf3rSJ0NDyfzz6Edg47K-tHwuLntqnIiAHVNbqvNZyWwWnJmXlH-oA5hBhreOFnjl42wpMnhBh6d4cBa9KKRMfblzEI1VCTVpY_62464KfVFf0dlnH4qmw2xt0jZWfHRT8o3RkxOYisvNGT-FgQaID_5PS-_m04E6-NZM48HD5yJ8j-i9inxo-IdAO5j6Ih6dY_ba8mqX-akZEi-HtyOs2OL-rXYijavSbrMiLq03a2S6k-f11tzP_fF2GI2FslQjbPubmAUbmfKQFlr4LGu2CFDNfM
+                          - link "Registrieren" [ref=f32e648] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=1xg5ItnTMLTy2RtFBubnYQPoypIko8Dh8O6LSmwTxS93CC91q18jo7OCsPfUErH2ZblS3ZPpWqABXSxXaiGPpDh5mDKkSNrf2I8dFMJvp7I8Tx4-HlIV4DcA8YgwMciWQ4IDvhaOKpP7T8sjp6_aOBgyUrbso5jMfMVSPLkn4fXfkaRD9jsDeVGl-NZQ3as-MIWjztuqEBgkAH-NVe99CYzx7nc6mVhifBGXE3qU9Kz04F7XXk5kza3IKw2tikoBFlflxuUneS_laGczlWu-qzPGP_BxwEvQpVbOPbUUnz8MWdspQTpUKPTOB656RBnKvCTk4ppA8dmG5RHkBu9JB7yqThC-CM7lRnGijiPQLy8dhf_hmKZJWSjmB6QGCoHdYuy6WKx0gLHzhLMcxQbt2e5a62rE-mcm_jaAMB3GJz9rGPVnPlQeQ56f6YslRMQzNW9B4ekqKi8ZGwETzqI7Wj59B_4UFx4TlCK09szvDzKAZcfHf88V6798bdD8R08EyOvtji6toWfSXX1US25wzs45F0PeP2RcrkNiQfN0Xjsz4afFGSWZXReVCYjTfvHldvqSEJEL-v9C05HapkXOikIxozcGN-skMz_5MJ-uDjpJ7C-LszFGCMBWhZlaK2b6RdMyMV6JHoJXkzsRw-XjZ5igEjXlG7Mx6IOWUUaMgH4&zp=HW7MmTc6rpY672InGdiySdESjEYfLN4YDD3Z8OjSlqepSdmxRfVIf2B4bXrrxVjFueki9nu7tB6hg2Hrf2sfuYM3zQ6npzrYMUa_O3vYqvKjhIItTAfxRepn9l0f6bYCFSdv5AEvvWLJDJHe_Sru9W2YaqmVpTN4rH2ZXz03gf3rSJ0NDyfzz6Edg47K-tHwuLntqnIiAHVNbqvNZyWwWnJmXlH-oA5hBhreOFnjl42wpMnhBh6d4cBa9KKRMfblzEI1VCTVpY_62464KfVFf0dlnH4qmw2xt0jZWfHRT8o3RkxOYisvNGT-FgQaID_5PS-_m04E6-NZM48HD5yJ8j-i9inxo-IdAO5j6Ih6dY_ba8mqX-akZEi-HtyOs2OL-rXYijavSbrMiLq03a2S6k-f11tzP_fF2GI2FslQjbPubmAUbmfKQFlr4LGu2CFDNfM
+                - article "Kommentar von space_wiener vor 23 Tagen" [ref=f32e652]:
+                  - generic [ref=f32e653] [cursor=pointer]:
+                    - link "Profil von space_wiener --- Avatar" [ref=f32e658]:
+                      - /url: https://www.reddit.com/user/space_wiener/
+                    - generic [ref=f32e674]:
+                      - link "Profil von space_wiener" [ref=f32e677]:
+                        - /url: https://www.reddit.com/user/space_wiener/
+                        - text: space_wiener
+                      - generic [ref=f32e678]: •
+                      - link [ref=f32e680]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycfp2x/
+                        - time [ref=f32e682]: vor 23 Tagen
+                  - generic [ref=f32e684]:
+                    - generic [ref=f32e687]:
+                      - paragraph [ref=f32e688]: I used both but might eventually fully switch to Open AI.
+                      - paragraph [ref=f32e689]: Planning stuff I cannot stand Claude. So it’s only used for code now. Did some ultra fable code reviews while it was available.
+                    - generic [ref=f32e690]: "2"
+                - article "Kommentar von myreddit333 vor 22 Tagen" [ref=f32e698]:
+                  - generic [ref=f32e699] [cursor=pointer]:
+                    - link "Profil von myreddit333 --- Avatar" [ref=f32e704]:
+                      - /url: https://www.reddit.com/user/myreddit333/
+                      - img "Avatar von u/myreddit333" [ref=f32e707]
+                    - generic [ref=f32e711]:
+                      - link "Profil von myreddit333" [ref=f32e714]:
+                        - /url: https://www.reddit.com/user/myreddit333/
+                        - text: myreddit333
+                      - generic [ref=f32e715]: •
+                      - link [ref=f32e717]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyg4sci/
+                        - time [ref=f32e719]: vor 22 Tagen
+                  - generic [ref=f32e721]:
+                    - generic [ref=f32e724]:
+                      - paragraph [ref=f32e725]: i am using Claude since Claude 2.0 - and i love it.Last week i canceld MAX -> downgraded.
+                      - paragraph [ref=f32e726]: I am using ChatGPT 5.6 - and it is really GREAT!Didn´t expect it!!! - Try :)
+                    - generic [ref=f32e727]: "2"
+                - article "Kommentar von TyFi10 vor 23 Tagen" [ref=f32e735]:
+                  - generic [ref=f32e736] [cursor=pointer]:
+                    - link "Profil von TyFi10 --- Avatar" [ref=f32e741]:
+                      - /url: https://www.reddit.com/user/TyFi10/
+                      - img "Avatar von u/TyFi10" [ref=f32e744]
+                    - generic [ref=f32e748]:
+                      - link "Profil von TyFi10" [ref=f32e751]:
+                        - /url: https://www.reddit.com/user/TyFi10/
+                        - text: TyFi10
+                      - generic [ref=f32e752]: •
+                      - link [ref=f32e754]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycf7he/
+                        - time [ref=f32e756]: vor 23 Tagen
+                  - generic [ref=f32e758]:
+                    - paragraph [ref=f32e762]: Both!
+                    - generic [ref=f32e763]: "1"
+                - article "Kommentar von heseov vor 23 Tagen" [ref=f32e771]:
+                  - generic [ref=f32e772] [cursor=pointer]:
+                    - link "Profil von heseov --- Avatar" [ref=f32e777]:
+                      - /url: https://www.reddit.com/user/heseov/
+                    - generic [ref=f32e793]:
+                      - link "Profil von heseov" [ref=f32e796]:
+                        - /url: https://www.reddit.com/user/heseov/
+                        - text: heseov
+                      - generic [ref=f32e797]: •
+                      - link [ref=f32e799]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycqifj/
+                        - time [ref=f32e801]: vor 23 Tagen
+                  - generic [ref=f32e803]:
+                    - paragraph [ref=f32e807]: I'd get a codex sub to try it out. I still primarily use fable for making plans then will have sol review the fable plans. Sol is always finding significant things fable missed in plan designs. I don't know if it's better but it's good.
+                    - generic [ref=f32e808]: "1"
+                - article "Kommentar von butimjustagirl vor 22 Tagen" [ref=f32e816]:
+                  - generic [ref=f32e817] [cursor=pointer]:
+                    - link "Profil von butimjustagirl --- Avatar" [ref=f32e822]:
+                      - /url: https://www.reddit.com/user/butimjustagirl/
+                      - img "Avatar von u/butimjustagirl" [ref=f32e825]
+                    - generic [ref=f32e829]:
+                      - link "Profil von butimjustagirl" [ref=f32e832]:
+                        - /url: https://www.reddit.com/user/butimjustagirl/
+                        - text: butimjustagirl
+                      - generic [ref=f32e833]: •
+                      - link [ref=f32e835]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyhabcb/
+                        - time [ref=f32e837]: vor 22 Tagen
+                  - generic [ref=f32e839]:
+                    - paragraph [ref=f32e843]: "\"extra 50% claude code\" is disappearing today."
+                    - generic [ref=f32e844]: "1"
+                - article "Kommentar von Radiant-Chipmunk-239 vor 22 Tagen" [ref=f32e852]:
+                  - generic [ref=f32e853] [cursor=pointer]:
+                    - link "Profil von Radiant-Chipmunk-239 --- Avatar" [ref=f32e858]:
+                      - /url: https://www.reddit.com/user/Radiant-Chipmunk-239/
+                      - img "Avatar von u/Radiant-Chipmunk-239" [ref=f32e861]
+                    - generic [ref=f32e865]:
+                      - link "Profil von Radiant-Chipmunk-239" [ref=f32e868]:
+                        - /url: https://www.reddit.com/user/Radiant-Chipmunk-239/
+                        - text: Radiant-Chipmunk-239
+                      - generic [ref=f32e869]: •
+                      - link [ref=f32e871]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyhlm34/
+                        - time [ref=f32e873]: vor 22 Tagen
+                  - generic [ref=f32e875]:
+                    - generic [ref=f32e878]:
+                      - paragraph [ref=f32e879]: I'm finding both.
+                      - paragraph [ref=f32e880]: I run fable on a code base and have Sol review it.or I run Sol on a code base and have fable review it.
+                      - paragraph [ref=f32e881]: at times fable out performs Sol on something specific and Sol just can't fix the issue identified by Fable. a contrived example is, say, fable is better at UI, while Sol is better at data modeling.
+                      - paragraph [ref=f32e882]: I'm using both.
+                    - generic [ref=f32e883]: "1"
+                - article "Kommentar von According_Garbage_72 vor 22 Tagen" [ref=f32e891]:
+                  - generic [ref=f32e892] [cursor=pointer]:
+                    - link "Profil von According_Garbage_72 --- Avatar" [ref=f32e897]:
+                      - /url: https://www.reddit.com/user/According_Garbage_72/
+                    - generic [ref=f32e907]:
+                      - link "Profil von According_Garbage_72" [ref=f32e910]:
+                        - /url: https://www.reddit.com/user/According_Garbage_72/
+                        - text: According_Garbage_72
+                      - generic [ref=f32e911]: •
+                      - link [ref=f32e913]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyhr3v7/
+                        - time [ref=f32e915]: vor 22 Tagen
+                  - generic [ref=f32e917]:
+                    - paragraph [ref=f32e921]: When coding, I get far with adversarial reviews back and forth between ChatGPT 5.6 Sol and Opus 4.8 high effort until there is consensus. Sometimes I throw Gemini in the mix, too.
+                    - generic [ref=f32e922]: "1"
+                - generic "Outdated data? Switch to data-driven workflows." [ref=f32e931]:
+                  - generic [ref=f32e932]:
+                    - 'generic "Advertisement: Outdated data? Switch to data-driven workflows." [ref=f32e933]':
+                      - 'link "Advertisement: Outdated data? Switch to data-driven workflows." [ref=f32e934] [cursor=pointer]':
+                        - /url: https://alb.reddit.com/cr?za=vFcE_MOz9nEctTO3e0uAPzEVw4bY4bC_QRmx0mhMF7E2YGTbWP6tpo1MoKLD9DvZiA7nKI9uYqXngIXERhuJG_OZIn_75FsgnNRs3ggJwzdN9phJxUHGIpZcKKtccVTT_Qdri-IiQX2CsPKo6QhtRPVYReDi9rzRg6oEvp8jv26OtkayB5fS6oCfy8ALa5rO_g2EkCgWZKre3KCjqROA8zZOw-OkRBcY4CLmg7FXAKpPp8PtAcMH6kAXxl0__Cr0JldpUeXqDq6XUkgbi6w1rz8gMyHGbhb5ZnVY9LrkTpLI0HnJTbLlSxWINtZ2Qd-TNrlT8KWE33DAtTL9z1Etm2N5b2GB07xkMitLMJSM52D6P4nd5qVg8MrI0txHgJ1acYi4FojfjtAIRbBXUrTV0eRDEyq9R0XdvSkz_zRIXOVFamkPHbk4VsjvGtOvitHS16h_uK5PmDLQj_g1tyQfl-cv2miXQfU81-QKVW5HT0YPC_MEzdOjQmTiTmSNngIRU-yD0x2KMrWt99r-PONeo7thmmnyTdmQVH9uVDGPw4knHq9z5ktZOGYF4LGwAe1nmJbnj1GIjeTxQ9xGqBHQALUtgowVfiHu8Gic7mIM3x2DUIegfE0LpmoncD03prAizKYIwlpIRdlBQTnORH9CjezsvYZ43tVqZ7OLcfk&zp=p7fE-cB8SMccFF600FN_YWGJ4QQk9ZzYkMQhgVPvxvpicwiv7rr2--TSeH1HLpEkRPvgwDSVMCLpZoZ4A_7mOM818vLlTpQ9hpsgku9uGe64kt_oE12CMXVmgNMPaVATmEDJ3YDDR4hQ5PW-RRx_efvIfE2p1Ywlno5m6_6PMxYjR-gYMqmqBKpJmk_cZNS-KUZoUCXfN8EgKBbrpiu6Zg3Ie87m9061hSrcspqZQ6sIA6NvvKOXE7jSBXvk-7OX41-q6VKzTcg
+                    - generic [ref=f32e935]:
+                      - generic [ref=f32e936]:
+                        - link "u/Bentley_Systems" [ref=f32e938] [cursor=pointer]:
+                          - /url: /user/Bentley_Systems/
+                          - img "Avatar von u/Bentley_Systems" [ref=f32e941]
+                        - generic [ref=f32e943]: •
+                        - link "Gesponsert" [ref=f32e945] [cursor=pointer]:
+                          - /url: /user/Bentley_Systems/
+                        - link [ref=f32e948] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=vFcE_MOz9nEctTO3e0uAPzEVw4bY4bC_QRmx0mhMF7E2YGTbWP6tpo1MoKLD9DvZiA7nKI9uYqXngIXERhuJG_OZIn_75FsgnNRs3ggJwzdN9phJxUHGIpZcKKtccVTT_Qdri-IiQX2CsPKo6QhtRPVYReDi9rzRg6oEvp8jv26OtkayB5fS6oCfy8ALa5rO_g2EkCgWZKre3KCjqROA8zZOw-OkRBcY4CLmg7FXAKpPp8PtAcMH6kAXxl0__Cr0JldpUeXqDq6XUkgbi6w1rz8gMyHGbhb5ZnVY9LrkTpLI0HnJTbLlSxWINtZ2Qd-TNrlT8KWE33DAtTL9z1Etm2N5b2GB07xkMitLMJSM52D6P4nd5qVg8MrI0txHgJ1acYi4FojfjtAIRbBXUrTV0eRDEyq9R0XdvSkz_zRIXOVFamkPHbk4VsjvGtOvitHS16h_uK5PmDLQj_g1tyQfl-cv2miXQfU81-QKVW5HT0YPC_MEzdOjQmTiTmSNngIRU-yD0x2KMrWt99r-PONeo7thmmnyTdmQVH9uVDGPw4knHq9z5ktZOGYF4LGwAe1nmJbnj1GIjeTxQ9xGqBHQALUtgowVfiHu8Gic7mIM3x2DUIegfE0LpmoncD03prAizKYIwlpIRdlBQTnORH9CjezsvYZ43tVqZ7OLcfk&zp=p7fE-cB8SMccFF600FN_YWGJ4QQk9ZzYkMQhgVPvxvpicwiv7rr2--TSeH1HLpEkRPvgwDSVMCLpZoZ4A_7mOM818vLlTpQ9hpsgku9uGe64kt_oE12CMXVmgNMPaVATmEDJ3YDDR4hQ5PW-RRx_efvIfE2p1Ywlno5m6_6PMxYjR-gYMqmqBKpJmk_cZNS-KUZoUCXfN8EgKBbrpiu6Zg3Ie87m9061hSrcspqZQ6sIA6NvvKOXE7jSBXvk-7OX41-q6VKzTcg
+                      - button "Handlungen für Nutzer*innen öffnen" [ref=f32e954] [cursor=pointer]
+                    - generic [ref=f32e960]:
+                      - generic [ref=f32e961]:
+                        - link "Outdated data? Switch to data-driven workflows." [ref=f32e963] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=vFcE_MOz9nEctTO3e0uAPzEVw4bY4bC_QRmx0mhMF7E2YGTbWP6tpo1MoKLD9DvZiA7nKI9uYqXngIXERhuJG_OZIn_75FsgnNRs3ggJwzdN9phJxUHGIpZcKKtccVTT_Qdri-IiQX2CsPKo6QhtRPVYReDi9rzRg6oEvp8jv26OtkayB5fS6oCfy8ALa5rO_g2EkCgWZKre3KCjqROA8zZOw-OkRBcY4CLmg7FXAKpPp8PtAcMH6kAXxl0__Cr0JldpUeXqDq6XUkgbi6w1rz8gMyHGbhb5ZnVY9LrkTpLI0HnJTbLlSxWINtZ2Qd-TNrlT8KWE33DAtTL9z1Etm2N5b2GB07xkMitLMJSM52D6P4nd5qVg8MrI0txHgJ1acYi4FojfjtAIRbBXUrTV0eRDEyq9R0XdvSkz_zRIXOVFamkPHbk4VsjvGtOvitHS16h_uK5PmDLQj_g1tyQfl-cv2miXQfU81-QKVW5HT0YPC_MEzdOjQmTiTmSNngIRU-yD0x2KMrWt99r-PONeo7thmmnyTdmQVH9uVDGPw4knHq9z5ktZOGYF4LGwAe1nmJbnj1GIjeTxQ9xGqBHQALUtgowVfiHu8Gic7mIM3x2DUIegfE0LpmoncD03prAizKYIwlpIRdlBQTnORH9CjezsvYZ43tVqZ7OLcfk&zp=p7fE-cB8SMccFF600FN_YWGJ4QQk9ZzYkMQhgVPvxvpicwiv7rr2--TSeH1HLpEkRPvgwDSVMCLpZoZ4A_7mOM818vLlTpQ9hpsgku9uGe64kt_oE12CMXVmgNMPaVATmEDJ3YDDR4hQ5PW-RRx_efvIfE2p1Ywlno5m6_6PMxYjR-gYMqmqBKpJmk_cZNS-KUZoUCXfN8EgKBbrpiu6Zg3Ie87m9061hSrcspqZQ6sIA6NvvKOXE7jSBXvk-7OX41-q6VKzTcg
+                        - generic [ref=f32e964]:
+                          - link [ref=f32e966] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=vFcE_MOz9nEctTO3e0uAPzEVw4bY4bC_QRmx0mhMF7E2YGTbWP6tpo1MoKLD9DvZiA7nKI9uYqXngIXERhuJG_OZIn_75FsgnNRs3ggJwzdN9phJxUHGIpZcKKtccVTT_Qdri-IiQX2CsPKo6QhtRPVYReDi9rzRg6oEvp8jv26OtkayB5fS6oCfy8ALa5rO_g2EkCgWZKre3KCjqROA8zZOw-OkRBcY4CLmg7FXAKpPp8PtAcMH6kAXxl0__Cr0JldpUeXqDq6XUkgbi6w1rz8gMyHGbhb5ZnVY9LrkTpLI0HnJTbLlSxWINtZ2Qd-TNrlT8KWE33DAtTL9z1Etm2N5b2GB07xkMitLMJSM52D6P4nd5qVg8MrI0txHgJ1acYi4FojfjtAIRbBXUrTV0eRDEyq9R0XdvSkz_zRIXOVFamkPHbk4VsjvGtOvitHS16h_uK5PmDLQj_g1tyQfl-cv2miXQfU81-QKVW5HT0YPC_MEzdOjQmTiTmSNngIRU-yD0x2KMrWt99r-PONeo7thmmnyTdmQVH9uVDGPw4knHq9z5ktZOGYF4LGwAe1nmJbnj1GIjeTxQ9xGqBHQALUtgowVfiHu8Gic7mIM3x2DUIegfE0LpmoncD03prAizKYIwlpIRdlBQTnORH9CjezsvYZ43tVqZ7OLcfk&zp=p7fE-cB8SMccFF600FN_YWGJ4QQk9ZzYkMQhgVPvxvpicwiv7rr2--TSeH1HLpEkRPvgwDSVMCLpZoZ4A_7mOM818vLlTpQ9hpsgku9uGe64kt_oE12CMXVmgNMPaVATmEDJ3YDDR4hQ5PW-RRx_efvIfE2p1Ywlno5m6_6PMxYjR-gYMqmqBKpJmk_cZNS-KUZoUCXfN8EgKBbrpiu6Zg3Ie87m9061hSrcspqZQ6sIA6NvvKOXE7jSBXvk-7OX41-q6VKzTcg
+                          - generic [ref=f32e967]:
+                            - link "Mehr erfahren" [ref=f32e969] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=vFcE_MOz9nEctTO3e0uAPzEVw4bY4bC_QRmx0mhMF7E2YGTbWP6tpo1MoKLD9DvZiA7nKI9uYqXngIXERhuJG_OZIn_75FsgnNRs3ggJwzdN9phJxUHGIpZcKKtccVTT_Qdri-IiQX2CsPKo6QhtRPVYReDi9rzRg6oEvp8jv26OtkayB5fS6oCfy8ALa5rO_g2EkCgWZKre3KCjqROA8zZOw-OkRBcY4CLmg7FXAKpPp8PtAcMH6kAXxl0__Cr0JldpUeXqDq6XUkgbi6w1rz8gMyHGbhb5ZnVY9LrkTpLI0HnJTbLlSxWINtZ2Qd-TNrlT8KWE33DAtTL9z1Etm2N5b2GB07xkMitLMJSM52D6P4nd5qVg8MrI0txHgJ1acYi4FojfjtAIRbBXUrTV0eRDEyq9R0XdvSkz_zRIXOVFamkPHbk4VsjvGtOvitHS16h_uK5PmDLQj_g1tyQfl-cv2miXQfU81-QKVW5HT0YPC_MEzdOjQmTiTmSNngIRU-yD0x2KMrWt99r-PONeo7thmmnyTdmQVH9uVDGPw4knHq9z5ktZOGYF4LGwAe1nmJbnj1GIjeTxQ9xGqBHQALUtgowVfiHu8Gic7mIM3x2DUIegfE0LpmoncD03prAizKYIwlpIRdlBQTnORH9CjezsvYZ43tVqZ7OLcfk&zp=p7fE-cB8SMccFF600FN_YWGJ4QQk9ZzYkMQhgVPvxvpicwiv7rr2--TSeH1HLpEkRPvgwDSVMCLpZoZ4A_7mOM818vLlTpQ9hpsgku9uGe64kt_oE12CMXVmgNMPaVATmEDJ3YDDR4hQ5PW-RRx_efvIfE2p1Ywlno5m6_6PMxYjR-gYMqmqBKpJmk_cZNS-KUZoUCXfN8EgKBbrpiu6Zg3Ie87m9061hSrcspqZQ6sIA6NvvKOXE7jSBXvk-7OX41-q6VKzTcg
+                            - link "bentley.info" [ref=f32e974] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=vFcE_MOz9nEctTO3e0uAPzEVw4bY4bC_QRmx0mhMF7E2YGTbWP6tpo1MoKLD9DvZiA7nKI9uYqXngIXERhuJG_OZIn_75FsgnNRs3ggJwzdN9phJxUHGIpZcKKtccVTT_Qdri-IiQX2CsPKo6QhtRPVYReDi9rzRg6oEvp8jv26OtkayB5fS6oCfy8ALa5rO_g2EkCgWZKre3KCjqROA8zZOw-OkRBcY4CLmg7FXAKpPp8PtAcMH6kAXxl0__Cr0JldpUeXqDq6XUkgbi6w1rz8gMyHGbhb5ZnVY9LrkTpLI0HnJTbLlSxWINtZ2Qd-TNrlT8KWE33DAtTL9z1Etm2N5b2GB07xkMitLMJSM52D6P4nd5qVg8MrI0txHgJ1acYi4FojfjtAIRbBXUrTV0eRDEyq9R0XdvSkz_zRIXOVFamkPHbk4VsjvGtOvitHS16h_uK5PmDLQj_g1tyQfl-cv2miXQfU81-QKVW5HT0YPC_MEzdOjQmTiTmSNngIRU-yD0x2KMrWt99r-PONeo7thmmnyTdmQVH9uVDGPw4knHq9z5ktZOGYF4LGwAe1nmJbnj1GIjeTxQ9xGqBHQALUtgowVfiHu8Gic7mIM3x2DUIegfE0LpmoncD03prAizKYIwlpIRdlBQTnORH9CjezsvYZ43tVqZ7OLcfk&zp=p7fE-cB8SMccFF600FN_YWGJ4QQk9ZzYkMQhgVPvxvpicwiv7rr2--TSeH1HLpEkRPvgwDSVMCLpZoZ4A_7mOM818vLlTpQ9hpsgku9uGe64kt_oE12CMXVmgNMPaVATmEDJ3YDDR4hQ5PW-RRx_efvIfE2p1Ywlno5m6_6PMxYjR-gYMqmqBKpJmk_cZNS-KUZoUCXfN8EgKBbrpiu6Zg3Ie87m9061hSrcspqZQ6sIA6NvvKOXE7jSBXvk-7OX41-q6VKzTcg
+                      - link [ref=f32e977] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=vFcE_MOz9nEctTO3e0uAPzEVw4bY4bC_QRmx0mhMF7E2YGTbWP6tpo1MoKLD9DvZiA7nKI9uYqXngIXERhuJG_OZIn_75FsgnNRs3ggJwzdN9phJxUHGIpZcKKtccVTT_Qdri-IiQX2CsPKo6QhtRPVYReDi9rzRg6oEvp8jv26OtkayB5fS6oCfy8ALa5rO_g2EkCgWZKre3KCjqROA8zZOw-OkRBcY4CLmg7FXAKpPp8PtAcMH6kAXxl0__Cr0JldpUeXqDq6XUkgbi6w1rz8gMyHGbhb5ZnVY9LrkTpLI0HnJTbLlSxWINtZ2Qd-TNrlT8KWE33DAtTL9z1Etm2N5b2GB07xkMitLMJSM52D6P4nd5qVg8MrI0txHgJ1acYi4FojfjtAIRbBXUrTV0eRDEyq9R0XdvSkz_zRIXOVFamkPHbk4VsjvGtOvitHS16h_uK5PmDLQj_g1tyQfl-cv2miXQfU81-QKVW5HT0YPC_MEzdOjQmTiTmSNngIRU-yD0x2KMrWt99r-PONeo7thmmnyTdmQVH9uVDGPw4knHq9z5ktZOGYF4LGwAe1nmJbnj1GIjeTxQ9xGqBHQALUtgowVfiHu8Gic7mIM3x2DUIegfE0LpmoncD03prAizKYIwlpIRdlBQTnORH9CjezsvYZ43tVqZ7OLcfk&zp=p7fE-cB8SMccFF600FN_YWGJ4QQk9ZzYkMQhgVPvxvpicwiv7rr2--TSeH1HLpEkRPvgwDSVMCLpZoZ4A_7mOM818vLlTpQ9hpsgku9uGe64kt_oE12CMXVmgNMPaVATmEDJ3YDDR4hQ5PW-RRx_efvIfE2p1Ywlno5m6_6PMxYjR-gYMqmqBKpJmk_cZNS-KUZoUCXfN8EgKBbrpiu6Zg3Ie87m9061hSrcspqZQ6sIA6NvvKOXE7jSBXvk-7OX41-q6VKzTcg
+                        - 'img "Thumbnail image: Outdated data? Switch to data-driven workflows." [ref=f32e978]'
+                - article "Kommentar von WasteCommunication62 vor 22 Tagen" [ref=f32e980]:
+                  - generic [ref=f32e981] [cursor=pointer]:
+                    - link "Profil von WasteCommunication62 --- Avatar" [ref=f32e986]:
+                      - /url: https://www.reddit.com/user/WasteCommunication62/
+                      - img "Avatar von u/WasteCommunication62" [ref=f32e989]
+                    - generic [ref=f32e993]:
+                      - link "Profil von WasteCommunication62" [ref=f32e996]:
+                        - /url: https://www.reddit.com/user/WasteCommunication62/
+                        - text: WasteCommunication62
+                      - generic [ref=f32e997]: •
+                      - link [ref=f32e999]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyjaoqc/
+                        - time [ref=f32e1001]: vor 22 Tagen
+                  - generic [ref=f32e1003]:
+                    - paragraph [ref=f32e1007]:
+                      - text: Depends what ur working on. Fable 5 is generally more expensive then GPT 5.6 sol and possesses higher capabilities in works on large repositories, globular refactoring and generally more heavy tasks (all time highest score in
+                      - strong [ref=f32e1008]: SWE Bench Pro
+                      - text: benchmark). GPT 5.6 on the other hand is better if your work in mainly terminal based, mathematically heavy and smaller localized refactoring (all time high at
+                      - strong [ref=f32e1009]: Terminal-Bench 2.1)
+                      - text: "Overall my tip is this - if you’re working on smaller tasks in general don’t do Fable cuz it’s an overshot and any real usage you’d only get with the Max 20x subscription on Claude code for 200 USD. Forget about using it off subscription or your credits will explode (spent 600 USD in 1 day because of not doing that), this also means Fable isn’t really feasable on any non Claude IDEs like Cursor unfortunately.PS: if ur work is stuff like Frontend or UI/UX I wouldn’t reccomend either. Kimi 3 scored the highest in the Frontend benchmark and it’s uncomperably cheaper from the two.Hope that helps 👌"
+                    - generic [ref=f32e1010]: "1"
+                - article "Kommentar von VeeruO07 vor 21 Tagen" [ref=f32e1018]:
+                  - generic [ref=f32e1019] [cursor=pointer]:
+                    - link "Profil von VeeruO07 --- Avatar" [ref=f32e1024]:
+                      - /url: https://www.reddit.com/user/VeeruO07/
+                    - generic [ref=f32e1034]:
+                      - link "Profil von VeeruO07" [ref=f32e1037]:
+                        - /url: https://www.reddit.com/user/VeeruO07/
+                        - text: VeeruO07
+                      - generic [ref=f32e1038]: •
+                      - link [ref=f32e1040]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oym1m6j/
+                        - time [ref=f32e1042]: vor 21 Tagen
+                  - generic [ref=f32e1044]:
+                    - generic [ref=f32e1047]:
+                      - paragraph [ref=f32e1048]: Both at this point of time.
+                      - paragraph [ref=f32e1049]: Claude for UI designing , orchestration
+                      - paragraph [ref=f32e1050]: Chat GPT for good design & backend coding (all that is not front end)
+                      - paragraph [ref=f32e1051]: Both over engineer so always you have to inform or alert keep it simple.
+                      - paragraph [ref=f32e1052]: Gemini is for testing with no coding task. Never give any code access to Gemini , it changes even after your instruction not to.
+                    - generic [ref=f32e1053]: "1"
+                - article "Kommentar von SecureLengthiness734 vor 19 Tagen" [ref=f32e1061]:
+                  - generic [ref=f32e1062] [cursor=pointer]:
+                    - link "Profil von SecureLengthiness734 --- Avatar" [ref=f32e1067]:
+                      - /url: https://www.reddit.com/user/SecureLengthiness734/
+                      - img "Avatar von u/SecureLengthiness734" [ref=f32e1070]
+                    - generic [ref=f32e1074]:
+                      - link "Profil von SecureLengthiness734" [ref=f32e1077]:
+                        - /url: https://www.reddit.com/user/SecureLengthiness734/
+                        - text: SecureLengthiness734
+                      - generic [ref=f32e1078]: •
+                      - link [ref=f32e1080]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oz0uxpc/
+                        - time [ref=f32e1082]: vor 19 Tagen
+                  - generic [ref=f32e1084]:
+                    - paragraph [ref=f32e1088]: fable understands you better and thinks smarter, looks farther out, while codex executes and works better to spec
+                    - generic [ref=f32e1089]: "1"
+                - article "Kommentar von No_Internal523 vor 19 Tagen" [ref=f32e1097]:
+                  - generic [ref=f32e1098] [cursor=pointer]:
+                    - link "Profil von No_Internal523 --- Avatar" [ref=f32e1103]:
+                      - /url: https://www.reddit.com/user/No_Internal523/
+                      - img "Avatar von u/No_Internal523" [ref=f32e1106]
+                    - generic [ref=f32e1110]:
+                      - link "Profil von No_Internal523" [ref=f32e1113]:
+                        - /url: https://www.reddit.com/user/No_Internal523/
+                        - text: No_Internal523
+                      - generic [ref=f32e1114]: •
+                      - link [ref=f32e1116]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oz1edbb/
+                        - time [ref=f32e1118]: vor 19 Tagen
+                  - generic [ref=f32e1120]:
+                    - generic [ref=f32e1123]:
+                      - paragraph [ref=f32e1124]: I’ve been using Sol for two days now and I am impressed. It one-shotted a lot of the little tasks I gave it and only took a few attempts before fixing a few larger issues. So far, it is comparable to Fable if not better. It hasn’t struggled with anything I’ve thrown at it.
+                      - paragraph [ref=f32e1125]: Before Sol, nothing was close to Claude for me. I tried all the leading models. Claude was the holy grail. That doesn’t appear to be the case anymore. Competition is catching up.
+                      - paragraph [ref=f32e1126]: You can get a free month to try it out. Decide for yourself.
+                    - generic [ref=f32e1127]: "1"
+                - article "Kommentar von No_Twist_678 vor 23 Tagen" [ref=f32e1135]:
+                  - generic [ref=f32e1136] [cursor=pointer]:
+                    - link "Profil von No_Twist_678 --- Avatar" [ref=f32e1141]:
+                      - /url: https://www.reddit.com/user/No_Twist_678/
+                    - generic [ref=f32e1151]:
+                      - link "Profil von No_Twist_678" [ref=f32e1154]:
+                        - /url: https://www.reddit.com/user/No_Twist_678/
+                        - text: No_Twist_678
+                      - generic [ref=f32e1155]: •
+                      - link [ref=f32e1157]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycfnnl/
+                        - time [ref=f32e1159]: vor 23 Tagen
+                  - generic [ref=f32e1161]:
+                    - generic [ref=f32e1164]:
+                      - figure [ref=f32e1165]:
+                        - link [ref=f32e1166] [cursor=pointer]:
+                          - /url: https://preview.redd.it/fable-5-or-gpt-5-6-sol-v0-um92kl2pi1eh1.png?width=1594&format=png&auto=webp&s=7701b9f1a522e3074bfaf04ecf87e2b3273ac4b0
+                          - img "Kommentarbild" [ref=f32e1167]
+                      - paragraph [ref=f32e1168]:
+                        - text: this can do SOL 5.6 (full working sim game on the image). And this full automated heuristic system can do fable
+                        - link "https://dbranked.com/" [ref=f32e1169] [cursor=pointer]:
+                          - /url: https://dbranked.com/
+                    - generic [ref=f32e1170]: "1"
+                - article "Kommentar von Super_Royal5174 vor 23 Tagen" [ref=f32e1178]:
+                  - generic [ref=f32e1179] [cursor=pointer]:
+                    - link "Profil von Super_Royal5174 --- Avatar" [ref=f32e1184]:
+                      - /url: https://www.reddit.com/user/Super_Royal5174/
+                    - generic [ref=f32e1194]:
+                      - link "Profil von Super_Royal5174" [ref=f32e1197]:
+                        - /url: https://www.reddit.com/user/Super_Royal5174/
+                        - text: Super_Royal5174
+                      - generic [ref=f32e1198]: •
+                      - link [ref=f32e1200]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycdv4b/
+                        - time [ref=f32e1202]: vor 23 Tagen
+                  - generic [ref=f32e1204]:
+                    - paragraph [ref=f32e1208]: Use Codex for the work and let fable craft the Plan and the Brainstorming iIwould say… 😅👍
+                    - generic [ref=f32e1209]: "1"
+                    - 'article "Kommentarthread-Level1: Antwort von Menthol-Cooking5842 vor 23 Tagen" [ref=f32e1218]':
+                      - generic [ref=f32e1219] [cursor=pointer]:
+                        - link "Profil von Menthol-Cooking5842 --- Avatar" [ref=f32e1224]:
+                          - /url: https://www.reddit.com/user/Menthol-Cooking5842/
+                          - img "Avatar von u/Menthol-Cooking5842" [ref=f32e1227]
+                        - generic [ref=f32e1231]:
+                          - link "Profil von Menthol-Cooking5842" [ref=f32e1234]:
+                            - /url: https://www.reddit.com/user/Menthol-Cooking5842/
+                            - text: Menthol-Cooking5842
+                          - generic [ref=f32e1235]: •
+                          - link [ref=f32e1237]:
+                            - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyceg4t/
+                            - time [ref=f32e1239]: vor 23 Tagen
+                      - generic [ref=f32e1241]:
+                        - paragraph [ref=f32e1245]: Why people saying plan with Fable and make the work with Sol? Is it because Fable is more creative, or because its more intelligent? Just asking. Thanks.
+                        - generic [ref=f32e1246]: "1"
+                        - generic [ref=f32e1253]:
+                          - 'article "Kommentarthread-Level2: Antwort von Super_Royal5174 vor 23 Tagen" [ref=f32e1255]':
+                            - generic [ref=f32e1256] [cursor=pointer]:
+                              - link "Profil von Super_Royal5174 --- Avatar" [ref=f32e1261]:
+                                - /url: https://www.reddit.com/user/Super_Royal5174/
+                              - generic [ref=f32e1271]:
+                                - link "Profil von Super_Royal5174" [ref=f32e1274]:
+                                  - /url: https://www.reddit.com/user/Super_Royal5174/
+                                  - text: Super_Royal5174
+                                - generic [ref=f32e1275]: •
+                                - link [ref=f32e1277]:
+                                  - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oycuvin/
+                                  - time [ref=f32e1279]: vor 23 Tagen
+                            - generic [ref=f32e1281]:
+                              - generic [ref=f32e1284]:
+                                - paragraph [ref=f32e1285]: Fable thinks more abstractly and seemingly more creatively. Therefore, I would use it for planning and the frontend – Codex, on the other hand, is very stable when writing code and consumes very few tokens.
+                                - paragraph [ref=f32e1286]: However, I think this also varies depending on the setup (Agents.md, etc.) and the project, but it would be my first approach.
+                                - paragraph [ref=f32e1287]: "- it must be said that Sol is extremely clever… Fable simply thinks differently and outside the box."
+                              - generic [ref=f32e1288]: "2"
+                              - button "1 weitere Antwort" [ref=f32e1298] [cursor=pointer]:
+                                - generic [ref=f32e1303]:
+                                  - generic [ref=f32e1304]: "1"
+                                  - text: weitere Antwort
+                          - button "2 weitere Antworten" [ref=f32e1309] [cursor=pointer]:
+                            - generic [ref=f32e1314]:
+                              - generic [ref=f32e1315]: "2"
+                              - text: weitere Antworten
+                - article "Kommentar von jiffythekid vor 23 Tagen" [ref=f32e1319]:
+                  - generic [ref=f32e1320] [cursor=pointer]:
+                    - link "Profil von jiffythekid --- Avatar" [ref=f32e1325]:
+                      - /url: https://www.reddit.com/user/jiffythekid/
+                    - generic [ref=f32e1335]:
+                      - link "Profil von jiffythekid" [ref=f32e1338]:
+                        - /url: https://www.reddit.com/user/jiffythekid/
+                        - text: jiffythekid
+                      - generic [ref=f32e1339]: •
+                      - link [ref=f32e1341]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oydqd71/
+                        - time [ref=f32e1343]: vor 23 Tagen
+                  - generic [ref=f32e1345]:
+                    - paragraph [ref=f32e1349]: This is totally subjective. If I were to pick one $100 plan, right now it would be ChatGPT. Claude limits don't go quite as far on Opus as they do on SOL. Fable IS smarter though.
+                    - generic [ref=f32e1350]: "1"
+                - article "Kommentar von DrHumorous vor 22 Tagen" [ref=f32e1358]:
+                  - generic [ref=f32e1359] [cursor=pointer]:
+                    - link "Profil von DrHumorous --- Avatar" [ref=f32e1364]:
+                      - /url: https://www.reddit.com/user/DrHumorous/
+                    - generic [ref=f32e1374]:
+                      - link "Profil von DrHumorous" [ref=f32e1377]:
+                        - /url: https://www.reddit.com/user/DrHumorous/
+                        - text: DrHumorous
+                      - generic [ref=f32e1378]: •
+                      - link [ref=f32e1380]:
+                        - /url: https://www.reddit.com/r/Anthropic/comments/1v04q9o/comment/oyi2ako/
+                        - time [ref=f32e1382]: vor 22 Tagen
+                  - generic [ref=f32e1384]:
+                    - paragraph [ref=f32e1388]: SOL is better.
+                    - generic [ref=f32e1389]: "1"
+            - generic [ref=f32e1399]:
+              - generic [ref=f32e1400]:
+                - complementary "Die Leute fragen auch nach dem Abschnitt" [ref=f32e1402]:
+                  - heading "Die Leute fragen auch nach dem Abschnitt" [level=1] [ref=f32e1403]
+                  - generic [ref=f32e1404]: Die Leute fragen auch nach …
+                  - generic [ref=f32e1409]:
+                    - link "Comparison of Fable 5 and GPT 5.6" [ref=f32e1411] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/1eba4cff-5ef1-4219-aec0-50e5cc301207/?q=Comparison+of+Fable+5+and+GPT+5.6&source=PDP&ep=pdp_unit&relatedPostId=t3_1v04q9o
+                    - link "Latest breakthroughs in AI technology" [ref=f32e1420] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/450bca43-0f29-4b8f-a0cf-26912b0cb407/?q=Latest+breakthroughs+in+AI+technology&source=PDP&ep=pdp_unit&relatedPostId=t3_1v04q9o
+                    - link "Best programming languages for AI development" [ref=f32e1429] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/794a2042-5097-434d-99db-a97907fe0685/?q=Best+programming+languages+for+AI+development&source=PDP&ep=pdp_unit&relatedPostId=t3_1v04q9o
+                    - link "How AI is transforming healthcare" [ref=f32e1438] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/594a82cd-9d64-4f94-87b1-014231f6159e/?q=How+AI+is+transforming+healthcare&source=PDP&ep=pdp_unit&relatedPostId=t3_1v04q9o
+                    - link "Ethical considerations in AI deployment" [ref=f32e1447] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/731d168b-d0d3-40e6-8577-4bffa36b4ff2/?q=Ethical+considerations+in+AI+deployment&source=PDP&ep=pdp_unit&relatedPostId=t3_1v04q9o
+                - complementary "Informationen zur Community" [ref=f32e1758]:
+                  - generic [ref=f32e1760]:
+                    - heading "Community-Info-Bereich" [level=1] [ref=f32e1761]
+                    - generic [ref=f32e1762]:
+                      - generic [ref=f32e1763]:
+                        - link "r/Anthropic" [ref=f32e1764] [cursor=pointer]:
+                          - /url: /r/Anthropic/
+                        - 'button "Community-Status: Talk to Claude" [ref=f32e1768] [cursor=pointer]':
+                          - img "favicon" [ref=f32e1769]
+                      - button "Beitreten" [ref=f32e1773] [cursor=pointer]
+                    - generic [ref=f32e1774]:
+                      - generic [ref=f32e1775]: Anthropic
+                      - generic [ref=f32e1776]: Anthropic (and Claude) Community
+                      - generic: Öffentlich
+              - list [ref=f32e1783]:
+                - listitem [ref=f32e1784]:
+                  - link "Home" [ref=f32e1786] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f32e1787]:
+                  - link "Beliebt" [ref=f32e1789] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f32e1790]:
+                  - link "Nachrichten" [ref=f32e1792] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f32e1793]:
+                  - link "Entdecken" [ref=f32e1795] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f32e1796]:
+                  - link "Das Beste von Reddit" [ref=f32e1798] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f32e1799]:
+                  - link "Das Beste von Reddit auf Portugiesisch" [ref=f32e1801] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f32e1802]:
+                  - link "Das Beste von Reddit auf Deutsch" [ref=f32e1804] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f32e1805]:
+                  - link "Regeln von Reddit" [ref=f32e1807] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f32e1808]:
+                  - link "Datenschutzerklärung" [ref=f32e1810] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f32e1811]:
+                  - link "Nutzungsvereinbarung" [ref=f32e1813] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f32e1814]:
+                  - link "Barrierefreiheit" [ref=f32e1816] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f32e1817]:
+                  - link "Impressum" [ref=f32e1819] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/impressum
+                - listitem [ref=f32e1820]:
+                  - link "Reddit, Inc. © 2026. Alle Rechte vorbehalten." [ref=f32e1821] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f32e1824]:
+          - paragraph [ref=f32e1825]: Werde Teil des authentischsten Orts im Internet
+          - generic [ref=f32e1827]:
+            - generic [ref=f32e1830]:
+              - iframe [ref=f32e1835]:
+                - button "Weiter mit Google. (Wird in neuem Tab geöffnet)" [ref=f33e3] [cursor=pointer]:
+                  - generic [ref=f33e5]: Weiter mit Google
+              - generic [ref=f32e1837] [cursor=pointer]:
+                - generic [ref=f32e1838]: Mit Apple fortfahren
+                - button "Sign in with Apple" [ref=f32e1844]:
+                  - generic [ref=f32e1845]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Weiter mit Telefonnummer" [ref=f32e1850] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Mit Mail fortfahren" [ref=f32e1859] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f32e1866]:
+            - text: Wenn du fortfährst, stimmst du unserer
+            - link "Nutzungsvereinbarung" [ref=f32e1867] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: zu und bestätigst, dass du die
+            - link "Datenschutzerklärung" [ref=f32e1868] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: verstehst.
+      - dialog "Data Protection Consent" [ref=f32e1870]:
+        - generic [ref=f32e1871]:
+          - generic [ref=f32e1873]:
+            - generic:
+              - button "Schließen" [ref=f32e1877] [cursor=pointer]
+              - generic [ref=f32e1882]:
+                - generic [ref=f32e1883]: Lege deine Cookie-Einstellungen fest
+                - generic [ref=f32e1886]:
+                  - paragraph [ref=f32e1887]: "Reddit verwendet Cookies und ähnliche Technologien, um:"
+                  - list [ref=f32e1888]:
+                    - listitem [ref=f32e1889]: die Website funktionsfähig zu halten und ordnungsgemäß zu betreiben
+                    - listitem [ref=f32e1890]: Betrug und Missbrauch zu verhindern
+                    - listitem [ref=f32e1891]: die Nutzung der Website und Leistungskennzahlen zu überwachen
+                  - paragraph [ref=f32e1892]: "Wenn du „Alle akzeptieren“ wählst, verwenden wir Cookies auch, um:"
+                  - list [ref=f32e1893]:
+                    - listitem [ref=f32e1894]: deine Empfehlungen und Anzeigen zu personalisieren
+                    - listitem [ref=f32e1895]: die Performance von Anzeigen zu messen
+                    - listitem [ref=f32e1896]: neue Funktionen und Dienste zu entwickeln und zu verbessern
+                  - paragraph [ref=f32e1897]: Wenn du „Optionale Cookies ablehnen“ wählst, verwenden wir keine Cookies für diese zusätzlichen Zwecke. Du kannst die Cookie-Einstellungen in deinen Einstellungen aktualisieren.
+                  - paragraph [ref=f32e1898]:
+                    - text: Erfahre mehr darüber,
+                    - link "wie Reddit Cookies verwendet" [ref=f32e1899] [cursor=pointer]:
+                      - /url: /de-de/policies/cookies
+                    - text: .
+          - generic [ref=f32e1901]:
+            - button "Optionale Cookies ablehnen" [ref=f32e1902] [cursor=pointer]
+            - button "Alle akzeptieren" [ref=f32e1905] [cursor=pointer]

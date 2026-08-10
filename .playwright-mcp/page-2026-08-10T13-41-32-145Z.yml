@@ -1,0 +1,306 @@
+- generic [active] [ref=f50e1]:
+  - link "Zum Hauptinhalt springen" [ref=f50e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f50e6]:
+    - generic:
+      - banner [ref=f50e9]:
+        - navigation [ref=f50e10]:
+          - link "Home" [ref=f50e14] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - textbox "Finde alles" [ref=f50e35]: Sonnet 5 vs Opus 5 Claude Code experience
+          - generic [ref=f50e36]:
+            - link "Registrieren" [ref=f50e42] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Anmelden" [ref=f50e48] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Nutzermenü ausklappen" [ref=f50e55] [cursor=pointer]
+      - generic "Sonnet 5 vs Opus 5 Claude Code experience – Reddit-Suche!"
+      - generic [ref=f50e64]:
+        - generic [ref=f50e65]:
+          - generic [ref=f50e69]:
+            - button "All" [ref=f50e70] [cursor=pointer]
+            - link "Beiträge" [ref=f50e75] [cursor=pointer]:
+              - /url: /search/?q=Sonnet+5+vs+Opus+5+Claude+Code+experience&type=posts&iId=bb9af640-bb53-46ab-972d-54d81aeb961e
+            - link "Communitys" [ref=f50e81] [cursor=pointer]:
+              - /url: /search/?q=Sonnet+5+vs+Opus+5+Claude+Code+experience&type=communities&iId=bb9af640-bb53-46ab-972d-54d81aeb961e
+            - link "Kommentare" [ref=f50e87] [cursor=pointer]:
+              - /url: /search/?q=Sonnet+5+vs+Opus+5+Claude+Code+experience&type=comments&iId=bb9af640-bb53-46ab-972d-54d81aeb961e
+            - link "Medien" [ref=f50e93] [cursor=pointer]:
+              - /url: /search/?q=Sonnet+5+vs+Opus+5+Claude+Code+experience&type=media&iId=bb9af640-bb53-46ab-972d-54d81aeb961e
+            - link "Profile" [ref=f50e99] [cursor=pointer]:
+              - /url: /search/?q=Sonnet+5+vs+Opus+5+Claude+Code+experience&type=people&iId=bb9af640-bb53-46ab-972d-54d81aeb961e
+          - generic [ref=f50e108]:
+            - main [ref=f50e109]:
+              - generic [ref=f50e110]:
+                - generic [ref=f50e111]:
+                  - generic [ref=f50e112]: Was die Leute sagen
+                  - separator [ref=f50e117]
+                - generic [ref=f50e118]:
+                  - generic [ref=f50e119]: Beiträge
+                  - link "Mehr anzeigen" [ref=f50e122] [cursor=pointer]:
+                    - /url: /search/?q=Sonnet+5+vs+Opus+5+Claude+Code+experience&type=posts
+                - generic [ref=f50e128]:
+                  - generic:
+                    - heading "Opus 5 is so awful." [level=2]:
+                      - link "Opus 5 is so awful." [ref=f50e129] [cursor=pointer]:
+                        - /url: /r/claude/comments/1vjp1m2/opus_5_is_so_awful/
+                  - generic [ref=f50e131]:
+                    - generic [ref=f50e134]:
+                      - link "r/claude" [ref=f50e137] [cursor=pointer]:
+                        - /url: /r/claude/
+                      - generic [ref=f50e142]: ·
+                    - link "Opus 5 is so awful." [ref=f50e143] [cursor=pointer]:
+                      - /url: /r/claude/comments/1vjp1m2/opus_5_is_so_awful/
+                    - generic [ref=f50e144]:
+                      - generic [ref=f50e145]: Votes
+                      - text: ·
+                      - generic [ref=f50e146]: Kommentare
+                - separator [ref=f50e147]
+                - generic [ref=f50e149]:
+                  - generic:
+                    - heading "My Opus 5 experience in a nutshell." [level=2]:
+                      - link "My Opus 5 experience in a nutshell." [ref=f50e150] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1vgpyni/my_opus_5_experience_in_a_nutshell/
+                  - generic [ref=f50e152]:
+                    - generic [ref=f50e155]:
+                      - link "r/ClaudeAI" [ref=f50e158] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f50e163]: ·
+                    - link "My Opus 5 experience in a nutshell." [ref=f50e164] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1vgpyni/my_opus_5_experience_in_a_nutshell/
+                    - link "I hit my Fable usage limit, switched to Opus 5, and told it explicitly not to overengineer, because its a small fix... it proceed to write diagrams in the code" [ref=f50e166] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1vgpyni/my_opus_5_experience_in_a_nutshell/
+                    - generic [ref=f50e167]:
+                      - generic [ref=f50e168]: Votes
+                      - text: ·
+                      - generic [ref=f50e169]: Kommentare
+                  - link "Vorschaubild von My Opus 5 experience in a nutshell." [ref=f50e171] [cursor=pointer]:
+                    - /url: /r/ClaudeAI/comments/1vgpyni/my_opus_5_experience_in_a_nutshell/
+                - separator [ref=f50e176]
+                - generic [ref=f50e178]:
+                  - generic:
+                    - heading "Me when I use Opus 5" [level=2]:
+                      - link "Me when I use Opus 5" [ref=f50e179] [cursor=pointer]:
+                        - /url: /r/claude/comments/1vjlsq1/me_when_i_use_opus_5/
+                  - generic [ref=f50e181]:
+                    - generic [ref=f50e184]:
+                      - link "r/claude" [ref=f50e187] [cursor=pointer]:
+                        - /url: /r/claude/
+                      - generic [ref=f50e192]: ·
+                    - link "Me when I use Opus 5" [ref=f50e193] [cursor=pointer]:
+                      - /url: /r/claude/comments/1vjlsq1/me_when_i_use_opus_5/
+                    - generic [ref=f50e194]:
+                      - generic [ref=f50e195]: Votes
+                      - text: ·
+                      - generic [ref=f50e196]: Kommentare
+                  - link "Vorschaubild von Me when I use Opus 5" [ref=f50e198] [cursor=pointer]:
+                    - /url: /r/claude/comments/1vjlsq1/me_when_i_use_opus_5/
+                - separator [ref=f50e203]
+                - generic [ref=f50e205]:
+                  - generic:
+                    - heading "My experience with Opus 5 so far" [level=2]:
+                      - link "My experience with Opus 5 so far" [ref=f50e206] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1vhagay/my_experience_with_opus_5_so_far/
+                  - generic [ref=f50e208]:
+                    - generic [ref=f50e211]:
+                      - link "r/ClaudeAI" [ref=f50e214] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f50e219]: ·
+                    - link "My experience with Opus 5 so far" [ref=f50e220] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1vhagay/my_experience_with_opus_5_so_far/
+                    - link "I find Opus 5 is very eager to go ahead and do things. I don't really trust it with full access any more." [ref=f50e222] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1vhagay/my_experience_with_opus_5_so_far/
+                    - generic [ref=f50e223]:
+                      - generic [ref=f50e224]: Votes
+                      - text: ·
+                      - generic [ref=f50e225]: Kommentare
+                  - link "Vorschaubild von My experience with Opus 5 so far" [ref=f50e227] [cursor=pointer]:
+                    - /url: /r/ClaudeAI/comments/1vhagay/my_experience_with_opus_5_so_far/
+                - separator [ref=f50e232]
+                - generic [ref=f50e234]:
+                  - generic:
+                    - heading "Why would anyone use Claude Sonnet 5?" [level=2]:
+                      - link "Why would anyone use Claude Sonnet 5?" [ref=f50e235] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/comments/1uljcfq/why_would_anyone_use_claude_sonnet_5/
+                  - generic [ref=f50e237]:
+                    - generic [ref=f50e240]:
+                      - link "r/ClaudeAI" [ref=f50e243] [cursor=pointer]:
+                        - /url: /r/ClaudeAI/
+                      - generic [ref=f50e248]: ·
+                    - link "Why would anyone use Claude Sonnet 5?" [ref=f50e249] [cursor=pointer]:
+                      - /url: /r/ClaudeAI/comments/1uljcfq/why_would_anyone_use_claude_sonnet_5/
+                    - 'link "Sonnet 5 shines in different areas and is the \"right tool for the job\" when: You''re doing simpler, high-volume work." [ref=f50e251] [cursor=pointer]':
+                      - /url: /r/ClaudeAI/comments/1uljcfq/why_would_anyone_use_claude_sonnet_5/
+                    - generic [ref=f50e252]:
+                      - generic [ref=f50e253]: Votes
+                      - text: ·
+                      - generic [ref=f50e254]: Kommentare
+                  - link "Vorschaubild von Why would anyone use Claude Sonnet 5?" [ref=f50e256] [cursor=pointer]:
+                    - /url: /r/ClaudeAI/comments/1uljcfq/why_would_anyone_use_claude_sonnet_5/
+                - separator [ref=f50e261]
+                - generic [ref=f50e263]:
+                  - generic:
+                    - 'heading "Unpopular Opinion: Opus 5 is unreadable and I’m sick of it" [level=2]':
+                      - 'link "Unpopular Opinion: Opus 5 is unreadable and I’m sick of it" [ref=f50e264] [cursor=pointer]':
+                        - /url: /r/ClaudeCode/comments/1vholig/unpopular_opinion_opus_5_is_unreadable_and_im/
+                  - generic [ref=f50e266]:
+                    - generic [ref=f50e269]:
+                      - link "r/ClaudeCode" [ref=f50e272] [cursor=pointer]:
+                        - /url: /r/ClaudeCode/
+                      - generic [ref=f50e277]: ·
+                    - 'link "Unpopular Opinion: Opus 5 is unreadable and I’m sick of it" [ref=f50e278] [cursor=pointer]':
+                      - /url: /r/ClaudeCode/comments/1vholig/unpopular_opinion_opus_5_is_unreadable_and_im/
+                    - link "Claude Code is supposed to help me work faster, but I waste so much time just trying to decode Opus 5's English." [ref=f50e280] [cursor=pointer]:
+                      - /url: /r/ClaudeCode/comments/1vholig/unpopular_opinion_opus_5_is_unreadable_and_im/
+                    - generic [ref=f50e281]:
+                      - generic [ref=f50e282]: Votes
+                      - text: ·
+                      - generic [ref=f50e283]: Kommentare
+                - separator [ref=f50e284]
+                - generic [ref=f50e286]:
+                  - generic:
+                    - 'heading "Opus: okay, this is getting ridiculous" [level=2]':
+                      - 'link "Opus: okay, this is getting ridiculous" [ref=f50e287] [cursor=pointer]':
+                        - /url: /r/ClaudeCode/comments/1vhu6yp/opus_okay_this_is_getting_ridiculous/
+                  - generic [ref=f50e289]:
+                    - generic [ref=f50e292]:
+                      - link "r/ClaudeCode" [ref=f50e295] [cursor=pointer]:
+                        - /url: /r/ClaudeCode/
+                      - generic [ref=f50e300]: ·
+                    - 'link "Opus: okay, this is getting ridiculous" [ref=f50e301] [cursor=pointer]':
+                      - /url: /r/ClaudeCode/comments/1vhu6yp/opus_okay_this_is_getting_ridiculous/
+                    - link "We are currently doing all company work with GPT Sol, we don't trust Opus 5 at all. It's been failing across the team." [ref=f50e303] [cursor=pointer]:
+                      - /url: /r/ClaudeCode/comments/1vhu6yp/opus_okay_this_is_getting_ridiculous/
+                    - generic [ref=f50e304]:
+                      - generic [ref=f50e305]: Votes
+                      - text: ·
+                      - generic [ref=f50e306]: Kommentare
+                - separator [ref=f50e307]
+                - generic [ref=f50e308]: Andere suchen auch nach
+                - generic [ref=f50e311]:
+                  - link "Opus 5 vs Sonnet 5 comparison" [ref=f50e314] [cursor=pointer]:
+                    - /url: /search/?q=Opus+5+vs+Sonnet+5+comparison&cId=7e64b009-87c3-4d52-bde9-aa0c42461cd8&iId=91bb850c-3baf-40de-9510-a4e5128150ae
+                  - link "Claude 3.5 Sonnet versus Claude 3.5 Opus" [ref=f50e322] [cursor=pointer]:
+                    - /url: /search/?q=Claude+3.5+Sonnet+versus+Claude+3.5+Opus&cId=db3e3590-ff7a-4c71-9c57-55d4102f8b50&iId=0578ef24-cc8a-4048-8514-069342fd2040
+                  - link "Cost comparison of Sonnet 5 and Opus 5" [ref=f50e330] [cursor=pointer]:
+                    - /url: /search/?q=Cost+comparison+of+Sonnet+5+and+Opus+5&cId=43d13658-8438-44a8-a7da-993a268dd7c9&iId=6925f913-84d3-43cf-9251-644de1034575
+                  - link "Is Claude Sonnet 5 a good model?" [ref=f50e338] [cursor=pointer]:
+                    - /url: /search/?q=Is+Claude+Sonnet+5+a+good+model%3F&cId=8916e0d9-3223-4531-ad6c-5243e9328466&iId=b3c754a4-7588-48a3-b680-16baf015cf7b
+                  - link "Opus 5 vs Sonnet 5 speed comparison" [ref=f50e346] [cursor=pointer]:
+                    - /url: /search/?q=Opus+5+vs+Sonnet+5+speed+comparison&cId=67ee289a-2dfa-4bee-9a87-4ab4ad2f04c5&iId=0f8d3ef6-973d-479f-a8b2-23a59b00b001
+                  - link "Claude Opus 4.8 vs Sonnet 4.6 comparison" [ref=f50e354] [cursor=pointer]:
+                    - /url: /search/?q=Claude+Opus+4.8+vs+Sonnet+4.6+comparison&cId=fae4c5dc-1688-48f2-838f-f5b20afe7de8&iId=395aecd7-d37d-4c22-9bc7-7b2911debb4f
+                - separator [ref=f50e360]
+            - generic [ref=f50e364]:
+              - generic [ref=f50e368]:
+                - heading "Communitys" [level=2] [ref=f50e369]
+                - generic [ref=f50e371]:
+                  - link "ClaudeAI" [ref=f50e372] [cursor=pointer]:
+                    - /url: /r/ClaudeAI/
+                  - generic [ref=f50e380]:
+                    - heading "r/ClaudeAI" [level=3] [ref=f50e381]
+                    - generic [ref=f50e383]:
+                      - paragraph [ref=f50e384]: This is a Claude and Claude Code discussion subreddit to help you make a fully informed decision about using Claude and Claude Code to best effect for your own purposes. ¹⌉ Anthropic does not control or operate this subreddit or endorse views expressed here. ²⌉ If your problem requires Anthropic's help, visit https://support.anthropic.com/ This subreddit is not the right place to fix your account issues. ³⌉ For more help, check the resources below. ⁴⌉ Please read the rules before posting.
+                      - generic [ref=f50e385]:
+                        - generic [ref=f50e386]: wöchentliche Besucher*innen
+                        - generic [ref=f50e387]: ·
+                        - generic [ref=f50e388]: wöchentliche Beiträge
+                - generic [ref=f50e390]:
+                  - link "ClaudeCode" [ref=f50e391] [cursor=pointer]:
+                    - /url: /r/ClaudeCode/
+                  - generic [ref=f50e399]:
+                    - heading "r/ClaudeCode" [level=3] [ref=f50e400]
+                    - generic [ref=f50e402]:
+                      - paragraph [ref=f50e403]: a community for building, learning, and sharing with claude code.
+                      - generic [ref=f50e404]:
+                        - generic [ref=f50e405]: wöchentliche Besucher*innen
+                        - generic [ref=f50e406]: ·
+                        - generic [ref=f50e407]: wöchentliche Beiträge
+                - generic [ref=f50e409]:
+                  - link "Claudeopus" [ref=f50e410] [cursor=pointer]:
+                    - /url: /r/Claudeopus/
+                  - generic [ref=f50e418]:
+                    - heading "r/Claudeopus" [level=3] [ref=f50e419]
+                    - generic [ref=f50e421]:
+                      - paragraph [ref=f50e422]: Everything Claude Opus. Prompts, workflows, cost breakdowns, and real talk from people who use the most capable model daily. No fluff.
+                      - generic [ref=f50e423]:
+                        - generic [ref=f50e424]: wöchentliche Besucher*innen
+                        - generic [ref=f50e425]: ·
+                        - generic [ref=f50e426]: wöchentliche Beiträge
+                - generic [ref=f50e428]:
+                  - link "claude" [ref=f50e429] [cursor=pointer]:
+                    - /url: /r/claude/
+                  - generic [ref=f50e437]:
+                    - heading "r/claude" [level=3] [ref=f50e438]
+                    - generic [ref=f50e440]:
+                      - paragraph [ref=f50e441]: Community for Anthropic's generative AI model, Claude.
+                      - generic [ref=f50e442]:
+                        - generic [ref=f50e443]: wöchentliche Besucher*innen
+                        - generic [ref=f50e444]: ·
+                        - generic [ref=f50e445]: wöchentliche Beiträge
+                - generic [ref=f50e447]:
+                  - link "ClaudeCoding" [ref=f50e448] [cursor=pointer]:
+                    - /url: /r/ClaudeCoding/
+                  - generic [ref=f50e456]:
+                    - heading "r/ClaudeCoding" [level=3] [ref=f50e457]
+                    - generic [ref=f50e459]:
+                      - paragraph [ref=f50e460]: This subreddit is for discussions about coding using Claude Code or the Claude model. It summarizes the discussions of all popular posts on Claude subreddits related to coding using Claude and Claude Code
+                      - generic [ref=f50e461]:
+                        - generic [ref=f50e462]: wöchentliche Besucher*innen
+                        - generic [ref=f50e463]: ·
+                        - generic [ref=f50e464]: wöchentliche Beiträge
+                - link "Weitere Communitys anzeigen" [ref=f50e466] [cursor=pointer]:
+                  - /url: /search/?q=Sonnet+5+vs+Opus+5+Claude+Code+experience&type=communities
+              - list [ref=f50e468]:
+                - listitem [ref=f50e469]:
+                  - link "Home" [ref=f50e471] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f50e472]:
+                  - link "Beliebt" [ref=f50e474] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f50e475]:
+                  - link "Nachrichten" [ref=f50e477] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f50e478]:
+                  - link "Entdecken" [ref=f50e480] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f50e481]:
+                  - link "Das Beste von Reddit" [ref=f50e483] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f50e484]:
+                  - link "Das Beste von Reddit auf Portugiesisch" [ref=f50e486] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f50e487]:
+                  - link "Das Beste von Reddit auf Deutsch" [ref=f50e489] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f50e490]:
+                  - link "Regeln von Reddit" [ref=f50e492] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f50e493]:
+                  - link "Datenschutzerklärung" [ref=f50e495] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f50e496]:
+                  - link "Nutzungsvereinbarung" [ref=f50e498] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f50e499]:
+                  - link "Barrierefreiheit" [ref=f50e501] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f50e502]:
+                  - link "Impressum" [ref=f50e504] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/impressum
+                - listitem [ref=f50e505]:
+                  - link "Reddit, Inc. © 2026. Alle Rechte vorbehalten." [ref=f50e506] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f50e509]:
+          - paragraph [ref=f50e510]: Werde Teil des authentischsten Orts im Internet
+          - generic [ref=f50e512]:
+            - generic [ref=f50e514]: Weiter mit Telefonnummer
+            - generic [ref=f50e522]: Mit Mail fortfahren
+          - paragraph [ref=f50e529]:
+            - text: Wenn du fortfährst, stimmst du unserer
+            - link "Nutzungsvereinbarung" [ref=f50e530] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: zu und bestätigst, dass du die
+            - link "Datenschutzerklärung" [ref=f50e531] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: verstehst.

@@ -1,0 +1,293 @@
+- generic [active] [ref=f38e1]:
+  - link "Zum Hauptinhalt springen" [ref=f38e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f38e6]:
+    - generic:
+      - banner [ref=f38e9]:
+        - navigation [ref=f38e10]:
+          - link "Home" [ref=f38e14] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - textbox "Finde alles" [ref=f38e35]: GPT-5.6 Terra Luna experience codex
+          - generic [ref=f38e36]:
+            - link "Registrieren" [ref=f38e42] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Anmelden" [ref=f38e48] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Nutzermenü ausklappen" [ref=f38e55] [cursor=pointer]
+      - generic "GPT-5.6 Terra Luna experience codex – Reddit-Suche!"
+      - generic [ref=f38e64]:
+        - generic [ref=f38e65]:
+          - generic [ref=f38e69]:
+            - button "All" [ref=f38e70] [cursor=pointer]
+            - link "Beiträge" [ref=f38e75] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Terra+Luna+experience+codex&type=posts&iId=d26a6320-5dfe-4db1-8ac6-c2a50be8b342
+            - link "Communitys" [ref=f38e81] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Terra+Luna+experience+codex&type=communities&iId=d26a6320-5dfe-4db1-8ac6-c2a50be8b342
+            - link "Kommentare" [ref=f38e87] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Terra+Luna+experience+codex&type=comments&iId=d26a6320-5dfe-4db1-8ac6-c2a50be8b342
+            - link "Medien" [ref=f38e93] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Terra+Luna+experience+codex&type=media&iId=d26a6320-5dfe-4db1-8ac6-c2a50be8b342
+            - link "Profile" [ref=f38e99] [cursor=pointer]:
+              - /url: /search/?q=GPT-5.6+Terra+Luna+experience+codex&type=people&iId=d26a6320-5dfe-4db1-8ac6-c2a50be8b342
+          - generic [ref=f38e108]:
+            - main [ref=f38e109]:
+              - generic [ref=f38e110]:
+                - generic [ref=f38e111]:
+                  - generic [ref=f38e112]: Was die Leute sagen
+                  - separator [ref=f38e117]
+                - generic [ref=f38e118]:
+                  - generic [ref=f38e119]: Beiträge
+                  - link "Mehr anzeigen" [ref=f38e122] [cursor=pointer]:
+                    - /url: /search/?q=GPT-5.6+Terra+Luna+experience+codex&type=posts
+                - generic [ref=f38e128]:
+                  - generic:
+                    - 'heading "GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking" [level=2]':
+                      - 'link "GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking" [ref=f38e129] [cursor=pointer]':
+                        - /url: /r/codex/comments/1vfwsug/gpt56_sol_luna_and_terra_choosing_by_cost_speed/
+                  - generic [ref=f38e131]:
+                    - generic [ref=f38e134]:
+                      - link "r/codex" [ref=f38e137] [cursor=pointer]:
+                        - /url: /r/codex/
+                      - generic [ref=f38e142]: ·
+                    - 'link "GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking" [ref=f38e143] [cursor=pointer]':
+                      - /url: /r/codex/comments/1vfwsug/gpt56_sol_luna_and_terra_choosing_by_cost_speed/
+                    - link "Getting way, way better results with terra xhigh than luna max on real tasks. It runs about twice as fast as Sol, too" [ref=f38e145] [cursor=pointer]:
+                      - /url: /r/codex/comments/1vfwsug/gpt56_sol_luna_and_terra_choosing_by_cost_speed/
+                    - generic [ref=f38e146]:
+                      - generic [ref=f38e147]: Votes
+                      - text: ·
+                      - generic [ref=f38e148]: Kommentare
+                  - 'link "Vorschaubild von GPT-5.6 Sol, Luna and Terra: choosing by cost, speed and capability instead of one universal ranking" [ref=f38e150] [cursor=pointer]':
+                    - /url: /r/codex/comments/1vfwsug/gpt56_sol_luna_and_terra_choosing_by_cost_speed/
+                - separator [ref=f38e155]
+                - generic [ref=f38e157]:
+                  - generic:
+                    - heading "Does anyone even use gpt 5.6 terra ?" [level=2]:
+                      - link "Does anyone even use gpt 5.6 terra ?" [ref=f38e158] [cursor=pointer]:
+                        - /url: /r/codex/comments/1v21pa4/does_anyone_even_use_gpt_56_terra/
+                  - generic [ref=f38e160]:
+                    - generic [ref=f38e163]:
+                      - link "r/codex" [ref=f38e166] [cursor=pointer]:
+                        - /url: /r/codex/
+                      - generic [ref=f38e171]: ·
+                    - link "Does anyone even use gpt 5.6 terra ?" [ref=f38e172] [cursor=pointer]:
+                      - /url: /r/codex/comments/1v21pa4/does_anyone_even_use_gpt_56_terra/
+                    - link "Terra handles large context retrieval much better than Luna." [ref=f38e174] [cursor=pointer]:
+                      - /url: /r/codex/comments/1v21pa4/does_anyone_even_use_gpt_56_terra/
+                    - generic [ref=f38e175]:
+                      - generic [ref=f38e176]: Votes
+                      - text: ·
+                      - generic [ref=f38e177]: Kommentare
+                  - link "Vorschaubild von Does anyone even use gpt 5.6 terra ?" [ref=f38e179] [cursor=pointer]:
+                    - /url: /r/codex/comments/1v21pa4/does_anyone_even_use_gpt_56_terra/
+                - separator [ref=f38e184]
+                - generic [ref=f38e186]:
+                  - generic:
+                    - heading "Testing 5.6 Luna vs Terra medium vs Sol medium for implementation only" [level=2]:
+                      - link "Testing 5.6 Luna vs Terra medium vs Sol medium for implementation only" [ref=f38e187] [cursor=pointer]:
+                        - /url: /r/codex/comments/1vembjz/testing_56_luna_vs_terra_medium_vs_sol_medium_for/
+                  - generic [ref=f38e189]:
+                    - generic [ref=f38e192]:
+                      - link "r/codex" [ref=f38e195] [cursor=pointer]:
+                        - /url: /r/codex/
+                      - generic [ref=f38e200]: ·
+                    - link "Testing 5.6 Luna vs Terra medium vs Sol medium for implementation only" [ref=f38e201] [cursor=pointer]:
+                      - /url: /r/codex/comments/1vembjz/testing_56_luna_vs_terra_medium_vs_sol_medium_for/
+                    - link "Luna XHigh consistently delivered the best result for this task relative to price, matching Luna Max on all quality measures" [ref=f38e203] [cursor=pointer]:
+                      - /url: /r/codex/comments/1vembjz/testing_56_luna_vs_terra_medium_vs_sol_medium_for/
+                    - generic [ref=f38e204]:
+                      - generic [ref=f38e205]: Votes
+                      - text: ·
+                      - generic [ref=f38e206]: Kommentare
+                  - link "Vorschaubild von Testing 5.6 Luna vs Terra medium vs Sol medium for implementation only" [ref=f38e208] [cursor=pointer]:
+                    - /url: /r/codex/comments/1vembjz/testing_56_luna_vs_terra_medium_vs_sol_medium_for/
+                - separator [ref=f38e213]
+                - generic [ref=f38e215]:
+                  - generic:
+                    - heading "Why does nobody talk about GPT-5.6 Terra?" [level=2]:
+                      - link "Why does nobody talk about GPT-5.6 Terra?" [ref=f38e216] [cursor=pointer]:
+                        - /url: /r/codex/comments/1v4cu68/why_does_nobody_talk_about_gpt56_terra/
+                  - generic [ref=f38e218]:
+                    - generic [ref=f38e221]:
+                      - link "r/codex" [ref=f38e224] [cursor=pointer]:
+                        - /url: /r/codex/
+                      - generic [ref=f38e229]: ·
+                    - link "Why does nobody talk about GPT-5.6 Terra?" [ref=f38e230] [cursor=pointer]:
+                      - /url: /r/codex/comments/1v4cu68/why_does_nobody_talk_about_gpt56_terra/
+                    - link "I have found Terra is a good mid-tier between Sol and Luna. Sol is better, but too token hungry. Luna is cheap, but sometimes too stupid." [ref=f38e232] [cursor=pointer]:
+                      - /url: /r/codex/comments/1v4cu68/why_does_nobody_talk_about_gpt56_terra/
+                    - generic [ref=f38e233]:
+                      - generic [ref=f38e234]: Votes
+                      - text: ·
+                      - generic [ref=f38e235]: Kommentare
+                - separator [ref=f38e236]
+                - generic [ref=f38e238]:
+                  - generic:
+                    - heading "Assuming you are on a $200 plan, why use anything but GPT 5.6 Sol Ultra right now? Serious question." [level=2]:
+                      - link "Assuming you are on a $200 plan, why use anything but GPT 5.6 Sol Ultra right now? Serious question." [ref=f38e239] [cursor=pointer]:
+                        - /url: /r/codex/comments/1va8766/assuming_you_are_on_a_200_plan_why_use_anything/
+                  - generic [ref=f38e241]:
+                    - generic [ref=f38e244]:
+                      - link "r/codex" [ref=f38e247] [cursor=pointer]:
+                        - /url: /r/codex/
+                      - generic [ref=f38e252]: ·
+                    - link "Assuming you are on a $200 plan, why use anything but GPT 5.6 Sol Ultra right now? Serious question." [ref=f38e253] [cursor=pointer]:
+                      - /url: /r/codex/comments/1va8766/assuming_you_are_on_a_200_plan_why_use_anything/
+                    - link "because ultra is literal dogshit and probably hurting your code in the long run" [ref=f38e255] [cursor=pointer]:
+                      - /url: /r/codex/comments/1va8766/assuming_you_are_on_a_200_plan_why_use_anything/
+                    - generic [ref=f38e256]:
+                      - generic [ref=f38e257]: Votes
+                      - text: ·
+                      - generic [ref=f38e258]: Kommentare
+                - separator [ref=f38e259]
+                - generic [ref=f38e261]:
+                  - generic:
+                    - heading "Terra 5.6" [level=2]:
+                      - link "Terra 5.6" [ref=f38e262] [cursor=pointer]:
+                        - /url: /r/codex/comments/1v7k4wr/terra_56/
+                  - generic [ref=f38e264]:
+                    - generic [ref=f38e267]:
+                      - link "r/codex" [ref=f38e270] [cursor=pointer]:
+                        - /url: /r/codex/
+                      - generic [ref=f38e275]: ·
+                    - link "Terra 5.6" [ref=f38e276] [cursor=pointer]:
+                      - /url: /r/codex/comments/1v7k4wr/terra_56/
+                    - link "I decided to ignore the thinking setting and always set it to Medium. And switch between Luna Terra Sol" [ref=f38e278] [cursor=pointer]:
+                      - /url: /r/codex/comments/1v7k4wr/terra_56/
+                    - generic [ref=f38e279]:
+                      - generic [ref=f38e280]: Votes
+                      - text: ·
+                      - generic [ref=f38e281]: Kommentare
+                - separator [ref=f38e282]
+                - generic [ref=f38e284]:
+                  - generic:
+                    - heading "Terra is the best model" [level=2]:
+                      - link "Terra is the best model" [ref=f38e285] [cursor=pointer]:
+                        - /url: /r/codex/comments/1vgza7j/terra_is_the_best_model/
+                  - generic [ref=f38e287]:
+                    - generic [ref=f38e290]:
+                      - link "r/codex" [ref=f38e293] [cursor=pointer]:
+                        - /url: /r/codex/
+                      - generic [ref=f38e298]: ·
+                    - link "Terra is the best model" [ref=f38e299] [cursor=pointer]:
+                      - /url: /r/codex/comments/1vgza7j/terra_is_the_best_model/
+                    - link "For regular coding terra xhigh is great, especially with luna subagents" [ref=f38e301] [cursor=pointer]:
+                      - /url: /r/codex/comments/1vgza7j/terra_is_the_best_model/
+                    - generic [ref=f38e302]:
+                      - generic [ref=f38e303]: Votes
+                      - text: ·
+                      - generic [ref=f38e304]: Kommentare
+                - separator [ref=f38e305]
+            - generic [ref=f38e309]:
+              - generic [ref=f38e313]:
+                - heading "Communitys" [level=2] [ref=f38e314]
+                - generic [ref=f38e316]:
+                  - link "lunaring" [ref=f38e317] [cursor=pointer]:
+                    - /url: /r/lunaring/
+                  - generic [ref=f38e325]:
+                    - heading "r/lunaring" [level=3] [ref=f38e326]
+                    - generic [ref=f38e328]:
+                      - paragraph [ref=f38e329]: Step into the Lunaverse 🚀 This is your space for all things health, performance, and cutting-edge science. Whether you're optimizing sleep, tracking recovery, or geeking out on data, you're in the right place. Got questions or feature ideas? Dive in! And if support is slower than your morning coffee, email vaidehi.tandon@nexxbase.com for a faster fix. Let’s level up together! 💪✨ https://linktr.ee/lunazone
+                      - generic [ref=f38e330]:
+                        - generic [ref=f38e331]: wöchentliche Besucher*innen
+                        - generic [ref=f38e332]: ·
+                        - generic [ref=f38e333]: wöchentliche Beiträge
+                - generic [ref=f38e335]:
+                  - link "DailyTechBytes" [ref=f38e336] [cursor=pointer]:
+                    - /url: /r/DailyTechBytes/
+                  - generic [ref=f38e344]:
+                    - heading "r/DailyTechBytes" [level=3] [ref=f38e345]
+                    - generic [ref=f38e347]:
+                      - paragraph [ref=f38e348]: A community for anyone who loves technology, gadgets, apps, gaming, AI, cybersecurity, and everything happening in the digital world. Share the latest news, ask questions, post your reviews, discuss new launches, or just talk about the tech you are excited about. Beginners, enthusiasts, and experts — everyone is welcome. We aim to keep the discussions informative, friendly, and spam-free.
+                      - generic [ref=f38e349]:
+                        - generic [ref=f38e350]: wöchentliche Besucher*innen
+                        - generic [ref=f38e351]: ·
+                        - generic [ref=f38e352]: wöchentliche Beiträge
+                - generic [ref=f38e354]:
+                  - link "Lunar" [ref=f38e355] [cursor=pointer]:
+                    - /url: /r/Lunar/
+                  - generic [ref=f38e363]:
+                    - heading "r/Lunar" [level=3] [ref=f38e364]
+                    - generic [ref=f38e366]:
+                      - paragraph [ref=f38e367]: "For fans of the Lunar game series. Lunar (Japanese: ルナ Hepburn: Runa) is a series of role-playing video games, developed by Game Arts in Japan and published in the United States by Working Designs, Ubisoft, and Xseed Games. In 2025 GungHo released a remastered collection for Nintendo Switch, PlayStation 5, PlayStation 4, Xbox One, Xbox Series X and Series S, and Microsoft Windows."
+                      - generic [ref=f38e368]:
+                        - generic [ref=f38e369]: wöchentliche Besucher*innen
+                        - generic [ref=f38e370]: ·
+                        - generic [ref=f38e371]: wöchentliche Beiträge
+                - generic [ref=f38e373]:
+                  - link "Claude_reports" [ref=f38e374] [cursor=pointer]:
+                    - /url: /r/Claude_reports/
+                  - generic [ref=f38e382]:
+                    - heading "r/Claude_reports" [level=3] [ref=f38e383]
+                    - generic [ref=f38e385]:
+                      - paragraph [ref=f38e386]: Repository of all performance, limits, bugs, reports and rant posts on r/ClaudeAI/. Constantly updated.
+                      - generic [ref=f38e387]:
+                        - generic [ref=f38e388]: wöchentliche Besucher*innen
+                        - generic [ref=f38e389]: ·
+                        - generic [ref=f38e390]: wöchentliche Beiträge
+                - generic [ref=f38e392]:
+                  - link "terragenesisgame" [ref=f38e393] [cursor=pointer]:
+                    - /url: /r/terragenesisgame/
+                  - generic [ref=f38e401]:
+                    - heading "r/terragenesisgame" [level=3] [ref=f38e402]
+                    - generic [ref=f38e404]:
+                      - paragraph [ref=f38e405]: "A subreddit for discussion and advice about TerraGenesis and TerraGenesis: Operation Landfall for iOS and Android!"
+                      - generic [ref=f38e406]:
+                        - generic [ref=f38e407]: wöchentliche Besucher*innen
+                        - generic [ref=f38e408]: ·
+                        - generic [ref=f38e409]: wöchentliche Beiträge
+                - link "Weitere Communitys anzeigen" [ref=f38e411] [cursor=pointer]:
+                  - /url: /search/?q=GPT-5.6+Terra+Luna+experience+codex&type=communities
+              - list [ref=f38e413]:
+                - listitem [ref=f38e414]:
+                  - link "Home" [ref=f38e416] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f38e417]:
+                  - link "Beliebt" [ref=f38e419] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f38e420]:
+                  - link "Nachrichten" [ref=f38e422] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f38e423]:
+                  - link "Entdecken" [ref=f38e425] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f38e426]:
+                  - link "Das Beste von Reddit" [ref=f38e428] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f38e429]:
+                  - link "Das Beste von Reddit auf Portugiesisch" [ref=f38e431] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f38e432]:
+                  - link "Das Beste von Reddit auf Deutsch" [ref=f38e434] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f38e435]:
+                  - link "Regeln von Reddit" [ref=f38e437] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f38e438]:
+                  - link "Datenschutzerklärung" [ref=f38e440] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f38e441]:
+                  - link "Nutzungsvereinbarung" [ref=f38e443] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f38e444]:
+                  - link "Barrierefreiheit" [ref=f38e446] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f38e447]:
+                  - link "Impressum" [ref=f38e449] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/impressum
+                - listitem [ref=f38e450]:
+                  - link "Reddit, Inc. © 2026. Alle Rechte vorbehalten." [ref=f38e451] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f38e454]:
+          - paragraph [ref=f38e455]: Werde Teil des authentischsten Orts im Internet
+          - generic [ref=f38e457]:
+            - generic [ref=f38e459]: Weiter mit Telefonnummer
+            - generic [ref=f38e467]: Mit Mail fortfahren
+          - paragraph [ref=f38e474]:
+            - text: Wenn du fortfährst, stimmst du unserer
+            - link "Nutzungsvereinbarung" [ref=f38e475] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: zu und bestätigst, dass du die
+            - link "Datenschutzerklärung" [ref=f38e476] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: verstehst.

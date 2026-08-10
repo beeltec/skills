@@ -17,6 +17,8 @@ Only use the terms from the Wiki's ubiquitous language document. If a new term i
 
 When communicating with the user always adhere to ISO 24495 at `references/iso-24495.md`. and ASD-STE100 Simplified Technical English at `references/asd-ste100.md`.
 
+## List of subskills
+
 Based on the prompt load the instructions for one of the following subskills from `subskills/{subskill_name}.md`:
 
 - codebase -> Exact words `analyze codebase` or general instruction to analyze and/or map the codebase
@@ -27,7 +29,15 @@ Based on the prompt load the instructions for one of the following subskills fro
 - setup -> Exact word `setup` or invoked by the model. Sets up the file and folder structure or adds a note that this project is not using it
 - wiki -> Use it when writing to the Wiki
 
+## Mapping the project
+
 If mapping the project is required for any of the subskills use up to 5 subagents using the cheapest model (see `references/models.md`). 
 Create an aggregated report from all subagents with a heading for each of them verbatim or lightly cleaned. Do not merge or rerank findings.
+
+## Working with subagents
+
+- Always make sure to close a subagent when you received it's report
+
+## Asking the user
 
 When asking the user anything (not just in the discuss subskill) use AskUserQuestion tool if it is available (in that case **it is non negotiable**).
