@@ -8,9 +8,9 @@ metadata:
 
 First check the AGENTS.md if we are using our file and folder structure for the backlog and Wiki. If no mention of it is in it, load `setup` subskill and execute it.
 
-When communicating with the user always adhere to ISO 24495 at `references/iso-24495.md`. and ASD-STE100 Simplified Technical English at `references/asd-ste100.md`.
+If this project uses the Wiki only use the terms from `docs/wiki/ubiquitous-language.md`. If a new term is introduced by the user, ask if it should be added to the document.
 
-If this project uses the okf wiki (check if docs/wiki/ubiquitous-language.md exists) only use these terms. If a new term is introduced by the user, ask if it should be added to the document.
+When communicating with the user always adhere to ISO 24495 at `references/iso-24495.md`. and ASD-STE100 Simplified Technical English at `references/asd-ste100.md`.
 
 Based on the prompt load the instructions for one of the following subskills from `subskills/{subskill_name}.md`:
 
