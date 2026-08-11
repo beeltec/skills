@@ -43,8 +43,7 @@ Based on the prompt load the instructions for one of the following subskills fro
 
 ## Mapping the project
 
-If mapping the project is required for any of the subskills use up to 5 subagents using the cheapest model (see `references/models.md`). 
-Create an aggregated report from all subagents with a heading for each of them verbatim or lightly cleaned. Do not merge or rerank findings.
+Use the codebase subskill if you need to map the project.
 
 ## Working with subagents
 
