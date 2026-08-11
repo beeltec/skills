@@ -20,8 +20,11 @@ If new tickets are created during the implementation work, queue them up so they
 - Coding-heavy work: role: Backend engineer; job: implement the Coding-heavy task; model: the most intelligent model
 - Database-heavy work: role: Database specialist; job: implement the Database-heavy task; model: a balanced one
 
-## Style
+## Style / Preferences
 
+- Focus on building complex things as simple as possible. Find ways to reduce complexity when solving problems
+- Keep things simple. Channel "YAGNI" energy unless told otherwise
+- Type safety is useful - take advantage of it
 - Keep comments inside code to a minimum. Never mention any tickets and/or Epics inside them
 
 ## Claiming
