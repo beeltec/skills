@@ -5,11 +5,13 @@ description: Analyze the codebase and return a summary of it
 
 ## Subagents (see `references/models.md`)
 
-Using three subagents analyze the entire codebase of this project (excluding docs folder):
+Using up to 10 subagents analyze the entire codebase of this project (excluding docs folder):
 
-1. role: analyst; job: tech stack including all used libraries
-2. role: analyst; job: code styling / conventions
-3. role: analyst; job: api contracts
+- applications, services, packages, and libraries;
+- languages, frameworks, package managers, and build systems;
+- workspaces, tests, generated code, and documentation;
+- infrastructure, CI/CD, schemas, migrations, and protocol definitions;
+- probable entry points, runtime units, and deployment units.
 
 Use the cheapest model available (check `references/models.md`).
 
