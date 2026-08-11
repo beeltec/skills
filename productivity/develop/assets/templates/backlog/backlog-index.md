@@ -69,6 +69,7 @@ None.
 3. Ticket files are not moved when their status changes.
 4. Open work uses `- [ ]`.
 5. Completed work uses `- [x]`.
-6. Move ticket links between the `Todo`, `In Progress`, `Blocked`, and `Done` sections as their state changes.
-7. The individual ticket file remains the source of truth for requirements and implementation details.
-8. Completed tickets remain in the repository for project history.
+6. Skipped work uses `- [~]`.
+7. Move ticket links between the `Todo`, `In Progress`, `Blocked`, and `Done` sections as their state changes.
+8. The individual ticket file remains the source of truth for requirements and implementation details.
+9. Completed tickets remain in the repository for project history.
