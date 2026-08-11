@@ -49,3 +49,11 @@ Close them when all work is done from them.
 ## Asking the user
 
 When asking the user anything (not just in the discuss subskill) use AskUserQuestion tool if it is available (in that case **it is non negotiable**).
+
+## Autonomous work
+
+If the user mentions running the flow autonomously (or something like "don't stop working" or "work without asking me"), go through this flow without ever stopping to ask the user:
+1. discuss with yourself using only recommended answers (discuss subskill)
+2. plan the work (plan subskill)
+3. implement the work including review cycle where applicable (implement subskill)
+4. make sure no branches opened by yourself stay open
