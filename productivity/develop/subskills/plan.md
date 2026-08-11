@@ -27,8 +27,8 @@ Use one of these templates:
 ## Testing
 
 - Unless otherwise stated, create the bare minimum of unit tests. Always ask yourself if the unit test is necessary. When in doubt the answer is no.
-- Run integration suites seldom and only when necessary to keep things fast.
 - You have to run acceptance tests. These have to be run in real environments (for example using a real browser or device simulators).
+- Run integration, e2e and acceptance tests only at the end of an epic, not during ticket implementation (unless they are standalone tickets).
 
 These testing guidelines need to be reflected as tasks inside Epics and/or tickets.
 

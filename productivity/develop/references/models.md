@@ -19,7 +19,6 @@ This is a summary of available AI models.
 | **Claude Fable 5**   |       **10** | **10** |          6 |          3 |   **8** |
 | **Claude Opus 5**    |            7 |      5 |          6 |          6 |   **6** |
 | **Claude Sonnet 5**  |            6 |      6 |          7 |          7 |   **6** |
-| **Claude Haiku 4.5** |            4 |      4 |      **9** |          6 |   **5** |
 
 ### Description
 

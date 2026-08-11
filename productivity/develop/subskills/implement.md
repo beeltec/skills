@@ -20,6 +20,10 @@ If new tickets are created during the implementation work, queue them up so they
 - Coding-heavy work: role: Backend engineer; job: implement the Coding-heavy task; model: the most intelligent model
 - Database-heavy work: role: Database specialist; job: implement the Database-heavy task; model: a balanced one
 
+## Style
+
+- Keep comments inside code to a minimum. Never mention any tickets and/or Epics inside them
+
 ## Claiming
 
 When claiming a ticket in the backlog use the exact model name of the implementing agent as the owner and the asignee. 
@@ -29,6 +33,7 @@ The asignee must not be changed or removed afterwards while the owner will be re
 
 After each ticket is done, do a code review using the review subskill. Fix all findings that are reported. 
 If using subagent-driven implementation direct the findings to the subagent that did the original implementation as that still has all the necessary context.
+If working on an Epic, do an additional code review pass using the review subskill at the end of the Epic and spawn fresh subagents to mitigate the findings.
 
 ## Wiki Updates
 
