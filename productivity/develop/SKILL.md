@@ -6,6 +6,11 @@ metadata:
   version "0.1"
 ---
 
+## AGENTS.md and CLAUDE.md
+
+Based on the executing harness the memory file is either CLAUDE.md (Claude Code) or AGENTS.md (all other harnesses). 
+When AGENTS.md is mentioned it means CLAUDE.md for Claude Code. The only exception is when no memory file is present, then AGENTS.md should be created and CLAUDE.md should be created as a symlink to AGENTS.md
+
 ## Setup check
 
 First check if AGENTS.md exists using `[ -f ./AGENTS.md ] && echo 1 || echo 0`. If 0 load `setup` subskill and execute it.
