@@ -6,14 +6,15 @@ metadata:
   version "0.1"
 ---
 
-## AGENTS.md and CLAUDE.md
+## Memory files
 
 Based on the executing harness the memory file is either CLAUDE.md (Claude Code) or AGENTS.md (all other harnesses). 
-When AGENTS.md is mentioned it means CLAUDE.md for Claude Code. The only exception is when no memory file is present, then AGENTS.md should be created and CLAUDE.md should be created as a symlink to AGENTS.md
+When AGENTS.md or just "memory file" is mentioned it means CLAUDE.md for Claude Code and AGENTS.md for all other harnesses. 
+The only exception is when no memory file is present, then AGENTS.md should be created and CLAUDE.md should be created as a symlink to AGENTS.md
 
 ## Setup check
 
-First check if AGENTS.md exists using `[ -f ./AGENTS.md ] && echo 1 || echo 0`. If 0 load `setup` subskill and execute it.
+First check if memory files exists using `[ -f ./{memory file}.md ] && echo 1 || echo 0`. If 0 load `setup` subskill and execute it.
 If 1 check it if we are using our file and folder structure for the backlog and Wiki. If no mention of it is in it, load `setup` subskill and execute it.
 In both cases explicitly write `Setup necessary, loading setup subskill`.
 The execution of this skill **has to be done before the execution of any other skill** and the user needs to answer. It cannot be run autonomously.
@@ -26,8 +27,7 @@ Instructions mentioning the Wiki and/or Backlog must only be executed if the pro
 
 Only use the terms from the Wiki's ubiquitous language document. If a new term is introduced by the user, ask if it should be added to the document.
 
-When communicating with the user always adhere to ISO 24495 at `references/iso-24495.md`. and ASD-STE100 Simplified Technical English at `references/asd-ste100.md`.
-Also assume the user is not a native English speaker and use simple terms during communication with them.
+When communicating with the user always adhere to ISO 24495 at `references/iso-24495.md`. and ASD-STE100 Simplified Technical English at `references/asd-ste100.md`. Also assume the user is not a native English speaker and use simple and layman's terms during communication with them.
 
 ## List of subskills
 
