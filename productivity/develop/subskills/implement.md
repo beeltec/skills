@@ -32,9 +32,10 @@ The asignee must not be changed or removed afterwards while the owner will be re
 
 ## Code review
 
-Before a ticket is marked done and merged back do a code review pass using the review subskill. 
+Before a ticket is marked done and merged back do a code review loop using the review subskill. 
 If using subagent-driven implementation use it from the implementing subagent and not from the orchestrator.
-If working on an Epic, do an additional code review pass using the review subskill at the end of the Epic and spawn fresh subagents to mitigate the findings.
+If working on an Epic, do an additional code review loop using the review subskill at the end of the Epic and spawn fresh subagents to mitigate the findings.
+Each loop may have a maximum of 3 iterations.
 
 ## Wiki usage
 
