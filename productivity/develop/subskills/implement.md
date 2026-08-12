@@ -5,20 +5,18 @@ description: Implement Epics, Stories or Bug Tickets either directly or using su
 
 ## Direct implementation vs. subagent-driven implementation
 
-Check if the implementation is likely to extend a context window of 150.000 tokens. If not, implement it directly.
-
-If it is (like when implementing entire Epics or Stories / Bug tickets), create a subagent for each task. 
-
-If there are several tasks to be worked on, analyze them first to see if multiple subagents working on them could interfer with each other. 
-If that is the case, work on the tasks sequentially. If not, use parallel subagents.
-
-If new tickets are created during the implementation work, queue them up so they are worked on as well automatically.
+Analyze all tickets and their subtasks that need to be implemented. 
+If they are likely to be finished in a single session with less than 150k tokens implement them directly. Otherwise use subagents. 
 
 ## Possible subagents (see `references/models.md`)
 
 - UI-heavy work: role: Frontend engineer; job: implement the UI heavy task; model: the one with the best taste
 - Coding-heavy work: role: Backend engineer; job: implement the Coding-heavy task; model: the most intelligent model
 - Database-heavy work: role: Database specialist; job: implement the Database-heavy task; model: a balanced one
+
+## Follow-ups
+
+If new tickets are created during the implementation work, queue them up so they are worked on as well automatically during this run.
 
 ## Style / Preferences
 
@@ -38,8 +36,9 @@ After each ticket is done, do a code review using the review subskill. Fix all f
 If using subagent-driven implementation direct the findings to the subagent that did the original implementation as that still has all the necessary context.
 If working on an Epic, do an additional code review pass using the review subskill at the end of the Epic and spawn fresh subagents to mitigate the findings.
 
-## Wiki Updates
+## Wiki usage
 
+Before implementation always check the wiki for important infos (for example on coding guidelines and best practices).
 Add or update the Wiki as the tasks are implemented.
 
 ## Backlog Updates
