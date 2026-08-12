@@ -37,7 +37,9 @@ Keep the Backlog index current at all times. Update it after adding or updating 
 
 ## Subtask granularity
 
-When creating subtasks be very granular about it. Always ask yourself "Will the agent implementing it likely exceed a context window of 150.000?". If so, be more granular so it will likely stay under it.
+When creating tickets and subtasks be very granular about it. 
+Always ask yourself "Will the agent implementing it likely exceed a context window of 150k tokens?". 
+If so, be more granular so it will likely stay under it.
 
 ## Research and Wiki
 
