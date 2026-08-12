@@ -36,9 +36,9 @@ Each smell reads what it is → how to fix; match it against the diff:
 
 ## Spawn subagents in parallel
 
-Create two subagents using balanced models (see `references/models`)
-1. name: Standards reviewer; job: does the code conform to this repo's documented coding standards?
-2. name: Specs reviewer; job: does the code faithfully implement the originating ticket?
+Create two subagents (see `references/models`)
+1. Standards reviewer: does the code conform to this repo's documented coding standards?
+2. Specs reviewer: does the code faithfully implement the originating ticket?
 
 ## Aggregate
 

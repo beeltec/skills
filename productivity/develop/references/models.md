@@ -1,35 +1,29 @@
-# Agent model summary
+# Agent Model Summary
 
-This is a summary of available AI models.
+This table summarizes the available AI models and their recommended sub-agent roles.
 
-**Note**: Always use a model from the same company as the orchestrating agent until otherwise noted.
+If one provider is unavailable, use the closest model from the other provider: substitute **GPT-5.6 Sol** for **Claude Fable 5** or **Claude Opus 5**, **GPT-5.6 Terra** for **Claude Sonnet 5**, **Claude Fable 5** for **GPT-5.6 Sol**, **Claude Sonnet 5** for **GPT-5.6 Terra**, and **Claude Sonnet 5** for **GPT-5.6 Luna**. When a role has unusually high reasoning, autonomy, or risk requirements, prefer the more capable fallback even if a lower-tier model would be cheaper.
 
-## OpenAI / Codex
-
-| Model             | Intelligence | Taste | Efficiency | Cost / job | Overall |
-| ----------------- | -----------: | ----: | ---------: | ---------: | ------: |
-| **GPT-5.6 Sol**   |        **9** | **8** |          7 |          7 |   **9** |
-| **GPT-5.6 Terra** |            7 |     7 |      **9** |          9 |   **8** |
-| **GPT-5.6 Luna**  |            6 |     5 |      **9** |     **10** |   **8** |
-
-## Anthropic / Claude Code
-
-| Model                | Intelligence |  Taste | Efficiency | Cost / job | Overall |
-| -------------------- | -----------: | -----: | ---------: | ---------: | ------: |
-| **Claude Fable 5**   |       **10** | **10** |          6 |          3 |   **8** |
-| **Claude Opus 5**    |            7 |      5 |          6 |          6 |   **6** |
-| **Claude Sonnet 5**  |            6 |      6 |          7 |          7 |   **6** |
-
-### Description
-
-* **Intelligence** — Reasoning ability, problem-solving, coding, factual accuracy, handling complexity, and completing difficult multi-step tasks.
-
-* **Taste** — Quality of judgment in subjective tasks: writing style, design sense, UX choices, architecture, creativity, and knowing what feels polished rather than merely correct.
-
-* **Efficiency** — How quickly and economically the model reaches a good result: speed, unnecessary verbosity/reasoning, number of agent steps, and token consumption.
-
-* **Cost / job** — The **actual cost to finish a task successfully**, accounting for input/output tokens, retries, long reasoning traces, and extra agent/tool calls—not just the advertised price per token.
-
-* **Overall** — Combined assessment of the model as a practical choice, balancing intelligence, taste, efficiency, and real-world cost.
-
-Higher score = better
+| Sub-agent                             | Role                                                                                 | Recommended model                    | Why                                                                                                                                                                           |
+| ------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Architect / Planner**               | Decompose ambiguous, large, multi-stage tasks and determine dependencies             | **GPT-5.6 Sol**                      | Highest reasoning tier for decisions that affect every downstream agent                                                                                                       |
+| **Principal Agent / Autonomous Lead** | Own very long-running tasks with substantial autonomy, tools, iteration, and context | **Claude Fable 5**                   | Anthropic describes Fable 5 as its most capable widely released model for long-running agents, with 1M context and adaptive thinking                                           |
+| **Deep Researcher**                   | Multi-source investigation, difficult synthesis, competing hypotheses                | **Claude Fable 5**                   | Particularly appropriate when research is open-ended and must stay coherent over a long trajectory                                                                            |
+| **Complex Reasoning Specialist**      | Solve difficult but reasonably bounded analytical problems                           | **Claude Opus 5**                    | Opus 5 is explicitly positioned for deep reasoning, agentic work, and long-horizon tasks                                                                                      |
+| **Research Scout**                    | Broad searching, gathering evidence, producing structured findings                   | **GPT-5.6 Terra**                    | Good cost/capability balance for multiple parallel researchers                                                                                                                |
+| **Fast Explorer**                     | Search repositories, files and existing context; locate relevant components          | **GPT-5.6 Luna**                     | Cheap, fast discovery before invoking expensive specialists                                                                                                                   |
+| **Principal Implementation Engineer** | Large features, difficult migrations, complex production implementations             | **GPT-5.6 Sol** / **Claude Fable 5** | Reserve maximum capability for difficult implementations                                                                                                                      |
+| **Senior Implementation Engineer**    | Substantial coding tasks with well-defined requirements                              | **Claude Opus 5**                    | Anthropic reports major gains in software engineering, debugging, root-cause analysis and large codebase work                                                                 |
+| **Routine Coding Agent**              | Normal feature implementation, refactors, tests and bug fixes                        | **Claude Sonnet 5**                  | Sonnet 5 offers substantially better cost-performance and can approach prior Opus capability on some tasks                                                                    |
+| **Independent Code Reviewer**         | Review correctness, architecture, edge cases and subtle defects                      | **Claude Opus 5**                    | Opus 5 is especially strong at verification, careful iteration, PR review and detecting subtle codebase-specific problems                                                     |
+| **Deep Code Reviewer**                | Independently challenge an especially consequential implementation                   | **Claude Fable 5**                   | Use when spending more compute on an independent second opinion is justified                                                                                                  |
+| **Test / Verification Agent**         | Generate tests, run checks, evaluate acceptance criteria                             | **GPT-5.6 Terra**                    | Reliable middle tier that is affordable enough to invoke routinely                                                                                                            |
+| **Critic / Red Team**                 | Try to falsify conclusions, find design holes and challenge assumptions              | **Claude Fable 5**                   | Strong choice when the entire point is finding something another capable agent missed; Anthropic reports strong results on identifying complex design holes                   |
+| **Security Reviewer**                 | Threat modeling, secure-code review, vulnerability analysis                          | **GPT-5.6 Sol**                      | OpenAI positions Sol as its highest-capability tier, including strong cybersecurity performance                                                                               |
+| **Data / Finance Analyst**            | Quantitative analysis, spreadsheets, tables, statistical reasoning                   | **Claude Opus 5**                    | Anthropic reports substantial strength in numerical reasoning, tables, financial modeling and scientific analysis                                                            |
+| **General Analyst**                   | Routine structured analysis and experiment interpretation                            | **GPT-5.6 Terra**                    | Good default before escalating to an expensive analytical specialist                                                                                                          |
+| **UI / App Builder**                  | Build interfaces, prototypes and full-stack applications                             | **Claude Fable 5**                   | Anthropic reports particular strength in UI design, app building and tool calling                                                                                             |
+| **Tool / Computer Operator**          | Browser, computer-use and repetitive interface workflows                             | **Claude Sonnet 5**                  | Sonnet 5 is specifically evaluated on agentic search and computer use while offering a strong cost-performance range                                                          |
+| **Writer / Editor**                   | Documentation, reports, explanations, editing                                        | **Claude Sonnet 5**                  | Strong enough for professional output without routinely spending flagship-model compute                                                                                       |
+| **Summarizer / Extractor**            | Compression, normalization, extraction and aggregation                               | **GPT-5.6 Luna**                     | Optimize high-volume transformation tasks for latency and cost                                                                                                                |
+| **Final Verifier**                    | Compare finished work against the original requirements                              | **Claude Opus 5**                    | Its stronger self-verification and careful iteration make it a particularly good final gate                                                                                   |

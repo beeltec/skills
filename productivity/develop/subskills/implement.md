@@ -8,11 +8,9 @@ description: Implement Epics, Stories or Bug Tickets either directly or using su
 Analyze all tickets and their subtasks that need to be implemented. 
 If they are likely to be finished in a single session with less than 150k tokens implement them directly. Otherwise use subagents.
 
-## Possible subagents (see `references/models.md`)
+## Possible subagents
 
-- UI-heavy work: role: Frontend engineer; job: implement the UI heavy task; model: the one with the best taste
-- Coding-heavy work: role: Backend engineer; job: implement the Coding-heavy task; model: the most intelligent model
-- Database-heavy work: role: Database specialist; job: implement the Database-heavy task; model: a balanced one
+see `references/models.md`
 
 ## Follow-ups
 

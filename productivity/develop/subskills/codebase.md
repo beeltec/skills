@@ -13,7 +13,7 @@ Using up to 10 subagents analyze the entire codebase of this project (excluding 
 - infrastructure, CI/CD, schemas, migrations, and protocol definitions;
 - probable entry points, runtime units, and deployment units.
 
-Use the cheapest model available (check `references/models.md`).
+Use the cheapest model available.
 
 ## Aggregate
 
