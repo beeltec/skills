@@ -32,8 +32,8 @@ The asignee must not be changed or removed afterwards while the owner will be re
 
 ## Code review
 
-After each ticket is done, do a code review using the review subskill. Fix all findings that are reported. 
-If using subagent-driven implementation direct the findings to the subagent that did the original implementation as that still has all the necessary context.
+Before a ticket is marked done and merged back do a code review pass using the review subskill. 
+If using subagent-driven implementation use it from the implementing subagent and not from the orchestrator.
 If working on an Epic, do an additional code review pass using the review subskill at the end of the Epic and spawn fresh subagents to mitigate the findings.
 
 ## Wiki usage
