@@ -9,6 +9,21 @@ epic:
 story:
 blocked_by: []
 blocks: []
+cloned_by: []
+clones: []
+duplicated_by: []
+duplicates: []
+added_to_idea: []
+idea_for: []
+implemented_by: []
+implements: []
+merged_into: []
+merged_from: []
+reviewed_by: []
+reviews: []
+caused_by: []
+causes: []
+relates_to: []
 owner:
 assignee:
 created: YYYY-MM-DD
