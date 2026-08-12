@@ -6,7 +6,7 @@ description: Implement Epics, Stories or Bug Tickets either directly or using su
 ## Direct implementation vs. subagent-driven implementation
 
 Analyze all tickets and their subtasks that need to be implemented. 
-If they are likely to be finished in a single session with less than 150k tokens implement them directly. Otherwise use subagents. 
+If they are likely to be finished in a single session with less than 150k tokens implement them directly. Otherwise use subagents.
 
 ## Possible subagents (see `references/models.md`)
 
@@ -48,5 +48,6 @@ When a ticket or Epic is done and green, check all marks inside the document and
 ## Versioning
 
 - If on main branch create a new branch per ticket and merge it with a merge commit when done and green
-- Always make sure to delete every merged branch
+- Always make sure to delete every merged branch and their worktrees
 - Commit units of work (ie. one commit after each subtask and after a ticket or Epic is done)
+- If working with subagents create a worktree for each ticket and run the subagents in parallel on tickets that are not blocked
