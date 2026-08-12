@@ -51,3 +51,4 @@ When a ticket or Epic is done and green, check all marks inside the document and
 - Always make sure to delete every merged branch and their worktrees
 - Commit units of work (ie. one commit after each subtask and after a ticket or Epic is done)
 - If working with subagents create a worktree for each ticket and run the subagents in parallel on tickets that are not blocked
+- Worktrees need to be created in the gitignored folder {project_root}/.worktrees. If it does not exist create it and add it to .gitignore
