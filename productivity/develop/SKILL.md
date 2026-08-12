@@ -3,7 +3,7 @@ name: develop
 description: A gateway skill to route to subskills that help planning and developing features
 metadata:
   author: Christian Beelte
-  version "0.1"
+  version: "0.1"
 ---
 
 ## Memory files
