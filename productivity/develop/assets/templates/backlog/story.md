@@ -5,6 +5,8 @@ title: ""
 status: todo
 priority: medium
 epic: EPIC-XXX
+blocked_by: []
+blocks: []
 owner:
 assignee:
 created: YYYY-MM-DD

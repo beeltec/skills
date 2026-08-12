@@ -7,6 +7,8 @@ priority: medium
 severity: medium
 epic:
 story:
+blocked_by: []
+blocks: []
 owner:
 assignee:
 created: YYYY-MM-DD
