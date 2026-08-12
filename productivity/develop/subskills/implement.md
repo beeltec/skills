@@ -40,7 +40,7 @@ Each loop may have a maximum of 3 iterations.
 ## Wiki usage
 
 Before implementation always check the wiki for important infos (for example on coding guidelines and best practices).
-Add or update the Wiki as the tasks are implemented.
+Add or update the Wiki as the tasks are being implemented.
 
 ## Backlog Updates
 
