@@ -34,6 +34,18 @@ Each smell reads what it is → how to fix; match it against the diff:
 - Middle Man — a class or function that mostly just delegates onward. → cut it, call the real target direct.
 - Refused Bequest — a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
+## Findings classification
+
+When reporting your findings use priority levels
+
+| Priority | Urgency    | Impact     | Example                                                              | Response                                                   |
+| -------- | ---------- | ---------- | -------------------------------------------------------------------- | ---------------------------------------------------------- |
+| P0       | Critical   | Extensive  | System outage                                                        | Immediate                                                  |
+| P1       | High       | Large      | Major feature malfunctioning                                         | Urgent but not out of BAU schedule                         |
+| P2       | Moderate   | Moderate   | Minor feature malfunctioning                                         | Important but needs to be prioritized against other issues |
+| P3       | Low        | Minor      | Functionality or feature prevents a few users from using the product | Part of routine work                                       |
+| P4       | Negligible | Negligible | Minor issue that doesn’t affect user base                            | Should be placed on backlog                                |
+
 ## Spawn subagents in parallel
 
 Create two subagents (see `references/models`)
