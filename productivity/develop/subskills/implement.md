@@ -15,7 +15,9 @@ see `references/models.md`
 
 ## Follow-ups
 
-If new tickets are created during the implementation work, queue them up so they are worked on as well automatically during this run.
+If new work comes up during implementation (like bugs that need new bug tickets or additional work that need stories) use the plan subskill to plan this work.
+If this comes up during the implementation of an Epic add these tickets to the current epic. 
+Queue the new tickets up so they are implemented in the same run unless stated otherwise by the user.
 
 ## Style / Preferences
 
