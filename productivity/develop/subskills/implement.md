@@ -51,7 +51,7 @@ When a ticket or Epic is done and green, check all marks inside the document and
 
 ## Versioning
 
-- If on main branch create a new branch per ticket (`story/bug-xxx_title`) and merge it with a merge commit when done and green
+- If on main branch create a new branch per ticket (`{feat,fix,hotfix,chore,docs}/{story,bug}-xxx_title`) and merge it with a merge commit when done and green
 - Always make sure to delete every merged branch and their worktrees
 - Commit units of work (ie. one commit after each subtask and after a ticket or Epic is done)
 - If working with subagents create a worktree for each ticket and run the subagents in parallel on tickets that are not blocked
