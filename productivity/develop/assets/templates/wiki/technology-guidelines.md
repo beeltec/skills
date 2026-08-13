@@ -15,11 +15,11 @@ generated:
 
 State what this document covers and where it applies in the repository.
 
-For `general/guidelines.md`, state that these rules apply to all code and that
-technology directories may add to them but not contradict them.
+For `general/guidelines.md`, state which technologies and code areas these
+rules cover.
 
-For a technology directory, state that these rules add to
-[the general guidelines](/technology/general/guidelines.md).
+For a technology directory, identify the shared documents that apply. Do not
+link a document from `general/` unless its scope includes this technology.
 
 # Rules
 
@@ -66,7 +66,8 @@ Each rule is stated as an imperative a reviewer can check.
 
 # Related
 
-* [General Guidelines](/technology/general/guidelines.md)
-* [<Technology> Best Practices](/technology/<technology>/best-practices.md)
-* [<Technology> Examples](/technology/<technology>/examples.md)
+Include only documents that exist and apply.
+
+* [<Applicable shared document>](/technology/general/<document>.md)
+* [<Related technology document>](/technology/<technology>/<document>.md)
 * [Architecture](/architecture.md)

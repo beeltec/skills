@@ -90,7 +90,7 @@ Their vocabulary is not ours. Translation happens at the boundary in
 
 * [Architecture](/architecture.md)
 * [External Systems](/external-systems/index.md)
-* [<Technology> API Contracts](/technology/<technology>/api.md)
+* [<Related technology document>](/technology/<technology>/<document>.md)
 * [ADR-XXX — <Decision to use this system>](/adrs/adr-XXX-<slug>.md)
 
 [^<source-key>]: <Human-readable source title>

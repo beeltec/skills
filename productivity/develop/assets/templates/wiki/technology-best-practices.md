@@ -21,8 +21,8 @@ sources:
 Guidelines are rules; best practices are judgement. This document records the
 approaches that have worked here and the mistakes that have cost us time.
 
-For `general/best-practices.md`, cover practices independent of any single
-technology.
+For `general/best-practices.md`, state which technologies and code areas these
+shared practices cover.
 
 # Practices
 
@@ -81,8 +81,9 @@ technology.
 
 # Related
 
-* [General Best Practices](/technology/general/best-practices.md)
-* [<Technology> Guidelines](/technology/<technology>/guidelines.md)
-* [<Technology> Examples](/technology/<technology>/examples.md)
+Include only documents that exist and apply.
+
+* [<Applicable shared document>](/technology/general/<document>.md)
+* [<Related technology document>](/technology/<technology>/<document>.md)
 
 [^<source-key>]: <Human-readable source title>

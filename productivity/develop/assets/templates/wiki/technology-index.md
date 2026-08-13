@@ -1,26 +1,42 @@
 # Technology Stack
 
-Each technology has the same four documents. `general/` holds the guidance that
-applies to every technology; a technology directory holds only what is specific
-to it and does not repeat the general rules.
+Each technology contains only documents that apply to it. It can use any subset
+of the standard documents and can add documents for other topics.
 
-# Cross-Cutting
+Documents in `general/` contain shared guidance. Each document states which
+technologies it covers. Do not assume that every general document applies to
+every technology.
 
-* [General](general/) - Guidance that applies across the whole codebase.
+# Shared Guidance
+
+* [<Document title>](general/<document>.md) - <Topic and technologies in scope.>
 
 # Technologies
 
-* [<Technology>](<technology>/) - <Where and why it is used, and its version.>
-* [<Technology>](<technology>/) - <Where and why it is used, and its version.>
+## <Technology>
 
-# Per Technology
+<Where and why it is used, and its version.>
 
-Every directory above contains:
+* [Guidelines](<technology>/guidelines.md) - <Rules contributors must follow.>
+* [<Additional document>](<technology>/<document>.md) - <What it covers.>
+
+## <Technology>
+
+<Where and why it is used, and its version.>
+
+* [Best Practices](<technology>/best-practices.md) - <Recommended approaches and known pitfalls.>
+
+# Standard Documents
+
+Use only the documents that apply:
 
 * `guidelines.md` - Rules contributors must follow.
 * `best-practices.md` - Recommended approaches and known pitfalls.
 * `examples.md` - Canonical implementations worth imitating.
 * `api.md` - API contracts the technology exposes or consumes.
+
+Add other documents when these choices do not fit. Use a descriptive kebab-case
+filename and list every document under its technology above.
 
 # Related
 

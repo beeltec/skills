@@ -22,4 +22,4 @@ Systems we call.
 # Related
 
 * [Architecture](/architecture.md)
-* [API Contracts](/technology/general/api.md)
+* [Technology Stack](/technology/index.md)

@@ -78,6 +78,6 @@ Briefly describe the alternative.
 # Related
 
 * [Architecture](/architecture.md)
-* [<Technology guidelines>](/technology/<tech>/guidelines.md)
+* [<Related technology document>](/technology/<technology>/<document>.md)
 * [<External system>](/external-systems/<system>.md)
 * [ADR-XXX — <Related decision>](/adrs/adr-XXX-<slug>.md)

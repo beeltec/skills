@@ -23,8 +23,8 @@ The machine-readable specification is the source of truth. This document says
 where it lives, what it covers, and the conventions and rules a reader cannot
 infer from the schema.
 
-For `general/api.md`, record the conventions every API in this project follows
-regardless of technology.
+For `general/api.md`, state which APIs and technologies the shared conventions
+cover.
 
 # Specification
 
@@ -87,8 +87,10 @@ Summarise the surface; do not restate the schema.
 
 # Related
 
-* [General API Contracts](/technology/general/api.md)
-* [<Technology> Guidelines](/technology/<technology>/guidelines.md)
+Include only documents that exist and apply.
+
+* [<Applicable shared document>](/technology/general/<document>.md)
+* [<Related technology document>](/technology/<technology>/<document>.md)
 * [External Systems](/external-systems/index.md)
 * [Architecture](/architecture.md)
 

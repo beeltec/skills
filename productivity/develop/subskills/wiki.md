@@ -16,34 +16,26 @@ Bundle-relative links (starting with `/`) resolve against `docs/wiki/`.
 ## Naming
 
 - Files and directories are lowercase kebab-case.
-- Technology directories are named after the technology, not the layer
-  (`postgres/`, not `database/`).
-- ADRs are `adr-NNN-<slug>.md` with zero-padded, sequential, never-reused
-  numbers.
+- Technology directories are named after the technology, not the layer (`postgres/`, not `database/`).
+- ADRs are `adr-NNN-<slug>.md` with zero-padded, sequential, never-reused numbers.
 - External systems are one file per system, named after the system.
-- `index.md` and `log.md` are reserved OKF filenames and carry no frontmatter,
-  except the bundle-root `index.md`, which may carry only `okf_version`.
+- `index.md` and `log.md` are reserved OKF filenames and carry no frontmatter, except the bundle-root `index.md`, which may carry only `okf_version`.
 
 ## Conventions
 
 - Every other `.md` file carries YAML frontmatter with a non-empty `type`.
-- A technology directory holds only what is specific to that technology;
-  `technology/general/` holds shared guidance and is never contradicted.
-- Each technology directory contains all four documents; a document with nothing
-  specific to say links to its `general/` counterpart rather than being omitted.
-- ADRs are written only after a decision is made; `decision_status` is
-  `accepted`, `superseded`, or `deprecated`. There is no proposed state.
-- `architecture.md` records the structure that exists today; intended changes
-  belong in an ADR.
-- Machine-readable specifications (OpenAPI, SDL, Protobuf) live in
-  `references/` or in the codebase, and `api.md` points at them rather than
-  restating them.
-- `log.md` records meaningful changes, newest first, under ISO 8601 date
-  headings.
+- A technology directory holds only documents that provide useful information about that technology.
+- A technology directory can use any subset of the four standard technology document templates and can add documents for other technology-specific topics.
+- Each document in `technology/general/` states which technologies it covers. Do not assume that it applies to every technology.
+- Technology documents must not contradict a shared document whose stated scope includes that technology.
+- ADRs are written only after a decision is made; `decision_status` is `accepted`, `superseded`, or `deprecated`. There is no proposed state.
+- `architecture.md` records the structure that exists today; intended changes belong in an ADR.
+- Machine-readable specifications (OpenAPI, SDL, Protobuf) live in `references/` or in the codebase. When `api.md` exists, it points at them rather than restating them.
+- `log.md` records meaningful changes, newest first, under ISO 8601 date headings.
 
 ## Templates
 
-Templates live in `assets/templates/wiki/`.
+Templates live in `assets/templates/wiki/`. Use a template only when its target document is needed.
 
 | Target file | Template |
 |-------------|----------|
@@ -61,5 +53,4 @@ Templates live in `assets/templates/wiki/`.
 | `adrs/index.md` | `adr-index.md` |
 | `adrs/adr-NNN-*.md` | `adr.md` |
 
-The four `technology-*` templates serve both `general/` and technology
-directories; each notes how its framing differs between the two.
+The four `technology-*` document templates are optional. They serve both `general/` and technology directories. Additional technology documents do not need a standard template. Give them descriptive kebab-case names, follow the OKF conventions, and list them in `technology/index.md`.

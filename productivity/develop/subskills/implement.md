@@ -38,7 +38,7 @@ Before a ticket is marked done and merged back do a code review loop using the r
 If using subagent-driven implementation spawn them inside the dynamic workflow, not on the orchestrator.
 If the harness does not support dynamic workflows spawn the code review subagents on the orchestrator instead.
 If working on an Epic, do an additional code review loop using the review subskill at the end of the Epic and spawn fresh subagents to mitigate the findings.
-Each loop may have a maximum of 5 iterations.
+Each loop may have a maximum of 4 iterations.
 
 ## Wiki usage
 

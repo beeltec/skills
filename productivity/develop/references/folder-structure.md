@@ -29,21 +29,16 @@ docs/
     │
     ├── technology/
     │   ├── index.md
-    │   ├── general/                    # Applies to all technologies
-    │   │   ├── guidelines.md
-    │   │   ├── best-practices.md
-    │   │   ├── examples.md
-    │   │   └── api.md
+    │   ├── general/                    # Shared documents; each states its scope
+    │   │   ├── guidelines.md           # Optional standard document
+    │   │   └── testing.md              # Additional shared document
     │   ├── typescript/                 # One directory per technology
     │   │   ├── guidelines.md
-    │   │   ├── best-practices.md
     │   │   ├── examples.md
-    │   │   └── api.md
+    │   │   └── package-management.md   # Additional technology document
     │   └── postgres/
-    │       ├── guidelines.md
     │       ├── best-practices.md
-    │       ├── examples.md
-    │       └── api.md
+    │       └── migrations.md           # Additional technology document
     │
     ├── external-systems/
     │   ├── index.md
@@ -58,3 +53,5 @@ docs/
     └── references/                     # Optional; mirrored specs and source material
         └── typescript/
             └── openapi.yaml
+
+The technology files above are examples. Each technology uses only the standard documents that apply to it. It can also use additional documents for other topics. Each document in `general/` states which technologies it covers.

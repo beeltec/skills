@@ -17,7 +17,8 @@ Each example points at real code in this repository and explains what makes it
 the reference to copy. Prefer linking to a file over pasting a long snippet, so
 the example cannot drift from the code.
 
-For `general/examples.md`, collect examples that are not tied to one technology.
+For `general/examples.md`, state which technologies and code areas the shared
+examples cover.
 
 # Examples
 
@@ -38,7 +39,7 @@ For `general/examples.md`, collect examples that are not tied to one technology.
 
 **Do not:** <A tempting variation that breaks a guideline or a boundary.>
 
-**Follows:** [<Guideline or ADR>](/technology/<technology>/guidelines.md)
+**Follows:** [<Relevant guideline or ADR>](<path>) (omit when not applicable)
 
 ## <What the example demonstrates>
 
@@ -62,6 +63,7 @@ For `general/examples.md`, collect examples that are not tied to one technology.
 
 # Related
 
-* [<Technology> Guidelines](/technology/<technology>/guidelines.md)
-* [<Technology> Best Practices](/technology/<technology>/best-practices.md)
-* [<Technology> API Contracts](/technology/<technology>/api.md)
+Include only documents that exist and apply.
+
+* [<Applicable shared document>](/technology/general/<document>.md)
+* [<Related technology document>](/technology/<technology>/<document>.md)
