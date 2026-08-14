@@ -9,6 +9,7 @@ Analyze all tickets and their subtasks that need to be implemented.
 If they are likely to be finished in a single session with less than 150k tokens implement them directly. 
 Otherwise use a dynamic workflow (use the name of the branch) with one implementing subagent. The workflow is necessary for code review agents later one.
 If the harness does not support dynamic workflows just use a normal subagent.
+Keep the implementing subagent alive as it will be responsible for implementing the fixes proposed by the code reviewing subagents.
 
 ## Possible subagents
 
@@ -37,6 +38,7 @@ The asignee must not be changed or removed afterwards while the owner will be re
 Before a ticket is marked done and merged back do a code review loop using the review subskill. 
 If using subagent-driven implementation spawn them inside the dynamic workflow, not on the orchestrator.
 If the harness does not support dynamic workflows spawn the code review subagents on the orchestrator instead.
+Let the subagent that originally did the implementation do the fixing as it still has all the context!
 If working on an Epic, do an additional code review loop using the review subskill at the end of the Epic and spawn fresh subagents to mitigate the findings.
 Keep doing code reviews until no P0, P1 and P2 findings are left.
 
