@@ -7,7 +7,7 @@ description: Implement Epics, Stories or Bug Tickets either directly or using su
 
 Analyze all tickets and their subtasks that need to be implemented. 
 If they are likely to be finished in a single session with less than 150k tokens implement them directly. 
-Otherwise use a dynamic workflow with one implementing subagent. The workflow is necessary for code review agents later one.
+Otherwise use a dynamic workflow (use the name of the branch) with one implementing subagent. The workflow is necessary for code review agents later one.
 If the harness does not support dynamic workflows just use a normal subagent.
 
 ## Possible subagents
