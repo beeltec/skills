@@ -95,9 +95,32 @@ codex_options=(
   --sandbox "$sandbox_mode"
   --ask-for-approval never
   --config 'sandbox_workspace_write.network_access=true'
+  --config "model_reasoning_effort=\"$reasoning_effort\""
   --cd "$working_directory"
 )
 
-codex_options+=(--config "model_reasoning_effort=\"$reasoning_effort\"")
+# The full event stream goes to a log file. The caller receives only the
+# final message (stdout) and the log path (stderr) to keep its context small.
+run_dir="$(mktemp -d "${TMPDIR:-/tmp}/codex-subagent.XXXXXX")"
+log_file="$run_dir/events.log"
+last_message_file="$run_dir/last-message"
 
-exec codex "${codex_options[@]}" exec -
+exit_code=0
+codex "${codex_options[@]}" exec --color never \
+  --output-last-message "$last_message_file" - >"$log_file" 2>&1 || exit_code=$?
+
+echo "event log: $log_file" >&2
+
+if [[ -s "$last_message_file" ]]; then
+  cat "$last_message_file"
+  [[ -n "$(tail -c 1 "$last_message_file")" ]] && echo
+else
+  echo "error: codex produced no final message; inspect the event log" >&2
+fi
+
+if (( exit_code != 0 )); then
+  echo "error: codex exited with status $exit_code; last 40 event-log lines:" >&2
+  tail -n 40 "$log_file" >&2
+fi
+
+exit "$exit_code"

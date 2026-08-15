@@ -23,7 +23,7 @@ Delegate the requested work to a non-interactive Codex CLI process and relay its
    Defaults: model `gpt-5.6-sol`, effort `medium`, sandbox `workspace-write`. Override independently with `--model`, `--effort` (`none|minimal|low|medium|high|xhigh|max|ultra`; models may support a subset), and `--sandbox` (`workspace-write` or `danger-full-access`).
 
    `workspace-write` deliberately makes `.git` read-only. If the delegated workflow must branch, stage, or commit — and the user authorized that in a trusted repository — use `--sandbox danger-full-access`. It removes filesystem sandboxing for the nested process; never enable it to recover from an unrelated failure.
-4. Read the entire output: progress streams on stderr, the nested agent's final message on stdout.
+4. Read the output: stdout carries only the nested agent's final message; stderr carries the event-log path. The full event stream is written to that log file, not to the caller. Read the log (start with `tail -n 100`) only when the exit is nonzero, the final message is missing, or step 5 contradicts its claims — never load it wholesale into context on a successful run.
 5. After exit, inspect relevant workspace changes and run cheap checks to verify the nested agent's claims. On failure, enumerate completed or dirty work in a corrected, self-contained retry prompt so the next run preserves it; read the composed prompt once to catch truncation or quoting damage. Always retry through the runner — never reconstruct a raw `codex exec` command (global options must precede the `exec` subcommand).
 6. Report the outcome, material files changed, and verification results; clearly report a nonzero exit or partial completion.
 
