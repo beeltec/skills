@@ -28,9 +28,13 @@ The setup skill installs a dependency-free Node.js CLI at
 
 ## Link skills into a project
 
-OpenAI documents `.agents/skills` as the repository skill directory. Codex
-supports symlinked skill folders there. Link this suite into any existing
-project with:
+The script links every skill into both supported project locations:
+
+- `.agents/skills` for Codex
+- `.claude/skills` for Claude Code
+
+Both products support symlinked skill directories. Link this suite into any
+existing project with:
 
 ```bash
 /absolute/path/to/skills-new/scripts/link-skills.sh /path/to/project
@@ -40,9 +44,10 @@ Omit the project path to use the current directory. The script resolves its
 own repository path, even when the script itself is called through a symlink.
 This makes it safe to place the script on `PATH`.
 
-The command preserves other skills under `.agents/skills`. It refuses to
-replace files or directories. Use `--force` only to replace an existing skill
-symlink, or use `--dry-run` to inspect the result first.
+The command preserves other skills under both directories. It checks both
+destinations before writing and refuses to replace files or directories. Use
+`--force` only to replace an existing skill symlink. Use `--dry-run` to inspect
+the result first.
 
 ## Context-aware implementation
 

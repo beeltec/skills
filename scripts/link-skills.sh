@@ -8,7 +8,9 @@ usage() {
   cat <<EOF
 Usage: $program_name [--dry-run] [--force] [PROJECT_DIR]
 
-Link this repository's skills into PROJECT_DIR/.agents/skills.
+Link this repository's skills into both project skill directories:
+  PROJECT_DIR/.agents/skills
+  PROJECT_DIR/.claude/skills
 PROJECT_DIR defaults to the current directory.
 
 Options:
@@ -87,21 +89,26 @@ if [[ ! -d "$project_argument" ]]; then
 fi
 
 project_root=$(cd -P "$project_argument" >/dev/null 2>&1 && pwd)
-agents_root=$project_root/.agents
-destination_root=$agents_root/skills
+namespace_roots=("$project_root/.agents" "$project_root/.claude")
+destination_roots=("$project_root/.agents/skills" "$project_root/.claude/skills")
 
-if [[ -L "$agents_root" ]]; then
-  fail "Refusing to write through symlinked directory: $agents_root"
-fi
-if [[ -e "$agents_root" && ! -d "$agents_root" ]]; then
-  fail "Expected a directory at $agents_root."
-fi
-if [[ -L "$destination_root" ]]; then
-  fail "Refusing to write through symlinked directory: $destination_root"
-fi
-if [[ -e "$destination_root" && ! -d "$destination_root" ]]; then
-  fail "Expected a directory at $destination_root."
-fi
+for namespace_root in "${namespace_roots[@]}"; do
+  if [[ -L "$namespace_root" ]]; then
+    fail "Refusing to write through symlinked directory: $namespace_root"
+  fi
+  if [[ -e "$namespace_root" && ! -d "$namespace_root" ]]; then
+    fail "Expected a directory at $namespace_root."
+  fi
+done
+
+for destination_root in "${destination_roots[@]}"; do
+  if [[ -L "$destination_root" ]]; then
+    fail "Refusing to write through symlinked directory: $destination_root"
+  fi
+  if [[ -e "$destination_root" && ! -d "$destination_root" ]]; then
+    fail "Expected a directory at $destination_root."
+  fi
+done
 
 skill_sources=()
 for skill_source in "$skills_root"/*; do
@@ -120,36 +127,38 @@ replace_destinations=()
 unchanged_destinations=()
 conflicts=()
 
-for skill_source in "${skill_sources[@]}"; do
-  skill_name=${skill_source##*/}
-  destination=$destination_root/$skill_name
+for destination_root in "${destination_roots[@]}"; do
+  for skill_source in "${skill_sources[@]}"; do
+    skill_name=${skill_source##*/}
+    destination=$destination_root/$skill_name
 
-  if [[ -L "$destination" ]]; then
-    if [[ -d "$destination" ]]; then
-      resolved_destination=$(cd -P "$destination" >/dev/null 2>&1 && pwd)
-      resolved_source=$(cd -P "$skill_source" >/dev/null 2>&1 && pwd)
-      if [[ "$resolved_destination" == "$resolved_source" ]]; then
-        unchanged_destinations+=("$destination")
-        continue
+    if [[ -L "$destination" ]]; then
+      if [[ -d "$destination" ]]; then
+        resolved_destination=$(cd -P "$destination" >/dev/null 2>&1 && pwd)
+        resolved_source=$(cd -P "$skill_source" >/dev/null 2>&1 && pwd)
+        if [[ "$resolved_destination" == "$resolved_source" ]]; then
+          unchanged_destinations+=("$destination")
+          continue
+        fi
       fi
+
+      if [[ "$force" == true ]]; then
+        replace_sources+=("$skill_source")
+        replace_destinations+=("$destination")
+      else
+        conflicts+=("$destination is already a different symlink")
+      fi
+      continue
     fi
 
-    if [[ "$force" == true ]]; then
-      replace_sources+=("$skill_source")
-      replace_destinations+=("$destination")
-    else
-      conflicts+=("$destination is already a different symlink")
+    if [[ -e "$destination" ]]; then
+      conflicts+=("$destination is not a symlink")
+      continue
     fi
-    continue
-  fi
 
-  if [[ -e "$destination" ]]; then
-    conflicts+=("$destination is not a symlink")
-    continue
-  fi
-
-  create_sources+=("$skill_source")
-  create_destinations+=("$destination")
+    create_sources+=("$skill_source")
+    create_destinations+=("$destination")
+  done
 done
 
 if ((${#conflicts[@]} > 0)); then
@@ -171,11 +180,16 @@ if [[ "$dry_run" == true ]]; then
   for index in "${!create_sources[@]}"; do
     printf 'Would link: %s -> %s\n' "${create_destinations[$index]}" "${create_sources[$index]}"
   done
-  printf 'Destination: %s\n' "$destination_root"
+  printf 'Destinations:\n'
+  for destination_root in "${destination_roots[@]}"; do
+    printf '  - %s\n' "$destination_root"
+  done
   exit 0
 fi
 
-mkdir -p "$destination_root"
+for destination_root in "${destination_roots[@]}"; do
+  mkdir -p "$destination_root"
+done
 
 for index in "${!replace_sources[@]}"; do
   unlink "${replace_destinations[$index]}"
@@ -188,8 +202,11 @@ for index in "${!create_sources[@]}"; do
   printf 'Linked: %s -> %s\n' "${create_destinations[$index]}" "${create_sources[$index]}"
 done
 
-printf 'Skills ready in %s. Linked: %d. Replaced: %d. Unchanged: %d.\n' \
-  "$destination_root" \
+printf 'Skills ready in:\n'
+for destination_root in "${destination_roots[@]}"; do
+  printf '  - %s\n' "$destination_root"
+done
+printf 'Linked: %d. Replaced: %d. Unchanged: %d.\n' \
   "${#create_sources[@]}" \
   "${#replace_sources[@]}" \
   "${#unchanged_destinations[@]}"

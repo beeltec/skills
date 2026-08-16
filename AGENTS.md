@@ -17,7 +17,7 @@ may refresh official source notes directly.
 ## Repository layout
 
 - `skills/` contains the installable skills.
-- `scripts/link-skills.sh` links every skill into another project.
+- `scripts/link-skills.sh` links every skill for Codex and Claude Code.
 - `skills/setup/scripts/project-flow.mjs` is the source CLI.
 - `.woktrees/` contains ignored ticket worktrees created by the workflow.
 - `examples/next-sqlite/` is the reproducible example and workflow fixture.

@@ -83,19 +83,22 @@ Sources:
 ## Local skill linking
 
 Codex scans `.agents/skills` from the current directory through the repository
-root. OpenAI also states that Codex follows symlinked skill directories.
+root. OpenAI states that Codex follows symlinked skill directories. Claude Code
+uses `.claude/skills` for project skills and also follows directory symlinks.
 
-The linker creates one absolute symlink per workflow skill. Individual links
-preserve unrelated project-specific skills in the same directory. The script
-resolves its repository from its own file path, so the caller's working
-directory does not affect the source paths.
+The linker creates one absolute symlink per workflow skill in both locations.
+Individual links preserve unrelated project-specific skills in each directory.
+The script resolves its repository from its own file path, so the caller's
+working directory does not affect the source paths.
 
-The script performs a full conflict check before writing. It never replaces a
-real file or directory. `--force` replaces only a conflicting symlink.
+The script performs a full conflict check across both locations before writing.
+It never replaces a real file or directory. `--force` replaces only a
+conflicting symlink.
 
 Source:
 
 - [OpenAI local skill locations](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills)
+- [Claude Code project skills](https://code.claude.com/docs/en/skills#where-skills-live)
 
 ## Official documentation cache
 

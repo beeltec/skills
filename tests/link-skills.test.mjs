@@ -21,6 +21,7 @@ const SKILLS_ROOT = resolve("skills");
 const SKILL_NAMES = readdirSync(SKILLS_ROOT)
   .filter((name) => existsSync(join(SKILLS_ROOT, name, "SKILL.md")))
   .sort();
+const DESTINATION_ROOTS = [join(".agents", "skills"), join(".claude", "skills")];
 
 function run(arguments_, cwd, expectedStatus = 0) {
   const result = spawnSync(SCRIPT, arguments_, { cwd, encoding: "utf8" });
@@ -41,16 +42,21 @@ test("links every skill from any working directory and stays idempotent", (conte
   mkdirSync(caller);
 
   const first = run([project], caller);
-  assert.match(first.stdout, new RegExp(`Linked: ${SKILL_NAMES.length}\\.`));
+  assert.match(first.stdout, new RegExp(`Linked: ${SKILL_NAMES.length * DESTINATION_ROOTS.length}\\.`));
 
-  for (const name of SKILL_NAMES) {
-    const destination = join(project, ".agents", "skills", name);
-    assert.ok(lstatSync(destination).isSymbolicLink());
-    assert.equal(realpathSync(destination), realpathSync(join(SKILLS_ROOT, name)));
+  for (const destinationRoot of DESTINATION_ROOTS) {
+    for (const name of SKILL_NAMES) {
+      const destination = join(project, destinationRoot, name);
+      assert.ok(lstatSync(destination).isSymbolicLink());
+      assert.equal(realpathSync(destination), realpathSync(join(SKILLS_ROOT, name)));
+    }
   }
 
   const second = run([], project);
-  assert.match(second.stdout, new RegExp(`Unchanged: ${SKILL_NAMES.length}\\.`));
+  assert.match(
+    second.stdout,
+    new RegExp(`Unchanged: ${SKILL_NAMES.length * DESTINATION_ROOTS.length}\\.`),
+  );
 });
 
 test("resolves its repository when called through PATH", (context) => {
@@ -74,6 +80,10 @@ test("resolves its repository when called through PATH", (context) => {
     realpathSync(join(project, ".agents", "skills", SKILL_NAMES[0])),
     realpathSync(join(SKILLS_ROOT, SKILL_NAMES[0])),
   );
+  assert.equal(
+    realpathSync(join(project, ".claude", "skills", SKILL_NAMES[0])),
+    realpathSync(join(SKILLS_ROOT, SKILL_NAMES[0])),
+  );
 });
 
 test("dry-run does not create project files", (context) => {
@@ -83,6 +93,7 @@ test("dry-run does not create project files", (context) => {
   const result = run(["--dry-run"], project);
   assert.match(result.stdout, /Would link:/);
   assert.equal(existsSync(join(project, ".agents")), false);
+  assert.equal(existsSync(join(project, ".claude")), false);
 });
 
 test("refuses real path conflicts before creating links", (context) => {
@@ -96,6 +107,7 @@ test("refuses real path conflicts before creating links", (context) => {
   assert.match(result.stderr, /is not a symlink/);
   assert.equal(readFileSync(join(conflict, "keep.txt"), "utf8"), "keep\n");
   assert.equal(existsSync(join(project, ".agents", "skills", SKILL_NAMES[1])), false);
+  assert.equal(existsSync(join(project, ".claude")), false);
 });
 
 test("force replaces only a conflicting symlink", (context) => {
@@ -112,4 +124,8 @@ test("force replaces only a conflicting symlink", (context) => {
   const result = run(["--force"], project);
   assert.match(result.stdout, /Replaced: 1\./);
   assert.equal(realpathSync(destination), realpathSync(join(SKILLS_ROOT, SKILL_NAMES[0])));
+  assert.equal(
+    realpathSync(join(project, ".claude", "skills", SKILL_NAMES[0])),
+    realpathSync(join(SKILLS_ROOT, SKILL_NAMES[0])),
+  );
 });
