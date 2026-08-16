@@ -4,11 +4,15 @@
 
 1. `docs/work/board.md`
 2. `docs/work/items/<KEY>.json`
-3. `docs/knowledge/index.md`
-4. Relevant concepts
-5. Relevant source and tests
+3. `docs/work/handoffs/<KEY>.md`, when it exists
+4. `docs/knowledge/index.md`
+5. Relevant concepts
+6. Relevant source and tests
 
 This order separates intended work from established facts.
+
+A handoff contains temporary implementation state. Verify it against the item,
+the fixed point, and the current worktree before continuing.
 
 ## Check execution
 

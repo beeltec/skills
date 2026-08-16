@@ -21,7 +21,8 @@ docs/
 └── work/
     ├── board.md
     ├── items/
-    └── drafts/
+    ├── drafts/
+    └── handoffs/              # Created when delegated work needs it
 ```
 
 ## OKF v0.2 profile
@@ -53,6 +54,7 @@ Add these instructions without removing local rules:
 
 - Read `docs/knowledge/index.md` before implementation.
 - Treat `docs/work/` as desired state, not current fact.
+- Assess session fit before code changes. Delegate bounded implementation when it will not fit.
 - Never set a work item to `done` by editing JSON.
 - Record separate passing Standards and Spec reviews before `in-review`.
 - Run `.project/bin/project-flow.mjs complete <KEY>` after all gates pass.

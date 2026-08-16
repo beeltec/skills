@@ -72,3 +72,34 @@ Sources:
 - [Using scripts in skills](https://agentskills.io/skill-creation/using-scripts)
 - [Matt Pocock's grilling skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)
 - [Matt Pocock's code-review skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md)
+
+## Context-aware implementation
+
+A published model context window is not always the effective agent-session
+limit. The API, product, and agent harness can expose different limits. The
+workflow therefore trusts runtime metadata first. It uses an explicit user or
+project value second. It never selects a context limit from the model name.
+
+As of the research date, OpenAI lists a 1.05M API context window for GPT-5.6.
+Anthropic lists a 1M context window for Claude Opus 5. A host can still provide
+a smaller effective session, such as 256K. The implementation skill uses that
+host value when it is reported.
+
+The session-fit gate reserves context for correction, integration, tests, and
+handoff. It delegates only when the complete implementation is unlikely to fit
+the safe remainder. Each subagent packet is sized against that subagent's own
+model and session, not the coordinator's capacity.
+
+Subagents receive bounded outcomes and exclusive path ownership. Write packets
+run sequentially unless both behavior and paths are independent. The
+coordinator owns integration and final verification. This reduces context
+pollution and shared-worktree conflicts without adding delegation to small
+tasks.
+
+Sources:
+
+- [OpenAI model comparison](https://developers.openai.com/api/docs/models/compare)
+- [OpenAI Codex subagents](https://developers.openai.com/codex/agent-configuration/subagents)
+- [OpenAI multi-agent guidance](https://developers.openai.com/api/docs/guides/responses-multi-agent)
+- [Anthropic context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows)
+- [Anthropic Claude Opus 5 prompting](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)

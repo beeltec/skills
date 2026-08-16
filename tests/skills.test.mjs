@@ -60,6 +60,7 @@ test("review defines an auditable two-axis review", () => {
   assert.match(review, /## Standards pass/);
   assert.match(review, /## Spec pass/);
   assert.match(review, /docs\/work\/items\/<KEY>\.json/);
+  assert.match(review, /docs\/work\/handoffs\/<KEY>\.md/);
   assert.match(review, /Do not merge or rank findings across axes/);
 });
 
@@ -69,4 +70,28 @@ test("setup owns workflow initialization", () => {
   assert.ok(existsSync(join(SKILLS_ROOT, "setup", "references", "workspace-format.md")));
   assert.match(skill, /\.project\/workflow\.json/);
   assert.match(skill, /Do not initialize twice/);
+});
+
+test("implement delegates work using each session's context capacity", () => {
+  const skill = readFileSync(join(SKILLS_ROOT, "implement", "SKILL.md"), "utf8");
+  const delegation = readFileSync(
+    join(SKILLS_ROOT, "implement", "references", "delegation.md"),
+    "utf8",
+  );
+  const workspace = readFileSync(
+    join(SKILLS_ROOT, "setup", "references", "workspace-format.md"),
+    "utf8",
+  );
+
+  assert.match(skill, /references\/delegation\.md/);
+  assert.match(skill, /session-fit gate/i);
+  assert.match(skill, /use implementation subagents/i);
+  assert.match(delegation, /runtime metadata/);
+  assert.match(delegation, /Never guess from a\s+model name/);
+  assert.match(delegation, /remaining context minus that reserve/);
+  assert.match(delegation, /docs\/work\/handoffs\/<KEY>\.md/);
+  assert.match(delegation, /Run write packets sequentially by default/);
+  assert.match(delegation, /Repeat the capacity calculation for the exact model/);
+  assert.match(delegation, /run the whole item's configured checks/);
+  assert.match(workspace, /handoffs\//);
 });

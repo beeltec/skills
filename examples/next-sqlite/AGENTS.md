@@ -5,6 +5,8 @@
 - Run `setup` once. Then use `discuss`, `plan`, `implement`, `review`, and `document`.
 - Read `docs/knowledge/index.md` before implementation.
 - Treat `docs/work/` as desired state, not current fact.
+- Assess session fit before code changes. Delegate bounded implementation when it will not fit.
+- Keep workflow state, integration, and final verification with the coordinator.
 - Never set a work item to `done` by editing JSON.
 - Record separate passing Standards and Spec reviews before `in-review`.
 - Run `.project/bin/project-flow.mjs complete <KEY>` after all gates pass.

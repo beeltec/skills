@@ -20,6 +20,17 @@ Use the skills as one suite:
 The setup skill installs a dependency-free Node.js CLI at
 `.project/bin/project-flow.mjs`. The remaining skills use that local copy.
 
+## Context-aware implementation
+
+The `implement` skill checks whether the full change fits the active session.
+It uses the context capacity reported by the current runtime or host. It does
+not infer capacity from a model name.
+
+When the work will not fit safely, the coordinator creates
+`docs/work/handoffs/<KEY>.md`. It delegates bounded code packets sized for each
+subagent's own context window. The coordinator keeps ticket state, integration,
+whole-item verification, and the handoff to `review`.
+
 ## Requirements
 
 - Use Node.js 20.9 or newer for the workflow and its tests.

@@ -16,6 +16,10 @@ Use the fixed point captured by `implement` or supplied by the user. Ask for it
 when neither exists. For uncommitted-only work, confirm that the starting
 `HEAD` still identifies the state before implementation.
 
+When `docs/work/handoffs/<KEY>.md` exists, use it to locate delegated packets
+and their claimed paths. Verify those claims against the complete Git diff.
+Never reduce review scope to the packet list.
+
 Validate a supplied reference before using it:
 
 ```bash
