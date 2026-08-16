@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review"
+  short_description: "Review changes against standards and their specification"
+  default_prompt: "Use $review to check the current work item against repository standards and its specification."

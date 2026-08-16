@@ -1,0 +1,11 @@
+{
+  "name": "project-flow-skills",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

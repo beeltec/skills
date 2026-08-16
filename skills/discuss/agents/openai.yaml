@@ -1,0 +1,4 @@
+interface:
+  display_name: "Discuss"
+  short_description: "Stress-test ideas before project planning"
+  default_prompt: "Use $discuss to question this idea until every important decision is explicit."

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "key": "TASK-3",
+  "type": "subtask",
+  "summary": "Create the task store",
+  "description": "Create the strict SQLite table and typed storage operations.",
+  "status": "done",
+  "resolution": "done",
+  "priority": "medium",
+  "parent": "TASK-2",
+  "acceptanceCriteria": [],
+  "checks": [],
+  "review": {
+    "status": "pass",
+    "reviewer": "agent/codex",
+    "fixedPoint": "initial tree",
+    "standards": "0 findings for the strict schema and typed store.",
+    "spec": "0 findings for the schema subtask.",
+    "reviewedAt": "2026-08-16T13:39:12.731Z"
+  },
+  "knowledgePolicy": "none",
+  "knowledgeChanges": [],
+  "promotions": [],
+  "links": {
+    "blockedBy": [],
+    "relatesTo": []
+  },
+  "createdAt": "2026-08-16T13:39:05.509Z",
+  "updatedAt": "2026-08-16T13:39:13.102Z",
+  "completedAt": "2026-08-16T13:39:13.101Z"
+}

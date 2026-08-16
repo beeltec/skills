@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "key": "TASK-4",
+  "type": "story",
+  "summary": "Manage tasks from the main page",
+  "description": "As a user, I want to add and complete tasks from one clear page.",
+  "status": "done",
+  "resolution": "done",
+  "priority": "medium",
+  "parent": "TASK-1",
+  "acceptanceCriteria": [
+    {
+      "id": "AC-1",
+      "text": "The page shows a form that creates a task.",
+      "status": "pass",
+      "evidence": "src/app/page.tsx binds the new-task form to the createTask server action.",
+      "verifiedAt": "2026-08-16T13:40:05.280Z"
+    },
+    {
+      "id": "AC-2",
+      "text": "Each task has a control that toggles completion.",
+      "status": "pass",
+      "evidence": "src/app/page.tsx binds each task toggle to the toggleTask server action.",
+      "verifiedAt": "2026-08-16T13:40:05.375Z"
+    }
+  ],
+  "checks": [
+    {
+      "id": "CHK-1",
+      "name": "Types",
+      "command": "npm run typecheck",
+      "status": "pass",
+      "lastRun": {
+        "at": "2026-08-16T13:39:55.557Z",
+        "exitCode": 0,
+        "output": "> next-sqlite-example@1.0.0 typecheck\n> tsc --noEmit"
+      }
+    },
+    {
+      "id": "CHK-2",
+      "name": "Build",
+      "command": "npm run build",
+      "status": "pass",
+      "lastRun": {
+        "at": "2026-08-16T13:39:58.416Z",
+        "exitCode": 0,
+        "output": "> next-sqlite-example@1.0.0 build\n> next build\n\n▲ Next.js 16.3.1 (Turbopack)\n✓ Running next.config.ts took 59ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 262ms\n  Running TypeScript ...\n  Finished TypeScript in 560ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/2) ...\n✓ Generating static pages using 4 workers (2/2) in 185ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ƒ /\n└ ○ /_not-found\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand"
+      }
+    }
+  ],
+  "review": {
+    "status": "pass",
+    "reviewer": "agent/codex",
+    "fixedPoint": "initial tree",
+    "standards": "0 findings for forms, actions, accessibility, responsive CSS, and rendering.",
+    "spec": "0 findings for the interaction acceptance criteria.",
+    "reviewedAt": "2026-08-16T13:40:05.471Z"
+  },
+  "knowledgePolicy": "required",
+  "knowledgeChanges": [],
+  "promotions": [
+    {
+      "target": "features/task-list.md",
+      "action": "create",
+      "sha256": "1245ae8d44e9c8dd50838f419820a034bb900acf0b133c2eff562ec0e1d74d2a",
+      "promotedAt": "2026-08-16T13:40:16.997Z"
+    }
+  ],
+  "links": {
+    "blockedBy": [],
+    "relatesTo": []
+  },
+  "createdAt": "2026-08-16T13:39:05.636Z",
+  "updatedAt": "2026-08-16T13:40:16.999Z",
+  "completedAt": "2026-08-16T13:40:16.997Z"
+}

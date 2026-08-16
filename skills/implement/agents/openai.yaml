@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implement"
+  short_description: "Implement and verify one ready work item"
+  default_prompt: "Use $implement to deliver the next ready item, verify it, and prepare it for review."

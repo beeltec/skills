@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "key": "TASK-5",
+  "type": "bug",
+  "summary": "Show inline validation errors",
+  "description": "Expected: invalid task input shows an accessible inline message. Actual: the form relies on browser validation and server-action exceptions.",
+  "status": "ready",
+  "resolution": null,
+  "priority": "medium",
+  "parent": null,
+  "acceptanceCriteria": [
+    {
+      "id": "AC-1",
+      "text": "An invalid title produces an inline message linked to the input.",
+      "status": "pending",
+      "evidence": null,
+      "verifiedAt": null
+    }
+  ],
+  "checks": [
+    {
+      "id": "CHK-1",
+      "name": "Tests",
+      "command": "npm test",
+      "status": "pending",
+      "lastRun": null
+    },
+    {
+      "id": "CHK-2",
+      "name": "Types",
+      "command": "npm run typecheck",
+      "status": "pending",
+      "lastRun": null
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "fixedPoint": null,
+    "standards": null,
+    "spec": null,
+    "reviewedAt": null
+  },
+  "knowledgePolicy": "required",
+  "knowledgeChanges": [],
+  "promotions": [],
+  "links": {
+    "blockedBy": [],
+    "relatesTo": []
+  },
+  "createdAt": "2026-08-16T13:40:38.545Z",
+  "updatedAt": "2026-08-16T13:40:38.643Z",
+  "completedAt": null
+}

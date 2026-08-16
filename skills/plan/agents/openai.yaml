@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan"
+  short_description: "Turn confirmed ideas into project work"
+  default_prompt: "Use $plan to turn this confirmed brief into small, linked project work items."

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "projectKey": "TASK",
+  "projectName": "Small Steps",
+  "createdAt": "2026-08-16T13:38:48.573Z",
+  "spaces": {
+    "knowledge": "docs/knowledge",
+    "work": "docs/work"
+  },
+  "checkTimeoutMs": 120000,
+  "statuses": [
+    "backlog",
+    "ready",
+    "in-progress",
+    "in-review",
+    "done"
+  ],
+  "definitionOfDone": [
+    "Acceptance criteria have passing evidence.",
+    "Configured checks pass in their latest run.",
+    "Standards and Spec reviews pass with separate evidence.",
+    "Blockers and child items are done.",
+    "Required knowledge is drafted and valid."
+  ]
+}

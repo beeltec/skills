@@ -1,0 +1,20 @@
+# Example project instructions
+
+## Project state workflow
+
+- Run `setup` once. Then use `discuss`, `plan`, `implement`, `review`, and `document`.
+- Read `docs/knowledge/index.md` before implementation.
+- Treat `docs/work/` as desired state, not current fact.
+- Never set a work item to `done` by editing JSON.
+- Record separate passing Standards and Spec reviews before `in-review`.
+- Run `.project/bin/project-flow.mjs complete <KEY>` after all gates pass.
+- Validate the workspace after workflow changes.
+
+## Commands
+
+- Run tests with `npm test`.
+- Run type checks with `npm run typecheck`.
+- Create a production build with `npm run build`.
+- Use Node.js 24.15 or newer for `node:sqlite`.
+
+Never use `any` in TypeScript.

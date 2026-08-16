@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+*.log
+*.tsbuildinfo
+examples/next-sqlite/.next/
+examples/next-sqlite/data/*.db
+examples/next-sqlite/data/*.db-shm
+examples/next-sqlite/data/*.db-wal
