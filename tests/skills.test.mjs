@@ -98,6 +98,30 @@ test("discuss shows approximate question progress", () => {
   assert.match(skill, /Never reduce the estimate below the current question number/);
 });
 
+test("next recommends one read-only workflow action", () => {
+  const skill = readFileSync(join(SKILLS_ROOT, "next", "SKILL.md"), "utf8");
+  const routing = readFileSync(
+    join(SKILLS_ROOT, "next", "references", "routing.md"),
+    "utf8",
+  );
+
+  assert.match(skill, /single smallest valid next action/i);
+  assert.match(skill, /without changing state/i);
+  assert.match(skill, /run `node \.project\/bin\/project-flow\.mjs validate`/i);
+  assert.match(skill, /Do not run another workflow skill/);
+  assert.match(skill, /Do not recommend `implement` for an epic or an item with an open blocker/);
+  assert.match(routing, /Follow open `blocked-by` links/);
+  assert.match(routing, /workflow root to equal the Git root/);
+  assert.match(routing, /No initial commit exists/);
+  assert.match(routing, /Do not include unrelated files/);
+  assert.match(routing, /configured target-branch worktree is dirty/);
+  assert.match(routing, /Never discard them/);
+  assert.match(routing, /Review requested changes or reports any P0, P1, or P2/);
+  assert.match(routing, /A release is deploying/);
+  assert.match(routing, /observation window is complete/);
+  assert.match(routing, /Do not invent business priority/);
+});
+
 test("setup owns workflow initialization", () => {
   const skill = readFileSync(join(SKILLS_ROOT, "setup", "SKILL.md"), "utf8");
   assert.ok(existsSync(join(SKILLS_ROOT, "setup", "scripts", "project-flow.mjs")));
@@ -177,7 +201,7 @@ test("routing eval fixtures cover every workflow skill", () => {
   const fixture = JSON.parse(readFileSync(resolve("evals", "skill-routing.json"), "utf8"));
   assert.equal(fixture.schemaVersion, 1);
   assert.ok(Array.isArray(fixture.cases));
-  assert.ok(fixture.cases.length >= 9);
+  assert.ok(fixture.cases.length >= 12);
 
   const expected = new Set();
   const ids = new Set();
@@ -194,8 +218,20 @@ test("routing eval fixtures cover every workflow skill", () => {
 
   assert.deepEqual(
     [...expected].sort(),
-    ["discuss", "document", "implement", "measure", "plan", "review", "setup", "ship", "source"],
+    [
+      "discuss",
+      "document",
+      "implement",
+      "measure",
+      "next",
+      "plan",
+      "review",
+      "setup",
+      "ship",
+      "source",
+    ],
   );
+  assert.ok(fixture.cases.filter((entry) => entry.expectedSkill === "next").length >= 3);
 });
 
 test("implement delegates work using each session's context capacity", () => {

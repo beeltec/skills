@@ -83,6 +83,7 @@ Add these instructions without removing local rules:
 ## Project state workflow
 
 - Read `docs/knowledge/index.md` and `docs/knowledge/sources/index.md` first.
+- Use `next` when the current workflow action is unclear.
 - Treat model memory as a search lead, not factual evidence.
 - Verify material external claims against current official documentation.
 - Save concise official source notes under `docs/knowledge/sources/`.

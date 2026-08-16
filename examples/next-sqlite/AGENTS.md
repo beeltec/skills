@@ -3,6 +3,7 @@
 ## Project state workflow
 
 - Run `setup` once. Then use `source`, `discuss`, `plan`, `implement`, `review`, `document`, `ship`, and `measure`.
+- Use `next` when the current workflow action is unclear.
 - Read `docs/knowledge/index.md` and `docs/knowledge/sources/index.md` first.
 - Treat model memory as a search lead, not factual evidence.
 - Verify material external claims against current official documentation.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Next"
+  short_description: "Find the next project workflow action"
+  default_prompt: "Use $next to inspect this project and tell me the next workflow step."

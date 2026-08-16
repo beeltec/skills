@@ -72,6 +72,7 @@ Sources:
 The suite follows
 `setup → discuss → plan → implement ⇄ review → document → ship → measure`.
 The `source` skill acts as an evidence gate before every substantive stage.
+The read-only `next` helper locates the current stage from repository state.
 Each skill has a narrow job and composes with the other skills. Instructions
 stay short. Detailed contracts live in direct references. Repeated and fragile
 operations use one tested script.

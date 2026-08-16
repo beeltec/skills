@@ -60,6 +60,24 @@
       "prompt": "The ticket is merged and done. Tell me whether users now have it.",
       "expectedSkill": "ship",
       "forbiddenSkills": ["document", "measure"]
+    },
+    {
+      "id": "next-unknown-position",
+      "prompt": "I do not know where this project is in the workflow. Inspect it and tell me the next step.",
+      "expectedSkill": "next",
+      "forbiddenSkills": ["implement", "ship"]
+    },
+    {
+      "id": "next-resume-work",
+      "prompt": "We stopped working on this repository yesterday. What workflow action should I resume with now?",
+      "expectedSkill": "next",
+      "forbiddenSkills": ["discuss", "plan"]
+    },
+    {
+      "id": "next-blocked-ticket",
+      "prompt": "What can I do next for blocked ticket APP-12, and which workflow skill should I invoke?",
+      "expectedSkill": "next",
+      "forbiddenSkills": ["implement", "document"]
     }
   ]
 }

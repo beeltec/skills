@@ -22,6 +22,9 @@ Use the skills as one suite:
 8. `ship` releases done tickets and verifies the deployed or published result.
 9. `measure` compares product evidence with the brief's agreed success measure.
 
+Use `next` at any point when the correct workflow action is unclear. It reads
+local state and recommends one action without changing the project.
+
 `source` is also a gate before every later stage. It reads the local source
 index, opens relevant official pages, and refreshes concise source notes. The
 workflow never treats model memory or a search-result snippet as authority.
@@ -153,6 +156,8 @@ The normal workflow is:
 ```text
 discuss → plan → implement ⇄ review → document → ship → measure
 ```
+
+Ask `next` to locate the current position and choose the next valid skill.
 
 The `source` skill verifies current official documentation at every stage.
 Run `brief-show`, `release-show`, and `outcome-show` to inspect their evidence.
