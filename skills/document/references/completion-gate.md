@@ -12,7 +12,7 @@ Source: https://support.atlassian.com/jira-cloud-administration/docs/configure-r
 
 - Compare each acceptance criterion with its evidence.
 - Check the last check run time against the relevant source changes.
-- Confirm Standards and Spec both pass with separate evidence.
+- Confirm Standards and Spec both report zero P0, P1, and P2 findings.
 - Inspect every child and blocker.
 - Compare each staged concept with the implemented code and tests.
 - Confirm update candidates retain still-valid prior knowledge.
@@ -22,8 +22,10 @@ Source: https://support.atlassian.com/jira-cloud-administration/docs/configure-r
 
 If acceptance or checks fail, transition the item to `in-progress`.
 
-If review requests changes, use `implement` to fix them. Then run `review`
-again against the same fixed point.
+If any P0, P1, or P2 remains, use `implement` to fix it. Run both review passes
+again against the same fixed point. Repeat until the blocking counts reach zero.
+
+P3 suggestions do not block completion.
 
 If a knowledge candidate is incomplete, edit the draft and keep the item in
 review.

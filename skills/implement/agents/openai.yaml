@@ -1,4 +1,4 @@
 interface:
   display_name: "Implement"
   short_description: "Implement safely with context-aware delegation"
-  default_prompt: "Use $implement to deliver the next ready item. Check session fit, delegate bounded code packets when needed, integrate them, verify the item, and prepare it for review."
+  default_prompt: "Use $implement to deliver or repair the current item. Check session fit, delegate bounded code packets when needed, verify the item, and return it to $review until no P0, P1, or P2 findings remain."

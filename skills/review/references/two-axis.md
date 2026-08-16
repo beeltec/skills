@@ -6,8 +6,10 @@ passes. Keep their findings separate.
 ## Contents
 
 - Establish the review scope
+- Severity scale
 - Standards pass
 - Spec pass
+- Review loop
 - Result format
 
 ## Establish the review scope
@@ -47,6 +49,22 @@ Do not attribute pre-existing dirty files to the item. If work overlaps those
 files, state that limitation in the review evidence.
 
 Stop if the final scope contains no relevant change.
+
+## Severity scale
+
+Assign exactly one severity to every finding:
+
+- **P0 — critical:** The change can cause catastrophic data loss, broad outage,
+  or direct security compromise. Stop normal work and fix it immediately.
+- **P1 — high:** The change breaks a critical or common path, creates a serious
+  security or reliability risk, or has no reasonable workaround.
+- **P2 — medium:** The change contains a real defect, unmet requirement, or
+  concrete maintainability risk that should be fixed before approval.
+- **P3 — low:** The change has a minor improvement or optional cleanup with no
+  current correctness, security, or specification failure.
+
+P0, P1, and P2 are blocking. P3 is non-blocking. Do not raise a P2 for style
+preference alone. State the concrete impact that makes a finding actionable.
 
 ## Standards pass
 
@@ -92,6 +110,26 @@ Inspect the same change again. Look only for:
 Quote or identify the relevant criterion. Name the file and line that caused
 the finding.
 
+## Review loop
+
+Use the original fixed point for every iteration. Review the complete updated
+change, not only the latest fix or previously reported files.
+
+When either axis finds a P0, P1, or P2:
+
+1. Record `changes-requested` with both axis reports.
+2. Send every blocking finding to `implement`.
+3. Require focused tests and the whole item's configured checks after fixes.
+4. Run fresh Standards and Spec passes.
+5. Repeat until both passes report zero P0, P1, and P2 findings.
+
+New findings can appear after a fix. Count them in the next iteration. Do not
+approve based on a claim that a finding was fixed. Inspect the updated change.
+
+P3 findings may remain. Record them as non-blocking suggestions. If a blocking
+finding cannot be resolved, keep `changes-requested` and ask for the missing
+decision or authority.
+
 ## Result format
 
 Keep the reports separate:
@@ -99,19 +137,20 @@ Keep the reports separate:
 ```markdown
 ## Standards
 
-- Pass. No material findings.
+- [P3] Optional name cleanup — src/example.ts:12 ...
 
 ## Spec
 
-- [material] AC-2 is partial — src/example.ts:24 ...
+- [P2] AC-2 is partial — src/example.ts:24 ...
 
-Summary: Standards 0 findings. Spec 1 material finding.
+Summary: Standards P0:0 P1:0 P2:0 P3:1. Spec P0:0 P1:0 P2:1 P3:0.
+Blocking total: 1. Review loop: changes requested.
 ```
 
-Do not merge or rank findings across axes. One material finding on either axis
-blocks approval.
+Do not merge findings across axes. Keep separate severity counts for each
+pass. Any P0, P1, or P2 on either axis blocks approval.
 
-After fixes, rerun affected checks. Then repeat both passes against the new
-final scope. Record the fixed point and finding counts in review evidence.
+After the loop passes, state `Blocking total: 0. Review loop complete.` Record
+the fixed point and final severity counts in review evidence.
 
 Source: https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md

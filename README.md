@@ -13,8 +13,8 @@ Use the skills as one suite:
 1. `setup` initializes the workflow once.
 2. `discuss` resolves product and technical choices.
 3. `plan` creates Jira-like work items.
-4. `implement` changes code and records verification evidence.
-5. `review` checks Standards and Spec independently.
+4. `implement` changes code and repairs blocking review findings.
+5. `review` checks Standards and Spec until both have no P0-P2 findings.
 6. `document` promotes established knowledge and closes green work.
 
 The setup skill installs a dependency-free Node.js CLI at

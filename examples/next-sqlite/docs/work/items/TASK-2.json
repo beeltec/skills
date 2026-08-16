@@ -63,8 +63,8 @@
     "status": "pass",
     "reviewer": "agent/codex",
     "fixedPoint": "initial tree",
-    "standards": "0 findings for input validation, SQL, row parsing, failure paths, and types.",
-    "spec": "0 findings for the storage acceptance criteria.",
+    "standards": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for input validation, SQL, row parsing, failure paths, and types.",
+    "spec": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for the storage acceptance criteria.",
     "reviewedAt": "2026-08-16T13:39:33.957Z"
   },
   "knowledgePolicy": "required",

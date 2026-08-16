@@ -48,7 +48,11 @@ test("completes a hierarchy and promotes knowledge", (context) => {
   assert.ok(existsSync(join(root, "docs", "work", "board.md")));
   assert.ok(existsSync(join(root, ".project", "bin", "project-flow.mjs")));
   const config = JSON.parse(readFileSync(join(root, ".project", "workflow.json"), "utf8"));
-  assert.ok(config.definitionOfDone.includes("Standards and Spec reviews pass with separate evidence."));
+  assert.ok(
+    config.definitionOfDone.includes(
+      "Standards and Spec report zero P0, P1, and P2 findings with separate evidence.",
+    ),
+  );
 
   run(root, [
     "create",
@@ -102,9 +106,9 @@ test("completes a hierarchy and promotes knowledge", (context) => {
     "--base",
     "initial tree",
     "--standards",
-    "0 findings.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
     "--spec",
-    "0 findings.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
   ]);
   run(root, ["transition", "FLOW-3", "in-review"]);
   run(root, ["complete", "FLOW-3"]);
@@ -131,9 +135,9 @@ test("completes a hierarchy and promotes knowledge", (context) => {
     "--base",
     "initial tree",
     "--standards",
-    "0 findings.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
     "--spec",
-    "0 findings.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
   ]);
   run(root, ["transition", "FLOW-2", "in-review"]);
   run(root, [
@@ -161,8 +165,8 @@ test("completes a hierarchy and promotes knowledge", (context) => {
   assert.equal(story.promotions.length, 1);
   assert.equal(story.knowledgeChanges.length, 0);
   assert.equal(story.review.fixedPoint, "initial tree");
-  assert.equal(story.review.standards, "0 findings.");
-  assert.equal(story.review.spec, "0 findings.");
+  assert.equal(story.review.standards, "Pass. P0:0 P1:0 P2:0 P3:0.");
+  assert.equal(story.review.spec, "Pass. P0:0 P1:0 P2:0 P3:0.");
   const storyKnowledge = readFileSync(
     join(root, "docs", "knowledge", "architecture", "task-storage.md"),
     "utf8",
@@ -191,9 +195,9 @@ test("completes a hierarchy and promotes knowledge", (context) => {
     "--base",
     "initial tree",
     "--standards",
-    "0 findings.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
     "--spec",
-    "0 findings.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
   ]);
   run(root, ["transition", "FLOW-1", "in-review"]);
   run(root, [
@@ -262,7 +266,7 @@ test("rejects a passing review when a configured check fails", (context) => {
     "--base",
     "initial tree",
     "--standards",
-    "0 findings.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
   ], 1);
   assert.match(incompleteReview.stderr, /--standards, and --spec/);
 
@@ -276,9 +280,9 @@ test("rejects a passing review when a configured check fails", (context) => {
     "--base",
     "initial tree",
     "--standards",
-    "0 findings.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
     "--spec",
-    "Checks failed.",
+    "Pass. P0:0 P1:0 P2:0 P3:0.",
   ], 1);
 
   assert.match(result.stderr, /CHK-1 must pass through verify/);

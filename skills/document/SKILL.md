@@ -12,7 +12,7 @@ work item through the knowledge promotion gate.
 
 1. Read [references/completion-gate.md](references/completion-gate.md).
 2. Run `show <KEY>`.
-3. Confirm the item is `in-review` with both review axes passing.
+3. Confirm the item is `in-review` and both axes report zero P0, P1, and P2 findings.
 4. Review acceptance evidence and the latest check results.
 5. Read the implemented source and relevant established concepts.
 6. Identify durable facts that future work needs.

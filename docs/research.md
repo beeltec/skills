@@ -60,6 +60,11 @@ Spec get independent passes, so one cannot hide failure in the other. The
 ticket is the fixed specification source. The review also includes uncommitted
 work because this workflow does not require agents to commit changes.
 
+Every finding receives a P0-P3 severity. P0, P1, and P2 block approval. P3 is
+non-blocking. After blocking findings are fixed, both axes inspect the complete
+change again from the original fixed point. The loop ends only when both axes
+report zero P0, P1, and P2 findings.
+
 Descriptions state user intent because agents use them for activation. The
 skills use checklists, explicit validation loops, and concrete commands.
 

@@ -50,7 +50,7 @@ Before `done`, require:
 
 - every acceptance criterion passes with evidence;
 - every configured check passes in its latest run;
-- both final review axes pass with separate evidence;
+- both final review axes report zero P0, P1, and P2 findings;
 - every blocker and child is done;
 - required drafted knowledge is valid OKF;
 - the item is in `in-review`.

@@ -35,8 +35,9 @@ Promote knowledge only through the completion gate.
 11. Never move a work item directly to `done`.
 12. Run the configured checks and record acceptance evidence.
 13. Use `review` to check Standards and Spec separately.
-14. Use `complete` to close work and promote drafted knowledge.
-15. Keep generated board and knowledge indexes synchronized.
+14. Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
+15. Use `complete` to close work and promote drafted knowledge.
+16. Keep generated board and knowledge indexes synchronized.
 
 ## Commands
 

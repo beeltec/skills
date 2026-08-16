@@ -52,8 +52,8 @@
     "status": "pass",
     "reviewer": "agent/codex",
     "fixedPoint": "initial tree",
-    "standards": "0 findings for forms, actions, accessibility, responsive CSS, and rendering.",
-    "spec": "0 findings for the interaction acceptance criteria.",
+    "standards": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for forms, actions, accessibility, responsive CSS, and rendering.",
+    "spec": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for the interaction acceptance criteria.",
     "reviewedAt": "2026-08-16T13:40:05.471Z"
   },
   "knowledgePolicy": "required",

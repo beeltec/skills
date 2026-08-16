@@ -36,3 +36,7 @@ outcome.
 Report the resolved starting commit, item key, changed files, checks, and
 acceptance evidence. Use `initial tree` when the repository had no commit.
 State any overlap with pre-existing dirty files. Then hand off to `review`.
+
+When the latest review requests changes, preserve that fixed point. Address
+all valid P0, P1, and P2 findings. Return disputed findings with concrete
+evidence. Rerun the complete configured check set before the next review pass.

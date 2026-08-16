@@ -758,7 +758,7 @@ function commandInit(args) {
     definitionOfDone: [
       "Acceptance criteria have passing evidence.",
       "Configured checks pass in their latest run.",
-      "Standards and Spec reviews pass with separate evidence.",
+      "Standards and Spec report zero P0, P1, and P2 findings with separate evidence.",
       "Blockers and child items are done.",
       "Required knowledge is drafted and valid.",
     ],

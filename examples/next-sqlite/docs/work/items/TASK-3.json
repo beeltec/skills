@@ -14,8 +14,8 @@
     "status": "pass",
     "reviewer": "agent/codex",
     "fixedPoint": "initial tree",
-    "standards": "0 findings for the strict schema and typed store.",
-    "spec": "0 findings for the schema subtask.",
+    "standards": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for the strict schema and typed store.",
+    "spec": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for the schema subtask.",
     "reviewedAt": "2026-08-16T13:39:12.731Z"
   },
   "knowledgePolicy": "none",

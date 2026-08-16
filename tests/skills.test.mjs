@@ -61,7 +61,31 @@ test("review defines an auditable two-axis review", () => {
   assert.match(review, /## Spec pass/);
   assert.match(review, /docs\/work\/items\/<KEY>\.json/);
   assert.match(review, /docs\/work\/handoffs\/<KEY>\.md/);
-  assert.match(review, /Do not merge or rank findings across axes/);
+  assert.match(review, /## Severity scale/);
+  assert.match(review, /P0, P1, and P2 are blocking/);
+  assert.match(review, /## Review loop/);
+  assert.match(review, /Repeat until both passes report zero P0, P1, and P2 findings/);
+  assert.match(review, /Do not merge findings across axes/);
+  assert.match(skill, /Repeat steps 8-14 until both passes contain no P0, P1, or P2/);
+});
+
+test("workflow loops blocking review findings through implementation", () => {
+  const implement = readFileSync(join(SKILLS_ROOT, "implement", "SKILL.md"), "utf8");
+  const completion = readFileSync(
+    join(SKILLS_ROOT, "document", "references", "completion-gate.md"),
+    "utf8",
+  );
+  const workspace = readFileSync(
+    join(SKILLS_ROOT, "setup", "references", "workspace-format.md"),
+    "utf8",
+  );
+
+  assert.match(implement, /address every valid P0, P1, and P2 finding/);
+  assert.match(implement, /Continue until `review` reports zero P0, P1, and P2/);
+  assert.match(completion, /Repeat until the blocking counts reach zero/);
+  assert.match(completion, /P3 suggestions do not block completion/);
+  assert.match(workspace, /Loop `review` and `implement` until both passes have no P0, P1, or P2/);
+  assert.match(workspace, /Standards and Spec reviews with zero P0-P2 findings/);
 });
 
 test("discuss shows approximate question progress", () => {
