@@ -15,9 +15,9 @@ Use the skills as one suite:
 2. `source` verifies external facts through live official documentation.
 3. `discuss` resolves product and technical choices.
 4. `plan` creates Jira-like work items.
-5. `implement` changes code and repairs blocking review findings.
+5. `implement` gives each ticket a branch and worktree, then changes code.
 6. `review` checks Standards and Spec until both have no P0-P2 findings.
-7. `document` promotes established knowledge and closes green work.
+7. `document` promotes knowledge, merges green work, and removes its branch and worktree.
 
 `source` is also a gate before every later stage. It reads the local source
 index, opens relevant official pages, and refreshes concise source notes. The
@@ -41,11 +41,52 @@ When the work will not fit safely, the coordinator creates
 subagent's own context window. The coordinator keeps ticket state, integration,
 whole-item verification, and the handoff to `review`.
 
+## Git workflow
+
+The workflow uses short-lived ticket branches and linked Git worktrees.
+
+- `main` is the default integration branch.
+- `.woktrees/<ticket-key>/` contains one isolated worktree per ticket.
+- Stories use `feat/<ticket-key>-<slug>`.
+- Bugs use `fix/<ticket-key>-<slug>`.
+- Tasks and subtasks use `chore/<ticket-key>-<slug>` by default.
+- Every commit follows Conventional Commits 1.0.0.
+- Green branches merge into `main` with a conventional `--no-ff` merge commit.
+- Successful finalization removes the clean worktree and merged local branch.
+
+Independent ready tickets without likely overlap in non-generated files may run in parallel. A ticket with an open
+`blocked-by` link cannot start implementation. The blocker must first finish
+and merge into `main`. Final merges always run one at a time.
+
+Create a ticket worktree from a clean `main` worktree:
+
+```bash
+node .project/bin/project-flow.mjs worktree-add APP-2
+```
+
+After review, knowledge promotion, completion, and a final conventional commit,
+finish it from `main`:
+
+```bash
+node .project/bin/project-flow.mjs worktree-finish APP-2
+```
+
+The target branch board shows integrated state. Use `worktree-list`, then run
+`show <KEY>` inside a ticket worktree, to inspect active branch-local state.
+
+The workflow never force-removes worktrees or force-deletes branches. It does
+not push or delete remote branches unless the user requests that action.
+
+Conventional Commits records release intent, but this workflow does not change
+package versions or create tags. Discuss and plan a Semantic Versioning release
+policy separately when the project publishes a stable public API.
+
 ## Requirements
 
 - Use Node.js 20.9 or newer for the workflow and its tests.
 - Use Node.js 24.15 or newer for the example's built-in SQLite module.
 - Provide web access when a stage needs current external technical facts.
+- Use Git with at least one baseline commit before ticket implementation.
 
 ## Quick start
 
@@ -56,7 +97,8 @@ directly:
 node skills/setup/scripts/project-flow.mjs init \
   --root /path/to/project \
   --key APP \
-  --name "Example App"
+  --name "Example App" \
+  --target-branch main
 ```
 
 Then inspect the board:

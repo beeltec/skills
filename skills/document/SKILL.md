@@ -1,6 +1,6 @@
 ---
 name: document
-description: Use this skill after implementation and code review to create or update established project knowledge. Refresh relevant official documentation and local source notes, turn completed behavior into draft OKF concepts under `docs/work/drafts/`, verify drafts against code and evidence, promote them into `docs/knowledge/`, and close the green work item.
+description: Use this skill after implementation and passing code review to establish project knowledge and finish a ticket branch. Verify the review used the latest target commit, refresh official sources, promote valid OKF drafts, complete the green item, commit its documentation, merge it into `main` by default, and safely remove its clean worktree and local branch.
 ---
 
 # Document
@@ -12,19 +12,22 @@ work item through the knowledge promotion gate.
 
 1. Read [references/completion-gate.md](references/completion-gate.md).
 2. Run `show <KEY>`.
-3. Confirm the item is `in-review` and both axes report zero P0, P1, and P2 findings.
-4. Review acceptance evidence and the latest check results.
-5. Read `docs/knowledge/sources/index.md` and relevant source notes.
-6. Use `$source` to refresh official docs cited by the completed work.
-7. Read the implemented code and relevant established concepts.
-8. Identify durable facts that future work needs.
-9. Create one small draft per stable concept.
-10. Cite relevant official source notes without treating them as code evidence.
-11. Edit each draft to describe current behavior, not the original plan.
-12. Compare every draft with the code and tests.
-13. Run `complete <KEY>`.
-14. Fix any rejected gate and repeat.
-15. Run `validate` and report promoted paths and resolution.
+3. Enter the serial integration lane. Do not document two tickets concurrently.
+4. Confirm the current path and branch belong to this ticket worktree.
+5. Resolve the configured target branch to its full current commit hash.
+6. Confirm that commit is an ancestor and equals `review.fixedPoint`.
+7. Return to `implement` and `review` when the target has advanced.
+8. Confirm the item is `in-review` with zero P0, P1, and P2 findings.
+9. Review acceptance evidence and the latest check results.
+10. Read `docs/knowledge/sources/index.md` and relevant source notes.
+11. Use `$source` to refresh official docs cited by the completed work.
+12. Read the implemented code and relevant established concepts.
+13. Create small drafts for durable facts and verify them against code.
+14. Run `complete <KEY>` and fix any rejected gate.
+15. Commit the completion changes with `docs(<key>): establish knowledge`.
+16. Return to the clean target-branch worktree.
+17. Run `worktree-finish <KEY>` to merge, remove the worktree, and delete the branch.
+18. Run `validate` and report the merge commit, promoted paths, and resolution.
 
 ## Create a draft
 
@@ -47,8 +50,11 @@ unknown OKF field.
 
 ```bash
 node .project/bin/project-flow.mjs complete APP-2
+git add docs
+git commit -m "docs(app-2): establish task storage knowledge"
+cd /path/to/target-worktree
+node .project/bin/project-flow.mjs worktree-finish APP-2
 node .project/bin/project-flow.mjs validate
-node .project/bin/project-flow.mjs status
 ```
 
 Completion moves valid drafts into `docs/knowledge/`, records their digests,
@@ -62,3 +68,7 @@ sets a resolution, and refreshes the knowledge indexes, log, and work board.
 - Leave user wishes and future behavior in `docs/work/`.
 - Use official docs for external behavior and code or tests for project behavior.
 - Never claim human review without an actual human reviewer.
+- Do not run `complete` before the ticket enters its serial integration turn.
+- Never merge when the final review fixed point differs from the current target.
+- Never force-remove a worktree or force-delete a ticket branch.
+- Do not push or delete remote branches unless the user requests it.

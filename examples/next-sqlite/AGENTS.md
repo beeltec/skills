@@ -9,6 +9,12 @@
 - Save concise source notes under `docs/knowledge/sources/`.
 - Re-open relevant official URLs once per work session before relying on them.
 - Treat `docs/work/` as desired state, not current fact.
+- Keep `main` clean for coordination and serial integration.
+- Implement each ticket in `.woktrees/<key>/` on its own Conventional Branch.
+- Do not implement epics or tickets with open blockers.
+- Parallelize only independent tickets without likely overlap in non-generated files.
+- Use Conventional Commits for ticket and merge commits.
+- Merge green branches into `main`, then remove their clean worktrees and local branches.
 - Assume Codex uses ChatGPT subscription access unless the user says otherwise.
 - Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
 - Assess session fit before code changes. Delegate bounded implementation when it will not fit.
@@ -17,6 +23,7 @@
 - Record separate Standards and Spec reviews with zero P0-P2 findings.
 - Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
 - Run `.project/bin/project-flow.mjs complete <KEY>` after all gates pass.
+- Run `.project/bin/project-flow.mjs worktree-finish <KEY>` from `main` after completion.
 - Validate the workspace after workflow changes.
 
 ## Commands

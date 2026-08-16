@@ -10,6 +10,9 @@ Source: https://support.atlassian.com/jira-cloud-administration/docs/configure-r
 
 ## Review checklist
 
+- Confirm work runs in the ticket's Conventional Branch worktree.
+- Confirm the latest target commit is an ancestor of the ticket branch.
+- Confirm `review.fixedPoint` equals that full target commit.
 - Compare each acceptance criterion with its evidence.
 - Check the last check run time against the relevant source changes.
 - Confirm relevant official source notes were refreshed in this work session.
@@ -38,6 +41,31 @@ If a child or blocker remains open, complete that work first.
 
 If a target existence check fails, correct `create` versus `update`. Never
 overwrite an unrelated concept.
+
+## Git finalization
+
+Only one ticket may enter this section at a time. Keep other green tickets in
+`in-review`. Do not complete them before their integration turn.
+
+After `complete`, commit the ticket state and promoted knowledge with a
+Conventional Commit. Keep the ticket worktree clean.
+
+From the clean target-branch worktree, run:
+
+```bash
+node .project/bin/project-flow.mjs worktree-finish <KEY>
+```
+
+The command requires a green, valid ticket worktree. It also requires every
+ticket commit to follow Conventional Commits. The target branch must equal the
+reviewed fixed point. It creates a `--no-ff` conventional merge commit.
+
+Only after a successful merge does it remove the worktree and run
+`git branch -d`. It never uses force. Integration is serial, even when several
+ticket implementations ran in parallel.
+
+If finalization fails, keep the branch and worktree. Resolve the reported
+condition, repeat checks and review when needed, then run finalization again.
 
 ## Trust result
 

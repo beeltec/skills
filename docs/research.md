@@ -58,8 +58,8 @@ to planning.
 
 The `review` skill adapts the code-review skill's two-axis model. Standards and
 Spec get independent passes, so one cannot hide failure in the other. The
-ticket is the fixed specification source. The review also includes uncommitted
-work because this workflow does not require agents to commit changes.
+ticket is the fixed specification source. Reviews cover the whole ticket branch
+and any remaining uncommitted work.
 
 Every finding receives a P0-P3 severity. P0, P1, and P2 block approval. P3 is
 non-blocking. After blocking findings are fixed, both axes inspect the complete
@@ -105,6 +105,54 @@ Sources:
 - [Next.js mutating data](https://nextjs.org/docs/app/getting-started/mutating-data)
 - [Node.js 24 SQLite API](https://nodejs.org/download/release/latest-v24.x/docs/api/sqlite.html)
 - [SQLite STRICT tables](https://www.sqlite.org/stricttables.html)
+
+## Git ticket delivery
+
+Git's own workflow guide recommends one short-lived topic branch for each
+feature or bug fix. Git worktrees provide separate working trees with their own
+`HEAD` and index while sharing repository references. This makes one branch and
+one linked worktree per ticket a small, native model for parallel agents.
+
+The workflow keeps the integration worktree on `main` by default. Every
+non-epic ticket uses `.woktrees/<ticket-key>/`. Branches follow Conventional
+Branch 1.1.0 as `<type>/<ticket-key>-<description>`. Stories default to `feat`,
+bugs to `fix`, and tasks or subtasks to `chore`.
+
+Every ticket commit follows Conventional Commits 1.0.0. The ticket key is the
+scope when one ticket owns the commit. Conventional Commits can later support
+Semantic Versioning, but this workflow does not automate releases or version
+bumps. A release policy needs its own explicit project decision.
+
+Jira treats dependencies as ordering constraints: the blocking item ends before
+the dependent item begins. The workflow therefore refuses a worktree for any
+ticket with an open blocker. It does not create stacked branches from unfinished
+blocker branches. Planning and discussion may still continue.
+
+Independent ticket implementation may run in parallel. Worktrees do not remove
+semantic dependencies or merge conflicts, so likely non-generated file overlap also
+blocks parallel execution. Generated board conflicts are resolved by rerunning
+`sync` after integrating the latest target. Final integration runs serially.
+
+Before final review, the ticket branch must contain the latest target commit.
+The review records that full commit hash. A green ticket is completed and
+committed inside its worktree. Finalization creates a conventional `--no-ff`
+merge commit on the target branch, removes the clean worktree, and deletes the
+fully merged local branch with `git branch -d`. It never forces cleanup.
+
+Remote pushes, pull requests, and remote branch deletion remain outside the
+default local workflow because they change external state.
+
+Sources:
+
+- [Git worktree documentation](https://git-scm.com/docs/git-worktree.html)
+- [Git topic-branch workflow](https://git-scm.com/docs/gitworkflows)
+- [Git feature branch workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow/)
+- [Git merge documentation](https://git-scm.com/docs/git-merge)
+- [Git branch deletion](https://git-scm.com/docs/git-branch)
+- [Jira dependencies](https://support.atlassian.com/jira-software-cloud/docs/what-are-dependencies-in-advanced-roadmaps/)
+- [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
+- [Conventional Branch 1.1.0](https://conventionalbranch.org/)
+- [Semantic Versioning 2.0.0](https://semver.org/)
 
 ## Context-aware implementation
 

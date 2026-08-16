@@ -3,6 +3,10 @@
 Apply this gate before changing product code. Use subagents only when one
 session is unlikely to finish the implementation safely.
 
+Parallel tickets use separate ticket agents and separate worktrees. This file
+also governs further decomposition inside one large ticket. Keep within-ticket
+write packets sequential unless their paths are fully disjoint.
+
 ## Resolve capacity
 
 Resolve capacity separately for the coordinator and every proposed subagent.
@@ -69,7 +73,10 @@ Use this structure:
 ```markdown
 # <KEY> implementation handoff
 
-- Fixed point: <commit or initial tree>
+- Fixed point: <resolved target commit>
+- Branch: <conventional ticket branch>
+- Worktree: <absolute .woktrees path>
+- Target branch: <main or explicit override>
 - Coordinator model: <exact runtime model>
 - Access mode: <Codex subscription, API key, or other host>
 - Capacity source: <runtime, user, project, or unknown>
@@ -126,13 +133,14 @@ Keep product decisions and acceptance criteria with the coordinator. Return to
 Include these fields in every implementation assignment:
 
 - work item key and fixed point;
+- absolute ticket worktree and branch;
 - exact outcome and acceptance criteria covered;
 - owned paths and excluded paths;
 - relevant project knowledge and official source-note paths;
 - the live-verification time for every external rule in the packet;
 - focused checks to run;
 - assigned model's safe context budget;
-- a warning that the worktree is shared;
+- a warning that this worktree belongs only to the named ticket;
 - the required return format below.
 
 Require this short return:
@@ -146,16 +154,17 @@ Risks:
 Remaining work:
 ```
 
-Tell subagents not to transition the item, record acceptance, create knowledge,
-run the final review, or commit unless asked. Tell them not to substitute model
-memory for the supplied official sources. Do not use subagents only to verify
-the coordinator's work.
+Tell within-ticket subagents not to transition the item, record acceptance,
+create knowledge, run the final review, or commit unless assigned a complete
+packet. Require Conventional Commits for assigned commits. Tell them not to
+substitute model memory for supplied official sources. Do not use subagents
+only to verify the coordinator's work.
 
 ## Coordinate and integrate
 
-The coordinator owns the ticket, fixed point, packet queue, integration, and
-final evidence. Read concise returns first. Inspect focused diffs instead of
-loading raw subagent transcripts.
+The ticket agent owns its branch, fixed point, packet queue, and final evidence.
+The main coordinator owns cross-ticket scheduling and serial integration. Read
+concise returns first. Inspect focused diffs instead of raw transcripts.
 
 After all packets finish, run the whole item's configured checks. Record
 acceptance evidence only after integrated behavior passes.

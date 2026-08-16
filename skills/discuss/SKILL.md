@@ -53,7 +53,10 @@ not change the result.
 - Revisit earlier answers when a later answer creates a conflict.
 - Challenge vague terms such as "simple," "fast," or "secure."
 - Cover users, outcomes, scope, failure behavior, data, interfaces, rollout,
-  compatibility, security, and verification when relevant.
+  compatibility, security, verification, ticket dependencies, and delivery order when relevant.
+- Distinguish work that can run in parallel from work that must wait.
+- Use the configured Git target and conventions unless the user requests a change.
+- Discuss release versioning separately when the project publishes a versioned API.
 - Keep the number of questions proportional to the decision.
 
 ## Planning handoff
@@ -69,6 +72,7 @@ When the frontier is empty, provide this brief:
 ## Out of scope
 ## Decisions
 ## Constraints
+## Delivery dependencies
 ## Official sources
 ## Risks and mitigations
 ## Acceptance signals

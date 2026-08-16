@@ -1,4 +1,4 @@
 interface:
   display_name: "Implement"
-  short_description: "Implement safely with context-aware delegation"
-  default_prompt: "Use $implement to refresh official sources, deliver or repair the current item, delegate bounded packets when needed, verify it, and return it to $review until no P0, P1, or P2 findings remain."
+  short_description: "Implement tickets in isolated Git worktrees"
+  default_prompt: "Use $implement to create ticket worktrees, run independent tickets in parallel, make conventional commits, verify each ticket, and return each to $review."

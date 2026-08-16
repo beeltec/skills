@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Use this skill when a user wants to turn a confirmed idea into project work in an initialized workflow. Read established knowledge and official source notes, refresh material external facts from current official documentation, then create or refine Jira-like epics, stories, bugs, tasks, and subtasks in `docs/work/`. Use after setup and discussion. Stop before implementation.
+description: Use this skill when a user wants to turn a confirmed idea into Jira-like project work. Read established knowledge and official sources, create or refine epics, stories, bugs, tasks, and subtasks, and define an acyclic dependency graph that identifies which tickets can run in parallel worktrees. Use after setup and discussion. Stop before implementation or Git branch creation.
 ---
 
 # Plan
@@ -26,9 +26,12 @@ Use the installed `.project/bin/project-flow.mjs` for every command.
 9. Add verification commands for code changes.
 10. Name relevant local source-note paths in the work-item description.
 11. Mark knowledge `required` for every epic and story.
-12. Link actual blockers.
-13. Move ready items to `ready`.
-14. Run `validate` and report the created keys and source notes.
+12. Link every hard ordering dependency with `blocked-by`.
+13. Keep the dependency graph acyclic.
+14. Identify tickets that can run in parallel without likely write overlap.
+15. Treat epics as coordination items, not implementation branches.
+16. Move fully defined items to `ready`, even when a blocker delays their start.
+17. Run `validate` and report ready, blocked, and parallel ticket groups.
 
 ## Example
 
@@ -51,5 +54,7 @@ node .project/bin/project-flow.mjs create \
 - Do not create speculative knowledge facts.
 - Do not plan against an external technical claim supported only by model memory.
 - Do not use an epic when one story is enough.
+- Do not use `relates-to` when one ticket must finish before another starts.
+- Do not claim worktrees make dependent or overlapping changes independent.
 - Do not enter `done` through a status edit.
 - Stop after the plan is valid and ready.

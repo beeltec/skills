@@ -14,9 +14,12 @@ passes. Keep their findings separate.
 
 ## Establish the review scope
 
-Use the fixed point captured by `implement` or supplied by the user. Ask for it
-when neither exists. For uncommitted-only work, confirm that the starting
-`HEAD` still identifies the state before implementation.
+Run workflow reviews inside the named ticket worktree. Resolve the configured
+target branch to an immutable full commit hash. Confirm that the ticket branch
+contains that commit and follows the ticket branch convention.
+
+For work outside this workflow, use the fixed point supplied by the user. Ask
+for it when none exists.
 
 When `docs/work/handoffs/<KEY>.md` exists, use it to locate delegated packets
 and their claimed paths. Verify those claims against the complete Git diff.
@@ -26,6 +29,7 @@ Validate a supplied reference before using it:
 
 ```bash
 git rev-parse --verify <fixed-point>^{commit}
+git merge-base --is-ancestor <fixed-point> HEAD
 ```
 
 For committed branch work, inspect these views:
@@ -33,6 +37,7 @@ For committed branch work, inspect these views:
 ```bash
 git diff <fixed-point>...HEAD
 git log <fixed-point>..HEAD --oneline
+git log <fixed-point>..HEAD --format=%s
 ```
 
 Also inspect staged, unstaged, and untracked changes:
@@ -42,8 +47,8 @@ git diff HEAD
 git status --short
 ```
 
-Review new untracked files in full. If the repository has no commit, review
-all files changed for the item. State `initial tree` as the fixed point.
+Review new untracked files in full. Ticket worktrees require an existing
+commit and must never use `initial tree` as the fixed point.
 
 Do not attribute pre-existing dirty files to the item. If work overlaps those
 files, state that limitation in the review evidence.
@@ -70,6 +75,9 @@ preference alone. State the concrete impact that makes a finding actionable.
 
 Read the applicable `AGENTS.md` files first. Also inspect `CONTRIBUTING.md`,
 coding guides, and relevant tool configuration.
+
+Check the branch against Conventional Branch 1.1.0. Check every ticket commit
+subject against Conventional Commits 1.0.0.
 
 Read the relevant notes under `docs/knowledge/sources/`. Re-open each canonical
 URL through `source` before enforcing an external API or vendor rule. Cite the
@@ -118,6 +126,10 @@ the finding.
 
 Use the original fixed point for every iteration. Review the complete updated
 change, not only the latest fix or previously reported files.
+
+If the target branch advances, stop the current loop. Return to `implement` to
+synchronize the ticket branch and rerun every check. Start a new full review
+cycle from the new target commit.
 
 When either axis finds a P0, P1, or P2:
 

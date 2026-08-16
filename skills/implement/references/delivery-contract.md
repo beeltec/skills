@@ -2,6 +2,8 @@
 
 ## Read order
 
+Read these files from the designated ticket worktree:
+
 1. `docs/work/board.md`
 2. `docs/work/items/<KEY>.json`
 3. `docs/work/handoffs/<KEY>.md`, when it exists
@@ -18,6 +20,18 @@ constraint. Treat model memory only as a search lead.
 
 A handoff contains temporary implementation state. Verify it against the item,
 the fixed point, and the current worktree before continuing.
+
+Confirm that the branch contains the ticket key and follows Conventional
+Branch 1.1.0. Stop if the agent is in the main worktree or another ticket's
+worktree.
+
+## Git evidence
+
+Keep the target branch commit as the fixed point. Inspect `git status` before
+editing and before every commit. Stage only ticket-owned files.
+
+Use Conventional Commits 1.0.0. Use the lowercase ticket key as the scope when
+the change belongs to one ticket. Keep unrelated changes out of the branch.
 
 ## Check execution
 
@@ -38,10 +52,9 @@ outcome.
 
 ## Review handoff
 
-Report the resolved starting commit, item key, source-note paths, changed files,
-checks, and acceptance evidence. Use `initial tree` when the repository had no
-commit. State any overlap with pre-existing dirty files. Then hand off to
-`review`.
+Report the resolved target commit, item key, worktree path, branch, source-note
+paths, commits, changed files, checks, and acceptance evidence. Ticket
+worktrees require an existing commit. Then hand off to `review`.
 
 When the latest review requests changes, preserve that fixed point. Address
 all valid P0, P1, and P2 findings. Return disputed findings with concrete

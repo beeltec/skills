@@ -1,4 +1,4 @@
 interface:
   display_name: "Review"
-  short_description: "Review changes against standards and their specification"
-  default_prompt: "Use $review to refresh official sources, check Standards and Spec, and loop with $implement until no P0, P1, or P2 findings remain."
+  short_description: "Review one ticket branch against standards and spec"
+  default_prompt: "Use $review to verify the ticket branch base, check Standards and Spec, and loop with $implement until no P0, P1, or P2 findings remain."

@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow. Create `.project/`, `docs/knowledge/`, `docs/knowledge/sources/`, and `docs/work/`; install the local workflow CLI; add project-state rules to `AGENTS.md`; and seed verified current knowledge and official source notes. Use once before planning. Do not create work items or product code.
+description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow and its Git policy. Create `.project/`, `docs/knowledge/`, `docs/work/`, and `.woktrees/`; install the local workflow CLI; configure `main` as the default integration branch; add project rules to `AGENTS.md`; and seed verified knowledge and official source notes. Use once before planning. Do not create work items or product code.
 ---
 
 # Setup
@@ -11,19 +11,24 @@ Use Node.js 20.9 or newer for the bundled workflow CLI.
 
 ## Procedure
 
-1. Inspect the repository, package metadata, and existing `AGENTS.md` files.
+1. Inspect the repository, package metadata, Git state, and existing `AGENTS.md` files.
 2. Read [references/workspace-format.md](references/workspace-format.md).
 3. Check whether `.project/workflow.json` already exists.
 4. If it exists, follow the refresh procedure below and stop.
 5. For a new workflow, choose a two-to-ten character uppercase project key.
 6. Derive a clear project name from repository metadata.
-7. Resolve this skill's directory from the loaded `SKILL.md` path.
-8. Run the initialization command.
-9. Add the reference's workflow block to `AGENTS.md` without removing rules.
-10. Use `$source` to verify official docs for material detected technologies.
-11. Add small OKF concepts only for facts verified from the repository.
-12. Run `sync` and `validate`.
-13. Report created paths, the project key, source notes, and undocumented facts.
+7. Use `main` as the integration branch unless the user names another branch.
+8. Initialize Git with `git init -b main` when no Git repository exists.
+9. Do not create a baseline commit from unrelated files without user approval.
+10. Resolve this skill's directory from the loaded `SKILL.md` path.
+11. Run the initialization command.
+12. Confirm `.woktrees/` exists and `/.woktrees/` is ignored by Git.
+13. Add the reference's workflow block to `AGENTS.md` without removing rules.
+14. Use `$source` to cache current Git, Jira dependency, commit, and branch rules.
+15. Use `$source` to verify official docs for material detected technologies.
+16. Add small OKF concepts only for facts verified from the repository.
+17. Run `sync` and `validate`.
+18. Report the target branch, missing initial commit, created paths, and sources.
 
 Ask for the project key or name only when repository context cannot provide a
 safe value.
@@ -34,15 +39,16 @@ safe value.
 node <skill-directory>/scripts/project-flow.mjs init \
   --root . \
   --key APP \
-  --name "Project name"
+  --name "Project name" \
+  --target-branch main
 node .project/bin/project-flow.mjs sync
 node .project/bin/project-flow.mjs validate
 ```
 
 ## Refresh an existing workflow
 
-Do not initialize twice. Refresh the installed CLI and confirm the AGENTS.md
-block. Use `$source` to refresh relevant official notes. Then validate:
+Do not initialize twice. Refresh the installed CLI, Git settings, `.woktrees/`,
+and the AGENTS.md block. Use `$source` to refresh relevant notes. Then validate:
 
 ```bash
 node <skill-directory>/scripts/project-flow.mjs install --root .
@@ -58,3 +64,5 @@ node .project/bin/project-flow.mjs validate
 - Do not create epics, stories, bugs, tasks, or subtasks.
 - Do not modify product code.
 - Do not turn model memory into project knowledge or source notes.
+- Do not rename an established integration branch without user approval.
+- Do not commit pre-existing or unrelated files during setup.

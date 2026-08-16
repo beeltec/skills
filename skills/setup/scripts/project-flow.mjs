@@ -8,6 +8,7 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
+  realpathSync,
   readdirSync,
   renameSync,
   unlinkSync,
@@ -30,6 +31,15 @@ const STANDARD_TYPES = ["story", "bug", "task"];
 const STATUSES = ["backlog", "ready", "in-progress", "in-review", "done"];
 const PRIORITIES = ["highest", "high", "medium", "low", "lowest"];
 const OFFICIAL_SOURCE_DONE = "Relevant external claims cite refreshed official source notes.";
+const DEFAULT_GIT_CONFIG = Object.freeze({
+  targetBranch: "main",
+  worktreeDirectory: ".woktrees",
+  mergeStrategy: "no-ff",
+  branchConvention: "conventional-branch@1.1.0",
+  commitConvention: "conventional-commits@1.0.0",
+});
+const TICKET_BRANCH_TYPES = ["feature", "feat", "bugfix", "fix", "hotfix", "chore"];
+const CONVENTIONAL_COMMIT_SUBJECT = /^[a-z][a-z0-9-]*(?:\([a-z0-9][a-z0-9._/-]*\))?!?: \S.*$/;
 const TRANSITIONS = {
   backlog: ["ready"],
   ready: ["backlog", "in-progress"],
@@ -180,7 +190,46 @@ function loadConfig(paths) {
   if (config.spaces?.knowledge !== "docs/knowledge" || config.spaces?.work !== "docs/work") {
     fail("workflow.json must use docs/knowledge and docs/work.");
   }
+  if (config.git !== undefined) validateGitConfig(config.git);
   return config;
+}
+
+function validateGitConfig(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    fail("workflow.json git settings must be an object.");
+  }
+  if (typeof value.targetBranch !== "string" || !validGitRefName(value.targetBranch)) {
+    fail("workflow.json git.targetBranch is invalid.");
+  }
+  if (value.worktreeDirectory !== DEFAULT_GIT_CONFIG.worktreeDirectory) {
+    fail("workflow.json git.worktreeDirectory must be .woktrees.");
+  }
+  if (value.mergeStrategy !== DEFAULT_GIT_CONFIG.mergeStrategy) {
+    fail("workflow.json git.mergeStrategy must be no-ff.");
+  }
+  if (value.branchConvention !== DEFAULT_GIT_CONFIG.branchConvention) {
+    fail("workflow.json must use Conventional Branch 1.1.0.");
+  }
+  if (value.commitConvention !== DEFAULT_GIT_CONFIG.commitConvention) {
+    fail("workflow.json must use Conventional Commits 1.0.0.");
+  }
+}
+
+function validGitRefName(value) {
+  return (
+    /^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(value) &&
+    !value.includes("..") &&
+    !value.includes("//") &&
+    !value.endsWith(".") &&
+    !value.endsWith("/") &&
+    !value.endsWith(".lock")
+  );
+}
+
+function gitConfig(config) {
+  const value = config.git ?? DEFAULT_GIT_CONFIG;
+  validateGitConfig(value);
+  return value;
 }
 
 function normalizeKey(value) {
@@ -341,6 +390,29 @@ function validateHierarchy(items) {
     }
   }
 
+  const states = new Map();
+  const stack = [];
+  function visitBlockers(key) {
+    const state = states.get(key) ?? "new";
+    if (state === "done") return;
+    if (state === "visiting") {
+      const start = stack.indexOf(key);
+      const cycle = [...stack.slice(start), key];
+      errors.push(`Blocked-by links contain a cycle: ${cycle.join(" -> ")}.`);
+      return;
+    }
+
+    states.set(key, "visiting");
+    stack.push(key);
+    for (const blocker of byKey.get(key)?.links.blockedBy ?? []) {
+      if (byKey.has(blocker)) visitBlockers(blocker);
+    }
+    stack.pop();
+    states.set(key, "done");
+  }
+
+  for (const item of items) visitBlockers(item.key);
+
   return errors;
 }
 
@@ -377,6 +449,106 @@ function canonicalHttpsUrl(value) {
 
 function oneLine(value) {
   return String(value).trim().replace(/\s+/g, " ");
+}
+
+function ensureWorktreeLayout(paths, config) {
+  const settings = gitConfig(config);
+  mkdirSync(join(paths.root, settings.worktreeDirectory), { recursive: true });
+
+  const ignorePath = join(paths.root, ".gitignore");
+  const rule = `/${settings.worktreeDirectory}/`;
+  const existing = existsSync(ignorePath) ? readFileSync(ignorePath, "utf8") : "";
+  const lines = existing.replaceAll("\r\n", "\n").split("\n");
+  if (lines.includes(rule)) return;
+
+  const prefix = existing && !existing.endsWith("\n") ? `${existing}\n` : existing;
+  writeText(ignorePath, `${prefix}${rule}\n`);
+}
+
+function runGit(root, args, allowFailure = false) {
+  const result = spawnSync("git", args, {
+    cwd: root,
+    encoding: "utf8",
+    maxBuffer: 2 * 1024 * 1024,
+  });
+  if (result.error) {
+    fail(`Cannot run Git: ${result.error.message}`);
+  }
+  if (result.status !== 0 && !allowFailure) {
+    const details = [result.stdout, result.stderr].filter(Boolean).join("\n").trim();
+    fail(`Git command failed: git ${args.join(" ")}${details ? `\n${details}` : ""}`);
+  }
+  return result;
+}
+
+function requireGitRepositoryRoot(root) {
+  const result = runGit(root, ["rev-parse", "--show-toplevel"], true);
+  if (result.status !== 0) fail("Ticket worktrees require an initialized Git repository.");
+  const topLevel = realpathSync(result.stdout.trim());
+  if (topLevel !== realpathSync(root)) {
+    fail("The workflow root must equal the Git repository root for ticket worktrees.");
+  }
+  const head = runGit(root, ["rev-parse", "--verify", "HEAD^{commit}"], true);
+  if (head.status !== 0) fail("Create the initial Git commit before creating a ticket worktree.");
+}
+
+function currentGitBranch(root) {
+  const result = runGit(root, ["symbolic-ref", "--quiet", "--short", "HEAD"], true);
+  if (result.status !== 0 || !result.stdout.trim()) fail("Ticket worktrees require a checked-out branch, not detached HEAD.");
+  return result.stdout.trim();
+}
+
+function assertCleanGitWorktree(root, label) {
+  const status = runGit(root, ["status", "--porcelain=v1", "--untracked-files=all"]).stdout.trim();
+  if (status) fail(`${label} must be clean before this operation.\n${status}`);
+}
+
+function slugifyBranchDescription(value) {
+  const slug = String(value)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 48)
+    .replace(/[-.]+$/g, "");
+  return slug || "work";
+}
+
+function branchTypeForItem(item) {
+  if (item.type === "story") return "feat";
+  if (item.type === "bug") return "fix";
+  return "chore";
+}
+
+function conventionalBranchName(item, requestedType) {
+  const type = (requestedType ?? branchTypeForItem(item)).toLowerCase();
+  if (!TICKET_BRANCH_TYPES.includes(type)) {
+    fail(`Branch type must be one of: ${TICKET_BRANCH_TYPES.join(", ")}.`);
+  }
+  const description = `${item.key.toLowerCase()}-${slugifyBranchDescription(item.summary)}`;
+  const branch = `${type}/${description}`;
+  if (!isConventionalTicketBranch(branch, item.key)) fail(`Generated invalid ticket branch: ${branch}.`);
+  return branch;
+}
+
+function isConventionalTicketBranch(branch, key) {
+  const separator = branch.indexOf("/");
+  if (separator < 1) return false;
+  const type = branch.slice(0, separator);
+  const description = branch.slice(separator + 1);
+  return (
+    TICKET_BRANCH_TYPES.includes(type) &&
+    description.startsWith(`${key.toLowerCase()}-`) &&
+    /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(description)
+  );
+}
+
+function commitTypeForBranch(branch) {
+  const type = branch.split("/", 1)[0];
+  if (["feature", "feat"].includes(type)) return "feat";
+  if (["bugfix", "fix", "hotfix"].includes(type)) return "fix";
+  return "chore";
 }
 
 function parseFrontmatter(content, jsonRequired = false) {
@@ -658,6 +830,39 @@ function greenGateErrors(paths, item, items) {
   return errors;
 }
 
+function completedGateErrors(item, items) {
+  const errors = [];
+  const byKey = itemMap(items);
+
+  if (item.status !== "done") return errors;
+  if (!item.resolution) errors.push(`${item.key}: done items need a resolution.`);
+  if (["epic", "story", "bug"].includes(item.type) && item.acceptanceCriteria.length === 0) {
+    errors.push(`${item.key}: a completed ${item.type} needs an acceptance criterion.`);
+  }
+  for (const criterion of item.acceptanceCriteria) {
+    if (criterion.status !== "pass" || typeof criterion.evidence !== "string" || !criterion.evidence.trim()) {
+      errors.push(`${item.key}: completed ${criterion.id} needs passing evidence.`);
+    }
+  }
+  for (const check of item.checks) {
+    if (check.status !== "pass" || !check.lastRun || check.lastRun.exitCode !== 0) {
+      errors.push(`${item.key}: completed ${check.id} needs a passing verification run.`);
+    }
+  }
+  if (!hasPassingReview(item)) errors.push(`${item.key}: done items need a passing code review.`);
+  for (const blockerKey of item.links.blockedBy) {
+    if (byKey.get(blockerKey)?.status !== "done") errors.push(`${item.key}: blocker ${blockerKey} is not done.`);
+  }
+  for (const child of childrenOf(items, item.key)) {
+    if (child.status !== "done") errors.push(`${item.key}: child ${child.key} is not done.`);
+  }
+  if (item.knowledgePolicy === "required" && item.promotions.length === 0) {
+    errors.push(`${item.key}: a done item with required knowledge needs a promotion record.`);
+  }
+  if (item.knowledgeChanges.length !== 0) errors.push(`${item.key}: done items cannot retain knowledge drafts.`);
+  return errors;
+}
+
 function boardContent(paths, config, items) {
   const lines = [
     `# ${config.projectName} Work Board`,
@@ -749,11 +954,7 @@ function validateWorkspace(paths, config, items) {
 
   for (const item of items) {
     if (item.status === "done") {
-      if (!item.resolution) errors.push(`${item.key}: done items need a resolution.`);
-      if (!hasPassingReview(item)) errors.push(`${item.key}: done items need a passing code review.`);
-      if (item.knowledgePolicy === "required" && item.promotions.length === 0) {
-        errors.push(`${item.key}: a done item with required knowledge needs a promotion record.`);
-      }
+      errors.push(...completedGateErrors(item, items));
     } else if (item.resolution !== null) {
       errors.push(`${item.key}: open items cannot have a resolution.`);
     }
@@ -798,10 +999,12 @@ function commandInit(args) {
   const paths = pathsFor(root);
   const projectKey = option(args, "key", true).toUpperCase();
   const projectName = option(args, "name", true).trim();
+  const targetBranch = option(args, "target-branch") ?? DEFAULT_GIT_CONFIG.targetBranch;
 
   if (!/^[A-Z][A-Z0-9]{1,9}$/.test(projectKey)) {
     fail("Project keys need 2-10 uppercase letters or numbers and must start with a letter.");
   }
+  if (!validGitRefName(targetBranch)) fail("The target Git branch name is invalid.");
   if (existsSync(paths.config)) fail("This project workflow is already initialized.");
   if (existsSync(paths.project) && readdirSync(paths.project).length > 0) {
     fail(".project already exists and is not empty. Inspect it before initialization.");
@@ -824,6 +1027,7 @@ function commandInit(args) {
     projectName,
     createdAt: now(),
     spaces: { knowledge: "docs/knowledge", work: "docs/work" },
+    git: { ...DEFAULT_GIT_CONFIG, targetBranch },
     checkTimeoutMs: 120000,
     statuses: STATUSES,
     definitionOfDone: [
@@ -836,6 +1040,7 @@ function commandInit(args) {
     ],
   };
   writeJson(paths.config, config);
+  ensureWorktreeLayout(paths, config);
   copyFileSync(SCRIPT_PATH, paths.cli);
   chmodSync(paths.cli, 0o755);
   writeText(paths.knowledgeLog, `# Knowledge Update Log\n\n## ${today()}\n* **Initialization**: Created the knowledge bundle.\n`);
@@ -850,6 +1055,7 @@ function commandInstall(args) {
     : findProjectRoot(requestedRoot);
   const paths = pathsFor(root);
   const config = loadConfig(paths);
+  let changed = false;
   if (!Array.isArray(config.definitionOfDone)) {
     fail("workflow.json must contain a definitionOfDone array.");
   }
@@ -859,9 +1065,16 @@ function commandInstall(args) {
     );
     const insertion = reviewGate < 0 ? config.definitionOfDone.length : reviewGate;
     config.definitionOfDone.splice(insertion, 0, OFFICIAL_SOURCE_DONE);
-    writeJson(paths.config, config);
+    changed = true;
   }
+  if (config.git === undefined) {
+    config.git = { ...DEFAULT_GIT_CONFIG };
+    changed = true;
+  }
+  validateGitConfig(config.git);
+  if (changed) writeJson(paths.config, config);
   mkdirSync(paths.sources, { recursive: true });
+  ensureWorktreeLayout(paths, config);
   if (resolve(SCRIPT_PATH) === resolve(paths.cli)) {
     console.log("The project CLI is already running from its installed path.");
     return;
@@ -1025,11 +1238,14 @@ function commandLink(args, paths, config) {
   const byKey = itemMap(items);
   const item = byKey.get(key);
   if (!item) fail(`Work item ${key} does not exist.`);
+  if (item.status === "done") fail("Done work items are immutable.");
   if (!byKey.has(targetKey)) fail(`Target ${targetKey} does not exist.`);
   if (key === targetKey) fail("An item cannot link to itself.");
   if (!["blocked-by", "relates-to"].includes(relation)) fail("Link type must be blocked-by or relates-to.");
   const field = relation === "blocked-by" ? "blockedBy" : "relatesTo";
   if (!item.links[field].includes(targetKey)) item.links[field].push(targetKey);
+  const hierarchyErrors = validateHierarchy(items);
+  if (hierarchyErrors.length) fail(hierarchyErrors.join("\n"));
   resetReview(item);
   saveItem(paths, item);
   syncGeneratedFiles(paths, config);
@@ -1353,6 +1569,130 @@ function commandComplete(args, paths, config) {
   for (const promotion of promotions) console.log(`Promoted ${promotion.target}`);
 }
 
+function commandWorktreeAdd(args, paths, config) {
+  const key = normalizeKey(requiredPositional(args, 1, "work item key"));
+  const item = loadItem(paths, key);
+  const items = loadItems(paths);
+  const settings = gitConfig(config);
+  const target = option(args, "base") ?? settings.targetBranch;
+
+  requireGitRepositoryRoot(paths.root);
+  if (currentGitBranch(paths.root) !== target) {
+    fail(`Create ticket worktrees from the checked-out target branch ${target}.`);
+  }
+  assertCleanGitWorktree(paths.root, `Target branch ${target}`);
+  if (item.type === "epic") fail("Epics coordinate work and do not receive implementation worktrees.");
+  if (item.status !== "ready") fail(`${key} must be ready before creating its worktree.`);
+
+  const byKey = itemMap(items);
+  const openBlockers = item.links.blockedBy.filter((blocker) => byKey.get(blocker)?.status !== "done");
+  if (openBlockers.length) {
+    fail(`Cannot implement ${key}. Open blockers: ${openBlockers.join(", ")}.`);
+  }
+
+  const targetRef = runGit(paths.root, ["rev-parse", "--verify", `${target}^{commit}`], true);
+  if (targetRef.status !== 0) fail(`Target branch ${target} does not resolve to a commit.`);
+
+  const branch = conventionalBranchName(item, option(args, "branch-type"));
+  const existingBranch = runGit(paths.root, ["show-ref", "--verify", "--quiet", `refs/heads/${branch}`], true);
+  if (existingBranch.status === 0) fail(`Branch ${branch} already exists.`);
+  runGit(paths.root, ["check-ref-format", "--branch", branch]);
+
+  ensureWorktreeLayout(paths, config);
+  const worktreePath = join(paths.root, settings.worktreeDirectory, key.toLowerCase());
+  if (existsSync(worktreePath)) fail(`Worktree path already exists: ${worktreePath}`);
+
+  runGit(paths.root, ["worktree", "add", "-b", branch, worktreePath, target]);
+  console.log(`Created ${key} worktree.`);
+  console.log(`Branch: ${branch}`);
+  console.log(`Path: ${worktreePath}`);
+}
+
+function commandWorktreeList(paths) {
+  requireGitRepositoryRoot(paths.root);
+  process.stdout.write(runGit(paths.root, ["worktree", "list", "--porcelain"]).stdout);
+}
+
+function commandWorktreeFinish(args, paths, config) {
+  const key = normalizeKey(requiredPositional(args, 1, "work item key"));
+  const settings = gitConfig(config);
+  const target = option(args, "target") ?? settings.targetBranch;
+
+  requireGitRepositoryRoot(paths.root);
+  if (currentGitBranch(paths.root) !== target) {
+    fail(`Finish ticket worktrees from the checked-out target branch ${target}.`);
+  }
+  assertCleanGitWorktree(paths.root, `Target branch ${target}`);
+
+  const worktreePath = join(paths.root, settings.worktreeDirectory, key.toLowerCase());
+  if (!existsSync(worktreePath)) fail(`No ticket worktree exists at ${worktreePath}.`);
+  const worktreeRoot = runGit(worktreePath, ["rev-parse", "--show-toplevel"]).stdout.trim();
+  if (realpathSync(worktreeRoot) !== realpathSync(worktreePath)) {
+    fail(`${worktreePath} is not the expected Git worktree root.`);
+  }
+  assertCleanGitWorktree(worktreePath, `${key} worktree`);
+
+  const branch = currentGitBranch(worktreePath);
+  if (!isConventionalTicketBranch(branch, key)) {
+    fail(`Branch ${branch} does not follow Conventional Branch for ${key}.`);
+  }
+
+  const worktreePaths = pathsFor(worktreePath);
+  const worktreeConfig = loadConfig(worktreePaths);
+  if (worktreeConfig.projectKey !== config.projectKey) fail("The ticket worktree belongs to another workflow.");
+  const item = loadItem(worktreePaths, key);
+  if (item.status !== "done" || !item.resolution) {
+    fail(`${key} must pass complete before merge and cleanup.`);
+  }
+  const validationErrors = validateWorkspace(worktreePaths, worktreeConfig, loadItems(worktreePaths));
+  if (validationErrors.length) fail(`Ticket worktree validation failed:\n- ${validationErrors.join("\n- ")}`);
+
+  const targetCommit = runGit(paths.root, ["rev-parse", "--verify", `${target}^{commit}`]).stdout.trim();
+  const branchCommit = runGit(paths.root, ["rev-parse", "--verify", `${branch}^{commit}`]).stdout.trim();
+  const containsTarget = runGit(paths.root, ["merge-base", "--is-ancestor", targetCommit, branchCommit], true);
+  if (containsTarget.status !== 0) {
+    fail(`Branch ${branch} does not contain the latest ${target}. Sync it, then rerun checks and review.`);
+  }
+
+  if (!/^[0-9a-f]{40,64}$/i.test(item.review.fixedPoint ?? "")) {
+    fail(`${key} review.fixedPoint must be a resolved commit hash.`);
+  }
+  if (item.review.fixedPoint.toLowerCase() !== targetCommit.toLowerCase()) {
+    fail(`${key} must be reviewed against current ${target} commit ${targetCommit}.`);
+  }
+
+  const commitCount = Number(
+    runGit(paths.root, ["rev-list", "--count", `${targetCommit}..${branchCommit}`]).stdout.trim(),
+  );
+  if (!Number.isSafeInteger(commitCount) || commitCount < 1) {
+    fail(`${branch} has no ticket commits to merge.`);
+  }
+  const subjects = runGit(paths.root, ["log", "--format=%s", `${targetCommit}..${branchCommit}`])
+    .stdout.split("\n")
+    .map((subject) => subject.trim())
+    .filter(Boolean);
+  const invalidSubjects = subjects.filter((subject) => !CONVENTIONAL_COMMIT_SUBJECT.test(subject));
+  if (invalidSubjects.length) {
+    fail(`Non-conventional commit subjects:\n- ${invalidSubjects.join("\n- ")}`);
+  }
+
+  const defaultDescription = oneLine(item.summary);
+  const normalizedDescription = `${defaultDescription.charAt(0).toLowerCase()}${defaultDescription.slice(1)}`;
+  const mergeMessage = oneLine(
+    option(args, "message") ?? `${commitTypeForBranch(branch)}(${key.toLowerCase()}): ${normalizedDescription}`,
+  );
+  if (!CONVENTIONAL_COMMIT_SUBJECT.test(mergeMessage)) {
+    fail("The merge message must follow Conventional Commits 1.0.0.");
+  }
+
+  runGit(paths.root, ["merge", "--no-ff", "--no-edit", "-m", mergeMessage, branch]);
+  runGit(paths.root, ["worktree", "remove", worktreePath]);
+  runGit(paths.root, ["branch", "--delete", branch]);
+  console.log(`Merged ${key} into ${target}.`);
+  console.log(`Removed worktree ${worktreePath}.`);
+  console.log(`Deleted local branch ${branch}.`);
+}
+
 function commandShow(args, paths) {
   const key = normalizeKey(requiredPositional(args, 1, "work item key"));
   console.log(JSON.stringify(loadItem(paths, key), null, 2));
@@ -1381,7 +1721,7 @@ function printHelp() {
   console.log(`Project Flow CLI
 
 Usage:
-  project-flow.mjs init --root PATH --key KEY --name NAME
+  project-flow.mjs init --root PATH --key KEY --name NAME [--target-branch main]
   project-flow.mjs install [--root PATH]
   project-flow.mjs create --type TYPE --summary TEXT [options]
   project-flow.mjs edit KEY [--summary TEXT] [--description TEXT]
@@ -1395,6 +1735,9 @@ Usage:
   project-flow.mjs source-add --target PATH --title TEXT --publisher TEXT [options]
   project-flow.mjs knowledge-template KEY --target PATH --action create|update [options]
   project-flow.mjs complete KEY
+  project-flow.mjs worktree-add KEY [--branch-type TYPE] [--base BRANCH]
+  project-flow.mjs worktree-list
+  project-flow.mjs worktree-finish KEY [--target BRANCH] [--message TEXT]
   project-flow.mjs show KEY
   project-flow.mjs status
   project-flow.mjs sync
@@ -1428,6 +1771,13 @@ Knowledge template options:
   --tag TEXT                   Repeat for more tags.
   --actor ACTOR
   --force
+
+Git workflow:
+  Ticket branches use <type>/<ticket-key>-<description>.
+  Branch types: feature, feat, bugfix, fix, hotfix, chore.
+  Commits use <type>[optional scope]: <description>.
+  The default target is main. Green merges use --no-ff.
+  worktree-finish removes only a clean, merged worktree and local branch.
 
 Use --root PATH with any project command when running outside the project.`);
 }
@@ -1488,6 +1838,15 @@ function main() {
       return true;
     case "complete":
       commandComplete(args, paths, config);
+      return true;
+    case "worktree-add":
+      commandWorktreeAdd(args, paths, config);
+      return true;
+    case "worktree-list":
+      commandWorktreeList(paths);
+      return true;
+    case "worktree-finish":
+      commandWorktreeFinish(args, paths, config);
       return true;
     case "show":
       commandShow(args, paths);

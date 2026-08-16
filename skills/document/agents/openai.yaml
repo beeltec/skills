@@ -1,4 +1,4 @@
 interface:
   display_name: "Document"
-  short_description: "Promote verified knowledge and close work"
-  default_prompt: "Use $document to refresh cited official sources, capture the reviewed result as established knowledge, and close the green work item."
+  short_description: "Promote knowledge, merge, and clean ticket work"
+  default_prompt: "Use $document to promote reviewed knowledge, complete the ticket, merge it into the target branch, and safely clean its worktree and local branch."

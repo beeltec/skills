@@ -22,5 +22,12 @@
     "Standards and Spec report zero P0, P1, and P2 findings with separate evidence.",
     "Blockers and child items are done.",
     "Required knowledge is drafted and valid."
-  ]
+  ],
+  "git": {
+    "targetBranch": "main",
+    "worktreeDirectory": ".woktrees",
+    "mergeStrategy": "no-ff",
+    "branchConvention": "conventional-branch@1.1.0",
+    "commitConvention": "conventional-commits@1.0.0"
+  }
 }

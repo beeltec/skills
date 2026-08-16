@@ -18,6 +18,7 @@ may refresh official source notes directly.
 
 - `skills/` contains the installable skills.
 - `skills/setup/scripts/project-flow.mjs` is the source CLI.
+- `.woktrees/` contains ignored ticket worktrees created by the workflow.
 - `examples/next-sqlite/` is the reproducible example and workflow fixture.
 - `tests/` verifies the shared workflow behavior.
 - `docs/research.md` records the source-backed design decisions.
@@ -33,17 +34,24 @@ may refresh official source notes directly.
 7. Re-open relevant official URLs once per work session before relying on them.
 8. Discuss material choices before planning.
 9. Treat `docs/work/items/*.json` as plans, not established facts.
-10. Assume Codex uses ChatGPT subscription access unless the user says otherwise.
-11. Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
-12. Assess the active model's remaining context before changing product code.
-13. Use bounded implementation subagents when the full change will not fit safely.
-14. Keep workflow state, integration, and final verification with the coordinator.
-15. Never move a work item directly to `done`.
-16. Run the configured checks and record acceptance evidence.
-17. Use `review` to check Standards and Spec separately.
-18. Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
-19. Use `complete` to close work and promote drafted knowledge.
-20. Keep generated board and knowledge indexes synchronized.
+10. Keep the configured target branch clean for coordination and serial integration.
+11. Use one Conventional Branch and `.woktrees/<key>/` worktree per ticket.
+12. Never implement an epic or a ticket with an open blocker.
+13. Parallelize only independent tickets without likely write overlap.
+14. Use Conventional Commits for every ticket and merge commit.
+15. Merge green ticket branches into the configured target branch. Its default is `main`.
+16. Remove only clean, successfully merged worktrees and local branches.
+17. Assume Codex uses ChatGPT subscription access unless the user says otherwise.
+18. Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
+19. Assess the active model's remaining context before changing product code.
+20. Use bounded implementation subagents when the full change will not fit safely.
+21. Keep workflow state, integration, and final verification with the coordinator.
+22. Never move a work item directly to `done`.
+23. Run the configured checks and record acceptance evidence.
+24. Use `review` to check Standards and Spec separately.
+25. Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
+26. Use `complete` to close work and promote drafted knowledge.
+27. Keep generated board and knowledge indexes synchronized.
 
 ## Commands
 

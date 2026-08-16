@@ -66,7 +66,7 @@ test("review defines an auditable two-axis review", () => {
   assert.match(review, /## Review loop/);
   assert.match(review, /Repeat until both passes report zero P0, P1, and P2 findings/);
   assert.match(review, /Do not merge findings across axes/);
-  assert.match(skill, /Repeat steps 10-16 until both passes contain no P0, P1, or P2/);
+  assert.match(skill, /Repeat steps 14-20 until both passes contain no P0, P1, or P2/);
 });
 
 test("workflow loops blocking review findings through implementation", () => {
@@ -154,4 +154,39 @@ test("implement delegates work using each session's context capacity", () => {
   assert.match(delegation, /Repeat the capacity calculation for the exact model/);
   assert.match(delegation, /run the whole item's configured checks/);
   assert.match(workspace, /handoffs\//);
+});
+
+test("workflow isolates tickets and serializes green integration", () => {
+  const setup = readFileSync(join(SKILLS_ROOT, "setup", "SKILL.md"), "utf8");
+  const workspace = readFileSync(
+    join(SKILLS_ROOT, "setup", "references", "workspace-format.md"),
+    "utf8",
+  );
+  const plan = readFileSync(join(SKILLS_ROOT, "plan", "SKILL.md"), "utf8");
+  const implement = readFileSync(join(SKILLS_ROOT, "implement", "SKILL.md"), "utf8");
+  const gitWorktrees = readFileSync(
+    join(SKILLS_ROOT, "implement", "references", "git-worktrees.md"),
+    "utf8",
+  );
+  const document = readFileSync(join(SKILLS_ROOT, "document", "SKILL.md"), "utf8");
+  const cli = readFileSync(join(SKILLS_ROOT, "setup", "scripts", "project-flow.mjs"), "utf8");
+
+  assert.match(setup, /\.woktrees\//);
+  assert.match(workspace, /Conventional Branch 1\.1\.0/);
+  assert.match(workspace, /Conventional Commits 1\.0\.0/);
+  assert.match(plan, /dependency graph acyclic/i);
+  assert.match(plan, /without likely write overlap/i);
+  assert.match(implement, /worktree-add <KEY>/);
+  assert.match(implement, /Do not create a worktree for an epic or blocked ticket/);
+  assert.match(gitWorktrees, /Do not stack the dependent branch/);
+  assert.match(gitWorktrees, /Integration is serial/);
+  assert.match(document, /worktree-finish <KEY>/);
+  assert.match(document, /Do not run `complete` before the ticket enters its serial integration turn/);
+  assert.match(document, /Never force-remove a worktree/);
+  assert.match(cli, /case "worktree-add"/);
+  assert.match(cli, /case "worktree-finish"/);
+  assert.match(cli, /"merge", "--no-ff"/);
+  assert.match(cli, /"branch", "--delete"/);
+  assert.doesNotMatch(cli, /"worktree", "remove", "--force"/);
+  assert.doesNotMatch(cli, /"branch", "-D"/);
 });
