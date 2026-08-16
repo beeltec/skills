@@ -18,7 +18,7 @@ for coordination and serial integration.
 6. Run `show <KEY>` for every selected ticket.
 7. Reject epics and tickets with any open `blocked-by` link.
 8. Group only dependency-independent tickets without likely write overlap in non-generated files.
-9. Read established knowledge, official source notes, and relevant code.
+9. Read the linked brief, risk profile, quality gates, established knowledge, official source notes, and relevant code.
 10. Use `$source` to verify relevant APIs against current official docs.
 11. Run `worktree-add <KEY>` once for each new ticket.
 12. Assign one implementation agent to each ticket worktree.
@@ -28,9 +28,11 @@ for coordination and serial integration.
 16. During repair loops, address every valid P0, P1, and P2 finding.
 17. Implement the smallest complete ticket change and focused tests.
 18. Run `verify <KEY>` and record concrete acceptance evidence.
-19. Commit cohesive changes with Conventional Commit messages.
-20. Report each branch, worktree, fixed point, sources, changes, and checks.
-21. Hand each unchanged ticket branch to `review`.
+19. Collect evidence for every declared quality gate and record it with `gate`.
+20. Add the instrumentation required by the ticket when the plan includes it.
+21. Commit cohesive changes with Conventional Commit messages.
+22. Report each branch, worktree, fixed point, sources, changes, checks, and quality gates.
+23. Hand each unchanged ticket branch to `review`.
 
 ## Review fixes
 
@@ -55,6 +57,9 @@ node .project/bin/project-flow.mjs verify APP-2
 node .project/bin/project-flow.mjs accept APP-2 AC-1 \
   --status pass \
   --evidence "src/lib/store.test.ts proves persistence"
+node .project/bin/project-flow.mjs gate APP-2 GATE-1 \
+  --status pass \
+  --evidence "Migration rollback test restores the previous schema."
 git commit -m "feat(app-2): persist tasks"
 ```
 
@@ -73,6 +78,7 @@ commit. Ticket worktrees require an existing commit, so never use `initial tree`
 - Do not run overlapping ticket writes in parallel.
 - Do not merge or delete ticket branches or worktrees.
 - Do not mark acceptance passed without evidence.
+- Do not mark a quality gate passed without applicable evidence.
 - Do not record the final review.
 - Do not approve or dismiss your own review fixes.
 - Do not choose an external API from model memory alone.

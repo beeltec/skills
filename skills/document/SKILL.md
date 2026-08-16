@@ -1,6 +1,6 @@
 ---
 name: document
-description: Use this skill after implementation and passing code review to establish project knowledge and finish a ticket branch. Verify the review used the latest target commit, refresh official sources, promote valid OKF drafts, complete the green item, commit its documentation, merge it into `main` by default, and safely remove its clean worktree and local branch.
+description: Use this skill after implementation and passing code review to establish repository knowledge and finish a ticket branch. Verify the review used the latest target commit, refresh official sources, promote valid OKF drafts, complete the green item, commit its documentation, merge it into `main` by default, and safely remove its clean worktree and local branch. Hand releasable work to ship without claiming it is deployed.
 ---
 
 # Document
@@ -28,6 +28,8 @@ work item through the knowledge promotion gate.
 16. Return to the clean target-branch worktree.
 17. Run `worktree-finish <KEY>` to merge, remove the worktree, and delete the branch.
 18. Run `validate` and report the merge commit, promoted paths, and resolution.
+19. State clearly that ticket `done` means merged and documented, not released.
+20. Hand releasable ticket groups to `ship`.
 
 ## Create a draft
 
@@ -63,6 +65,7 @@ sets a resolution, and refreshes the knowledge indexes, log, and work board.
 ## Knowledge rules
 
 - Document current architecture, behavior, interfaces, data, and operations.
+- Describe repository behavior as deployed only when green release knowledge proves it.
 - Omit temporary implementation detail with no future value.
 - Keep rejected approaches in work history.
 - Leave user wishes and future behavior in `docs/work/`.
@@ -72,3 +75,4 @@ sets a resolution, and refreshes the knowledge indexes, log, and work board.
 - Never merge when the final review fixed point differs from the current target.
 - Never force-remove a worktree or force-delete a ticket branch.
 - Do not push or delete remote branches unless the user requests it.
+- Do not create a release record or run a deployment from this skill.

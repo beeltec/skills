@@ -72,3 +72,7 @@ condition, repeat checks and review when needed, then run finalization again.
 Promotion adds machine confirmation through `process:project-flow`. It does not
 add `human:<id>`. Add human review only after a real person confirms the
 concept.
+
+Completion establishes the target branch state. It does not establish a
+deployment, publication, package version, or product outcome. Use `ship` for a
+release and `measure` for the confirmed brief's post-release success metric.

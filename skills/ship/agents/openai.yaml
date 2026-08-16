@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ship"
+  short_description: "Release and verify completed project work"
+  default_prompt: "Use $ship to release completed tickets safely and record the verified result."

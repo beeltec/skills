@@ -1,0 +1,4 @@
+interface:
+  display_name: "Measure"
+  short_description: "Measure released product outcomes"
+  default_prompt: "Use $measure to compare a green release with its confirmed success target."

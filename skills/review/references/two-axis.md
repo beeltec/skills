@@ -105,7 +105,8 @@ Report each finding with its rule or heuristic, severity, file, and line.
 ## Spec pass
 
 For workflow work, use `docs/work/items/<KEY>.json` as the specification. Read
-its description, acceptance criteria, parent context, and declared checks.
+its description, acceptance criteria, parent context, linked brief, risk
+profile, declared checks, and quality gates.
 
 Otherwise, use a specification path supplied by the user. Then check commit
 messages for an issue reference or find a matching specification under
@@ -118,6 +119,9 @@ Inspect the same change again. Look only for:
 - missing or partly implemented requirements;
 - behavior outside the requested scope;
 - implemented requirements whose behavior is incorrect.
+
+The brief's product success metric is not a ticket requirement. Confirm only
+that instrumentation or release preparation named by the ticket exists.
 
 Quote or identify the relevant criterion. Name the file and line that caused
 the finding.

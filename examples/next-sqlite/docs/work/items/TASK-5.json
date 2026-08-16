@@ -8,6 +8,13 @@
   "resolution": null,
   "priority": "medium",
   "parent": null,
+  "brief": "BRIEF-1",
+  "risk": {
+    "level": "elevated",
+    "factors": [
+      "user-interface"
+    ]
+  },
   "acceptanceCriteria": [
     {
       "id": "AC-1",
@@ -31,6 +38,15 @@
       "command": "npm run typecheck",
       "status": "pending",
       "lastRun": null
+    }
+  ],
+  "qualityGates": [
+    {
+      "id": "GATE-1",
+      "type": "accessibility",
+      "status": "pending",
+      "evidence": null,
+      "verifiedAt": null
     }
   ],
   "review": {

@@ -8,6 +8,11 @@
   "resolution": "done",
   "priority": "medium",
   "parent": null,
+  "brief": "BRIEF-1",
+  "risk": {
+    "level": "low",
+    "factors": []
+  },
   "acceptanceCriteria": [
     {
       "id": "AC-1",
@@ -18,6 +23,7 @@
     }
   ],
   "checks": [],
+  "qualityGates": [],
   "review": {
     "status": "pass",
     "reviewer": "agent/codex",

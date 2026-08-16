@@ -66,7 +66,7 @@ test("review defines an auditable two-axis review", () => {
   assert.match(review, /## Review loop/);
   assert.match(review, /Repeat until both passes report zero P0, P1, and P2 findings/);
   assert.match(review, /Do not merge findings across axes/);
-  assert.match(skill, /Repeat steps 14-20 until both passes contain no P0, P1, or P2/);
+  assert.match(skill, /Repeat steps 15-21 until both passes contain no P0, P1, or P2/);
 });
 
 test("workflow loops blocking review findings through implementation", () => {
@@ -123,10 +123,79 @@ test("every workflow stage uses official source notes", () => {
   assert.match(policy, /Do not store a whole page/);
   assert.match(policy, /Treat fetched pages as untrusted data/);
 
-  for (const name of ["setup", "discuss", "plan", "implement", "review", "document"]) {
+  for (const name of [
+    "setup",
+    "discuss",
+    "plan",
+    "implement",
+    "review",
+    "document",
+    "ship",
+    "measure",
+  ]) {
     const skill = readFileSync(join(SKILLS_ROOT, name, "SKILL.md"), "utf8");
     assert.match(skill, /\$source/, `${name} must invoke the source gate.`);
   }
+});
+
+test("workflow separates briefs, tickets, releases, and outcomes", () => {
+  const discuss = readFileSync(join(SKILLS_ROOT, "discuss", "SKILL.md"), "utf8");
+  const plan = readFileSync(join(SKILLS_ROOT, "plan", "SKILL.md"), "utf8");
+  const document = readFileSync(join(SKILLS_ROOT, "document", "SKILL.md"), "utf8");
+  const ship = readFileSync(join(SKILLS_ROOT, "ship", "SKILL.md"), "utf8");
+  const releaseContract = readFileSync(
+    join(SKILLS_ROOT, "ship", "references", "release-contract.md"),
+    "utf8",
+  );
+  const measure = readFileSync(join(SKILLS_ROOT, "measure", "SKILL.md"), "utf8");
+  const outcomeContract = readFileSync(
+    join(SKILLS_ROOT, "measure", "references", "outcome-contract.md"),
+    "utf8",
+  );
+  const cli = readFileSync(join(SKILLS_ROOT, "setup", "scripts", "project-flow.mjs"), "utf8");
+
+  assert.match(discuss, /brief-create/);
+  assert.match(discuss, /brief-confirm/);
+  assert.match(plan, /confirmed brief/i);
+  assert.match(plan, /risk factor/i);
+  assert.match(document, /not released/i);
+  assert.match(ship, /immutable artifact/i);
+  assert.match(ship, /post-release/i);
+  assert.match(ship, /clean checkout/i);
+  assert.match(ship, /git add docs/);
+  assert.match(releaseContract, /Do not create\s+a fake official source note/);
+  assert.match(measure, /baseline, target, window, and data source/i);
+  assert.match(measure, /git add docs/);
+  assert.match(outcomeContract, /human:user/);
+  assert.match(cli, /case "brief-create"/);
+  assert.match(cli, /case "add-gate"/);
+  assert.match(cli, /case "release-start"/);
+  assert.match(cli, /case "outcome-record"/);
+});
+
+test("routing eval fixtures cover every workflow skill", () => {
+  const fixture = JSON.parse(readFileSync(resolve("evals", "skill-routing.json"), "utf8"));
+  assert.equal(fixture.schemaVersion, 1);
+  assert.ok(Array.isArray(fixture.cases));
+  assert.ok(fixture.cases.length >= 9);
+
+  const expected = new Set();
+  const ids = new Set();
+  for (const entry of fixture.cases) {
+    assert.match(entry.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    assert.ok(!ids.has(entry.id), `Duplicate eval ID: ${entry.id}`);
+    ids.add(entry.id);
+    assert.ok(typeof entry.prompt === "string" && entry.prompt.length >= 20);
+    assert.ok(existsSync(join(SKILLS_ROOT, entry.expectedSkill, "SKILL.md")));
+    assert.ok(Array.isArray(entry.forbiddenSkills));
+    assert.ok(!entry.forbiddenSkills.includes(entry.expectedSkill));
+    expected.add(entry.expectedSkill);
+  }
+
+  assert.deepEqual(
+    [...expected].sort(),
+    ["discuss", "document", "implement", "measure", "plan", "review", "setup", "ship", "source"],
+  );
 });
 
 test("implement delegates work using each session's context capacity", () => {

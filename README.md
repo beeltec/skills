@@ -4,8 +4,9 @@ This workflow keeps project truth and planned work in separate spaces.
 
 - Established knowledge lives in `docs/knowledge/` as Open Knowledge Format v0.2.
 - Official documentation notes live in `docs/knowledge/sources/`.
-- Desired work lives in `docs/work/` as epics, stories, bugs, tasks, and subtasks.
+- Desired state lives in `docs/work/` as briefs, tickets, releases, and outcomes.
 - Completed work promotes drafted knowledge only after every declared gate passes.
+- Green releases and observed outcomes promote their own verified knowledge.
 
 ## Skills
 
@@ -18,6 +19,8 @@ Use the skills as one suite:
 5. `implement` gives each ticket a branch and worktree, then changes code.
 6. `review` checks Standards and Spec until both have no P0-P2 findings.
 7. `document` promotes knowledge, merges green work, and removes its branch and worktree.
+8. `ship` releases done tickets and verifies the deployed or published result.
+9. `measure` compares product evidence with the brief's agreed success measure.
 
 `source` is also a gate before every later stage. It reads the local source
 index, opens relevant official pages, and refreshes concise source notes. The
@@ -97,12 +100,27 @@ node .project/bin/project-flow.mjs worktree-finish APP-2
 The target branch board shows integrated state. Use `worktree-list`, then run
 `show <KEY>` inside a ticket worktree, to inspect active branch-local state.
 
-The workflow never force-removes worktrees or force-deletes branches. It does
-not push or delete remote branches unless the user requests that action.
+The workflow never force-removes worktrees or force-deletes branches. External
+pushes, deployments, publications, and remote deletion require user authority.
 
-Conventional Commits records release intent, but this workflow does not change
-package versions or create tags. Discuss and plan a Semantic Versioning release
-policy separately when the project publishes a stable public API.
+Conventional Commits records release intent. The `ship` skill records release
+versions when the project has a version policy. It does not infer version bumps
+or create tags without an explicit project decision.
+
+## Product and release gates
+
+A confirmed brief records the problem, users, evidence, scope, assumptions,
+delivery acceptance, and measurable product target. Epic and story work cannot
+become ready without one.
+
+Tickets declare risk factors. Each factor maps to a focused quality gate. For
+example, a migration risk requires migration evidence. Review and completion
+remain blocked until every required gate passes.
+
+Ticket `done` means merged, reviewed, and documented repository state. It does
+not mean deployed. A release becomes `green` only after preflight, immutable
+artifact, rollout, and post-release checks. Product success is measured later
+against the unchanged brief baseline, target, window, and data source.
 
 ## Requirements
 
@@ -130,6 +148,15 @@ Then inspect the board:
 node .project/bin/project-flow.mjs status
 ```
 
+The normal workflow is:
+
+```text
+discuss → plan → implement ⇄ review → document → ship → measure
+```
+
+The `source` skill verifies current official documentation at every stage.
+Run `brief-show`, `release-show`, and `outcome-show` to inspect their evidence.
+
 Run `node .project/bin/project-flow.mjs help` for every command.
 
 ## Verification
@@ -139,6 +166,9 @@ Run the workflow tests from this repository:
 ```bash
 npm test
 ```
+
+On Node.js 24.15 or newer, this also copies the example into a temporary Git
+repository and completes its build, release, and outcome cycle.
 
 Run the reproducible Next.js and SQLite example:
 

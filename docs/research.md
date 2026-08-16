@@ -35,6 +35,10 @@ facts. `docs/work/` remains accurate after an item leaves the backlog.
 Acceptance criteria describe item-specific success. The definition of done
 describes the shared quality gate. This workflow checks both before closure.
 
+A planning brief now precedes epics and stories. It records user evidence,
+the problem, alternatives, assumptions, delivery acceptance, and one measurable
+product outcome. This avoids treating completed output as proof of user value.
+
 Sources:
 
 - [Jira work types and default hierarchy](https://support.atlassian.com/jira-cloud-administration/docs/what-are-issue-types/)
@@ -42,10 +46,31 @@ Sources:
 - [Jira status, priority, and resolution](https://support.atlassian.com/jira-cloud-administration/docs/what-are-issue-statuses-priorities-and-resolutions/)
 - [Atlassian user stories](https://www.atlassian.com/agile/project-management/user-stories)
 - [Atlassian definition of done](https://www.atlassian.com/agile/project-management/definition-of-done)
+- [GOV.UK discovery guidance](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works)
+- [GOV.UK alpha guidance](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works)
+- [GOV.UK defining success](https://www.gov.uk/service-manual/service-standard/point-10-define-success-publish-performance-data)
+
+## Risk-driven quality gates
+
+One universal checklist is either too weak for risky changes or too heavy for
+small changes. Tickets therefore declare concrete risk factors. Each factor
+requires only its applicable security, privacy, dependency, migration,
+accessibility, reliability, performance, or compatibility evidence.
+
+The shared review loop still checks every change. Risk gates add focused proof
+for changes with sensitive data, authentication, public exposure, migrations,
+user interfaces, availability targets, or other named risks.
+
+Sources:
+
+- [NIST Secure Software Development Framework](https://csrc.nist.gov/pubs/sp/800/218/final)
+- [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- [GitHub protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
 
 ## Agent Skill design
 
-The suite follows `setup → discuss → plan → implement → review → document`.
+The suite follows
+`setup → discuss → plan → implement ⇄ review → document → ship → measure`.
 The `source` skill acts as an evidence gate before every substantive stage.
 Each skill has a narrow job and composes with the other skills. Instructions
 stay short. Detailed contracts live in direct references. Repeated and fragile
@@ -68,10 +93,13 @@ report zero P0, P1, and P2 findings.
 
 Descriptions state user intent because agents use them for activation. The
 skills use checklists, explicit validation loops, and concrete commands.
+Routing fixtures cover realistic requests for every skill. Subagent forward
+tests complement deterministic structure and CLI tests.
 
 Sources:
 
 - [OpenAI skill authoring](https://learn.chatgpt.com/docs/build-skills)
+- [Anthropic Agent Skills best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
 - [Agent Skills specification](https://agentskills.io/specification)
 - [Skill creator best practices](https://agentskills.io/skill-creation/best-practices)
 - [Evaluating skill output quality](https://agentskills.io/skill-creation/evaluating-skills)
@@ -140,8 +168,8 @@ bugs to `fix`, and tasks or subtasks to `chore`.
 
 Every ticket commit follows Conventional Commits 1.0.0. The ticket key is the
 scope when one ticket owns the commit. Conventional Commits can later support
-Semantic Versioning, but this workflow does not automate releases or version
-bumps. A release policy needs its own explicit project decision.
+Semantic Versioning. The workflow records releases, but it does not infer
+version bumps or tags. A version policy needs its own project decision.
 
 Jira treats dependencies as ordering constraints: the blocking item ends before
 the dependent item begins. The workflow therefore refuses a worktree for any
@@ -173,6 +201,33 @@ Sources:
 - [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
 - [Conventional Branch 1.1.0](https://conventionalbranch.org/)
 - [Semantic Versioning 2.0.0](https://semver.org/)
+
+## Release and product outcome
+
+Jira versions track groups of completed work through release states. That
+state is distinct from ticket resolution. This workflow makes the distinction
+explicit: `done` means merged repository state, while `green` means a verified
+deployment or publication.
+
+A planned release records its tickets, target, provider, migration, rollout,
+recovery, approvals, and official source notes. Release start records one
+immutable commit and artifact digest. Green requires passing live checks.
+Failed and rolled-back attempts remain in work history and never become current
+release knowledge.
+
+An outcome record copies the brief's metric, baseline, target, observation
+window, and data source. A later measurement records the observed result and a
+decision to proceed, improve, revert, or stop. This closes the loop without
+rewriting the original success definition.
+
+Sources:
+
+- [Jira releases and versions](https://support.atlassian.com/jira-software-cloud/docs/enable-releases-and-versions/)
+- [GitHub deployment environments](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments)
+- [Google SRE release engineering](https://sre.google/sre-book/release-engineering/)
+- [Google SRE canarying releases](https://sre.google/workbook/canarying-releases/)
+- [Google SRE service level objectives](https://sre.google/sre-book/service-level-objectives/)
+- [DORA metrics](https://dora.dev/guides/dora-metrics/)
 
 ## Context-aware implementation
 

@@ -6,11 +6,12 @@ Read these files from the designated ticket worktree:
 
 1. `docs/work/board.md`
 2. `docs/work/items/<KEY>.json`
-3. `docs/work/handoffs/<KEY>.md`, when it exists
-4. `docs/knowledge/index.md`
-5. `docs/knowledge/sources/index.md` and relevant official source notes
-6. Relevant project concepts
-7. Relevant code and tests
+3. The confirmed brief named by the item
+4. `docs/work/handoffs/<KEY>.md`, when it exists
+5. `docs/knowledge/index.md`
+6. `docs/knowledge/sources/index.md` and relevant official source notes
+7. Relevant project concepts
+8. Relevant code and tests
 
 This order separates intended work from established facts.
 
@@ -49,6 +50,13 @@ test case, an inspected response, or a specific file and behavior.
 
 Avoid statements such as "implemented" or "looks good." They do not prove an
 outcome.
+
+## Quality-gate evidence
+
+Treat each declared gate as a separate proof obligation. Use automated output
+when it directly proves the gate. Otherwise, record the inspected behavior,
+artifact, or human assessment. Do not use a generic test pass as security,
+privacy, accessibility, migration, reliability, or performance evidence.
 
 ## Review handoff
 

@@ -57,11 +57,29 @@ Sources:
 Before `ready`, require:
 
 - a clear summary and description;
+- a confirmed planning brief for every epic and story;
 - local source-note paths for material external constraints;
 - at least one acceptance criterion for an epic, story, or bug;
 - a valid parent relationship;
 - known blockers linked;
+- an explicit risk level and applicable risk factors;
+- every risk-required quality gate declared;
 - suitable verification commands for code changes.
+
+Risk factors activate these minimum gates:
+
+| Risk factor | Required quality gate |
+| --- | --- |
+| `sensitive-data` | `security`, `privacy` |
+| `authentication`, `public-network`, `financial`, `destructive` | `security` |
+| `dependency` | `dependency` |
+| `migration` | `migration` |
+| `user-interface` | `accessibility` |
+| `availability` | `reliability` |
+| `performance` | `performance` |
+
+Add only applicable factors. A gate may use automated or inspected evidence.
+Passing a command alone does not prove a manual gate.
 
 ## Definition of done
 
@@ -69,6 +87,7 @@ Before `done`, require:
 
 - every acceptance criterion passes with evidence;
 - every configured check passes in its latest run;
+- every applicable quality gate has passing evidence;
 - both final review axes report zero P0, P1, and P2 findings;
 - every blocker and child is done;
 - required drafted knowledge is valid OKF;
@@ -77,6 +96,20 @@ Before `done`, require:
 
 Acceptance criteria confirm one item's behavior. The definition of done applies
 the shared quality standard.
+
+The brief's product success metric is evaluated after a green release. It is
+not part of ticket completion.
+
+## Release boundary
+
+Keep releases separate from work-item status. A ticket is `done` after reviewed
+integration and knowledge promotion. A release becomes `green` only after its
+artifact reaches the named target and post-release checks pass.
+
+Use one release to group completed tickets that move together. Do not add a
+`released` status to each ticket.
+
+Source: https://support.atlassian.com/jira-software-cloud/docs/enable-releases-and-versions/
 
 Source: https://www.atlassian.com/agile/project-management/definition-of-done
 

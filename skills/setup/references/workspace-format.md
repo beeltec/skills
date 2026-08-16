@@ -13,8 +13,14 @@
 `docs/knowledge/` is an OKF v0.2 bundle. It describes the verified current
 state.
 
-`docs/work/` stores desired outcomes and delivery evidence. Its item files
-are JSON for deterministic updates.
+`docs/work/` stores desired outcomes and delivery evidence. It includes
+confirmed planning briefs, Jira-like tickets, releases, and product outcomes.
+Briefs use Markdown with JSON-compatible YAML frontmatter. Tickets, releases,
+and outcomes use JSON. Every index and board file is generated.
+
+Only verified current state enters `docs/knowledge/`. A completed ticket can
+establish repository facts. A green release can establish deployed facts. An
+observed outcome can establish product-result facts.
 
 ## Generated layout
 
@@ -27,11 +33,16 @@ docs/
 ├── knowledge/
 │   ├── index.md
 │   ├── log.md
-│   └── sources/
-│       └── index.md            # Concise notes from official documentation
+│   ├── releases/               # Green deployed or published state
+│   ├── outcomes/               # Observed product results
+│   └── sources/                # Concise notes from official documentation
+│       └── index.md
 └── work/
     ├── board.md
     ├── items/
+    ├── briefs/                 # Confirmed problem and success definitions
+    ├── releases/               # Planned and historical release attempts
+    ├── outcomes/               # Planned and observed outcome checks
     ├── drafts/
     └── handoffs/              # Created when delegated work needs it
 ```
@@ -77,6 +88,9 @@ Add these instructions without removing local rules:
 - Save concise official source notes under `docs/knowledge/sources/`.
 - Re-open relevant official URLs once per work session before relying on them.
 - Treat `docs/work/` as desired state, not current fact.
+- Require a confirmed brief before moving an epic or story to `ready`.
+- Keep delivery acceptance separate from the product success measure.
+- Declare ticket risk factors and record each required quality gate.
 - Assume Codex uses ChatGPT subscription access unless the user says otherwise.
 - Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
 - Assess session fit before code changes. Delegate bounded implementation when it will not fit.
@@ -89,6 +103,10 @@ Add these instructions without removing local rules:
 - Record separate Standards and Spec reviews with zero P0-P2 findings.
 - Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
 - Run `.project/bin/project-flow.mjs complete <KEY>` after all gates pass.
+- Treat ticket `done` as merged repository state, not a successful release.
+- Use `ship` to record preflight, artifact, rollout, recovery, and live checks.
+- Mark only verified releases green and promote only their established facts.
+- Use `measure` after the agreed observation window to record the product result.
 - Validate the workspace after workflow changes.
 ```
 
@@ -102,7 +120,8 @@ Add these instructions without removing local rules:
 - Integrate ticket branches one at a time.
 - Require the latest target commit as the final review fixed point.
 - Use `git branch -d`, never force deletion, after a successful merge.
-- Leave remote pushes, pull requests, and remote branch deletion to explicit user instructions.
+- Leave remote pushes, pull requests, deployments, publications, and remote
+  branch deletion to explicit user instructions.
 
 Official references:
 

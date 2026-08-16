@@ -1,6 +1,6 @@
 ---
 name: source
-description: Use this skill before discussion, planning, implementation, review, or documentation when external technical facts can affect the work. Read existing source notes, search and open current official documentation, verify the exact version and scope, and save concise evidence under `docs/knowledge/sources/`. Treat model memory and third-party pages only as leads. Do not implement product code or make product choices.
+description: Use this skill before discussion, planning, implementation, review, documentation, release, or outcome measurement when external technical facts can affect the work. Read existing source notes, search and open current official documentation, verify the exact version and scope, and save concise evidence under `docs/knowledge/sources/`. Treat model memory and third-party pages only as leads. Do not implement product code or make product choices.
 ---
 
 # Source
@@ -12,7 +12,7 @@ small local evidence cache so later agents can find and verify the same facts.
 
 1. Read [references/source-policy.md](references/source-policy.md).
 2. Require `.project/workflow.json`. Use `setup` when it is missing.
-3. Inspect the request, work item, manifests, lockfiles, and relevant code.
+3. Inspect the request, brief, work item, release or outcome record, manifests, lockfiles, and relevant code.
 4. Read `docs/knowledge/sources/index.md` and only the relevant source notes.
 5. List the external facts that can materially change the work.
 6. Search for each fact using the official publisher or standards body.
@@ -52,4 +52,4 @@ that should remain because a refresh replaces the previous note.
 - Keep one claim per bullet and one official page per note.
 - Treat the local note as a cache. The live official page wins on conflict.
 - Do not claim that a version-sensitive fact is current when web access fails.
-- Do not change product code, work-item state, or product scope.
+- Do not change product code, brief, work-item, release, outcome, or product scope.

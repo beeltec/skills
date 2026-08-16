@@ -8,6 +8,13 @@
   "resolution": "done",
   "priority": "medium",
   "parent": "TASK-1",
+  "brief": "BRIEF-1",
+  "risk": {
+    "level": "elevated",
+    "factors": [
+      "user-interface"
+    ]
+  },
   "acceptanceCriteria": [
     {
       "id": "AC-1",
@@ -46,6 +53,15 @@
         "exitCode": 0,
         "output": "> next-sqlite-example@1.0.0 build\n> next build\n\n▲ Next.js 16.3.1 (Turbopack)\n✓ Running next.config.ts took 59ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 262ms\n  Running TypeScript ...\n  Finished TypeScript in 560ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/2) ...\n✓ Generating static pages using 4 workers (2/2) in 185ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ƒ /\n└ ○ /_not-found\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand"
       }
+    }
+  ],
+  "qualityGates": [
+    {
+      "id": "GATE-1",
+      "type": "accessibility",
+      "status": "pass",
+      "evidence": "The input has a visible label, and each toggle has a task-specific accessible name.",
+      "verifiedAt": "2026-08-16T13:40:05.375Z"
     }
   ],
   "review": {

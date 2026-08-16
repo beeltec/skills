@@ -8,8 +8,14 @@
   "resolution": "done",
   "priority": "medium",
   "parent": "TASK-2",
+  "brief": "BRIEF-1",
+  "risk": {
+    "level": "low",
+    "factors": []
+  },
   "acceptanceCriteria": [],
   "checks": [],
+  "qualityGates": [],
   "review": {
     "status": "pass",
     "reviewer": "agent/codex",

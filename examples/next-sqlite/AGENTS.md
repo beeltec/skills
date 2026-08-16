@@ -2,13 +2,16 @@
 
 ## Project state workflow
 
-- Run `setup` once. Then use `source`, `discuss`, `plan`, `implement`, `review`, and `document`.
+- Run `setup` once. Then use `source`, `discuss`, `plan`, `implement`, `review`, `document`, `ship`, and `measure`.
 - Read `docs/knowledge/index.md` and `docs/knowledge/sources/index.md` first.
 - Treat model memory as a search lead, not factual evidence.
 - Verify material external claims against current official documentation.
 - Save concise source notes under `docs/knowledge/sources/`.
 - Re-open relevant official URLs once per work session before relying on them.
 - Treat `docs/work/` as desired state, not current fact.
+- Require a confirmed brief before moving an epic or story to `ready`.
+- Keep delivery acceptance separate from the product success measure.
+- Declare risk factors and record every required quality gate.
 - Keep `main` clean for coordination and serial integration.
 - Implement each ticket in `.woktrees/<key>/` on its own Conventional Branch.
 - Do not implement epics or tickets with open blockers.
@@ -24,6 +27,9 @@
 - Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
 - Run `.project/bin/project-flow.mjs complete <KEY>` after all gates pass.
 - Run `.project/bin/project-flow.mjs worktree-finish <KEY>` from `main` after completion.
+- Treat ticket `done` as merged repository state, not a successful release.
+- Use `ship` for approved release actions and verified live checks.
+- Use `measure` after the brief's agreed observation window.
 - Validate the workspace after workflow changes.
 
 ## Commands
