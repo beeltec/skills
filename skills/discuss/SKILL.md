@@ -15,9 +15,10 @@ separate from planning and implementation.
 3. Separate discoverable facts from choices only the user can make.
 4. Inspect the repository and available sources for facts.
 5. Find the current frontier: unresolved choices with no unresolved prerequisite.
-6. Ask every independent frontier question in one round.
-7. Wait for the user's answers before expanding dependent branches.
-8. Update the graph and repeat until no important branch remains.
+6. Estimate the total material questions, including likely dependent branches.
+7. Ask every independent frontier question in one round.
+8. Wait for the user's answers before expanding dependent branches.
+9. Update the graph, revise the estimate, and repeat until no branch remains.
 
 Do not ask the user for facts available in files, tools, or authoritative
 documentation. Do not silently choose product behavior, scope, or risk.
@@ -27,15 +28,21 @@ documentation. Do not silently choose product behavior, scope, or risk.
 Use this format for each question:
 
 ```markdown
-Q1 — Short decision title
+Q1 of ~6 — Short decision title
 
 [One clear question. Add two or three concrete choices when useful.]
 
 Recommendation: [Your preferred answer and its main reason.]
 ```
 
-Number questions continuously across rounds. Explain the material consequence
-of each choice. Avoid questions whose answers do not change the result.
+Number questions continuously across rounds. Use the same approximate total
+for every question in one round. Recalculate it after each answer round because
+new branches can appear and resolved branches can disappear.
+
+Never reduce the estimate below the current question number. If the estimate
+changes materially, state the new approximate total before the next round.
+Explain each choice's material consequence. Avoid questions whose answers do
+not change the result.
 
 ## Round rules
 

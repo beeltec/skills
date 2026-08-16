@@ -64,6 +64,16 @@ test("review defines an auditable two-axis review", () => {
   assert.match(review, /Do not merge or rank findings across axes/);
 });
 
+test("discuss shows approximate question progress", () => {
+  const skill = readFileSync(join(SKILLS_ROOT, "discuss", "SKILL.md"), "utf8");
+
+  assert.match(skill, /Q1 of ~6/);
+  assert.match(skill, /Number questions continuously across rounds/);
+  assert.match(skill, /same approximate total\s+for every question in one round/);
+  assert.match(skill, /Recalculate it after each answer round/);
+  assert.match(skill, /Never reduce the estimate below the current question number/);
+});
+
 test("setup owns workflow initialization", () => {
   const skill = readFileSync(join(SKILLS_ROOT, "setup", "SKILL.md"), "utf8");
   assert.ok(existsSync(join(SKILLS_ROOT, "setup", "scripts", "project-flow.mjs")));
