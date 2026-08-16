@@ -26,6 +26,24 @@ workflow never treats model memory or a search-result snippet as authority.
 The setup skill installs a dependency-free Node.js CLI at
 `.project/bin/project-flow.mjs`. The remaining skills use that local copy.
 
+## Link skills into a project
+
+OpenAI documents `.agents/skills` as the repository skill directory. Codex
+supports symlinked skill folders there. Link this suite into any existing
+project with:
+
+```bash
+/absolute/path/to/skills-new/scripts/link-skills.sh /path/to/project
+```
+
+Omit the project path to use the current directory. The script resolves its
+own repository path, even when the script itself is called through a symlink.
+This makes it safe to place the script on `PATH`.
+
+The command preserves other skills under `.agents/skills`. It refuses to
+replace files or directories. Use `--force` only to replace an existing skill
+symlink, or use `--dry-run` to inspect the result first.
+
 ## Context-aware implementation
 
 The `implement` skill checks whether the full change fits the active session.

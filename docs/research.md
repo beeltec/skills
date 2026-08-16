@@ -80,6 +80,23 @@ Sources:
 - [Matt Pocock's grilling skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)
 - [Matt Pocock's code-review skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md)
 
+## Local skill linking
+
+Codex scans `.agents/skills` from the current directory through the repository
+root. OpenAI also states that Codex follows symlinked skill directories.
+
+The linker creates one absolute symlink per workflow skill. Individual links
+preserve unrelated project-specific skills in the same directory. The script
+resolves its repository from its own file path, so the caller's working
+directory does not affect the source paths.
+
+The script performs a full conflict check before writing. It never replaces a
+real file or directory. `--force` replaces only a conflicting symlink.
+
+Source:
+
+- [OpenAI local skill locations](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills)
+
 ## Official documentation cache
 
 External technical facts come from current official documentation. Model
