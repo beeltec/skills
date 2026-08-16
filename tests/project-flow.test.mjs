@@ -45,9 +45,15 @@ test("completes a hierarchy and promotes knowledge", (context) => {
 
   run(root, ["init", "--key", "FLOW", "--name", "Flow Example"]);
   assert.ok(existsSync(join(root, "docs", "knowledge", "index.md")));
+  assert.ok(existsSync(join(root, "docs", "knowledge", "sources", "index.md")));
   assert.ok(existsSync(join(root, "docs", "work", "board.md")));
   assert.ok(existsSync(join(root, ".project", "bin", "project-flow.mjs")));
   const config = JSON.parse(readFileSync(join(root, ".project", "workflow.json"), "utf8"));
+  assert.ok(
+    config.definitionOfDone.includes(
+      "Relevant external claims cite refreshed official source notes.",
+    ),
+  );
   assert.ok(
     config.definitionOfDone.includes(
       "Standards and Spec report zero P0, P1, and P2 findings with separate evidence.",
@@ -224,6 +230,90 @@ test("completes a hierarchy and promotes knowledge", (context) => {
     /okf_version: "0.2"/,
   );
   assert.match(readFileSync(join(root, "docs", "work", "board.md"), "utf8"), /Done \(3\)/);
+});
+
+test("records and refreshes official source notes", (context) => {
+  const root = mkdtempSync(join(tmpdir(), "project-flow-source-"));
+  context.after(() => rmSync(root, { recursive: true, force: true }));
+
+  run(root, ["init", "--key", "SRC", "--name", "Source Example"]);
+  const configPath = join(root, ".project", "workflow.json");
+  const legacyConfig = JSON.parse(readFileSync(configPath, "utf8"));
+  legacyConfig.definitionOfDone = legacyConfig.definitionOfDone.filter(
+    (entry) => entry !== "Relevant external claims cite refreshed official source notes.",
+  );
+  writeFileSync(configPath, `${JSON.stringify(legacyConfig, null, 2)}\n`, "utf8");
+  run(root, ["install"]);
+  const refreshedConfig = JSON.parse(readFileSync(configPath, "utf8"));
+  assert.ok(
+    refreshedConfig.definitionOfDone.includes(
+      "Relevant external claims cite refreshed official source notes.",
+    ),
+  );
+
+  const addArguments = [
+    "source-add",
+    "--target",
+    "runtimes/node-sqlite.md",
+    "--title",
+    "Node.js SQLite API",
+    "--publisher",
+    "Node.js",
+    "--url",
+    "https://nodejs.org/api/sqlite.html",
+    "--version",
+    "24",
+    "--scope",
+    "The local task store.",
+    "--claim",
+    "DatabaseSync exposes synchronous SQLite operations.",
+    "--tag",
+    "node",
+  ];
+
+  run(root, addArguments);
+  const notePath = join(
+    root,
+    "docs",
+    "knowledge",
+    "sources",
+    "runtimes",
+    "node-sqlite.md",
+  );
+  const note = readFileSync(notePath, "utf8");
+  assert.match(note, /"type": "OfficialSource"/);
+  assert.match(note, /"resource": "https:\/\/nodejs\.org\/api\/sqlite\.html"/);
+  assert.match(note, /"version": "24"/);
+  assert.match(note, /# Verified claims/);
+  assert.match(note, /DatabaseSync exposes synchronous SQLite operations/);
+  assert.match(
+    readFileSync(join(root, "docs", "knowledge", "sources", "runtimes", "index.md"), "utf8"),
+    /Node\.js SQLite API/,
+  );
+
+  const duplicate = run(root, addArguments, 1);
+  assert.match(duplicate.stderr, /Re-open the page, then use --force/);
+
+  const insecure = run(root, [
+    "source-add",
+    "--target",
+    "invalid.md",
+    "--title",
+    "Invalid",
+    "--publisher",
+    "Example",
+    "--url",
+    "http://example.com/docs",
+    "--scope",
+    "Invalid source.",
+    "--claim",
+    "This should fail.",
+  ], 1);
+  assert.match(insecure.stderr, /must use HTTPS/);
+
+  run(root, [...addArguments, "--claim", "Prepared statements support bound values.", "--force"]);
+  assert.match(readFileSync(notePath, "utf8"), /Prepared statements support bound values/);
+  run(root, ["validate"]);
 });
 
 test("rejects a passing review when a configured check fails", (context) => {

@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow. Create `.project/`, `docs/knowledge/`, and `docs/work/`; install the local workflow CLI; add project-state rules to `AGENTS.md`; and seed only verified current knowledge. Use once before planning. Do not create work items or product code.
+description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow. Create `.project/`, `docs/knowledge/`, `docs/knowledge/sources/`, and `docs/work/`; install the local workflow CLI; add project-state rules to `AGENTS.md`; and seed verified current knowledge and official source notes. Use once before planning. Do not create work items or product code.
 ---
 
 # Setup
@@ -20,9 +20,10 @@ Use Node.js 20.9 or newer for the bundled workflow CLI.
 7. Resolve this skill's directory from the loaded `SKILL.md` path.
 8. Run the initialization command.
 9. Add the reference's workflow block to `AGENTS.md` without removing rules.
-10. Add small OKF concepts only for facts verified from the repository.
-11. Run `sync` and `validate`.
-12. Report created paths, the project key, and any facts left undocumented.
+10. Use `$source` to verify official docs for material detected technologies.
+11. Add small OKF concepts only for facts verified from the repository.
+12. Run `sync` and `validate`.
+13. Report created paths, the project key, source notes, and undocumented facts.
 
 Ask for the project key or name only when repository context cannot provide a
 safe value.
@@ -40,8 +41,8 @@ node .project/bin/project-flow.mjs validate
 
 ## Refresh an existing workflow
 
-Do not initialize twice. Refresh the installed CLI, confirm the AGENTS.md block,
-then validate:
+Do not initialize twice. Refresh the installed CLI and confirm the AGENTS.md
+block. Use `$source` to refresh relevant official notes. Then validate:
 
 ```bash
 node <skill-directory>/scripts/project-flow.mjs install --root .
@@ -56,3 +57,4 @@ node .project/bin/project-flow.mjs validate
 - Do not overwrite existing knowledge or AGENTS.md rules.
 - Do not create epics, stories, bugs, tasks, or subtasks.
 - Do not modify product code.
+- Do not turn model memory into project knowledge or source notes.

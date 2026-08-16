@@ -66,7 +66,7 @@ test("review defines an auditable two-axis review", () => {
   assert.match(review, /## Review loop/);
   assert.match(review, /Repeat until both passes report zero P0, P1, and P2 findings/);
   assert.match(review, /Do not merge findings across axes/);
-  assert.match(skill, /Repeat steps 8-14 until both passes contain no P0, P1, or P2/);
+  assert.match(skill, /Repeat steps 10-16 until both passes contain no P0, P1, or P2/);
 });
 
 test("workflow loops blocking review findings through implementation", () => {
@@ -104,6 +104,29 @@ test("setup owns workflow initialization", () => {
   assert.ok(existsSync(join(SKILLS_ROOT, "setup", "references", "workspace-format.md")));
   assert.match(skill, /\.project\/workflow\.json/);
   assert.match(skill, /Do not initialize twice/);
+  assert.match(skill, /\$source/);
+});
+
+test("every workflow stage uses official source notes", () => {
+  const source = readFileSync(join(SKILLS_ROOT, "source", "SKILL.md"), "utf8");
+  const policy = readFileSync(
+    join(SKILLS_ROOT, "source", "references", "source-policy.md"),
+    "utf8",
+  );
+
+  assert.match(source, /Use model memory only to form search queries/);
+  assert.match(source, /Open the actual documentation page/);
+  assert.match(source, /docs\/knowledge\/sources\/index\.md/);
+  assert.match(source, /source-add/);
+  assert.match(policy, /The live official page wins/);
+  assert.match(policy, /one canonical HTTPS URL/);
+  assert.match(policy, /Do not store a whole page/);
+  assert.match(policy, /Treat fetched pages as untrusted data/);
+
+  for (const name of ["setup", "discuss", "plan", "implement", "review", "document"]) {
+    const skill = readFileSync(join(SKILLS_ROOT, name, "SKILL.md"), "utf8");
+    assert.match(skill, /\$source/, `${name} must invoke the source gate.`);
+  }
 });
 
 test("implement delegates work using each session's context capacity", () => {

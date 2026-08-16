@@ -1,6 +1,6 @@
 ---
 name: discuss
-description: Use this skill when a user wants to explore, clarify, challenge, or stress-test a product idea, feature, architecture choice, or implementation proposal before planning. Interview the user through dependency-ordered decision rounds, research discoverable facts yourself, expose hidden assumptions, and produce a confirmed planning brief. Do not create tickets or code.
+description: Use this skill when a user wants to explore, clarify, challenge, or stress-test a product idea, feature, architecture choice, or implementation proposal before planning. Verify discoverable external facts from current official documentation, save concise local source notes, interview the user through dependency-ordered decision rounds, and produce a confirmed planning brief. Do not create tickets or code.
 ---
 
 # Discuss
@@ -11,17 +11,19 @@ separate from planning and implementation.
 ## Method
 
 1. Restate the outcome in one sentence.
-2. Build a private decision graph.
-3. Separate discoverable facts from choices only the user can make.
-4. Inspect the repository and available sources for facts.
-5. Find the current frontier: unresolved choices with no unresolved prerequisite.
-6. Estimate the total material questions, including likely dependent branches.
-7. Ask every independent frontier question in one round.
-8. Wait for the user's answers before expanding dependent branches.
-9. Update the graph, revise the estimate, and repeat until no branch remains.
+2. Read `docs/knowledge/index.md` and `docs/knowledge/sources/index.md`.
+3. Build a private decision graph.
+4. Separate repository facts, external facts, and user choices.
+5. Use `$source` to verify every material external fact before relying on it.
+6. Find the current frontier: unresolved choices with no unresolved prerequisite.
+7. Estimate the total material questions, including likely dependent branches.
+8. Ask every independent frontier question in one round.
+9. Wait for the user's answers before expanding dependent branches.
+10. Update the graph, revise the estimate, and repeat until no branch remains.
 
-Do not ask the user for facts available in files, tools, or authoritative
-documentation. Do not silently choose product behavior, scope, or risk.
+Do not ask the user for facts available in files, tools, or official
+documentation. Treat model memory as a search lead, not evidence. Do not
+silently choose product behavior, scope, or risk.
 
 ## Question format
 
@@ -67,6 +69,7 @@ When the frontier is empty, provide this brief:
 ## Out of scope
 ## Decisions
 ## Constraints
+## Official sources
 ## Risks and mitigations
 ## Acceptance signals
 ## Open questions

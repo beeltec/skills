@@ -17,7 +17,9 @@ are JSON for deterministic updates.
 docs/
 ├── knowledge/
 │   ├── index.md
-│   └── log.md
+│   ├── log.md
+│   └── sources/
+│       └── index.md            # Concise notes from official documentation
 └── work/
     ├── board.md
     ├── items/
@@ -43,6 +45,10 @@ Use these fields when known:
 Use `human:<id>` only for actual human authors or reviewers. Use
 `process:project-flow` for the automated completion gate.
 
+`docs/knowledge/sources/` contains `OfficialSource` concepts. The `source`
+skill may update them directly after live verification. Product knowledge must
+still pass through the work-item completion gate.
+
 Source: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
 
 ## Target AGENTS.md block
@@ -52,7 +58,11 @@ Add these instructions without removing local rules:
 ```markdown
 ## Project state workflow
 
-- Read `docs/knowledge/index.md` before implementation.
+- Read `docs/knowledge/index.md` and `docs/knowledge/sources/index.md` first.
+- Treat model memory as a search lead, not factual evidence.
+- Verify material external claims against current official documentation.
+- Save concise official source notes under `docs/knowledge/sources/`.
+- Re-open relevant official URLs once per work session before relying on them.
 - Treat `docs/work/` as desired state, not current fact.
 - Assume Codex uses ChatGPT subscription access unless the user says otherwise.
 - Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.

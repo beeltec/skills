@@ -39,6 +39,7 @@ Sources:
 Before `ready`, require:
 
 - a clear summary and description;
+- local source-note paths for material external constraints;
 - at least one acceptance criterion for an epic, story, or bug;
 - a valid parent relationship;
 - known blockers linked;
@@ -53,6 +54,7 @@ Before `done`, require:
 - both final review axes report zero P0, P1, and P2 findings;
 - every blocker and child is done;
 - required drafted knowledge is valid OKF;
+- relevant external claims still match refreshed official source notes;
 - the item is in `in-review`.
 
 Acceptance criteria confirm one item's behavior. The definition of done applies

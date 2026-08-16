@@ -12,6 +12,7 @@ Source: https://support.atlassian.com/jira-cloud-administration/docs/configure-r
 
 - Compare each acceptance criterion with its evidence.
 - Check the last check run time against the relevant source changes.
+- Confirm relevant official source notes were refreshed in this work session.
 - Confirm Standards and Spec both report zero P0, P1, and P2 findings.
 - Inspect every child and blocker.
 - Compare each staged concept with the implemented code and tests.
@@ -29,6 +30,9 @@ P3 suggestions do not block completion.
 
 If a knowledge candidate is incomplete, edit the draft and keep the item in
 review.
+
+If an official page conflicts with a source note, refresh the note and return
+affected code or decisions to the appropriate workflow stage.
 
 If a child or blocker remains open, complete that work first.
 

@@ -11,6 +11,14 @@
     {
       "resource": "urn:project-work:TASK-1",
       "title": "TASK-1 Provide persistent task tracking"
+    },
+    {
+      "resource": "docs/knowledge/sources/frameworks/nextjs-mutating-data.md",
+      "title": "Next.js mutating data"
+    },
+    {
+      "resource": "docs/knowledge/sources/runtimes/node-sqlite.md",
+      "title": "Node.js SQLite API"
     }
   ],
   "status": "stable",
@@ -39,6 +47,7 @@ It has no external database service.
 
 - [Task list](/features/task-list.md) describes visible behavior.
 - [Task storage](/architecture/task-storage.md) describes persistence and schema.
+- [Official sources](/sources/) record external framework and runtime constraints.
 
 # Verification
 

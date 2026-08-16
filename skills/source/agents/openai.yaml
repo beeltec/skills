@@ -1,0 +1,4 @@
+interface:
+  display_name: "Source"
+  short_description: "Verify official docs and save concise source notes"
+  default_prompt: "Use $source to verify relevant official documentation and update local source notes before work begins."

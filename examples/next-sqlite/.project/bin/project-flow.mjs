@@ -29,6 +29,7 @@ const ITEM_TYPES = ["epic", "story", "bug", "task", "subtask"];
 const STANDARD_TYPES = ["story", "bug", "task"];
 const STATUSES = ["backlog", "ready", "in-progress", "in-review", "done"];
 const PRIORITIES = ["highest", "high", "medium", "low", "lowest"];
+const OFFICIAL_SOURCE_DONE = "Relevant external claims cite refreshed official source notes.";
 const TRANSITIONS = {
   backlog: ["ready"],
   ready: ["backlog", "in-progress"],
@@ -114,13 +115,14 @@ function findProjectRoot(start) {
     current = parent;
   }
 
-  fail("No .project/workflow.json was found. Run the plan skill first.");
+  fail("No .project/workflow.json was found. Run the setup skill first.");
 }
 
 function pathsFor(root) {
   const project = join(root, ".project");
   const docs = join(root, "docs");
   const knowledge = join(docs, "knowledge");
+  const sources = join(knowledge, "sources");
   const work = join(docs, "work");
   return {
     root,
@@ -130,6 +132,7 @@ function pathsFor(root) {
     cli: join(project, "bin", "project-flow.mjs"),
     knowledge,
     knowledgeLog: join(knowledge, "log.md"),
+    sources,
     work,
     board: join(work, "board.md"),
     items: join(work, "items"),
@@ -360,6 +363,22 @@ function safeKnowledgeTarget(value) {
   return normalized;
 }
 
+function canonicalHttpsUrl(value) {
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    fail(`Invalid source URL: ${value}.`);
+  }
+  if (url.protocol !== "https:") fail("Official source URLs must use HTTPS.");
+  if (url.username || url.password) fail("Official source URLs cannot contain credentials.");
+  return url.toString();
+}
+
+function oneLine(value) {
+  return String(value).trim().replace(/\s+/g, " ");
+}
+
 function parseFrontmatter(content, jsonRequired = false) {
   const normalized = content.replaceAll("\r\n", "\n");
   const match = normalized.match(/^---\n([\s\S]*?)\n---(?:\n|$)([\s\S]*)$/);
@@ -410,6 +429,51 @@ function conceptMetadata(content) {
     description:
       typeof data.description === "string" && data.description.trim() ? data.description.trim() : undefined,
   };
+}
+
+function officialSourceErrors(data, body, path) {
+  if (data.type !== "OfficialSource") return [];
+
+  const errors = [];
+  if (data.status !== "stable") errors.push(`${path}: an official source must have stable status.`);
+  if (typeof data.description !== "string" || !data.description.trim()) {
+    errors.push(`${path}: an official source needs an applicability description.`);
+  }
+  if (!Array.isArray(data.sources) || data.sources.length !== 1) {
+    errors.push(`${path}: an official source must contain exactly one source entry.`);
+  } else {
+    const source = data.sources[0];
+    if (!source || typeof source !== "object" || Array.isArray(source)) {
+      errors.push(`${path}: the official source entry must be an object.`);
+    } else {
+      if (typeof source.resource !== "string") {
+        errors.push(`${path}: the official source needs a canonical URL.`);
+      } else {
+        try {
+          canonicalHttpsUrl(source.resource);
+        } catch (error) {
+          errors.push(`${path}: ${error instanceof Error ? error.message : String(error)}`);
+        }
+      }
+      for (const field of ["title", "publisher", "version", "retrievedAt"]) {
+        if (typeof source[field] !== "string" || !source[field].trim()) {
+          errors.push(`${path}: source.${field} must be a non-empty string.`);
+        }
+      }
+      if (
+        typeof source.retrievedAt === "string" &&
+        Number.isNaN(Date.parse(source.retrievedAt))
+      ) {
+        errors.push(`${path}: source.retrievedAt must be an ISO date-time.`);
+      }
+    }
+  }
+
+  const claims = body.match(/(?:^|\n)# Verified claims\n\n([\s\S]*?)(?=\n# |\s*$)/)?.[1] ?? "";
+  if (!claims.split("\n").some((line) => line.startsWith("- ") && line.slice(2).trim())) {
+    errors.push(`${path}: an official source needs at least one verified claim.`);
+  }
+  return errors;
 }
 
 function markdownLabel(value) {
@@ -623,6 +687,7 @@ function boardContent(paths, config, items) {
 }
 
 function syncGeneratedFiles(paths, config, items = loadItems(paths)) {
+  mkdirSync(paths.sources, { recursive: true });
   generateKnowledgeIndexes(paths, config);
   writeText(paths.board, boardContent(paths, config, items));
 }
@@ -661,7 +726,12 @@ function validateKnowledge(paths) {
       }
 
       try {
+        const { data, body } = parseFrontmatter(content);
         conceptMetadata(content);
+        if (path.startsWith(`${paths.sources}${sep}`) && data.type !== "OfficialSource") {
+          errors.push(`${path}: files under docs/knowledge/sources must use type OfficialSource.`);
+        }
+        errors.push(...officialSourceErrors(data, body, path));
       } catch (error) {
         errors.push(`${path}: ${error instanceof Error ? error.message : String(error)}`);
       }
@@ -744,6 +814,7 @@ function commandInit(args) {
 
   mkdirSync(join(paths.project, "bin"), { recursive: true });
   mkdirSync(paths.knowledge, { recursive: true });
+  mkdirSync(paths.sources, { recursive: true });
   mkdirSync(paths.items, { recursive: true });
   mkdirSync(paths.candidates, { recursive: true });
 
@@ -758,6 +829,7 @@ function commandInit(args) {
     definitionOfDone: [
       "Acceptance criteria have passing evidence.",
       "Configured checks pass in their latest run.",
+      OFFICIAL_SOURCE_DONE,
       "Standards and Spec report zero P0, P1, and P2 findings with separate evidence.",
       "Blockers and child items are done.",
       "Required knowledge is drafted and valid.",
@@ -777,7 +849,19 @@ function commandInstall(args) {
     ? resolve(requestedRoot)
     : findProjectRoot(requestedRoot);
   const paths = pathsFor(root);
-  loadConfig(paths);
+  const config = loadConfig(paths);
+  if (!Array.isArray(config.definitionOfDone)) {
+    fail("workflow.json must contain a definitionOfDone array.");
+  }
+  if (!config.definitionOfDone.includes(OFFICIAL_SOURCE_DONE)) {
+    const reviewGate = config.definitionOfDone.findIndex((entry) =>
+      typeof entry === "string" && entry.startsWith("Standards and Spec"),
+    );
+    const insertion = reviewGate < 0 ? config.definitionOfDone.length : reviewGate;
+    config.definitionOfDone.splice(insertion, 0, OFFICIAL_SOURCE_DONE);
+    writeJson(paths.config, config);
+  }
+  mkdirSync(paths.sources, { recursive: true });
   if (resolve(SCRIPT_PATH) === resolve(paths.cli)) {
     console.log("The project CLI is already running from its installed path.");
     return;
@@ -1099,6 +1183,64 @@ function commandReview(args, paths, config) {
   console.log(`Recorded ${status} review for ${key}.`);
 }
 
+function commandSourceAdd(args, paths, config) {
+  const target = safeKnowledgeTarget(option(args, "target", true));
+  const targetPath = join(paths.sources, ...target.split("/"));
+  const title = oneLine(option(args, "title", true));
+  const publisher = oneLine(option(args, "publisher", true));
+  const url = canonicalHttpsUrl(option(args, "url", true));
+  const version = oneLine(option(args, "version") ?? "unversioned");
+  const scope = oneLine(option(args, "scope", true));
+  const actor = oneLine(option(args, "actor") ?? "agent/source");
+  const claims = options(args, "claim").map(oneLine).filter(Boolean);
+  const tags = [...new Set(["official-source", ...options(args, "tag").map(oneLine).filter(Boolean)])];
+
+  if (!title || !publisher || !version || !scope || !actor) {
+    fail("Source title, publisher, version, scope, and actor cannot be empty.");
+  }
+  if (claims.length === 0) fail("Add at least one verified claim with --claim.");
+  if (existsSync(targetPath) && !hasOption(args, "force")) {
+    fail(`Source note ${relative(paths.root, targetPath)} already exists. Re-open the page, then use --force.`);
+  }
+
+  const timestamp = now();
+  const data = {
+    type: "OfficialSource",
+    title,
+    description: scope,
+    tags,
+    sources: [
+      {
+        resource: url,
+        title,
+        publisher,
+        version,
+        retrievedAt: timestamp,
+      },
+    ],
+    status: "stable",
+    generated: { by: actor, at: timestamp },
+    verified: [{ by: actor, at: timestamp }],
+  };
+  const body = [
+    "# Applicability",
+    "",
+    scope,
+    "",
+    "# Verified claims",
+    "",
+    ...claims.map((claim) => `- ${claim}`),
+    "",
+    "# Refresh rule",
+    "",
+    "Open the canonical URL before relying on these claims in a new work session.",
+  ].join("\n");
+
+  writeText(targetPath, renderJsonConcept(data, body));
+  syncGeneratedFiles(paths, config);
+  console.log(relative(paths.root, targetPath).split(sep).join("/"));
+}
+
 function commandKnowledgeTemplate(args, paths, config) {
   const key = normalizeKey(requiredPositional(args, 1, "work item key"));
   const item = loadItem(paths, key);
@@ -1250,6 +1392,7 @@ Usage:
   project-flow.mjs accept KEY AC-N --status pending|pass|fail [--evidence TEXT]
   project-flow.mjs verify KEY
   project-flow.mjs review KEY --status STATUS --reviewer ACTOR [review evidence]
+  project-flow.mjs source-add --target PATH --title TEXT --publisher TEXT [options]
   project-flow.mjs knowledge-template KEY --target PATH --action create|update [options]
   project-flow.mjs complete KEY
   project-flow.mjs show KEY
@@ -1270,6 +1413,15 @@ Review evidence:
   --base REF                    Fixed point or "initial tree".
   --standards TEXT              Independent Standards result.
   --spec TEXT                   Independent Spec result.
+
+Official source options:
+  --url HTTPS_URL              Canonical official documentation page.
+  --version TEXT               Exact dependency or documentation version.
+  --scope TEXT                 Where this page applies in the project.
+  --claim TEXT                 Repeat for each verified claim.
+  --tag TEXT                   Repeat for discovery tags.
+  --actor ACTOR
+  --force                      Replace a note after live re-verification.
 
 Knowledge template options:
   --type TEXT --title TEXT --description TEXT
@@ -1327,6 +1479,9 @@ function main() {
       return commandVerify(args, paths, config);
     case "review":
       commandReview(args, paths, config);
+      return true;
+    case "source-add":
+      commandSourceAdd(args, paths, config);
       return true;
     case "knowledge-template":
       commandKnowledgeTemplate(args, paths, config);

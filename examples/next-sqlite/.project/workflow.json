@@ -18,6 +18,7 @@
   "definitionOfDone": [
     "Acceptance criteria have passing evidence.",
     "Configured checks pass in their latest run.",
+    "Relevant external claims cite refreshed official source notes.",
     "Standards and Spec report zero P0, P1, and P2 findings with separate evidence.",
     "Blockers and child items are done.",
     "Required knowledge is drafted and valid."

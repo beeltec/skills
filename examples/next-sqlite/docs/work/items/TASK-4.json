@@ -3,7 +3,7 @@
   "key": "TASK-4",
   "type": "story",
   "summary": "Manage tasks from the main page",
-  "description": "As a user, I want to add and complete tasks from one clear page.",
+  "description": "As a user, I want to add and complete tasks from one clear page. Official constraint: docs/knowledge/sources/frameworks/nextjs-mutating-data.md.",
   "status": "done",
   "resolution": "done",
   "priority": "medium",
@@ -52,7 +52,7 @@
     "status": "pass",
     "reviewer": "agent/codex",
     "fixedPoint": "initial tree",
-    "standards": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for forms, actions, accessibility, responsive CSS, and rendering.",
+    "standards": "Pass. P0:0 P1:0 P2:0 P3:0. The Next.js mutation source note and repository rules were checked with no findings.",
     "spec": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for the interaction acceptance criteria.",
     "reviewedAt": "2026-08-16T13:40:05.471Z"
   },

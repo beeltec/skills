@@ -46,6 +46,7 @@ Sources:
 ## Agent Skill design
 
 The suite follows `setup → discuss → plan → implement → review → document`.
+The `source` skill acts as an evidence gate before every substantive stage.
 Each skill has a narrow job and composes with the other skills. Instructions
 stay short. Detailed contracts live in direct references. Repeated and fragile
 operations use one tested script.
@@ -70,6 +71,7 @@ skills use checklists, explicit validation loops, and concrete commands.
 
 Sources:
 
+- [OpenAI skill authoring](https://learn.chatgpt.com/docs/build-skills)
 - [Agent Skills specification](https://agentskills.io/specification)
 - [Skill creator best practices](https://agentskills.io/skill-creation/best-practices)
 - [Evaluating skill output quality](https://agentskills.io/skill-creation/evaluating-skills)
@@ -77,6 +79,32 @@ Sources:
 - [Using scripts in skills](https://agentskills.io/skill-creation/using-scripts)
 - [Matt Pocock's grilling skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)
 - [Matt Pocock's code-review skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md)
+
+## Official documentation cache
+
+External technical facts come from current official documentation. Model
+memory, search snippets, and third-party explanations only help find a primary
+source. The agent must open the official page before relying on it.
+
+The `source` skill records concise, paraphrased claims under
+`docs/knowledge/sources/`. Each OKF note stores one canonical URL, publisher,
+version, applicability, and retrieval time. Later stages read the source index
+and re-open relevant URLs once per work session. The live page wins when it
+conflicts with the local note.
+
+This design keeps source context discoverable without copying full manuals.
+It also follows OpenAI's progressive-disclosure model: load the index first,
+then only the references needed for the task.
+
+The example records Next.js, Node.js, and SQLite facts from their owners. These
+notes support external API constraints. Source code and tests remain the
+authority for the application's implemented behavior.
+
+Sources:
+
+- [Next.js mutating data](https://nextjs.org/docs/app/getting-started/mutating-data)
+- [Node.js 24 SQLite API](https://nodejs.org/download/release/latest-v24.x/docs/api/sqlite.html)
+- [SQLite STRICT tables](https://www.sqlite.org/stricttables.html)
 
 ## Context-aware implementation
 

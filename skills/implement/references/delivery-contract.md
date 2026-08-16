@@ -6,10 +6,15 @@
 2. `docs/work/items/<KEY>.json`
 3. `docs/work/handoffs/<KEY>.md`, when it exists
 4. `docs/knowledge/index.md`
-5. Relevant concepts
-6. Relevant source and tests
+5. `docs/knowledge/sources/index.md` and relevant official source notes
+6. Relevant project concepts
+7. Relevant code and tests
 
 This order separates intended work from established facts.
+
+Read relevant notes under `docs/knowledge/sources/`. Re-open their official
+URLs through `source` before choosing an external API or relying on a vendor
+constraint. Treat model memory only as a search lead.
 
 A handoff contains temporary implementation state. Verify it against the item,
 the fixed point, and the current worktree before continuing.
@@ -33,9 +38,10 @@ outcome.
 
 ## Review handoff
 
-Report the resolved starting commit, item key, changed files, checks, and
-acceptance evidence. Use `initial tree` when the repository had no commit.
-State any overlap with pre-existing dirty files. Then hand off to `review`.
+Report the resolved starting commit, item key, source-note paths, changed files,
+checks, and acceptance evidence. Use `initial tree` when the repository had no
+commit. State any overlap with pre-existing dirty files. Then hand off to
+`review`.
 
 When the latest review requests changes, preserve that fixed point. Address
 all valid P0, P1, and P2 findings. Return disputed findings with concrete

@@ -128,7 +128,8 @@ Include these fields in every implementation assignment:
 - work item key and fixed point;
 - exact outcome and acceptance criteria covered;
 - owned paths and excluded paths;
-- relevant knowledge and source entry points;
+- relevant project knowledge and official source-note paths;
+- the live-verification time for every external rule in the packet;
 - focused checks to run;
 - assigned model's safe context budget;
 - a warning that the worktree is shared;
@@ -146,8 +147,9 @@ Remaining work:
 ```
 
 Tell subagents not to transition the item, record acceptance, create knowledge,
-run the final review, or commit unless asked. Do not use subagents only to
-verify the coordinator's work.
+run the final review, or commit unless asked. Tell them not to substitute model
+memory for the supplied official sources. Do not use subagents only to verify
+the coordinator's work.
 
 ## Coordinate and integrate
 

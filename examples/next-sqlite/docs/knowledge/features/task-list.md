@@ -11,6 +11,10 @@
     {
       "resource": "urn:project-work:TASK-4",
       "title": "TASK-4 Manage tasks from the main page"
+    },
+    {
+      "resource": "docs/knowledge/sources/frameworks/nextjs-mutating-data.md",
+      "title": "Next.js mutating data"
     }
   ],
   "status": "stable",
@@ -37,3 +41,6 @@ Server Actions in `src/app/actions.ts` validate form values, call the typed
 
 The page reports open and total task counts. Completed tasks remain visible and
 use a checked control with struck-through text.
+
+Official framework context is recorded in the
+[Next.js mutation note](/sources/frameworks/nextjs-mutating-data.md).

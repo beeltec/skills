@@ -71,6 +71,10 @@ preference alone. State the concrete impact that makes a finding actionable.
 Read the applicable `AGENTS.md` files first. Also inspect `CONTRIBUTING.md`,
 coding guides, and relevant tool configuration.
 
+Read the relevant notes under `docs/knowledge/sources/`. Re-open each canonical
+URL through `source` before enforcing an external API or vendor rule. Cite the
+note and official URL in the finding. Never use model memory as review evidence.
+
 Check the change against documented rules. Repository rules take priority.
 Do not repeat failures already reported by configured checks.
 

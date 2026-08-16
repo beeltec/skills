@@ -1,4 +1,4 @@
 interface:
   display_name: "Discuss"
   short_description: "Stress-test ideas before project planning"
-  default_prompt: "Use $discuss to question this idea until every important decision is explicit. Show each question's approximate progress through the discussion."
+  default_prompt: "Use $discuss to verify external facts through $source, then question this idea until every important decision is explicit. Show approximate question progress."

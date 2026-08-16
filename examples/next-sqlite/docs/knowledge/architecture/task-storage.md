@@ -11,6 +11,14 @@
     {
       "resource": "urn:project-work:TASK-2",
       "title": "TASK-2 Persist tasks in SQLite"
+    },
+    {
+      "resource": "docs/knowledge/sources/runtimes/node-sqlite.md",
+      "title": "Node.js SQLite API"
+    },
+    {
+      "resource": "docs/knowledge/sources/databases/sqlite-strict-tables.md",
+      "title": "SQLite STRICT tables"
     }
   ],
   "status": "stable",
@@ -53,3 +61,6 @@ title. `toggle()` changes the stored completion value.
 
 See `src/lib/task-store.ts` for the implementation and
 `src/lib/task-store.test.ts` for verified behavior.
+
+Official API context is recorded in the [Node.js SQLite note](/sources/runtimes/node-sqlite.md)
+and [SQLite STRICT note](/sources/databases/sqlite-strict-tables.md).

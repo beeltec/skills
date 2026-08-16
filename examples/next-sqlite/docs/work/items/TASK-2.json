@@ -3,7 +3,7 @@
   "key": "TASK-2",
   "type": "story",
   "summary": "Persist tasks in SQLite",
-  "description": "As a user, I want saved tasks so that they survive page reloads.",
+  "description": "As a user, I want saved tasks so that they survive page reloads. Official constraints: docs/knowledge/sources/runtimes/node-sqlite.md and docs/knowledge/sources/databases/sqlite-strict-tables.md.",
   "status": "done",
   "resolution": "done",
   "priority": "medium",
@@ -63,7 +63,7 @@
     "status": "pass",
     "reviewer": "agent/codex",
     "fixedPoint": "initial tree",
-    "standards": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for input validation, SQL, row parsing, failure paths, and types.",
+    "standards": "Pass. P0:0 P1:0 P2:0 P3:0. Node.js SQLite and SQLite STRICT source notes were checked with no findings.",
     "spec": "Pass. P0:0 P1:0 P2:0 P3:0. No findings for the storage acceptance criteria.",
     "reviewedAt": "2026-08-16T13:39:33.957Z"
   },

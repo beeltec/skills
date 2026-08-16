@@ -2,8 +2,12 @@
 
 ## Project state workflow
 
-- Run `setup` once. Then use `discuss`, `plan`, `implement`, `review`, and `document`.
-- Read `docs/knowledge/index.md` before implementation.
+- Run `setup` once. Then use `source`, `discuss`, `plan`, `implement`, `review`, and `document`.
+- Read `docs/knowledge/index.md` and `docs/knowledge/sources/index.md` first.
+- Treat model memory as a search lead, not factual evidence.
+- Verify material external claims against current official documentation.
+- Save concise source notes under `docs/knowledge/sources/`.
+- Re-open relevant official URLs once per work session before relying on them.
 - Treat `docs/work/` as desired state, not current fact.
 - Assume Codex uses ChatGPT subscription access unless the user says otherwise.
 - Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.

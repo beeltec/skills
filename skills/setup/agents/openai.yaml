@@ -1,4 +1,4 @@
 interface:
   display_name: "Setup"
   short_description: "Initialize the project knowledge and work spaces"
-  default_prompt: "Use $setup to initialize this repository's knowledge and work workflow."
+  default_prompt: "Use $setup to initialize this repository's workflow, then use $source to seed official documentation notes for detected technologies."
