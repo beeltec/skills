@@ -10,6 +10,10 @@
 
 Never substitute one evidence role for another.
 
+Use active terms from `docs/knowledge/ubiquitous-language.md` when describing
+the observation and decision. A vocabulary change cannot change the brief's
+original metric, baseline, target, cohort, or observation window.
+
 ## Result scale
 
 - `met`: The declared evidence meets the original target.

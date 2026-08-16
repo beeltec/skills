@@ -1,0 +1,4 @@
+interface:
+  display_name: "Language"
+  short_description: "Manage the shared project vocabulary"
+  default_prompt: "Use $language to define, inspect, or revise the project vocabulary."

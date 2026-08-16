@@ -15,6 +15,7 @@ Use this order. Stop at the first condition that applies to the focused work.
 | The workflow root differs from the Git root | Stop. Ask whether the workflow belongs at the Git root or in a standalone repository. |
 | No initial commit exists and the next stage needs a worktree or release | Ask the user to create an intentional baseline commit. |
 | The configured target-branch worktree is dirty | Stop. Report the changed paths and ask how to preserve them. |
+| A material project term is missing, ambiguous, or conflicting | Use `$language` for explicit user agreement. |
 | A material external fact is missing, stale, or conflicts with its live official page | Use `$source`. |
 
 Do not route damaged ticket, brief, release, or outcome data to `setup`. Setup

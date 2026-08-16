@@ -28,6 +28,7 @@ difference.
 
 If a required page is missing, search the official domain and create a note.
 If a page changed, refresh the note before continuing.
+Opening an unchanged page satisfies session verification without rewriting its note.
 The live official page wins over its local note.
 If official sources conflict, report the conflict and do not choose silently.
 
@@ -62,6 +63,10 @@ verification. Add a short quote only when exact wording is essential.
 Official documentation explains external behavior and constraints. It does
 not prove the repository's current behavior. Use source code, tests, and
 established project concepts for project facts.
+
+Official documentation also does not choose project vocabulary. Read
+`docs/knowledge/ubiquitous-language.md` for agreed meanings. Send missing or
+conflicting meanings to `language` for explicit user agreement.
 
 When the repository intentionally differs from an official recommendation,
 record the project decision and its reason. Do not rewrite it as vendor fact.

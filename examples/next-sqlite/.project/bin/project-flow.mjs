@@ -72,6 +72,11 @@ const RELEASE_RESULTS = ["green", "failed", "rolled-back"];
 const OUTCOME_STATUSES = ["planned", "observed"];
 const OUTCOME_RESULTS = ["met", "missed", "inconclusive"];
 const OUTCOME_DECISIONS = ["proceed", "improve", "revert", "stop"];
+const LANGUAGE_STATUSES = ["active", "deprecated"];
+const LANGUAGE_ACTIONS = ["added", "updated", "deprecated"];
+const LANGUAGE_SOURCE_URL =
+  "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf";
+const LANGUAGE_FILENAME = "ubiquitous-language.md";
 const OFFICIAL_SOURCE_DONE = "Relevant external claims cite refreshed official source notes.";
 const QUALITY_GATE_DONE = "Applicable risk-driven quality gates have passing evidence.";
 const DEFAULT_GIT_CONFIG = Object.freeze({
@@ -185,6 +190,7 @@ function pathsFor(root) {
     cli: join(project, "bin", "project-flow.mjs"),
     knowledge,
     knowledgeLog: join(knowledge, "log.md"),
+    language: join(knowledge, LANGUAGE_FILENAME),
     sources,
     knowledgeReleases: join(knowledge, "releases"),
     knowledgeOutcomes: join(knowledge, "outcomes"),
@@ -570,8 +576,11 @@ function safeKnowledgeTarget(value) {
     fail(`Unsafe knowledge target: ${value}.`);
   }
   if (!normalized.endsWith(".md")) fail("Knowledge targets must end in .md.");
-  if (RESERVED_KNOWLEDGE_FILES.has(normalized.split("/").at(-1))) {
-    fail("index.md and log.md are reserved knowledge filenames.");
+  if (
+    RESERVED_KNOWLEDGE_FILES.has(normalized.split("/").at(-1)) ||
+    normalized === LANGUAGE_FILENAME
+  ) {
+    fail(`${normalized.split("/").at(-1)} is a workflow-managed knowledge filename.`);
   }
   for (const segment of normalized.split("/")) {
     if (!/^[A-Za-z0-9._-]+$/.test(segment)) {
@@ -646,6 +655,22 @@ function requireTargetBranch(paths, config, operation) {
   return target;
 }
 
+function requireLanguageMutationLocation(paths, config) {
+  const repository = runGit(paths.root, ["rev-parse", "--show-toplevel"], true);
+  if (repository.status !== 0) return;
+
+  const topLevel = realpathSync(repository.stdout.trim());
+  if (topLevel !== realpathSync(paths.root)) {
+    fail("Language changes must run from the workflow's Git repository root.");
+  }
+
+  const target = gitConfig(config).targetBranch;
+  const branch = currentGitBranch(paths.root);
+  if (branch !== target) {
+    fail(`Language changes must run on the configured target branch ${target}, not ${branch}.`);
+  }
+}
+
 function assertTicketsInReleaseCommit(root, commit, ticketKeys) {
   const errors = [];
   for (const key of ticketKeys) {
@@ -672,7 +697,7 @@ function assertTicketsInReleaseCommit(root, commit, ticketKeys) {
 
 function currentGitBranch(root) {
   const result = runGit(root, ["symbolic-ref", "--quiet", "--short", "HEAD"], true);
-  if (result.status !== 0 || !result.stdout.trim()) fail("Ticket worktrees require a checked-out branch, not detached HEAD.");
+  if (result.status !== 0 || !result.stdout.trim()) fail("This operation requires a checked-out branch, not detached HEAD.");
   return result.stdout.trim();
 }
 
@@ -767,6 +792,269 @@ function parseFrontmatter(content, jsonRequired = false) {
 function renderJsonConcept(data, body) {
   const normalizedBody = body.startsWith("\n") ? body.slice(1) : body;
   return `---\n${JSON.stringify(data, null, 2)}\n---\n\n${normalizedBody.trimEnd()}\n`;
+}
+
+function languageTermKey(value) {
+  return oneLine(value).normalize("NFKC").toLocaleLowerCase("en-US");
+}
+
+function compareLanguageEntries(left, right) {
+  const leftKey = languageTermKey(left.term);
+  const rightKey = languageTermKey(right.term);
+  if (leftKey < rightKey) return -1;
+  if (leftKey > rightKey) return 1;
+  return 0;
+}
+
+function languageTermInput(value, label = "Term") {
+  const normalized = oneLine(value);
+  if (!/^[\p{L}\p{N}][\p{L}\p{N} ._/'&()+-]{0,79}$/u.test(normalized)) {
+    fail(`${label} must be 1-80 plain-text characters.`);
+  }
+  return normalized;
+}
+
+function languageTextInput(value, label, maximum) {
+  const normalized = oneLine(value);
+  if (!normalized) fail(`${label} cannot be empty.`);
+  if (normalized.length > maximum) fail(`${label} cannot exceed ${maximum} characters.`);
+  return normalized;
+}
+
+function languageListInput(values, label, kind) {
+  const normalized = values.map((value) =>
+    kind === "term"
+      ? languageTermInput(value, label)
+      : languageTextInput(value, label, 300),
+  );
+  const seen = new Set();
+  for (const value of normalized) {
+    const key = value.normalize("NFKC").toLocaleLowerCase("en-US");
+    if (seen.has(key)) fail(`${label} contains a duplicate: ${value}.`);
+    seen.add(key);
+  }
+  return normalized;
+}
+
+function languageBody(data) {
+  const terms = [...data.terms].sort(compareLanguageEntries);
+  const active = terms.filter((entry) => entry.status === "active");
+  const deprecated = terms.filter((entry) => entry.status === "deprecated");
+  const lines = [
+    "# Purpose",
+    "",
+    "Use these agreed terms in user conversations, project documents, tests, and code when they describe the same project concept.",
+    "",
+    "This file applies only the Ubiquitous Language principle. It does not adopt other Domain-Driven Design patterns.",
+    "",
+    "# Rules",
+    "",
+    "- Use each active canonical term for its stated meaning.",
+    "- Recognize accepted aliases, but prefer the canonical term.",
+    "- Ask the user when a term is missing, ambiguous, or used with another meaning.",
+    "- Treat a definition change as a project meaning change that needs explicit agreement.",
+    "",
+    "# Active terms",
+    "",
+  ];
+
+  function appendTerm(entry) {
+    lines.push(`## ${entry.term}`, "", entry.definition, "");
+    if (entry.aliases.length) lines.push(`Accepted aliases: ${entry.aliases.join(", ")}.`, "");
+    if (entry.examples.length) {
+      lines.push("Examples:", "", ...entry.examples.map((example) => `- ${example}`), "");
+    }
+    if (entry.status === "deprecated") {
+      lines.push(`Replacement: ${entry.replacement ?? "None"}.`, "");
+    }
+  }
+
+  if (active.length) active.forEach(appendTerm);
+  else lines.push("No active terms yet.", "");
+
+  lines.push("# Deprecated terms", "");
+  if (deprecated.length) deprecated.forEach(appendTerm);
+  else lines.push("No deprecated terms.", "");
+
+  return `${lines.join("\n").trimEnd()}\n`;
+}
+
+function newLanguageConcept(config) {
+  const timestamp = now();
+  const data = {
+    type: "UbiquitousLanguage",
+    title: `${config.projectName} ubiquitous language`,
+    description: "Agreed project terms used consistently by users and agents.",
+    tags: ["ubiquitous-language", "project-vocabulary"],
+    sources: [
+      {
+        resource: LANGUAGE_SOURCE_URL,
+        title: "Domain-Driven Design Reference: Ubiquitous Language",
+        publisher: "Eric Evans, Domain Language",
+        version: "2015",
+      },
+    ],
+    status: "stable",
+    generated: { by: "process:project-flow", at: timestamp },
+    verified: [],
+    terms: [],
+    history: [],
+  };
+  return renderJsonConcept(data, languageBody(data));
+}
+
+function ensureLanguageFile(paths, config) {
+  if (!existsSync(paths.language)) writeText(paths.language, newLanguageConcept(config));
+}
+
+function refreshLanguageFile(paths, config) {
+  ensureLanguageFile(paths, config);
+  const { data } = parseFrontmatter(readText(paths.language), true);
+  const errors = languageConceptErrors(data, "", paths.language, false);
+  if (errors.length) fail(errors.join("\n"));
+  const body = languageBody(data);
+  const rendered = renderJsonConcept(data, body);
+  if (readText(paths.language) !== rendered) writeText(paths.language, rendered);
+}
+
+function languageConceptErrors(data, body, path, checkBody = true) {
+  const errors = [];
+  if (data.type !== "UbiquitousLanguage") errors.push(`${path}: type must be UbiquitousLanguage.`);
+  if (data.status !== "stable") errors.push(`${path}: status must be stable.`);
+  if (!nonEmptyString(data.title)) errors.push(`${path}: title must be a non-empty string.`);
+  if (!nonEmptyString(data.description)) errors.push(`${path}: description must be a non-empty string.`);
+  if (!Array.isArray(data.terms)) errors.push(`${path}: terms must be an array.`);
+  if (!Array.isArray(data.history)) errors.push(`${path}: history must be an array.`);
+  if (
+    !Array.isArray(data.sources) ||
+    !data.sources.some((source) => source?.resource === LANGUAGE_SOURCE_URL)
+  ) {
+    errors.push(`${path}: sources must cite Eric Evans' DDD Reference.`);
+  }
+  if (errors.length) return errors;
+
+  const canonical = new Map();
+  const aliasOwners = new Map();
+  for (const [index, entry] of data.terms.entries()) {
+    const label = `${path}: terms[${index}]`;
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+      errors.push(`${label} must be an object.`);
+      continue;
+    }
+    if (
+      !nonEmptyString(entry.term) ||
+      entry.term !== oneLine(entry.term) ||
+      !/^[\p{L}\p{N}][\p{L}\p{N} ._/'&()+-]{0,79}$/u.test(entry.term)
+    ) {
+      errors.push(`${label}.term must be 1-80 plain-text characters.`);
+    } else {
+      const key = languageTermKey(entry.term);
+      if (canonical.has(key)) errors.push(`${label}.term duplicates ${canonical.get(key)}.`);
+      else canonical.set(key, entry.term);
+    }
+    if (!nonEmptyString(entry.definition) || entry.definition !== oneLine(entry.definition)) {
+      errors.push(`${label}.definition must be one non-empty line.`);
+    } else if (entry.definition.length > 500) {
+      errors.push(`${label}.definition cannot exceed 500 characters.`);
+    }
+    if (!LANGUAGE_STATUSES.includes(entry.status)) errors.push(`${label}.status is invalid.`);
+    errors.push(...stringArrayErrors(entry.aliases, `${label}.aliases`));
+    errors.push(...stringArrayErrors(entry.examples, `${label}.examples`));
+    if (Array.isArray(entry.aliases)) {
+      for (const alias of entry.aliases) {
+        if (
+          !nonEmptyString(alias) ||
+          alias !== oneLine(alias) ||
+          !/^[\p{L}\p{N}][\p{L}\p{N} ._/'&()+-]{0,79}$/u.test(alias)
+        ) {
+          errors.push(`${label}.aliases entries must be 1-80 plain-text characters.`);
+        }
+      }
+    }
+    if (Array.isArray(entry.examples)) {
+      for (const example of entry.examples) {
+        if (!nonEmptyString(example) || example !== oneLine(example) || example.length > 300) {
+          errors.push(`${label}.examples entries must be one line of at most 300 characters.`);
+        }
+      }
+    }
+    if (!nonEmptyString(entry.updatedBy)) errors.push(`${label}.updatedBy is required.`);
+    if (!nonEmptyString(entry.updatedAt) || Number.isNaN(Date.parse(entry.updatedAt))) {
+      errors.push(`${label}.updatedAt must be an ISO date-time.`);
+    }
+    if (entry.status === "active" && entry.replacement !== null) {
+      errors.push(`${label}.replacement must be null while active.`);
+    }
+    if (
+      entry.status === "deprecated" &&
+      entry.replacement !== null &&
+      !nonEmptyString(entry.replacement)
+    ) {
+      errors.push(`${label}.replacement must be null or a canonical term.`);
+    }
+  }
+
+  for (const entry of data.terms) {
+    if (!entry || typeof entry !== "object" || !Array.isArray(entry.aliases)) continue;
+    const owner = nonEmptyString(entry.term) ? entry.term : "unknown term";
+    const localAliases = new Set();
+    for (const alias of entry.aliases) {
+      if (!nonEmptyString(alias)) continue;
+      const key = languageTermKey(alias);
+      if (localAliases.has(key)) errors.push(`${path}: ${owner} contains duplicate alias ${alias}.`);
+      localAliases.add(key);
+      if (canonical.has(key)) errors.push(`${path}: alias ${alias} conflicts with canonical term ${canonical.get(key)}.`);
+      if (aliasOwners.has(key)) errors.push(`${path}: alias ${alias} belongs to both ${aliasOwners.get(key)} and ${owner}.`);
+      else aliasOwners.set(key, owner);
+    }
+    if (entry.status === "deprecated" && entry.replacement !== null) {
+      const replacement = data.terms.find(
+        (candidate) =>
+          nonEmptyString(candidate?.term) && languageTermKey(candidate.term) === languageTermKey(entry.replacement),
+      );
+      if (!replacement || replacement.status !== "active") {
+        errors.push(`${path}: replacement ${entry.replacement} for ${owner} must name an active canonical term.`);
+      }
+    }
+  }
+
+  for (const [index, event] of data.history.entries()) {
+    const label = `${path}: history[${index}]`;
+    if (!event || typeof event !== "object" || Array.isArray(event)) {
+      errors.push(`${label} must be an object.`);
+      continue;
+    }
+    if (!LANGUAGE_ACTIONS.includes(event.action)) errors.push(`${label}.action is invalid.`);
+    if (!nonEmptyString(event.term) || event.term !== oneLine(event.term)) {
+      errors.push(`${label}.term must be one non-empty line.`);
+    }
+    if (!nonEmptyString(event.by) || event.by !== oneLine(event.by) || event.by.length > 120) {
+      errors.push(`${label}.by must be one line of at most 120 characters.`);
+    }
+    if (
+      !nonEmptyString(event.reason) ||
+      event.reason !== oneLine(event.reason) ||
+      event.reason.length > 300
+    ) {
+      errors.push(`${label}.reason must be one line of at most 300 characters.`);
+    }
+    if (!nonEmptyString(event.at) || Number.isNaN(Date.parse(event.at))) {
+      errors.push(`${label}.at must be an ISO date-time.`);
+    }
+  }
+
+  if (checkBody && !errors.length && body !== `\n${languageBody(data)}` && body !== languageBody(data)) {
+    errors.push(`${path}: generated body is stale. Run setup refresh to regenerate it.`);
+  }
+  return errors;
+}
+
+function loadLanguage(paths) {
+  if (!existsSync(paths.language)) fail("The ubiquitous language file is missing. Run setup to refresh the workflow.");
+  const { data, body } = parseFrontmatter(readText(paths.language), true);
+  const errors = languageConceptErrors(data, body, paths.language);
+  if (errors.length) fail(errors.join("\n"));
+  return data;
 }
 
 function nextRecordId(directory, prefix, extension) {
@@ -1277,15 +1565,10 @@ function generateKnowledgeIndexes(paths, config) {
   visit(paths.knowledge);
 }
 
-function appendKnowledgeLog(paths, item, promotions) {
+function appendKnowledgeLogEntries(paths, entries) {
   const heading = "# Knowledge Update Log\n\n";
   let content = existsSync(paths.knowledgeLog) ? readText(paths.knowledgeLog) : heading;
   if (!content.startsWith("# Knowledge Update Log")) fail("Knowledge log has an invalid heading.");
-
-  const entries = promotions.map((promotion) => {
-    const label = markdownLabel(promotion.title ?? humanize(promotion.target.split("/").at(-1).slice(0, -3)));
-    return `* **Promotion**: ${item.key} promoted [${label}](/${promotion.target}).`;
-  });
   const dateHeading = `## ${today()}`;
 
   if (content.includes(`${dateHeading}\n`)) {
@@ -1295,6 +1578,14 @@ function appendKnowledgeLog(paths, item, promotions) {
     content = `${heading}${dateHeading}\n${entries.join("\n")}\n\n${remainder}`.trimEnd() + "\n";
   }
   writeText(paths.knowledgeLog, content);
+}
+
+function appendKnowledgeLog(paths, item, promotions) {
+  const entries = promotions.map((promotion) => {
+    const label = markdownLabel(promotion.title ?? humanize(promotion.target.split("/").at(-1).slice(0, -3)));
+    return `* **Promotion**: ${item.key} promoted [${label}](/${promotion.target}).`;
+  });
+  appendKnowledgeLogEntries(paths, entries);
 }
 
 function childrenOf(items, key) {
@@ -1525,6 +1816,9 @@ function syncGeneratedFiles(paths, config, items = loadItems(paths)) {
 
 function validateKnowledge(paths) {
   const errors = [];
+  if (!existsSync(paths.language)) {
+    errors.push(`${paths.language}: required ubiquitous language file is missing. Run setup to refresh the workflow.`);
+  }
 
   function visit(directory) {
     for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -1562,6 +1856,10 @@ function validateKnowledge(paths) {
         if (path.startsWith(`${paths.sources}${sep}`) && data.type !== "OfficialSource") {
           errors.push(`${path}: files under docs/knowledge/sources must use type OfficialSource.`);
         }
+        if (data.type === "UbiquitousLanguage" && path !== paths.language) {
+          errors.push(`${path}: UbiquitousLanguage must use docs/knowledge/ubiquitous-language.md.`);
+        }
+        if (path === paths.language) errors.push(...languageConceptErrors(data, body, path));
         errors.push(...officialSourceErrors(data, body, path));
       } catch (error) {
         errors.push(`${path}: ${error instanceof Error ? error.message : String(error)}`);
@@ -1715,6 +2013,7 @@ function commandInit(args) {
   ensureWorktreeLayout(paths, config);
   copyFileSync(SCRIPT_PATH, paths.cli);
   chmodSync(paths.cli, 0o755);
+  refreshLanguageFile(paths, config);
   writeText(paths.knowledgeLog, `# Knowledge Update Log\n\n## ${today()}\n* **Initialization**: Created the knowledge bundle.\n`);
   syncGeneratedFiles(paths, config, []);
   console.log(`Initialized ${projectName} at ${paths.project}`);
@@ -1757,6 +2056,7 @@ function commandInstall(args) {
   mkdirSync(paths.briefs, { recursive: true });
   mkdirSync(paths.releases, { recursive: true });
   mkdirSync(paths.outcomes, { recursive: true });
+  refreshLanguageFile(paths, config);
   ensureWorktreeLayout(paths, config);
   syncGeneratedFiles(paths, config);
   if (resolve(SCRIPT_PATH) === resolve(paths.cli)) {
@@ -2170,6 +2470,210 @@ function commandReview(args, paths, config) {
   saveItem(paths, item);
   syncGeneratedFiles(paths, config);
   console.log(`Recorded ${status} review for ${key}.`);
+}
+
+function languageMutationIdentity(args) {
+  return {
+    actor: languageTextInput(option(args, "by", true), "Language actor", 120),
+    reason: languageTextInput(option(args, "reason", true), "Language change reason", 300),
+  };
+}
+
+function canonicalLanguageEntry(data, requested) {
+  const term = languageTermInput(requested);
+  const entry = data.terms.find((candidate) => languageTermKey(candidate.term) === languageTermKey(term));
+  if (!entry) fail(`Language term ${term} does not exist.`);
+  return entry;
+}
+
+function visibleLanguageEntry(data, requested) {
+  const term = languageTermInput(requested);
+  const canonical = data.terms.find(
+    (candidate) => languageTermKey(candidate.term) === languageTermKey(term),
+  );
+  if (canonical) return { entry: canonical, matchedAlias: null };
+  const alias = data.terms.find((candidate) =>
+    candidate.aliases.some((value) => languageTermKey(value) === languageTermKey(term)),
+  );
+  if (!alias) fail(`Language term or alias ${term} does not exist.`);
+  return { entry: alias, matchedAlias: term };
+}
+
+function saveLanguage(paths, config, data, event) {
+  data.terms.sort(compareLanguageEntries);
+  data.updatedAt = event.at;
+  data.verified = [
+    ...(Array.isArray(data.verified) ? data.verified : []),
+    { by: event.by, at: event.at },
+  ];
+  data.history.push(event);
+  const body = languageBody(data);
+  const errors = languageConceptErrors(data, `\n${body}`, paths.language);
+  if (errors.length) fail(errors.join("\n"));
+  writeText(paths.language, renderJsonConcept(data, body));
+  appendKnowledgeLogEntries(paths, [
+    `* **Language**: ${humanize(event.action)} ${markdownLabel(event.term)} by ${markdownLabel(event.by)}.`,
+  ]);
+  syncGeneratedFiles(paths, config);
+}
+
+function commandLanguageAdd(args, paths, config) {
+  requireLanguageMutationLocation(paths, config);
+  const data = loadLanguage(paths);
+  const term = languageTermInput(option(args, "term", true));
+  if (data.terms.some((entry) => languageTermKey(entry.term) === languageTermKey(term))) {
+    fail(`Language term ${term} already exists. Use language-update.`);
+  }
+  const definition = languageTextInput(option(args, "definition", true), "Definition", 500);
+  const aliases = languageListInput(options(args, "alias"), "Alias", "term");
+  const examples = languageListInput(options(args, "example"), "Example", "text");
+  const { actor, reason } = languageMutationIdentity(args);
+  const timestamp = now();
+  data.terms.push({
+    term,
+    definition,
+    aliases,
+    examples,
+    status: "active",
+    replacement: null,
+    updatedAt: timestamp,
+    updatedBy: actor,
+  });
+  saveLanguage(paths, config, data, {
+    action: "added",
+    term,
+    at: timestamp,
+    by: actor,
+    reason,
+  });
+  console.log(`Added language term ${term}.`);
+}
+
+function commandLanguageUpdate(args, paths, config) {
+  requireLanguageMutationLocation(paths, config);
+  const data = loadLanguage(paths);
+  const entry = canonicalLanguageEntry(data, requiredPositional(args, 1, "canonical language term"));
+  if (
+    !hasOption(args, "definition") &&
+    !hasOption(args, "alias") &&
+    !hasOption(args, "example") &&
+    !hasOption(args, "replacement")
+  ) {
+    fail("Change --definition, --alias, --example, or --replacement.");
+  }
+  const { actor, reason } = languageMutationIdentity(args);
+  const previous = {
+    definition: entry.definition,
+    aliases: [...entry.aliases],
+    examples: [...entry.examples],
+    replacement: entry.replacement,
+  };
+  if (hasOption(args, "definition")) {
+    entry.definition = languageTextInput(option(args, "definition", true), "Definition", 500);
+  }
+  if (hasOption(args, "alias")) {
+    entry.aliases = languageListInput(options(args, "alias"), "Alias", "term");
+  }
+  if (hasOption(args, "example")) {
+    entry.examples = languageListInput(options(args, "example"), "Example", "text");
+  }
+  if (hasOption(args, "replacement")) {
+    if (entry.status !== "deprecated") {
+      fail("Only a deprecated term can have a replacement.");
+    }
+    const requestedReplacement = option(args, "replacement");
+    if (requestedReplacement === undefined) {
+      entry.replacement = null;
+    } else {
+      const replacementEntry = canonicalLanguageEntry(data, requestedReplacement);
+      if (replacementEntry === entry) fail("A deprecated term cannot replace itself.");
+      if (replacementEntry.status !== "active") fail("A replacement must be an active canonical term.");
+      entry.replacement = replacementEntry.term;
+    }
+  }
+  const current = {
+    definition: entry.definition,
+    aliases: [...entry.aliases],
+    examples: [...entry.examples],
+    replacement: entry.replacement,
+  };
+  if (JSON.stringify(current) === JSON.stringify(previous)) {
+    fail("The requested language update does not change the term.");
+  }
+  const timestamp = now();
+  entry.updatedAt = timestamp;
+  entry.updatedBy = actor;
+  saveLanguage(paths, config, data, {
+    action: "updated",
+    term: entry.term,
+    at: timestamp,
+    by: actor,
+    reason,
+    previous,
+  });
+  console.log(`Updated language term ${entry.term}.`);
+}
+
+function commandLanguageDeprecate(args, paths, config) {
+  requireLanguageMutationLocation(paths, config);
+  const data = loadLanguage(paths);
+  const entry = canonicalLanguageEntry(data, requiredPositional(args, 1, "canonical language term"));
+  if (entry.status !== "active") fail(`${entry.term} is already deprecated.`);
+  const requestedReplacement = option(args, "replacement");
+  let replacement = null;
+  if (requestedReplacement !== undefined) {
+    const replacementEntry = canonicalLanguageEntry(data, requestedReplacement);
+    if (replacementEntry === entry) fail("A deprecated term cannot replace itself.");
+    if (replacementEntry.status !== "active") fail("A replacement must be an active canonical term.");
+    replacement = replacementEntry.term;
+  }
+  const dependents = data.terms.filter(
+    (candidate) =>
+      candidate.status === "deprecated" &&
+      nonEmptyString(candidate.replacement) &&
+      languageTermKey(candidate.replacement) === languageTermKey(entry.term),
+  );
+  if (dependents.length) {
+    fail(`Update these replacement links before deprecating ${entry.term}: ${dependents.map((item) => item.term).join(", ")}.`);
+  }
+  const { actor, reason } = languageMutationIdentity(args);
+  const timestamp = now();
+  entry.status = "deprecated";
+  entry.replacement = replacement;
+  entry.updatedAt = timestamp;
+  entry.updatedBy = actor;
+  saveLanguage(paths, config, data, {
+    action: "deprecated",
+    term: entry.term,
+    at: timestamp,
+    by: actor,
+    reason,
+    previous: { status: "active", replacement: null },
+  });
+  console.log(`Deprecated language term ${entry.term}.`);
+}
+
+function commandLanguageShow(args, paths) {
+  const data = loadLanguage(paths);
+  const requested = args.positionals[1];
+  if (!requested) {
+    console.log(languageBody(data).trimEnd());
+    return;
+  }
+  const { entry, matchedAlias } = visibleLanguageEntry(data, requested);
+  console.log(
+    JSON.stringify(
+      {
+        ...entry,
+        matchedAlias,
+        history: data.history.filter(
+          (event) => languageTermKey(event.term) === languageTermKey(entry.term),
+        ),
+      },
+      null,
+      2,
+    ),
+  );
 }
 
 function commandSourceAdd(args, paths, config) {
@@ -2915,6 +3419,10 @@ Usage:
   project-flow.mjs accept KEY AC-N --status pending|pass|fail [--evidence TEXT]
   project-flow.mjs verify KEY
   project-flow.mjs review KEY --status STATUS --reviewer ACTOR [review evidence]
+  project-flow.mjs language-add --term TERM --definition TEXT --by ACTOR --reason TEXT [options]
+  project-flow.mjs language-update TERM --by ACTOR --reason TEXT [options]
+  project-flow.mjs language-deprecate TERM --by ACTOR --reason TEXT [--replacement TERM]
+  project-flow.mjs language-show [TERM]
   project-flow.mjs source-add --target PATH --title TEXT --publisher TEXT [options]
   project-flow.mjs brief-create --title TEXT --problem TEXT --outcome TEXT [options]
   project-flow.mjs brief-confirm BRIEF-N --by ACTOR
@@ -2985,6 +3493,14 @@ Review evidence:
   --base REF                    Fixed point or "initial tree".
   --standards TEXT              Independent Standards result.
   --spec TEXT                   Independent Spec result.
+
+Language options:
+  --alias TERM                  Repeat accepted aliases. Prefer the canonical term.
+  --example TEXT                Repeat examples of correct usage.
+  --replacement TERM           Change a deprecated term's active replacement.
+  language-update replaces an array when its option is present.
+  Pass --alias, --example, or --replacement without a value to clear it.
+  Deprecate obsolete terms. Language terms are never deleted.
 
 Official source options:
   --url HTTPS_URL              Canonical official documentation page.
@@ -3064,6 +3580,18 @@ function main() {
       return commandVerify(args, paths, config);
     case "review":
       commandReview(args, paths, config);
+      return true;
+    case "language-add":
+      commandLanguageAdd(args, paths, config);
+      return true;
+    case "language-update":
+      commandLanguageUpdate(args, paths, config);
+      return true;
+    case "language-deprecate":
+      commandLanguageDeprecate(args, paths, config);
+      return true;
+    case "language-show":
+      commandLanguageShow(args, paths);
       return true;
     case "source-add":
       commandSourceAdd(args, paths, config);

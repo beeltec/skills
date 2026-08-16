@@ -137,6 +137,7 @@ Include these fields in every implementation assignment:
 - exact outcome and acceptance criteria covered;
 - owned paths and excluded paths;
 - relevant project knowledge and official source-note paths;
+- the ubiquitous language path and relevant canonical terms;
 - the live-verification time for every external rule in the packet;
 - focused checks to run;
 - assigned model's safe context budget;
@@ -159,6 +160,9 @@ create knowledge, run the final review, or commit unless assigned a complete
 packet. Require Conventional Commits for assigned commits. Tell them not to
 substitute model memory for supplied official sources. Do not use subagents
 only to verify the coordinator's work.
+
+Tell subagents not to add or redefine project terms. They must report a
+language conflict to the ticket agent.
 
 ## Coordinate and integrate
 

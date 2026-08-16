@@ -13,15 +13,16 @@ small local evidence cache so later agents can find and verify the same facts.
 1. Read [references/source-policy.md](references/source-policy.md).
 2. Require `.project/workflow.json`. Use `setup` when it is missing.
 3. Inspect the request, brief, work item, release or outcome record, manifests, lockfiles, and relevant code.
-4. Read `docs/knowledge/sources/index.md` and only the relevant source notes.
-5. List the external facts that can materially change the work.
-6. Search for each fact using the official publisher or standards body.
-7. Open the actual documentation page. Never rely on a search snippet.
-8. Match the page to the installed version and intended environment.
-9. Compare the live page with the local note.
-10. Create or refresh one concise note per official page.
-11. Run `sync` and `validate`.
-12. Report note paths, verified facts, versions, and unresolved conflicts.
+4. Read `docs/knowledge/ubiquitous-language.md` and use its active Ubiquitous Language terms.
+5. Read `docs/knowledge/sources/index.md` and only the relevant source notes.
+6. List the external facts that can materially change the work.
+7. Search for each fact using the official publisher or standards body.
+8. Open the actual documentation page. Never rely on a search snippet.
+9. Match the page to the installed version and intended environment.
+10. Compare the live page with the local note.
+11. Create missing notes. Refresh notes when claims, version, scope, URL, or required freshness evidence changes.
+12. Run `sync` and `validate`.
+13. Report note paths, verified facts, versions, and unresolved conflicts.
 
 Use model memory only to form search queries. Do not use it as evidence.
 
@@ -53,3 +54,4 @@ that should remain because a refresh replaces the previous note.
 - Treat the local note as a cache. The live official page wins on conflict.
 - Do not claim that a version-sensitive fact is current when web access fails.
 - Do not change product code, brief, work-item, release, outcome, or product scope.
+- Do not let external documentation define or change agreed project vocabulary.

@@ -19,17 +19,20 @@ work item through the knowledge promotion gate.
 7. Return to `implement` and `review` when the target has advanced.
 8. Confirm the item is `in-review` with zero P0, P1, and P2 findings.
 9. Review acceptance evidence and the latest check results.
-10. Read `docs/knowledge/sources/index.md` and relevant source notes.
-11. Use `$source` to refresh official docs cited by the completed work.
-12. Read the implemented code and relevant established concepts.
-13. Create small drafts for durable facts and verify them against code.
-14. Run `complete <KEY>` and fix any rejected gate.
-15. Commit the completion changes with `docs(<key>): establish knowledge`.
-16. Return to the clean target-branch worktree.
-17. Run `worktree-finish <KEY>` to merge, remove the worktree, and delete the branch.
-18. Run `validate` and report the merge commit, promoted paths, and resolution.
-19. State clearly that ticket `done` means merged and documented, not released.
-20. Hand releasable ticket groups to `ship`.
+10. Read `docs/knowledge/ubiquitous-language.md` as the project Ubiquitous Language.
+11. Read `docs/knowledge/sources/index.md` and relevant source notes.
+12. Use `$source` to refresh official docs cited by the completed work.
+13. Read the implemented code and relevant established concepts.
+14. Use active canonical terms in each knowledge draft.
+15. Resolve missing or changed meanings through `$language` before completion.
+16. Create small drafts for durable facts and verify them against code.
+17. Run `complete <KEY>` and fix any rejected gate.
+18. Commit the completion changes with `docs(<key>): establish knowledge`.
+19. Return to the clean target-branch worktree.
+20. Run `worktree-finish <KEY>` to merge, remove the worktree, and delete the branch.
+21. Run `validate` and report the merge commit, promoted paths, and resolution.
+22. State clearly that ticket `done` means merged and documented, not released.
+23. Hand releasable ticket groups to `ship`.
 
 ## Create a draft
 
@@ -76,3 +79,4 @@ sets a resolution, and refreshes the knowledge indexes, log, and work board.
 - Never force-remove a worktree or force-delete a ticket branch.
 - Do not push or delete remote branches unless the user requests it.
 - Do not create a release record or run a deployment from this skill.
+- Do not stage `ubiquitous-language.md` through a ticket knowledge draft.

@@ -83,12 +83,17 @@ Read the relevant notes under `docs/knowledge/sources/`. Re-open each canonical
 URL through `source` before enforcing an external API or vendor rule. Cite the
 note and official URL in the finding. Never use model memory as review evidence.
 
+Read `docs/knowledge/ubiquitous-language.md`. Check that behavior, domain-facing
+names, tests, and documentation use the same agreed meaning. Do not report
+exact vendor identifiers or framework names as vocabulary drift.
+
 Check the change against documented rules. Repository rules take priority.
 Do not repeat failures already reported by configured checks.
 
 Then look for maintainability risks. Treat these as judgement calls:
 
 - unclear names or responsibilities;
+- names that conflict with an active canonical project term;
 - duplicated logic or repeated branching;
 - related values that need one typed model;
 - domain concepts represented by unsafe primitives;

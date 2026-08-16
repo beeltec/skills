@@ -12,7 +12,7 @@ separate from deployment or publication.
 
 1. Read [references/release-contract.md](references/release-contract.md).
 2. Require `.project/workflow.json`. Use `setup` when it is missing.
-3. Read the work board, release index, knowledge index, and source index.
+3. Read the board, indexes, and `docs/knowledge/ubiquitous-language.md` as the Ubiquitous Language.
 4. Require a clean configured target-branch worktree.
 5. Select only `done` tickets already merged into that target branch.
 6. Create one release record when no suitable planned release exists.
@@ -33,8 +33,9 @@ separate from deployment or publication.
 21. Record `failed` or `rolled-back`, then create a linked bug through `discuss` and `plan`.
 22. Record `green` only when all checks pass. Let the command establish release knowledge.
 23. Create one outcome record per confirmed brief included in the release.
-24. Run `validate` and commit the release evidence with a Conventional Commit.
-25. Report the release ID, commit, artifact, target, checks, result, and recovery state.
+24. Use active canonical terms in release records and user-facing release notes.
+25. Run `validate` and commit the release evidence with a Conventional Commit.
+26. Report the release ID, commit, artifact, target, checks, result, and recovery state.
 
 ## Commands
 
@@ -80,3 +81,4 @@ git commit -m "docs(rel-1): record verified release"
 - Do not overwrite a failed attempt. Create another release record.
 - Do not change ticket `done` state during release work.
 - Do not establish failed or rolled-back behavior as the current deployed state.
+- Do not redefine project vocabulary during a release.

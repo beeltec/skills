@@ -2,9 +2,12 @@
 
 ## Project state workflow
 
-- Run `setup` once. Then use `source`, `discuss`, `plan`, `implement`, `review`, `document`, `ship`, and `measure`.
+- Run `setup` once. Then use `source`, `language`, `discuss`, `plan`, `implement`, `review`, `document`, `ship`, and `measure`.
 - Use `next` when the current workflow action is unclear.
-- Read `docs/knowledge/index.md` and `docs/knowledge/sources/index.md` first.
+- Read `docs/knowledge/index.md`, `docs/knowledge/ubiquitous-language.md`, and `docs/knowledge/sources/index.md` first.
+- Use active canonical project terms across discussion, work, code, tests, and knowledge.
+- Use `language` only after explicit user agreement to add, revise, or deprecate terms.
+- Do not introduce other Domain-Driven Design patterns through this rule.
 - Treat model memory as a search lead, not factual evidence.
 - Verify material external claims against current official documentation.
 - Save concise source notes under `docs/knowledge/sources/`.

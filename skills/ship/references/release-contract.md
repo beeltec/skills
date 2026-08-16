@@ -6,8 +6,9 @@
 2. `docs/work/releases/<REL-N>.json`, when it exists
 3. `docs/work/board.md` and every included ticket
 4. `docs/knowledge/index.md`
-5. `docs/knowledge/sources/index.md` and relevant source notes
-6. Project build, migration, deployment, and recovery configuration
+5. `docs/knowledge/ubiquitous-language.md`
+6. `docs/knowledge/sources/index.md` and relevant source notes
+7. Project build, migration, deployment, and recovery configuration
 
 ## State model
 
@@ -42,6 +43,9 @@ Record concise evidence that another agent can verify:
 Do not place secrets, complete provider logs, or transient tokens in records.
 Build and release that exact target commit. Do not attach current tickets to an
 older artifact.
+
+Use active canonical project terms in release records and communication. Keep
+exact provider, environment, artifact, and API identifiers unchanged.
 
 Use a provider-built artifact, CI job, `git archive`, or clean detached checkout.
 Never let uncommitted release records change the artifact. Prefer a provider

@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow and its Git policy. Create `.project/`, `docs/knowledge/`, `docs/work/`, and `.woktrees/`; install the local workflow CLI; configure `main` as the default integration branch; add project rules to `AGENTS.md`; and seed verified knowledge and official source notes. Use once before discussion or planning. Do not create briefs, work items, releases, outcomes, or product code.
+description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow and its Git policy. Create `.project/`, `docs/knowledge/`, `docs/work/`, `.woktrees/`, and the shared ubiquitous language file; install the local workflow CLI; configure `main` as the default integration branch; add project rules to `AGENTS.md`; and seed verified knowledge and official source notes. Use once before discussion or planning. Do not create briefs, work items, releases, outcomes, or product code.
 ---
 
 # Setup
@@ -24,12 +24,15 @@ Use Node.js 20.9 or newer for the bundled workflow CLI.
 11. Run the initialization command.
 12. Confirm `.woktrees/` exists and `/.woktrees/` is ignored by Git.
 13. Confirm the brief, release, outcome, source, item, and knowledge folders exist.
-14. Add the reference's workflow block to `AGENTS.md` without removing rules.
-15. Use `$source` to cache current Git, Jira dependency, commit, and branch rules.
-16. Use `$source` to verify official docs for material detected technologies.
-17. Add small OKF concepts only for facts verified from the repository.
-18. Run `sync` and `validate`.
-19. Report the target branch, missing initial commit, created paths, and sources.
+14. Confirm `docs/knowledge/ubiquitous-language.md` exists.
+15. Add the reference's workflow block to `AGENTS.md` without removing rules.
+16. Use `$source` to cache the Ubiquitous Language principle from Eric Evans.
+17. Store it at `docs/knowledge/sources/methods/ubiquitous-language.md`.
+18. Use `$source` to cache current Git, Jira dependency, commit, and branch rules.
+19. Use `$source` to verify official docs for material detected technologies.
+20. Add small OKF concepts only for facts verified from the repository.
+21. Run `sync` and `validate`.
+22. Report the target branch, missing initial commit, created paths, and sources.
 
 Ask for the project key or name only when repository context cannot provide a
 safe value.
@@ -63,6 +66,7 @@ node .project/bin/project-flow.mjs validate
 - Do not merge legacy or conflicting state automatically.
 - Do not overwrite existing knowledge or AGENTS.md rules.
 - Do not create briefs, tickets, releases, or outcome records.
+- Do not add vocabulary terms without explicit user agreement.
 - Do not modify product code.
 - Do not turn model memory into project knowledge or source notes.
 - Do not rename an established integration branch without user approval.

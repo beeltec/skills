@@ -14,6 +14,24 @@
       "forbiddenSkills": ["implement", "document"]
     },
     {
+      "id": "language-define-term",
+      "prompt": "We agreed that Customer means the paying organization. Add this to our shared project vocabulary.",
+      "expectedSkill": "language",
+      "forbiddenSkills": ["plan", "document"]
+    },
+    {
+      "id": "language-lookup-term",
+      "prompt": "What does Work item mean in this project, and which aliases are accepted for it?",
+      "expectedSkill": "language",
+      "forbiddenSkills": ["source", "implement"]
+    },
+    {
+      "id": "language-retire-term",
+      "prompt": "Retire the project term Todo and record Task as its canonical replacement.",
+      "expectedSkill": "language",
+      "forbiddenSkills": ["plan", "implement"]
+    },
+    {
       "id": "discuss-vague-idea",
       "prompt": "I have an idea for team reminders. Challenge it before we build anything.",
       "expectedSkill": "discuss",

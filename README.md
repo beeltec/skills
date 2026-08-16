@@ -3,6 +3,7 @@
 This workflow keeps project truth and planned work in separate spaces.
 
 - Established knowledge lives in `docs/knowledge/` as Open Knowledge Format v0.2.
+- Agreed project terms live in `docs/knowledge/ubiquitous-language.md`.
 - Official documentation notes live in `docs/knowledge/sources/`.
 - Desired state lives in `docs/work/` as briefs, tickets, releases, and outcomes.
 - Completed work promotes drafted knowledge only after every declared gate passes.
@@ -14,16 +15,21 @@ Use the skills as one suite:
 
 1. `setup` initializes the workflow once.
 2. `source` verifies external facts through live official documentation.
-3. `discuss` resolves product and technical choices.
-4. `plan` creates Jira-like work items.
-5. `implement` gives each ticket a branch and worktree, then changes code.
-6. `review` checks Standards and Spec until both have no P0-P2 findings.
-7. `document` promotes knowledge, merges green work, and removes its branch and worktree.
-8. `ship` releases done tickets and verifies the deployed or published result.
-9. `measure` compares product evidence with the brief's agreed success measure.
+3. `language` manages terms explicitly agreed with the user.
+4. `discuss` resolves product and technical choices.
+5. `plan` creates Jira-like work items.
+6. `implement` gives each ticket a branch and worktree, then changes code.
+7. `review` checks Standards and Spec until both have no P0-P2 findings.
+8. `document` promotes knowledge, merges green work, and removes its branch and worktree.
+9. `ship` releases done tickets and verifies the deployed or published result.
+10. `measure` compares product evidence with the brief's agreed success measure.
+11. `next` finds the smallest valid next action without changing project state.
 
 Use `next` at any point when the correct workflow action is unclear. It reads
 local state and recommends one action without changing the project.
+
+Use `language` whenever a project term is unclear or changes meaning. It applies
+only the Ubiquitous Language principle from DDD. It adds no other DDD process.
 
 `source` is also a gate before every later stage. It reads the local source
 index, opens relevant official pages, and refreshes concise source notes. The
@@ -31,6 +37,10 @@ workflow never treats model memory or a search-result snippet as authority.
 
 The setup skill installs a dependency-free Node.js CLI at
 `.project/bin/project-flow.mjs`. The remaining skills use that local copy.
+
+The CLI creates `docs/knowledge/ubiquitous-language.md`. Use `language-show`,
+`language-add`, `language-update`, and `language-deprecate` to manage it. Every
+change records the actor, reason, time, and prior value.
 
 ## Link skills into a project
 
@@ -161,6 +171,7 @@ Ask `next` to locate the current position and choose the next valid skill.
 
 The `source` skill verifies current official documentation at every stage.
 Run `brief-show`, `release-show`, and `outcome-show` to inspect their evidence.
+Run `language-show` to inspect the agreed vocabulary.
 
 Run `node .project/bin/project-flow.mjs help` for every command.
 

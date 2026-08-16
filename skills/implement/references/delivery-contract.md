@@ -9,9 +9,10 @@ Read these files from the designated ticket worktree:
 3. The confirmed brief named by the item
 4. `docs/work/handoffs/<KEY>.md`, when it exists
 5. `docs/knowledge/index.md`
-6. `docs/knowledge/sources/index.md` and relevant official source notes
-7. Relevant project concepts
-8. Relevant code and tests
+6. `docs/knowledge/ubiquitous-language.md`
+7. `docs/knowledge/sources/index.md` and relevant official source notes
+8. Relevant project concepts
+9. Relevant code and tests
 
 This order separates intended work from established facts.
 
@@ -21,6 +22,10 @@ constraint. Treat model memory only as a search lead.
 
 A handoff contains temporary implementation state. Verify it against the item,
 the fixed point, and the current worktree before continuing.
+
+Use canonical project terms when the same concepts appear in behavior, code,
+tests, and documentation. Do not rename exact external API identifiers. Stop
+for `language` when implementation reveals a disputed meaning.
 
 Confirm that the branch contains the ticket key and follows Conventional
 Branch 1.1.0. Stop if the agent is in the main worktree or another ticket's

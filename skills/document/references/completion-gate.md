@@ -16,6 +16,7 @@ Source: https://support.atlassian.com/jira-cloud-administration/docs/configure-r
 - Compare each acceptance criterion with its evidence.
 - Check the last check run time against the relevant source changes.
 - Confirm relevant official source notes were refreshed in this work session.
+- Confirm promoted knowledge uses active canonical project terms.
 - Confirm Standards and Spec both report zero P0, P1, and P2 findings.
 - Inspect every child and blocker.
 - Compare each staged concept with the implemented code and tests.
@@ -36,6 +37,10 @@ review.
 
 If an official page conflicts with a source note, refresh the note and return
 affected code or decisions to the appropriate workflow stage.
+
+If a project term is missing or disputed, use `language` for explicit user
+agreement. Never stage the workflow-managed ubiquitous language file as a
+ticket knowledge candidate.
 
 If a child or blocker remains open, complete that work first.
 

@@ -160,6 +160,16 @@ function readItem(root, key) {
   return JSON.parse(readFileSync(join(root, "docs", "work", "items", `${key}.json`), "utf8"));
 }
 
+function readLanguage(root) {
+  const content = readFileSync(
+    join(root, "docs", "knowledge", "ubiquitous-language.md"),
+    "utf8",
+  );
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  assert.ok(match, "The ubiquitous language file needs JSON frontmatter.");
+  return { data: JSON.parse(match[1]), body: match[2] };
+}
+
 function createConfirmedBrief(root) {
   run(root, [
     "brief-create",
@@ -206,6 +216,7 @@ test("completes a hierarchy and promotes knowledge", (context) => {
 
   run(root, ["init", "--key", "FLOW", "--name", "Flow Example"]);
   assert.ok(existsSync(join(root, "docs", "knowledge", "index.md")));
+  assert.ok(existsSync(join(root, "docs", "knowledge", "ubiquitous-language.md")));
   assert.ok(existsSync(join(root, "docs", "knowledge", "sources", "index.md")));
   assert.ok(existsSync(join(root, "docs", "knowledge", "releases")));
   assert.ok(existsSync(join(root, "docs", "knowledge", "outcomes")));
@@ -423,6 +434,7 @@ test("records and refreshes official source notes", (context) => {
   run(root, ["init", "--key", "SRC", "--name", "Source Example"]);
   const configPath = join(root, ".project", "workflow.json");
   const legacyConfig = JSON.parse(readFileSync(configPath, "utf8"));
+  rmSync(join(root, "docs", "knowledge", "ubiquitous-language.md"));
   delete legacyConfig.git;
   legacyConfig.definitionOfDone = legacyConfig.definitionOfDone.filter(
     (entry) => entry !== "Relevant external claims cite refreshed official source notes.",
@@ -437,6 +449,14 @@ test("records and refreshes official source notes", (context) => {
   );
   assert.equal(refreshedConfig.git.targetBranch, "main");
   assert.equal(refreshedConfig.git.worktreeDirectory, ".woktrees");
+  const languagePath = join(root, "docs", "knowledge", "ubiquitous-language.md");
+  assert.ok(existsSync(languagePath));
+
+  writeFileSync(languagePath, readFileSync(languagePath, "utf8").replace("No active terms yet.", "Stale body."));
+  assert.match(run(root, ["validate"], 1).stderr, /generated body is stale/);
+  run(root, ["install"]);
+  assert.match(readFileSync(languagePath, "utf8"), /No active terms yet/);
+  run(root, ["validate"]);
 
   const addArguments = [
     "source-add",
@@ -501,6 +521,177 @@ test("records and refreshes official source notes", (context) => {
   run(root, [...addArguments, "--claim", "Prepared statements support bound values.", "--force"]);
   assert.match(readFileSync(notePath, "utf8"), /Prepared statements support bound values/);
   run(root, ["validate"]);
+});
+
+test("manages an agreed ubiquitous language without deleting history", (context) => {
+  const root = mkdtempSync(join(tmpdir(), "project-flow-language-"));
+  context.after(() => rmSync(root, { recursive: true, force: true }));
+
+  run(root, ["init", "--key", "TERM", "--name", "Language Example"]);
+  const initial = readLanguage(root);
+  assert.equal(initial.data.type, "UbiquitousLanguage");
+  assert.deepEqual(initial.data.terms, []);
+  assert.match(initial.body, /does not adopt other Domain-Driven Design patterns/);
+
+  run(root, [
+    "language-add",
+    "--term",
+    "Task",
+    "--definition",
+    "A piece of user work that can be completed.",
+    "--alias",
+    "todo",
+    "--example",
+    "A user completes a task.",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "The user confirmed this project meaning.",
+  ]);
+  const alias = run(root, ["language-show", "todo"]).stdout;
+  assert.match(alias, /"term": "Task"/);
+  assert.match(alias, /"matchedAlias": "todo"/);
+
+  const duplicate = run(root, [
+    "language-add",
+    "--term",
+    "task",
+    "--definition",
+    "A conflicting definition.",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "This should fail.",
+  ], 1);
+  assert.match(duplicate.stderr, /already exists/);
+
+  const aliasConflict = run(root, [
+    "language-add",
+    "--term",
+    "Todo",
+    "--definition",
+    "A second canonical meaning.",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "This should fail.",
+  ], 1);
+  assert.match(aliasConflict.stderr, /alias todo conflicts with canonical term Todo/i);
+
+  run(root, [
+    "language-update",
+    "Task",
+    "--definition",
+    "A tracked piece of user work that can be completed.",
+    "--alias",
+    "--example",
+    "A user completes a task.",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "The user removed the ambiguous alias.",
+  ]);
+  run(root, [
+    "language-add",
+    "--term",
+    "Work item",
+    "--definition",
+    "A unit tracked in the delivery workflow.",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "The user separated product tasks from delivery records.",
+  ]);
+  run(root, [
+    "language-deprecate",
+    "Task",
+    "--replacement",
+    "Work item",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "The old term no longer has one clear meaning.",
+  ]);
+  run(root, ["validate"]);
+
+  const language = readLanguage(root);
+  const task = language.data.terms.find((entry) => entry.term === "Task");
+  assert.equal(task.status, "deprecated");
+  assert.equal(task.replacement, "Work item");
+  assert.equal(task.aliases.length, 0);
+  assert.deepEqual(language.data.history.map((entry) => entry.action), [
+    "added",
+    "updated",
+    "added",
+    "deprecated",
+  ]);
+  assert.match(language.body, /# Active terms[\s\S]*## Work item/);
+  assert.match(language.body, /# Deprecated terms[\s\S]*## Task/);
+  assert.match(
+    readFileSync(join(root, "docs", "knowledge", "log.md"), "utf8"),
+    /\* \*\*Language\*\*: Deprecated Task by human:test-owner\./,
+  );
+
+  run(root, [
+    "language-add",
+    "--term",
+    "Work record",
+    "--definition",
+    "A durable record of delivery work.",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "The user confirmed a replacement for the delivery concept.",
+  ]);
+  run(root, [
+    "language-update",
+    "Task",
+    "--replacement",
+    "Work record",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "The replacement term changed before Work item was retired.",
+  ]);
+  run(root, [
+    "language-deprecate",
+    "Work item",
+    "--replacement",
+    "Work record",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "The user retired Work item in favor of Work record.",
+  ]);
+  run(root, ["validate"]);
+  const revisedLanguage = readLanguage(root);
+  assert.equal(
+    revisedLanguage.data.terms.find((entry) => entry.term === "Task").replacement,
+    "Work record",
+  );
+  assert.equal(
+    revisedLanguage.data.terms.find((entry) => entry.term === "Work item").replacement,
+    "Work record",
+  );
+
+  git(root, ["init", "-b", "main"]);
+  git(root, ["config", "user.name", "Workflow Test"]);
+  git(root, ["config", "user.email", "workflow@example.com"]);
+  git(root, ["add", "."]);
+  git(root, ["commit", "-m", "chore: establish language fixture"]);
+  git(root, ["switch", "-c", "feat/term-change"]);
+  const offTarget = run(root, [
+    "language-update",
+    "Work item",
+    "--definition",
+    "A changed definition that must not be written from a ticket branch.",
+    "--by",
+    "human:test-owner",
+    "--reason",
+    "This should fail.",
+  ], 1);
+  assert.match(offTarget.stderr, /must run on the configured target branch main/);
+  assert.match(run(root, ["language-show", "Work item"]).stdout, /A unit tracked in the delivery workflow/);
 });
 
 test("isolates ready tickets and merges only green worktrees", (context) => {

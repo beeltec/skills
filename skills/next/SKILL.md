@@ -1,6 +1,6 @@
 ---
 name: next
-description: Use this helper skill whenever a user asks what to do next, where the project is in the workflow, which workflow skill to use, why work cannot proceed, or how to resume after an interruption. Inspect local workflow, Git, brief, ticket, review, release, and outcome state. Recommend the single smallest valid next action without changing files, advancing state, or performing that action.
+description: Use this helper skill whenever a user asks what to do next, where the project is in the workflow, which workflow skill to use, why work cannot proceed, or how to resume after an interruption. Inspect local workflow, Git, shared language, brief, ticket, review, release, and outcome state. Recommend the single smallest valid next action without changing files, advancing state, or performing that action.
 ---
 
 # Next
@@ -14,7 +14,7 @@ not execution.
 2. If it is missing, recommend `$setup` and stop.
 3. Run the remaining checks from that project root.
 4. Read project `AGENTS.md` instructions and `.project/workflow.json`.
-5. Read `docs/knowledge/index.md` and `docs/knowledge/sources/index.md`.
+5. Read the indexes and `docs/knowledge/ubiquitous-language.md` as the project Ubiquitous Language.
 6. Read the work board and the brief, release, and outcome indexes.
 7. If `.project/bin/project-flow.mjs` is missing, recommend `$setup` and stop.
 8. Run `node .project/bin/project-flow.mjs validate` without changing state.
@@ -66,6 +66,7 @@ changed outcome.
 - Do not create an initial commit without user approval.
 - Do not run another workflow skill.
 - Do not infer state from model memory or conversation alone.
+- Do not guess what an ambiguous project term means.
 - Do not trust a stale generated index over its source record.
 - Do not recommend `implement` for an epic or an item with an open blocker.
 - Do not recommend `document` while a P0, P1, or P2 finding remains.

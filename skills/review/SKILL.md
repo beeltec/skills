@@ -21,18 +21,20 @@ Leave clean workflow items in `in-review`.
 9. If the target is missing, return to `implement` for synchronization.
 10. Validate the fixed point and confirm the review scope is not empty.
 11. Read the linked confirmed brief, item risk profile, and quality-gate evidence.
-12. Read `docs/knowledge/sources/index.md` and relevant source notes.
-13. Use `$source` to refresh external rules from official documentation.
-14. Read applicable repository standards and Git conventions.
-15. Run the Standards pass against the complete change and every declared gate.
-16. Run a fresh Spec pass against the originating work item or specification.
-17. Assign P0, P1, P2, or P3 to every finding.
-18. Report both results separately, including counts for every severity.
-19. If any P0, P1, or P2 exists, record `changes-requested`.
-20. Hand all blocking findings to `implement` and keep the fixed point.
-21. After fixes, rerun both complete passes against the updated change.
-22. Repeat steps 15-21 until both passes contain no P0, P1, or P2 findings.
-23. Record the passing review and move the item to `in-review`.
+12. Read `docs/knowledge/ubiquitous-language.md` as the project Ubiquitous Language.
+13. Read `docs/knowledge/sources/index.md` and relevant source notes.
+14. Use `$source` to refresh external rules from official documentation.
+15. Read applicable repository standards and Git conventions.
+16. Check canonical term use in behavior, code, tests, and documentation.
+17. Run the Standards pass against the complete change and every declared gate.
+18. Run a fresh Spec pass against the originating work item or specification.
+19. Assign P0, P1, P2, or P3 to every finding.
+20. Report both results separately, including counts for every severity.
+21. If any P0, P1, or P2 exists, record `changes-requested`.
+22. Hand all blocking findings to `implement` and keep the fixed point.
+23. After fixes, rerun both complete passes against the updated change.
+24. Repeat steps 17-23 until both passes contain no P0, P1, or P2 findings.
+25. Record the passing review and move the item to `in-review`.
 
 For a review without this workflow, return the two reports without recording a
 ticket transition. If fixes are not authorized, report that the review loop is
@@ -71,6 +73,8 @@ node .project/bin/project-flow.mjs transition APP-2 in-review
 - Do not approve only because automated checks pass.
 - Do not approve when a declared quality gate lacks applicable passing evidence.
 - Do not report an external API or vendor-rule finding from model memory alone.
+- Do not force project terms onto exact external API identifiers.
+- Send a disputed meaning to `$language`; do not decide it during review.
 - Do not treat a promise to fix later as a resolved finding.
 - Do not create or promote established knowledge.
 - Keep the item out of `in-review` while any P0, P1, or P2 remains.

@@ -66,6 +66,9 @@ Before `ready`, require:
 - every risk-required quality gate declared;
 - suitable verification commands for code changes.
 
+Use active terms from `docs/knowledge/ubiquitous-language.md`. A material term
+with no agreed meaning keeps the item out of `ready` until `language` resolves it.
+
 Risk factors activate these minimum gates:
 
 | Risk factor | Required quality gate |

@@ -66,7 +66,7 @@ test("review defines an auditable two-axis review", () => {
   assert.match(review, /## Review loop/);
   assert.match(review, /Repeat until both passes report zero P0, P1, and P2 findings/);
   assert.match(review, /Do not merge findings across axes/);
-  assert.match(skill, /Repeat steps 15-21 until both passes contain no P0, P1, or P2/);
+  assert.match(skill, /Repeat steps 17-23 until both passes contain no P0, P1, or P2/);
 });
 
 test("workflow loops blocking review findings through implementation", () => {
@@ -120,6 +120,52 @@ test("next recommends one read-only workflow action", () => {
   assert.match(routing, /A release is deploying/);
   assert.match(routing, /observation window is complete/);
   assert.match(routing, /Do not invent business priority/);
+});
+
+test("language manages only explicitly agreed ubiquitous language", () => {
+  const skill = readFileSync(join(SKILLS_ROOT, "language", "SKILL.md"), "utf8");
+  const contract = readFileSync(
+    join(SKILLS_ROOT, "language", "references", "language-contract.md"),
+    "utf8",
+  );
+  const cli = readFileSync(join(SKILLS_ROOT, "setup", "scripts", "project-flow.mjs"), "utf8");
+
+  assert.match(skill, /explicit user agreement/i);
+  assert.match(skill, /language-add/);
+  assert.match(skill, /language-update/);
+  assert.match(skill, /language-deprecate/);
+  assert.match(skill, /To rename a term, add the new canonical term/);
+  assert.match(skill, /Do not delete terms/);
+  assert.match(skill, /Ignore unrelated homonyms/);
+  assert.match(skill, /Do not introduce bounded contexts, aggregates, entities, repositories/);
+  assert.match(contract, /adopts only this Ubiquitous Language principle/i);
+  assert.match(contract, /one unique canonical term/);
+  assert.match(contract, /append-only change history/);
+  assert.match(contract, /create qualified terms instead of overloading/i);
+  assert.match(contract, /same project concept/i);
+  assert.match(cli, /case "language-add"/);
+  assert.match(cli, /case "language-update"/);
+  assert.match(cli, /case "language-deprecate"/);
+  assert.match(cli, /case "language-show"/);
+});
+
+test("every workflow skill reads or maintains the ubiquitous language", () => {
+  for (const name of [
+    "setup",
+    "source",
+    "language",
+    "discuss",
+    "plan",
+    "implement",
+    "review",
+    "document",
+    "ship",
+    "measure",
+    "next",
+  ]) {
+    const skill = readFileSync(join(SKILLS_ROOT, name, "SKILL.md"), "utf8");
+    assert.match(skill, /ubiquitous language/i, `${name} must use the ubiquitous language.`);
+  }
 });
 
 test("setup owns workflow initialization", () => {
@@ -201,7 +247,7 @@ test("routing eval fixtures cover every workflow skill", () => {
   const fixture = JSON.parse(readFileSync(resolve("evals", "skill-routing.json"), "utf8"));
   assert.equal(fixture.schemaVersion, 1);
   assert.ok(Array.isArray(fixture.cases));
-  assert.ok(fixture.cases.length >= 12);
+  assert.ok(fixture.cases.length >= 15);
 
   const expected = new Set();
   const ids = new Set();
@@ -222,6 +268,7 @@ test("routing eval fixtures cover every workflow skill", () => {
       "discuss",
       "document",
       "implement",
+      "language",
       "measure",
       "next",
       "plan",
@@ -232,6 +279,7 @@ test("routing eval fixtures cover every workflow skill", () => {
     ],
   );
   assert.ok(fixture.cases.filter((entry) => entry.expectedSkill === "next").length >= 3);
+  assert.ok(fixture.cases.filter((entry) => entry.expectedSkill === "language").length >= 3);
 });
 
 test("implement delegates work using each session's context capacity", () => {

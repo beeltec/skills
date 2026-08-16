@@ -72,6 +72,7 @@ Sources:
 The suite follows
 `setup → discuss → plan → implement ⇄ review → document → ship → measure`.
 The `source` skill acts as an evidence gate before every substantive stage.
+The `language` skill acts as a vocabulary gate when project meaning changes.
 The read-only `next` helper locates the current stage from repository state.
 Each skill has a narrow job and composes with the other skills. Instructions
 stay short. Detailed contracts live in direct references. Repeated and fragile
@@ -108,6 +109,25 @@ Sources:
 - [Using scripts in skills](https://agentskills.io/skill-creation/using-scripts)
 - [Matt Pocock's grilling skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)
 - [Matt Pocock's code-review skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md)
+
+## Shared ubiquitous language
+
+Eric Evans defines Ubiquitous Language as shared language that connects team
+communication with software. His reference says teams should use the same
+language in speech, writing, diagrams, and code. It also treats a language
+change as a model change that needs deliberate resolution.
+
+This workflow adopts only that principle. It keeps one project-wide,
+user-agreed vocabulary at `docs/knowledge/ubiquitous-language.md`. It does not
+add bounded contexts, aggregates, entities, repositories, or other DDD patterns.
+Agents recognize accepted aliases but use canonical terms. They never infer a
+new meaning without explicit user agreement.
+
+Sources:
+
+- [Eric Evans' DDD Reference page](https://www.domainlanguage.com/ddd/reference/)
+- [Eric Evans' DDD Reference PDF](https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf)
+- [Microsoft domain analysis guidance](https://learn.microsoft.com/en-nz/azure/architecture/microservices/model/domain-analysis)
 
 ## Local skill linking
 

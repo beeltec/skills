@@ -11,7 +11,7 @@ separate from planning and implementation.
 ## Method
 
 1. Restate the outcome in one sentence.
-2. Read `docs/knowledge/index.md`, `docs/knowledge/sources/index.md`, and `docs/work/briefs/index.md`.
+2. Read `docs/knowledge/index.md`, `docs/knowledge/ubiquitous-language.md` as the Ubiquitous Language file, the source index, and the brief index.
 3. Build a private decision graph.
 4. Separate repository facts, external facts, product evidence, assumptions, and user choices.
 5. Use `$source` to verify every material external fact before relying on it.
@@ -20,6 +20,8 @@ separate from planning and implementation.
 8. Ask every independent frontier question in one round.
 9. Wait for the user's answers before expanding dependent branches.
 10. Update the graph, revise the estimate, and repeat until no branch remains.
+11. Identify each term that the answers add, redefine, or make ambiguous.
+12. If term agreement is not already explicit, ask for it. Then use `$language` to record it.
 
 Do not ask the user for facts available in files, tools, or official
 documentation. Treat model memory as a search lead, not evidence. Official
@@ -51,6 +53,8 @@ not change the result.
 ## Round rules
 
 - Ask only questions that can be answered now.
+- Use active canonical terms and explain an accepted alias when the user uses it.
+- Treat conflicting or missing meanings as decisions, not wording corrections.
 - Defer a choice when another open choice controls it.
 - Revisit earlier answers when a later answer creates a conflict.
 - Challenge vague terms such as "simple," "fast," or "secure."
