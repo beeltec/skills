@@ -23,8 +23,12 @@ The setup skill installs a dependency-free Node.js CLI at
 ## Context-aware implementation
 
 The `implement` skill checks whether the full change fits the active session.
-It uses the context capacity reported by the current runtime or host. It does
-not infer capacity from a model name.
+The workflow assumes Codex with ChatGPT subscription access. It uses the
+runtime context value first. When that value is unavailable, GPT-5.6 uses a
+conservative 256,000-token fallback.
+
+The 1.05M GPT-5.6 API context does not apply to this default profile. Use it
+only when project instructions explicitly select API-key access.
 
 When the work will not fit safely, the coordinator creates
 `docs/work/handoffs/<KEY>.md`. It delegates bounded code packets sized for each

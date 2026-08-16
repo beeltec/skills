@@ -86,8 +86,11 @@ test("implement delegates work using each session's context capacity", () => {
   assert.match(skill, /references\/delegation\.md/);
   assert.match(skill, /session-fit gate/i);
   assert.match(skill, /use implementation subagents/i);
-  assert.match(delegation, /runtime metadata/);
-  assert.match(delegation, /Never guess from a\s+model name/);
+  assert.match(delegation, /runtime\s+metadata/);
+  assert.match(delegation, /Codex with ChatGPT subscription access/);
+  assert.match(delegation, /256,000 tokens/);
+  assert.match(delegation, /Do not use GPT-5\.6's 1\.05M API limit/);
+  assert.match(delegation, /Never infer capacity from a model name alone/);
   assert.match(delegation, /remaining context minus that reserve/);
   assert.match(delegation, /docs\/work\/handoffs\/<KEY>\.md/);
   assert.match(delegation, /Run write packets sequentially by default/);

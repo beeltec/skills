@@ -27,14 +27,16 @@ Promote knowledge only through the completion gate.
 3. Read the active skill before changing workflow files.
 4. Read `docs/knowledge/index.md` before implementing a work item.
 5. Treat `docs/work/items/*.json` as plans, not established facts.
-6. Assess the active model's remaining context before changing product code.
-7. Use bounded implementation subagents when the full change will not fit safely.
-8. Keep workflow state, integration, and final verification with the coordinator.
-9. Never move a work item directly to `done`.
-10. Run the configured checks and record acceptance evidence.
-11. Use `review` to check Standards and Spec separately.
-12. Use `complete` to close work and promote drafted knowledge.
-13. Keep generated board and knowledge indexes synchronized.
+6. Assume Codex uses ChatGPT subscription access unless the user says otherwise.
+7. Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
+8. Assess the active model's remaining context before changing product code.
+9. Use bounded implementation subagents when the full change will not fit safely.
+10. Keep workflow state, integration, and final verification with the coordinator.
+11. Never move a work item directly to `done`.
+12. Run the configured checks and record acceptance evidence.
+13. Use `review` to check Standards and Spec separately.
+14. Use `complete` to close work and promote drafted knowledge.
+15. Keep generated board and knowledge indexes synchronized.
 
 ## Commands
 

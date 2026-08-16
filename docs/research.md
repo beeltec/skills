@@ -75,15 +75,25 @@ Sources:
 
 ## Context-aware implementation
 
-A published model context window is not always the effective agent-session
-limit. The API, product, and agent harness can expose different limits. The
-workflow therefore trusts runtime metadata first. It uses an explicit user or
-project value second. It never selects a context limit from the model name.
+This workflow assumes Codex with ChatGPT subscription access. OpenAI documents
+ChatGPT sign-in and API-key authentication as separate Codex access modes. The
+public API catalog lists a 1.05M GPT-5.6 context window, but that API value does
+not define the subscription session.
 
-As of the research date, OpenAI lists a 1.05M API context window for GPT-5.6.
-Anthropic lists a 1M context window for Claude Opus 5. A host can still provide
-a smaller effective session, such as 256K. The implementation skill uses that
-host value when it is reported.
+OpenAI's public Codex model page does not publish the subscription context
+window. Local verification used Codex CLI 0.147.0 while signed in through
+ChatGPT. Its service-provided model catalog reported 272,000 raw tokens and a
+95 percent effective limit for every GPT-5.6 variant. That produces 258,400
+effective tokens.
+
+The workflow rounds this down to a conservative 256,000-token fallback. A
+runtime-reported subscription limit still takes priority because Codex can
+change its limits. The 1.05M limit is used only when a project explicitly runs
+through API-key access.
+
+Anthropic lists a 1M context window for Claude Opus 5. That value applies only
+when its actual host or runtime provides it. It does not change the default
+Codex subscription profile.
 
 The session-fit gate reserves context for correction, integration, tests, and
 handoff. It delegates only when the complete implementation is unlikely to fit
@@ -98,7 +108,8 @@ tasks.
 
 Sources:
 
-- [OpenAI model comparison](https://developers.openai.com/api/docs/models/compare)
+- [OpenAI Codex models and access modes](https://learn.chatgpt.com/docs/models)
+- [OpenAI API model comparison](https://developers.openai.com/api/docs/models/compare)
 - [OpenAI Codex subagents](https://developers.openai.com/codex/agent-configuration/subagents)
 - [OpenAI multi-agent guidance](https://developers.openai.com/api/docs/guides/responses-multi-agent)
 - [Anthropic context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows)

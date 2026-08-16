@@ -6,18 +6,25 @@ session is unlikely to finish the implementation safely.
 ## Resolve capacity
 
 Resolve capacity separately for the coordinator and every proposed subagent.
+Assume Codex with ChatGPT subscription access unless project instructions or
+the user explicitly select API-key access.
 
 1. Read the model identity, total context, and remaining context from runtime
    metadata.
 2. Treat the current host or session limit as authoritative.
-3. If runtime metadata is missing, use an explicit user or project value.
-4. If no verified limit exists, mark capacity unknown. Never guess from a
-   model name.
-5. Record the model, limit, remaining capacity, and source of each value.
+3. For GPT-5.6 under Codex subscription access, use 256,000 tokens when runtime
+   metadata is unavailable.
+4. For another model, use an explicit host, user, or project value.
+5. If no verified limit exists, mark capacity unknown.
+6. Record the model, access mode, limit, remaining capacity, and value source.
 
-Published API limits can differ from a product or agent harness. For example,
-use 256K when a GPT-5.6 host reports 256K. Use 1M when a Claude Opus 5 host
-reports 1M. Do not replace both with one fixed threshold.
+Never infer capacity from a model name alone. Combine the exact model with its
+access mode and host. Do not use GPT-5.6's 1.05M API limit for a Codex
+subscription session.
+
+Apply this rule separately to every subagent. A Claude Opus 5 host that reports
+1M can receive a larger packet than a Codex subscription GPT-5.6 session. Do
+not replace both with one fixed threshold.
 
 ## Apply the session-fit gate
 
@@ -64,6 +71,7 @@ Use this structure:
 
 - Fixed point: <commit or initial tree>
 - Coordinator model: <exact runtime model>
+- Access mode: <Codex subscription, API key, or other host>
 - Capacity source: <runtime, user, project, or unknown>
 - Total context: <tokens or unknown>
 - Remaining context: <tokens or unknown>

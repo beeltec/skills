@@ -54,6 +54,8 @@ Add these instructions without removing local rules:
 
 - Read `docs/knowledge/index.md` before implementation.
 - Treat `docs/work/` as desired state, not current fact.
+- Assume Codex uses ChatGPT subscription access unless the user says otherwise.
+- Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
 - Assess session fit before code changes. Delegate bounded implementation when it will not fit.
 - Never set a work item to `done` by editing JSON.
 - Record separate passing Standards and Spec reviews before `in-review`.
