@@ -14,16 +14,17 @@ This workflow keeps project truth and planned work in separate spaces.
 Use the skills as one suite:
 
 1. `setup` initializes the workflow once.
-2. `source` verifies external facts through live official documentation.
-3. `language` manages terms explicitly agreed with the user.
-4. `discuss` resolves product and technical choices.
-5. `plan` creates Jira-like work items.
-6. `implement` gives each ticket a branch and worktree, then changes code.
-7. `review` checks Standards and Spec until both have no P0-P2 findings.
-8. `document` promotes knowledge, merges green work, and removes its branch and worktree.
-9. `ship` releases done tickets and verifies the deployed or published result.
-10. `measure` compares product evidence with the brief's agreed success measure.
-11. `next` finds the smallest valid next action without changing project state.
+2. `rules` installs and verifies managed `AGENTS.md` rule fragments.
+3. `source` verifies external facts through live official documentation.
+4. `language` manages terms explicitly agreed with the user.
+5. `discuss` resolves product and technical choices.
+6. `plan` creates Jira-like work items.
+7. `implement` gives each ticket a branch and worktree, then changes code.
+8. `review` checks Standards and Spec until both have no P0-P2 findings.
+9. `document` promotes knowledge, merges green work, and removes its branch and worktree.
+10. `ship` releases done tickets and verifies the deployed or published result.
+11. `measure` compares product evidence with the brief's agreed success measure.
+12. `next` finds the smallest valid next action without changing project state.
 
 Use `next` at any point when the correct workflow action is unclear. It reads
 local state and recommends one action without changing the project.
@@ -36,7 +37,7 @@ index, opens relevant official pages, and refreshes concise source notes. The
 workflow never treats model memory or a search-result snippet as authority.
 
 The setup skill installs a dependency-free Node.js CLI at
-`.project/bin/project-flow.mjs`. The remaining skills use that local copy.
+`.project/bin/project-flow.mjs`. Workflow-stage skills use that local copy.
 
 The CLI creates `docs/knowledge/ubiquitous-language.md`. Use `language-show`,
 `language-add`, `language-update`, and `language-deprecate` to manage it. Every
@@ -45,16 +46,54 @@ change records the actor, reason, time, and prior value.
 ## Agent rules
 
 Reusable `AGENTS.md` rule fragments live in `agent-rules/`. They are separate
-from task-triggered skills. Each Markdown file covers one topic and has no
-dependency on a skill.
+from task-triggered skills. Each Markdown file covers one topic.
 
-The first rule is [plain English communication](agent-rules/plain-english.md).
-It adapts ISO 24495-1 and selected ASD-STE100 principles for non-native English
-speakers.
+The recommended scopes are:
 
-Codex does not load `agent-rules/` automatically. Copy a selected rule into the
-applicable `AGENTS.md`. Use user scope for reusable personal preferences. Use
-project or nested scope for repository-specific rules.
+| Rule source | Scope | Reason |
+| --- | --- | --- |
+| `user/plain-english` | User | Communication preferences should follow the user. |
+| `user/official-sources` | User | The evidence preference applies across projects. |
+| `project/project-evidence` | Project | Knowledge paths and workflow gates are repository state. |
+| `project/ubiquitous-language` | Project | Each repository owns its agreed vocabulary. |
+| `project/ticket-git-workflow` | Project | Branch, worktree, and integration rules are shared policy. |
+| `project/code-quality` | Project | Contributors need the same coding expectations. |
+| `project/comments` | Project | Contributors need one code-comment policy. |
+| `project/testing` | Project | Contributors need one focused test policy. |
+| `project/review-policy` | Project | Contributors need the same approval gate. |
+
+The [plain English rule](agent-rules/user/plain-english.md) adapts ISO 24495-1
+and selected ASD-STE100 principles for non-native English speakers.
+
+Codex does not load `agent-rules/` automatically. The `rules` skill installs
+selected fragments into an active `AGENTS.md`. The `setup` skill installs the
+recommended project profile. It never installs personal rules without an
+explicit user request.
+
+Each installed block has named start and end markers. Its start marker contains
+a SHA-256 digest of the embedded source. The rules manager fails when a block
+is missing, duplicated, malformed, stale, or changed by hand. It preserves text
+outside managed blocks. Research links stay in `docs/research.md`, so installed
+rules spend tokens only on active instructions.
+
+Install the personal profile once, after checking the target:
+
+```bash
+node skills/rules/scripts/manage-rules.mjs install --scope user --dry-run
+node skills/rules/scripts/manage-rules.mjs install --scope user
+node skills/rules/scripts/manage-rules.mjs check --scope user
+```
+
+Install project rules directly when you do not invoke `setup`:
+
+```bash
+node skills/rules/scripts/manage-rules.mjs install \
+  --scope project --root /path/to/project --dry-run
+node skills/rules/scripts/manage-rules.mjs install \
+  --scope project --root /path/to/project
+node skills/rules/scripts/manage-rules.mjs check \
+  --scope project --root /path/to/project
+```
 
 Keep active instructions concise. Put repository-wide rules at the root and
 specialized rules near the files they govern. State required behavior and any
@@ -171,7 +210,15 @@ node skills/setup/scripts/project-flow.mjs init \
   --key APP \
   --name "Example App" \
   --target-branch main
+node skills/rules/scripts/manage-rules.mjs install \
+  --scope project --root /path/to/project --dry-run
+node skills/rules/scripts/manage-rules.mjs install \
+  --scope project --root /path/to/project
+node skills/rules/scripts/manage-rules.mjs check \
+  --scope project --root /path/to/project
 ```
+
+The direct commands do not perform the setup skill's official-source research.
 
 Then inspect the board:
 

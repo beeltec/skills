@@ -5,6 +5,11 @@ import test from "node:test";
 
 const SKILLS_ROOT = resolve("skills");
 const AGENT_RULES_ROOT = resolve("agent-rules");
+const RULE_SCOPES = ["project", "user"];
+
+function rulePath(scope, name) {
+  return join(AGENT_RULES_ROOT, scope, `${name}.md`);
+}
 
 function parseSkillFrontmatter(content) {
   const match = content.replaceAll("\r\n", "\n").match(/^---\n([\s\S]*?)\n---\n/);
@@ -49,19 +54,25 @@ for (const name of readdirSync(SKILLS_ROOT).sort()) {
 }
 
 test("agent rules are standalone Markdown fragments", () => {
-  const files = readdirSync(AGENT_RULES_ROOT).filter((name) => name.endsWith(".md"));
-  assert.ok(files.includes("plain-english.md"));
+  assert.deepEqual(readdirSync(AGENT_RULES_ROOT).sort(), RULE_SCOPES);
 
-  for (const name of files) {
-    const content = readFileSync(join(AGENT_RULES_ROOT, name), "utf8");
-    assert.match(content, /^# [^\n]+\n/);
-    assert.doesNotMatch(content, /^---\n/);
-    assert.ok(content.split("\n").length < 200);
+  for (const scope of RULE_SCOPES) {
+    const files = readdirSync(join(AGENT_RULES_ROOT, scope))
+      .filter((name) => name.endsWith(".md"));
+    assert.ok(files.length > 0, `${scope} needs at least one rule.`);
+
+    for (const name of files) {
+      const content = readFileSync(join(AGENT_RULES_ROOT, scope, name), "utf8");
+      assert.match(content, /^# [^\n]+\n/);
+      assert.doesNotMatch(content, /^---\n/);
+      assert.doesNotMatch(content, /https?:\/\//);
+      assert.ok(content.split("\n").length < 200);
+    }
   }
 });
 
 test("plain English communication is an independent agent rule", () => {
-  const rule = readFileSync(join(AGENT_RULES_ROOT, "plain-english.md"), "utf8");
+  const rule = readFileSync(rulePath("user", "plain-english"), "utf8");
   const readme = readFileSync(resolve("README.md"), "utf8");
 
   assert.match(rule, /Relevant:/);
@@ -106,17 +117,39 @@ test("workflow loops blocking review findings through implementation", () => {
     join(SKILLS_ROOT, "document", "references", "completion-gate.md"),
     "utf8",
   );
-  const workspace = readFileSync(
-    join(SKILLS_ROOT, "setup", "references", "workspace-format.md"),
-    "utf8",
-  );
+  const policy = readFileSync(rulePath("project", "review-policy"), "utf8");
 
   assert.match(implement, /address every valid P0, P1, and P2 finding/);
   assert.match(implement, /Continue until `review` reports zero P0, P1, and P2/);
   assert.match(completion, /Repeat until the blocking counts reach zero/);
   assert.match(completion, /P3 suggestions do not block completion/);
-  assert.match(workspace, /Loop `review` and `implement` until both passes have no P0, P1, or P2/);
-  assert.match(workspace, /Standards and Spec reviews with zero P0-P2 findings/);
+  assert.match(policy, /Continue until both passes report zero P0, P1, and P2 findings/);
+  assert.match(policy, /Run a Standards pass/);
+  assert.match(policy, /Run a separate Spec pass/);
+});
+
+test("project rules keep code, comments, and tests focused", () => {
+  const code = readFileSync(rulePath("project", "code-quality"), "utf8");
+  const comments = readFileSync(rulePath("project", "comments"), "utf8");
+  const testing = readFileSync(rulePath("project", "testing"), "utf8");
+
+  assert.match(code, /## DRY/);
+  assert.match(code, /one unambiguous, authoritative representation/);
+  assert.match(code, /similar-looking code/);
+  assert.match(code, /## YAGNI/);
+  assert.match(code, /presumed future capabilities/);
+  assert.match(code, /Do not use YAGNI to excuse weak tests/);
+
+  assert.match(comments, /one or two sentences by default/);
+  assert.match(comments, /Do not add boilerplate comments to every function/);
+  assert.match(comments, /Do not translate each statement into prose/);
+  assert.match(comments, /Treat an inaccurate comment as a defect/);
+
+  assert.match(testing, /Use the lowest level that can prove the behavior/);
+  assert.match(testing, /Do not repeat the same assertions at several test levels/);
+  assert.match(testing, /Delete obsolete tests/);
+  assert.match(testing, /current contract or security requirement/);
+  assert.match(testing, /Do not add tests only to raise coverage/);
 });
 
 test("discuss shows approximate question progress", () => {
@@ -205,6 +238,7 @@ test("setup owns workflow initialization", () => {
   assert.ok(existsSync(join(SKILLS_ROOT, "setup", "references", "workspace-format.md")));
   assert.match(skill, /\.project\/workflow\.json/);
   assert.match(skill, /Do not initialize twice/);
+  assert.match(skill, /\$rules/);
   assert.match(skill, /\$source/);
 });
 
@@ -278,7 +312,7 @@ test("routing eval fixtures cover every workflow skill", () => {
   const fixture = JSON.parse(readFileSync(resolve("evals", "skill-routing.json"), "utf8"));
   assert.equal(fixture.schemaVersion, 1);
   assert.ok(Array.isArray(fixture.cases));
-  assert.ok(fixture.cases.length >= 15);
+  assert.ok(fixture.cases.length >= 19);
 
   const expected = new Set();
   const ids = new Set();
@@ -304,6 +338,7 @@ test("routing eval fixtures cover every workflow skill", () => {
       "next",
       "plan",
       "review",
+      "rules",
       "setup",
       "ship",
       "source",
@@ -311,6 +346,7 @@ test("routing eval fixtures cover every workflow skill", () => {
   );
   assert.ok(fixture.cases.filter((entry) => entry.expectedSkill === "next").length >= 3);
   assert.ok(fixture.cases.filter((entry) => entry.expectedSkill === "language").length >= 3);
+  assert.ok(fixture.cases.filter((entry) => entry.expectedSkill === "rules").length >= 3);
 });
 
 test("implement delegates work using each session's context capacity", () => {
@@ -342,10 +378,7 @@ test("implement delegates work using each session's context capacity", () => {
 
 test("workflow isolates tickets and serializes green integration", () => {
   const setup = readFileSync(join(SKILLS_ROOT, "setup", "SKILL.md"), "utf8");
-  const workspace = readFileSync(
-    join(SKILLS_ROOT, "setup", "references", "workspace-format.md"),
-    "utf8",
-  );
+  const gitPolicy = readFileSync(rulePath("project", "ticket-git-workflow"), "utf8");
   const plan = readFileSync(join(SKILLS_ROOT, "plan", "SKILL.md"), "utf8");
   const implement = readFileSync(join(SKILLS_ROOT, "implement", "SKILL.md"), "utf8");
   const gitWorktrees = readFileSync(
@@ -356,8 +389,8 @@ test("workflow isolates tickets and serializes green integration", () => {
   const cli = readFileSync(join(SKILLS_ROOT, "setup", "scripts", "project-flow.mjs"), "utf8");
 
   assert.match(setup, /\.worktrees\//);
-  assert.match(workspace, /Conventional Branch 1\.1\.0/);
-  assert.match(workspace, /Conventional Commits 1\.0\.0/);
+  assert.match(gitPolicy, /Conventional Branch 1\.1\.0/);
+  assert.match(gitPolicy, /Conventional Commits 1\.0\.0/);
   assert.match(plan, /dependency graph acyclic/i);
   assert.match(plan, /without likely write overlap/i);
   assert.match(implement, /worktree-add <KEY>/);

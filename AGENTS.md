@@ -2,9 +2,9 @@
 
 ## Purpose
 
-This repository provides one project workflow through eleven Agent Skills:
-`setup`, `source`, `language`, `discuss`, `plan`, `implement`, `review`,
-`document`, `ship`, `measure`, and the read-only `next` helper.
+This repository provides one project workflow through twelve Agent Skills:
+`setup`, `rules`, `source`, `language`, `discuss`, `plan`, `implement`,
+`review`, `document`, `ship`, `measure`, and the read-only `next` helper.
 
 Keep two information spaces separate:
 
@@ -26,8 +26,10 @@ skill may update agreed terms directly after explicit user confirmation.
 ## Repository layout
 
 - `skills/` contains the installable skills.
-- `agent-rules/` contains standalone, reusable `AGENTS.md` rule fragments.
+- `agent-rules/user/` contains reusable personal rule fragments.
+- `agent-rules/project/` contains shared repository rule fragments.
 - `scripts/link-skills.sh` links every skill for Codex and Claude Code.
+- `skills/rules/scripts/manage-rules.mjs` installs and verifies managed rules.
 - `skills/setup/scripts/project-flow.mjs` is the source CLI.
 - `.worktrees/` contains ignored ticket worktrees created by the workflow.
 - `examples/next-sqlite/` is the reproducible example and workflow fixture.
@@ -60,22 +62,21 @@ skill may update agreed terms directly after explicit user confirmation.
 22. Use Conventional Commits for every ticket and merge commit.
 23. Merge green ticket branches into the configured target branch. Its default is `main`.
 24. Remove only clean, successfully merged worktrees and local branches.
-25. Assume Codex uses ChatGPT subscription access unless the user says otherwise.
-26. Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
-27. Assess the active model's remaining context before changing product code.
-28. Use bounded implementation subagents when the full change will not fit safely.
-29. Keep workflow state, integration, and final verification with the coordinator.
-30. Never move a work item directly to `done`.
-31. Run configured checks and record acceptance and quality-gate evidence.
-32. Use `review` to check Standards and Spec separately.
-33. Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
-34. Use `complete` to close work and promote drafted repository knowledge.
-35. Treat ticket `done` as merged and documented, not released.
-36. Use `ship` for approved external release actions and live checks.
-37. Mark a release green only after its post-release checks pass.
-38. Use `measure` after the agreed observation window.
-39. Keep generated board and knowledge indexes synchronized.
-40. Keep every file under `agent-rules/` concise, standalone, and limited to one topic.
+25. Never move a work item directly to `done`.
+26. Run configured checks and record acceptance and quality-gate evidence.
+27. Use `review` to check Standards and Spec separately.
+28. Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
+29. Use `complete` to close work and promote drafted repository knowledge.
+30. Treat ticket `done` as merged and documented, not released.
+31. Use `ship` for approved external release actions and live checks.
+32. Mark a release green only after its post-release checks pass.
+33. Use `measure` after the agreed observation window.
+34. Keep generated board and knowledge indexes synchronized.
+35. Put every reusable rule under `agent-rules/user/` or `agent-rules/project/`.
+36. Keep each rule concise, standalone, and limited to one topic.
+37. Keep the rules manager catalog and scope tests synchronized with rule files.
+38. Use the rules manager to update installed managed blocks.
+39. Never edit text between managed agent-rule markers by hand.
 
 ## Commands
 

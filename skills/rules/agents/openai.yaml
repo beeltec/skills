@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rules"
+  short_description: "Install and verify managed AGENTS.md rules"
+  default_prompt: "Use $rules to install or verify the recommended AGENTS.md rule fragments."

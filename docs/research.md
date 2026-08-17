@@ -73,6 +73,7 @@ The suite follows
 `setup → discuss → plan → implement ⇄ review → document → ship → measure`.
 The `source` skill acts as an evidence gate before every substantive stage.
 The `language` skill acts as a vocabulary gate when project meaning changes.
+The `rules` setup helper installs and verifies reusable instructions.
 The read-only `next` helper locates the current stage from repository state.
 Each skill has a narrow job and composes with the other skills. Instructions
 stay short. Detailed contracts live in direct references. Repeated and fragile
@@ -113,9 +114,9 @@ Sources:
 ## Agent rule design
 
 Persistent working agreements belong in `AGENTS.md`. Task-triggered procedures
-belong in skills. This repository stores reusable instruction fragments under
-`agent-rules/`, but Codex does not discover that directory automatically. A
-user or project must copy each selected fragment into an active `AGENTS.md`.
+belong in skills. This repository stores personal fragments under
+`agent-rules/user/` and shared repository fragments under
+`agent-rules/project/`. Codex does not discover those directories directly.
 
 OpenAI documents layered instruction scopes. Reusable personal defaults belong
 in the Codex home directory. Repository-wide rules belong at the project root.
@@ -127,15 +128,52 @@ therefore stay concise and cover one topic. Each rule states the required
 behavior and any safe path or exception. Automated formatting and lint checks
 remain in CI or repository tools.
 
-The first reusable rule covers plain English communication. It preserves the
-former skill's ISO 24495-1 reader outcomes and selected ASD-STE100 principles.
-It removes the skill procedure and keeps only persistent communication rules.
+The user profile contains plain English communication and official-source
+preferences. These expectations should follow the user across repositories.
+The project profile contains evidence, vocabulary, Git, code, comments, tests,
+and review policy. These rules depend on shared paths or delivery gates.
+
+The `rules` skill installs each source between named markers. The start marker
+contains a SHA-256 digest of the embedded content. Its script detects missing,
+duplicate, malformed, stale, or manually changed blocks. It leaves all other
+instructions intact. The `setup` skill installs only the project profile.
+Research links remain in this document instead of installed fragments. They
+provide provenance without consuming the active `AGENTS.md` instruction limit.
+
+The code-quality rule treats DRY as one authoritative representation for each
+piece of knowledge. It does not require one abstraction for unrelated code that
+only looks similar. YAGNI rejects presumed future capabilities and speculative
+extension points. It does not reject refactoring, tests, or other practices
+that keep current code safe and easy to change.
+
+The testing rule chooses the lowest layer that proves current behavior. It
+keeps end-to-end tests for a few critical journeys and prevents repeated
+assertions across layers. Tests for intentionally removed behavior are deleted.
+A new absence test needs a current contract, security need, or named risk.
+
+The comments rule prefers clear code and short, useful context. Function
+comments state non-obvious purpose and use. Implementation comments preserve
+intent, constraints, and tradeoffs instead of narrating statements. Longer
+contract detail remains allowed when a caller needs it.
 
 Sources:
 
 - [OpenAI custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
+- [OpenAI skill authoring](https://learn.chatgpt.com/docs/build-skills)
+- [OpenAI web-search guidance](https://learn.chatgpt.com/docs/web-search)
 - [OpenAI prompting guidance](https://learn.chatgpt.com/docs/prompting)
+- [The Pragmatic Programmer DRY principle](https://pragprog.com/tips/)
+- [Martin Fowler on YAGNI](https://martinfowler.com/bliki/Yagni.html)
+- [Microsoft unit testing best practices](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices)
+- [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
+- [Testing Library guiding principles](https://testing-library.com/docs/)
+- [Google C++ comments guidance](https://google.github.io/styleguide/cppguide#Comments)
+- [Google documentation best practices](https://google.github.io/styleguide/docguide/best_practices.html)
+- [Linux kernel commenting guidance](https://cdn.kernel.org/doc/html/latest/process/coding-style.html#commenting)
+- [PEP 8 comments guidance](https://peps.python.org/pep-0008/#comments)
 - [ISO 24495-1:2023 catalogue and scope](https://www.iso.org/standard/78907.html)
+- [Government of Canada summary of the four ISO principles](https://our-languages.canada.ca/en/blogue-blog/iso-langage-simple-plain-language-eng)
+- [ISO guidance for plain standards writing](https://www.iso.org/files/live/sites/isoorg/files/developing_standards/docs/en/how-to-write-standards.pdf)
 - [ASD-STE100 official overview](https://www.asd-ste100.org/about_STE.html)
 - [ASD-STE100 Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf)
 - [ASD-STE100 official FAQ](https://www.asd-ste100.org/STE_faq.html)

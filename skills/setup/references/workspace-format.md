@@ -5,8 +5,7 @@
 - Two spaces
 - Generated layout
 - OKF v0.2 profile
-- Target AGENTS.md block
-- Git policy
+- Project agent rules
 
 ## Two spaces
 
@@ -83,60 +82,47 @@ only the Ubiquitous Language principle. Do not add other DDD patterns.
 
 Source: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
 
-## Target AGENTS.md block
+## Project agent rules
 
-Add these instructions without removing local rules:
+Use `$rules` to install these project-profile fragments in the root
+`AGENTS.md`:
 
-```markdown
-## Project state workflow
+- `project-evidence`
+- `ubiquitous-language`
+- `ticket-git-workflow`
+- `code-quality`
+- `comments`
+- `testing`
+- `review-policy`
 
-- Read `docs/knowledge/index.md`, `docs/knowledge/ubiquitous-language.md`, and `docs/knowledge/sources/index.md` first.
-- Use active canonical terms across discussion, work records, code, tests, and knowledge.
-- Use `language` after explicit user agreement to add, revise, or deprecate project terms.
-- Apply only Ubiquitous Language. Do not infer other Domain-Driven Design patterns.
-- Use `next` when the current workflow action is unclear.
-- Treat model memory as a search lead, not factual evidence.
-- Verify material external claims against current official documentation.
-- Save concise official source notes under `docs/knowledge/sources/`.
-- Re-open relevant official URLs once per work session before relying on them.
-- Treat `docs/work/` as desired state, not current fact.
-- Require a confirmed brief before moving an epic or story to `ready`.
-- Keep delivery acceptance separate from the product success measure.
-- Declare ticket risk factors and record each required quality gate.
-- Assume Codex uses ChatGPT subscription access unless the user says otherwise.
-- Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
-- Assess session fit before code changes. Delegate bounded implementation when it will not fit.
-- Keep the configured target worktree clean for coordination and serial integration.
-- Implement each non-epic ticket in `.worktrees/<ticket-key>/` on its own branch.
-- Do not create a worktree while any `blocked-by` ticket is open.
-- Use Conventional Branch 1.1.0 names and Conventional Commits 1.0.0 messages.
-- Merge green ticket branches into the configured target, `main` by default, then remove local ticket state.
-- Never set a work item to `done` by editing JSON.
-- Record separate Standards and Spec reviews with zero P0-P2 findings.
-- Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
-- Run `.project/bin/project-flow.mjs complete <KEY>` after all gates pass.
-- Treat ticket `done` as merged repository state, not a successful release.
-- Use `ship` to record preflight, artifact, rollout, recovery, and live checks.
-- Mark only verified releases green and promote only their established facts.
-- Use `measure` after the agreed observation window to record the product result.
-- Validate the workspace after workflow changes.
+The `agent-rules/project/` files are their canonical sources. The rules manager
+embeds each fragment between named markers. Its SHA-256 digest makes manual
+changes, stale copies, missing blocks, malformed markers, and duplicates
+detectable.
+
+Run the dry-run before installation. Then run the exact check:
+
+```bash
+node <rules-skill-directory>/scripts/manage-rules.mjs install \
+  --scope project --root . --dry-run
+node <rules-skill-directory>/scripts/manage-rules.mjs install \
+  --scope project --root .
+node <rules-skill-directory>/scripts/manage-rules.mjs check \
+  --scope project --root .
 ```
 
-## Git policy
+Preserve all text outside managed blocks. Do not edit managed text by hand.
+Update its source fragment, then rerun installation and the check.
 
-- Treat the configured target as stable integration history, not an implementation workspace.
-- Use `feat/<key>-<slug>` for stories and `fix/<key>-<slug>` for bugs.
-- Use `chore/<key>-<slug>` for tasks and subtasks unless another supported type fits.
-- Keep epics as coordination items. Do not create epic worktrees.
-- Parallelize only ready tickets without open blockers or likely write overlap.
-- Integrate ticket branches one at a time.
-- Require the latest target commit as the final review fixed point.
-- Use `git branch -d`, never force deletion, after a successful merge.
-- Leave remote pushes, pull requests, deployments, publications, and remote
-  branch deletion to explicit user instructions.
+Do not install personal defaults during project setup. The user can invoke
+`$rules` explicitly to install the user profile once.
+
+The `ticket-git-workflow` fragment is the persistent Git policy. The
+`implement` and `document` skills own its task-specific commands and gates.
 
 Official references:
 
+- https://learn.chatgpt.com/docs/agent-configuration/agents-md
 - https://www.domainlanguage.com/ddd/reference/
 - https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf
 - https://git-scm.com/docs/git-worktree.html

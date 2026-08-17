@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow and its Git policy. Create `.project/`, `docs/knowledge/`, `docs/work/`, `.worktrees/`, and the shared ubiquitous language file; install the local workflow CLI; configure `main` as the default integration branch; add project rules to `AGENTS.md`; and seed verified knowledge and official source notes. Use once before discussion or planning. Do not create briefs, work items, releases, outcomes, or product code.
+description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow and its Git policy. Create `.project/`, `docs/knowledge/`, `docs/work/`, `.worktrees/`, and the shared ubiquitous language file; install the local workflow CLI; configure `main` as the default integration branch; install the recommended project `AGENTS.md` rules through `$rules`; and seed verified knowledge and official source notes. Use once before discussion or planning. Do not create briefs, work items, releases, outcomes, or product code.
 ---
 
 # Setup
@@ -25,14 +25,16 @@ Use Node.js 20.9 or newer for the bundled workflow CLI.
 12. Confirm `.worktrees/` exists and `/.worktrees/` is ignored by Git.
 13. Confirm the brief, release, outcome, source, item, and knowledge folders exist.
 14. Confirm `docs/knowledge/ubiquitous-language.md` exists.
-15. Add the reference's workflow block to `AGENTS.md` without removing rules.
-16. Use `$source` to cache the Ubiquitous Language principle from Eric Evans.
-17. Store it at `docs/knowledge/sources/methods/ubiquitous-language.md`.
-18. Use `$source` to cache current Git, Jira dependency, commit, and branch rules.
-19. Use `$source` to verify official docs for material detected technologies.
-20. Add small OKF concepts only for facts verified from the repository.
-21. Run `sync` and `validate`.
-22. Report the target branch, missing initial commit, created paths, and sources.
+15. Load `$rules` and use its recommended project-scope procedure.
+16. Confirm `$rules` reports a passing check for every project-profile block.
+17. Do not install the user profile unless the user explicitly requests it.
+18. Use `$source` to cache the Ubiquitous Language principle from Eric Evans.
+19. Store it at `docs/knowledge/sources/methods/ubiquitous-language.md`.
+20. Use `$source` to cache current Git, Jira dependency, commit, and branch rules.
+21. Use `$source` to verify official docs for material detected technologies.
+22. Add small OKF concepts only for facts verified from the repository.
+23. Run `sync` and `validate`.
+24. Report the target branch, missing initial commit, agent-rule check, created paths, and sources.
 
 Ask for the project key or name only when repository context cannot provide a
 safe value.
@@ -51,8 +53,9 @@ node .project/bin/project-flow.mjs validate
 
 ## Refresh an existing workflow
 
-Do not initialize twice. Refresh the installed CLI, Git settings, `.worktrees/`,
-and the AGENTS.md block. Use `$source` to refresh relevant notes. Then validate:
+Do not initialize twice. Refresh the installed CLI, Git settings, and
+`.worktrees/`. Use `$rules` to update and check the project profile. Use
+`$source` to refresh relevant notes. Then validate:
 
 ```bash
 node <skill-directory>/scripts/project-flow.mjs install --root .
@@ -64,7 +67,9 @@ node .project/bin/project-flow.mjs validate
 
 - Inspect non-empty target folders before setup.
 - Do not merge legacy or conflicting state automatically.
-- Do not overwrite existing knowledge or AGENTS.md rules.
+- Do not overwrite existing knowledge.
+- Do not change text outside managed `AGENTS.md` rule blocks.
+- Do not install user-scoped rules without explicit user intent.
 - Do not create briefs, tickets, releases, or outcome records.
 - Do not add vocabulary terms without explicit user agreement.
 - Do not modify product code.

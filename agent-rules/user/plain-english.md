@@ -68,14 +68,3 @@ Check these points:
 - Can a non-native English speaker understand each necessary word?
 
 Revise the text when any answer is no.
-
-## Sources
-
-Checked on 2026-08-17:
-
-- [ISO 24495-1:2023 catalogue and scope](https://www.iso.org/standard/78907.html)
-- [Government of Canada summary of the four ISO principles](https://our-languages.canada.ca/en/blogue-blog/iso-langage-simple-plain-language-eng)
-- [ISO guidance for plain standards writing](https://www.iso.org/files/live/sites/isoorg/files/developing_standards/docs/en/how-to-write-standards.pdf)
-- [ASD-STE100 official overview](https://www.asd-ste100.org/about_STE.html)
-- [ASD-STE100 Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf)
-- [ASD-STE100 official FAQ](https://www.asd-ste100.org/STE_faq.html)

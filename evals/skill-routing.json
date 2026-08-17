@@ -8,6 +8,24 @@
       "forbiddenSkills": ["plan", "implement"]
     },
     {
+      "id": "rules-project-install",
+      "prompt": "Install the recommended managed rule fragments in this project's AGENTS.md without initializing the workflow.",
+      "expectedSkill": "rules",
+      "forbiddenSkills": ["setup", "source"]
+    },
+    {
+      "id": "rules-user-install",
+      "prompt": "Install my personal plain-English and official-source rules in the user-scoped Codex AGENTS.md.",
+      "expectedSkill": "rules",
+      "forbiddenSkills": ["setup", "source"]
+    },
+    {
+      "id": "rules-check-boundaries",
+      "prompt": "Check every managed agent-rule boundary and SHA-256 digest in this project's AGENTS.md.",
+      "expectedSkill": "rules",
+      "forbiddenSkills": ["review", "setup"]
+    },
+    {
       "id": "source-current-api",
       "prompt": "Verify the current framework API from official documentation and cache the facts locally.",
       "expectedSkill": "source",
