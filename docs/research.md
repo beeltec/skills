@@ -106,8 +106,9 @@ report zero P0, P1, and P2 findings.
 
 Descriptions state user intent because agents use them for activation. The
 skills use checklists, explicit validation loops, and concrete commands.
-The reproducible Next.js and SQLite project provides the workflow exercise.
-Run skills through a real target harness instead of testing instruction text.
+The full verification prompt creates a disposable Next.js and SQLite project
+under `.verification/`. Run it through a real target harness instead of testing
+instruction text.
 
 ## Canonical workflow records
 
@@ -265,9 +266,9 @@ This design keeps source context discoverable without copying full manuals.
 It also follows OpenAI's progressive-disclosure model: load the index first,
 then only the references needed for the task.
 
-The example records Next.js, Node.js, and SQLite facts from their owners. These
-notes support external API constraints. Source code and tests remain the
-authority for the application's implemented behavior.
+The disposable verification project records Next.js, Node.js, and SQLite facts
+from their owners. These notes support external API constraints. Source code
+and direct application use remain the authority for implemented behavior.
 
 Sources:
 

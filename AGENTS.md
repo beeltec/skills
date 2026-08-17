@@ -32,7 +32,8 @@ skill may update agreed terms directly after explicit user confirmation.
 - `skills/rules/scripts/manage-rules.mjs` installs and verifies managed rules.
 - `skills/setup/scripts/project-flow.mjs` is the source CLI.
 - `.worktrees/` contains ignored ticket worktrees created by the workflow.
-- `examples/next-sqlite/` is the reproducible example and workflow fixture.
+- `verification/full-workflow.md` is the reusable autonomous verification prompt.
+- `.verification/` contains ignored projects and evidence created by that prompt.
 - `docs/research.md` records the source-backed design decisions.
 
 ## Working rules
@@ -77,7 +78,7 @@ skill may update agreed terms directly after explicit user confirmation.
 38. Use the rules manager to update installed managed blocks.
 39. Never edit text between managed agent-rule markers by hand.
 40. Do not add repository-level test or eval harnesses for the skills.
-41. Exercise skill behavior through a disposable copy of the real example project.
+41. Exercise skill behavior through a fresh project under `.verification/`.
 
 ## Commands
 
@@ -87,15 +88,13 @@ Validate an initialized project:
 node .project/bin/project-flow.mjs validate
 ```
 
-Exercise the example project:
+Run the full real-project verification:
 
 ```bash
-cd examples/next-sqlite
-npm ci
-npm run typecheck
-npm run build
-node .project/bin/project-flow.mjs validate
+cat verification/full-workflow.md
 ```
+
+Give that prompt to a new agent session started at this repository root.
 
 ## Code conventions
 

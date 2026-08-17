@@ -1,2 +1,0 @@
-# Releases
-No releases yet.

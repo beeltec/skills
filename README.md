@@ -210,8 +210,8 @@ against the unchanged brief baseline, target, window, and data source.
 
 ## Requirements
 
-- Use Node.js 20.9 or newer for the workflow and its tests.
-- Use Node.js 24.15 or newer for the example's built-in SQLite module.
+- Use Node.js 20.9 or newer for the workflow CLI.
+- Use Node.js 24.15 or newer for the disposable SQLite verification project.
 - Provide web access when a stage needs current external technical facts.
 - Use Git with at least one baseline commit before ticket implementation.
 
@@ -259,22 +259,20 @@ Run `node .project/bin/project-flow.mjs help` for every command.
 Run `setup` again after updating this skill suite. Its refresh procedure
 migrates older duplicated language, source, outcome, log, and check data.
 
-## Real-project exercise
+## Real-project verification
 
 This repository does not keep an automated skill or CLI test suite.
 
-Use the reproducible Next.js and SQLite project to exercise the workflow:
+The tracked prompt creates a fresh Next.js and SQLite project under the ignored
+`.verification/` directory. It exercises all twelve skills through a real agent
+harness and records its evidence inside that disposable project.
 
 ```bash
-cd examples/next-sqlite
-npm ci
-npm run typecheck
-npm run build
-node .project/bin/project-flow.mjs validate
+cat verification/full-workflow.md
 ```
 
-Link the skills into a disposable copy of that project. Then invoke `next`,
-`discuss`, `plan`, and `implement` through the target agent harness. Confirm
-that implementation starts the separate two-subagent review automatically.
+Give the prompt to a new agent session started at this repository root. The
+prompt links both supported skill directories before it creates workflow state.
+It does not commit the project or its evidence to this repository.
 
 See [docs/research.md](docs/research.md) for sources and design decisions.

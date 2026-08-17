@@ -1,3 +1,0 @@
-# Outcomes
-
-No concepts yet.
