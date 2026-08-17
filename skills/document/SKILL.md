@@ -63,7 +63,7 @@ node .project/bin/project-flow.mjs validate
 ```
 
 Completion moves valid drafts into `docs/knowledge/`, records their digests,
-sets a resolution, and refreshes the knowledge indexes, log, and work board.
+sets a resolution, and refreshes the knowledge indexes and work board.
 
 ## Knowledge rules
 

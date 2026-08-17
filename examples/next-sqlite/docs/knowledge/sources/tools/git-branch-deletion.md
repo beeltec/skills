@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://git-scm.com/docs/git-branch",
-      "title": "Git branch documentation",
       "publisher": "The Git project",
       "version": "Current manual; last changed in Git 2.51",
       "retrievedAt": "2026-08-16T15:47:13.082Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-Safe local cleanup after a ticket branch has merged.
 
 # Verified claims
 

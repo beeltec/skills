@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow/",
-      "title": "Git feature branch workflow",
       "publisher": "Atlassian",
       "version": "Current guide",
       "retrievedAt": "2026-08-16T15:46:51.012Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-One short-lived branch per feature or issue, integrated into main after review.
 
 # Verified claims
 

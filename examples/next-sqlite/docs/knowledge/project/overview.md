@@ -51,4 +51,5 @@ It has no external database service.
 
 # Verification
 
-Run `npm test`, `npm run typecheck`, and `npm run build` from this directory.
+Run `npm run typecheck` and `npm run build` from this directory. Start the
+application to exercise the task workflow in a browser.

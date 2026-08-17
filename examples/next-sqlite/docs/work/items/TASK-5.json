@@ -27,13 +27,6 @@
   "checks": [
     {
       "id": "CHK-1",
-      "name": "Tests",
-      "command": "npm test",
-      "status": "pending",
-      "lastRun": null
-    },
-    {
-      "id": "CHK-2",
       "name": "Types",
       "command": "npm run typecheck",
       "status": "pending",

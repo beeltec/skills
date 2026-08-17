@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf",
-      "title": "DDD Reference: Ubiquitous Language",
       "publisher": "Eric Evans, Domain Language",
       "version": "2015",
       "retrievedAt": "2026-08-16T23:19:09.373Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-The shared project vocabulary in docs/knowledge/ubiquitous-language.md.
 
 # Verified claims
 

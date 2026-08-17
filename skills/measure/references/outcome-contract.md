@@ -48,8 +48,9 @@ product metric. Use DORA measures only when repeated releases make trends useful
 
 If no external analytics or experiment rule applies, use the declared local
 evidence without inventing an official source note. After recording the result,
-validate and commit the outcome record, generated indexes, knowledge log, and
-established outcome concept. Do not push without user authority.
+validate and commit the outcome record, generated indexes, and established
+outcome concept. Read the immutable success definition from the linked brief.
+Do not copy it into the outcome record. Do not push without user authority.
 
 ## Official sources
 

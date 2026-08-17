@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://git-scm.com/docs/git-merge",
-      "title": "Git merge documentation",
       "publisher": "The Git project",
       "version": "Current Git documentation",
       "retrievedAt": "2026-08-16T15:43:37.664Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-Serial integration of green ticket branches into the configured target branch.
 
 # Verified claims
 

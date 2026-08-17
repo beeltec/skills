@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://semver.org/",
-      "title": "Semantic Versioning",
       "publisher": "Semantic Versioning",
       "version": "2.0.0",
       "retrievedAt": "2026-08-16T15:43:39.742Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-Future release version decisions when the project declares a public API.
 
 # Verified claims
 

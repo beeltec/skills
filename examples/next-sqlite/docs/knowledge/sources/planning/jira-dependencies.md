@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://support.atlassian.com/jira-software-cloud/docs/what-are-dependencies-in-advanced-roadmaps/",
-      "title": "Jira plan dependencies",
       "publisher": "Atlassian",
       "version": "Jira Cloud current documentation",
       "retrievedAt": "2026-08-16T15:43:39.314Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-Blocked-by links that control ticket implementation order.
 
 # Verified claims
 

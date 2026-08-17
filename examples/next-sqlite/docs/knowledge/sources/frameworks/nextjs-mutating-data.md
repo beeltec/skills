@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://nextjs.org/docs/app/getting-started/mutating-data",
-      "title": "Next.js mutating data",
       "publisher": "Vercel",
       "version": "Next.js 16.3.1 App Router",
       "retrievedAt": "2026-08-16T15:09:49.409Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-Server Functions used by the example's task forms.
 
 # Verified claims
 

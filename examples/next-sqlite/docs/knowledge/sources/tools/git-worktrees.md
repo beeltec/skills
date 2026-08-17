@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://git-scm.com/docs/git-worktree.html",
-      "title": "Git worktree documentation",
       "publisher": "The Git project",
       "version": "Current Git documentation",
       "retrievedAt": "2026-08-16T15:43:36.952Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-Ticket branches checked out under .worktrees for isolated implementation.
 
 # Verified claims
 

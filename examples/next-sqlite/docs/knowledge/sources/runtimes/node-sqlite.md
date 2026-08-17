@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://nodejs.org/download/release/latest-v24.x/docs/api/sqlite.html",
-      "title": "Node.js SQLite API",
       "publisher": "Node.js",
       "version": "Node.js 24.15 or newer",
       "retrievedAt": "2026-08-16T15:09:49.457Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-The example's synchronous local SQLite connection and prepared statements.
 
 # Verified claims
 

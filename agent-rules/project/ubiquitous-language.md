@@ -22,4 +22,6 @@ Design practices.
 - Preserve exact vendor names, commands, API identifiers, interface names, and quotations.
 - Do not let external documentation choose the project's preferred vocabulary.
 - Use the `language` skill for managed vocabulary changes.
-- Do not edit the generated readable body by hand.
+- Read canonical terms from the structured frontmatter.
+- Use `language-show` when a readable Markdown view is useful.
+- Do not copy term data into the Markdown body.

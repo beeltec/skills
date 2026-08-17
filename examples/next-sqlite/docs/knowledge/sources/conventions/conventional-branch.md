@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://conventionalbranch.org/",
-      "title": "Conventional Branch",
       "publisher": "Conventional Branch",
       "version": "1.1.0",
       "retrievedAt": "2026-08-16T15:43:38.947Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-One purpose-driven local branch for every non-epic implementation ticket.
 
 # Verified claims
 

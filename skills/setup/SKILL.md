@@ -6,6 +6,7 @@ description: Use this skill when a user wants to initialize, bootstrap, install,
 # Setup
 
 Initialize the two project-state spaces without changing product behavior.
+Keep one canonical persisted representation for each workflow value.
 
 Use Node.js 20.9 or newer for the bundled workflow CLI.
 
@@ -33,8 +34,9 @@ Use Node.js 20.9 or newer for the bundled workflow CLI.
 20. Use `$source` to cache current Git, Jira dependency, commit, and branch rules.
 21. Use `$source` to verify official docs for material detected technologies.
 22. Add small OKF concepts only for facts verified from the repository.
-23. Run `sync` and `validate`.
-24. Report the target branch, missing initial commit, agent-rule check, created paths, and sources.
+23. Confirm no canonical value is copied into a generated concept body.
+24. Run `sync` and `validate`.
+25. Report the target branch, missing initial commit, agent-rule check, created paths, and sources.
 
 Ask for the project key or name only when repository context cannot provide a
 safe value.
@@ -55,7 +57,11 @@ node .project/bin/project-flow.mjs validate
 
 Do not initialize twice. Refresh the installed CLI, Git settings, and
 `.worktrees/`. Use `$rules` to update and check the project profile. Use
-`$source` to refresh relevant notes. Then validate:
+`$source` to refresh relevant notes. The install command also removes obsolete
+generated duplication, including old lifecycle concept detail. It preflights
+every migration conflict before rewriting records. It installs the compatible
+CLI before applying the planned migration. It preserves canonical vocabulary
+history and failed check diagnostics. Then validate:
 
 ```bash
 node <skill-directory>/scripts/project-flow.mjs install --root .
@@ -68,6 +74,7 @@ node .project/bin/project-flow.mjs validate
 - Inspect non-empty target folders before setup.
 - Do not merge legacy or conflicting state automatically.
 - Do not overwrite existing knowledge.
+- Rewrite only workflow-managed representations during format migration.
 - Do not change text outside managed `AGENTS.md` rule blocks.
 - Do not install user-scoped rules without explicit user intent.
 - Do not create briefs, tickets, releases, or outcome records.

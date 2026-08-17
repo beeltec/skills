@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://www.sqlite.org/stricttables.html",
-      "title": "SQLite STRICT tables",
       "publisher": "SQLite",
       "version": "SQLite 3.37.0 or newer",
       "retrievedAt": "2026-08-16T15:09:49.502Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-The example's STRICT tasks table and its column constraints.
 
 # Verified claims
 

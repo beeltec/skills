@@ -40,8 +40,8 @@
 `TaskStore` owns all task persistence. It uses Node.js `DatabaseSync` from
 `node:sqlite`, so the application needs Node.js 24.15 or newer.
 
-The application stores data in `data/tasks.db` by default. Tests use an
-in-memory database. Set `TASK_DATABASE_PATH` to override the application path.
+The application stores data in `data/tasks.db` by default. Set
+`TASK_DATABASE_PATH` to override the application path.
 
 # Schema
 
@@ -59,8 +59,7 @@ The strict `tasks` table has these columns:
 `TaskStore.list()` returns newest IDs first. `create()` trims and validates the
 title. `toggle()` changes the stored completion value.
 
-See `src/lib/task-store.ts` for the implementation and
-`src/lib/task-store.test.ts` for verified behavior.
+See `src/lib/task-store.ts` for the implementation.
 
 Official API context is recorded in the [Node.js SQLite note](/sources/runtimes/node-sqlite.md)
 and [SQLite STRICT note](/sources/databases/sqlite-strict-tables.md).

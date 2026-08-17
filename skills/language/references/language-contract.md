@@ -17,12 +17,14 @@ Primary source:
 
 The local verified note belongs at
 `docs/knowledge/sources/methods/ubiquitous-language.md`.
+Validation requires this file to exist and use the `OfficialSource` type.
 
 ## Canonical file
 
 `docs/knowledge/ubiquitous-language.md` is an OKF v0.2 concept with type
 `UbiquitousLanguage`. Its JSON-compatible frontmatter stores the canonical
-data. Its Markdown body is generated for people and agents.
+persisted data. Do not repeat terms or history in the Markdown body. Run
+`language-show` for a readable Markdown view.
 
 Each term contains:
 
@@ -35,7 +37,8 @@ Each term contains:
 - the latest actor and timestamp.
 
 The file also stores an append-only change history with the actor and reason.
-Use CLI commands because manual body edits make the file invalid.
+Only the latest content confirmations remain in `verified`. Use CLI commands
+because manual data edits bypass agreement and validation.
 
 ## Agreement rules
 

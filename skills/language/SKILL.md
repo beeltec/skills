@@ -12,8 +12,8 @@ Maintain one agreed project vocabulary so users and agents mean the same thing.
 1. Require `.project/workflow.json`. Use `setup` when it is missing.
 2. Read [references/language-contract.md](references/language-contract.md).
 3. Read `docs/knowledge/ubiquitous-language.md` before interpreting project terms.
-4. Read the local Ubiquitous Language source note when it exists.
-5. Use `$source` only when that principle note is missing or conflicts with its official page.
+4. Read the local Ubiquitous Language source note.
+5. Use `$source` when that principle note is missing or conflicts with its official page.
 6. Use `language-show [TERM]` for lookup without changing the file.
 7. Separate observed wording, proposed meaning, and confirmed meaning.
 8. Ask for confirmation only when the current message does not confirm the exact canonical term and definition.

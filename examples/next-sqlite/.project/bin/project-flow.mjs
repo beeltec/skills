@@ -76,7 +76,9 @@ const LANGUAGE_STATUSES = ["active", "deprecated"];
 const LANGUAGE_ACTIONS = ["added", "updated", "deprecated"];
 const LANGUAGE_SOURCE_URL =
   "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf";
+const LANGUAGE_SOURCE_NOTE = "sources/methods/ubiquitous-language.md";
 const LANGUAGE_FILENAME = "ubiquitous-language.md";
+const SUCCESS_FIELDS = ["metric", "baseline", "target", "observationWindow", "dataSource"];
 const OFFICIAL_SOURCE_DONE = "Relevant external claims cite refreshed official source notes.";
 const QUALITY_GATE_DONE = "Applicable risk-driven quality gates have passing evidence.";
 const DEFAULT_GIT_CONFIG = Object.freeze({
@@ -106,10 +108,6 @@ function fail(message) {
 
 function now() {
   return new Date().toISOString();
-}
-
-function today() {
-  return now().slice(0, 10);
 }
 
 function parseArguments(values) {
@@ -189,7 +187,7 @@ function pathsFor(root) {
     config: join(project, "workflow.json"),
     cli: join(project, "bin", "project-flow.mjs"),
     knowledge,
-    knowledgeLog: join(knowledge, "log.md"),
+    legacyKnowledgeLog: join(knowledge, "log.md"),
     language: join(knowledge, LANGUAGE_FILENAME),
     sources,
     knowledgeReleases: join(knowledge, "releases"),
@@ -347,6 +345,17 @@ function validateItemShape(item, path) {
   }
   if (!Array.isArray(item.acceptanceCriteria)) errors.push(`${path}: acceptanceCriteria must be an array.`);
   if (!Array.isArray(item.checks)) errors.push(`${path}: checks must be an array.`);
+  if (Array.isArray(item.checks)) {
+    for (const check of item.checks) {
+      if (
+        check?.status === "pass" &&
+        check.lastRun?.exitCode === 0 &&
+        check.lastRun.output !== undefined
+      ) {
+        errors.push(`${path}: passing checks must not retain command output. Run setup refresh.`);
+      }
+    }
+  }
   if (item.risk !== undefined) {
     if (!item.risk || typeof item.risk !== "object" || Array.isArray(item.risk)) {
       errors.push(`${path}: risk must be an object.`);
@@ -836,7 +845,7 @@ function languageListInput(values, label, kind) {
   return normalized;
 }
 
-function languageBody(data) {
+function languageDisplay(data) {
   const terms = [...data.terms].sort(compareLanguageEntries);
   const active = terms.filter((entry) => entry.status === "active");
   const deprecated = terms.filter((entry) => entry.status === "deprecated");
@@ -879,6 +888,53 @@ function languageBody(data) {
   return `${lines.join("\n").trimEnd()}\n`;
 }
 
+function languageDocumentBody() {
+  return [
+    "# Usage",
+    "",
+    "Read the canonical vocabulary data from the frontmatter.",
+    "Run `node .project/bin/project-flow.mjs language-show` for a readable view.",
+    "",
+  ].join("\n");
+}
+
+function normalizeLanguageData(data) {
+  const history = Array.isArray(data.history) ? data.history : [];
+  const latestEvent = history.at(-1);
+  const meaningfulAt = latestEvent?.at ?? data.updatedAt;
+
+  if (nonEmptyString(meaningfulAt) && !Number.isNaN(Date.parse(meaningfulAt))) {
+    data.generated = { by: "process:project-flow", at: meaningfulAt };
+    const previousVerifications = Array.isArray(data.verified)
+      ? data.verified
+      : data.verified
+        ? [data.verified]
+        : [];
+    data.verified = previousVerifications.filter(
+      (event) =>
+        nonEmptyString(event?.at) &&
+        !Number.isNaN(Date.parse(event.at)) &&
+        Date.parse(event.at) >= Date.parse(meaningfulAt),
+    );
+    if (
+      latestEvent &&
+      !data.verified.some(
+        (event) => event?.by === latestEvent.by && event?.at === latestEvent.at,
+      )
+    ) {
+      data.verified.push({ by: latestEvent.by, at: latestEvent.at });
+    }
+  }
+  delete data.updatedAt;
+
+  const sources = Array.isArray(data.sources) ? data.sources : [];
+  const retained = sources.filter(
+    (source) =>
+      source?.resource !== LANGUAGE_SOURCE_URL && source?.resource !== LANGUAGE_SOURCE_NOTE,
+  );
+  data.sources = [{ resource: LANGUAGE_SOURCE_NOTE }, ...retained];
+}
+
 function newLanguageConcept(config) {
   const timestamp = now();
   const data = {
@@ -886,38 +942,35 @@ function newLanguageConcept(config) {
     title: `${config.projectName} ubiquitous language`,
     description: "Agreed project terms used consistently by users and agents.",
     tags: ["ubiquitous-language", "project-vocabulary"],
-    sources: [
-      {
-        resource: LANGUAGE_SOURCE_URL,
-        title: "Domain-Driven Design Reference: Ubiquitous Language",
-        publisher: "Eric Evans, Domain Language",
-        version: "2015",
-      },
-    ],
+    sources: [{ resource: LANGUAGE_SOURCE_NOTE }],
     status: "stable",
     generated: { by: "process:project-flow", at: timestamp },
     verified: [],
     terms: [],
     history: [],
   };
-  return renderJsonConcept(data, languageBody(data));
+  return renderJsonConcept(data, languageDocumentBody());
 }
 
-function ensureLanguageFile(paths, config) {
-  if (!existsSync(paths.language)) writeText(paths.language, newLanguageConcept(config));
+function refreshedLanguageContent(paths, config) {
+  const current = existsSync(paths.language)
+    ? readText(paths.language)
+    : newLanguageConcept(config);
+  const { data } = parseFrontmatter(current, true);
+  normalizeLanguageData(data);
+  const errors = languageConceptErrors(data, "", paths.language, false, false);
+  if (errors.length) fail(errors.join("\n"));
+  return renderJsonConcept(data, languageDocumentBody());
 }
 
 function refreshLanguageFile(paths, config) {
-  ensureLanguageFile(paths, config);
-  const { data } = parseFrontmatter(readText(paths.language), true);
-  const errors = languageConceptErrors(data, "", paths.language, false);
-  if (errors.length) fail(errors.join("\n"));
-  const body = languageBody(data);
-  const rendered = renderJsonConcept(data, body);
-  if (readText(paths.language) !== rendered) writeText(paths.language, rendered);
+  const rendered = refreshedLanguageContent(paths, config);
+  if (!existsSync(paths.language) || readText(paths.language) !== rendered) {
+    writeText(paths.language, rendered);
+  }
 }
 
-function languageConceptErrors(data, body, path, checkBody = true) {
+function languageConceptErrors(data, body, path, checkBody = true, checkSourceFile = true) {
   const errors = [];
   if (data.type !== "UbiquitousLanguage") errors.push(`${path}: type must be UbiquitousLanguage.`);
   if (data.status !== "stable") errors.push(`${path}: status must be stable.`);
@@ -925,11 +978,26 @@ function languageConceptErrors(data, body, path, checkBody = true) {
   if (!nonEmptyString(data.description)) errors.push(`${path}: description must be a non-empty string.`);
   if (!Array.isArray(data.terms)) errors.push(`${path}: terms must be an array.`);
   if (!Array.isArray(data.history)) errors.push(`${path}: history must be an array.`);
-  if (
-    !Array.isArray(data.sources) ||
-    !data.sources.some((source) => source?.resource === LANGUAGE_SOURCE_URL)
-  ) {
-    errors.push(`${path}: sources must cite Eric Evans' DDD Reference.`);
+  const hasLanguageSource =
+    Array.isArray(data.sources) &&
+    data.sources.some((source) => source?.resource === LANGUAGE_SOURCE_NOTE);
+  if (!hasLanguageSource) {
+    errors.push(`${path}: sources must reference the local Ubiquitous Language source note.`);
+  }
+  if (checkSourceFile && hasLanguageSource) {
+    const sourcePath = join(dirname(path), ...LANGUAGE_SOURCE_NOTE.split("/"));
+    if (!existsSync(sourcePath)) {
+      errors.push(`${path}: the local Ubiquitous Language source note is missing.`);
+    } else {
+      try {
+        const source = parseFrontmatter(readText(sourcePath), true);
+        if (source.data.type !== "OfficialSource") {
+          errors.push(`${sourcePath}: type must be OfficialSource.`);
+        }
+      } catch (error) {
+        errors.push(`${sourcePath}: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    }
   }
   if (errors.length) return errors;
 
@@ -1043,8 +1111,37 @@ function languageConceptErrors(data, body, path, checkBody = true) {
     }
   }
 
-  if (checkBody && !errors.length && body !== `\n${languageBody(data)}` && body !== languageBody(data)) {
-    errors.push(`${path}: generated body is stale. Run setup refresh to regenerate it.`);
+  if (data.updatedAt !== undefined) {
+    errors.push(`${path}: updatedAt duplicates generated.at. Run setup refresh.`);
+  }
+  const latestEvent = data.history.at(-1);
+  if (latestEvent) {
+    if (data.generated?.by !== "process:project-flow" || data.generated?.at !== latestEvent.at) {
+      errors.push(`${path}: generated metadata must describe the latest language change.`);
+    }
+    const verifications = Array.isArray(data.verified) ? data.verified : data.verified ? [data.verified] : [];
+    if (!verifications.some((event) => event?.by === latestEvent.by && event?.at === latestEvent.at)) {
+      errors.push(`${path}: the latest language change needs its confirmation evidence.`);
+    }
+    if (
+      verifications.some(
+        (event) =>
+          !nonEmptyString(event?.at) ||
+          Number.isNaN(Date.parse(event.at)) ||
+          Date.parse(event.at) < Date.parse(latestEvent.at),
+      )
+    ) {
+      errors.push(`${path}: verification entries must apply to the current vocabulary content.`);
+    }
+  }
+
+  if (
+    checkBody &&
+    !errors.length &&
+    body !== `\n${languageDocumentBody()}` &&
+    body !== languageDocumentBody()
+  ) {
+    errors.push(`${path}: body must not duplicate vocabulary data. Run setup refresh.`);
   }
   return errors;
 }
@@ -1123,7 +1220,7 @@ function briefErrors(paths, brief) {
   if (!brief.success || typeof brief.success !== "object" || Array.isArray(brief.success)) {
     errors.push(`${label}: success must be an object.`);
   } else {
-    for (const field of ["metric", "baseline", "target", "observationWindow", "dataSource"]) {
+    for (const field of SUCCESS_FIELDS) {
       if (typeof brief.success[field] !== "string") errors.push(`${label}: success.${field} must be a string.`);
     }
   }
@@ -1150,7 +1247,7 @@ function briefErrors(paths, brief) {
       errors.push(`${label}: confirmed briefs need at least one delivery acceptance signal.`);
     }
     if (brief.success && typeof brief.success === "object" && !Array.isArray(brief.success)) {
-      for (const field of ["metric", "baseline", "target", "observationWindow", "dataSource"]) {
+      for (const field of SUCCESS_FIELDS) {
         if (!nonEmptyString(brief.success[field])) errors.push(`${label}: confirmed briefs need success.${field}.`);
       }
     }
@@ -1346,15 +1443,8 @@ function outcomeErrors(outcome, briefs, releases, items) {
   } else if (release.status !== "green") {
     errors.push(`${label}: release ${outcome.release} must be green.`);
   }
-  if (!outcome.success || typeof outcome.success !== "object" || Array.isArray(outcome.success)) {
-    errors.push(`${label}: success must be an object.`);
-  } else {
-    for (const field of ["metric", "baseline", "target", "observationWindow", "dataSource"]) {
-      if (!nonEmptyString(outcome.success[field])) errors.push(`${label}: success.${field} is required.`);
-      if (brief && outcome.success[field] !== brief.success[field]) {
-        errors.push(`${label}: success.${field} must match ${brief.id}.`);
-      }
-    }
+  if (outcome.success !== undefined) {
+    errors.push(`${label}: duplicated success data is obsolete. Run setup refresh.`);
   }
   for (const field of ["observed", "result", "decision", "measuredAt", "measuredBy"]) {
     if (outcome[field] !== null && !nonEmptyString(outcome[field])) {
@@ -1477,10 +1567,16 @@ function officialSourceErrors(data, body, path) {
           errors.push(`${path}: ${error instanceof Error ? error.message : String(error)}`);
         }
       }
-      for (const field of ["title", "publisher", "version", "retrievedAt"]) {
+      for (const field of ["publisher", "version", "retrievedAt"]) {
         if (typeof source[field] !== "string" || !source[field].trim()) {
           errors.push(`${path}: source.${field} must be a non-empty string.`);
         }
+      }
+      if (source.title !== undefined && !nonEmptyString(source.title)) {
+        errors.push(`${path}: source.title must be a non-empty string when present.`);
+      }
+      if (source.title === data.title) {
+        errors.push(`${path}: source.title duplicates the concept title. Run setup refresh.`);
       }
       if (
         typeof source.retrievedAt === "string" &&
@@ -1494,6 +1590,10 @@ function officialSourceErrors(data, body, path) {
   const claims = body.match(/(?:^|\n)# Verified claims\n\n([\s\S]*?)(?=\n# |\s*$)/)?.[1] ?? "";
   if (!claims.split("\n").some((line) => line.startsWith("- ") && line.slice(2).trim())) {
     errors.push(`${path}: an official source needs at least one verified claim.`);
+  }
+  const normalizedBody = body.startsWith("\n") ? body.slice(1) : body;
+  if (normalizedBody.startsWith(`# Applicability\n\n${data.description}\n\n`)) {
+    errors.push(`${path}: Applicability duplicates description. Run setup refresh.`);
   }
   return errors;
 }
@@ -1563,29 +1663,6 @@ function generateKnowledgeIndexes(paths, config) {
     writeText(join(directory, "index.md"), knowledgeIndexContent(directory, paths, config));
   }
   visit(paths.knowledge);
-}
-
-function appendKnowledgeLogEntries(paths, entries) {
-  const heading = "# Knowledge Update Log\n\n";
-  let content = existsSync(paths.knowledgeLog) ? readText(paths.knowledgeLog) : heading;
-  if (!content.startsWith("# Knowledge Update Log")) fail("Knowledge log has an invalid heading.");
-  const dateHeading = `## ${today()}`;
-
-  if (content.includes(`${dateHeading}\n`)) {
-    content = content.replace(`${dateHeading}\n`, `${dateHeading}\n${entries.join("\n")}\n`);
-  } else {
-    const remainder = content.slice(content.indexOf("\n") + 1).trimStart();
-    content = `${heading}${dateHeading}\n${entries.join("\n")}\n\n${remainder}`.trimEnd() + "\n";
-  }
-  writeText(paths.knowledgeLog, content);
-}
-
-function appendKnowledgeLog(paths, item, promotions) {
-  const entries = promotions.map((promotion) => {
-    const label = markdownLabel(promotion.title ?? humanize(promotion.target.split("/").at(-1).slice(0, -3)));
-    return `* **Promotion**: ${item.key} promoted [${label}](/${promotion.target}).`;
-  });
-  appendKnowledgeLogEntries(paths, entries);
 }
 
 function childrenOf(items, key) {
@@ -1814,13 +1891,23 @@ function syncGeneratedFiles(paths, config, items = loadItems(paths)) {
   generateWorkIndexes(paths, items);
 }
 
-function validateKnowledge(paths) {
+function validateKnowledge(paths, config) {
   const errors = [];
   if (!existsSync(paths.language)) {
     errors.push(`${paths.language}: required ubiquitous language file is missing. Run setup to refresh the workflow.`);
   }
 
   function visit(directory) {
+    const indexPath = join(directory, "index.md");
+    try {
+      const expectedIndex = knowledgeIndexContent(directory, paths, config);
+      if (!existsSync(indexPath) || readText(indexPath) !== expectedIndex) {
+        errors.push(`${indexPath}: generated index is stale. Run sync.`);
+      }
+    } catch (error) {
+      errors.push(`${indexPath}: cannot generate index: ${error instanceof Error ? error.message : String(error)}`);
+    }
+
     for (const entry of readdirSync(directory, { withFileTypes: true })) {
       if (entry.name.startsWith(".")) continue;
       const path = join(directory, entry.name);
@@ -1832,18 +1919,12 @@ function validateKnowledge(paths) {
 
       const localName = entry.name;
       const content = readText(path);
-      if (localName === "index.md") {
-        if (directory === paths.knowledge) {
-          if (!/^---\nokf_version:\s*["']?0\.2["']?\n---\n/.test(content.replaceAll("\r\n", "\n"))) {
-            errors.push(`${path}: root index must declare okf_version 0.2.`);
-          }
-        } else if (content.startsWith("---")) {
-          errors.push(`${path}: only the root index may have frontmatter.`);
-        }
-        continue;
-      }
+      if (localName === "index.md") continue;
 
       if (localName === "log.md") {
+        if (content.startsWith("# Knowledge Update Log")) {
+          errors.push(`${path}: generated knowledge logs are obsolete. Run setup refresh.`);
+        }
         for (const match of content.matchAll(/^##\s+(.+)$/gm)) {
           if (!/^\d{4}-\d{2}-\d{2}$/.test(match[1])) errors.push(`${path}: log dates must use YYYY-MM-DD.`);
         }
@@ -1874,7 +1955,7 @@ function validateKnowledge(paths) {
 function validateWorkspace(paths, config, items) {
   const errors = [];
   errors.push(...validateHierarchy(items));
-  errors.push(...validateKnowledge(paths));
+  errors.push(...validateKnowledge(paths, config));
 
   const briefs = loadBriefs(paths);
   const releases = loadReleases(paths, items);
@@ -1958,6 +2039,263 @@ function parseCheck(value) {
   return { name: value.slice(0, separator).trim(), command: value.slice(separator + 2).trim() };
 }
 
+function plannedWrite(path, content) {
+  if (existsSync(path) && readText(path) === content) return [];
+  return [{ path, content }];
+}
+
+function planOfficialSourceMigrations(paths) {
+  if (!existsSync(paths.sources)) return [];
+  const writes = [];
+
+  function visit(directory) {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const path = join(directory, entry.name);
+      if (entry.isDirectory()) {
+        visit(path);
+        continue;
+      }
+      if (!entry.isFile() || !entry.name.endsWith(".md") || entry.name === "index.md") continue;
+
+      const content = readText(path);
+      const parsed = parseFrontmatter(content);
+      if (parsed.format !== "json" || parsed.data.type !== "OfficialSource") continue;
+
+      let changed = false;
+      const source = Array.isArray(parsed.data.sources) ? parsed.data.sources[0] : undefined;
+      if (source?.title === parsed.data.title) {
+        delete source.title;
+        changed = true;
+      }
+
+      let body = parsed.body.startsWith("\n") ? parsed.body.slice(1) : parsed.body;
+      const repeatedApplicability = `# Applicability\n\n${parsed.data.description}\n\n`;
+      if (body.startsWith(repeatedApplicability)) {
+        body = body.slice(repeatedApplicability.length);
+        changed = true;
+      }
+
+      if (changed) {
+        writes.push({ path, content: renderJsonConcept(parsed.data, body) });
+      }
+    }
+  }
+
+  visit(paths.sources);
+  return writes;
+}
+
+function planSuccessfulCheckOutputMigrations(paths) {
+  if (!existsSync(paths.items)) return { writes: [], items: [] };
+  const writes = [];
+  const items = [];
+
+  for (const name of readdirSync(paths.items)
+    .filter((entry) => entry.endsWith(".json"))
+    .sort((left, right) => left.localeCompare(right, undefined, { numeric: true }))) {
+    const path = join(paths.items, name);
+    const item = readJson(path, "work item");
+    let changed = false;
+    for (const check of Array.isArray(item.checks) ? item.checks : []) {
+      if (
+        check.status === "pass" &&
+        check.lastRun?.exitCode === 0 &&
+        Object.hasOwn(check.lastRun, "output")
+      ) {
+        delete check.lastRun.output;
+        changed = true;
+      }
+    }
+    const errors = validateItemShape(item, path);
+    if (errors.length) fail(errors.join("\n"));
+    items.push(item);
+    if (changed) writes.push({ path, content: `${JSON.stringify(item, null, 2)}\n` });
+  }
+
+  const hierarchyErrors = validateHierarchy(items);
+  if (hierarchyErrors.length) fail(hierarchyErrors.join("\n"));
+  return { writes, items };
+}
+
+function planOutcomeSuccessMigrations(paths, briefs, releases, items) {
+  if (!existsSync(paths.outcomes)) return { writes: [], outcomes: [] };
+  const briefsById = new Map(briefs.map((brief) => [brief.id, brief]));
+  const writes = [];
+  const outcomes = [];
+
+  for (const name of readdirSync(paths.outcomes)
+    .filter((entry) => /^OUT-[1-9][0-9]*\.json$/.test(entry))
+    .sort((left, right) => left.localeCompare(right, undefined, { numeric: true }))) {
+    const path = join(paths.outcomes, name);
+    const outcome = readJson(path, "outcome");
+    let changed = false;
+
+    if (Object.hasOwn(outcome, "success")) {
+      const brief = briefsById.get(outcome.brief);
+      if (!brief) fail(`${outcome.id}: cannot migrate success data without brief ${outcome.brief}.`);
+      for (const field of SUCCESS_FIELDS) {
+        if (outcome.success?.[field] !== brief.success[field]) {
+          fail(`${outcome.id}: success.${field} conflicts with ${brief.id}; resolve it before setup refresh.`);
+        }
+      }
+      delete outcome.success;
+      changed = true;
+    }
+
+    const errors = outcomeErrors(outcome, briefs, releases, items);
+    if (errors.length) fail(errors.join("\n"));
+    outcomes.push(outcome);
+    if (changed) writes.push({ path, content: `${JSON.stringify(outcome, null, 2)}\n` });
+  }
+
+  return { writes, outcomes };
+}
+
+function normalizedConceptBody(body) {
+  return (body.startsWith("\n") ? body.slice(1) : body).trimEnd();
+}
+
+function planLifecycleConceptMigration(path, type, resource, legacyBody, currentBody) {
+  const parsed = parseFrontmatter(readText(path), true);
+  if (parsed.data.type !== type) {
+    fail(`${path}: cannot migrate ${type} knowledge because its type was changed.`);
+  }
+  const sources = Array.isArray(parsed.data.sources) ? parsed.data.sources : [];
+  const source = sources.find((entry) => entry?.resource === resource);
+  if (!source) {
+    fail(`${path}: cannot migrate ${type} knowledge without source ${resource}.`);
+  }
+
+  const storedBody = normalizedConceptBody(parsed.body);
+  const legacy = legacyBody.trimEnd();
+  const current = currentBody.trimEnd();
+  if (storedBody !== legacy && storedBody !== current) {
+    fail(`${path}: generated lifecycle body was customized; resolve it before setup refresh.`);
+  }
+
+  if (source.title === parsed.data.title) delete source.title;
+  return plannedWrite(path, renderJsonConcept(parsed.data, currentBody));
+}
+
+function planLifecycleKnowledgeMigrations(paths, briefs, releases, outcomes) {
+  const writes = [];
+  const briefsById = new Map(briefs.map((brief) => [brief.id, brief]));
+  const releasesById = new Map(releases.map((release) => [release.id, release]));
+
+  for (const release of releases) {
+    const path = join(paths.knowledgeReleases, `${release.id.toLowerCase()}.md`);
+    if (!existsSync(path)) continue;
+    writes.push(
+      ...planLifecycleConceptMigration(
+        path,
+        "Release",
+        `urn:project-release:${release.id}`,
+        legacyReleaseKnowledgeBody(release),
+        releaseKnowledgeBody(release),
+      ),
+    );
+  }
+
+  for (const outcome of outcomes) {
+    const path = join(paths.knowledgeOutcomes, `${outcome.id.toLowerCase()}.md`);
+    if (!existsSync(path)) continue;
+    const brief = briefsById.get(outcome.brief);
+    const release = releasesById.get(outcome.release);
+    if (!brief || !release) {
+      fail(`${outcome.id}: cannot migrate lifecycle knowledge without its brief and release.`);
+    }
+    writes.push(
+      ...planLifecycleConceptMigration(
+        path,
+        "ProductOutcome",
+        `urn:project-outcome:${outcome.id}`,
+        legacyOutcomeKnowledgeBody(outcome, brief, release),
+        outcomeKnowledgeBody(outcome, brief, release),
+      ),
+    );
+  }
+
+  return writes;
+}
+
+function planSetupMigration(paths, config) {
+  const workItems = planSuccessfulCheckOutputMigrations(paths);
+  const briefs = loadBriefs(paths);
+  const releases = loadReleases(paths, workItems.items);
+  const outcomeRecords = planOutcomeSuccessMigrations(
+    paths,
+    briefs,
+    releases,
+    workItems.items,
+  );
+  const sourceNotes = planOfficialSourceMigrations(paths);
+  const language = plannedWrite(paths.language, refreshedLanguageContent(paths, config));
+  const lifecycle = planLifecycleKnowledgeMigrations(
+    paths,
+    briefs,
+    releases,
+    outcomeRecords.outcomes,
+  );
+  const removeLog =
+    existsSync(paths.legacyKnowledgeLog) &&
+    readText(paths.legacyKnowledgeLog).startsWith("# Knowledge Update Log");
+
+  const writes = [
+    ...language,
+    ...sourceNotes,
+    ...workItems.writes,
+    ...outcomeRecords.writes,
+    ...lifecycle,
+  ];
+  const targets = new Set();
+  for (const write of writes) {
+    if (targets.has(write.path)) fail(`Setup migration planned duplicate writes for ${write.path}.`);
+    targets.add(write.path);
+  }
+
+  return {
+    writes,
+    removeLog,
+    counts: {
+      sourceNotes: sourceNotes.length,
+      outcomes: outcomeRecords.writes.length,
+      workItems: workItems.writes.length,
+      lifecycle: lifecycle.length,
+    },
+  };
+}
+
+function applySetupMigration(paths, plan) {
+  for (const write of plan.writes) writeText(write.path, write.content);
+  if (plan.removeLog) unlinkSync(paths.legacyKnowledgeLog);
+}
+
+function installLocalCli(paths) {
+  if (resolve(SCRIPT_PATH) === resolve(paths.cli)) return false;
+  mkdirSync(dirname(paths.cli), { recursive: true });
+  copyFileSync(SCRIPT_PATH, paths.cli);
+  chmodSync(paths.cli, 0o755);
+  return true;
+}
+
+function reportSetupMigration(plan) {
+  if (plan.counts.sourceNotes) {
+    console.log(`Removed duplicated fields from ${plan.counts.sourceNotes} official source note(s).`);
+  }
+  if (plan.counts.outcomes) {
+    console.log(`Removed copied success data from ${plan.counts.outcomes} outcome record(s).`);
+  }
+  if (plan.counts.workItems) {
+    console.log(`Removed successful command output from ${plan.counts.workItems} work item(s).`);
+  }
+  if (plan.counts.lifecycle) {
+    console.log(`Removed copied detail from ${plan.counts.lifecycle} lifecycle concept(s).`);
+  }
+  if (plan.removeLog) {
+    console.log("Removed the generated knowledge log. Git retains committed history.");
+  }
+}
+
 function commandInit(args) {
   const root = resolve(option(args, "root") ?? process.cwd());
   const paths = pathsFor(root);
@@ -2014,7 +2352,6 @@ function commandInit(args) {
   copyFileSync(SCRIPT_PATH, paths.cli);
   chmodSync(paths.cli, 0o755);
   refreshLanguageFile(paths, config);
-  writeText(paths.knowledgeLog, `# Knowledge Update Log\n\n## ${today()}\n* **Initialization**: Created the knowledge bundle.\n`);
   syncGeneratedFiles(paths, config, []);
   console.log(`Initialized ${projectName} at ${paths.project}`);
 }
@@ -2049,23 +2386,23 @@ function commandInstall(args) {
     changed = true;
   }
   validateGitConfig(config.git);
-  if (changed) writeJson(paths.config, config);
+  const migration = planSetupMigration(paths, config);
   mkdirSync(paths.sources, { recursive: true });
   mkdirSync(paths.knowledgeReleases, { recursive: true });
   mkdirSync(paths.knowledgeOutcomes, { recursive: true });
   mkdirSync(paths.briefs, { recursive: true });
   mkdirSync(paths.releases, { recursive: true });
   mkdirSync(paths.outcomes, { recursive: true });
-  refreshLanguageFile(paths, config);
+  const installedCli = installLocalCli(paths);
+  if (changed) writeJson(paths.config, config);
+  applySetupMigration(paths, migration);
   ensureWorktreeLayout(paths, config);
   syncGeneratedFiles(paths, config);
-  if (resolve(SCRIPT_PATH) === resolve(paths.cli)) {
+  reportSetupMigration(migration);
+  if (!installedCli) {
     console.log("The project CLI is already running from its installed path.");
     return;
   }
-  mkdirSync(dirname(paths.cli), { recursive: true });
-  copyFileSync(SCRIPT_PATH, paths.cli);
-  chmodSync(paths.cli, 0o755);
   console.log(`Installed workflow CLI at ${paths.cli}`);
 }
 
@@ -2401,10 +2738,14 @@ function commandVerify(args, paths, config) {
       env: process.env,
     });
     const exitCode = typeof result.status === "number" ? result.status : 1;
-    const output = boundedOutput(result.stdout, result.stderr || result.error?.message);
     check.status = exitCode === 0 ? "pass" : "fail";
-    check.lastRun = { at: now(), exitCode, output };
-    if (exitCode !== 0) passed = false;
+    check.lastRun = { at: now(), exitCode };
+    if (exitCode !== 0) {
+      const output = boundedOutput(result.stdout, result.stderr || result.error?.message);
+      check.lastRun.output = output;
+      console.error(output);
+      passed = false;
+    }
     console.log(`${check.id}: ${check.status}`);
   }
   saveItem(paths, item);
@@ -2501,19 +2842,13 @@ function visibleLanguageEntry(data, requested) {
 
 function saveLanguage(paths, config, data, event) {
   data.terms.sort(compareLanguageEntries);
-  data.updatedAt = event.at;
-  data.verified = [
-    ...(Array.isArray(data.verified) ? data.verified : []),
-    { by: event.by, at: event.at },
-  ];
+  data.generated = { by: "process:project-flow", at: event.at };
+  data.verified = [{ by: event.by, at: event.at }];
   data.history.push(event);
-  const body = languageBody(data);
+  const body = languageDocumentBody();
   const errors = languageConceptErrors(data, `\n${body}`, paths.language);
   if (errors.length) fail(errors.join("\n"));
   writeText(paths.language, renderJsonConcept(data, body));
-  appendKnowledgeLogEntries(paths, [
-    `* **Language**: ${humanize(event.action)} ${markdownLabel(event.term)} by ${markdownLabel(event.by)}.`,
-  ]);
   syncGeneratedFiles(paths, config);
 }
 
@@ -2657,7 +2992,7 @@ function commandLanguageShow(args, paths) {
   const data = loadLanguage(paths);
   const requested = args.positionals[1];
   if (!requested) {
-    console.log(languageBody(data).trimEnd());
+    console.log(languageDisplay(data).trimEnd());
     return;
   }
   const { entry, matchedAlias } = visibleLanguageEntry(data, requested);
@@ -2705,7 +3040,6 @@ function commandSourceAdd(args, paths, config) {
     sources: [
       {
         resource: url,
-        title,
         publisher,
         version,
         retrievedAt: timestamp,
@@ -2716,10 +3050,6 @@ function commandSourceAdd(args, paths, config) {
     verified: [{ by: actor, at: timestamp }],
   };
   const body = [
-    "# Applicability",
-    "",
-    scope,
-    "",
     "# Verified claims",
     "",
     ...claims.map((claim) => `- ${claim}`),
@@ -2928,7 +3258,7 @@ function lifecycleConcept(type, title, description, tags, actor, source, body) {
       title,
       description,
       tags,
-      sources: [{ resource: source, title }],
+      sources: [{ resource: source }],
       status: "stable",
       generated: { by: actor, at: timestamp },
       verified: [{ by: "process:project-flow", at: timestamp }],
@@ -2937,26 +3267,8 @@ function lifecycleConcept(type, title, description, tags, actor, source, body) {
   );
 }
 
-function appendKnowledgeEvent(paths, kind, id, target) {
-  const heading = "# Knowledge Update Log\n\n";
-  let content = existsSync(paths.knowledgeLog) ? readText(paths.knowledgeLog) : heading;
-  if (!content.startsWith("# Knowledge Update Log")) fail("Knowledge log has an invalid heading.");
-  const dateHeading = `## ${today()}`;
-  const entry = `* **${kind}**: ${id} established [${target}](/${target}).`;
-  if (content.includes(`${dateHeading}\n`)) {
-    content = content.replace(`${dateHeading}\n`, `${dateHeading}\n${entry}\n`);
-  } else {
-    const remainder = content.slice(content.indexOf("\n") + 1).trimStart();
-    content = `${heading}${dateHeading}\n${entry}\n\n${remainder}`.trimEnd() + "\n";
-  }
-  writeText(paths.knowledgeLog, content);
-}
-
-function releaseKnowledge(release, actor) {
-  const checks = release.checks.map(
-    (check) => `- ${check.phase} ${check.name}: ${check.status} — ${check.evidence}`,
-  );
-  const body = [
+function releaseKnowledgeBody(release) {
+  return [
     "# Released state",
     "",
     `- Kind: ${release.kind}`,
@@ -2967,6 +3279,15 @@ function releaseKnowledge(release, actor) {
     `- Commit: ${release.commit}`,
     `- Artifact: ${release.artifact}`,
     `- Digest: ${release.digest}`,
+  ].join("\n");
+}
+
+function legacyReleaseKnowledgeBody(release) {
+  const checks = release.checks.map(
+    (check) => `- ${check.phase} ${check.name}: ${check.status} — ${check.evidence}`,
+  );
+  return [
+    releaseKnowledgeBody(release),
     `- Tickets: ${release.tickets.join(", ")}`,
     `- Finished: ${release.finishedAt}`,
     "",
@@ -2979,6 +3300,9 @@ function releaseKnowledge(release, actor) {
     "",
     release.recoveryPlan,
   ].join("\n");
+}
+
+function releaseKnowledge(release, actor) {
   return lifecycleConcept(
     "Release",
     `${release.id} ${release.title}`,
@@ -2986,7 +3310,7 @@ function releaseKnowledge(release, actor) {
     ["release", release.kind, release.target.environment],
     actor,
     `urn:project-release:${release.id}`,
-    body,
+    releaseKnowledgeBody(release),
   );
 }
 
@@ -3012,7 +3336,6 @@ function commandReleaseFinish(args, paths, config) {
     const targetPath = join(paths.knowledge, ...target.split("/"));
     if (existsSync(targetPath)) fail(`Established release knowledge already exists: ${target}.`);
     writeText(targetPath, releaseKnowledge(release, actor));
-    appendKnowledgeEvent(paths, "Release", id, target);
   }
   saveRelease(paths, release);
   syncGeneratedFiles(paths, config, items);
@@ -3046,7 +3369,6 @@ function commandOutcomeCreate(args, paths, config) {
     status: "planned",
     brief: brief.id,
     release: release.id,
-    success: { ...brief.success },
     observed: null,
     result: null,
     evidence: [],
@@ -3064,15 +3386,30 @@ function commandOutcomeCreate(args, paths, config) {
   console.log(`${outcome.id}: measure ${brief.id} after ${release.id}.`);
 }
 
-function outcomeKnowledge(outcome, brief, release, actor) {
-  const body = [
+function outcomeKnowledgeBody(outcome, brief, release) {
+  return [
     "# Observed outcome",
     "",
     `- Brief: ${brief.id}`,
     `- Release: ${release.id}`,
-    `- Metric: ${outcome.success.metric}`,
-    `- Baseline: ${outcome.success.baseline}`,
-    `- Target: ${outcome.success.target}`,
+    `- Metric: ${brief.success.metric}`,
+    `- Target: ${brief.success.target}`,
+    `- Observed: ${outcome.observed}`,
+    `- Result: ${outcome.result}`,
+    `- Decision: ${outcome.decision}`,
+    `- Measured: ${outcome.measuredAt}`,
+  ].join("\n");
+}
+
+function legacyOutcomeKnowledgeBody(outcome, brief, release) {
+  return [
+    "# Observed outcome",
+    "",
+    `- Brief: ${brief.id}`,
+    `- Release: ${release.id}`,
+    `- Metric: ${brief.success.metric}`,
+    `- Baseline: ${brief.success.baseline}`,
+    `- Target: ${brief.success.target}`,
     `- Observed: ${outcome.observed}`,
     `- Result: ${outcome.result}`,
     `- Decision: ${outcome.decision}`,
@@ -3084,8 +3421,13 @@ function outcomeKnowledge(outcome, brief, release, actor) {
     "",
     "# Follow-up",
     "",
-    outcome.followUpTickets.length ? outcome.followUpTickets.map((key) => `- ${key}`).join("\n") : "None.",
+    outcome.followUpTickets.length
+      ? outcome.followUpTickets.map((key) => `- ${key}`).join("\n")
+      : "None.",
   ].join("\n");
+}
+
+function outcomeKnowledge(outcome, brief, release, actor) {
   return lifecycleConcept(
     "ProductOutcome",
     `${outcome.id} ${brief.title}`,
@@ -3093,7 +3435,7 @@ function outcomeKnowledge(outcome, brief, release, actor) {
     ["product-outcome", outcome.result, outcome.decision],
     actor,
     `urn:project-outcome:${outcome.id}`,
-    body,
+    outcomeKnowledgeBody(outcome, brief, release),
   );
 }
 
@@ -3131,7 +3473,6 @@ function commandOutcomeRecord(args, paths, config) {
   const brief = briefs.find((entry) => entry.id === outcome.brief);
   const release = releases.find((entry) => entry.id === outcome.release);
   writeText(targetPath, outcomeKnowledge(outcome, brief, release, actor));
-  appendKnowledgeEvent(paths, "Outcome", id, target);
   saveOutcome(paths, outcome);
   syncGeneratedFiles(paths, config, items);
   console.log(`Recorded ${id} as ${result}; decision ${decision}.`);
@@ -3248,7 +3589,6 @@ function commandComplete(args, paths, config) {
   );
   item.knowledgeChanges = [];
   saveItem(paths, item);
-  if (promotions.length) appendKnowledgeLog(paths, item, promotions);
   syncGeneratedFiles(paths, config);
   console.log(`Completed ${key} with resolution ${item.resolution}.`);
   for (const promotion of promotions) console.log(`Promoted ${promotion.target}`);

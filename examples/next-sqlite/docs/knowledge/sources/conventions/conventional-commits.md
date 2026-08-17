@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://www.conventionalcommits.org/en/v1.0.0/",
-      "title": "Conventional Commits",
       "publisher": "Conventional Commits",
       "version": "1.0.0",
       "retrievedAt": "2026-08-16T15:43:38.474Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-All commits created for ticket implementation and integration.
 
 # Verified claims
 

@@ -57,8 +57,9 @@ When no external provider or tool rule applies, report that fact. Do not create
 a fake official source note.
 
 After a terminal result, validate and commit the release record, generated
-indexes, log, and established knowledge. Include each planned outcome created by
-the release. Use a Conventional Commit such as
+indexes, and concise established knowledge. Keep detailed checks and recovery
+evidence in the release record. Include each planned outcome created by the
+release. Use a Conventional Commit such as
 `docs(rel-1): record verified release`. Do not push without user authority.
 
 ## Deployment variants

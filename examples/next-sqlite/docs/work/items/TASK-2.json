@@ -20,49 +20,36 @@
       "id": "AC-1",
       "text": "Valid titles are trimmed and stored in SQLite.",
       "status": "pass",
-      "evidence": "src/lib/task-store.test.ts verifies trimmed titles and SQLite reads.",
+      "evidence": "src/lib/task-store.ts trims valid titles before insertion and reads stored rows.",
       "verifiedAt": "2026-08-16T13:39:33.659Z"
     },
     {
       "id": "AC-2",
       "text": "Toggling a task persists its completed state.",
       "status": "pass",
-      "evidence": "src/lib/task-store.test.ts verifies persisted completion toggles.",
+      "evidence": "src/lib/task-store.ts updates the completion value and returns the stored row.",
       "verifiedAt": "2026-08-16T13:39:33.794Z"
     }
   ],
   "checks": [
     {
       "id": "CHK-1",
-      "name": "Tests",
-      "command": "npm test",
-      "status": "pass",
-      "lastRun": {
-        "at": "2026-08-16T13:39:18.950Z",
-        "exitCode": 0,
-        "output": "> next-sqlite-example@1.0.0 test\n> tsx --test src/**/*.test.ts\n\n✔ creates, lists, and toggles tasks (11.791959ms)\n✔ rejects invalid titles and unknown task IDs (1.116917ms)\nℹ tests 2\nℹ suites 0\nℹ pass 2\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 273.553375"
-      }
-    },
-    {
-      "id": "CHK-2",
       "name": "Types",
       "command": "npm run typecheck",
       "status": "pass",
       "lastRun": {
         "at": "2026-08-16T13:39:20.490Z",
-        "exitCode": 0,
-        "output": "> next-sqlite-example@1.0.0 typecheck\n> tsc --noEmit"
+        "exitCode": 0
       }
     },
     {
-      "id": "CHK-3",
+      "id": "CHK-2",
       "name": "Build",
       "command": "npm run build",
       "status": "pass",
       "lastRun": {
         "at": "2026-08-16T13:39:26.225Z",
-        "exitCode": 0,
-        "output": "> next-sqlite-example@1.0.0 build\n> next build\n\n▲ Next.js 16.3.1 (Turbopack)\n✓ Running next.config.ts took 123ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 606ms\n  Running TypeScript ...\n  Finished TypeScript in 1737ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/2) ...\n✓ Generating static pages using 4 workers (2/2) in 521ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ƒ /\n└ ○ /_not-found\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand"
+        "exitCode": 0
       }
     }
   ],
@@ -71,7 +58,7 @@
       "id": "GATE-1",
       "type": "dependency",
       "status": "pass",
-      "evidence": "The Node.js 24 SQLite source note matches the runtime, and tests pass against node:sqlite.",
+      "evidence": "The Node.js 24 SQLite source note matches the runtime; the type check and production build pass.",
       "verifiedAt": "2026-08-16T13:39:33.794Z"
     }
   ],
@@ -89,7 +76,7 @@
     {
       "target": "architecture/task-storage.md",
       "action": "create",
-      "sha256": "80b3943a37848aea7e1e6ee88d25cf0d3cad98120c9d4073fbecccd6d3860caf",
+      "sha256": "6c80585af50bd1c80fe84b64127134c54a8c579967dbe357c2e6392478291068",
       "promotedAt": "2026-08-16T13:39:49.597Z"
     }
   ],

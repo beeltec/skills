@@ -55,6 +55,11 @@ Each record must contain:
 - the exact project scope where the page applies;
 - concise, paraphrased claims verified on that page.
 
+Store project applicability once as the concept `description`. Keep verified
+claims in the Markdown body. Do not repeat the description under an
+`Applicability` heading. Omit a nested source title when it equals the concept
+title.
+
 Do not store a whole page. Keep enough detail to support discovery and future
 verification. Add a short quote only when exact wording is essential.
 

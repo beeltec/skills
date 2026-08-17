@@ -11,7 +11,6 @@
   "sources": [
     {
       "resource": "https://git-scm.com/docs/gitworkflows",
-      "title": "Git workflows: topic branches",
       "publisher": "The Git project",
       "version": "Current manual; unchanged from Git 2.35 through 2.55",
       "retrievedAt": "2026-08-16T15:46:43.857Z"
@@ -30,10 +29,6 @@
   ]
 }
 ---
-
-# Applicability
-
-Short-lived ticket branches and serial integration into the stable target branch.
 
 # Verified claims
 
