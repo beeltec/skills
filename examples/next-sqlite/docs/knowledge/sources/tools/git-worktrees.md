@@ -2,7 +2,7 @@
 {
   "type": "OfficialSource",
   "title": "Git worktree documentation",
-  "description": "Ticket branches checked out under .woktrees for isolated implementation.",
+  "description": "Ticket branches checked out under .worktrees for isolated implementation.",
   "tags": [
     "official-source",
     "git",
@@ -33,7 +33,7 @@
 
 # Applicability
 
-Ticket branches checked out under .woktrees for isolated implementation.
+Ticket branches checked out under .worktrees for isolated implementation.
 
 # Verified claims
 

@@ -1,4 +1,4 @@
-/.woktrees/
+/.worktrees/
 /.next/
 /node_modules/
 /data/*.db

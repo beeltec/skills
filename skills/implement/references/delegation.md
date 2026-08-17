@@ -75,7 +75,7 @@ Use this structure:
 
 - Fixed point: <resolved target commit>
 - Branch: <conventional ticket branch>
-- Worktree: <absolute .woktrees path>
+- Worktree: <absolute .worktrees path>
 - Target branch: <main or explicit override>
 - Coordinator model: <exact runtime model>
 - Access mode: <Codex subscription, API key, or other host>

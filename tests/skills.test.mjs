@@ -324,7 +324,7 @@ test("workflow isolates tickets and serializes green integration", () => {
   const document = readFileSync(join(SKILLS_ROOT, "document", "SKILL.md"), "utf8");
   const cli = readFileSync(join(SKILLS_ROOT, "setup", "scripts", "project-flow.mjs"), "utf8");
 
-  assert.match(setup, /\.woktrees\//);
+  assert.match(setup, /\.worktrees\//);
   assert.match(workspace, /Conventional Branch 1\.1\.0/);
   assert.match(workspace, /Conventional Commits 1\.0\.0/);
   assert.match(plan, /dependency graph acyclic/i);

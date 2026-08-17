@@ -69,7 +69,7 @@ function runInstalled(root, arguments_, expectedStatus = 0) {
 }
 
 function copyExampleProject(target) {
-  const excluded = new Set([".next", ".woktrees", "data", "node_modules"]);
+  const excluded = new Set([".next", ".worktrees", "data", "node_modules"]);
   cpSync(EXAMPLE_ROOT, target, {
     recursive: true,
     filter(source) {
@@ -228,13 +228,13 @@ test("completes a hierarchy and promotes knowledge", (context) => {
   const config = JSON.parse(readFileSync(join(root, ".project", "workflow.json"), "utf8"));
   assert.deepEqual(config.git, {
     targetBranch: "main",
-    worktreeDirectory: ".woktrees",
+    worktreeDirectory: ".worktrees",
     mergeStrategy: "no-ff",
     branchConvention: "conventional-branch@1.1.0",
     commitConvention: "conventional-commits@1.0.0",
   });
-  assert.ok(existsSync(join(root, ".woktrees")));
-  assert.match(readFileSync(join(root, ".gitignore"), "utf8"), /^\/\.woktrees\/$/m);
+  assert.ok(existsSync(join(root, ".worktrees")));
+  assert.match(readFileSync(join(root, ".gitignore"), "utf8"), /^\/\.worktrees\/$/m);
   assert.ok(
     config.definitionOfDone.includes(
       "Relevant external claims cite refreshed official source notes.",
@@ -448,7 +448,7 @@ test("records and refreshes official source notes", (context) => {
     ),
   );
   assert.equal(refreshedConfig.git.targetBranch, "main");
-  assert.equal(refreshedConfig.git.worktreeDirectory, ".woktrees");
+  assert.equal(refreshedConfig.git.worktreeDirectory, ".worktrees");
   const languagePath = join(root, "docs", "knowledge", "ubiquitous-language.md");
   assert.ok(existsSync(languagePath));
 
@@ -755,13 +755,13 @@ test("isolates ready tickets and merges only green worktrees", (context) => {
 
   const created = run(root, ["worktree-add", "TREE-1"]);
   assert.match(created.stdout, /Branch: chore\/tree-1-build-shared-base/);
-  const worktree = join(root, ".woktrees", "tree-1");
+  const worktree = join(root, ".worktrees", "tree-1");
   assert.ok(existsSync(worktree));
   assert.equal(git(worktree, ["branch", "--show-current"]).stdout.trim(), "chore/tree-1-build-shared-base");
 
   const independent = run(root, ["worktree-add", "TREE-3"]);
   assert.match(independent.stdout, /Branch: chore\/tree-3-build-independent-helper/);
-  const independentWorktree = join(root, ".woktrees", "tree-3");
+  const independentWorktree = join(root, ".worktrees", "tree-3");
   assert.ok(existsSync(independentWorktree));
   const activeWorktrees = run(root, ["worktree-list"]).stdout;
   assert.match(activeWorktrees, /chore\/tree-1-build-shared-base/);
@@ -840,7 +840,7 @@ test("isolates ready tickets and merges only green worktrees", (context) => {
   assert.equal(readItem(root, "TREE-3").status, "done");
 
   run(root, ["worktree-add", "TREE-2"]);
-  const dependentWorktree = join(root, ".woktrees", "tree-2");
+  const dependentWorktree = join(root, ".worktrees", "tree-2");
   assert.ok(existsSync(dependentWorktree));
   git(root, ["worktree", "remove", dependentWorktree]);
   git(root, ["branch", "--delete", "feat/tree-2-use-shared-base"]);

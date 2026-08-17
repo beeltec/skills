@@ -26,7 +26,7 @@
   ],
   "git": {
     "targetBranch": "main",
-    "worktreeDirectory": ".woktrees",
+    "worktreeDirectory": ".worktrees",
     "mergeStrategy": "no-ff",
     "branchConvention": "conventional-branch@1.1.0",
     "commitConvention": "conventional-commits@1.0.0"

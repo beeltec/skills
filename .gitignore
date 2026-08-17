@@ -2,7 +2,7 @@ node_modules/
 .DS_Store
 *.log
 *.tsbuildinfo
-/.woktrees/
+/.worktrees/
 examples/next-sqlite/.next/
 examples/next-sqlite/data/*.db
 examples/next-sqlite/data/*.db-shm

@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow and its Git policy. Create `.project/`, `docs/knowledge/`, `docs/work/`, `.woktrees/`, and the shared ubiquitous language file; install the local workflow CLI; configure `main` as the default integration branch; add project rules to `AGENTS.md`; and seed verified knowledge and official source notes. Use once before discussion or planning. Do not create briefs, work items, releases, outcomes, or product code.
+description: Use this skill when a user wants to initialize, bootstrap, install, refresh, or validate the project workflow and its Git policy. Create `.project/`, `docs/knowledge/`, `docs/work/`, `.worktrees/`, and the shared ubiquitous language file; install the local workflow CLI; configure `main` as the default integration branch; add project rules to `AGENTS.md`; and seed verified knowledge and official source notes. Use once before discussion or planning. Do not create briefs, work items, releases, outcomes, or product code.
 ---
 
 # Setup
@@ -22,7 +22,7 @@ Use Node.js 20.9 or newer for the bundled workflow CLI.
 9. Do not create a baseline commit from unrelated files without user approval.
 10. Resolve this skill's directory from the loaded `SKILL.md` path.
 11. Run the initialization command.
-12. Confirm `.woktrees/` exists and `/.woktrees/` is ignored by Git.
+12. Confirm `.worktrees/` exists and `/.worktrees/` is ignored by Git.
 13. Confirm the brief, release, outcome, source, item, and knowledge folders exist.
 14. Confirm `docs/knowledge/ubiquitous-language.md` exists.
 15. Add the reference's workflow block to `AGENTS.md` without removing rules.
@@ -51,7 +51,7 @@ node .project/bin/project-flow.mjs validate
 
 ## Refresh an existing workflow
 
-Do not initialize twice. Refresh the installed CLI, Git settings, `.woktrees/`,
+Do not initialize twice. Refresh the installed CLI, Git settings, `.worktrees/`,
 and the AGENTS.md block. Use `$source` to refresh relevant notes. Then validate:
 
 ```bash

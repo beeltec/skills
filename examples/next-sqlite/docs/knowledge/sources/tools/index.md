@@ -6,4 +6,4 @@
 * [Git branch documentation](git-branch-deletion.md) - Safe local cleanup after a ticket branch has merged.
 * [Git merge documentation](git-merge.md) - Serial integration of green ticket branches into the configured target branch.
 * [Git workflows: topic branches](git-topic-branches.md) - Short-lived ticket branches and serial integration into the stable target branch.
-* [Git worktree documentation](git-worktrees.md) - Ticket branches checked out under .woktrees for isolated implementation.
+* [Git worktree documentation](git-worktrees.md) - Ticket branches checked out under .worktrees for isolated implementation.

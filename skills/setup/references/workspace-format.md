@@ -31,7 +31,7 @@ The `language` skill may update it directly after explicit user confirmation.
 .project/
 ├── workflow.json
 └── bin/project-flow.mjs
-.woktrees/                    # Ignored linked worktrees, one per ticket
+.worktrees/                    # Ignored linked worktrees, one per ticket
 docs/
 ├── knowledge/
 │   ├── index.md
@@ -52,7 +52,7 @@ docs/
 ```
 
 The workflow config uses `main` as `git.targetBranch` by default. It fixes the
-worktree directory at `.woktrees` and the merge strategy at `no-ff`. A user may
+worktree directory at `.worktrees` and the merge strategy at `no-ff`. A user may
 select another target branch during setup or finalization.
 
 ## OKF v0.2 profile
@@ -107,7 +107,7 @@ Add these instructions without removing local rules:
 - Use runtime context values. Otherwise, use 256,000 tokens for GPT-5.6.
 - Assess session fit before code changes. Delegate bounded implementation when it will not fit.
 - Keep the configured target worktree clean for coordination and serial integration.
-- Implement each non-epic ticket in `.woktrees/<ticket-key>/` on its own branch.
+- Implement each non-epic ticket in `.worktrees/<ticket-key>/` on its own branch.
 - Do not create a worktree while any `blocked-by` ticket is open.
 - Use Conventional Branch 1.1.0 names and Conventional Commits 1.0.0 messages.
 - Merge green ticket branches into the configured target, `main` by default, then remove local ticket state.

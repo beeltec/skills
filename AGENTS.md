@@ -28,7 +28,7 @@ skill may update agreed terms directly after explicit user confirmation.
 - `skills/` contains the installable skills.
 - `scripts/link-skills.sh` links every skill for Codex and Claude Code.
 - `skills/setup/scripts/project-flow.mjs` is the source CLI.
-- `.woktrees/` contains ignored ticket worktrees created by the workflow.
+- `.worktrees/` contains ignored ticket worktrees created by the workflow.
 - `examples/next-sqlite/` is the reproducible example and workflow fixture.
 - `tests/` verifies the shared workflow behavior.
 - `docs/research.md` records the source-backed design decisions.
@@ -53,7 +53,7 @@ skill may update agreed terms directly after explicit user confirmation.
 16. Treat all files under `docs/work/` as plans or history, not current facts.
 17. Declare risk factors and add every required quality gate to each ticket.
 18. Keep the configured target branch clean for coordination and serial integration.
-19. Use one Conventional Branch and `.woktrees/<key>/` worktree per ticket.
+19. Use one Conventional Branch and `.worktrees/<key>/` worktree per ticket.
 20. Never implement an epic or a ticket with an open blocker.
 21. Parallelize only independent tickets without likely write overlap.
 22. Use Conventional Commits for every ticket and merge commit.

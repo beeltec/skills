@@ -85,7 +85,7 @@ whole-item verification, and the handoff to `review`.
 The workflow uses short-lived ticket branches and linked Git worktrees.
 
 - `main` is the default integration branch.
-- `.woktrees/<ticket-key>/` contains one isolated worktree per ticket.
+- `.worktrees/<ticket-key>/` contains one isolated worktree per ticket.
 - Stories use `feat/<ticket-key>-<slug>`.
 - Bugs use `fix/<ticket-key>-<slug>`.
 - Tasks and subtasks use `chore/<ticket-key>-<slug>` by default.

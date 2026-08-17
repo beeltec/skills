@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Use this skill when a user wants to implement, fix, or continue one or more ready tickets from `docs/work/`, including review fixes. Create one Conventional Branch and `.woktrees/KEY/` worktree per dependency-ready ticket, run independent tickets in parallel agents, enforce Conventional Commits, verify acceptance, and return review fixes until no P0-P2 findings remain. Do not implement blocked tickets, merge branches, promote knowledge, or close items.
+description: Use this skill when a user wants to implement, fix, or continue one or more ready tickets from `docs/work/`, including review fixes. Create one Conventional Branch and `.worktrees/KEY/` worktree per dependency-ready ticket, run independent tickets in parallel agents, enforce Conventional Commits, verify acceptance, and return review fixes until no P0-P2 findings remain. Do not implement blocked tickets, merge branches, promote knowledge, or close items.
 ---
 
 # Implement
@@ -53,7 +53,7 @@ that branch or worktree.
 
 ```bash
 node .project/bin/project-flow.mjs worktree-add APP-2 --branch-type feat
-cd .woktrees/app-2
+cd .worktrees/app-2
 node .project/bin/project-flow.mjs transition APP-2 in-progress
 node .project/bin/project-flow.mjs verify APP-2
 node .project/bin/project-flow.mjs accept APP-2 AC-1 \

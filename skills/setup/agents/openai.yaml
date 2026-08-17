@@ -1,4 +1,4 @@
 interface:
   display_name: "Setup"
   short_description: "Initialize workflow, sources, and Git worktrees"
-  default_prompt: "Use $setup to initialize the workflow, Git target, .woktrees directory, project rules, and official source notes."
+  default_prompt: "Use $setup to initialize the workflow, Git target, .worktrees directory, project rules, and official source notes."

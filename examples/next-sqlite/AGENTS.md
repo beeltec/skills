@@ -17,7 +17,7 @@
 - Keep delivery acceptance separate from the product success measure.
 - Declare risk factors and record every required quality gate.
 - Keep `main` clean for coordination and serial integration.
-- Implement each ticket in `.woktrees/<key>/` on its own Conventional Branch.
+- Implement each ticket in `.worktrees/<key>/` on its own Conventional Branch.
 - Do not implement epics or tickets with open blockers.
 - Parallelize only independent tickets without likely overlap in non-generated files.
 - Use Conventional Commits for ticket and merge commits.

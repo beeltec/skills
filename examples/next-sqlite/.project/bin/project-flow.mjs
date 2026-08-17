@@ -81,7 +81,7 @@ const OFFICIAL_SOURCE_DONE = "Relevant external claims cite refreshed official s
 const QUALITY_GATE_DONE = "Applicable risk-driven quality gates have passing evidence.";
 const DEFAULT_GIT_CONFIG = Object.freeze({
   targetBranch: "main",
-  worktreeDirectory: ".woktrees",
+  worktreeDirectory: ".worktrees",
   mergeStrategy: "no-ff",
   branchConvention: "conventional-branch@1.1.0",
   commitConvention: "conventional-commits@1.0.0",
@@ -256,7 +256,7 @@ function validateGitConfig(value) {
     fail("workflow.json git.targetBranch is invalid.");
   }
   if (value.worktreeDirectory !== DEFAULT_GIT_CONFIG.worktreeDirectory) {
-    fail("workflow.json git.worktreeDirectory must be .woktrees.");
+    fail("workflow.json git.worktreeDirectory must be .worktrees.");
   }
   if (value.mergeStrategy !== DEFAULT_GIT_CONFIG.mergeStrategy) {
     fail("workflow.json git.mergeStrategy must be no-ff.");

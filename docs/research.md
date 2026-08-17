@@ -183,7 +183,7 @@ feature or bug fix. Git worktrees provide separate working trees with their own
 one linked worktree per ticket a small, native model for parallel agents.
 
 The workflow keeps the integration worktree on `main` by default. Every
-non-epic ticket uses `.woktrees/<ticket-key>/`. Branches follow Conventional
+non-epic ticket uses `.worktrees/<ticket-key>/`. Branches follow Conventional
 Branch 1.1.0 as `<type>/<ticket-key>-<description>`. Stories default to `feat`,
 bugs to `fix`, and tasks or subtasks to `chore`.
 

@@ -8,7 +8,7 @@ Keep the main worktree on the configured target branch. The default target is
 Create one linked worktree and branch for each non-epic ticket:
 
 ```text
-.woktrees/<lowercase-ticket-key>/
+.worktrees/<lowercase-ticket-key>/
 feat/<lowercase-ticket-key>-<short-slug>
 fix/<lowercase-ticket-key>-<short-slug>
 chore/<lowercase-ticket-key>-<short-slug>
