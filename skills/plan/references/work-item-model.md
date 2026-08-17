@@ -47,6 +47,10 @@ For parallel delivery, group only tickets without a dependency path between
 them. Also compare likely write paths. Separate worktrees prevent working-copy
 collisions, but they do not prevent logical conflicts or difficult merges.
 
+When a brief uses an epic with stories, send the epic key to `implement`.
+Implementation coordinates every descendant in dependency order. It creates the
+epic worktree only for the final integrated review after all descendants are done.
+
 Sources:
 
 - https://support.atlassian.com/jira-software-cloud/docs/what-are-dependencies-in-advanced-roadmaps/
@@ -103,6 +107,9 @@ the shared quality standard.
 The brief's product success metric is evaluated after a green release. It is
 not part of ticket completion.
 
+For an epic, the final review covers the complete integrated change from the
+recorded delivery scope base. Passing child reviews do not replace this review.
+
 ## Release boundary
 
 Keep releases separate from work-item status. A ticket is `done` after reviewed
@@ -118,5 +125,6 @@ Source: https://www.atlassian.com/agile/project-management/definition-of-done
 
 ## Review evidence
 
-Store the Git fixed point with every completed review. Store Standards and Spec
-results in separate fields. Either axis can block the item.
+Store the current target fixed point with every completed review. For an epic,
+also store the delivery scope base. Keep Standards and Spec results separate.
+Either axis can block the item.

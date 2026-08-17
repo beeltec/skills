@@ -1,4 +1,4 @@
 interface:
   display_name: "Review"
-  short_description: "Run parallel Standards and Spec reviews"
-  default_prompt: "Use $review to verify the fixed scope, delegate Standards and Spec to separate parallel subagents, and loop until no P0, P1, or P2 findings remain."
+  short_description: "Review tickets and integrated epics"
+  default_prompt: "Use $review to run separate Standards and Spec passes over a ticket or the complete integrated epic scope."

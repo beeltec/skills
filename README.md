@@ -19,7 +19,7 @@ Use the skills as one suite:
 4. `language` manages terms explicitly agreed with the user.
 5. `discuss` resolves product and technical choices.
 6. `plan` creates Jira-like work items.
-7. `implement` changes a ticket and automatically completes its review loop.
+7. `implement` delivers a ticket or coordinates a complete epic and its review loops.
 8. `review` is the separate two-subagent engine used by implementation.
 9. `document` promotes knowledge, merges green work, and removes its branch and worktree.
 10. `ship` releases done tickets and verifies the deployed or published result.
@@ -45,6 +45,10 @@ The review stops when the harness cannot provide subagents.
 
 An implementation request also authorizes the review loop and valid in-scope
 P0-P2 repairs. The agent does not ask whether it should start that loop.
+
+When a brief is planned as an epic with stories, `next` recommends the epic.
+Implementation coordinates every descendant and merges passing tickets serially.
+After every descendant is done, it runs another review loop over the whole epic.
 
 The setup skill installs a dependency-free Node.js CLI at
 `.project/bin/project-flow.mjs`. Workflow-stage skills use that local copy.
@@ -153,6 +157,10 @@ When the work will not fit safely, the coordinator creates
 subagent's own context window. The coordinator keeps ticket state, integration,
 whole-item verification, automatic review, and repair-loop control.
 
+An epic implementation request keeps the epic as the delivery unit. The
+coordinator schedules all child tickets by dependency. It invokes `document`
+to integrate each passing child before dependent work starts.
+
 ## Git workflow
 
 The workflow uses short-lived ticket branches and linked Git worktrees.
@@ -162,6 +170,7 @@ The workflow uses short-lived ticket branches and linked Git worktrees.
 - Stories use `feat/<ticket-key>-<slug>`.
 - Bugs use `fix/<ticket-key>-<slug>`.
 - Tasks and subtasks use `chore/<ticket-key>-<slug>` by default.
+- Epics receive one final review worktree only after every descendant is done.
 - Every commit follows Conventional Commits 1.0.0.
 - Green branches merge into `main` with a conventional `--no-ff` merge commit.
 - Successful finalization removes the clean worktree and merged local branch.
@@ -169,6 +178,10 @@ The workflow uses short-lived ticket branches and linked Git worktrees.
 Independent ready tickets without likely overlap in non-generated files may run in parallel. A ticket with an open
 `blocked-by` link cannot start implementation. The blocker must first finish
 and merge into `main`. Final merges always run one at a time.
+
+The final epic review inspects the complete integrated range from the target
+commit recorded before its first child. P0, P1, and P2 repairs stay in the epic
+review worktree. The epic cannot complete until both review axes pass again.
 
 Create a ticket worktree from a clean `main` worktree:
 
@@ -203,8 +216,8 @@ Tickets declare risk factors. Each factor maps to a focused quality gate. For
 example, a migration risk requires migration evidence. Review and completion
 remain blocked until every required gate passes.
 
-Ticket `done` means merged, reviewed, and documented repository state. It does
-not mean deployed. A release becomes `green` only after preflight, immutable
+Ticket `done` means merged, reviewed, and documented repository state. An epic
+also needs its final integrated review. Neither state means deployed. A release becomes `green` only after preflight, immutable
 artifact, rollout, and post-release checks. Product success is measured later
 against the unchanged brief baseline, target, window, and data source.
 

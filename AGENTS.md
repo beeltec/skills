@@ -57,7 +57,7 @@ skill may update agreed terms directly after explicit user confirmation.
 17. Declare risk factors and add every required quality gate to each ticket.
 18. Keep the configured target branch clean for coordination and serial integration.
 19. Use one Conventional Branch and `.worktrees/<key>/` worktree per ticket.
-20. Never implement an epic or a ticket with an open blocker.
+20. Coordinate an epic as one implementation unit. Never implement a ticket with an open blocker.
 21. Parallelize only independent tickets without likely write overlap.
 22. Use Conventional Commits for every ticket and merge commit.
 23. Merge green ticket branches into the configured target branch. Its default is `main`.
@@ -66,19 +66,20 @@ skill may update agreed terms directly after explicit user confirmation.
 26. Run configured checks and record acceptance and quality-gate evidence.
 27. Use `review` to check Standards and Spec separately.
 28. Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
-29. Use `complete` to close work and promote drafted repository knowledge.
-30. Treat ticket `done` as merged and documented, not released.
-31. Use `ship` for approved external release actions and live checks.
-32. Mark a release green only after its post-release checks pass.
-33. Use `measure` after the agreed observation window.
-34. Keep generated board and knowledge indexes synchronized.
-35. Put every reusable rule under `agent-rules/user/` or `agent-rules/project/`.
-36. Keep each rule concise, standalone, and limited to one topic.
-37. Keep the rules manager catalog synchronized with rule files.
-38. Use the rules manager to update installed managed blocks.
-39. Never edit text between managed agent-rule markers by hand.
-40. Do not add repository-level test or eval harnesses for the skills.
-41. Exercise skill behavior through a fresh project under `.verification/`.
+29. Repeat that review loop for the integrated epic after every descendant ticket is done.
+30. Use `complete` to close work and promote drafted repository knowledge.
+31. Treat ticket `done` as merged and documented, not released.
+32. Use `ship` for approved external release actions and live checks.
+33. Mark a release green only after its post-release checks pass.
+34. Use `measure` after the agreed observation window.
+35. Keep generated board and knowledge indexes synchronized.
+36. Put every reusable rule under `agent-rules/user/` or `agent-rules/project/`.
+37. Keep each rule concise, standalone, and limited to one topic.
+38. Keep the rules manager catalog synchronized with rule files.
+39. Use the rules manager to update installed managed blocks.
+40. Never edit text between managed agent-rule markers by hand.
+41. Do not add repository-level test or eval harnesses for the skills.
+42. Exercise skill behavior through a fresh project under `.verification/`.
 
 ## Commands
 
@@ -104,7 +105,7 @@ Give that prompt to a new agent session started at this repository root.
 - Never use `any` in TypeScript.
 - Update this file when commands, paths, or invariants change.
 
-<!-- agent-rule:project-evidence:start sha256=4a6ce9ae95bec54f9b3ad184d32f4b41987e6394f16a88ac4672edd749684d13 -->
+<!-- agent-rule:project-evidence:start sha256=9e323f2e4b55bbc1fb0eb724294fbaa9c39cd61b6003614393f5fa5d889dccd2 -->
 ## Project evidence and state
 
 Keep established project knowledge separate from intended work. Use the correct
@@ -136,6 +137,7 @@ evidence for each kind of claim.
 - Declare applicable risk factors and record each required quality gate.
 - Never set a work item to `done` by editing its JSON file.
 - Complete a ticket only after acceptance, checks, gates, and review pass.
+- Complete an epic only after every descendant ticket is done and its integrated review passes.
 - Treat ticket `done` as merged and documented repository state.
 - Treat release `green` as verified deployed or published state.
 - Treat `met`, `missed`, or `inconclusive` as an observed product result.
@@ -172,7 +174,7 @@ Design practices.
 - Do not copy term data into the Markdown body.
 <!-- agent-rule:ubiquitous-language:end -->
 
-<!-- agent-rule:ticket-git-workflow:start sha256=42f3016c79783b106f22053f825a8d7aa3c8dcd06a9d320e606bccd0b3f344e7 -->
+<!-- agent-rule:ticket-git-workflow:start sha256=6370e60cc6af18c6e893be365d43386c21238abd2ef7f9103c2a52cc13c60b7c -->
 ## Ticket Git workflow
 
 Keep ticket implementation isolated and integration predictable.
@@ -186,7 +188,9 @@ Keep ticket implementation isolated and integration predictable.
 - Use `feat/<key>-<slug>` for stories and `fix/<key>-<slug>` for bugs.
 - Use `chore/<key>-<slug>` for tasks and subtasks when no better supported type exists.
 - Never reuse one ticket branch or worktree for another ticket.
-- Do not create an implementation branch or worktree for an epic.
+- Treat an epic implementation request as coordination of its complete child set.
+- Create one epic review worktree only after every descendant ticket is done.
+- Use that epic worktree only for integrated review, repairs, knowledge, and completion.
 
 ### Dependencies and parallel work
 
@@ -197,6 +201,7 @@ Keep ticket implementation isolated and integration predictable.
 - Do not parallelize tickets with likely overlap in non-generated write paths.
 - Assign each agent one ticket and one absolute worktree path.
 - Keep final integration serial even when implementation is parallel.
+- Merge passing epic descendants serially before starting the final epic review.
 
 ### Commits and integration
 
@@ -207,6 +212,7 @@ Keep ticket implementation isolated and integration predictable.
 - Keep unrelated changes out of the ticket branch.
 - Make the latest target commit an ancestor before final review.
 - Rerun checks and review after synchronizing with an advanced target branch.
+- Review an epic from its recorded pre-child scope base through its final review branch.
 - Merge green ticket branches into the configured target branch with `--no-ff`.
 - Remove only clean worktrees and fully merged local branches.
 - Use `git branch -d`; never force-delete a ticket branch.
@@ -351,7 +357,7 @@ the test when that failure is irrelevant, impossible, or already caught more
 clearly elsewhere.
 <!-- agent-rule:testing:end -->
 
-<!-- agent-rule:review-policy:start sha256=c120dbe94edfe8b1be93e336bb0e8b29d0d0d549f01a2d1ef3fab5ec4141e6c9 -->
+<!-- agent-rule:review-policy:start sha256=141c6ea17a7d8316fa739511749f5d10dbc6b0fa2d57f9ecff767f8191b9ee57 -->
 ## Review policy
 
 Review completed changes against repository standards and the requested
@@ -359,13 +365,16 @@ behavior before integration.
 
 ### Required passes
 
-- Pin one immutable fixed point for the complete review scope.
+- Pin one immutable scope base for the complete review change.
+- Pin the current target commit as the branch integration fixed point.
 - Run a Standards pass against applicable rules, checks, and engineering risks.
 - Run a separate Spec pass against the originating ticket or specification.
 - Run the two passes in separate parallel review subagents.
 - Let the orchestrator only prepare scope, aggregate results, and control the loop.
 - Stop when the harness cannot run review subagents. Do not review in the orchestrator.
 - Inspect the complete change in both passes.
+- After every epic descendant ticket is done, review the complete integrated epic again.
+- Keep the pre-child epic scope base fixed through all epic review iterations.
 - Keep findings and severity counts separate for each pass.
 
 ### Severity gate
@@ -380,13 +389,14 @@ behavior before integration.
 
 ### Review loop
 
-- Treat a request to implement a ticket as authority to run its review loop.
+- Treat a request to implement a ticket or epic as authority to run its review loop.
 - Do not ask whether to start review or fix valid in-scope blocking findings.
 - Send every valid blocking finding back to implementation.
 - Require focused tests and the complete configured check set after fixes.
 - Rerun fresh Standards and Spec passes against the complete updated change.
 - Use fresh review subagents for every loop iteration.
 - Continue until both passes report zero P0, P1, and P2 findings.
+- Do not substitute passing child reviews for the final integrated epic review.
 - Do not approve only because automated checks pass.
 - Do not accept a promise to fix later as a resolved finding.
 - Allow documented P3 suggestions to remain.

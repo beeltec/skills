@@ -18,6 +18,15 @@ Use `feat` for stories, `fix` for bugs, and `chore` for tasks or subtasks.
 Override the type only when another Conventional Branch purpose type is more
 accurate. Never reuse a branch for another ticket.
 
+After every epic descendant is `done`, create one epic review worktree:
+
+```bash
+node .project/bin/project-flow.mjs worktree-add APP-1 --epic-review
+```
+
+Use it only for integrated verification, final epic review repairs, knowledge,
+and completion. Do not create it for child implementation.
+
 Create the worktree from the clean, checked-out target branch:
 
 ```bash

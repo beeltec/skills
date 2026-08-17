@@ -23,6 +23,9 @@ constraint. Treat model memory only as a search lead.
 A handoff contains temporary implementation state. Verify it against the item,
 the fixed point, and the current worktree before continuing.
 
+For an epic, read every descendant and preserve `review.scopeBase` from before the
+first child started. Use the separate epic delivery reference for coordination.
+
 Use canonical project terms when the same concepts appear in behavior, code,
 tests, and documentation. Do not rename exact external API identifiers. Stop
 for `language` when implementation reveals a disputed meaning.
@@ -75,3 +78,6 @@ When the latest review requests changes, preserve that fixed point. Address
 all valid P0, P1, and P2 findings. Return disputed findings with concrete
 evidence. Rerun the complete configured check set before the next review pass.
 Continue the loop until both review axes have no P0, P1, or P2 findings.
+
+For the final epic loop, also preserve `review.scopeBase`. Review the complete
+integrated range on every iteration, not only changes on the epic branch.

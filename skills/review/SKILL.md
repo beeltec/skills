@@ -1,11 +1,11 @@
 ---
 name: review
-description: Use this skill when a user wants to review a ticket branch, ticket worktree, pull request, or work-in-progress change. Verify the branch contains the latest target commit, refresh official sources, delegate Standards and Spec to two separate parallel subagents, aggregate their independent P0-P3 findings, and loop with implementation until no P0-P2 findings remain. Use after implementation and before documentation. Do not perform either review axis in the orchestrating agent, implement, merge, or promote knowledge.
+description: Use this skill when a user wants to review a ticket branch, final epic integration, pull request, or work-in-progress change. Verify the branch contains the latest target commit, review an epic from its recorded delivery scope base after every descendant is done, delegate Standards and Spec to separate parallel subagents, and loop with implementation until no P0-P2 findings remain. Use after implementation and before documentation. Do not perform either review axis in the orchestrating agent, implement, merge, or promote knowledge.
 ---
 
 # Review
 
-Review one fixed change without letting code quality hide specification errors.
+Review one fixed scope without letting code quality hide specification errors.
 Leave clean workflow items in `in-review`.
 
 ## Procedure
@@ -14,29 +14,33 @@ Leave clean workflow items in `in-review`.
 2. Run `show <KEY>` when reviewing a workflow item.
 3. Confirm the item is `in-progress` or `in-review`.
 4. Read `docs/work/handoffs/<KEY>.md` when it exists.
-5. Confirm the current path and branch belong only to the named ticket.
-6. Resolve the current configured target branch to a full commit hash.
-7. Confirm that commit is an ancestor of the ticket branch.
-8. Pin the fixed point to that exact target commit.
-9. If the target is missing, return to `implement` for synchronization.
-10. Validate the fixed point and confirm the review scope is not empty.
-11. Read the linked confirmed brief, item risk profile, and quality-gate evidence.
-12. Read `docs/knowledge/ubiquitous-language.md` as the project Ubiquitous Language.
-13. Read `docs/knowledge/sources/index.md` and relevant source notes.
-14. Use `$source` to refresh external rules from official documentation.
-15. Read applicable repository standards and Git conventions.
-16. Add canonical-term rules and the vocabulary file to the Standards packet.
-17. Prepare separate Standards and Spec packets for the same fixed scope.
-18. Spawn one Standards subagent and one Spec subagent in parallel.
-19. Let each subagent inspect the complete change in its own context.
-20. Wait for both reports. Do not perform either pass in the orchestrating agent.
-21. Aggregate the reports without merging or reranking their findings.
-22. Report both results separately, including counts for every severity.
-23. If any P0, P1, or P2 exists, record `changes-requested`.
-24. Hand all blocking findings to `implement` and keep the fixed point.
-25. After fixes, spawn two fresh parallel review subagents.
-26. Repeat steps 17-25 until both axes contain no P0, P1, or P2 findings.
-27. Record the passing review and move the item to `in-review`.
+5. Confirm the current path and branch belong only to the named work item.
+6. Resolve the configured or explicit alternate target branch to a full commit hash.
+7. Confirm that commit is an ancestor of the review branch.
+8. Pin `review.fixedPoint` and the target branch name to that exact target commit.
+9. For an epic, require every descendant `done` and load its recorded `review.scopeBase`.
+10. Confirm the epic scope base is an ancestor commit or the controlled legacy empty tree.
+11. For a non-epic ticket, use the target fixed point as its scope base.
+12. If the target or scope base is missing, return to `implement` for synchronization.
+13. Confirm the complete review scope is not empty.
+14. Read the linked confirmed brief, item risk profile, and quality-gate evidence.
+15. For an epic, read every descendant specification and acceptance record.
+16. Read `docs/knowledge/ubiquitous-language.md` as the project Ubiquitous Language.
+17. Read `docs/knowledge/sources/index.md` and relevant source notes.
+18. Use `$source` to refresh external rules from official documentation.
+19. Read applicable repository standards and Git conventions.
+20. Add canonical-term rules and the vocabulary file to the Standards packet.
+21. Prepare separate Standards and Spec packets for the same fixed scope.
+22. Spawn one Standards subagent and one Spec subagent in parallel.
+23. Let each subagent inspect the complete change in its own context.
+24. Wait for both reports. Do not perform either pass in the orchestrating agent.
+25. Aggregate the reports without merging or reranking their findings.
+26. Report both results separately, including counts for every severity.
+27. If any P0, P1, or P2 exists, record `changes-requested`.
+28. Hand all blocking findings to `implement` and keep both commits fixed.
+29. After fixes, spawn two fresh parallel review subagents.
+30. Repeat steps 21-29 until both axes contain no P0, P1, or P2 findings.
+31. Record the passing review and move the item to `in-review`.
 
 For a review without this workflow, return the two reports without recording a
 ticket transition. If fixes are not authorized, report that the review loop is
@@ -75,6 +79,9 @@ node .project/bin/project-flow.mjs review APP-2 \
   --spec "P0:0 P1:0 P2:1 P3:0. AC-2 is incomplete at src/lib/store.ts:48."
 ```
 
+For an epic, add `--scope-base <commit-before-first-child>`. Keep `--base` as
+the current target commit used to create the epic review worktree.
+
 ## Record approval
 
 ```bash
@@ -92,7 +99,9 @@ node .project/bin/project-flow.mjs transition APP-2 in-review
 - Do not change product code during the review.
 - Do not perform Standards or Spec analysis in the orchestrating agent.
 - Do not use one subagent for both review axes.
-- Do not review two ticket branches as one change.
+- Do not combine unrelated ticket branches as one change.
+- Review an epic only in its final review worktree after every descendant is `done`.
+- Do not reduce an epic review to its final review-branch-only diff.
 - Do not approve a branch that lacks the latest target commit.
 - Do not merge or remove the ticket branch or worktree.
 - Do not mark acceptance criteria passed.

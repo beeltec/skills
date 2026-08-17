@@ -1,6 +1,6 @@
 ---
 name: next
-description: Use this helper skill whenever a user asks what to do next, where the project is in the workflow, which workflow skill to use, why work cannot proceed, or how to resume after an interruption. Inspect local workflow, Git, shared language, brief, ticket, review, release, and outcome state. Recommend the single smallest valid next action without changing files, advancing state, or performing that action.
+description: Use this helper skill whenever a user asks what to do next, where the project is in the workflow, which workflow skill to use, why work cannot proceed, or how to resume after an interruption. Inspect local workflow, Git, shared language, brief, ticket, epic-wide review, release, and outcome state. Recommend the single smallest valid next action, using an epic rather than one child story when a brief has an epic, without changing state or performing that action.
 ---
 
 # Next
@@ -28,8 +28,9 @@ not execution.
 16. Run `git status --short --branch` and the CLI's `worktree-list` command.
 17. Locate the configured target-branch worktree and inspect its status.
 18. Inspect active records and read each focused source record.
-19. Select the smallest valid action from the strongest local evidence.
-20. Report one recommendation, its reason, blockers, and the likely action after it.
+19. Resolve a story with an epic parent to that epic implementation scope.
+20. Select the smallest valid action from the strongest local evidence.
+21. Report one recommendation, its reason, blockers, and the likely action after it.
 
 Prefer finishing active work over starting more work. Prioritize a deploying or
 harmful release because it may affect users. Never route a blocked ticket to
@@ -41,15 +42,15 @@ the immediate blocker. Later workflow skills invoke their own source gate.
 ## Response format
 
 ```markdown
-Next: `$implement APP-7`
+Next: `$implement APP-1`
 
-Why: APP-7 is ready and has no open blockers.
+Why: BRIEF-1 is planned as APP-1 with stories. Implement the epic as one coordinated unit.
 
 Blocked by: Nothing.
 
-Prompt: Use $implement to implement and review APP-7 in its ticket worktree.
+Prompt: Use $implement to deliver APP-1 and run its final integrated review loop.
 
-After that: `$document APP-7` after the automatic review loop passes.
+After that: `$document APP-1` after the epic review loop passes.
 ```
 
 Replace the example with actual state. Keep the answer short. Include other
@@ -68,7 +69,8 @@ changed outcome.
 - Do not infer state from model memory or conversation alone.
 - Do not guess what an ambiguous project term means.
 - Do not trust a stale generated index over its source record.
-- Do not recommend `implement` for an epic or an item with an open blocker.
+- Do not recommend one story when its confirmed brief is planned as an epic.
+- Do not recommend an epic with an open blocker outside that epic.
 - Do not recommend `document` while a P0, P1, or P2 finding remains.
 - Do not equate `done`, `green`, and `met`.
 - Do not invent priority when two actions have equal evidence.

@@ -53,14 +53,26 @@ Follow open `blocked-by` links before routing the requested ticket. Recommend
 the first actionable blocker. Never stack a dependent branch on unfinished
 blocker work.
 
+When the blocker belongs to the same epic, keep that epic as the recommendation.
+When it is external, recommend the blocker or its own parent epic first.
+
+When a brief has an epic with stories, keep the epic as the implementation
+scope. Do not reduce the recommendation to one child. The epic coordinator
+orders blockers, resumes active children, integrates passing children, and runs
+the final whole-epic review.
+
 | State | Next action |
 | --- | --- |
-| An epic has open children | Route the next child. Do not implement the epic. |
-| A non-epic ticket is `ready` with no open blocker | Use `$implement`. |
-| A ticket is `in-progress` with incomplete or failing evidence | Use `$implement`. |
+| An epic has any unfinished descendant | Use `$implement` with the epic key. |
+| A child belongs to an open epic | Use `$implement` with its parent epic key. |
+| A legacy `done` epic with descendants lacks `review.scopeBase` | Use `$implement` with the epic key for controlled re-review. |
+| Every epic descendant is `done`, but its integrated review has not passed | Use `$implement` with the epic key. |
+| An epic is `in-review` with a passing integrated review | Use `$document` with the epic key. |
+| A standalone non-epic ticket is `ready` with no open blocker | Use `$implement`. |
+| A standalone ticket is `in-progress` with incomplete or failing evidence | Use `$implement`. |
 | Review requested changes or reports any P0, P1, or P2 | Use `$implement`; it resumes the review loop automatically. |
-| A ticket is `in-progress` and all delivery evidence passes | Use `$implement` to run its required review loop. |
-| A ticket is `in-review` with a passing review and zero P0-P2 findings | Use `$document`. |
+| A standalone ticket is `in-progress` and all delivery evidence passes | Use `$implement` to run its required review loop. |
+| A standalone ticket is `in-review` with a passing review and zero P0-P2 findings | Use `$document`. |
 | A ticket is `done` | Inspect release state. Do not implement or document it again. |
 
 When several tickets are available, use this preference order:
@@ -71,14 +83,15 @@ When several tickets are available, use this preference order:
 4. Use the highest declared ticket priority.
 5. Use the oldest ready ticket.
 
-Recommend a parallel implementation batch only after checking that every item
-is dependency-independent and unlikely to write the same non-generated files.
+Recommend a parallel implementation batch only inside the selected epic, or
+for standalone tickets. Check that every item is dependency-independent and
+unlikely to write the same non-generated files.
 
 ## Releases and outcomes
 
 | State | Next action |
 | --- | --- |
-| Done non-epic tickets are not in a release attempt | Use `$ship`. |
+| Done leaf tickets have no open parent epic and are not in a release attempt | Use `$ship`. |
 | A release is planned or deploying | Use `$ship`. |
 | A green release lacks its required planned outcome | Use `$ship` to create the outcome record. |
 | A planned outcome's observation window is complete and evidence is available | Use `$measure`. |
@@ -88,6 +101,8 @@ is dependency-independent and unlikely to write the same non-generated files.
 
 `done` proves merged repository state. `green` proves a verified release.
 `met`, `missed`, or `inconclusive` records the observed product result.
+Never release a child ticket while its parent epic still needs integrated
+review or completion.
 
 ## Tie handling
 

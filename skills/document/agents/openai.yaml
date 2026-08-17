@@ -1,4 +1,4 @@
 interface:
   display_name: "Document"
-  short_description: "Promote knowledge, merge, and clean ticket work"
-  default_prompt: "Use $document to promote reviewed knowledge, complete the ticket, merge it into the target branch, and safely clean its worktree and local branch."
+  short_description: "Complete reviewed tickets and epics"
+  default_prompt: "Use $document to promote knowledge, complete the reviewed ticket or epic, merge it, and clean its local worktree."

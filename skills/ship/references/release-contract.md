@@ -25,6 +25,9 @@ target and every recorded post-release check passed.
 Ticket `done` means reviewed code is merged and documented. It does not mean the
 ticket reached an environment or package registry.
 
+Release only leaf tickets. When a leaf belongs to an epic, require the parent
+epic to be `done`. This proves the final integrated epic review passed.
+
 Create and update release and outcome records only on the configured target
 branch. The release commit must contain every named ticket as completed.
 

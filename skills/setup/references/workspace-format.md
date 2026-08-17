@@ -46,7 +46,7 @@ docs/
     ├── releases/               # Planned and historical release attempts
     ├── outcomes/               # Planned and observed outcome checks
     ├── drafts/
-    └── handoffs/              # Created when delegated work needs it
+    └── handoffs/              # Delegated work and epic coordination state
 ```
 
 The workflow config uses `main` as `git.targetBranch` by default. It fixes the

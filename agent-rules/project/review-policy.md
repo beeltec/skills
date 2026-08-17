@@ -5,13 +5,16 @@ behavior before integration.
 
 ## Required passes
 
-- Pin one immutable fixed point for the complete review scope.
+- Pin one immutable scope base for the complete review change.
+- Pin the current target commit as the branch integration fixed point.
 - Run a Standards pass against applicable rules, checks, and engineering risks.
 - Run a separate Spec pass against the originating ticket or specification.
 - Run the two passes in separate parallel review subagents.
 - Let the orchestrator only prepare scope, aggregate results, and control the loop.
 - Stop when the harness cannot run review subagents. Do not review in the orchestrator.
 - Inspect the complete change in both passes.
+- After every epic descendant ticket is done, review the complete integrated epic again.
+- Keep the pre-child epic scope base fixed through all epic review iterations.
 - Keep findings and severity counts separate for each pass.
 
 ## Severity gate
@@ -26,13 +29,14 @@ behavior before integration.
 
 ## Review loop
 
-- Treat a request to implement a ticket as authority to run its review loop.
+- Treat a request to implement a ticket or epic as authority to run its review loop.
 - Do not ask whether to start review or fix valid in-scope blocking findings.
 - Send every valid blocking finding back to implementation.
 - Require focused tests and the complete configured check set after fixes.
 - Rerun fresh Standards and Spec passes against the complete updated change.
 - Use fresh review subagents for every loop iteration.
 - Continue until both passes report zero P0, P1, and P2 findings.
+- Do not substitute passing child reviews for the final integrated epic review.
 - Do not approve only because automated checks pass.
 - Do not accept a promise to fix later as a resolved finding.
 - Allow documented P3 suggestions to remain.

@@ -15,30 +15,62 @@ passes. Keep their findings separate.
 
 ## Establish the review scope
 
-Run workflow reviews inside the named ticket worktree. Resolve the configured
-target branch to an immutable full commit hash. Confirm that the ticket branch
-contains that commit and follows the ticket branch convention.
+Run workflow reviews inside the named work item worktree. Resolve the configured
+or explicit alternate target branch to an immutable full commit hash. Confirm
+that the review branch contains that commit and follows the work item branch
+convention. Record the same target branch with the review.
+
+For a non-epic ticket, use that target commit as both `review.fixedPoint` and
+the review scope base.
+
+For an epic, require every descendant to be `done`. Load `review.scopeBase`, recorded
+before its first child started. Use the current target commit as
+`review.fixedPoint`. Review the complete range from `review.scopeBase` through
+the epic review branch. Child review results do not replace this review.
+
+Use the epic handoff to identify child merge commits. The scope-base diff can
+include unrelated target commits. Do not attribute those changes to the epic.
+Still inspect current interactions across every epic-owned change.
+
+For a legacy scope derived from an `initial tree` review, inspect the full diff
+from Git's empty tree to `HEAD`. Also inspect every current file relevant to the
+epic and descendant specifications. Use `git log HEAD` because a tree is not a
+commit range endpoint.
 
 For work outside this workflow, use the fixed point supplied by the user. Ask
-for it when none exists.
+for it when none exists. Use it as the scope base unless the user supplies a
+separate earlier scope base.
 
 When `docs/work/handoffs/<KEY>.md` exists, use it to locate delegated packets
 and their claimed paths. Verify those claims against the complete Git diff.
 Never reduce review scope to the packet list.
 
-Validate a supplied reference before using it:
+Validate each supplied reference before using it:
 
 ```bash
 git rev-parse --verify <fixed-point>^{commit}
 git merge-base --is-ancestor <fixed-point> HEAD
+git rev-parse --verify <scope-base>^{commit}
+git merge-base --is-ancestor <scope-base> <fixed-point>
 ```
 
-For committed branch work, inspect these views:
+For the controlled legacy empty-tree scope, use these commands instead:
 
 ```bash
-git diff <fixed-point>...HEAD
-git log <fixed-point>..HEAD --oneline
-git log <fixed-point>..HEAD --format=%s
+git rev-parse --verify <scope-base>^{tree}
+git diff <scope-base> HEAD
+git log HEAD --oneline
+git log HEAD --format=%s
+```
+
+Do not run `merge-base` or a three-dot range with a tree object.
+
+For committed branch work, inspect these views with the scope base:
+
+```bash
+git diff <scope-base>...HEAD
+git log <scope-base>..HEAD --oneline
+git log <scope-base>..HEAD --format=%s
 ```
 
 Also inspect staged, unstaged, and untracked changes:
@@ -48,8 +80,9 @@ git diff HEAD
 git status --short
 ```
 
-Review new untracked files in full. Ticket worktrees require an existing
-commit and must never use `initial tree` as the fixed point.
+Review new untracked files in full. Workflow worktrees require existing
+commits. Never store the literal `initial tree` as a new fixed point or scope
+base. The controlled legacy command converts it to Git's empty-tree object.
 
 Do not attribute pre-existing dirty files to the item. If work overlaps those
 files, state that limitation in the review evidence.
@@ -71,7 +104,7 @@ Start these two subagents in parallel:
 Give both subagents:
 
 - the absolute worktree path;
-- the immutable fixed-point commit;
+- the immutable target fixed point and review scope base;
 - the complete diff, log, dirty-state, and untracked-file commands;
 - the severity scale and required report format;
 - a read-only instruction.
@@ -82,9 +115,10 @@ and quality gates. Tell it to cite the rule or heuristic and file line for every
 finding. Tell it to skip failures already enforced by configured checks.
 
 Give the Spec subagent the work item, linked brief, parent context, acceptance
-criteria, and any user-supplied specification. Tell it to report missing,
-partial, incorrect, and unrequested behavior. Require the relevant criterion
-and file line for every finding.
+criteria, and any user-supplied specification. For an epic, include every descendant
+item and its acceptance evidence. Tell it to report missing, partial, incorrect,
+and unrequested behavior. Require the relevant criterion and file line for
+every finding.
 
 Do not give either subagent the other axis or its report. Do not let one
 subagent review both axes. If a subagent fails, discard that result and start a
@@ -150,7 +184,8 @@ Report each finding with its rule or heuristic, severity, file, and line.
 
 For workflow work, use `docs/work/items/<KEY>.json` as the specification. Read
 its description, acceptance criteria, parent context, linked brief, risk
-profile, declared checks, and quality gates.
+profile, declared checks, and quality gates. For an epic, also read every descendant
+item and verify their integrated behavior against the epic outcome.
 
 Otherwise, use a specification path supplied by the user. Then check commit
 messages for an issue reference or find a matching specification under
@@ -172,12 +207,13 @@ the finding.
 
 ## Review loop
 
-Use the original fixed point for every iteration. Review the complete updated
-change, not only the latest fix or previously reported files.
+Use the original target fixed point and scope base for every iteration. Review
+the complete updated change, not only the latest fix or reported files.
 
 If the target branch advances, stop the current loop. Return to `implement` to
 synchronize the ticket branch and rerun every check. Start a new full review
-cycle from the new target commit.
+cycle from the new target commit. For an epic, update only `review.fixedPoint`.
+Keep its original `review.scopeBase`.
 
 When either axis finds a P0, P1, or P2:
 
@@ -216,6 +252,6 @@ rewrite findings across axes. Keep separate severity counts for each pass. Any
 P0, P1, or P2 on either axis blocks approval.
 
 After the loop passes, state `Blocking total: 0. Review loop complete.` Record
-the fixed point and final severity counts in review evidence.
+the target fixed point, scope base, and final severity counts in review evidence.
 
 Source: https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md

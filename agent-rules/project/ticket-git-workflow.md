@@ -11,7 +11,9 @@ Keep ticket implementation isolated and integration predictable.
 - Use `feat/<key>-<slug>` for stories and `fix/<key>-<slug>` for bugs.
 - Use `chore/<key>-<slug>` for tasks and subtasks when no better supported type exists.
 - Never reuse one ticket branch or worktree for another ticket.
-- Do not create an implementation branch or worktree for an epic.
+- Treat an epic implementation request as coordination of its complete child set.
+- Create one epic review worktree only after every descendant ticket is done.
+- Use that epic worktree only for integrated review, repairs, knowledge, and completion.
 
 ## Dependencies and parallel work
 
@@ -22,6 +24,7 @@ Keep ticket implementation isolated and integration predictable.
 - Do not parallelize tickets with likely overlap in non-generated write paths.
 - Assign each agent one ticket and one absolute worktree path.
 - Keep final integration serial even when implementation is parallel.
+- Merge passing epic descendants serially before starting the final epic review.
 
 ## Commits and integration
 
@@ -32,6 +35,7 @@ Keep ticket implementation isolated and integration predictable.
 - Keep unrelated changes out of the ticket branch.
 - Make the latest target commit an ancestor before final review.
 - Rerun checks and review after synchronizing with an advanced target branch.
+- Review an epic from its recorded pre-child scope base through its final review branch.
 - Merge green ticket branches into the configured target branch with `--no-ff`.
 - Remove only clean worktrees and fully merged local branches.
 - Use `git branch -d`; never force-delete a ticket branch.

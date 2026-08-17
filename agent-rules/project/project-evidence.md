@@ -29,6 +29,7 @@ evidence for each kind of claim.
 - Declare applicable risk factors and record each required quality gate.
 - Never set a work item to `done` by editing its JSON file.
 - Complete a ticket only after acceptance, checks, gates, and review pass.
+- Complete an epic only after every descendant ticket is done and its integrated review passes.
 - Treat ticket `done` as merged and documented repository state.
 - Treat release `green` as verified deployed or published state.
 - Treat `met`, `missed`, or `inconclusive` as an observed product result.

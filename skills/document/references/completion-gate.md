@@ -10,15 +10,17 @@ Source: https://support.atlassian.com/jira-cloud-administration/docs/configure-r
 
 ## Review checklist
 
-- Confirm work runs in the ticket's Conventional Branch worktree.
-- Confirm the latest target commit is an ancestor of the ticket branch.
+- Confirm work runs in the item's Conventional Branch worktree.
+- Confirm the latest recorded target-branch commit is an ancestor of the item branch.
 - Confirm `review.fixedPoint` equals that full target commit.
+- For an epic, confirm `review.scopeBase` starts before its first child change.
+- For an epic, confirm every descendant is `done` and its final review passed.
 - Compare each acceptance criterion with its evidence.
 - Check the last check run time against the relevant source changes.
 - Confirm relevant official source notes were refreshed in this work session.
 - Confirm promoted knowledge uses active canonical project terms.
 - Confirm Standards and Spec both report zero P0, P1, and P2 findings.
-- Inspect every child and blocker.
+- Inspect every descendant and blocker.
 - Compare each staged concept with the implemented code and tests.
 - Confirm update candidates retain still-valid prior knowledge.
 - Confirm sources use valid actor names and useful provenance.
@@ -49,7 +51,7 @@ overwrite an unrelated concept.
 
 ## Git finalization
 
-Only one ticket may enter this section at a time. Keep other green tickets in
+Only one work item may enter this section at a time. Keep other green items in
 `in-review`. Do not complete them before their integration turn.
 
 After `complete`, commit the ticket state and promoted knowledge with a

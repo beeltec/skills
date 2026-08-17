@@ -1,4 +1,4 @@
 interface:
   display_name: "Ship"
-  short_description: "Release and verify completed project work"
-  default_prompt: "Use $ship to release completed tickets safely and record the verified result."
+  short_description: "Release completed epic-approved work"
+  default_prompt: "Use $ship to release done leaf tickets only after any parent epic has passed its integrated review."

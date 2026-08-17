@@ -402,6 +402,12 @@ function validateItemShape(item, path) {
   } else if (
     (item.review.reviewer !== null && typeof item.review.reviewer !== "string") ||
     (item.review.fixedPoint !== null && typeof item.review.fixedPoint !== "string") ||
+    (item.review.scopeBase !== undefined &&
+      item.review.scopeBase !== null &&
+      typeof item.review.scopeBase !== "string") ||
+    (item.review.targetBranch !== undefined &&
+      item.review.targetBranch !== null &&
+      (typeof item.review.targetBranch !== "string" || !validGitRefName(item.review.targetBranch))) ||
     (item.review.standards !== null && typeof item.review.standards !== "string") ||
     (item.review.spec !== null && typeof item.review.spec !== "string") ||
     (item.review.reviewedAt !== null && typeof item.review.reviewedAt !== "string")
@@ -483,10 +489,13 @@ function saveItem(paths, item) {
 }
 
 function resetReview(item) {
+  const scopeBase = item.type === "epic" ? item.review?.scopeBase ?? null : null;
   item.review = {
     status: "pending",
     reviewer: null,
     fixedPoint: null,
+    scopeBase,
+    targetBranch: null,
     standards: null,
     spec: null,
     reviewedAt: null,
@@ -509,8 +518,42 @@ function hasPassingReview(item) {
   );
 }
 
+function blockingReviewCountErrors(item) {
+  const errors = [];
+  for (const axis of ["standards", "spec"]) {
+    const evidence = item.review?.[axis];
+    if (typeof evidence !== "string" || !evidence.trim()) {
+      errors.push(`${item.key}: ${axis} review evidence is missing.`);
+      continue;
+    }
+    for (const severity of ["P0", "P1", "P2"]) {
+      const matches = [...evidence.matchAll(new RegExp(`\\b${severity}\\s*:\\s*(\\d+)\\b`, "gi"))];
+      if (matches.length === 0) {
+        errors.push(`${item.key}: ${axis} review evidence needs an explicit ${severity} count.`);
+        continue;
+      }
+      if (matches.some((match) => Number(match[1]) !== 0)) {
+        errors.push(`${item.key}: ${axis} review evidence reports a blocking ${severity} finding.`);
+      }
+    }
+  }
+  return errors;
+}
+
 function itemMap(items) {
   return new Map(items.map((item) => [item.key, item]));
+}
+
+function ancestorEpicKey(item, byKey) {
+  const visited = new Set();
+  let parent = item?.parent ? byKey.get(item.parent) : undefined;
+  while (parent) {
+    if (visited.has(parent.key)) fail(`${item.key}: parent hierarchy contains a cycle.`);
+    visited.add(parent.key);
+    if (parent.type === "epic") return parent.key;
+    parent = parent.parent ? byKey.get(parent.parent) : undefined;
+  }
+  return null;
 }
 
 function validateHierarchy(items) {
@@ -553,28 +596,56 @@ function validateHierarchy(items) {
     }
   }
 
+  const childrenByParent = new Map();
+  for (const item of items) {
+    if (!item.parent) continue;
+    const children = childrenByParent.get(item.parent) ?? [];
+    children.push(item.key);
+    childrenByParent.set(item.parent, children);
+  }
+
   const states = new Map();
   const stack = [];
-  function visitBlockers(key) {
+  function visitCompletionDependencies(key) {
     const state = states.get(key) ?? "new";
     if (state === "done") return;
     if (state === "visiting") {
       const start = stack.indexOf(key);
       const cycle = [...stack.slice(start), key];
-      errors.push(`Blocked-by links contain a cycle: ${cycle.join(" -> ")}.`);
+      errors.push(`Completion dependencies contain a cycle: ${cycle.join(" -> ")}.`);
       return;
     }
 
     states.set(key, "visiting");
     stack.push(key);
-    for (const blocker of byKey.get(key)?.links.blockedBy ?? []) {
-      if (byKey.has(blocker)) visitBlockers(blocker);
+    const dependencies = [
+      ...(byKey.get(key)?.links.blockedBy ?? []),
+      ...(childrenByParent.get(key) ?? []),
+    ];
+    for (const dependency of dependencies) {
+      if (byKey.has(dependency)) visitCompletionDependencies(dependency);
     }
     stack.pop();
     states.set(key, "done");
   }
 
-  for (const item of items) visitBlockers(item.key);
+  for (const item of items) visitCompletionDependencies(item.key);
+
+  for (const epic of items.filter((item) => item.type === "epic")) {
+    const descendantKeys = new Set(descendantsOf(items, epic.key).map((item) => item.key));
+    const blockerQueue = [...epic.links.blockedBy];
+    const visitedBlockers = new Set();
+    while (blockerQueue.length) {
+      const blocker = blockerQueue.shift();
+      if (visitedBlockers.has(blocker)) continue;
+      visitedBlockers.add(blocker);
+      if (descendantKeys.has(blocker)) {
+        errors.push(`${epic.key}: an epic cannot be blocked by its descendant ${blocker}.`);
+        break;
+      }
+      blockerQueue.push(...(byKey.get(blocker)?.links.blockedBy ?? []));
+    }
+  }
 
   return errors;
 }
@@ -682,21 +753,43 @@ function requireLanguageMutationLocation(paths, config) {
   }
 }
 
-function assertTicketsInReleaseCommit(root, commit, ticketKeys) {
+function loadItemsFromCommit(root, commit) {
+  const listing = runGit(
+    root,
+    ["ls-tree", "-r", "--name-only", commit, "--", "docs/work/items"],
+    true,
+  );
+  if (listing.status !== 0) fail(`Cannot inspect work items in release commit ${commit}.`);
+
+  const items = [];
   const errors = [];
-  for (const key of ticketKeys) {
-    const target = `docs/work/items/${key}.json`;
+  for (const target of listing.stdout.split("\n").map((line) => line.trim()).filter(Boolean)) {
+    if (!target.endsWith(".json")) continue;
     const result = runGit(root, ["show", `${commit}:${target}`], true);
     if (result.status !== 0) {
-      errors.push(`${key} is absent from the release commit.`);
+      errors.push(`${target} cannot be read from the release commit.`);
       continue;
     }
-
-    let item;
     try {
-      item = JSON.parse(result.stdout);
+      const item = JSON.parse(result.stdout);
+      const shapeErrors = validateItemShape(item, target);
+      if (shapeErrors.length) errors.push(...shapeErrors);
+      else items.push(item);
     } catch {
-      errors.push(`${key} is not valid JSON in the release commit.`);
+      errors.push(`${target} is not valid JSON in the release commit.`);
+    }
+  }
+  if (errors.length) fail(`Release commit work items are invalid:\n- ${errors.join("\n- ")}`);
+  return items;
+}
+
+function assertTicketsInReleaseCommit(items, ticketKeys) {
+  const errors = [];
+  const byKey = itemMap(items);
+  for (const key of ticketKeys) {
+    const item = byKey.get(key);
+    if (!item) {
+      errors.push(`${key} is absent from the release commit.`);
       continue;
     }
     if (item?.key !== key || item?.status !== "done" || !nonEmptyString(item?.resolution)) {
@@ -1713,6 +1806,91 @@ function childrenOf(items, key) {
   return items.filter((item) => item.parent === key);
 }
 
+function descendantsOf(items, key) {
+  const descendants = [];
+  const queue = [...childrenOf(items, key)];
+  const visited = new Set();
+  while (queue.length) {
+    const item = queue.shift();
+    if (!item || visited.has(item.key)) continue;
+    visited.add(item.key);
+    descendants.push(item);
+    queue.push(...childrenOf(items, item.key));
+  }
+  return descendants;
+}
+
+function emptyTreeHash(root, write = false) {
+  const args = ["hash-object"];
+  if (write) args.push("-w");
+  args.push("-t", "tree", "--stdin");
+  const result = spawnSync("git", args, {
+    cwd: root,
+    encoding: "utf8",
+    input: "",
+    maxBuffer: 2 * 1024 * 1024,
+  });
+  if (result.error || result.status !== 0 || !result.stdout.trim()) {
+    fail("Cannot resolve Git's empty tree object.");
+  }
+  return result.stdout.trim();
+}
+
+function resolveReviewScope(root, scopeBase) {
+  const emptyTree = emptyTreeHash(root);
+  const isEmptyTree = scopeBase.toLowerCase() === emptyTree.toLowerCase();
+  if (isEmptyTree) emptyTreeHash(root, true);
+  const suffix = isEmptyTree ? "tree" : "commit";
+  const result = runGit(root, ["rev-parse", "--verify", `${scopeBase}^{${suffix}}`], true);
+  return { emptyTree, isEmptyTree, result };
+}
+
+function epicScopeCoverageErrors(paths, item, items, scopeBase) {
+  if (item.type !== "epic") return [];
+
+  const errors = [];
+  const scopeIsEmptyTree = scopeBase.toLowerCase() === emptyTreeHash(paths.root).toLowerCase();
+  for (const descendant of descendantsOf(items, item.key)) {
+    const fixedPoint = descendant.review.fixedPoint;
+    if (fixedPoint?.trim().toLowerCase() === "initial tree") {
+      const emptyTree = emptyTreeHash(paths.root);
+      if (emptyTree.toLowerCase() !== scopeBase.toLowerCase()) {
+        errors.push(`${item.key}: legacy descendant ${descendant.key} needs the empty tree as scope base.`);
+      }
+      continue;
+    }
+    if (!fixedPoint) {
+      if (descendant.status === "done") {
+        errors.push(`${item.key}: completed descendant ${descendant.key} lacks a review fixed point.`);
+      }
+      continue;
+    }
+    if (!/^[0-9a-f]{40,64}$/i.test(fixedPoint)) {
+      errors.push(`${item.key}: descendant ${descendant.key} has an invalid review fixed point.`);
+      continue;
+    }
+    const descendantRef = runGit(
+      paths.root,
+      ["rev-parse", "--verify", `${fixedPoint}^{commit}`],
+      true,
+    );
+    if (descendantRef.status !== 0) {
+      errors.push(`${item.key}: descendant ${descendant.key} review fixed point does not resolve.`);
+      continue;
+    }
+    if (scopeIsEmptyTree) continue;
+    const containsDescendantBase = runGit(
+      paths.root,
+      ["merge-base", "--is-ancestor", scopeBase, descendantRef.stdout.trim()],
+      true,
+    );
+    if (containsDescendantBase.status !== 0) {
+      errors.push(`${item.key}: scope base does not cover descendant ${descendant.key}.`);
+    }
+  }
+  return errors;
+}
+
 function candidateErrors(paths, item) {
   const errors = [];
   const seen = new Set();
@@ -1791,17 +1969,129 @@ function greenGateErrors(paths, item, items) {
   errors.push(...qualityGateErrors(item, true));
   if (!hasPassingReview(item)) {
     errors.push(`${item.key}: Standards and Spec need passing evidence and a reviewer.`);
+  } else {
+    errors.push(...blockingReviewCountErrors(item));
+  }
+  if (item.type === "epic" && !item.review.scopeBase?.trim()) {
+    errors.push(`${item.key}: an epic review needs the full delivery scope base.`);
   }
   for (const blockerKey of item.links.blockedBy) {
     if (byKey.get(blockerKey)?.status !== "done") errors.push(`${item.key}: blocker ${blockerKey} is not done.`);
   }
-  for (const child of childrenOf(items, item.key)) {
+  const completionChildren = item.type === "epic" ? descendantsOf(items, item.key) : childrenOf(items, item.key);
+  for (const child of completionChildren) {
     if (child.status !== "done") errors.push(`${item.key}: child ${child.key} is not done.`);
   }
-  if (item.knowledgePolicy === "required" && item.knowledgeChanges.length === 0) {
+  const hasEstablishedEpicKnowledge = item.type === "epic" && item.promotions.length > 0;
+  if (
+    item.knowledgePolicy === "required" &&
+    item.knowledgeChanges.length === 0 &&
+    !hasEstablishedEpicKnowledge
+  ) {
     errors.push(`${item.key}: drafted knowledge is required.`);
   }
   errors.push(...candidateErrors(paths, item));
+  return errors;
+}
+
+function epicReviewScopeErrors(paths, item) {
+  if (item.type !== "epic") return [];
+
+  const errors = [];
+  const scopeBase = item.review.scopeBase ?? "";
+  const fixedPoint = item.review.fixedPoint ?? "";
+  if (!/^[0-9a-f]{40,64}$/i.test(scopeBase)) {
+    return [`${item.key}: review.scopeBase must be a resolved full Git object hash.`];
+  }
+  if (!/^[0-9a-f]{40,64}$/i.test(fixedPoint)) {
+    return [`${item.key}: review.fixedPoint must be a resolved full commit hash.`];
+  }
+
+  const scope = resolveReviewScope(paths.root, scopeBase);
+  const fixedRef = runGit(paths.root, ["rev-parse", "--verify", `${fixedPoint}^{commit}`], true);
+  if (scope.result.status !== 0) errors.push(`${item.key}: review.scopeBase does not resolve.`);
+  if (fixedRef.status !== 0) errors.push(`${item.key}: review.fixedPoint does not resolve to a commit.`);
+  if (errors.length) return errors;
+
+  const resolvedScope = scope.result.stdout.trim();
+  const resolvedFixed = fixedRef.stdout.trim();
+  if (
+    !scope.isEmptyTree &&
+    runGit(paths.root, ["merge-base", "--is-ancestor", resolvedScope, resolvedFixed], true).status !== 0
+  ) {
+    errors.push(`${item.key}: review.scopeBase is not an ancestor of review.fixedPoint.`);
+  }
+  if (runGit(paths.root, ["merge-base", "--is-ancestor", resolvedFixed, "HEAD"], true).status !== 0) {
+    errors.push(`${item.key}: review.fixedPoint is not an ancestor of the epic review branch.`);
+  }
+  errors.push(...epicScopeCoverageErrors(paths, item, loadItems(paths), resolvedScope));
+  return errors;
+}
+
+function reviewTargetErrors(paths, config, item) {
+  const target = item.review.targetBranch?.trim() || gitConfig(config).targetBranch;
+  const fixedPoint = item.review.fixedPoint ?? "";
+  if (!target) return [`${item.key}: review target branch is missing.`];
+  if (!/^[0-9a-f]{40,64}$/i.test(fixedPoint)) {
+    return [`${item.key}: review.fixedPoint must be a resolved full commit hash.`];
+  }
+  const targetRef = runGit(
+    paths.root,
+    ["rev-parse", "--verify", `refs/heads/${target}^{commit}`],
+    true,
+  );
+  if (targetRef.status !== 0) return [`${item.key}: review target branch ${target} does not resolve.`];
+  if (targetRef.stdout.trim().toLowerCase() !== fixedPoint.toLowerCase()) {
+    return [`${item.key}: review fixed point is not the current ${target} commit.`];
+  }
+  return [];
+}
+
+function completedEpicReviewErrors(paths, config, item, items = loadItems(paths)) {
+  if (item.type !== "epic") return [];
+
+  const errors = [];
+  if (item.status !== "done") errors.push(`${item.key}: parent epic is not done.`);
+  if (!hasPassingReview(item)) errors.push(`${item.key}: parent epic review did not pass.`);
+  else errors.push(...blockingReviewCountErrors(item));
+  for (const descendant of descendantsOf(items, item.key)) {
+    if (descendant.status !== "done") {
+      errors.push(`${item.key}: descendant ${descendant.key} is not done.`);
+    }
+  }
+
+  const scopeBase = item.review.scopeBase ?? "";
+  const fixedPoint = item.review.fixedPoint ?? "";
+  if (!/^[0-9a-f]{40,64}$/i.test(scopeBase)) {
+    errors.push(`${item.key}: parent epic lacks an integrated review scope base.`);
+  }
+  if (!/^[0-9a-f]{40,64}$/i.test(fixedPoint)) {
+    errors.push(`${item.key}: parent epic lacks a resolved review fixed point.`);
+  }
+  if (errors.length) return errors;
+
+  const target = gitConfig(config).targetBranch;
+  const scope = resolveReviewScope(paths.root, scopeBase);
+  const fixedRef = runGit(paths.root, ["rev-parse", "--verify", `${fixedPoint}^{commit}`], true);
+  const targetRef = runGit(paths.root, ["rev-parse", "--verify", `${target}^{commit}`], true);
+  if (scope.result.status !== 0) errors.push(`${item.key}: parent epic scope base does not resolve.`);
+  if (fixedRef.status !== 0) errors.push(`${item.key}: parent epic fixed point does not resolve.`);
+  if (targetRef.status !== 0) errors.push(`${item.key}: target branch ${target} does not resolve.`);
+  if (errors.length) return errors;
+
+  const resolvedScope = scope.result.stdout.trim();
+  const resolvedFixed = fixedRef.stdout.trim();
+  const resolvedTarget = targetRef.stdout.trim();
+  if (
+    !scope.isEmptyTree &&
+    runGit(paths.root, ["merge-base", "--is-ancestor", resolvedScope, resolvedFixed], true).status !== 0
+  ) {
+    errors.push(`${item.key}: parent epic scope base is not an ancestor of its fixed point.`);
+  }
+  if (runGit(paths.root, ["merge-base", "--is-ancestor", resolvedFixed, resolvedTarget], true).status !== 0) {
+    errors.push(`${item.key}: parent epic review is not part of current ${target}.`);
+  }
+  errors.push(...epicScopeCoverageErrors(paths, item, items, resolvedScope));
   return errors;
 }
 
@@ -2480,6 +2770,7 @@ function commandCreate(args, paths, config) {
   if (type === "epic" && parent) fail("An epic cannot have a parent.");
   if (type === "subtask" && !parent) fail("A subtask needs --parent.");
   if (parent && !byKey.has(parent)) fail(`Parent ${parent} does not exist.`);
+  if (parentItem?.status === "done") fail(`Cannot add a child to done parent ${parentItem.key}.`);
   if (type === "subtask" && parent && !STANDARD_TYPES.includes(byKey.get(parent).type)) {
     fail("A subtask parent must be a story, bug, or task.");
   }
@@ -2533,6 +2824,8 @@ function commandCreate(args, paths, config) {
       status: "pending",
       reviewer: null,
       fixedPoint: null,
+      scopeBase: null,
+      targetBranch: null,
       standards: null,
       spec: null,
       reviewedAt: null,
@@ -2545,6 +2838,8 @@ function commandCreate(args, paths, config) {
     updatedAt: createdAt,
     completedAt: null,
   };
+  const hierarchyErrors = validateHierarchy([...items, item]);
+  if (hierarchyErrors.length) fail(`Work item hierarchy is invalid:\n- ${hierarchyErrors.join("\n- ")}`);
   writeJson(itemPath(paths, key), item);
   syncGeneratedFiles(paths, config, [...items, item]);
   console.log(`Created ${key}: ${summary}`);
@@ -2802,6 +3097,8 @@ function commandReview(args, paths, config) {
   const status = option(args, "status", true).toLowerCase();
   const reviewer = option(args, "reviewer");
   const fixedPoint = option(args, "base");
+  const requestedScopeBase = option(args, "scope-base");
+  const requestedTarget = option(args, "target") ?? gitConfig(config).targetBranch;
   const standards = option(args, "standards");
   const spec = option(args, "spec");
   const item = loadItem(paths, key);
@@ -2812,6 +3109,7 @@ function commandReview(args, paths, config) {
   if (!["pending", "pass", "changes-requested"].includes(status)) {
     fail("Review status must be pending, pass, or changes-requested.");
   }
+  if (!validGitRefName(requestedTarget)) fail("Review target branch is invalid.");
   if (
     status !== "pending" &&
     (!reviewer?.trim() || !fixedPoint?.trim() || !standards?.trim() || !spec?.trim())
@@ -2819,8 +3117,81 @@ function commandReview(args, paths, config) {
     fail("A completed review needs --reviewer, --base, --standards, and --spec.");
   }
 
+  const storedScopeBase = item.review.scopeBase?.trim() || null;
+  const suppliedScopeBase = requestedScopeBase?.trim() || null;
+  if (
+    item.type === "epic" &&
+    storedScopeBase &&
+    suppliedScopeBase &&
+    storedScopeBase.toLowerCase() !== suppliedScopeBase.toLowerCase()
+  ) {
+    fail(`Epic review scope base is immutable at ${storedScopeBase}.`);
+  }
+  let scopeBase = suppliedScopeBase;
+  if (item.type === "epic") scopeBase = storedScopeBase ?? suppliedScopeBase;
+  else if (status !== "pending") scopeBase = fixedPoint?.trim() || null;
+  if (scopeBase && !/^[0-9a-f]{40,64}$/i.test(scopeBase)) {
+    fail("Review scope base must be a resolved full Git object hash.");
+  }
+  if (item.type === "epic" && status !== "pending" && !scopeBase) {
+    fail("An epic review needs --scope-base from the start of epic delivery.");
+  }
+  if (status !== "pending" && !/^[0-9a-f]{40,64}$/i.test(fixedPoint ?? "")) {
+    fail("Review fixed point must be a resolved full commit hash.");
+  }
+  if (status !== "pending") {
+    const targetRef = runGit(
+      paths.root,
+      ["rev-parse", "--verify", `refs/heads/${requestedTarget}^{commit}`],
+      true,
+    );
+    if (targetRef.status !== 0) fail(`Review target branch ${requestedTarget} does not resolve.`);
+    if (targetRef.stdout.trim().toLowerCase() !== fixedPoint.toLowerCase()) {
+      fail(`Review fixed point must equal the current ${requestedTarget} commit.`);
+    }
+  }
+
+  if (scopeBase) {
+    const scope = resolveReviewScope(paths.root, scopeBase);
+    if (scope.result.status !== 0) fail("Review scope base does not resolve.");
+    if (item.type === "epic") {
+      const coverageErrors = epicScopeCoverageErrors(
+        paths,
+        item,
+        loadItems(paths),
+        scope.result.stdout.trim(),
+      );
+      if (coverageErrors.length) fail(`Epic review scope is incomplete:\n- ${coverageErrors.join("\n- ")}`);
+    }
+    const comparisonRef = status === "pending" ? "HEAD" : fixedPoint;
+    if (!scope.isEmptyTree) {
+      const containsScope = runGit(
+        paths.root,
+        ["merge-base", "--is-ancestor", scope.result.stdout.trim(), comparisonRef],
+        true,
+      );
+      if (containsScope.status !== 0) fail("Review scope base is not an ancestor of the reviewed change.");
+    }
+  }
+  if (status !== "pending") {
+    const fixedRef = runGit(paths.root, ["rev-parse", "--verify", `${fixedPoint}^{commit}`], true);
+    if (fixedRef.status !== 0) fail("Review fixed point does not resolve to a commit.");
+    const containsTarget = runGit(
+      paths.root,
+      ["merge-base", "--is-ancestor", fixedRef.stdout.trim(), "HEAD"],
+      true,
+    );
+    if (containsTarget.status !== 0) fail("Review branch does not contain the current target commit.");
+  }
+
   if (status === "pass") {
     const errors = [];
+    errors.push(
+      ...blockingReviewCountErrors({
+        ...item,
+        review: { ...item.review, status, standards, spec },
+      }),
+    );
     for (const criterion of item.acceptanceCriteria) {
       if (criterion.status !== "pass" || !criterion.evidence?.trim()) {
         errors.push(`${criterion.id} needs passing evidence before review can pass.`);
@@ -2833,7 +3204,8 @@ function commandReview(args, paths, config) {
     }
     errors.push(...qualityGateErrors(item, true));
     const items = loadItems(paths);
-    for (const child of childrenOf(items, item.key)) {
+    const reviewChildren = item.type === "epic" ? descendantsOf(items, item.key) : childrenOf(items, item.key);
+    for (const child of reviewChildren) {
       if (child.status !== "done") errors.push(`Child ${child.key} must be done before review can pass.`);
     }
     const byKey = itemMap(items);
@@ -2847,6 +3219,8 @@ function commandReview(args, paths, config) {
     status,
     reviewer: status === "pending" ? null : reviewer,
     fixedPoint: status === "pending" ? null : fixedPoint,
+    scopeBase,
+    targetBranch: status === "pending" ? null : requestedTarget,
     standards: status === "pending" ? null : standards,
     spec: status === "pending" ? null : spec,
     reviewedAt: status === "pending" ? null : now(),
@@ -3255,6 +3629,8 @@ function commandReleaseStart(args, paths, config) {
   const targetBranch = requireTargetBranch(paths, config, "Release start");
   const id = normalizeReleaseId(requiredPositional(args, 1, "release ID"));
   const items = loadItems(paths);
+  const hierarchyErrors = validateHierarchy(items);
+  if (hierarchyErrors.length) fail(`Work item hierarchy is invalid:\n- ${hierarchyErrors.join("\n- ")}`);
   const byKey = itemMap(items);
   const release = loadRelease(paths, id, items);
   if (release.status !== "planned") fail(`${id} must be planned before release start.`);
@@ -3281,7 +3657,30 @@ function commandReleaseStart(args, paths, config) {
   if (commit.toLowerCase() !== targetCommit.toLowerCase()) {
     fail(`Release commit must equal the current ${targetBranch} commit ${targetCommit}.`);
   }
-  assertTicketsInReleaseCommit(paths.root, commit, release.tickets);
+  const committedItems = loadItemsFromCommit(paths.root, commit);
+  const committedHierarchyErrors = validateHierarchy(committedItems);
+  if (committedHierarchyErrors.length) {
+    fail(`Release commit hierarchy is invalid:\n- ${committedHierarchyErrors.join("\n- ")}`);
+  }
+  assertTicketsInReleaseCommit(committedItems, release.tickets);
+  const committedByKey = itemMap(committedItems);
+  const nonLeafTickets = release.tickets.filter(
+    (key) => committedByKey.get(key)?.type === "epic" || childrenOf(committedItems, key).length > 0,
+  );
+  if (nonLeafTickets.length) {
+    fail(`Release leaf tickets, not parent items: ${nonLeafTickets.join(", ")}.`);
+  }
+  const parentEpics = [
+    ...new Set(
+      release.tickets
+        .map((key) => ancestorEpicKey(committedByKey.get(key), committedByKey))
+        .filter(Boolean),
+    ),
+  ];
+  const parentEpicErrors = parentEpics.flatMap((key) =>
+    completedEpicReviewErrors(paths, config, committedByKey.get(key), committedItems),
+  );
+  if (parentEpicErrors.length) fail(`Parent epic review gate failed:\n- ${parentEpicErrors.join("\n- ")}`);
   release.status = "deploying";
   release.commit = commit;
   release.artifact = oneLine(option(args, "artifact", true));
@@ -3596,12 +3995,95 @@ function promotedConcept(content, timestamp) {
   return renderJsonConcept(data, body);
 }
 
+function earliestDescendantReviewBase(paths, item, items) {
+  const fixedPoints = [];
+  for (const descendant of descendantsOf(items, item.key)) {
+    const fixedPoint = descendant.review.fixedPoint;
+    if (fixedPoint?.trim().toLowerCase() === "initial tree") {
+      fixedPoints.push(emptyTreeHash(paths.root, true));
+      continue;
+    }
+    if (!/^[0-9a-f]{40,64}$/i.test(fixedPoint ?? "")) {
+      fail(`Cannot derive ${item.key} scope. ${descendant.key} lacks a resolved review fixed point.`);
+    }
+    const result = runGit(paths.root, ["rev-parse", "--verify", `${fixedPoint}^{commit}`], true);
+    if (result.status !== 0) fail(`${descendant.key} review fixed point does not resolve to a commit.`);
+    fixedPoints.push(result.stdout.trim());
+  }
+  if (!fixedPoints.length) fail(`${item.key} has no reviewed descendants for a legacy epic review.`);
+
+  const emptyTree = emptyTreeHash(paths.root);
+  if (fixedPoints.some((fixedPoint) => fixedPoint.toLowerCase() === emptyTree.toLowerCase())) {
+    return emptyTree;
+  }
+
+  let earliest = fixedPoints[0];
+  for (const candidate of fixedPoints.slice(1)) {
+    if (runGit(paths.root, ["merge-base", "--is-ancestor", candidate, earliest], true).status === 0) {
+      earliest = candidate;
+      continue;
+    }
+    if (runGit(paths.root, ["merge-base", "--is-ancestor", earliest, candidate], true).status !== 0) {
+      fail(`${item.key} descendant review fixed points do not share one target history.`);
+    }
+  }
+  return earliest;
+}
+
+function commandEpicReviewOpen(args, paths, config) {
+  const target = requireTargetBranch(paths, config, "Legacy epic review");
+  assertCleanGitWorktree(paths.root, `Target branch ${target}`);
+  const key = normalizeKey(requiredPositional(args, 1, "epic key"));
+  const items = loadItems(paths);
+  const hierarchyErrors = validateHierarchy(items);
+  if (hierarchyErrors.length) fail(`Work item hierarchy is invalid:\n- ${hierarchyErrors.join("\n- ")}`);
+  const item = items.find((entry) => entry.key === key);
+  if (!item) fail(`Work item ${key} does not exist.`);
+  if (item.type !== "epic") fail(`${key} is not an epic.`);
+  if (item.status !== "done") fail(`${key} must be a legacy done epic.`);
+  if (item.review.scopeBase?.trim()) fail(`${key} already has integrated epic review evidence.`);
+  const openDescendants = descendantsOf(items, key).filter((child) => child.status !== "done");
+  if (openDescendants.length) {
+    fail(`Cannot reopen ${key}. Open descendants: ${openDescendants.map((child) => child.key).join(", ")}.`);
+  }
+
+  const targetRef = runGit(paths.root, ["rev-parse", "--verify", `${target}^{commit}`]).stdout.trim();
+  const scopeBase = earliestDescendantReviewBase(paths, item, items);
+  const scope = resolveReviewScope(paths.root, scopeBase);
+  if (scope.result.status !== 0) fail(`${key} derived scope base does not resolve.`);
+  if (
+    !scope.isEmptyTree &&
+    runGit(paths.root, ["merge-base", "--is-ancestor", scopeBase, targetRef], true).status !== 0
+  ) {
+    fail(`${key} derived scope base is not an ancestor of ${target}.`);
+  }
+
+  item.status = "in-progress";
+  item.resolution = null;
+  item.completedAt = null;
+  item.review = {
+    status: "pending",
+    reviewer: null,
+    fixedPoint: null,
+    scopeBase,
+    targetBranch: null,
+    standards: null,
+    spec: null,
+    reviewedAt: null,
+  };
+  saveItem(paths, item);
+  syncGeneratedFiles(paths, config, items);
+  console.log(`Reopened ${key} for integrated epic review from ${scopeBase}.`);
+}
+
 function commandComplete(args, paths, config) {
   const key = normalizeKey(requiredPositional(args, 1, "work item key"));
   const items = loadItems(paths);
   const item = items.find((entry) => entry.key === key);
   if (!item) fail(`Work item ${key} does not exist.`);
   const errors = greenGateErrors(paths, item, items);
+  if (errors.length === 0) errors.push(...reviewTargetErrors(paths, config, item));
+  if (errors.length === 0) errors.push(...epicReviewScopeErrors(paths, item));
   if (errors.length) fail(`Completion gate failed:\n- ${errors.join("\n- ")}`);
 
   const completedAt = now();
@@ -3644,16 +4126,36 @@ function commandWorktreeAdd(args, paths, config) {
   const items = loadItems(paths);
   const settings = gitConfig(config);
   const target = option(args, "base") ?? settings.targetBranch;
+  const epicReview = hasOption(args, "epic-review");
 
   requireGitRepositoryRoot(paths.root);
   if (currentGitBranch(paths.root) !== target) {
     fail(`Create ticket worktrees from the checked-out target branch ${target}.`);
   }
   assertCleanGitWorktree(paths.root, `Target branch ${target}`);
-  if (item.type === "epic") fail("Epics coordinate work and do not receive implementation worktrees.");
-  if (item.status !== "ready") fail(`${key} must be ready before creating its worktree.`);
-
   const byKey = itemMap(items);
+  if (item.type === "epic") {
+    if (!epicReview) fail("Use --epic-review for an epic after every child ticket is done.");
+    if (item.status !== "in-progress") fail(`${key} must be in-progress before its final epic review.`);
+    const openDescendants = descendantsOf(items, key).filter((child) => child.status !== "done");
+    if (openDescendants.length) {
+      fail(`Cannot review ${key}. Open descendants: ${openDescendants.map((child) => child.key).join(", ")}.`);
+    }
+    if (!item.review.scopeBase?.trim()) {
+      fail(`${key} needs a recorded review scope base before creating its epic review worktree.`);
+    }
+  } else {
+    if (epicReview) fail("--epic-review applies only to an epic.");
+    if (item.status !== "ready") fail(`${key} must be ready before creating its worktree.`);
+    const parentEpicKey = ancestorEpicKey(item, byKey);
+    if (parentEpicKey) {
+      const parentEpic = byKey.get(parentEpicKey);
+      if (parentEpic.status !== "in-progress" || !parentEpic.review.scopeBase?.trim()) {
+        fail(`Start or resume parent epic ${parentEpicKey} before implementing ${key}.`);
+      }
+    }
+  }
+
   const openBlockers = item.links.blockedBy.filter((blocker) => byKey.get(blocker)?.status !== "done");
   if (openBlockers.length) {
     fail(`Cannot implement ${key}. Open blockers: ${openBlockers.join(", ")}.`);
@@ -3661,6 +4163,20 @@ function commandWorktreeAdd(args, paths, config) {
 
   const targetRef = runGit(paths.root, ["rev-parse", "--verify", `${target}^{commit}`], true);
   if (targetRef.status !== 0) fail(`Target branch ${target} does not resolve to a commit.`);
+  if (item.type === "epic") {
+    const scope = resolveReviewScope(paths.root, item.review.scopeBase);
+    if (scope.result.status !== 0) fail(`${key} review.scopeBase does not resolve.`);
+    const coverageErrors = epicScopeCoverageErrors(paths, item, items, scope.result.stdout.trim());
+    if (coverageErrors.length) fail(`Epic review scope is incomplete:\n- ${coverageErrors.join("\n- ")}`);
+    if (!scope.isEmptyTree) {
+      const containsScope = runGit(
+        paths.root,
+        ["merge-base", "--is-ancestor", scope.result.stdout.trim(), targetRef.stdout.trim()],
+        true,
+      );
+      if (containsScope.status !== 0) fail(`${key} review.scopeBase is not an ancestor of ${target}.`);
+    }
+  }
 
   const branch = conventionalBranchName(item, option(args, "branch-type"));
   const existingBranch = runGit(paths.root, ["show-ref", "--verify", "--quiet", `refs/heads/${branch}`], true);
@@ -3713,6 +4229,11 @@ function commandWorktreeFinish(args, paths, config) {
   if (item.status !== "done" || !item.resolution) {
     fail(`${key} must pass complete before merge and cleanup.`);
   }
+  if (item.review.targetBranch && item.review.targetBranch !== target) {
+    fail(`${key} was reviewed for ${item.review.targetBranch}, not ${target}.`);
+  }
+  const epicScopeErrors = epicReviewScopeErrors(worktreePaths, item);
+  if (epicScopeErrors.length) fail(`Epic review scope failed:\n- ${epicScopeErrors.join("\n- ")}`);
   const validationErrors = validateWorkspace(worktreePaths, worktreeConfig, loadItems(worktreePaths));
   if (validationErrors.length) fail(`Ticket worktree validation failed:\n- ${validationErrors.join("\n- ")}`);
 
@@ -3813,7 +4334,8 @@ Usage:
   project-flow.mjs brief-show BRIEF-N
   project-flow.mjs knowledge-template KEY --target PATH --action create|update [options]
   project-flow.mjs complete KEY
-  project-flow.mjs worktree-add KEY [--branch-type TYPE] [--base BRANCH]
+  project-flow.mjs epic-review-open KEY
+  project-flow.mjs worktree-add KEY [--branch-type TYPE] [--base BRANCH] [--epic-review]
   project-flow.mjs worktree-list
   project-flow.mjs worktree-finish KEY [--target BRANCH] [--message TEXT]
   project-flow.mjs release-create --title TEXT --ticket KEY [options]
@@ -3874,7 +4396,9 @@ Outcome evidence:
   --evidence TEXT --follow-up KEY                  Repeat as needed.
 
 Review evidence:
-  --base REF                    Fixed point or "initial tree".
+  --base REF                    Current target commit for the review branch.
+  --scope-base REF              Start of the complete epic delivery range.
+  --target BRANCH               Reviewed target; defaults to the configured branch.
   --standards TEXT              Independent Standards result.
   --spec TEXT                   Independent Spec result.
 
@@ -3903,6 +4427,7 @@ Knowledge template options:
 
 Git workflow:
   Ticket branches use <type>/<ticket-key>-<description>.
+  Epics use one final review worktree after every descendant ticket is done.
   Branch types: feature, feat, bugfix, fix, hotfix, chore.
   Commits use <type>[optional scope]: <description>.
   The default target is main. Green merges use --no-ff.
@@ -3994,6 +4519,9 @@ function main() {
       return true;
     case "complete":
       commandComplete(args, paths, config);
+      return true;
+    case "epic-review-open":
+      commandEpicReviewOpen(args, paths, config);
       return true;
     case "worktree-add":
       commandWorktreeAdd(args, paths, config);

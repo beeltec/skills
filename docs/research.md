@@ -303,6 +303,12 @@ semantic dependencies or merge conflicts, so likely non-generated file overlap a
 blocks parallel execution. Generated board conflicts are resolved by rerunning
 `sync` after integrating the latest target. Final integration runs serially.
 
+When a brief is planned as an epic with stories, the epic remains the user-facing
+implementation unit. Its coordinator delivers and integrates every descendant
+in dependency order. After every descendant is done, one final epic worktree reviews the
+complete integrated range from the pre-child target commit. Blocking findings
+are repaired there, and the entire epic review repeats until both axes pass.
+
 Before final review, the ticket branch must contain the latest target commit.
 The review records that full commit hash. A green ticket is completed and
 committed inside its worktree. Finalization creates a conventional `--no-ff`

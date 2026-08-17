@@ -1,4 +1,4 @@
 interface:
   display_name: "Plan"
-  short_description: "Plan linked tickets and safe parallel delivery"
-  default_prompt: "Use $plan to turn this confirmed brief into linked tickets and identify independent worktree batches."
+  short_description: "Plan epics and linked delivery tickets"
+  default_prompt: "Use $plan to turn this confirmed brief into linked work and hand an epic to implementation as one unit."

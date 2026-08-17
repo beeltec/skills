@@ -14,28 +14,29 @@ separate from deployment or publication.
 2. Require `.project/workflow.json`. Use `setup` when it is missing.
 3. Read the board, indexes, and `docs/knowledge/ubiquitous-language.md` as the Ubiquitous Language.
 4. Require a clean configured target-branch worktree.
-5. Select only `done` tickets already merged into that target branch.
-6. Create one release record when no suitable planned release exists.
-7. If external rules apply, use `$source` to refresh the exact official guidance.
-8. Otherwise, report that no external provider or tool rule applies.
-9. Confirm the target, version policy, rollout, recovery plan, and required approvals.
-10. Run every applicable build, test, security, migration, and packaging preflight.
-11. Record each preflight with `release-check --phase pre`.
-12. Resolve the current target-branch commit.
-13. Build one immutable artifact from a clean checkout of that exact commit.
-14. Obtain its provider digest or calculate a stable digest locally.
-15. Obtain explicit authority before any remote push, publication, or deployment.
-16. Run `release-start` with the resolved target commit, artifact, digest, actor, and approvals.
-17. Deploy or publish with the verified project or provider command.
-18. Supervise the rollout and run user-facing smoke and health checks.
-19. Record every live check with `release-check --phase post`.
-20. Recover first when the release harms users or fails its declared checks.
-21. Record `failed` or `rolled-back`, then create a linked bug through `discuss` and `plan`.
-22. Record `green` only when all checks pass. Let the command establish release knowledge.
-23. Create one outcome record per confirmed brief included in the release.
-24. Use active canonical terms in release records and user-facing release notes.
-25. Run `validate` and commit the release evidence with a Conventional Commit.
-26. Report the release ID, commit, artifact, target, checks, result, and recovery state.
+5. Select only `done` leaf tickets already merged into that target branch.
+6. Require every selected ticket's parent epic to be `done`.
+7. Create one release record when no suitable planned release exists.
+8. If external rules apply, use `$source` to refresh the exact official guidance.
+9. Otherwise, report that no external provider or tool rule applies.
+10. Confirm the target, version policy, rollout, recovery plan, and required approvals.
+11. Run every applicable build, test, security, migration, and packaging preflight.
+12. Record each preflight with `release-check --phase pre`.
+13. Resolve the current target-branch commit.
+14. Build one immutable artifact from a clean checkout of that exact commit.
+15. Obtain its provider digest or calculate a stable digest locally.
+16. Obtain explicit authority before any remote push, publication, or deployment.
+17. Run `release-start` with the resolved target commit, artifact, digest, actor, and approvals.
+18. Deploy or publish with the verified project or provider command.
+19. Supervise the rollout and run user-facing smoke and health checks.
+20. Record every live check with `release-check --phase post`.
+21. Recover first when the release harms users or fails its declared checks.
+22. Record `failed` or `rolled-back`, then create a linked bug through `discuss` and `plan`.
+23. Record `green` only when all checks pass. Let the command establish release knowledge.
+24. Create one outcome record per confirmed brief included in the release.
+25. Use active canonical terms in release records and user-facing release notes.
+26. Run `validate` and commit the release evidence with a Conventional Commit.
+27. Report the release ID, commit, artifact, target, checks, result, and recovery state.
 
 ## Commands
 
@@ -71,6 +72,7 @@ git commit -m "docs(rel-1): record verified release"
 ## Boundaries
 
 - Do not release an epic or an unfinished ticket.
+- Do not release a child ticket while its parent epic is open.
 - Do not release an older commit while naming tickets from the current target.
 - Do not build a release artifact from a dirty coordinator worktree.
 - Do not use model memory as provider guidance.

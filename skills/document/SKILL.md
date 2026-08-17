@@ -1,6 +1,6 @@
 ---
 name: document
-description: Use this skill after implementation and passing code review to establish repository knowledge and finish a ticket branch. Verify the review used the latest target commit, refresh official sources, promote valid OKF drafts, complete the green item, commit its documentation, merge it into `main` by default, and safely remove its clean worktree and local branch. Hand releasable work to ship without claiming it is deployed.
+description: Use this skill after implementation and passing code review to establish repository knowledge and finish a ticket or final epic review branch. Verify the review used the latest target commit, require the full recorded scope for an epic, refresh official sources, promote valid OKF drafts, complete the green item, merge it into `main` by default, and safely remove its clean worktree and local branch. Hand releasable work to ship without claiming it is deployed.
 ---
 
 # Document
@@ -12,27 +12,28 @@ work item through the knowledge promotion gate.
 
 1. Read [references/completion-gate.md](references/completion-gate.md).
 2. Run `show <KEY>`.
-3. Enter the serial integration lane. Do not document two tickets concurrently.
-4. Confirm the current path and branch belong to this ticket worktree.
-5. Resolve the configured target branch to its full current commit hash.
+3. Enter the serial integration lane. Do not document two work items concurrently.
+4. Confirm the current path and branch belong to this work item worktree.
+5. Resolve the recorded review target branch to its full current commit hash.
 6. Confirm that commit is an ancestor and equals `review.fixedPoint`.
-7. Return to `implement` and `review` when the target has advanced.
-8. Confirm the item is `in-review` with zero P0, P1, and P2 findings.
-9. Review acceptance evidence and the latest check results.
-10. Read `docs/knowledge/ubiquitous-language.md` as the project Ubiquitous Language.
-11. Read `docs/knowledge/sources/index.md` and relevant source notes.
-12. Use `$source` to refresh official docs cited by the completed work.
-13. Read the implemented code and relevant established concepts.
-14. Use active canonical terms in each knowledge draft.
-15. Resolve missing or changed meanings through `$language` before completion.
-16. Create small drafts for durable facts and verify them against code.
-17. Run `complete <KEY>` and fix any rejected gate.
-18. Commit the completion changes with `docs(<key>): establish knowledge`.
-19. Return to the clean target-branch worktree.
-20. Run `worktree-finish <KEY>` to merge, remove the worktree, and delete the branch.
-21. Run `validate` and report the merge commit, promoted paths, and resolution.
-22. State clearly that ticket `done` means merged and documented, not released.
-23. Hand releasable ticket groups to `ship`.
+7. For an epic, confirm every descendant is `done` and `review.scopeBase` is valid.
+8. Return to `implement` and `review` when the target has advanced.
+9. Confirm the item is `in-review` with zero P0, P1, and P2 findings.
+10. Review acceptance evidence and the latest check results.
+11. Read `docs/knowledge/ubiquitous-language.md` as the project Ubiquitous Language.
+12. Read `docs/knowledge/sources/index.md` and relevant source notes.
+13. Use `$source` to refresh official docs cited by the completed work.
+14. Read the implemented code and relevant established concepts.
+15. Use active canonical terms in each knowledge draft.
+16. Resolve missing or changed meanings through `$language` before completion.
+17. Create small drafts for durable facts and verify them against code.
+18. Run `complete <KEY>` and fix any rejected gate.
+19. Commit the completion changes with `docs(<key>): establish knowledge`.
+20. Return to that clean target-branch worktree.
+21. Run `worktree-finish <KEY>` with the same target to merge and clean up.
+22. Run `validate` and report the merge commit, promoted paths, and resolution.
+23. State clearly that item `done` means merged and documented, not released.
+24. Hand releasable leaf ticket groups to `ship` after their parent epic is done.
 
 ## Create a draft
 
@@ -76,6 +77,8 @@ sets a resolution, and refreshes the knowledge indexes and work board.
 - Never claim human review without an actual human reviewer.
 - Do not run `complete` before the ticket enters its serial integration turn.
 - Never merge when the final review fixed point differs from the current target.
+- Never complete an epic from child review evidence alone.
+- Do not ship epic children before the parent epic reaches `done`.
 - Never force-remove a worktree or force-delete a ticket branch.
 - Do not push or delete remote branches unless the user requests it.
 - Do not create a release record or run a deployment from this skill.

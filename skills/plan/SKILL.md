@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Use this skill when a user wants to turn a persisted, confirmed brief into Jira-like project work. Read established knowledge and official sources, create or refine epics, stories, bugs, tasks, and subtasks, declare risk-driven quality gates and release needs, and define an acyclic dependency graph for parallel worktrees. Use after setup and discussion. Stop before implementation or Git branch creation.
+description: Use this skill when a user wants to turn a persisted, confirmed brief into Jira-like project work. Read established knowledge and official sources, create or refine epics, stories, bugs, tasks, and subtasks, declare risk-driven quality gates and release needs, define an acyclic dependency graph, and hand an epic with stories to implementation as one coordinated unit. Use after setup and discussion. Stop before implementation or Git branch creation.
 ---
 
 # Plan
@@ -33,10 +33,13 @@ Use the installed `.project/bin/project-flow.mjs` for every command.
 16. Link every hard ordering dependency with `blocked-by`.
 17. Keep the dependency graph acyclic.
 18. Identify tickets that can run in parallel without likely write overlap.
-19. Treat epics as coordination items, not implementation branches.
-20. Describe the expected release slice, target, migration, rollout, recovery, and outcome measurement.
-21. Move fully defined items to `ready`, even when a blocker delays their start.
-22. Run `validate` and report ready, blocked, parallel, risk-gated, and release groups.
+19. Add epic acceptance, checks, and gates that verify the integrated child result.
+20. Treat an epic as the implementation coordination unit for its stories.
+21. Reserve its worktree for the final integrated review after every descendant is done.
+22. Describe the expected release slice, target, migration, rollout, recovery, and outcome measurement.
+23. Move fully defined items to `ready`, even when a blocker delays their start.
+24. Run `validate` and report ready, blocked, parallel, risk-gated, and release groups.
+25. Hand an epic plan to `$implement <EPIC-KEY>`, never to one of its stories.
 
 ## Example
 
@@ -67,6 +70,7 @@ node .project/bin/project-flow.mjs create \
 - Do not use an epic when one story is enough.
 - Do not use `relates-to` when one ticket must finish before another starts.
 - Do not claim worktrees make dependent or overlapping changes independent.
+- Do not propose one story for implementation when its confirmed brief has an epic.
 - Do not introduce a new meaning without user confirmation through `language`.
 - Do not enter `done` through a status edit.
 - Stop after the plan is valid and ready.
