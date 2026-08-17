@@ -1,6 +1,6 @@
 ---
 name: discuss
-description: Use this skill when a user wants to explore, clarify, challenge, or stress-test a product idea, feature, architecture choice, or implementation proposal before planning. Verify external facts from current official documentation, separate product evidence from assumptions, interview the user through dependency-ordered decision rounds, and persist a confirmed brief with success measures. Do not create tickets or code.
+description: Use this skill when a user wants to explore, clarify, challenge, or stress-test a product idea, feature, architecture choice, or implementation proposal before planning. Verify external facts from current official documentation, separate product evidence from assumptions, interview the user through dependency-ordered decision rounds, use the harness's user-question tool whenever available, and persist a confirmed brief with success measures. Do not create tickets or code.
 ---
 
 # Discuss
@@ -29,9 +29,21 @@ technical documentation cannot prove user need or product value. Use observed
 behavior, research, analytics, or an explicit owner decision for product
 evidence. Do not silently choose product behavior, scope, or risk.
 
+## Interaction tool
+
+- Use the harness's structured user-question tool for every question round when it is available.
+- In Claude Code, use `AskUserQuestion` for each round.
+- Put the round's independent questions in the tool call, within its supported limit.
+- If a round exceeds the tool limit, continue that round in another tool call.
+- Wait for the user's answers before starting dependent questions.
+- Use plain text only when the current harness has no user-question tool.
+- Never skip an available question tool merely because plain text is easier.
+- Use the same tool for brief confirmation and any requested clarification.
+
 ## Question format
 
-Use this format for each question:
+Use this format for each question. Map it to the question tool's fields when the
+tool is available. Otherwise, use the Markdown format directly.
 
 ```markdown
 Q1 of ~6 — Short decision title
@@ -94,9 +106,9 @@ When the frontier is empty, provide this brief:
 ## Open questions
 ```
 
-Use `None` when no open questions remain. Ask the user to confirm the brief.
-Do not create work items until the user confirms it. After confirmation, run
-`brief-create` with the agreed evidence and success fields, then run
-`brief-confirm <BRIEF-N> --by <actor>`. Use the authenticated identity when
-available. Use `human:user` when the current user directly confirms the brief.
-Hand the persisted brief ID to `plan`.
+Use `None` when no open questions remain. Ask the user to confirm the brief
+through the available user-question tool. Do not create work items until the
+user confirms it. After confirmation, run `brief-create` with the agreed
+evidence and success fields, then run `brief-confirm <BRIEF-N> --by <actor>`.
+Use the authenticated identity when available. Use `human:user` when the
+current user directly confirms the brief. Hand the persisted brief ID to `plan`.
