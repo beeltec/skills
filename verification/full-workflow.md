@@ -157,64 +157,77 @@ autonomous prompt was incomplete.
 
 Persist and confirm one brief with `human:user`.
 
-Invoke `$plan` for that brief. Apply YAGNI. Create one story, not an epic. The
-story must cover the complete local task flow. Include precise acceptance
-criteria, the relevant official source-note paths, dependency and accessibility
-risks, both required quality gates, and these checks:
+Invoke `$plan` for that brief. Apply YAGNI. Create one epic with exactly two
+stories. The first story must create, list, validate, and persist tasks. The
+second story must toggle completion and must be blocked by the first story.
+The epic must cover the complete integrated task flow.
+
+Include precise acceptance criteria and relevant official source-note paths.
+Include dependency and accessibility risks. Add both required quality gates
+and these checks to every item where they apply:
 
 - `npm run lint`
 - `npm test`
 - `npm run typecheck`
 - `npm run build`
 
-Move the fully defined story to `ready`. Run validation. Commit the discussion
-and plan as:
+Move the fully defined epic and both stories to `ready`. Run validation. Commit
+the discussion and plan as:
 
 ```text
 docs: plan local task workflow
 ```
 
-Invoke `$next` again. It must recommend `$implement` for the ready story.
+Invoke `$next` again. It must recommend `$implement` with the epic key. It must
+not recommend one story.
 
 ### 3. Implement and review
 
-Invoke `$implement` for the story. Let it create the ticket worktree and branch.
-Use the smallest typed design. Never use TypeScript `any`.
+Invoke `$implement` for the epic. Let it coordinate both story worktrees and
+branches in dependency order. Use the smallest typed design. Never use
+TypeScript `any`.
 
 Implement the full feature and verify it through the configured checks and
 direct application use. Record concrete acceptance and quality-gate evidence.
 
-Implementation must invoke `$review` automatically without asking me. The
-orchestrator must create two different review subagents in the same parallel
-round:
+Implementation must invoke `$review` automatically for each story. After a
+story passes review, it must invoke `$document` and merge that story into
+`main`. It must continue until both stories are `done`.
+
+After both stories are `done`, implementation must create the final epic review
+worktree. It must verify the integrated flow and invoke `$review` for the whole
+epic. Each review round must use two different review subagents in parallel:
 
 - one Standards reviewer;
 - one Spec reviewer.
 
 The orchestrator must perform neither review axis. Record each subagent's
-identity and separate P0-P3 counts. Fix every valid P0, P1, and P2 finding.
-Use two fresh reviewers after each repair. Continue until both axes report zero
-P0, P1, and P2 findings. Leave the story in `in-review`.
+identity and separate P0-P3 counts for every story and epic review. Fix every
+valid P0, P1, and P2 finding. Use two fresh reviewers after each repair.
+Continue each loop until both axes report zero P0, P1, and P2 findings. Leave
+the epic in `in-review` after its final integrated review passes.
 
 Treat missing subagent support as a blocked verification. Never replace the two
 reviewers with an orchestrator review.
 
 ### 4. Document and integrate
 
-Invoke `$document`. Create concise established knowledge for the implemented
-task behavior and storage architecture. Do not duplicate canonical ticket or
-vocabulary data in generated Markdown.
+Invoke `$document` for the epic. Create concise established knowledge for the
+integrated task behavior and storage architecture. Do not duplicate canonical
+ticket or vocabulary data in generated Markdown.
 
-Complete the story through the CLI. Commit its documentation. Merge it into
-`main` with the configured no-fast-forward merge. Confirm that the ticket
-worktree and local ticket branch are removed only after a clean green merge.
+Complete the epic through the CLI. Commit its documentation. Merge it into
+`main` with the configured no-fast-forward merge. Confirm that the epic review
+worktree and local branch are removed only after a clean green merge. Confirm
+that both story worktrees and local branches were already removed after their
+successful integrations.
 
 Invoke `$next` and record its recommendation.
 
 ### 5. Ship locally
 
-Invoke `$ship` for the completed story. This prompt authorizes only local release
-actions.
+Invoke `$ship` for both completed stories in one release. Do not release the
+epic. This prompt authorizes only local release actions.
 
 Create an immutable artifact from the exact clean `main` commit. Calculate and
 record a stable digest. Use a sibling path under `.verification/` as the local
@@ -264,9 +277,10 @@ The run passes only when:
 - every one of the twelve skills has concrete evidence in the report;
 - workflow validation passes;
 - `main` is clean;
-- the ticket is `done`;
-- the ticket branch and worktree are gone;
-- both final review axes have zero P0, P1, and P2 findings;
+- the epic and both stories are `done`;
+- the epic and story branches and worktrees are gone;
+- both final epic review axes have zero P0, P1, and P2 findings;
+- the final epic review covers the complete integrated delivery range;
 - established ticket knowledge exists;
 - the release is `green`;
 - the outcome is observed;
