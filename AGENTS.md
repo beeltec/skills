@@ -26,6 +26,7 @@ skill may update agreed terms directly after explicit user confirmation.
 ## Repository layout
 
 - `skills/` contains the installable skills.
+- `agent-rules/` contains standalone, reusable `AGENTS.md` rule fragments.
 - `scripts/link-skills.sh` links every skill for Codex and Claude Code.
 - `skills/setup/scripts/project-flow.mjs` is the source CLI.
 - `.worktrees/` contains ignored ticket worktrees created by the workflow.
@@ -74,6 +75,7 @@ skill may update agreed terms directly after explicit user confirmation.
 37. Mark a release green only after its post-release checks pass.
 38. Use `measure` after the agreed observation window.
 39. Keep generated board and knowledge indexes synchronized.
+40. Keep every file under `agent-rules/` concise, standalone, and limited to one topic.
 
 ## Commands
 

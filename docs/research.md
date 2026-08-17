@@ -1,6 +1,6 @@
 # Research and design basis
 
-Research was checked on 2026-08-16. Primary specifications take priority over
+Research was last updated on 2026-08-17. Primary specifications take priority over
 secondary guides.
 
 ## Open Knowledge Format
@@ -109,6 +109,36 @@ Sources:
 - [Using scripts in skills](https://agentskills.io/skill-creation/using-scripts)
 - [Matt Pocock's grilling skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)
 - [Matt Pocock's code-review skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md)
+
+## Agent rule design
+
+Persistent working agreements belong in `AGENTS.md`. Task-triggered procedures
+belong in skills. This repository stores reusable instruction fragments under
+`agent-rules/`, but Codex does not discover that directory automatically. A
+user or project must copy each selected fragment into an active `AGENTS.md`.
+
+OpenAI documents layered instruction scopes. Reusable personal defaults belong
+in the Codex home directory. Repository-wide rules belong at the project root.
+Specialized rules belong near the files they govern. More specific instructions
+override broader instructions.
+
+The combined project instruction chain has a default 32 KiB limit. Rule files
+therefore stay concise and cover one topic. Each rule states the required
+behavior and any safe path or exception. Automated formatting and lint checks
+remain in CI or repository tools.
+
+The first reusable rule covers plain English communication. It preserves the
+former skill's ISO 24495-1 reader outcomes and selected ASD-STE100 principles.
+It removes the skill procedure and keeps only persistent communication rules.
+
+Sources:
+
+- [OpenAI custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
+- [OpenAI prompting guidance](https://learn.chatgpt.com/docs/prompting)
+- [ISO 24495-1:2023 catalogue and scope](https://www.iso.org/standard/78907.html)
+- [ASD-STE100 official overview](https://www.asd-ste100.org/about_STE.html)
+- [ASD-STE100 Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf)
+- [ASD-STE100 official FAQ](https://www.asd-ste100.org/STE_faq.html)
 
 ## Shared ubiquitous language
 

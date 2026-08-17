@@ -4,6 +4,7 @@ import { join, resolve } from "node:path";
 import test from "node:test";
 
 const SKILLS_ROOT = resolve("skills");
+const AGENT_RULES_ROOT = resolve("agent-rules");
 
 function parseSkillFrontmatter(content) {
   const match = content.replaceAll("\r\n", "\n").match(/^---\n([\s\S]*?)\n---\n/);
@@ -46,6 +47,36 @@ for (const name of readdirSync(SKILLS_ROOT).sort()) {
     assert.match(metadata, new RegExp(`default_prompt:.*\\$${name}`));
   });
 }
+
+test("agent rules are standalone Markdown fragments", () => {
+  const files = readdirSync(AGENT_RULES_ROOT).filter((name) => name.endsWith(".md"));
+  assert.ok(files.includes("plain-english.md"));
+
+  for (const name of files) {
+    const content = readFileSync(join(AGENT_RULES_ROOT, name), "utf8");
+    assert.match(content, /^# [^\n]+\n/);
+    assert.doesNotMatch(content, /^---\n/);
+    assert.ok(content.split("\n").length < 200);
+  }
+});
+
+test("plain English communication is an independent agent rule", () => {
+  const rule = readFileSync(join(AGENT_RULES_ROOT, "plain-english.md"), "utf8");
+  const readme = readFileSync(resolve("README.md"), "utf8");
+
+  assert.match(rule, /Relevant:/);
+  assert.match(rule, /Findable:/);
+  assert.match(rule, /Understandable:/);
+  assert.match(rule, /Usable:/);
+  assert.match(rule, /20 words/);
+  assert.match(rule, /25 words/);
+  assert.match(rule, /When the reader reports confusion/);
+  assert.match(rule, /Necessary exceptions/);
+  assert.match(rule, /ISO 24495-1:2023/);
+  assert.match(rule, /ASD-STE100 Issue 9/);
+  assert.doesNotMatch(rule, /skills\/plain|\$plain/);
+  assert.match(readme, /Codex does not load `agent-rules\/` automatically/);
+});
 
 test("review defines an auditable two-axis review", () => {
   const skill = readFileSync(join(SKILLS_ROOT, "review", "SKILL.md"), "utf8");

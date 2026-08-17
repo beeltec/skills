@@ -42,6 +42,24 @@ The CLI creates `docs/knowledge/ubiquitous-language.md`. Use `language-show`,
 `language-add`, `language-update`, and `language-deprecate` to manage it. Every
 change records the actor, reason, time, and prior value.
 
+## Agent rules
+
+Reusable `AGENTS.md` rule fragments live in `agent-rules/`. They are separate
+from task-triggered skills. Each Markdown file covers one topic and has no
+dependency on a skill.
+
+The first rule is [plain English communication](agent-rules/plain-english.md).
+It adapts ISO 24495-1 and selected ASD-STE100 principles for non-native English
+speakers.
+
+Codex does not load `agent-rules/` automatically. Copy a selected rule into the
+applicable `AGENTS.md`. Use user scope for reusable personal preferences. Use
+project or nested scope for repository-specific rules.
+
+Keep active instructions concise. Put repository-wide rules at the root and
+specialized rules near the files they govern. State required behavior and any
+safe path or exception. Keep mechanical formatting checks in automated tools.
+
 ## Link skills into a project
 
 The script links every skill into both supported project locations:
