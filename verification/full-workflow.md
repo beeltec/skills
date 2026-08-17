@@ -196,16 +196,16 @@ story passes review, it must invoke `$document` and merge that story into
 
 After both stories are `done`, implementation must create the final epic review
 worktree. It must verify the integrated flow and invoke `$review` for the whole
-epic. Each review round must use two different review subagents in parallel:
+epic. Each ticket and the epic must use one review round with two subagents in parallel:
 
 - one Standards reviewer;
 - one Spec reviewer.
 
 The orchestrator must perform neither review axis. Record each subagent's
 identity and separate P0-P3 counts for every story and epic review. Fix every
-valid P0, P1, and P2 finding. Use two fresh reviewers after each repair.
-Continue each loop until both axes report zero P0, P1, and P2 findings. Leave
-the epic in `in-review` after its final integrated review passes.
+valid P0, P1, and P2 finding. Rerun the configured checks and record concrete
+remediation with `review-resolve`. Do not start another review round. Leave the
+epic in `in-review` after review and remediation complete.
 
 Treat missing subagent support as a blocked verification. Never replace the two
 reviewers with an orchestrator review.
@@ -279,7 +279,8 @@ The run passes only when:
 - `main` is clean;
 - the epic and both stories are `done`;
 - the epic and story branches and worktrees are gone;
-- both final epic review axes have zero P0, P1, and P2 findings;
+- one final epic Standards and Spec review round is recorded;
+- every final epic P0, P1, and P2 finding has remediation evidence;
 - the final epic review covers the complete integrated delivery range;
 - established ticket knowledge exists;
 - the release is `green`;
