@@ -39,6 +39,7 @@ evidence. Do not silently choose product behavior, scope, or risk.
 - Use plain text only when the current harness has no user-question tool.
 - Never skip an available question tool merely because plain text is easier.
 - Use the same tool for brief confirmation and any requested clarification.
+- Do not repeat a confirmation that the current request already states explicitly.
 
 ## Question format
 
@@ -106,9 +107,10 @@ When the frontier is empty, provide this brief:
 ## Open questions
 ```
 
-Use `None` when no open questions remain. Ask the user to confirm the brief
-through the available user-question tool. Do not create work items until the
-user confirms it. After confirmation, run `brief-create` with the agreed
-evidence and success fields, then run `brief-confirm <BRIEF-N> --by <actor>`.
+Use `None` when no open questions remain. When the current request does not
+already confirm the exact brief, ask for confirmation through the available
+user-question tool. Do not create work items until the user confirms it. After
+confirmation, run `brief-create` with the agreed evidence and success fields,
+then run `brief-confirm <BRIEF-N> --by <actor>`.
 Use the authenticated identity when available. Use `human:user` when the
 current user directly confirms the brief. Hand the persisted brief ID to `plan`.
