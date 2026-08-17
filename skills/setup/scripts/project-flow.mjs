@@ -76,6 +76,8 @@ const LANGUAGE_STATUSES = ["active", "deprecated"];
 const LANGUAGE_ACTIONS = ["added", "updated", "deprecated"];
 const LANGUAGE_SOURCE_URL =
   "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf";
+const LANGUAGE_SOURCE_PAGE_URL = "https://www.domainlanguage.com/ddd/reference/";
+const LANGUAGE_SOURCE_URLS = [LANGUAGE_SOURCE_URL, LANGUAGE_SOURCE_PAGE_URL];
 const LANGUAGE_SOURCE_NOTE = "sources/methods/ubiquitous-language.md";
 const LANGUAGE_FILENAME = "ubiquitous-language.md";
 const SUCCESS_FIELDS = ["metric", "baseline", "target", "observationWindow", "dataSource"];
@@ -904,7 +906,17 @@ function normalizeLanguageData(data) {
   const meaningfulAt = latestEvent?.at ?? data.updatedAt;
 
   if (nonEmptyString(meaningfulAt) && !Number.isNaN(Date.parse(meaningfulAt))) {
-    data.generated = { by: "process:project-flow", at: meaningfulAt };
+    if (
+      data.generated !== undefined &&
+      (!data.generated || typeof data.generated !== "object" || Array.isArray(data.generated))
+    ) {
+      fail("Ubiquitous Language generated metadata must be an object before setup can refresh it.");
+    }
+    data.generated = {
+      ...(data.generated ?? {}),
+      by: "process:project-flow",
+      at: meaningfulAt,
+    };
     const previousVerifications = Array.isArray(data.verified)
       ? data.verified
       : data.verified
@@ -928,11 +940,27 @@ function normalizeLanguageData(data) {
   delete data.updatedAt;
 
   const sources = Array.isArray(data.sources) ? data.sources : [];
-  const retained = sources.filter(
+  const matchingSources = sources.filter(
     (source) =>
-      source?.resource !== LANGUAGE_SOURCE_URL && source?.resource !== LANGUAGE_SOURCE_NOTE,
+      source?.resource === LANGUAGE_SOURCE_URL || source?.resource === LANGUAGE_SOURCE_NOTE,
   );
-  data.sources = [{ resource: LANGUAGE_SOURCE_NOTE }, ...retained];
+  if (matchingSources.length > 1) {
+    fail("Ubiquitous Language has several canonical source entries. Resolve them before setup refresh.");
+  }
+  const existingSource = matchingSources[0];
+  const normalizedSource =
+    existingSource && typeof existingSource === "object" && !Array.isArray(existingSource)
+      ? { ...existingSource, resource: LANGUAGE_SOURCE_NOTE }
+      : { resource: LANGUAGE_SOURCE_NOTE };
+  if (normalizedSource.title === "Domain-Driven Design Reference: Ubiquitous Language") {
+    delete normalizedSource.title;
+  }
+  if (normalizedSource.publisher === "Eric Evans, Domain Language") {
+    delete normalizedSource.publisher;
+  }
+  if (normalizedSource.version === "2015") delete normalizedSource.version;
+  const retained = sources.filter((source) => !matchingSources.includes(source));
+  data.sources = [normalizedSource, ...retained];
 }
 
 function newLanguageConcept(config) {
@@ -956,7 +984,17 @@ function refreshedLanguageContent(paths, config) {
   const current = existsSync(paths.language)
     ? readText(paths.language)
     : newLanguageConcept(config);
-  const { data } = parseFrontmatter(current, true);
+  const { data, body } = parseFrontmatter(current, true);
+  const storedBody = normalizedConceptBody(body);
+  let legacyBody = null;
+  try {
+    legacyBody = languageDisplay(data).trimEnd();
+  } catch {
+    // Shape validation below reports malformed vocabulary data.
+  }
+  if (storedBody !== languageDocumentBody().trimEnd() && storedBody !== legacyBody) {
+    fail(`${paths.language}: the Markdown body was customized; resolve it before setup refresh.`);
+  }
   normalizeLanguageData(data);
   const errors = languageConceptErrors(data, "", paths.language, false, false);
   if (errors.length) fail(errors.join("\n"));
@@ -993,6 +1031,12 @@ function languageConceptErrors(data, body, path, checkBody = true, checkSourceFi
         const source = parseFrontmatter(readText(sourcePath), true);
         if (source.data.type !== "OfficialSource") {
           errors.push(`${sourcePath}: type must be OfficialSource.`);
+        }
+        if (
+          !Array.isArray(source.data.sources) ||
+          !source.data.sources.some((entry) => LANGUAGE_SOURCE_URLS.includes(entry?.resource))
+        ) {
+          errors.push(`${sourcePath}: sources must cite the official Ubiquitous Language reference.`);
         }
       } catch (error) {
         errors.push(`${sourcePath}: ${error instanceof Error ? error.message : String(error)}`);

@@ -49,9 +49,10 @@ node <skill-directory>/scripts/project-flow.mjs init \
   --key APP \
   --name "Project name" \
   --target-branch main
-node .project/bin/project-flow.mjs sync
-node .project/bin/project-flow.mjs validate
 ```
+
+Continue with the source and rule steps above. Run `sync` and `validate` only
+after the required local source notes exist.
 
 ## Refresh an existing workflow
 

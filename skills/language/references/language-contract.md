@@ -17,7 +17,8 @@ Primary source:
 
 The local verified note belongs at
 `docs/knowledge/sources/methods/ubiquitous-language.md`.
-Validation requires this file to exist and use the `OfficialSource` type.
+Validation requires this file to use the `OfficialSource` type and cite the
+official Ubiquitous Language reference above.
 
 ## Canonical file
 
