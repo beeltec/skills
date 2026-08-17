@@ -83,6 +83,8 @@ const LANGUAGE_FILENAME = "ubiquitous-language.md";
 const SUCCESS_FIELDS = ["metric", "baseline", "target", "observationWindow", "dataSource"];
 const OFFICIAL_SOURCE_DONE = "Relevant external claims cite refreshed official source notes.";
 const QUALITY_GATE_DONE = "Applicable risk-driven quality gates have passing evidence.";
+const REVIEW_DONE =
+  "One Standards and Spec review round is recorded, and every P0, P1, and P2 finding has remediation evidence.";
 const DEFAULT_GIT_CONFIG = Object.freeze({
   targetBranch: "main",
   worktreeDirectory: ".worktrees",
@@ -396,9 +398,9 @@ function validateItemShape(item, path) {
   if (
     !item.review ||
     typeof item.review !== "object" ||
-    !["pending", "pass", "changes-requested"].includes(item.review.status)
+    !["pending", "pass", "changes-requested", "resolved"].includes(item.review.status)
   ) {
-    errors.push(`${path}: review status must be pending, pass, or changes-requested.`);
+    errors.push(`${path}: review status must be pending, pass, changes-requested, or resolved.`);
   } else if (
     (item.review.reviewer !== null && typeof item.review.reviewer !== "string") ||
     (item.review.fixedPoint !== null && typeof item.review.fixedPoint !== "string") ||
@@ -410,9 +412,29 @@ function validateItemShape(item, path) {
       (typeof item.review.targetBranch !== "string" || !validGitRefName(item.review.targetBranch))) ||
     (item.review.standards !== null && typeof item.review.standards !== "string") ||
     (item.review.spec !== null && typeof item.review.spec !== "string") ||
-    (item.review.reviewedAt !== null && typeof item.review.reviewedAt !== "string")
+    (item.review.reviewedAt !== null && typeof item.review.reviewedAt !== "string") ||
+    (item.review.reviewedHead !== undefined &&
+      item.review.reviewedHead !== null &&
+      typeof item.review.reviewedHead !== "string") ||
+    (item.review.resolutionEvidence !== undefined &&
+      item.review.resolutionEvidence !== null &&
+      typeof item.review.resolutionEvidence !== "string") ||
+    (item.review.resolvedAt !== undefined &&
+      item.review.resolvedAt !== null &&
+      typeof item.review.resolvedAt !== "string") ||
+    (item.review.resolvedBy !== undefined &&
+      item.review.resolvedBy !== null &&
+      typeof item.review.resolvedBy !== "string") ||
+    (item.review.resolvedHead !== undefined &&
+      item.review.resolvedHead !== null &&
+      typeof item.review.resolvedHead !== "string") ||
+    (item.review.rereviewAuthorizedBy !== undefined &&
+      item.review.rereviewAuthorizedBy !== null &&
+      typeof item.review.rereviewAuthorizedBy !== "string") ||
+    (item.review.roundCount !== undefined &&
+      (!Number.isSafeInteger(item.review.roundCount) || item.review.roundCount < 0))
   ) {
-    errors.push(`${path}: review fields must be strings or null.`);
+    errors.push(`${path}: review fields have invalid types.`);
   }
   if (
     !item.links ||
@@ -490,6 +512,7 @@ function saveItem(paths, item) {
 
 function resetReview(item) {
   const scopeBase = item.type === "epic" ? item.review?.scopeBase ?? null : null;
+  const roundCount = item.review?.roundCount ?? (nonEmptyString(item.review?.reviewedAt) ? 1 : 0);
   item.review = {
     status: "pending",
     reviewer: null,
@@ -499,12 +522,19 @@ function resetReview(item) {
     standards: null,
     spec: null,
     reviewedAt: null,
+    reviewedHead: null,
+    resolutionEvidence: null,
+    resolvedAt: null,
+    resolvedBy: null,
+    resolvedHead: null,
+    rereviewAuthorizedBy: null,
+    roundCount,
   };
 }
 
-function hasPassingReview(item) {
+function hasCompletedReview(item) {
   return (
-    item.review.status === "pass" &&
+    ["pass", "resolved"].includes(item.review.status) &&
     typeof item.review.reviewer === "string" &&
     Boolean(item.review.reviewer.trim()) &&
     typeof item.review.fixedPoint === "string" &&
@@ -538,6 +568,69 @@ function blockingReviewCountErrors(item) {
     }
   }
   return errors;
+}
+
+function reviewHasBlockingCounts(item) {
+  for (const axis of ["standards", "spec"]) {
+    const evidence = item.review?.[axis];
+    if (typeof evidence !== "string") continue;
+    for (const severity of ["P0", "P1", "P2"]) {
+      const matches = [...evidence.matchAll(new RegExp(`\\b${severity}\\s*:\\s*(\\d+)\\b`, "gi"))];
+      if (matches.some((match) => Number(match[1]) > 0)) return true;
+    }
+  }
+  return false;
+}
+
+function reviewCountFormatErrors(item) {
+  return blockingReviewCountErrors(item).filter(
+    (error) => !error.includes("reports a blocking"),
+  );
+}
+
+function reviewCompletionErrors(item) {
+  const formatErrors = reviewCountFormatErrors(item);
+  if (formatErrors.length) return formatErrors;
+  const hasBlockingCounts = reviewHasBlockingCounts(item);
+  if (!hasBlockingCounts) {
+    return item.review.status === "resolved"
+      ? [`${item.key}: a resolved review needs a recorded blocking finding.`]
+      : [];
+  }
+
+  const errors = [];
+  if (item.review.status !== "resolved") {
+    errors.push(`${item.key}: remediated blocking findings need resolved review status.`);
+  }
+  if (!nonEmptyString(item.review.resolutionEvidence)) {
+    errors.push(`${item.key}: blocking review findings need remediation evidence.`);
+  }
+  if (!nonEmptyString(item.review.resolvedAt)) {
+    errors.push(`${item.key}: blocking review findings need a remediation time.`);
+  }
+  if (!nonEmptyString(item.review.resolvedBy)) {
+    errors.push(`${item.key}: blocking review findings need a remediation actor.`);
+  }
+  if (!/^[0-9a-f]{40,64}$/i.test(item.review.resolvedHead ?? "")) {
+    errors.push(`${item.key}: blocking review findings need a resolved remediation commit.`);
+  }
+  return errors;
+}
+
+function reviewRemediationGitErrors(paths, item) {
+  if (!reviewHasBlockingCounts(item)) return [];
+  const resolvedHead = item.review.resolvedHead ?? "";
+  if (!/^[0-9a-f]{40,64}$/i.test(resolvedHead)) return [];
+  const resolvedRef = runGit(paths.root, ["rev-parse", "--verify", `${resolvedHead}^{commit}`], true);
+  if (resolvedRef.status !== 0) return [`${item.key}: remediation commit does not resolve.`];
+  const containsResolved = runGit(
+    paths.root,
+    ["merge-base", "--is-ancestor", resolvedRef.stdout.trim(), "HEAD"],
+    true,
+  );
+  return containsResolved.status === 0
+    ? []
+    : [`${item.key}: current branch does not contain the remediation commit.`];
 }
 
 function itemMap(items) {
@@ -1967,10 +2060,11 @@ function greenGateErrors(paths, item, items) {
     }
   }
   errors.push(...qualityGateErrors(item, true));
-  if (!hasPassingReview(item)) {
-    errors.push(`${item.key}: Standards and Spec need passing evidence and a reviewer.`);
+  if (!hasCompletedReview(item)) {
+    errors.push(`${item.key}: Standards and Spec review and remediation are incomplete.`);
   } else {
-    errors.push(...blockingReviewCountErrors(item));
+    errors.push(...reviewCompletionErrors(item));
+    errors.push(...reviewRemediationGitErrors(paths, item));
   }
   if (item.type === "epic" && !item.review.scopeBase?.trim()) {
     errors.push(`${item.key}: an epic review needs the full delivery scope base.`);
@@ -2052,8 +2146,11 @@ function completedEpicReviewErrors(paths, config, item, items = loadItems(paths)
 
   const errors = [];
   if (item.status !== "done") errors.push(`${item.key}: parent epic is not done.`);
-  if (!hasPassingReview(item)) errors.push(`${item.key}: parent epic review did not pass.`);
-  else errors.push(...blockingReviewCountErrors(item));
+  if (!hasCompletedReview(item)) errors.push(`${item.key}: parent epic review is incomplete.`);
+  else {
+    errors.push(...reviewCompletionErrors(item));
+    errors.push(...reviewRemediationGitErrors(paths, item));
+  }
   for (const descendant of descendantsOf(items, item.key)) {
     if (descendant.status !== "done") {
       errors.push(`${item.key}: descendant ${descendant.key} is not done.`);
@@ -2095,7 +2192,7 @@ function completedEpicReviewErrors(paths, config, item, items = loadItems(paths)
   return errors;
 }
 
-function completedGateErrors(item, items) {
+function completedGateErrors(paths, item, items) {
   const errors = [];
   const byKey = itemMap(items);
 
@@ -2115,7 +2212,12 @@ function completedGateErrors(item, items) {
     }
   }
   errors.push(...qualityGateErrors(item, true));
-  if (!hasPassingReview(item)) errors.push(`${item.key}: done items need a passing code review.`);
+  if (!hasCompletedReview(item)) {
+    errors.push(`${item.key}: done items need completed code review evidence.`);
+  } else {
+    errors.push(...reviewCompletionErrors(item));
+    errors.push(...reviewRemediationGitErrors(paths, item));
+  }
   for (const blockerKey of item.links.blockedBy) {
     if (byKey.get(blockerKey)?.status !== "done") errors.push(`${item.key}: blocker ${blockerKey} is not done.`);
   }
@@ -2307,7 +2409,7 @@ function validateWorkspace(paths, config, items) {
     }
     if (item.status !== "backlog") errors.push(...qualityGateErrors(item, item.status === "done"));
     if (item.status === "done") {
-      errors.push(...completedGateErrors(item, items));
+      errors.push(...completedGateErrors(paths, item, items));
     } else if (item.resolution !== null) {
       errors.push(`${item.key}: open items cannot have a resolution.`);
     }
@@ -2676,7 +2778,7 @@ function commandInit(args) {
       "Configured checks pass in their latest run.",
       QUALITY_GATE_DONE,
       OFFICIAL_SOURCE_DONE,
-      "Standards and Spec report zero P0, P1, and P2 findings with separate evidence.",
+      REVIEW_DONE,
       "Blockers and child items are done.",
       "Required knowledge is drafted and valid.",
     ],
@@ -2713,6 +2815,18 @@ function commandInstall(args) {
     const sourceGate = config.definitionOfDone.indexOf(OFFICIAL_SOURCE_DONE);
     const insertion = sourceGate < 0 ? config.definitionOfDone.length : sourceGate;
     config.definitionOfDone.splice(insertion, 0, QUALITY_GATE_DONE);
+    changed = true;
+  }
+  const reviewGate = config.definitionOfDone.findIndex(
+    (entry) => typeof entry === "string" && entry.startsWith("Standards and Spec"),
+  );
+  const currentReviewGate = config.definitionOfDone.indexOf(REVIEW_DONE);
+  if (reviewGate >= 0) {
+    if (currentReviewGate >= 0) config.definitionOfDone.splice(reviewGate, 1);
+    else config.definitionOfDone[reviewGate] = REVIEW_DONE;
+    changed = true;
+  } else if (currentReviewGate < 0) {
+    config.definitionOfDone.push(REVIEW_DONE);
     changed = true;
   }
   if (config.git === undefined) {
@@ -2829,6 +2943,13 @@ function commandCreate(args, paths, config) {
       standards: null,
       spec: null,
       reviewedAt: null,
+      reviewedHead: null,
+      resolutionEvidence: null,
+      resolvedAt: null,
+      resolvedBy: null,
+      resolvedHead: null,
+      rereviewAuthorizedBy: null,
+      roundCount: 0,
     },
     knowledgePolicy,
     knowledgeChanges: [],
@@ -3018,8 +3139,12 @@ function commandTransition(args, paths, config) {
     if (openBlockers.length) fail(`Open blockers: ${openBlockers.join(", ")}.`);
     if (item.status === "in-review") resetReview(item);
   }
-  if (target === "in-review" && !hasPassingReview(item)) {
-    fail("Record passing Standards and Spec reviews before moving to in-review.");
+  if (target === "in-review") {
+    if (!hasCompletedReview(item)) {
+      fail("Record the Standards and Spec review round before moving to in-review.");
+    }
+    const reviewErrors = reviewCompletionErrors(item);
+    if (reviewErrors.length) fail(`Review remediation is incomplete:\n- ${reviewErrors.join("\n- ")}`);
   }
   item.status = target;
   item.resolution = null;
@@ -3092,6 +3217,30 @@ function commandVerify(args, paths, config) {
   return passed;
 }
 
+function reviewDeliveryEvidenceErrors(item, items) {
+  const errors = [];
+  for (const criterion of item.acceptanceCriteria) {
+    if (criterion.status !== "pass" || !criterion.evidence?.trim()) {
+      errors.push(`${criterion.id} needs passing evidence before review can finish.`);
+    }
+  }
+  for (const check of item.checks) {
+    if (check.status !== "pass" || check.lastRun?.exitCode !== 0) {
+      errors.push(`${check.id} must pass through verify before review can finish.`);
+    }
+  }
+  errors.push(...qualityGateErrors(item, true));
+  const reviewChildren = item.type === "epic" ? descendantsOf(items, item.key) : childrenOf(items, item.key);
+  for (const child of reviewChildren) {
+    if (child.status !== "done") errors.push(`Child ${child.key} must be done before review can finish.`);
+  }
+  const byKey = itemMap(items);
+  for (const blocker of item.links.blockedBy) {
+    if (byKey.get(blocker)?.status !== "done") errors.push(`Blocker ${blocker} must be done before review can finish.`);
+  }
+  return errors;
+}
+
 function commandReview(args, paths, config) {
   const key = normalizeKey(requiredPositional(args, 1, "work item key"));
   const status = option(args, "status", true).toLowerCase();
@@ -3101,6 +3250,7 @@ function commandReview(args, paths, config) {
   const requestedTarget = option(args, "target") ?? gitConfig(config).targetBranch;
   const standards = option(args, "standards");
   const spec = option(args, "spec");
+  const requestedRereviewAuthority = option(args, "rereview-authority");
   const item = loadItem(paths, key);
 
   if (!["in-progress", "in-review"].includes(item.status)) {
@@ -3110,6 +3260,18 @@ function commandReview(args, paths, config) {
     fail("Review status must be pending, pass, or changes-requested.");
   }
   if (!validGitRefName(requestedTarget)) fail("Review target branch is invalid.");
+  const roundCount = item.review.roundCount ?? (nonEmptyString(item.review.reviewedAt) ? 1 : 0);
+  const rereviewAuthority = requestedRereviewAuthority ?? item.review.rereviewAuthorizedBy ?? null;
+  if (rereviewAuthority && !/^human:[A-Za-z0-9._-]+$/.test(rereviewAuthority)) {
+    fail("Another review round needs explicit authority recorded as human:<id>.");
+  }
+  const hasPriorRound = roundCount > 0;
+  if (status === "pending" && hasPriorRound) {
+    fail("A completed review round cannot return to pending.");
+  }
+  if (status !== "pending" && hasPriorRound && !rereviewAuthority?.trim()) {
+    fail("This item already has one review round. Another round needs --rereview-authority from the user.");
+  }
   if (
     status !== "pending" &&
     (!reviewer?.trim() || !fixedPoint?.trim() || !standards?.trim() || !spec?.trim())
@@ -3184,36 +3346,21 @@ function commandReview(args, paths, config) {
     if (containsTarget.status !== 0) fail("Review branch does not contain the current target commit.");
   }
 
-  if (status === "pass") {
-    const errors = [];
-    errors.push(
-      ...blockingReviewCountErrors({
-        ...item,
-        review: { ...item.review, status, standards, spec },
-      }),
-    );
-    for (const criterion of item.acceptanceCriteria) {
-      if (criterion.status !== "pass" || !criterion.evidence?.trim()) {
-        errors.push(`${criterion.id} needs passing evidence before review can pass.`);
-      }
-    }
-    for (const check of item.checks) {
-      if (check.status !== "pass" || check.lastRun?.exitCode !== 0) {
-        errors.push(`${check.id} must pass through verify before review can pass.`);
-      }
-    }
-    errors.push(...qualityGateErrors(item, true));
-    const items = loadItems(paths);
-    const reviewChildren = item.type === "epic" ? descendantsOf(items, item.key) : childrenOf(items, item.key);
-    for (const child of reviewChildren) {
-      if (child.status !== "done") errors.push(`Child ${child.key} must be done before review can pass.`);
-    }
-    const byKey = itemMap(items);
-    for (const blocker of item.links.blockedBy) {
-      if (byKey.get(blocker)?.status !== "done") errors.push(`Blocker ${blocker} must be done before review can pass.`);
+  if (status !== "pending") {
+    const reviewRecord = { ...item, review: { ...item.review, status, standards, spec } };
+    const errors = reviewDeliveryEvidenceErrors(item, loadItems(paths));
+    if (status === "pass") errors.push(...blockingReviewCountErrors(reviewRecord));
+    else errors.push(...reviewCountFormatErrors(reviewRecord));
+    if (status === "changes-requested" && !reviewHasBlockingCounts(reviewRecord)) {
+      errors.push("changes-requested needs at least one P0, P1, or P2 finding.");
     }
     if (errors.length) fail(`Review gate failed:\n- ${errors.join("\n- ")}`);
   }
+
+  const reviewedHead =
+    status === "pending"
+      ? null
+      : runGit(paths.root, ["rev-parse", "--verify", "HEAD^{commit}"]).stdout.trim();
 
   item.review = {
     status,
@@ -3224,11 +3371,63 @@ function commandReview(args, paths, config) {
     standards: status === "pending" ? null : standards,
     spec: status === "pending" ? null : spec,
     reviewedAt: status === "pending" ? null : now(),
+    reviewedHead,
+    resolutionEvidence: null,
+    resolvedAt: null,
+    resolvedBy: null,
+    resolvedHead: null,
+    rereviewAuthorizedBy: status === "pending" ? null : rereviewAuthority ?? null,
+    roundCount: status === "pending" ? roundCount : roundCount + 1,
   };
   if (status === "changes-requested" && item.status === "in-review") item.status = "in-progress";
   saveItem(paths, item);
   syncGeneratedFiles(paths, config);
   console.log(`Recorded ${status} review for ${key}.`);
+}
+
+function commandReviewResolve(args, paths, config) {
+  const key = normalizeKey(requiredPositional(args, 1, "work item key"));
+  const evidence = option(args, "evidence", true).trim();
+  const actor = option(args, "by", true).trim();
+  const item = loadItem(paths, key);
+  const items = loadItems(paths);
+
+  if (!["in-progress", "in-review"].includes(item.status)) {
+    fail("Review remediation may run only while an item is in-progress or in-review.");
+  }
+  if (item.review.status !== "changes-requested") {
+    fail(`${key} has no blocking review round to resolve.`);
+  }
+  const formatErrors = reviewCountFormatErrors(item);
+  if (formatErrors.length) fail(`Review evidence is invalid:\n- ${formatErrors.join("\n- ")}`);
+  if (!reviewHasBlockingCounts(item)) fail(`${key} has no recorded P0, P1, or P2 findings.`);
+
+  const errors = reviewDeliveryEvidenceErrors(item, items);
+  errors.push(...reviewTargetErrors(paths, config, item));
+  if (!/^[0-9a-f]{40,64}$/i.test(item.review.reviewedHead ?? "")) {
+    errors.push(`${key}: the original review head is missing.`);
+  }
+  const resolvedHead = runGit(paths.root, ["rev-parse", "--verify", "HEAD^{commit}"]).stdout.trim();
+  if (errors.length === 0) {
+    const containsReviewedHead = runGit(
+      paths.root,
+      ["merge-base", "--is-ancestor", item.review.reviewedHead, resolvedHead],
+      true,
+    );
+    if (containsReviewedHead.status !== 0) {
+      errors.push(`${key}: remediation must preserve the reviewed change history.`);
+    }
+  }
+  if (errors.length) fail(`Review remediation gate failed:\n- ${errors.join("\n- ")}`);
+
+  item.review.status = "resolved";
+  item.review.resolutionEvidence = evidence;
+  item.review.resolvedAt = now();
+  item.review.resolvedBy = actor;
+  item.review.resolvedHead = resolvedHead;
+  saveItem(paths, item);
+  syncGeneratedFiles(paths, config);
+  console.log(`Resolved blocking review findings for ${key} without another review round.`);
 }
 
 function languageMutationIdentity(args) {
@@ -4042,6 +4241,11 @@ function commandEpicReviewOpen(args, paths, config) {
   if (item.type !== "epic") fail(`${key} is not an epic.`);
   if (item.status !== "done") fail(`${key} must be a legacy done epic.`);
   if (item.review.scopeBase?.trim()) fail(`${key} already has integrated epic review evidence.`);
+  const roundCount = item.review.roundCount ?? (nonEmptyString(item.review.reviewedAt) ? 1 : 0);
+  const rereviewAuthority = option(args, "rereview-authority");
+  if (roundCount > 0 && !/^human:[A-Za-z0-9._-]+$/.test(rereviewAuthority ?? "")) {
+    fail("Reopening a reviewed epic needs explicit --rereview-authority human:<id>.");
+  }
   const openDescendants = descendantsOf(items, key).filter((child) => child.status !== "done");
   if (openDescendants.length) {
     fail(`Cannot reopen ${key}. Open descendants: ${openDescendants.map((child) => child.key).join(", ")}.`);
@@ -4070,6 +4274,13 @@ function commandEpicReviewOpen(args, paths, config) {
     standards: null,
     spec: null,
     reviewedAt: null,
+    reviewedHead: null,
+    resolutionEvidence: null,
+    resolvedAt: null,
+    resolvedBy: null,
+    resolvedHead: null,
+    rereviewAuthorizedBy: rereviewAuthority ?? null,
+    roundCount,
   };
   saveItem(paths, item);
   syncGeneratedFiles(paths, config, items);
@@ -4324,6 +4535,7 @@ Usage:
   project-flow.mjs accept KEY AC-N --status pending|pass|fail [--evidence TEXT]
   project-flow.mjs verify KEY
   project-flow.mjs review KEY --status STATUS --reviewer ACTOR [review evidence]
+  project-flow.mjs review-resolve KEY --by ACTOR --evidence TEXT
   project-flow.mjs language-add --term TERM --definition TEXT --by ACTOR --reason TEXT [options]
   project-flow.mjs language-update TERM --by ACTOR --reason TEXT [options]
   project-flow.mjs language-deprecate TERM --by ACTOR --reason TEXT [--replacement TERM]
@@ -4334,7 +4546,7 @@ Usage:
   project-flow.mjs brief-show BRIEF-N
   project-flow.mjs knowledge-template KEY --target PATH --action create|update [options]
   project-flow.mjs complete KEY
-  project-flow.mjs epic-review-open KEY
+  project-flow.mjs epic-review-open KEY --rereview-authority ACTOR
   project-flow.mjs worktree-add KEY [--branch-type TYPE] [--base BRANCH] [--epic-review]
   project-flow.mjs worktree-list
   project-flow.mjs worktree-finish KEY [--target BRANCH] [--message TEXT]
@@ -4401,6 +4613,7 @@ Review evidence:
   --target BRANCH               Reviewed target; defaults to the configured branch.
   --standards TEXT              Independent Standards result.
   --spec TEXT                   Independent Spec result.
+  --rereview-authority ACTOR    Explicit user authority for another review round.
 
 Language options:
   --alias TERM                  Repeat accepted aliases. Prefer the canonical term.
@@ -4489,6 +4702,9 @@ function main() {
       return commandVerify(args, paths, config);
     case "review":
       commandReview(args, paths, config);
+      return true;
+    case "review-resolve":
+      commandReviewResolve(args, paths, config);
       return true;
     case "language-add":
       commandLanguageAdd(args, paths, config);

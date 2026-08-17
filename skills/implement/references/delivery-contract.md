@@ -76,8 +76,9 @@ asking the user.
 
 When the latest review requests changes, preserve that fixed point. Address
 all valid P0, P1, and P2 findings. Return disputed findings with concrete
-evidence. Rerun the complete configured check set before the next review pass.
-Continue the loop until both review axes have no P0, P1, or P2 findings.
+evidence. Rerun the complete configured check set, commit the repairs, and use
+`review-resolve`. Do not start another review round without explicit user
+authority.
 
-For the final epic loop, also preserve `review.scopeBase`. Review the complete
-integrated range on every iteration, not only changes on the epic branch.
+For the final epic round, also preserve `review.scopeBase`. Review the complete
+integrated range, not only changes on the epic branch.

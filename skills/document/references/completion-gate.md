@@ -14,12 +14,13 @@ Source: https://support.atlassian.com/jira-cloud-administration/docs/configure-r
 - Confirm the latest recorded target-branch commit is an ancestor of the item branch.
 - Confirm `review.fixedPoint` equals that full target commit.
 - For an epic, confirm `review.scopeBase` starts before its first child change.
-- For an epic, confirm every descendant is `done` and its final review passed.
+- For an epic, confirm every descendant is `done` and its final review is complete.
 - Compare each acceptance criterion with its evidence.
 - Check the last check run time against the relevant source changes.
 - Confirm relevant official source notes were refreshed in this work session.
 - Confirm promoted knowledge uses active canonical project terms.
-- Confirm Standards and Spec both report zero P0, P1, and P2 findings.
+- Confirm one Standards and Spec review round is recorded.
+- Confirm every recorded P0, P1, and P2 finding has remediation evidence.
 - Inspect every descendant and blocker.
 - Compare each staged concept with the implemented code and tests.
 - Confirm update candidates retain still-valid prior knowledge.
@@ -29,8 +30,9 @@ Source: https://support.atlassian.com/jira-cloud-administration/docs/configure-r
 
 If acceptance or checks fail, transition the item to `in-progress`.
 
-If any P0, P1, or P2 remains, use `implement` to fix it. Run both review passes
-again against the same fixed point. Repeat until the blocking counts reach zero.
+If any P0, P1, or P2 lacks remediation, use `implement` to fix it. Rerun the
+configured checks and use `review-resolve`. Do not run another review round
+unless the user explicitly requests it.
 
 P3 suggestions do not block completion.
 
@@ -72,7 +74,8 @@ Only after a successful merge does it remove the worktree and run
 ticket implementations ran in parallel.
 
 If finalization fails, keep the branch and worktree. Resolve the reported
-condition, repeat checks and review when needed, then run finalization again.
+condition, repeat checks when needed, then run finalization again. Do not repeat
+review without explicit user authority.
 
 ## Trust result
 

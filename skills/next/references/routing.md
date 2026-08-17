@@ -65,19 +65,19 @@ the final whole-epic review.
 | --- | --- |
 | An epic has any unfinished descendant | Use `$implement` with the epic key. |
 | A child belongs to an open epic | Use `$implement` with its parent epic key. |
-| A legacy `done` epic with descendants lacks `review.scopeBase` | Use `$implement` with the epic key for controlled re-review. |
-| Every epic descendant is `done`, but its integrated review has not passed | Use `$implement` with the epic key. |
-| An epic is `in-review` with a passing integrated review | Use `$document` with the epic key. |
+| A legacy `done` epic with descendants lacks `review.scopeBase` | Ask whether the user authorizes one additional integrated review round. |
+| Every epic descendant is `done`, but its integrated review is incomplete | Use `$implement` with the epic key. |
+| An epic is `in-review` with completed review and remediation | Use `$document` with the epic key. |
 | A standalone non-epic ticket is `ready` with no open blocker | Use `$implement`. |
 | A standalone ticket is `in-progress` with incomplete or failing evidence | Use `$implement`. |
-| Review requested changes or reports any P0, P1, or P2 | Use `$implement`; it resumes the review loop automatically. |
-| A standalone ticket is `in-progress` and all delivery evidence passes | Use `$implement` to run its required review loop. |
-| A standalone ticket is `in-review` with a passing review and zero P0-P2 findings | Use `$document`. |
+| One review round reports P0, P1, or P2 without remediation | Use `$implement` to repair and run `review-resolve`. |
+| A standalone ticket is `in-progress` with no completed review round | Use `$implement` to run its one review round. |
+| A ticket is `in-review` with one completed review round and required remediation | Use `$document`. |
 | A ticket is `done` | Inspect release state. Do not implement or document it again. |
 
 When several tickets are available, use this preference order:
 
-1. Finish an existing review-repair loop.
+1. Finish existing review remediation without re-review.
 2. Finish other work already in progress.
 3. Unblock the greatest number of ready tickets.
 4. Use the highest declared ticket priority.

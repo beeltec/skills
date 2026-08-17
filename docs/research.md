@@ -57,7 +57,7 @@ small changes. Tickets therefore declare concrete risk factors. Each factor
 requires only its applicable security, privacy, dependency, migration,
 accessibility, reliability, performance, or compatibility evidence.
 
-The shared review loop still checks every change. Risk gates add focused proof
+The single review round still checks every change. Risk gates add focused proof
 for changes with sensitive data, authentication, public exposure, migrations,
 user interfaces, availability targets, or other named risks.
 
@@ -70,7 +70,7 @@ Sources:
 ## Agent Skill design
 
 The suite follows
-`setup → discuss → plan → implement ⇄ review → document → ship → measure`.
+`setup → discuss → plan → implement → review → remediation → document → ship → measure`.
 The `source` skill acts as an evidence gate before every substantive stage.
 The `language` skill acts as a vocabulary gate when project meaning changes.
 The `rules` setup helper installs and verifies reusable instructions.
@@ -99,10 +99,10 @@ orchestrator only prepares the scope and aggregates their independent reports.
 This suite makes that separation mandatory and blocks instead of reviewing in
 the orchestrator when a harness cannot create subagents.
 
-Every finding receives a P0-P3 severity. P0, P1, and P2 block approval. P3 is
-non-blocking. After blocking findings are fixed, both axes inspect the complete
-change again from the original fixed point. The loop ends only when both axes
-report zero P0, P1, and P2 findings.
+Every finding receives a P0-P3 severity. P0, P1, and P2 block approval until
+implementation records concrete remediation and reruns the configured checks.
+Reviewers inspect each ticket and epic once. Another round runs only after
+explicit user instruction.
 
 Descriptions state user intent because agents use them for activation. The
 skills use checklists, explicit validation loops, and concrete commands.
@@ -305,9 +305,9 @@ blocks parallel execution. Generated board conflicts are resolved by rerunning
 
 When a brief is planned as an epic with stories, the epic remains the user-facing
 implementation unit. Its coordinator delivers and integrates every descendant
-in dependency order. After every descendant is done, one final epic worktree reviews the
-complete integrated range from the pre-child target commit. Blocking findings
-are repaired there, and the entire epic review repeats until both axes pass.
+in dependency order. After every descendant is done, one final epic worktree
+reviews the complete integrated range from the pre-child target commit. Blocking
+findings are repaired there and recorded without another review round.
 
 Before final review, the ticket branch must contain the latest target commit.
 The review records that full commit hash. A green ticket is completed and

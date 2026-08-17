@@ -65,8 +65,8 @@ skill may update agreed terms directly after explicit user confirmation.
 25. Never move a work item directly to `done`.
 26. Run configured checks and record acceptance and quality-gate evidence.
 27. Use `review` to check Standards and Spec separately.
-28. Loop `review` and `implement` until both passes have no P0, P1, or P2 findings.
-29. Repeat that review loop for the integrated epic after every descendant ticket is done.
+28. Run exactly one review round per ticket and per epic.
+29. Run another review round only when the user explicitly requests it.
 30. Use `complete` to close work and promote drafted repository knowledge.
 31. Treat ticket `done` as merged and documented, not released.
 32. Use `ship` for approved external release actions and live checks.
@@ -105,7 +105,7 @@ Give that prompt to a new agent session started at this repository root.
 - Never use `any` in TypeScript.
 - Update this file when commands, paths, or invariants change.
 
-<!-- agent-rule:project-evidence:start sha256=9e323f2e4b55bbc1fb0eb724294fbaa9c39cd61b6003614393f5fa5d889dccd2 -->
+<!-- agent-rule:project-evidence:start sha256=d01a5e50d2d653537fe73b20ea2a2c1c3ad680c2c17bc90b60f689e16a28a766 -->
 ## Project evidence and state
 
 Keep established project knowledge separate from intended work. Use the correct
@@ -116,7 +116,7 @@ evidence for each kind of claim.
 - Treat `docs/knowledge/` as verified current project state.
 - Treat `docs/work/` as desired state, delivery evidence, or work history.
 - Never present a brief, ticket, draft, release plan, or outcome plan as current fact.
-- Promote repository knowledge only after implementation, acceptance, checks, and review pass.
+- Promote repository knowledge only after implementation, acceptance, checks, review, and remediation.
 - Promote deployed facts only from a verified green release.
 - Promote product-result facts only from an observed outcome.
 
@@ -136,8 +136,8 @@ evidence for each kind of claim.
 - Keep ticket delivery acceptance separate from the product success measure.
 - Declare applicable risk factors and record each required quality gate.
 - Never set a work item to `done` by editing its JSON file.
-- Complete a ticket only after acceptance, checks, gates, and review pass.
-- Complete an epic only after every descendant ticket is done and its integrated review passes.
+- Complete a ticket only after acceptance, checks, gates, one review round, and required remediation.
+- Complete an epic only after every descendant is done, one integrated review round, and required remediation.
 - Treat ticket `done` as merged and documented repository state.
 - Treat release `green` as verified deployed or published state.
 - Treat `met`, `missed`, or `inconclusive` as an observed product result.
@@ -174,7 +174,7 @@ Design practices.
 - Do not copy term data into the Markdown body.
 <!-- agent-rule:ubiquitous-language:end -->
 
-<!-- agent-rule:ticket-git-workflow:start sha256=6370e60cc6af18c6e893be365d43386c21238abd2ef7f9103c2a52cc13c60b7c -->
+<!-- agent-rule:ticket-git-workflow:start sha256=9e9b605a6090915fd6d89a921bc76fc1d23f6bd83fd40d6c447b960ec7e5ba85 -->
 ## Ticket Git workflow
 
 Keep ticket implementation isolated and integration predictable.
@@ -211,7 +211,8 @@ Keep ticket implementation isolated and integration predictable.
 - Keep commits cohesive and passing when practical.
 - Keep unrelated changes out of the ticket branch.
 - Make the latest target commit an ancestor before final review.
-- Rerun checks and review after synchronizing with an advanced target branch.
+- Synchronize with the latest target before the single review round.
+- If the target advances after review, require explicit user authority for another review round.
 - Review an epic from its recorded pre-child scope base through its final review branch.
 - Merge green ticket branches into the configured target branch with `--no-ff`.
 - Remove only clean worktrees and fully merged local branches.
@@ -357,7 +358,7 @@ the test when that failure is irrelevant, impossible, or already caught more
 clearly elsewhere.
 <!-- agent-rule:testing:end -->
 
-<!-- agent-rule:review-policy:start sha256=141c6ea17a7d8316fa739511749f5d10dbc6b0fa2d57f9ecff767f8191b9ee57 -->
+<!-- agent-rule:review-policy:start sha256=2ef77def57a091827158e8c974fabf1ba9c9a09cf0726b2e1e1f7e7be45804b3 -->
 ## Review policy
 
 Review completed changes against repository standards and the requested
@@ -370,11 +371,11 @@ behavior before integration.
 - Run a Standards pass against applicable rules, checks, and engineering risks.
 - Run a separate Spec pass against the originating ticket or specification.
 - Run the two passes in separate parallel review subagents.
-- Let the orchestrator only prepare scope, aggregate results, and control the loop.
+- Let the orchestrator only prepare scope and aggregate results.
 - Stop when the harness cannot run review subagents. Do not review in the orchestrator.
 - Inspect the complete change in both passes.
-- After every epic descendant ticket is done, review the complete integrated epic again.
-- Keep the pre-child epic scope base fixed through all epic review iterations.
+- Once every epic descendant ticket is done, review the complete integrated epic.
+- Keep the pre-child epic scope base fixed through the epic review.
 - Keep findings and severity counts separate for each pass.
 
 ### Severity gate
@@ -383,19 +384,20 @@ behavior before integration.
 - Treat P1 as a high-impact defect or serious risk.
 - Treat P2 as a real defect, unmet requirement, or concrete maintainability risk.
 - Treat P3 as a non-blocking improvement without a current failure.
-- Block approval and integration while any P0, P1, or P2 remains.
+- Block approval and integration while any P0, P1, or P2 lacks remediation evidence.
 - Do not classify a style preference alone as P2.
 - State the concrete impact, file, and line for each finding.
 
-### Review loop
+### Single review round
 
-- Treat a request to implement a ticket or epic as authority to run its review loop.
+- Treat a request to implement a ticket or epic as authority for one review round.
+- Run exactly one Standards pass and one Spec pass for that round.
 - Do not ask whether to start review or fix valid in-scope blocking findings.
 - Send every valid blocking finding back to implementation.
 - Require focused tests and the complete configured check set after fixes.
-- Rerun fresh Standards and Spec passes against the complete updated change.
-- Use fresh review subagents for every loop iteration.
-- Continue until both passes report zero P0, P1, and P2 findings.
+- Record concrete remediation evidence after fixes without starting another review.
+- Run another review round only when the user explicitly requests it.
+- Do not infer re-review authority from an implementation or repair request.
 - Do not substitute passing child reviews for the final integrated epic review.
 - Do not approve only because automated checks pass.
 - Do not accept a promise to fix later as a resolved finding.

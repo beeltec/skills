@@ -1,4 +1,4 @@
 interface:
   display_name: "Implement"
   short_description: "Deliver tickets and coordinated epics"
-  default_prompt: "Use $implement to deliver a ready ticket or coordinate an entire epic through its final integrated review loop."
+  default_prompt: "Use $implement to deliver a ready ticket or coordinate an entire epic through one review round and required remediation."

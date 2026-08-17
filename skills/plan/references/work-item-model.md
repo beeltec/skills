@@ -95,7 +95,8 @@ Before `done`, require:
 - every acceptance criterion passes with evidence;
 - every configured check passes in its latest run;
 - every applicable quality gate has passing evidence;
-- both final review axes report zero P0, P1, and P2 findings;
+- one Standards and Spec review round is recorded;
+- every P0, P1, and P2 finding has remediation evidence;
 - every blocker and child is done;
 - required drafted knowledge is valid OKF;
 - relevant external claims still match refreshed official source notes;
@@ -107,8 +108,8 @@ the shared quality standard.
 The brief's product success metric is evaluated after a green release. It is
 not part of ticket completion.
 
-For an epic, the final review covers the complete integrated change from the
-recorded delivery scope base. Passing child reviews do not replace this review.
+For an epic, one final review round covers the complete integrated change from
+the recorded delivery scope base. Child reviews do not replace this review.
 
 ## Release boundary
 

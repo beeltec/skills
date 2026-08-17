@@ -34,7 +34,8 @@ Keep ticket implementation isolated and integration predictable.
 - Keep commits cohesive and passing when practical.
 - Keep unrelated changes out of the ticket branch.
 - Make the latest target commit an ancestor before final review.
-- Rerun checks and review after synchronizing with an advanced target branch.
+- Synchronize with the latest target before the single review round.
+- If the target advances after review, require explicit user authority for another review round.
 - Review an epic from its recorded pre-child scope base through its final review branch.
 - Merge green ticket branches into the configured target branch with `--no-ff`.
 - Remove only clean worktrees and fully merged local branches.

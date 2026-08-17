@@ -1,6 +1,6 @@
 ---
 name: review
-description: Use this skill when a user wants to review a ticket branch, final epic integration, pull request, or work-in-progress change. Verify the branch contains the latest target commit, review an epic from its recorded delivery scope base after every descendant is done, delegate Standards and Spec to separate parallel subagents, and loop with implementation until no P0-P2 findings remain. Use after implementation and before documentation. Do not perform either review axis in the orchestrating agent, implement, merge, or promote knowledge.
+description: Use this skill when a user wants to review a ticket branch, final epic integration, pull request, or work-in-progress change. Verify the branch contains the latest target commit, review an epic from its recorded delivery scope after every descendant is done, and run one parallel Standards and Spec review round. Return P0-P2 findings for remediation without re-review unless the user explicitly requests another round. Use after implementation and before documentation. Do not perform either review axis in the orchestrator, implement, merge, or promote knowledge.
 ---
 
 # Review
@@ -37,18 +37,15 @@ Leave clean workflow items in `in-review`.
 25. Aggregate the reports without merging or reranking their findings.
 26. Report both results separately, including counts for every severity.
 27. If any P0, P1, or P2 exists, record `changes-requested`.
-28. Hand all blocking findings to `implement` and keep both commits fixed.
-29. After fixes, spawn two fresh parallel review subagents.
-30. Repeat steps 21-29 until both axes contain no P0, P1, or P2 findings.
-31. Record the passing review and move the item to `in-review`.
+28. Hand all blocking findings to `implement` for remediation without re-review.
+29. If neither axis has a blocker, record `pass` and move the item to `in-review`.
+30. Run another review round only when the user explicitly requests it.
 
 For a review without this workflow, return the two reports without recording a
-ticket transition. If fixes are not authorized, report that the review loop is
-still blocked. Never approve while a P0, P1, or P2 remains.
+ticket transition. Never treat an unresolved P0, P1, or P2 as approved.
 
-When `$implement` invokes this skill, its implementation request already
-authorizes valid in-scope repairs. Return blocking findings directly to
-implementation without asking the user for permission.
+When `$implement` invokes this skill, its implementation request authorizes one
+review round and valid in-scope repairs. It does not authorize a second round.
 
 ## Required agent separation
 
@@ -61,7 +58,6 @@ implementation without asking the user for permission.
 - Give only Standards material to the Standards subagent.
 - Give only specification material to the Spec subagent.
 - Do not pass one subagent's findings to the other.
-- Use fresh subagents for every review-loop iteration.
 - If a subagent fails, rerun that axis in a fresh subagent.
 - If the harness cannot run subagents, stop. Do not review in the orchestrator.
 
@@ -82,6 +78,16 @@ node .project/bin/project-flow.mjs review APP-2 \
 For an epic, add `--scope-base <commit-before-first-child>`. Keep `--base` as
 the current target commit used to create the epic review worktree.
 
+After implementation repairs the recorded findings, it must preserve both
+reports and use:
+
+```bash
+node .project/bin/project-flow.mjs review-resolve APP-2 \
+  --by agent/codex \
+  --evidence "Fixed AC-2, reran the configured checks, and committed the repair."
+node .project/bin/project-flow.mjs transition APP-2 in-review
+```
+
 ## Record approval
 
 ```bash
@@ -93,6 +99,24 @@ node .project/bin/project-flow.mjs review APP-2 \
   --spec "Pass. P0:0 P1:0 P2:0 P3:0."
 node .project/bin/project-flow.mjs transition APP-2 in-review
 ```
+
+## Additional review round
+
+Run another Standards and Spec round only when the user explicitly requests
+one for this ticket or epic. Record that authority on the replacement round:
+
+```bash
+node .project/bin/project-flow.mjs review APP-2 \
+  --status pass \
+  --reviewer agent/codex \
+  --rereview-authority human:user \
+  --base 0123456789abcdef0123456789abcdef01234567 \
+  --standards "Pass. P0:0 P1:0 P2:0 P3:0." \
+  --spec "Pass. P0:0 P1:0 P2:0 P3:0."
+```
+
+Do not treat a general implementation, repair, completion, or the original
+review request as authority for this additional round.
 
 ## Boundaries
 
@@ -112,5 +136,5 @@ node .project/bin/project-flow.mjs transition APP-2 in-review
 - Send a disputed meaning to `$language`; do not decide it during review.
 - Do not treat a promise to fix later as a resolved finding.
 - Do not create or promote established knowledge.
-- Keep the item out of `in-review` while any P0, P1, or P2 remains.
-- Stop only when blocked by missing authority or after the loop passes.
+- Keep the item out of `in-review` while remediation evidence is incomplete.
+- Do not start another review round without explicit user authority.

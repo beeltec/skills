@@ -92,14 +92,15 @@ review, make the latest target commit an ancestor of the ticket branch.
 
 Rebase only a local, unpublished ticket branch. If the branch is shared, merge
 the target with a conventional message such as `chore(app-2): sync main`.
-Rerun all checks and both review passes after either operation.
+Rerun all checks after either operation. Run the one review round only after
+the branch contains the final target state.
 
 Parallel tickets can both change generated board or index files. After
 integrating the target, resolve those generated-file conflicts by running
 `sync` and staging its output. Do not hand-edit derived board contents.
 
-The final review must store the full current target commit hash. If the target
-advances again, repeat synchronization and review before completion.
+The review must store the full current target commit hash. If the target
+advances afterward, stop. Another review round needs explicit user authority.
 
 ## Official sources
 

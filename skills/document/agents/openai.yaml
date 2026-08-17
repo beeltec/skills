@@ -1,4 +1,4 @@
 interface:
   display_name: "Document"
   short_description: "Complete reviewed tickets and epics"
-  default_prompt: "Use $document to promote knowledge, complete the reviewed ticket or epic, merge it, and clean its local worktree."
+  default_prompt: "Use $document after one review round and required remediation to promote knowledge, complete the item, merge it, and clean its worktree."

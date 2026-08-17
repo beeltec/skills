@@ -19,7 +19,7 @@ Use the skills as one suite:
 4. `language` manages terms explicitly agreed with the user.
 5. `discuss` resolves product and technical choices.
 6. `plan` creates Jira-like work items.
-7. `implement` delivers a ticket or coordinates a complete epic and its review loops.
+7. `implement` delivers a ticket or coordinates a complete epic and one review round each.
 8. `review` is the separate two-subagent engine used by implementation.
 9. `document` promotes knowledge, merges green work, and removes its branch and worktree.
 10. `ship` releases done tickets and verifies the deployed or published result.
@@ -43,12 +43,12 @@ workflow never treats model memory or a search-result snippet as authority.
 the scope and aggregates their reports. It never performs either review pass.
 The review stops when the harness cannot provide subagents.
 
-An implementation request also authorizes the review loop and valid in-scope
-P0-P2 repairs. The agent does not ask whether it should start that loop.
+An implementation request authorizes one review round and valid in-scope P0-P2
+repairs. Another review round requires explicit user instruction.
 
 When a brief is planned as an epic with stories, `next` recommends the epic.
 Implementation coordinates every descendant and merges passing tickets serially.
-After every descendant is done, it runs another review loop over the whole epic.
+After every descendant is done, it runs one review round over the whole epic.
 
 The setup skill installs a dependency-free Node.js CLI at
 `.project/bin/project-flow.mjs`. Workflow-stage skills use that local copy.
@@ -155,7 +155,7 @@ only when project instructions explicitly select API-key access.
 When the work will not fit safely, the coordinator creates
 `docs/work/handoffs/<KEY>.md`. It delegates bounded code packets sized for each
 subagent's own context window. The coordinator keeps ticket state, integration,
-whole-item verification, automatic review, and repair-loop control.
+whole-item verification, one automatic review round, and remediation control.
 
 An epic implementation request keeps the epic as the delivery unit. The
 coordinator schedules all child tickets by dependency. It invokes `document`
@@ -181,7 +181,7 @@ and merge into `main`. Final merges always run one at a time.
 
 The final epic review inspects the complete integrated range from the target
 commit recorded before its first child. P0, P1, and P2 repairs stay in the epic
-review worktree. The epic cannot complete until both review axes pass again.
+review worktree. The epic can complete after checks pass and remediation is recorded.
 
 Create a ticket worktree from a clean `main` worktree:
 
@@ -258,7 +258,7 @@ node .project/bin/project-flow.mjs status
 The normal workflow is:
 
 ```text
-discuss → plan → implement (automatic review loop) → document → ship → measure
+discuss → plan → implement (one review round) → document → ship → measure
 ```
 
 Ask `next` to locate the current position and choose the next valid skill.

@@ -48,9 +48,9 @@ Why: BRIEF-1 is planned as APP-1 with stories. Implement the epic as one coordin
 
 Blocked by: Nothing.
 
-Prompt: Use $implement to deliver APP-1 and run its final integrated review loop.
+Prompt: Use $implement to deliver APP-1 and run its one integrated review round.
 
-After that: `$document APP-1` after the epic review loop passes.
+After that: `$document APP-1` after review remediation is complete.
 ```
 
 Replace the example with actual state. Keep the answer short. Include other
@@ -71,7 +71,7 @@ changed outcome.
 - Do not trust a stale generated index over its source record.
 - Do not recommend one story when its confirmed brief is planned as an epic.
 - Do not recommend an epic with an open blocker outside that epic.
-- Do not recommend `document` while a P0, P1, or P2 finding remains.
+- Do not recommend `document` while a P0, P1, or P2 lacks remediation evidence.
 - Do not equate `done`, `green`, and `met`.
 - Do not invent priority when two actions have equal evidence.
 - Ask one short choice only when repository evidence cannot break a real tie.

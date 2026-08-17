@@ -10,7 +10,7 @@ passes. Keep their findings separate.
 - Severity scale
 - Standards pass
 - Spec pass
-- Review loop
+- Review result and remediation
 - Result format
 
 ## Establish the review scope
@@ -91,8 +91,8 @@ Stop if the final scope contains no relevant change.
 
 ## Agent separation and packets
 
-The orchestrating agent owns scope discovery, delegation, aggregation, workflow
-recording, and loop control. It must not conduct either review axis.
+The orchestrating agent owns scope discovery, delegation, aggregation, and
+workflow recording. It must not conduct either review axis.
 
 Start these two subagents in parallel:
 
@@ -205,26 +205,28 @@ that instrumentation or release preparation named by the ticket exists.
 Quote or identify the relevant criterion. Name the file and line that caused
 the finding.
 
-## Review loop
+## Review result and remediation
 
-Use the original target fixed point and scope base for every iteration. Review
-the complete updated change, not only the latest fix or reported files.
+Use the target fixed point and scope base for the one review round. Inspect the
+complete change, not only selected files or delegated packets.
 
-If the target branch advances, stop the current loop. Return to `implement` to
-synchronize the ticket branch and rerun every check. Start a new full review
-cycle from the new target commit. For an epic, update only `review.fixedPoint`.
-Keep its original `review.scopeBase`.
+If the target branch advances before review, return to `implement` to
+synchronize and rerun every check. Start the review only after synchronization.
+If it advances after review, stop. Another round requires explicit user
+authority. Keep the epic's original `review.scopeBase`.
 
 When either axis finds a P0, P1, or P2:
 
 1. Record `changes-requested` with both axis reports.
 2. Send every blocking finding to `implement`.
 3. Require focused tests and the whole item's configured checks after fixes.
-4. Spawn fresh Standards and Spec subagents in parallel.
-5. Repeat until both passes report zero P0, P1, and P2 findings.
+4. Require a repair commit and concrete `review-resolve` evidence.
+5. Do not start another review round.
 
-New findings can appear after a fix. Count them in the next iteration. Do not
-approve based on a claim that a finding was fixed. Inspect the updated change.
+The remediation record does not change, remove, or rerank the original
+findings. It records how implementation addressed them and which checks passed.
+Run another review only when the user explicitly asks for it. Record that user
+authority with the new round.
 
 P3 findings may remain. Record them as non-blocking suggestions. If a blocking
 finding cannot be resolved, keep `changes-requested` and ask for the missing
@@ -244,14 +246,15 @@ Keep the reports separate:
 - [P2] AC-2 is partial — src/example.ts:24 ...
 
 Summary: Standards P0:0 P1:0 P2:0 P3:1. Spec P0:0 P1:0 P2:1 P3:0.
-Blocking total: 1. Review loop: changes requested.
+Blocking total: 1. Review round: changes requested; remediation required.
 ```
 
 The orchestrator may lightly clean formatting. Do not merge, remove, rerank, or
 rewrite findings across axes. Keep separate severity counts for each pass. Any
 P0, P1, or P2 on either axis blocks approval.
 
-After the loop passes, state `Blocking total: 0. Review loop complete.` Record
-the target fixed point, scope base, and final severity counts in review evidence.
+For a round with no blockers, state `Blocking total: 0. Review round complete.`
+Record the target fixed point, scope base, and severity counts. For a round with
+blockers, preserve those counts and add remediation separately.
 
 Source: https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md

@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Use this skill when a user wants to implement, fix, or continue ready work from `docs/work/`, including an entire epic or review fixes. Coordinate every descendant of a requested epic, document and merge passing tickets in dependency order, then run a final whole-epic review loop in one isolated epic review worktree. For standalone tickets, create isolated Conventional Branch worktrees, verify acceptance, invoke review automatically, and fix all P0-P2 findings. Do not implement blocked tickets, release work, or skip the final epic review.
+description: Use this skill when a user wants to implement, fix, or continue ready work from `docs/work/`, including an entire epic or review remediation. Coordinate every descendant of a requested epic, document and merge passing tickets in dependency order, then run one final whole-epic review round in an isolated epic review worktree. For standalone tickets, create isolated Conventional Branch worktrees, verify acceptance, invoke one review round automatically, and remediate its P0-P2 findings without re-review unless the user explicitly requests another round. Do not implement blocked tickets, release work, or skip required review.
 ---
 
 # Implement
@@ -28,7 +28,7 @@ for coordination and serial integration.
 16. Pin the target commit and apply the session-fit gate per ticket agent.
 17. If a ticket will not fit, use implementation subagents for bounded packets.
 18. Transition each ticket to `in-progress` inside its own worktree.
-19. During repair loops, address every valid P0, P1, and P2 finding.
+19. During review remediation, address every valid P0, P1, and P2 finding.
 20. Use canonical project terms in code, tests, and interfaces when they describe the same concept.
 21. If code exposes a meaning conflict, stop and use `$language`. Use `$discuss` when behavior or scope changes.
 22. Implement the smallest complete ticket change and focused tests.
@@ -36,25 +36,24 @@ for coordination and serial integration.
 24. Collect evidence for every declared quality gate and record it with `gate`.
 25. Add the instrumentation required by the ticket when the plan includes it.
 26. Commit cohesive changes with Conventional Commit messages.
-27. Invoke `$review` for each ticket immediately. Do not ask the user to start review.
+27. Invoke `$review` once for each ticket. Do not ask the user to start review.
 28. If review finds P0, P1, or P2 issues, fix every valid in-scope finding.
-29. Rerun checks, commit repairs, and let `$review` use two fresh review subagents.
-30. Repeat steps 27-29 until both review axes have no P0, P1, or P2 findings.
-31. Leave a standalone passing ticket in `in-review` and hand it to `$document`.
+29. Rerun checks, commit repairs, and record concrete evidence with `review-resolve`.
+30. Do not start another review round unless the user explicitly requests it.
+31. Leave a reviewed and remediated standalone ticket in `in-review` and hand it to `$document`.
 
-## Review fixes
+## Review remediation
 
 Treat every valid P0, P1, and P2 finding as required work. A P3 suggestion is
 optional and must not expand the ticket without a clear benefit.
 
-The user's implementation request authorizes this review loop and its in-scope
-repairs. Do not ask for separate permission to review or fix valid blocking
-findings.
+The user's implementation request authorizes one review round and its in-scope
+repairs. It does not authorize another review round.
 
-Keep the original review fixed point. If a finding is invalid or outside the
-ticket, return concrete evidence to `review`; do not silently ignore it. After
-fixing blocking findings, rerun the whole ticket's checks and return to
-`review`. Continue until `review` reports zero P0, P1, and P2 findings.
+Keep the original review fixed point and reports. If a finding is invalid or
+outside the ticket, include concrete evidence in the remediation record. After
+fixing blocking findings, rerun the whole ticket's checks and use
+`review-resolve`. Do not ask the review agents to inspect the fixes.
 
 Commit every repair in the same ticket branch. Do not mix another ticket into
 that branch or worktree.
@@ -81,13 +80,13 @@ Give `$review` the item key, absolute worktree path, branch, target branch name,
 and resolved target commit. Ticket worktrees require an existing commit, so
 never use `initial tree`.
 The review skill must run Standards and Spec in separate parallel subagents.
-The implementation agent may coordinate the loop but must not perform either
+The implementation agent may coordinate the round but must not perform either
 review axis.
 
 For an epic, give `$review` both commits. `review.fixedPoint` is the target
 commit used to create the final epic review worktree. `review.scopeBase` is the
 target commit from before the first child started. Review the full range from
-the scope base through the epic review branch on every loop iteration.
+the scope base through the epic review branch once.
 
 ## Boundaries
 
@@ -103,11 +102,11 @@ the scope base through the epic review branch on every loop iteration.
 - During epic coordination, invoke `$document` to merge each passing child serially.
 - Do not mark acceptance passed without evidence.
 - Do not mark a quality gate passed without applicable evidence.
-- Record review state only through `$review`.
-- Do not approve or dismiss your own review fixes.
+- Record review state only through `$review` and `review-resolve`.
+- Do not change or erase the original review findings during remediation.
 - Do not choose an external API from model memory alone.
 - Do not redefine project vocabulary in a ticket worktree.
 - Do not delegate small work that fits safely in the current session.
 - Do not let within-ticket subagents change workflow state or review the item.
-- Stop in `in-review` only after the automatic review loop passes.
+- Stop in `in-review` only after the review round and required remediation complete.
 - Do not release epic children before the parent epic passes and reaches `done`.

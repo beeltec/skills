@@ -8,7 +8,7 @@ evidence for each kind of claim.
 - Treat `docs/knowledge/` as verified current project state.
 - Treat `docs/work/` as desired state, delivery evidence, or work history.
 - Never present a brief, ticket, draft, release plan, or outcome plan as current fact.
-- Promote repository knowledge only after implementation, acceptance, checks, and review pass.
+- Promote repository knowledge only after implementation, acceptance, checks, review, and remediation.
 - Promote deployed facts only from a verified green release.
 - Promote product-result facts only from an observed outcome.
 
@@ -28,8 +28,8 @@ evidence for each kind of claim.
 - Keep ticket delivery acceptance separate from the product success measure.
 - Declare applicable risk factors and record each required quality gate.
 - Never set a work item to `done` by editing its JSON file.
-- Complete a ticket only after acceptance, checks, gates, and review pass.
-- Complete an epic only after every descendant ticket is done and its integrated review passes.
+- Complete a ticket only after acceptance, checks, gates, one review round, and required remediation.
+- Complete an epic only after every descendant is done, one integrated review round, and required remediation.
 - Treat ticket `done` as merged and documented repository state.
 - Treat release `green` as verified deployed or published state.
 - Treat `met`, `missed`, or `inconclusive` as an observed product result.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Review"
   short_description: "Review tickets and integrated epics"
-  default_prompt: "Use $review to run separate Standards and Spec passes over a ticket or the complete integrated epic scope."
+  default_prompt: "Use $review to run one parallel Standards and Spec review round over the complete ticket or epic scope."

@@ -28,12 +28,14 @@ git commit -m "chore(app-1): start epic delivery"
 On resume, reuse `review.scopeBase`. Require an ancestor commit or the controlled
 legacy empty tree. Never replace it with a newer commit.
 
-For a legacy `done` epic without `review.scopeBase`, reopen only its integrated
-review through the controlled command below. Commit the reopened workflow state,
-then continue with the final epic review. Do not edit the item JSON.
+For a legacy `done` epic without `review.scopeBase`, do not reopen it
+automatically. Ask the user to authorize another review round. After explicit
+authority, use the controlled command, commit the reopened state, and continue.
+Do not edit the item JSON.
 
 ```bash
-node .project/bin/project-flow.mjs epic-review-open APP-1
+node .project/bin/project-flow.mjs epic-review-open APP-1 \
+  --rereview-authority human:user
 git add docs/work
 git commit -m "chore(app-1): reopen integrated epic review"
 ```
@@ -56,7 +58,7 @@ descendant. Stop when repository evidence cannot prove the complete range.
 1. Select every unfinished descendant, not only the next story.
 2. Build dependency-ready waves from `blocked-by` links.
 3. Run independent, non-overlapping tickets in parallel worktrees when safe.
-4. Apply the normal ticket implementation and automatic review loop.
+4. Apply the normal ticket implementation and its single automatic review round.
 5. Invoke `$document` for each passing child in the serial integration lane.
 6. Merge a blocker before starting any dependent child.
 7. Record each child merge commit in the epic handoff.
@@ -87,19 +89,19 @@ knowledge drafting, and completion.
 5. Give both axes the epic handoff and its child merge commits.
 6. Let both axes inspect `review.scopeBase...HEAD` as the complete change superset.
 7. Fix every valid P0, P1, and P2 finding in the epic review worktree.
-8. Rerun all epic checks after each repair.
-9. Use fresh parallel Standards and Spec subagents for every review iteration.
-10. Continue until both axes report zero P0, P1, and P2 findings.
-11. Leave the epic in `in-review` and hand it to `$document`.
+8. Rerun all epic checks after repairs and commit them.
+9. Record remediation with `review-resolve` without starting another review.
+10. Start another review round only after explicit user instruction.
+11. Leave the reviewed and remediated epic in `in-review` and hand it to `$document`.
 
-The descendant reviews prove each isolated ticket. The epic review separately proves
-their integrated result. Never substitute the child reports for this final loop.
+The descendant reviews inspect each isolated ticket. The epic review separately
+inspects their integrated result. Never substitute child reports for this round.
 
 ## Boundaries
 
 - Do not create the epic review worktree while any descendant is open.
 - Do not implement child product code in the target worktree.
 - Do not release any child while its parent epic remains open.
-- Do not change the recorded epic scope base during repair loops.
+- Do not change the recorded epic scope base during remediation.
 - Do not skip integrated checks because every child check passed.
 - Do not stop after one child when the user requested the epic.

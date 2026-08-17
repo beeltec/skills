@@ -1,6 +1,6 @@
 ---
 name: document
-description: Use this skill after implementation and passing code review to establish repository knowledge and finish a ticket or final epic review branch. Verify the review used the latest target commit, require the full recorded scope for an epic, refresh official sources, promote valid OKF drafts, complete the green item, merge it into `main` by default, and safely remove its clean worktree and local branch. Hand releasable work to ship without claiming it is deployed.
+description: Use this skill after one code review round and any required remediation to establish repository knowledge and finish a ticket or final epic review branch. Verify the review used the latest target commit, require the full recorded scope for an epic, confirm remediation evidence, refresh official sources, promote valid OKF drafts, complete the green item, merge it into `main` by default, and safely remove its clean worktree and local branch. Hand releasable work to ship without claiming it is deployed.
 ---
 
 # Document
@@ -17,8 +17,8 @@ work item through the knowledge promotion gate.
 5. Resolve the recorded review target branch to its full current commit hash.
 6. Confirm that commit is an ancestor and equals `review.fixedPoint`.
 7. For an epic, confirm every descendant is `done` and `review.scopeBase` is valid.
-8. Return to `implement` and `review` when the target has advanced.
-9. Confirm the item is `in-review` with zero P0, P1, and P2 findings.
+8. If the target advanced after review, stop and request explicit user authority for another review round.
+9. Confirm the item is `in-review` after one review round and required remediation.
 10. Review acceptance evidence and the latest check results.
 11. Read `docs/knowledge/ubiquitous-language.md` as the project Ubiquitous Language.
 12. Read `docs/knowledge/sources/index.md` and relevant source notes.
