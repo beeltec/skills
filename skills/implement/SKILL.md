@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Use this skill when a user wants to implement, fix, or continue one or more ready tickets from `docs/work/`, including review fixes. Create one Conventional Branch and `.worktrees/KEY/` worktree per dependency-ready ticket, run independent tickets in parallel agents, enforce Conventional Commits, verify acceptance, and return review fixes until no P0-P2 findings remain. Do not implement blocked tickets, merge branches, promote knowledge, or close items.
+description: Use this skill when a user wants to implement, fix, or continue one or more ready tickets from `docs/work/`, including review fixes. Create one Conventional Branch and `.worktrees/KEY/` worktree per dependency-ready ticket, run independent tickets in parallel agents, enforce Conventional Commits, verify acceptance, automatically invoke the separate review skill, and fix findings until no P0-P2 findings remain. Do not implement blocked tickets, merge branches, promote knowledge, or close items.
 ---
 
 # Implement
@@ -33,13 +33,20 @@ for coordination and serial integration.
 21. Collect evidence for every declared quality gate and record it with `gate`.
 22. Add the instrumentation required by the ticket when the plan includes it.
 23. Commit cohesive changes with Conventional Commit messages.
-24. Report each branch, worktree, fixed point, sources, changes, checks, and quality gates.
-25. Hand each unchanged ticket branch to `review`.
+24. Invoke `$review` for each ticket immediately. Do not ask the user to start review.
+25. If review finds P0, P1, or P2 issues, fix every valid in-scope finding.
+26. Rerun checks, commit repairs, and let `$review` use two fresh review subagents.
+27. Repeat steps 24-26 until both review axes have no P0, P1, or P2 findings.
+28. Leave the passing item in `in-review` and hand it to `$document`.
 
 ## Review fixes
 
 Treat every valid P0, P1, and P2 finding as required work. A P3 suggestion is
 optional and must not expand the ticket without a clear benefit.
+
+The user's implementation request authorizes this review loop and its in-scope
+repairs. Do not ask for separate permission to review or fix valid blocking
+findings.
 
 Keep the original review fixed point. If a finding is invalid or outside the
 ticket, return concrete evidence to `review`; do not silently ignore it. After
@@ -65,10 +72,13 @@ node .project/bin/project-flow.mjs gate APP-2 GATE-1 \
 git commit -m "feat(app-2): persist tasks"
 ```
 
-## Review handoff
+## Automatic review
 
-Give `review` the item key, absolute worktree path, branch, and resolved target
+Give `$review` the item key, absolute worktree path, branch, and resolved target
 commit. Ticket worktrees require an existing commit, so never use `initial tree`.
+The review skill must run Standards and Spec in separate parallel subagents.
+The implementation agent may coordinate the loop but must not perform either
+review axis.
 
 ## Boundaries
 
@@ -81,10 +91,10 @@ commit. Ticket worktrees require an existing commit, so never use `initial tree`
 - Do not merge or delete ticket branches or worktrees.
 - Do not mark acceptance passed without evidence.
 - Do not mark a quality gate passed without applicable evidence.
-- Do not record the final review.
+- Record review state only through `$review`.
 - Do not approve or dismiss your own review fixes.
 - Do not choose an external API from model memory alone.
 - Do not redefine project vocabulary in a ticket worktree.
 - Do not delegate small work that fits safely in the current session.
 - Do not let within-ticket subagents change workflow state or review the item.
-- Stop with verified work in `in-progress`.
+- Stop in `in-review` only after the automatic review loop passes.

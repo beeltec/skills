@@ -1,4 +1,4 @@
 interface:
   display_name: "Implement"
-  short_description: "Implement tickets in isolated Git worktrees"
-  default_prompt: "Use $implement to create ticket worktrees, run independent tickets in parallel, make conventional commits, verify each ticket, and return each to $review."
+  short_description: "Implement and review isolated tickets"
+  default_prompt: "Use $implement to implement ready tickets in isolated worktrees, verify them, and automatically complete the two-subagent $review loop."

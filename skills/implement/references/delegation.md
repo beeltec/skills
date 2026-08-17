@@ -39,7 +39,7 @@ Estimate the context needed for the complete implementation. Include:
 - expected exploration and tool output;
 - code edits and focused tests;
 - failed checks and likely correction loops;
-- integration, final verification, and the review handoff.
+- integration, final verification, review coordination, and likely repair loops.
 
 Use a runtime token counter when available. Otherwise, make a conservative
 estimate from the relevant file sizes and expected diagnostic output.

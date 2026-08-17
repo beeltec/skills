@@ -58,8 +58,8 @@ blocker work.
 | An epic has open children | Route the next child. Do not implement the epic. |
 | A non-epic ticket is `ready` with no open blocker | Use `$implement`. |
 | A ticket is `in-progress` with incomplete or failing evidence | Use `$implement`. |
-| Review requested changes or reports any P0, P1, or P2 | Use `$implement`, then `$review` again. |
-| A ticket is `in-progress` and all delivery evidence passes | Use `$review`. |
+| Review requested changes or reports any P0, P1, or P2 | Use `$implement`; it resumes the review loop automatically. |
+| A ticket is `in-progress` and all delivery evidence passes | Use `$implement` to run its required review loop. |
 | A ticket is `in-review` with a passing review and zero P0-P2 findings | Use `$document`. |
 | A ticket is `done` | Inspect release state. Do not implement or document it again. |
 

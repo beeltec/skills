@@ -41,9 +41,10 @@ the change belongs to one ticket. Keep unrelated changes out of the branch.
 
 ## Check execution
 
-`verify <KEY>` runs each declared command from the project root. It stores the
-exit code, timestamp, and bounded output. Review the commands before running
-them because work item files are executable project input.
+`verify <KEY>` runs each declared command from the project root. A successful
+run stores only its exit code and timestamp. A failed run also stores bounded
+diagnostic output. Review commands first because work item files are executable
+project input.
 
 If a command fails, fix the product or refine the work item. Never change the
 recorded status by hand.
@@ -63,12 +64,14 @@ when it directly proves the gate. Otherwise, record the inspected behavior,
 artifact, or human assessment. Do not use a generic test pass as security,
 privacy, accessibility, migration, reliability, or performance evidence.
 
-## Review handoff
+## Automatic review
 
 Report the resolved target commit, item key, worktree path, branch, source-note
 paths, commits, changed files, checks, and acceptance evidence. Ticket
-worktrees require an existing commit. Then hand off to `review`.
+worktrees require an existing commit. Invoke `review` immediately without
+asking the user.
 
 When the latest review requests changes, preserve that fixed point. Address
 all valid P0, P1, and P2 findings. Return disputed findings with concrete
 evidence. Rerun the complete configured check set before the next review pass.
+Continue the loop until both review axes have no P0, P1, or P2 findings.

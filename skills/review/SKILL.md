@@ -1,6 +1,6 @@
 ---
 name: review
-description: Use this skill when a user wants to review a ticket branch, ticket worktree, pull request, or work-in-progress change. Verify the branch contains the latest target commit, refresh official sources, run independent Standards and Spec passes, classify findings from P0 to P3, and loop with implementation until no P0-P2 findings remain. Use after implementation and before documentation. Do not implement, merge, or promote knowledge.
+description: Use this skill when a user wants to review a ticket branch, ticket worktree, pull request, or work-in-progress change. Verify the branch contains the latest target commit, refresh official sources, delegate Standards and Spec to two separate parallel subagents, aggregate their independent P0-P3 findings, and loop with implementation until no P0-P2 findings remain. Use after implementation and before documentation. Do not perform either review axis in the orchestrating agent, implement, merge, or promote knowledge.
 ---
 
 # Review
@@ -25,20 +25,44 @@ Leave clean workflow items in `in-review`.
 13. Read `docs/knowledge/sources/index.md` and relevant source notes.
 14. Use `$source` to refresh external rules from official documentation.
 15. Read applicable repository standards and Git conventions.
-16. Check canonical term use in behavior, code, tests, and documentation.
-17. Run the Standards pass against the complete change and every declared gate.
-18. Run a fresh Spec pass against the originating work item or specification.
-19. Assign P0, P1, P2, or P3 to every finding.
-20. Report both results separately, including counts for every severity.
-21. If any P0, P1, or P2 exists, record `changes-requested`.
-22. Hand all blocking findings to `implement` and keep the fixed point.
-23. After fixes, rerun both complete passes against the updated change.
-24. Repeat steps 17-23 until both passes contain no P0, P1, or P2 findings.
-25. Record the passing review and move the item to `in-review`.
+16. Add canonical-term rules and the vocabulary file to the Standards packet.
+17. Prepare separate Standards and Spec packets for the same fixed scope.
+18. Spawn one Standards subagent and one Spec subagent in parallel.
+19. Let each subagent inspect the complete change in its own context.
+20. Wait for both reports. Do not perform either pass in the orchestrating agent.
+21. Aggregate the reports without merging or reranking their findings.
+22. Report both results separately, including counts for every severity.
+23. If any P0, P1, or P2 exists, record `changes-requested`.
+24. Hand all blocking findings to `implement` and keep the fixed point.
+25. After fixes, spawn two fresh parallel review subagents.
+26. Repeat steps 17-25 until both axes contain no P0, P1, or P2 findings.
+27. Record the passing review and move the item to `in-review`.
 
 For a review without this workflow, return the two reports without recording a
 ticket transition. If fixes are not authorized, report that the review loop is
 still blocked. Never approve while a P0, P1, or P2 remains.
+
+When `$implement` invokes this skill, its implementation request already
+authorizes valid in-scope repairs. Return blocking findings directly to
+implementation without asking the user for permission.
+
+## Required agent separation
+
+- Run the Standards pass only in the Standards subagent.
+- Run the Spec pass only in the Spec subagent.
+- Use two distinct subagents. Never ask one subagent to review both axes.
+- Start both subagents in the same parallel delegation round.
+- Keep both subagents read-only. They must not edit code or workflow state.
+- Give both the same fixed point and complete change scope.
+- Give only Standards material to the Standards subagent.
+- Give only specification material to the Spec subagent.
+- Do not pass one subagent's findings to the other.
+- Use fresh subagents for every review-loop iteration.
+- If a subagent fails, rerun that axis in a fresh subagent.
+- If the harness cannot run subagents, stop. Do not review in the orchestrator.
+
+For non-workflow reviews, skip the Spec subagent only after the user confirms
+that no specification exists. State that the Spec axis was skipped.
 
 ## Record requested changes
 
@@ -66,6 +90,8 @@ node .project/bin/project-flow.mjs transition APP-2 in-review
 ## Boundaries
 
 - Do not change product code during the review.
+- Do not perform Standards or Spec analysis in the orchestrating agent.
+- Do not use one subagent for both review axes.
 - Do not review two ticket branches as one change.
 - Do not approve a branch that lacks the latest target commit.
 - Do not merge or remove the ticket branch or worktree.

@@ -47,9 +47,9 @@ Why: APP-7 is ready and has no open blockers.
 
 Blocked by: Nothing.
 
-Prompt: Use $implement to implement APP-7 in its ticket worktree.
+Prompt: Use $implement to implement and review APP-7 in its ticket worktree.
 
-After that: `$review APP-7` if its acceptance, checks, and gates pass.
+After that: `$document APP-7` after the automatic review loop passes.
 ```
 
 Replace the example with actual state. Keep the answer short. Include other

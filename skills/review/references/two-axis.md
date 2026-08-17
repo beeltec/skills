@@ -6,6 +6,7 @@ passes. Keep their findings separate.
 ## Contents
 
 - Establish the review scope
+- Agent separation and packets
 - Severity scale
 - Standards pass
 - Spec pass
@@ -54,6 +55,44 @@ Do not attribute pre-existing dirty files to the item. If work overlaps those
 files, state that limitation in the review evidence.
 
 Stop if the final scope contains no relevant change.
+
+## Agent separation and packets
+
+The orchestrating agent owns scope discovery, delegation, aggregation, workflow
+recording, and loop control. It must not conduct either review axis.
+
+Start these two subagents in parallel:
+
+- The Standards subagent reviews only repository rules, external constraints,
+  maintainability, correctness, security, and quality gates.
+- The Spec subagent reviews only the work item, brief, acceptance criteria, and
+  requested scope.
+
+Give both subagents:
+
+- the absolute worktree path;
+- the immutable fixed-point commit;
+- the complete diff, log, dirty-state, and untracked-file commands;
+- the severity scale and required report format;
+- a read-only instruction.
+
+Give the Standards subagent the applicable `AGENTS.md`, `CONTRIBUTING.md`,
+coding guides, source notes, Ubiquitous Language, Git conventions, risk profile,
+and quality gates. Tell it to cite the rule or heuristic and file line for every
+finding. Tell it to skip failures already enforced by configured checks.
+
+Give the Spec subagent the work item, linked brief, parent context, acceptance
+criteria, and any user-supplied specification. Tell it to report missing,
+partial, incorrect, and unrequested behavior. Require the relevant criterion
+and file line for every finding.
+
+Do not give either subagent the other axis or its report. Do not let one
+subagent review both axes. If a subagent fails, discard that result and start a
+fresh subagent for that axis. If the harness cannot provide subagents, stop the
+review instead of running either pass in the orchestrator.
+
+For workflow items, both subagents are mandatory. For other work, skip the Spec
+subagent only after the user confirms that no specification exists.
 
 ## Severity scale
 
@@ -145,7 +184,7 @@ When either axis finds a P0, P1, or P2:
 1. Record `changes-requested` with both axis reports.
 2. Send every blocking finding to `implement`.
 3. Require focused tests and the whole item's configured checks after fixes.
-4. Run fresh Standards and Spec passes.
+4. Spawn fresh Standards and Spec subagents in parallel.
 5. Repeat until both passes report zero P0, P1, and P2 findings.
 
 New findings can appear after a fix. Count them in the next iteration. Do not
@@ -172,8 +211,9 @@ Summary: Standards P0:0 P1:0 P2:0 P3:1. Spec P0:0 P1:0 P2:1 P3:0.
 Blocking total: 1. Review loop: changes requested.
 ```
 
-Do not merge findings across axes. Keep separate severity counts for each
-pass. Any P0, P1, or P2 on either axis blocks approval.
+The orchestrator may lightly clean formatting. Do not merge, remove, rerank, or
+rewrite findings across axes. Keep separate severity counts for each pass. Any
+P0, P1, or P2 on either axis blocks approval.
 
 After the loop passes, state `Blocking total: 0. Review loop complete.` Record
 the fixed point and final severity counts in review evidence.
