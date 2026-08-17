@@ -2,7 +2,6 @@
 
 ## Commands
 
-- Run tests with `npm test`.
 - Run type checks with `npm run typecheck`.
 - Create a production build with `npm run build`.
 - Use Node.js 24.15 or newer for `node:sqlite`.
@@ -45,7 +44,7 @@ evidence for each kind of claim.
 - Validate generated indexes and boards after workflow state changes.
 <!-- agent-rule:project-evidence:end -->
 
-<!-- agent-rule:ubiquitous-language:start sha256=a94bff1ca0d3642a45937e25d1bceac4283f6593423917ce58d7bc46fe52aa23 -->
+<!-- agent-rule:ubiquitous-language:start sha256=5b7c332ab2606e175829dc229db957ae92a748dc43aab6e0546639077c83b589 -->
 ## Ubiquitous language
 
 Use one shared project vocabulary to reduce meaning conflicts between users,
@@ -70,7 +69,9 @@ Design practices.
 - Preserve exact vendor names, commands, API identifiers, interface names, and quotations.
 - Do not let external documentation choose the project's preferred vocabulary.
 - Use the `language` skill for managed vocabulary changes.
-- Do not edit the generated readable body by hand.
+- Read canonical terms from the structured frontmatter.
+- Use `language-show` when a readable Markdown view is useful.
+- Do not copy term data into the Markdown body.
 <!-- agent-rule:ubiquitous-language:end -->
 
 <!-- agent-rule:ticket-git-workflow:start sha256=42f3016c79783b106f22053f825a8d7aa3c8dcd06a9d320e606bccd0b3f344e7 -->
@@ -252,7 +253,7 @@ the test when that failure is irrelevant, impossible, or already caught more
 clearly elsewhere.
 <!-- agent-rule:testing:end -->
 
-<!-- agent-rule:review-policy:start sha256=f20512c6110eaed1ac00ca2229eb38fdd17682057062a96ff354959a7ad52db0 -->
+<!-- agent-rule:review-policy:start sha256=c120dbe94edfe8b1be93e336bb0e8b29d0d0d549f01a2d1ef3fab5ec4141e6c9 -->
 ## Review policy
 
 Review completed changes against repository standards and the requested
@@ -263,6 +264,9 @@ behavior before integration.
 - Pin one immutable fixed point for the complete review scope.
 - Run a Standards pass against applicable rules, checks, and engineering risks.
 - Run a separate Spec pass against the originating ticket or specification.
+- Run the two passes in separate parallel review subagents.
+- Let the orchestrator only prepare scope, aggregate results, and control the loop.
+- Stop when the harness cannot run review subagents. Do not review in the orchestrator.
 - Inspect the complete change in both passes.
 - Keep findings and severity counts separate for each pass.
 
@@ -278,9 +282,12 @@ behavior before integration.
 
 ### Review loop
 
+- Treat a request to implement a ticket as authority to run its review loop.
+- Do not ask whether to start review or fix valid in-scope blocking findings.
 - Send every valid blocking finding back to implementation.
 - Require focused tests and the complete configured check set after fixes.
 - Rerun fresh Standards and Spec passes against the complete updated change.
+- Use fresh review subagents for every loop iteration.
 - Continue until both passes report zero P0, P1, and P2 findings.
 - Do not approve only because automated checks pass.
 - Do not accept a promise to fix later as a resolved finding.

@@ -19,8 +19,8 @@ Use the skills as one suite:
 4. `language` manages terms explicitly agreed with the user.
 5. `discuss` resolves product and technical choices.
 6. `plan` creates Jira-like work items.
-7. `implement` gives each ticket a branch and worktree, then changes code.
-8. `review` checks Standards and Spec until both have no P0-P2 findings.
+7. `implement` changes a ticket and automatically completes its review loop.
+8. `review` is the separate two-subagent engine used by implementation.
 9. `document` promotes knowledge, merges green work, and removes its branch and worktree.
 10. `ship` releases done tickets and verifies the deployed or published result.
 11. `measure` compares product evidence with the brief's agreed success measure.
@@ -29,6 +29,9 @@ Use the skills as one suite:
 Use `next` at any point when the correct workflow action is unclear. It reads
 local state and recommends one action without changing the project.
 
+`discuss` must use the harness's structured user-question tool when one is
+available.
+
 Use `language` whenever a project term is unclear or changes meaning. It applies
 only the Ubiquitous Language principle from DDD. It adds no other DDD process.
 
@@ -36,12 +39,25 @@ only the Ubiquitous Language principle from DDD. It adds no other DDD process.
 index, opens relevant official pages, and refreshes concise source notes. The
 workflow never treats model memory or a search-result snippet as authority.
 
+`review` must use two separate subagents in parallel. The orchestrator prepares
+the scope and aggregates their reports. It never performs either review pass.
+The review stops when the harness cannot provide subagents.
+
+An implementation request also authorizes the review loop and valid in-scope
+P0-P2 repairs. The agent does not ask whether it should start that loop.
+
 The setup skill installs a dependency-free Node.js CLI at
 `.project/bin/project-flow.mjs`. Workflow-stage skills use that local copy.
 
 The CLI creates `docs/knowledge/ubiquitous-language.md`. Use `language-show`,
 `language-add`, `language-update`, and `language-deprecate` to manage it. Every
-change records the actor, reason, time, and prior value.
+change records the actor, reason, time, and prior value. The file stores each
+term once in structured frontmatter. `language-show` renders the readable view
+without persisting a second copy.
+
+Canonical records own workflow data. Generated boards and indexes repeat only
+small summaries for progressive reading. Validation rejects stale generated
+views and obsolete duplicated fields.
 
 ## Agent rules
 
@@ -135,7 +151,7 @@ only when project instructions explicitly select API-key access.
 When the work will not fit safely, the coordinator creates
 `docs/work/handoffs/<KEY>.md`. It delegates bounded code packets sized for each
 subagent's own context window. The coordinator keeps ticket state, integration,
-whole-item verification, and the handoff to `review`.
+whole-item verification, automatic review, and repair-loop control.
 
 ## Git workflow
 
@@ -229,7 +245,7 @@ node .project/bin/project-flow.mjs status
 The normal workflow is:
 
 ```text
-discuss → plan → implement ⇄ review → document → ship → measure
+discuss → plan → implement (automatic review loop) → document → ship → measure
 ```
 
 Ask `next` to locate the current position and choose the next valid skill.
@@ -240,25 +256,25 @@ Run `language-show` to inspect the agreed vocabulary.
 
 Run `node .project/bin/project-flow.mjs help` for every command.
 
-## Verification
+Run `setup` again after updating this skill suite. Its refresh procedure
+migrates older duplicated language, source, outcome, log, and check data.
 
-Run the workflow tests from this repository:
+## Real-project exercise
 
-```bash
-npm test
-```
+This repository does not keep an automated skill or CLI test suite.
 
-On Node.js 24.15 or newer, this also copies the example into a temporary Git
-repository and completes its build, release, and outcome cycle.
-
-Run the reproducible Next.js and SQLite example:
+Use the reproducible Next.js and SQLite project to exercise the workflow:
 
 ```bash
 cd examples/next-sqlite
 npm ci
-npm test
+npm run typecheck
 npm run build
 node .project/bin/project-flow.mjs validate
 ```
+
+Link the skills into a disposable copy of that project. Then invoke `next`,
+`discuss`, `plan`, and `implement` through the target agent harness. Confirm
+that implementation starts the separate two-subagent review automatically.
 
 See [docs/research.md](docs/research.md) for sources and design decisions.

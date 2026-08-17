@@ -84,10 +84,20 @@ questions by decision dependencies, ask the currently unblocked choices, and
 recompute after every answer. It adds a confirmed brief as the explicit handoff
 to planning.
 
+A harness-provided structured question tool is mandatory for discussion rounds
+when available. Claude Code therefore uses `AskUserQuestion`. A round can keep
+several independent questions, within the tool's supported limit. Dependent
+questions remain in later rounds.
+
 The `review` skill adapts the code-review skill's two-axis model. Standards and
 Spec get independent passes, so one cannot hide failure in the other. The
 ticket is the fixed specification source. Reviews cover the whole ticket branch
 and any remaining uncommitted work.
+
+Matt Pocock's current skill assigns those axes to two parallel subagents. The
+orchestrator only prepares the scope and aggregates their independent reports.
+This suite makes that separation mandatory and blocks instead of reviewing in
+the orchestrator when a harness cannot create subagents.
 
 Every finding receives a P0-P3 severity. P0, P1, and P2 block approval. P3 is
 non-blocking. After blocking findings are fixed, both axes inspect the complete
@@ -96,12 +106,33 @@ report zero P0, P1, and P2 findings.
 
 Descriptions state user intent because agents use them for activation. The
 skills use checklists, explicit validation loops, and concrete commands.
-Routing fixtures cover realistic requests for every skill. Subagent forward
-tests complement deterministic structure and CLI tests.
+The reproducible Next.js and SQLite project provides the workflow exercise.
+Run skills through a real target harness instead of testing instruction text.
+
+## Canonical workflow records
+
+OKF v0.2 requires Markdown with YAML frontmatter. Only `type` is always
+required. The body has no mandatory sections. Indexes and logs are optional,
+and an index may be synthesized. The workflow therefore keeps structured data
+canonical and generates only small, validated navigation views.
+
+The Ubiquitous Language file stores terms and history only in frontmatter. Its
+body points to `language-show`, which renders a readable view on demand.
+Official source applicability stays in `description`. Outcomes refer to the
+confirmed brief instead of copying its success definition. Passing checks keep
+only time and exit status; failed checks retain bounded diagnostics. The
+workflow removes its generated knowledge log because Git and canonical records
+already preserve the relevant history.
+
+OKF distinguishes `generated` authorship metadata from `verified` checking
+metadata. The language record keeps both meanings instead of merging them.
 
 Sources:
 
 - [OpenAI skill authoring](https://learn.chatgpt.com/docs/build-skills)
+- [Claude Code tools reference](https://code.claude.com/docs/en/tools-reference)
+- [Claude Code user-input guidance](https://code.claude.com/docs/en/agent-sdk/user-input)
+- [Claude Code interviewing best practice](https://code.claude.com/docs/en/best-practices#let-claude-interview-you)
 - [Anthropic Agent Skills best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
 - [Agent Skills specification](https://agentskills.io/specification)
 - [Skill creator best practices](https://agentskills.io/skill-creation/best-practices)
@@ -110,6 +141,7 @@ Sources:
 - [Using scripts in skills](https://agentskills.io/skill-creation/using-scripts)
 - [Matt Pocock's grilling skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)
 - [Matt Pocock's code-review skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md)
+- [Open Knowledge Format v0.2 specification](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
 
 ## Agent rule design
 
@@ -304,10 +336,10 @@ immutable commit and artifact digest. Green requires passing live checks.
 Failed and rolled-back attempts remain in work history and never become current
 release knowledge.
 
-An outcome record copies the brief's metric, baseline, target, observation
-window, and data source. A later measurement records the observed result and a
-decision to proceed, improve, revert, or stop. This closes the loop without
-rewriting the original success definition.
+An outcome record links to the confirmed brief instead of copying its success
+definition. A later measurement records the observed result and a decision to
+proceed, improve, revert, or stop. This closes the loop without rewriting the
+original success definition.
 
 Sources:
 
